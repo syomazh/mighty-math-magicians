@@ -30,4 +30,6 @@ import MMM.Residue
 import MMM.ResidueB
 import MMM.ResidueForms
 import MMM.NormalForm
+import MMM.FussFormula
+import MMM.Problem137
 import MMM.Axioms

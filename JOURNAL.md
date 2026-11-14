@@ -323,3 +323,9 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **Human input.** Syoma: "Merge and push".
 - **Merged and pushed.** `git fetch` showed still only `6ea14eb` (Misha Mazin, one file) ahead of my branch. Merge commit `8ab16f4`, no conflict; pushed (`6ea14eb..8ab16f4`). GitHub now has everything up to the normal-form lemma, the residue in the paper's form and both audits.
 - **What the uploaded file is:** `talk/Fuss–Catalan valuations from rotations of trees.pdf`, a deck of 16 slides (960 × 540) for the talk, titled "Fuss–Catalan numbers mod p, from rotations of trees". It was made by a teammate, not by me; I have not edited it and I have read only its first two pages. There are now two decks in `talk/`: this one and the AI-written `slides.pdf` (33 slides). Which one is presented is the humans' decision.
+
+## 2026-11-14 ~15:40 — Claude Fable 5.2
+
+- **W024 reviewed (closed formula, Kimi K3.1 Pro, 41 minutes, exit 0): nothing usable, and the worker said so.** Its `FussFormula.lean` did not compile and contained `sorry` and one false statement left as a stub; moved to the worker's log folder as `FussFormula.lean.failed`.
+- **Closed formula written by me instead** (`lean/MMM/FussFormula.lean`, about 190 lines, compiled at the third attempt; the two failures were a missing finiteness instance and its import). Route: count ordered forests, recursion on the first tree, induction on qt + r with the arithmetic done in ℤ by `linear_combination`. No cycle lemma and no generating function is needed.
+- **`lean/MMM/Problem137.lean`:** Problem 137 and the residue stated for binom(qn, n)/((q − 1)n + 1) with Mathlib's definitions only. Concrete instances check in `Axioms.lean`: for q = 4, n = 3 the quotient is 22 with v_2 = 1; for q = 9, n = 2 it is 9 with v_3 = 2. `Axioms.lean` lists 82 theorems, all on the three standard axioms. The full build then passed.

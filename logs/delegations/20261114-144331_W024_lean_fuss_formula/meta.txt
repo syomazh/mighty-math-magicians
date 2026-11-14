@@ -1,0 +1,8 @@
+slug:    W024_lean_fuss_formula
+brief:   briefs/W024_lean_fuss_formula.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 14:43:31 PST
+attempt 1: exit 0 at 15:24:03
+ended:   2026-11-14 15:24:03 PST
+exit:    0

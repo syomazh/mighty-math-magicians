@@ -10,6 +10,8 @@ import MMM.Residue
 import MMM.ResidueB
 import MMM.ResidueForms
 import MMM.NormalForm
+import MMM.FussFormula
+import MMM.Problem137
 
 -- digit sums
 #print axioms MMM.ds_add_le
@@ -144,3 +146,28 @@ example := MMM.PTree.residue (p := 2) 7 2 (by simp [MMM.ds])
 
 -- the paper's lemma "Normal form" (worker W023)
 #print axioms MMM.PTree.rot_iff_eqvGen
+
+-- the closed formula (Fuss–Catalan numbers) and Problem 137 in Mathlib's vocabulary only
+#print axioms MMM.PTree.forest_card
+#print axioms MMM.PTree.fuss_catalan_formula
+#print axioms MMM.PTree.choose_div_eq_card
+#print axioms MMM.problem137_fussCatalan
+#print axioms MMM.problem137_fussCatalan_exact
+#print axioms MMM.residue_fussCatalan
+
+-- concrete instances with binomial coefficients:
+-- q = 4, n = 3: binom(12, 3) / 10 = 22, and v_2(22) = 1
+example : multiplicity 2 (Nat.choose (2 ^ 2 * 3) 3 / ((2 ^ 2 - 1) * 3 + 1)) = 1 := by
+  have h := MMM.problem137_fussCatalan (p := 2) 2 3 (by omega)
+  have hd : (Nat.digits 2 ((2 ^ 2 - 1) * 3 + 1)).sum = 2 := by simp
+  rw [hd] at h
+  omega
+-- q = 9, n = 2: binom(18, 2) / 17 = 9, and v_3(9) = 2
+example : multiplicity 3 (Nat.choose (3 ^ 2 * 2) 2 / ((3 ^ 2 - 1) * 2 + 1)) = 2 := by
+  have h := MMM.problem137_fussCatalan (p := 3) 2 2 (by omega)
+  have hd : (Nat.digits 3 ((3 ^ 2 - 1) * 2 + 1)).sum = 5 := by simp
+  rw [hd] at h
+  omega
+-- and the quotient really is 22 and 9
+example : Nat.choose (2 ^ 2 * 3) 3 / ((2 ^ 2 - 1) * 3 + 1) = 22 := by decide
+example : Nat.choose (3 ^ 2 * 2) 2 / ((3 ^ 2 - 1) * 2 + 1) = 9 := by decide

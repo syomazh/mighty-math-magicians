@@ -1,0 +1,41 @@
+import MMM.Divisibility
+import Mathlib.SetTheory.Cardinal.Finite
+import Mathlib.Data.Fintype.BigOperators
+
+namespace MMM.PTree
+variable {p : ℕ}
+
+theorem eq_leaf_of_leaves_eq one (hp : 2 ≤ p) {T : PTree p} (hT : T.leaves = 1) : T = leaf := by
+  have : NeZero p := ⟨by omega⟩
+  cases T with
+  | leaf => rfl
+  | node f =>
+    exfalso
+    have hle : p ≤ ∑ i, (f i).leaves := by
+      calc
+        p = ∑ _i : Fin p, 1 := by simp
+        _ ≤ ∑ i, (f i).leaves := Finset.sum_le_sum (fun i _ => leaves_pos (f i))
+    rw [show (∑ i, (f i).leaves) = (node f).leaves from rfl, hT] at hle
+    omega
+
+theorem card_leaves_eq_one (hp : 2 ≤ p) : Nat.card {T : PTree p // T.leaves = 1} = 1 := by
+  rw [Nat.card_eq_one_iff_unique]
+  refine ⟨⟨?_⟩, ⟨⟨leaf, rfl⟩⟩⟩
+  rintro ⟨S, hS⟩ ⟨T, hT⟩
+  exact Subtype.ext ((eq_leaf_of_leaves_eq one hp hS).trans
+    (eq_leaf_of_leaves_eq one hp hT).symm)
+
+def nodeEquiv (p : ℕ) : (Fin p → PTree p) ≃ {T : PTree p // T ≠ leaf} where
+  toFun f := ⟨node f, fun h => by cases h⟩
+  invFun T := match T with
+    | ⟨leaf, h⟩ => (h rfl).elim
+    | ⟨node f, _⟩ => f
+  left_inv _ := rfl
+  right_inv T := match T with
+    | ⟨leaf, h⟩ => (h rfl).elim
+    | ⟨node f, _⟩ => rfl
+
+/-- Conclusion of the fundamentally simple case analysis. -/
+theorem Number_trees_one (hp : 2 ≤ p) (T : PTree p) : T.leaves = 1 := by sorry
+
+end MMM.PTree
