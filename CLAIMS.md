@@ -144,3 +144,8 @@ It does not contain: the valuation of the Catalan numbers, the count of minimal 
 ## Update, 2026-11-14 12:02 PT (Claude Fable 5.2)
 
 - On Syoma's go-ahead the credit to Etherington was added to `paper/main.tex` (one sentence in the introduction's paragraph on p = 2, one bibliography entry) and to `paper/frobenius_proof.tex` (one paragraph in the remark "Earlier algebraic work", one bibliography entry). No statement or proof was changed. Note for the sign-off record: the professor approved the main paper *before* this sentence was added; the change is to the introduction only.
+
+## Update, 2026-11-14 12:13 PT (Claude Fable 5.2) — human status of the second and third proofs
+
+- **C18 (Frobenius proof): no human verdict.** Syoma reported at about 12:15 that the grad student gave up reading it for now; the team is concentrating on understanding the main proof and may return to it. This is not a finding against the proof; it means that no human has checked it. Its grade stays `ai-reviewed` (one AI referee, computer checks). It must not be presented as verified by the team.
+- **Lean (started 12:05, with Syoma's permission to install):** nothing is machine-checked yet. Target: the main proof only, Step 2 first, then Step 1. Status is kept in `lean/README.md`.

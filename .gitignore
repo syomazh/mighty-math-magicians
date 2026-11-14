@@ -24,3 +24,6 @@ talk/build/
 *.bbl
 *.blg
 !references/cross_field_refs.md
+
+# Lean build products and downloaded packages (several GB)
+lean/.lake/

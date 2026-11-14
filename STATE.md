@@ -19,6 +19,12 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 - **Nothing is running.** Next moves are the humans': read `paper/main.pdf` and sign; decide whether the carry budget replaces the induction on the Step 2 slide; the professor's view on novelty and on the Stickelberger resemblance (C21); whether to bring in a second agent.
 - Note: an untracked file `AGENTS.md` (a copy of `CLAUDE.md`) was in the folder on Saturday morning; the orchestrator did not create or change it. Syoma asked how a second agent (ChatGPT) could work here without conflicts; the answer given: its own branch, its own folders, proposals instead of edits, provenance headers. Not started.
 
+## Saturday afternoon (from 12:05)
+
+- **Humans:** the professor approved the main proof (name pending). The grad student gave up on the Frobenius proof for now (12:13, reported by Syoma); the team is working on understanding the main proof. Aid written for that: `notes/main_proof_map.md` (one page, pictures, one example through every step, the three places to read slowly).
+- **Lean** (Syoma said yes to installing): `elan` is in the user's home folder (not on PATH); project in `lean/`; targets are the main proof only: digit lemmas and the lower bound (Step 2), then rotation equivalence and class size (Step 1). Nothing counts until `lake build` passes; status table in `lean/README.md`.
+- **Talk:** with no human having checked the Frobenius proof, keep it to one sentence or move its slide to the backups (the humans decide).
+
 ## Saturday midday: motivation, connections, pictures
 
 - [x] **M1 — Figures.** DONE 10:57, extended later: fifteen figures (`talk/figures/`), one script, PDF and PNG.

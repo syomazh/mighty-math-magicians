@@ -1178,7 +1178,74 @@ def fig_laser():
     save(fig, "fig_laser")
 
 
+# ------------------------------------------------------------------------------------------
+# 16. Step 4: a carry is a collapsing cherry (p = 2, three atoms)
+# ------------------------------------------------------------------------------------------
+def fig_cherry():
+    def draw_labelled(ax, t, x0, y0, sx=1.0, sy=1.0):
+        nodes, edges, w = layout(t)
+        for (xa, ya, xb, yb, _) in edges:
+            ax.plot([x0 + xa * sx, x0 + xb * sx], [y0 + ya * sy, y0 + yb * sy], color=INK2, lw=1.0, zorder=1)
+        for nd in nodes:
+            X, Y = x0 + nd["x"] * sx, y0 + nd["y"] * sy
+            if nd["kind"] == "leaf":
+                lab = nd["obj"]
+                ax.scatter([X], [Y - 0.05], s=260 if len(lab) == 1 else 520, marker="^", color=AQUA_SOFT,
+                           edgecolors=AQUA, linewidths=1.0, zorder=3)
+                ax.text(X, Y - 0.12, lab, ha="center", va="center", fontsize=7.4 if len(lab) == 1 else 6.4, zorder=4)
+            else:
+                ax.scatter([X], [Y], s=34, marker="s", color=ORANGE, edgecolors="white", linewidths=0.8, zorder=3)
+        return w * sx
+
+    # the three trees on atoms A, B, C up to swapping children, and the action of swapping the labels A, B
+    trees = [(("A", "B"), "C"), (("A", "C"), "B"), (("B", "C"), "A")]
+    swap = {"A": "B", "B": "A", "C": "C"}
+
+    def relabel(t):
+        return swap[t] if isinstance(t, str) else tuple(relabel(c) for c in t)
+
+    images = [key(relabel(t)) for t in trees]
+    keys = [key(t) for t in trees]
+    assert len(set(keys)) == 3
+    assert images[0] == keys[0] and images[1] == keys[2] and images[2] == keys[1]   # one fixed, one pair
+
+    fig, ax = plt.subplots(figsize=(6.3, 2.75))
+    clean(ax)
+    y = 0.0
+    # panel 1
+    ax.add_patch(Rectangle((-0.45, -2.75), 3.9, 3.55, facecolor=AQUA_SOFT, edgecolor="none", zorder=0))
+    draw_labelled(ax, trees[0], 0.0, y)
+    ax.add_patch(Rectangle((3.75, -2.75), 7.9, 3.55, facecolor="#f1f0ec", edgecolor="none", zorder=0))
+    draw_labelled(ax, trees[1], 4.2, y)
+    draw_labelled(ax, trees[2], 8.2, y)
+    ax.annotate("", xy=(8.25, -1.0), xytext=(7.15, -1.0),
+                arrowprops=dict(arrowstyle="<|-|>", color=MUTED, lw=1.3, mutation_scale=12))
+    ax.text(1.5, 1.15, "A, B in a cherry:\nnothing changes", ha="center", va="center", fontsize=7.6, linespacing=1.1)
+    ax.text(7.7, 1.15, "these two trade places:\na pair, invisible modulo 2", ha="center", va="center", fontsize=7.6,
+            linespacing=1.1)
+    ax.text(5.6, 2.2, "Three atoms A, B, C: three ways to join them.  Swap the names A and B.", ha="center",
+            va="center", fontsize=8.6, fontweight="bold")
+    # collapse arrows
+    ax.annotate("", xy=(13.6, -1.0), xytext=(12.2, -1.0), arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=1.1))
+    ax.text(12.9, -0.55, "collapse\nthe cherry", ha="center", va="bottom", fontsize=7, color=MUTED, linespacing=1.0)
+    draw_labelled(ax, ("AB", "C"), 13.6, -0.5, sx=1.7)
+    ax.annotate("", xy=(18.6, -1.0), xytext=(17.2, -1.0), arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=1.1))
+    ax.text(17.9, -0.55, "again", ha="center", va="bottom", fontsize=7, color=MUTED)
+    ax.scatter([19.9], [-1.05], s=900, marker="^", color=AQUA_SOFT, edgecolors=AQUA, linewidths=1.0, zorder=3)
+    ax.text(19.9, -1.15, "ABC", ha="center", va="center", fontsize=6.4, zorder=4)
+    ax.text(15.2, 1.05, "two atoms:\none tree", ha="center", va="center", fontsize=7.6, linespacing=1.05)
+    ax.text(19.9, 1.05, "one atom:\none tree", ha="center", va="center", fontsize=7.6, linespacing=1.05)
+    ax.text(10.4, -3.5, r"$3 \equiv 1 \equiv 1$ (mod 2):  the number of most symmetric trees is odd.  "
+            "Each collapse is a carry.", ha="center", va="center", fontsize=8.4)
+    ax.text(10.4, -4.2, r"For a prime $p$: rotate the names of $p$ atoms. The trees that stay put have them in one cherry, "
+            r"in $p - 1$ ways: a factor $-1$.", ha="center", va="center", fontsize=7.6, color=INK2)
+    ax.set_xlim(-0.8, 21.4)
+    ax.set_ylim(-4.7, 2.6)
+    save(fig, "fig_cherry")
+
+
 if __name__ == "__main__":
+    fig_cherry()
     fig_quadtree()
     fig_triangles()
     fig_mobile()

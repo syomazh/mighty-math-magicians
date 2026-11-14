@@ -230,3 +230,11 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **Human input.** Syoma: "Yes, add it" (the Etherington credit to the two papers); then asked for a concise summary of the change; then asked to verify the three proofs in Lean.
 - Added the credit: `paper/main.tex` introduction (one sentence, bibliography entry; PDF 14 pages, one page more because of the added lines), `paper/frobenius_proof.tex` remark on earlier work (one paragraph, bibliography entry; 9 pages). Both compile; no undefined references. No mathematical change in either.
 - **Lean:** nothing has been verified in Lean so far, and Lean is not installed on this machine (CLAUDE.md, rule 7). Reported to Syoma with what a formalization could realistically cover before the deadline; installing it needs his permission (downloads).
+
+## 2026-11-14 ~12:13 — Claude Fable 5.2
+
+- **Human input.** Syoma: "Yes, install Lean". Later: the grad student gave up on the Frobenius proof; they may try later; for now they are concentrating on understanding the main proof.
+- **Lean installation** (permission given). `elan` 4.2.4 from the official release of leanprover/elan (zip 2,508,099 bytes), installed with `--no-modify-path --default-toolchain none` into the user's home folder. Project `lean/` created (toolchain `leanprover/lean4:v4.36.0-rc2`, the one Mathlib's master pins today; Mathlib required by git). Toolchain, Mathlib and its cache are downloading in the background; exact sizes will be recorded when done. `lean/.lake/` is in `.gitignore`.
+- **Lean files drafted, not yet compiled:** `lean/MMM/Digits.lean` (digit sums: recursion, s(p·n) = s(n), positivity, subadditivity, all without factorials) and `lean/MMM/Trees.lean` (p-ary trees, rotation equivalence in normal form, d, and the lower bound of Step 2).
+- **For the humans' reading of the main proof:** a new figure for Step 4 (`fig_cherry`: three atoms, swap two names, one tree stays, two trade places; collapse the cherry) and `notes/main_proof_map.md`, one page with a picture and the running example (7 leaves, 132 trees) at every step, the lemma names of the paper, the three places to read slowly and six self-test questions.
+- Plan change: Lean is aimed at the main proof only.
