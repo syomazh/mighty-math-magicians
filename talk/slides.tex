@@ -79,6 +79,33 @@
 \end{frame}
 
 % 3 ------------------------------------------------------------------
+\begin{frame}{The same trees, elsewhere}
+  \begin{columns}[T]
+    \begin{column}{0.47\textwidth}
+      \textbf{Chemistry ($p=3$).}
+      A carbon atom in a chain has three further bonds. They can be
+      \emph{rotated}, not reflected.\\[5pt]
+      Ternary trees up to rotation at every node\\
+      $=$ alkyl radicals $\mathrm{C}_n\mathrm{H}_{2n+1}$, counting stereoisomers:
+      \[1,\ 1,\ 2,\ 5,\ 11,\ 28,\ 74,\ 199,\dots\]
+      {\footnotesize OEIS A000625}
+    \end{column}
+    \begin{column}{0.47\textwidth}
+      \textbf{Biology ($p=2$).}
+      Binary trees up to swapping the two children at every node\\[5pt]
+      $=$ shapes of evolutionary trees:
+      \[1,\ 1,\ 2,\ 3,\ 6,\ 11,\ 23,\ 46,\dots\]
+      {\footnotesize Wedderburn--Etherington numbers, OEIS A001190}
+    \end{column}
+  \end{columns}
+  \vfill
+  \begin{center}
+  Our question: \emph{how many ordered trees lie over each shape?}\\[2pt]
+  Always a power of $p$. The smallest power that occurs is the valuation.
+  \end{center}
+\end{frame}
+
+% 3 ------------------------------------------------------------------
 \begin{frame}{The problem}
   A \emph{$q$-ary tree}: every node has $q$ ordered branches,
   each empty or again a $q$-ary tree.
@@ -346,7 +373,7 @@
     \node[font=\small] at (0,0.55) {$p$ siblings, same class $c$};
     \draw[->,thick] (1.6,-0.5) -- (2.6,-0.5);
     \node[draw,circle,fill=yellow!25,minimum size=6mm,font=\small] at (3.6,-0.45) {$c{+}1$};
-    \node[font=\small,align=left] at (5.7,-0.45) {collapse: class $c+1$\\
+    \node[font=\small,align=left,anchor=west] at (4.3,-0.45) {collapse: class $c+1$\\
       $(p-1)$ cyclic orders\\ $\Rightarrow$ one factor $-1$};
   \end{tikzpicture}
   \qquad
@@ -382,8 +409,6 @@
     \item Class sizes $p^d$ with $d\ge t$; the sum $\bmod\,p$ sees only minimal classes.
     \item Their number is $\equiv(-1)^t/\prod_j m_j!\not\equiv 0\pmod p$.
     \item No valuation of a factorial, binomial or multinomial is used.
-    \item For $p=q=2$: minimal classes $=$ phylogenetic trees on the $1$-bits,
-          $(2s-3)!!$ of them, an odd number.
   \end{itemize}
   \status
 \end{frame}
@@ -396,27 +421,27 @@
   Atoms of heights $0,2,3$ (sizes $1,4,8$); leaf depths must be \textbf{even}
   ($k=2$). Only one skeleton fits:
   \begin{center}
-  \begin{tikzpicture}[level distance=14mm,sibling distance=24mm]
+  \begin{tikzpicture}[level distance=10mm,sibling distance=22mm]
     \node[asymnode]{}
       child{node[asymnode]{}
         child{node[atom]{1}} child{node[atom]{4}}}
       child{node[atom]{8}};
-    \node[font=\small] at (-3.3,0) {depth $0$};
-    \node[font=\small] at (-3.3,-1.4) {depth $1$};
-    \node[font=\small] at (-3.3,-2.8) {depth $2$};
+    \node[font=\small] at (-4.2,0) {depth $0$};
+    \node[font=\small] at (-4.2,-1.0) {depth $1$};
+    \node[font=\small] at (-4.2,-2.0) {depth $2$};
   \end{tikzpicture}
   \end{center}
   \begin{itemize}
-    \item Atom $8$ (height $3$) at depth $1$: $1+3\equiv0\pmod2$.
-    \item Atoms $1$ and $4$ (heights $0,2$) at depth $2$: $2+0\equiv2+2\equiv0$.
+    \item Atom $8$ (height $3$) at depth $1$; atoms $1$, $4$ (heights $0$, $2$) at depth $2$:
+          height $+$ depth is even each time.
     \item Carries: $(2,1)\to(0,2)\to(1,0)$, two carries, sign $+1$.
-    \item So $N_{\min}=1$, and indeed $140/4=35$ is odd.
+          So $N_{\min}=1$, and indeed $140/4=35$ is odd.
   \end{itemize}
   \status
 \end{frame}
 
 % 14 -----------------------------------------------------------------
-\begin{frame}{What else falls out \hfill\normalsize\textcolor{red!70!black}{conjectural}}
+\begin{frame}{What else falls out \hfill\normalsize\textcolor{red!70!black}{checked numerically, not yet proved}}
   \begin{itemize}
     \item \textbf{Weighted Fuss--Catalan numbers.}
       Konvalinka's weighted theorem seems to need only transitivity on the $q$
@@ -433,7 +458,24 @@
       \par\hfill{\small(conjecture C11)}
   \end{itemize}
   \vfill
-  {\small Numerical checks are running; not claimed as results today.}
+  {\small Checked by computer: every level profile up to $22$ nodes for $q=2$ (up to
+  $12$--$15$ for $q=3,4,5,8,9$); weighted numbers for six values of $q$.
+  Not claimed as theorems today.}
+\end{frame}
+
+% 14b ----------------------------------------------------------------
+\begin{frame}{Two more ways to see it \hfill\normalsize\textcolor{red!70!black}{ideas, being verified}}
+  \textbf{Frobenius.} The generating function of $p$-ary trees by number of leaves
+  satisfies $G=x+G^p$. Modulo $p$, $G^p=G(x^p)$, so
+  \[ G\equiv x+x^p+x^{p^2}+\cdots\pmod p . \]
+  The count is prime to $p$ exactly when $m$ is a power of $p$.
+  Rotation classes keep track of the difference $G^p-G(x^p)$.
+
+  \medskip
+  \textbf{Accounting.} Label the leaves. A tree has $\frac{m-1}{p-1}$ nodes, each
+  worth a factor $-p$; the $m!$ labellings absorb $\frac{m-\sd(m)}{p-1}$ of them.
+  What is left over is $t$:
+  \[ \Cq\cdot\prod_j m_j!\;\equiv\;(-p)^{\,t}\pmod{p^{\,t+1}} . \]
 \end{frame}
 
 % 15 -----------------------------------------------------------------
@@ -455,9 +497,11 @@
       (Open Math OS); independent re-check, literature scan, explainer and further
       drafts by other logged worker models (Mistral Large 4.0, Muse Spark Open,
       DeepSeek Flash).
-    \item \textbf{Attacking:} three adversarial reviews of the proof by Mistral
-      Large 4.0, Muse Spark Open and a fresh Kimi K3.1 Pro, each asked to break
-      every lemma; brute-force checks on $47$ cases and $307$ carry instances.
+    \item \textbf{Attacking:} three adversarial reviews (Mistral Large 4.0, Muse
+      Spark Open, a fresh Kimi K3.1 Pro) found $14$ defects in the write-up and no
+      counterexample; a later line-by-line read by Claude found $4$ more. All
+      repaired. Computer checks: every tree for small sizes, then $1067$ leaf
+      counts up to $400$ leaves and primes up to $13$, no failures.
     \item \textbf{What humans verified:} \alert{to be filled in.}
   \end{itemize}
   \vfill

@@ -55,9 +55,10 @@ def leaf(a):
 
 
 def canonical(tree):
-    tree = choose_rotation(tree)
     if tree[0] == "L":
         return tree
+    if isinstance(tree[1], frozenset):
+        return tree  # already a quotient: do not iterate integers in labels
     children = tuple(canonical(ch) for ch in tree[1])
     # Store the whole cyclic equivalence class at every node.
     return ("N", frozenset(children[i:]+children[:i] for i in range(len(children))))
@@ -287,6 +288,8 @@ def complete_trees(labels, p, height):
     assert len(labels) == p**height
     result = set()
     for partition in block_partitions(labels,p):
+        if any(len(block) != p**(height-1) for block in partition):
+            continue
         options = [complete_trees(block,p,height-1) for block in partition]
         for children in itertools.product(*options):
             result.add(canonical(("N",children)))
@@ -301,37 +304,24 @@ def digit_forests(m, p):
 @lru_cache(maxsize=None)
 def forest_from_counts(labels, counts, p):
     if not labels:
-        return ((),)  # one empty forest, not an empty set of forests
-    if len(labels) == 1:
-        return ((leaf(labels[0]),),) if sum(counts) == 1 and counts[0] == 1 else ()
+        return ((),)
     if sum(c*p**j for j,c in enumerate(counts)) != len(labels):
         return ()
-    choices = [j for j,c in enumerate(counts) if c]
-    if not choices:
-        return ()
-    j = choices[0]
-    blocksize = p**j
-    rest_counts = list(counts)
-    rest_counts[j] -= 1
     result = set()
-    for other in itertools.combinations(labels[1:], blocksize-1):
-        block = (labels[0],)+other
-        remaining = tuple(x for x in labels if x not in block)
-        for tr in complete_trees(block,p,j):
-            for forest in forest_from_counts(remaining,tuple(rest_counts),p):
-                result.add(tuple(sorted((tr,)+forest)))
-    return tuple(sorted(result))
-    j = choices[0]
-    blocksize = p**j
-    rest_counts = list(counts)
-    rest_counts[j] -= 1
-    result = set()
-    for other in itertools.combinations(labels[1:], blocksize-1):
-        block = (labels[0],)+other
-        remaining = tuple(x for x in labels if x not in block)
-        for tr in complete_trees(block,p,j):
-            for forest in forest_from_counts(remaining,tuple(rest_counts),p):
-                result.add(tuple(sorted((tr,)+forest)))
+    # The smallest unused label can belong to any prescribed tree height.
+    # Once that height is selected, fixing its block avoids duplicate forests.
+    for j, c in enumerate(counts):
+        if not c:
+            continue
+        blocksize = p**j
+        rest_counts = list(counts)
+        rest_counts[j] -= 1
+        for other in itertools.combinations(labels[1:], blocksize-1):
+            block = (labels[0],)+other
+            remaining = tuple(x for x in labels if x not in block)
+            for tr in complete_trees(block,p,j):
+                for forest in forest_from_counts(remaining,tuple(rest_counts),p):
+                    result.add(tuple(sorted((tr,)+forest)))
     return tuple(sorted(result))
 
 

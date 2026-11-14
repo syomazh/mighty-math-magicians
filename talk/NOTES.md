@@ -119,3 +119,9 @@ lemma, and brute force checked $47$ cases plus $307$ carry instances. The human-
 line is deliberately left open in the draft — fill it in before the talk, and say plainly
 which claims each presenter has personally checked. Offer the repository logs for full
 provenance.
+
+## Slides added by the orchestrator (2026-11-13 23:50)
+
+**Slide 3, "The same trees, elsewhere" (Syoma).** Before stating the problem, show that these classes of trees are familiar. For ternary trees, rotating the three branches at a node is what a chemist does with the three other bonds of a carbon atom, and the number of classes is the number of alkyl radicals counted with stereoisomers. For binary trees the classes are the shapes of evolutionary trees. Our question is how many ordered trees sit over each shape; the answer is always a power of p.
+
+**Slide 16, "Two more ways to see it" (grad student; optional, skip if short of time).** Two ideas that are not signed. Frobenius: modulo p the equation G = x + G^p forces G = x + x^p + x^(p^2) + ..., which already says when the count is prime to p. Accounting: with labelled leaves every node is worth a factor -p, the m! labellings absorb some of them, and t are left over.
