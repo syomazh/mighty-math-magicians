@@ -127,47 +127,51 @@ provenance.
 **Slide 16, "Two more ways to see it" (grad student; optional, skip if short of time).** Two ideas that are not signed. Frobenius: modulo p the equation G = x + G^p forces G = x + x^p + x^(p^2) + ..., which already says when the count is prime to p. Accounting: with labelled leaves every node is worth a factor -p, the m! labellings absorb some of them, and t are left over.
 
 
-## Slide map after Saturday's picture slides (added 2026-11-14 10:57 by Claude Fable 5.2)
+## Slide map after Saturday's picture slides (rewritten 2026-11-14 11:16 by Claude Fable 5.2)
 
-The deck now has 29 slides: more than fit in 20 minutes. The figures come from `talk/figures/make_figures.py`. Numbers below are the page numbers of `slides.pdf`.
+The deck now has 33 slides: more than fit in 20 minutes. The figures come from `talk/figures/make_figures.py`. Numbers are the page numbers of `slides.pdf`.
 
 | Page | Slide | In the 20-minute path? | Time |
 |---|---|---|---|
 | 1 | Title | yes | 0:15 |
-| 2 | A pattern in the Catalan numbers (table) | yes, quickly | 0:40 |
-| 3 | The pattern goes on, for every prime (picture) | yes | 0:35 |
-| 4 | One tree, four sciences (picture) | **yes** | 1:00 |
-| 5 | Chemistry does it with p = 3 (picture) | **yes** | 1:00 |
-| 6 | The problem | yes | 1:00 |
-| 7 | Konvalinka's symmetries and ours | yes | 1:15 |
-| 8 | Why the smaller group works: bits, not bytes (picture) | yes; it can replace page 9 | 0:45 |
-| 9 | Step 0 | skip if page 8 is shown | — |
-| 10 | Step 1: rotate, don't permute | yes | 1:00 |
-| 11 | Class size = p^d | yes | 1:15 |
-| 12 | Step 2 (induction) | skip if page 13 is shown; keep for questions | — |
-| 13 | Step 2 again: the carry budget (picture) | **yes** | 1:30 |
-| 14 | Step 3 | yes | 1:15 |
-| 15 | The answer in one picture | **yes** | 0:45 |
-| 16 | Running example | yes | 1:15 |
-| 17 | Step 4: a carry is a collapsing cherry | yes | 2:00 |
-| 18 | Conclusion | yes | 0:45 |
-| 19 | Prime-power example | skip (backup) | — |
-| 20 | What else falls out | skip (backup) | — |
-| 21 | Why the most symmetric shapes decide (picture) | yes | 1:00 |
-| 22 | Two more proofs | yes | 1:00 |
-| 23 | The idea in one sentence | optional | 0:20 |
-| 24 | How AI was used | yes | 1:00 |
-| 25 | What was known, and references | yes, briefly | 0:30 |
-| 26–29 | Backup: fusion; tree = interval = balls; polymers; sand on a ring | questions only | — |
+| 2 | A pattern in the Catalan numbers (table) | yes, quickly | 0:35 |
+| 3 | The pattern goes on, for every prime (picture) | yes; first to drop if short of time | 0:30 |
+| 4 | A shape of tree is a mobile (picture) | **yes** | 0:50 |
+| 5 | One tree, four sciences (picture) | **yes** | 0:45 |
+| 6 | Chemistry does it with p = 3 (picture) | **yes** | 0:50 |
+| 7 | The problem | yes | 1:00 |
+| 8 | Konvalinka's symmetries and ours | yes | 1:10 |
+| 9 | Why the smaller group works: bits, not bytes (picture) | yes | 0:40 |
+| 10 | Prime powers in a picture: cut a square (picture) | **yes**; it replaces page 21 | 0:50 |
+| 11 | Step 0 | skip if pages 9–10 are shown | — |
+| 12 | Step 1: rotate, don't permute | yes | 0:50 |
+| 13 | Class size = p^d | yes | 1:10 |
+| 14 | Step 2 (induction) | skip if page 15 is shown; keep for questions | — |
+| 15 | Step 2 again: the carry budget (picture) | **yes** | 1:30 |
+| 16 | Step 3 | yes | 1:10 |
+| 17 | The answer in one picture | **yes** | 0:40 |
+| 18 | Running example | yes | 1:10 |
+| 19 | Step 4: a carry is a collapsing cherry | yes | 2:00 |
+| 20 | Conclusion | yes | 0:45 |
+| 21 | Prime-power example | skip (backup) | — |
+| 22 | What else falls out | skip (backup) | — |
+| 23 | Why the most symmetric shapes decide (picture) | yes | 1:00 |
+| 24 | Two more proofs | yes | 0:50 |
+| 25 | The idea in one sentence | optional | — |
+| 26 | How AI was used | yes | 1:00 |
+| 27 | What was known, and references | yes, briefly | 0:25 |
+| 28–33 | Backup: fusion; tree = interval = balls; polymers; cut a triangle; light; sand on a ring | questions only | — |
 
-Total of the marked path: about 19 minutes. This selection is a suggestion; the humans decide.
+Total of the marked path: just under 20 minutes, with no slack. This selection is a suggestion; the humans decide.
 
-**What to say on the new slides.**
+**What to say on the picture slides.**
 
 - *Page 3.* "The same picture for every prime: the count is not divisible by p exactly at the rings. The height of a bar is a digit sum. This was known, by computing with factorials. Why should digits have anything to do with trees?"
-- *Page 4.* "The same tree four times: species, players, code words, notes. In none of them does left and right mean anything. So ask how many ordered trees stand over one shape: always a power of two. Six is 110 in binary, two ones, so one node must be lopsided. Biologists count exactly these nodes."
-- *Page 5.* "With three branches this is chemistry. The five butyl groups; over them 1, 9, 9, 9 and 27 trees. 55 is not divisible by 3 because tert-butyl stands alone: it is perfectly branched." (If asked: sec-butyl has two mirror-image forms; with reflections allowed there are four butyl groups.)
-- *Page 8.* "Konvalinka permutes all the branches of a node: that is like permuting the 256 values of a byte. We only flip its bits, one level at a time. Then every class has a power of p members."
-- *Page 13.* "Add up the leaves in base p. A carry is one trade of p units for one. Every tree makes the same number of carries. A symmetric node always makes one. So only so many nodes can be symmetric." Point at the two trees: 4 carries each; left none wasted, right three wasted.
-- *Page 15.* "13 is 8 + 4 + 1. The most symmetric tree with 13 leaves is a complete tree of 8, one of 4, and a leaf, joined by two nodes. The digits are the building blocks."
-- *Page 21.* "The 132 trees with 7 leaves, by shape. Each row is a power of two. With 2-adic eyes the big rows are small, and the lowest row decides. A physicist would call the power of 2 the ground-state energy."
+- *Page 4.* "Hang the tree up as a mobile. Every bar can spin. A drawing is a photograph of the mobile. This mobile has two lopsided bars, so four photographs. Spinning a balanced bar changes nothing. So the number of drawings is a sum of powers of two, one for each mobile, and its power of two is the smallest one that occurs."
+- *Page 5.* "The same tree four times: species, players, code words, notes. In none of them does left and right mean anything. Six is 110 in binary, two ones, so one node must be lopsided. Biologists count exactly these nodes."
+- *Page 6.* "With three branches this is chemistry. The five butyl groups; over them 1, 9, 9, 9 and 27 trees. 55 is not divisible by 3 because tert-butyl stands alone: it is perfectly branched." (If asked: sec-butyl has two mirror-image forms; with reflections allowed there are four butyl groups.)
+- *Page 9.* "Konvalinka permutes all the branches of a node: that is like permuting the 256 values of a byte. We only flip its bits, one level at a time. Then every class has a power of p members."
+- *Page 10.* "For q = 4 you can see it. Cut a square into quarters, three times: 22 pictures. Turn or mirror any cut square in place. The eight symmetries of a square are exactly our group. The pictures fall into families of 2, 4 and 16. The smallest is 2, so 22 is twice an odd number."
+- *Page 15.* "Add up the leaves in base p. A carry is one trade of p units for one. Every tree makes the same number of carries. A symmetric node always makes one. So only so many nodes can be symmetric." Point at the two trees: 4 carries each; left none wasted, right three wasted.
+- *Page 17.* "13 is 8 + 4 + 1. The most symmetric tree with 13 leaves is a complete tree of 8, one of 4, and a leaf, joined by two nodes. The digits are the building blocks." (If asked: this is also the shape of the hash tree that a certificate log builds over 13 entries.)
+- *Page 23.* "The 132 trees with 7 leaves, by shape. Each row is a power of two. With 2-adic eyes the big rows are small, and the lowest row decides. A physicist would call the power of 2 the ground-state energy. For p = 2 these are the tree diagrams of a cubic field theory, each divided by its symmetry factor."

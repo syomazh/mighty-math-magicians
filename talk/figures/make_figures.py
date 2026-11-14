@@ -908,7 +908,281 @@ def fig_sand():
     save(fig, "fig_sand")
 
 
+# ------------------------------------------------------------------------------------------
+# 12. quadtrees (q = 4): the 22 subdivisions with three quarterings
+# ------------------------------------------------------------------------------------------
+def quad_to_binary(t):
+    """A 4-ary node (c0, c1, c2, c3) read as two binary levels ((c0, c1), (c2, c3)).
+    Children: c0 = south-west, c1 = north-east (one diagonal), c2 = south-east, c3 = north-west."""
+    if is_leaf(t):
+        return ()
+    b = [quad_to_binary(c) for c in t]
+    return ((b[0], b[1]), (b[2], b[3]))
+
+
+def draw_quad(ax, t, x, y, size, lw=0.7):
+    if is_leaf(t):
+        return
+    h = size / 2
+    ax.plot([x, x + size], [y + h, y + h], color=INK, lw=lw, solid_capstyle="butt")
+    ax.plot([x + h, x + h], [y, y + size], color=INK, lw=lw, solid_capstyle="butt")
+    for c, (dx, dy) in zip(t, [(0, 0), (h, h), (h, 0), (0, h)]):       # SW, NE, SE, NW
+        draw_quad(ax, c, x + dx, y + dy, h, lw=lw * 0.85)
+
+
+def fig_quadtree():
+    trees = plane_trees(4, 3)
+    assert len(trees) == 22
+    fam = {}
+    for t in trees:
+        fam.setdefault(key(quad_to_binary(t)), []).append(t)
+    sizes = sorted(len(v) for v in fam.values())
+    assert sizes == [2, 4, 16]
+    for k, v in fam.items():
+        assert len(v) == 2 ** d_of(quad_to_binary(v[0]))
+    groups = sorted(fam.values(), key=len)
+
+    def where(t):
+        """(outer quadrant index, inner quadrant index or None) for sorting pictures."""
+        idx = [i for i, c in enumerate(t) if not is_leaf(c)]
+        inner = None
+        if len(idx) == 1:
+            inner = [i for i, c in enumerate(t[idx[0]]) if not is_leaf(c)]
+            inner = inner[0] if inner else None
+        return idx, inner
+
+    pos = {0: (0, 0), 1: (1, 1), 2: (1, 0), 3: (0, 1)}                 # quadrant -> (column, row)
+    fig, ax = plt.subplots(figsize=(6.3, 3.0))
+    clean(ax)
+    ax.set_aspect("equal")
+    S, G = 1.0, 0.28
+
+    def frame(x0, y0, cols, rows, soft):
+        w, h = cols * S + (cols - 1) * G, rows * S + (rows - 1) * G
+        ax.add_patch(Rectangle((x0 - 0.22, y0 - 0.22), w + 0.44, h + 0.44, facecolor=soft, edgecolor="none", zorder=0))
+        return w, h
+
+    def put(t, x, y):
+        ax.add_patch(Rectangle((x, y), S, S, facecolor="white", edgecolor=INK, lw=0.9, zorder=1))
+        draw_quad(ax, t, x, y, S)
+
+    # family of 2
+    x0, ybase = 0.0, 1.9
+    w, h = frame(x0, ybase, 1, 2, AQUA_SOFT)
+    for i, t in enumerate(sorted(groups[0], key=repr)):
+        put(t, x0, ybase + i * (S + G))
+    ax.text(x0 + w / 2, ybase - 0.5, "2 pictures", ha="center", va="top", fontsize=8.2)
+    ax.text(x0 + w / 2, ybase - 0.95, "opposite\nquarters cut", ha="center", va="top", fontsize=7, color=INK2, linespacing=1.05)
+    # family of 4
+    x1 = 2.6
+    w, h = frame(x1, ybase, 2, 2, "#f1f0ec")
+    for t in groups[1]:
+        idx, _ = where(t)
+        missing = [i for i in range(4) if i not in idx]                 # the uncut pair; place by one of them
+        cx = sum(pos[i][0] for i in idx) / 2
+        cy = sum(pos[i][1] for i in idx) / 2
+        col = 0 if cx < 0.5 or (cx == 0.5 and cy < 0.5) else 1
+        row = 0 if cy < 0.5 or (cy == 0.5 and cx > 0.5) else 1
+        put(t, x1 + col * (S + G), ybase + row * (S + G))
+    ax.text(x1 + w / 2, ybase - 0.5, "4 pictures", ha="center", va="top", fontsize=8.2)
+    ax.text(x1 + w / 2, ybase - 0.95, "neighbouring\nquarters cut", ha="center", va="top", fontsize=7, color=INK2, linespacing=1.05)
+    # family of 16
+    x2 = 6.5
+    y2 = 0.0
+    w, h = frame(x2, y2, 4, 4, "#f1f0ec")
+    for t in groups[2]:
+        idx, inner = where(t)
+        ox, oy = pos[idx[0]]
+        ix, iy = pos[inner]
+        put(t, x2 + (2 * ox + ix) * (S + G), y2 + (2 * oy + iy) * (S + G))
+    ax.text(x2 + w + 0.55, y2 + h - 0.3, "16 pictures", ha="left", va="center", fontsize=8.2)
+    ax.text(x2 + w + 0.55, y2 + h - 0.95, "a quarter cut,\nand a quarter\nof it cut again", ha="left", va="center", fontsize=7,
+            color=INK2, linespacing=1.05)
+    ax.text(x2 + w + 0.55, 1.75, r"$22 = 2 + 4 + 16$", ha="left", va="center", fontsize=10.5)
+    ax.text(x2 + w + 0.55, 1.05, "smallest family: $2^1$", ha="left", va="center", fontsize=8)
+    ax.text(x2 + w + 0.55, 0.45, r"so $22 = 2 \times 11$", ha="left", va="center", fontsize=8)
+    ax.text(x2 + w + 0.55, -0.15, "10 cells, $10 = 1010_2$", ha="left", va="center", fontsize=7.4, color=INK2)
+    ax.text(2.6, 5.05, "Turn or mirror any cut square in place:\nyou stay inside the family.", ha="center", va="center",
+            fontsize=8, linespacing=1.15)
+    ax.set_xlim(-0.6, x2 + w + 3.6)
+    ax.set_ylim(-0.6, 5.6)
+    save(fig, "fig_quadtree")
+
+
+# ------------------------------------------------------------------------------------------
+# 13. triangles (p = 3): stacked triangulations with three inner points
+# ------------------------------------------------------------------------------------------
+def draw_tri(ax, t, A, B, C, lw=0.7):
+    if is_leaf(t):
+        return
+    Gx, Gy = (A[0] + B[0] + C[0]) / 3, (A[1] + B[1] + C[1]) / 3
+    for P in (A, B, C):
+        ax.plot([Gx, P[0]], [Gy, P[1]], color=INK, lw=lw, solid_capstyle="round")
+    G = (Gx, Gy)
+    draw_tri(ax, t[0], A, B, G, lw * 0.85)
+    draw_tri(ax, t[1], B, C, G, lw * 0.85)
+    draw_tri(ax, t[2], C, A, G, lw * 0.85)
+
+
+def fig_triangles():
+    import math
+
+    trees = plane_trees(3, 3)
+    assert len(trees) == 12
+    fam = {}
+    for t in trees:
+        fam.setdefault(key(t), []).append(t)
+    groups = sorted(fam.values(), key=len)
+    assert [len(g) for g in groups] == [3, 9]
+    perfect = complete(2, 3)                                         # 4 inner points, 9 faces
+    assert len({key(t) for t in plane_trees(3, 4)}) == 5
+
+    fig, ax = plt.subplots(figsize=(6.3, 2.75))
+    clean(ax)
+    ax.set_aspect("equal")
+    S = 1.0
+    hgt = S * math.sqrt(3) / 2
+
+    def put(t, x, y, s=S, lw=0.7):
+        A, B, C = (x, y), (x + s, y), (x + s / 2, y + s * math.sqrt(3) / 2)
+        ax.add_patch(Polygon([A, B, C], closed=True, facecolor="white", edgecolor=INK, lw=0.9, zorder=1))
+        draw_tri(ax, t, A, B, C, lw=lw)
+
+    # family of 3
+    ax.add_patch(Rectangle((-0.2, 1.75), 3 * S + 2 * 0.25 + 0.4, hgt + 0.4, facecolor=AQUA_SOFT, edgecolor="none", zorder=0))
+    for i, t in enumerate(sorted(groups[0], key=repr)):
+        put(t, i * (S + 0.25), 1.95)
+    ax.text(1.75, 1.55, "3 pictures:  two of the three parts cut", ha="center", va="top", fontsize=7.6)
+    # family of 9
+    x1 = 4.6
+    ax.add_patch(Rectangle((x1 - 0.2, -0.2), 3 * S + 2 * 0.25 + 0.4, 3 * hgt + 2 * 0.22 + 0.4, facecolor="#f1f0ec",
+                           edgecolor="none", zorder=0))
+    for i, t in enumerate(sorted(groups[1], key=repr)):
+        put(t, x1 + (i % 3) * (S + 0.25), (i // 3) * (hgt + 0.22))
+    ax.text(x1 + 1.75, -0.4, "9 pictures:  a part cut,\nand a part of it cut again", ha="center", va="top", fontsize=7.6,
+            linespacing=1.1)
+    ax.text(1.75, 0.75, r"$12 = 3 + 9$", ha="center", va="center", fontsize=10.5)
+    ax.text(1.75, 0.2, "Turn the inside of any cut triangle\nby a third of a turn: same family.", ha="center", va="center",
+            fontsize=7.6, color=INK2, linespacing=1.1)
+    # the perfect one with 4 inner points
+    x2 = 9.6
+    put(perfect, x2, 1.05, s=2.3, lw=0.9)
+    ax.text(x2 + 1.15, 0.8, "4 inner points,\nall three parts cut:", ha="center", va="top", fontsize=7.6, linespacing=1.1)
+    ax.text(x2 + 1.15, 0.05, "alone in its family", ha="center", va="top", fontsize=8.2)
+    ax.text(x2 + 1.15, -0.4, r"$55 = 1 + 9 + 9 + 9 + 27$", ha="center", va="top", fontsize=8.6)
+    ax.set_xlim(-0.5, x2 + 2.9)
+    ax.set_ylim(-1.2, 3.35)
+    save(fig, "fig_triangles")
+
+
+# ------------------------------------------------------------------------------------------
+# 14. a mobile and its photographs (p = 2)
+# ------------------------------------------------------------------------------------------
+def draw_mobile(ax, t, x0, y0, sx=1.0, sy=1.0):
+    nodes, edges, width = layout(t)
+    byp = {nd["path"]: nd for nd in nodes}
+    for nd in nodes:
+        X, Y = x0 + nd["x"] * sx, y0 + nd["y"] * sy
+        if nd["kind"] == "leaf":
+            ax.plot([X, X], [Y + 0.55 * sy, Y + 0.12 * sy], color=INK2, lw=0.7, zorder=1)
+            ax.scatter([X], [Y], s=38, marker="o", color="#c9c8c1", edgecolors=INK2, linewidths=0.7, zorder=3)
+            continue
+        kids = [byp[nd["path"] + (i,)] for i in range(2)]
+        xs = [x0 + k["x"] * sx for k in kids]
+        yb = Y - 0.45 * sy
+        ax.plot([X, X], [Y + (0.55 * sy if nd["path"] else 0.5 * sy), yb], color=INK2, lw=0.7, zorder=1)   # string
+        ax.plot(xs, [yb, yb], color=INK, lw=1.6, solid_capstyle="round", zorder=2)                          # bar
+        ax.scatter([X], [yb], s=30, marker="o" if nd["kind"] == "sym" else "s",
+                   color=BLUE if nd["kind"] == "sym" else ORANGE, edgecolors="white", linewidths=0.7, zorder=4)
+    return width * sx
+
+
+def fig_mobile():
+    o = ()
+    c = (o, o)
+    base = (c, (o, c))                              # 5 leaves, two lopsided bars
+    assert d_of(base) == 2
+    swap_root = lambda t: (t[1], t[0])
+    swap_inner = lambda t: (t[0], (t[1][1], t[1][0]))
+    photos = [base, swap_inner(base), swap_root(base), swap_root(swap_inner(base))]
+    assert len({repr(t) for t in photos}) == 4 and len({key(t) for t in photos}) == 1
+    all5 = [t for t in plane_trees(2, 4) if key(t) == key(base)]
+    assert len(all5) == 4
+    fig, ax = plt.subplots(figsize=(6.3, 2.5))
+    clean(ax)
+    x = 0.0
+    for i, t in enumerate(photos):
+        w = draw_mobile(ax, t, x, 0.0, sx=0.8, sy=1.0)
+        ax.text(x + w / 2, -4.15, f"photograph {i + 1}", ha="center", va="top", fontsize=7.6, color=INK2)
+        x += w + 1.3
+    total = x - 1.3
+    ax.text(total / 2, 1.2, "One mobile, four photographs", ha="center", va="center", fontsize=9.5, fontweight="bold")
+    ax.scatter([total * 0.04], [-5.2], s=30, marker="s", color=ORANGE, edgecolors="white", linewidths=0.7)
+    ax.text(total * 0.04 + 0.3, -5.2, "lopsided bar: spin it, new photograph", ha="left", va="center",
+            fontsize=7.6, color=INK2)
+    ax.scatter([total * 0.54], [-5.2], s=30, marker="o", color=BLUE, edgecolors="white", linewidths=0.7)
+    ax.text(total * 0.54 + 0.3, -5.2, "balanced bar: spinning changes nothing", ha="left", va="center",
+            fontsize=7.6, color=INK2)
+    ax.text(total / 2, -6.1, r"2 lopsided bars, $2^2 = 4$ photographs.   A shape of tree is a mobile; an ordered tree is "
+            "a photograph of it.", ha="center", va="center", fontsize=8)
+    ax.set_xlim(-0.6, total + 0.6)
+    ax.set_ylim(-6.6, 1.7)
+    save(fig, "fig_mobile")
+
+
+# ------------------------------------------------------------------------------------------
+# 15. laser harmonics: two recipes for the fifth harmonic
+# ------------------------------------------------------------------------------------------
+def fig_laser():
+    o = ()
+    A = (complete(2), o)                           # 4 + 1
+    B = (((o, o), o), (o, o))                      # 3 + 2
+    assert (d_of(A), d_of(B)) == (1, 2) and n_leaves(A) == n_leaves(B) == 5
+    nm = {1: "1064 nm", 2: "532 nm", 3: "355 nm", 4: "266 nm", 5: "213 nm"}
+    for k, v in nm.items():
+        assert abs(1064 / k - float(v.split()[0])) < 0.6
+    fig, ax = plt.subplots(figsize=(6.3, 2.75))
+    clean(ax)
+
+    def panel(t, x0, title, sub):
+        nodes, w = draw_tree(ax, t, x0=x0, y0=0.0, sx=1.25, sy=1.0, node_size=50, leaf_size=0, lw=1.0,
+                             show_leaves=False)
+        for nd in nodes:
+            if nd["kind"] == "leaf":
+                ax.scatter([nd["X"]], [nd["Y"]], s=34, marker="o", color="#c9c8c1", edgecolors=INK2, linewidths=0.7,
+                           zorder=4)
+                continue
+            k = n_leaves(nd["obj"])
+            left = nd["path"] != () and nd["path"][-1] == 0
+            hx, ha = (-0.42, "right") if left else (0.42, "left")
+            if nd["path"] == ():
+                hx, ha = 0.42, "left"
+            ax.text(nd["X"] + hx, nd["Y"] + 0.12, f"{k}$\\omega$  {nm[k]}", ha=ha, va="bottom", fontsize=7.2)
+        ax.text(x0 + w / 2, 1.15, title, ha="center", va="bottom", fontsize=8.6, fontweight="bold")
+        ax.text(x0 + w / 2, -3.75, sub, ha="center", va="top", fontsize=7.8)
+        return w
+
+    wA = panel(A, 0.0, "recipe 4 + 1", "one mixing step: the minimum")
+    wB = panel(B, wA + 4.4, "recipe 3 + 2", "two mixing steps")
+    xr = wA + 4.4 + wB + 3.3
+    ax.scatter([xr], [0.4], s=34, marker="o", color="#c9c8c1", edgecolors=INK2, linewidths=0.7)
+    ax.text(xr + 0.45, 0.4, "pump photon, 1064 nm", ha="left", va="center", fontsize=7.4, color=INK2)
+    ax.scatter([xr], [-0.25], s=44, marker="o", color=BLUE, edgecolors="white", linewidths=0.8)
+    ax.text(xr + 0.45, -0.25, "doubling: equal photons fuse", ha="left", va="center", fontsize=7.4, color=INK2)
+    ax.scatter([xr], [-0.9], s=44, marker="s", color=ORANGE, edgecolors="white", linewidths=0.8)
+    ax.text(xr + 0.45, -0.9, "mixing: different photons fuse", ha="left", va="center", fontsize=7.4, color=INK2)
+    ax.text(xr - 0.1, -1.95, r"$5 = 101_2$: two ones, so one", ha="left", va="center", fontsize=8)
+    ax.text(xr - 0.1, -2.45, "mixing step cannot be avoided.", ha="left", va="center", fontsize=8)
+    ax.set_xlim(-1.6, xr + 7.0)
+    ax.set_ylim(-4.4, 1.75)
+    save(fig, "fig_laser")
+
+
 if __name__ == "__main__":
+    fig_quadtree()
+    fig_triangles()
+    fig_mobile()
+    fig_laser()
     fig_dendrimer()
     fig_sand()
     fig_fusion()

@@ -1,0 +1,5 @@
+p = 2: m = 1..399, 5 random merge orders each: number of merges = (m - s_p(m))/(p-1), remainder = base-2 digits: OK
+p = 3: m = 1..399, 5 random merge orders each: number of merges = (m - s_p(m))/(p-1), remainder = base-3 digits: OK
+p = 5: m = 1..399, 5 random merge orders each: number of merges = (m - s_p(m))/(p-1), remainder = base-5 digits: OK
+p = 2: score = sum over remaining tiles 2^(j+1) of j * 2^(j+1): OK
+example: the 2048 tile (level 10, made of 1024 twos) has score contribution 20480

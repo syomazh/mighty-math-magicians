@@ -93,6 +93,18 @@
   \end{minipage}
 \end{frame}
 
+% 2c (added 2026-11-14) ----------------------------------------------
+\begin{frame}{A shape of tree is a mobile}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/fig_mobile.pdf}\\[2pt]
+  \begin{minipage}{0.95\textwidth}\small
+  Every bar can spin. A drawing of a tree is a photograph of the mobile; a mobile with $d$ lopsided bars has
+  $p^{d}$ photographs. So the number of drawings is a sum of powers of $p$, one for each mobile, and
+  \textbf{its power of $p$ is the smallest one that occurs}, if the number of mobiles with that power is
+  not divisible by $p$. That is the plan of the proof.
+  \end{minipage}
+\end{frame}
+
 % 3 ------------------------------------------------------------------
 \begin{frame}{One tree, four sciences}
   \centering
@@ -185,6 +197,17 @@
   \begin{minipage}{0.93\textwidth}\small
   For $q=p^k$: read every $q$-ary node as $k$ levels of $p$-ary nodes, and only \emph{rotate} at each of them.
   Then every class of trees has $p^{d}$ members, where $d$ is the number of asymmetric nodes.
+  \end{minipage}
+\end{frame}
+
+% 5c (added 2026-11-14) ----------------------------------------------
+\begin{frame}{Prime powers in a picture: cut a square ($q=4$)}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/fig_quadtree.pdf}\\[1pt]
+  \begin{minipage}{0.95\textwidth}\small
+  The $8$ symmetries of a square permute its four quarters and keep the diagonals together: exactly our
+  group for a node with four branches. All families have a power of $2$ members; the smallest one gives
+  the power of $2$ in the count. {\footnotesize (Cutting squares this way is how quadtrees store images.)}
   \end{minipage}
 \end{frame}
 
@@ -510,11 +533,13 @@
 % 14b ----------------------------------------------------------------
 \begin{frame}{Why the most symmetric shapes decide}
   \centering
-  \includegraphics[width=0.93\textwidth]{figures/fig_levels.pdf}\\[2pt]
+  \includegraphics[width=0.86\textwidth]{figures/fig_levels.pdf}\\[1pt]
   \begin{minipage}{0.95\textwidth}\small
   For $2$-adic eyes $2^d$ is \emph{small} when $d$ is large, so the lowest row decides.
   A physicist would say: \textbf{the valuation is the ground-state energy}, and we must check that the number
-  of ground states does not vanish modulo $p$. That is the shape of the proof.
+  of ground states does not vanish modulo $p$. {\footnotesize For $p=2$ this is literal: these are the tree
+  diagrams of a cubic field theory, each divided by its symmetry factor $2^{\#\text{symmetric}}$:
+  $\tfrac3{16}+\tfrac38+\tfrac44+\tfrac12=\tfrac{33}{16}$, and $16$ is the largest symmetry factor.}
   \end{minipage}
 \end{frame}
 
@@ -616,9 +641,29 @@
   \includegraphics[width=0.8\textwidth]{figures/fig_dendrimer.pdf}\\[2pt]
   \begin{minipage}{0.95\textwidth}\small
   A molecule with $m$ ends can be perfectly branched only if $m$ is a power of $p$; otherwise it is $t$
-  junctions short. Up to a simple factor, Fuss--Catalan numbers are the statistical weights of branched
-  molecules in the classical theory of polymer branching (units with three reactive groups give the
-  Catalan numbers).
+  junctions short. In the classical theory of polymer branching, Stockmayer's combinatorial factor for
+  $n$ units with $f$ reactive groups is the Fuss--Catalan number for $q=f-1$ divided by the number of
+  free groups (units with three reactive groups give the Catalan numbers).
+  \end{minipage}
+\end{frame}
+
+\begin{frame}{Backup: cut a triangle ($p=3$)}
+  \centering
+  \includegraphics[width=0.95\textwidth]{figures/fig_triangles.pdf}\\[4pt]
+  \begin{minipage}{0.93\textwidth}\small
+  Put a point inside a triangle, join it to the corners, repeat. Turning the inside of a cut triangle by a
+  third of a turn is our rotation. The picture that stands alone is the twin of \emph{tert}-butyl.
+  \end{minipage}
+\end{frame}
+
+\begin{frame}{Backup: light, doubling and mixing ($p=2$)}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/fig_laser.pdf}\\[2pt]
+  \begin{minipage}{0.95\textwidth}\small
+  A nonlinear crystal fuses two photons into one. In the history of any photon of the $m$-th harmonic, at
+  least $(\text{number of ones of } m)-1$ fusions are mixings of two different photons. Both recipes for the
+  fifth harmonic are in use. {\footnotesize (A real apparatus can reuse a beam; then the count can drop, first at
+  $m=15$.)}
   \end{minipage}
 \end{frame}
 

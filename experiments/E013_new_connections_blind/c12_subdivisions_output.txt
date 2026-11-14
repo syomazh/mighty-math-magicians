@@ -1,0 +1,44 @@
+========================================================================
+SQUARE (quadtrees, q = 4 = 2^2)
+symmetries of the square acting on the 4 quadrants: order 8
+  = C2 wr C2 with blocks the two diagonals: True
+
+ N  cells  #quadtrees  v2  t=s2(m)-1  #orbits  orbit sizes (size:count)  #smallest
+ 0      1           1   0          0        1  {1: 1}  1
+ 1      4           1   0          0        1  {1: 1}  1
+ 2      7           4   2          2        1  {4: 1}  1
+ 3     10          22   1          1        3  {2: 1, 4: 1, 16: 1}  1
+ 4     13         140   2          2        6  {4: 1, 8: 1, 16: 2, 32: 1, 64: 1}  1
+ 5     16         969   0          0       17  {1: 1, 8: 1, 16: 4, 32: 4, 64: 4, 128: 2, 256: 1}  1
+ 6     19        7084   2          2       44  {4: 1, 8: 1, 16: 4, 32: 5, 64: 11, 128: 10, 256: 7, 512: 4, 1024: 1}  1
+all assertions passed for N = 0 .. 6
+
+number theory only (no enumeration): v2(binom(4N,N)/(3N+1)) = s2(3N+1)-1
+  quadtrees, N = 0..3000: failures: []
+  octrees (q = 8), v2(binom(8N,N)/(7N+1)) = s2(7N+1)-1, N = 0..3000: failures: []
+  symmetries of the cube on the 8 octants: order 48 ; 2-part 16 ; local group C2 wr C2 wr C2 has order 2^7 = 128
+========================================================================
+TRIANGLE (corner subdivision / Sierpinski refinement, p = 3)
+ N  cells  #pictures  v3  t  #orbits  orbit sizes (size:count)  #smallest  predicted mod 3
+ 0      1          1   0  0        1  {1: 1}  1  1
+ 1      3          1   0  0        1  {1: 1}  1  1
+ 2      5          3   1  1        1  {3: 1}  1  1
+ 3      7         12   1  1        2  {3: 1, 9: 1}  1  1
+ 4      9         55   0  0        5  {1: 1, 9: 3, 27: 1}  1  1
+ 5     11        273   1  1       11  {3: 1, 9: 3, 27: 6, 81: 1}  1  1
+ 6     13       1428   1  1       28  {3: 2, 9: 2, 27: 13, 81: 10, 243: 1}  2  2
+ 7     15       7752   1  1       74  {3: 1, 9: 6, 27: 15, 81: 36, 243: 15, 729: 1}  1  1
+all assertions passed for N = 0 .. 7
+========================================================================
+STACKED TRIANGULATIONS (planar 3-trees with a labelled outer triangle)
+count of pairwise non-isomorphic rooted graphs, by brute-force relabelling of inner vertices
+ N  #non-isomorphic rooted graphs  binom(3N,N)/(2N+1)  v3  t
+ 0                              1                   1   0  0
+ 1                              1                   1   0  0
+ 2                              3                   3   1  1
+ 3                             12                  12   1  1
+ 4                             55                  55   0  0
+ 5                            273                 273   1  1
+ 6                           1428                1428   1  1
+all assertions passed for N = 0 .. 6
+number theory only: v3(binom(3N,N)/(2N+1)) = (s3(2N+1)-1)/2, N = 0..3000: failures: []

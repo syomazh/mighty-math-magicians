@@ -1,0 +1,56 @@
+ m  binary     #schemes  min d  min u  ones-1  #min-d  #min-u  same set  all Fact-3 form
+ 1          1         1      0      0       0       1       1  True      True
+ 2         10         1      0      0       0       1       1  True      True
+ 3         11         1      1      1       1       1       1  True      True
+ 4        100         2      0      0       0       1       1  True      True
+ 5        101         3      1      1       1       1       1  True      True
+ 6        110         6      1      1       1       1       1  True      True
+ 7        111        11      2      2       2       3       3  True      True
+ 8       1000        23      0      0       0       1       1  True      True
+ 9       1001        46      1      1       1       1       1  True      True
+10       1010        98      1      1       1       1       1  True      True
+11       1011       207      2      2       2       3       3  True      True
+12       1100       451      1      1       1       1       1  True      True
+13       1101       983      2      2       2       3       3  True      True
+14       1110      2179      2      2       2       3       3  True      True
+15       1111      4850      3      3       3      15      15  True      True
+16      10000     10905      0      0       0       1       1  True      True
+17      10001     24631      1      1       1       1       1  True      True
+18      10010     56011      1      1       1       1       1  True      True
+19      10011    127912      2      2       2       3       3  True      True
+20      10100    293547      1      1       1       1       1  True      True
+all assertions passed for m = 1 .. 20
+
+All schemes for the 3rd to 7th harmonic (1 = one pump photon):
+ harmonic 3  (lower bound on SFG stages: 1)
+   d=1 u=1  SFG[SHG[1,1],1]  <- minimal
+ harmonic 4  (lower bound on SFG stages: 0)
+   d=0 u=0  SHG[SHG[1,1],SHG[1,1]]  <- minimal
+   d=2 u=2  SFG[SFG[SHG[1,1],1],1]
+ harmonic 5  (lower bound on SFG stages: 1)
+   d=1 u=1  SFG[SHG[SHG[1,1],SHG[1,1]],1]  <- minimal
+   d=2 u=2  SFG[SFG[SHG[1,1],1],SHG[1,1]]
+   d=3 u=3  SFG[SFG[SFG[SHG[1,1],1],1],1]
+ harmonic 6  (lower bound on SFG stages: 1)
+   d=1 u=1  SFG[SHG[SHG[1,1],SHG[1,1]],SHG[1,1]]  <- minimal
+   d=2 u=2  SFG[SFG[SHG[SHG[1,1],SHG[1,1]],1],1]
+   d=2 u=2  SHG[SFG[SHG[1,1],1],SFG[SHG[1,1],1]]
+   d=3 u=3  SFG[SFG[SFG[SHG[1,1],1],SHG[1,1]],1]
+   d=3 u=3  SFG[SFG[SFG[SHG[1,1],1],1],SHG[1,1]]
+   d=4 u=4  SFG[SFG[SFG[SFG[SHG[1,1],1],1],1],1]
+ harmonic 7  (lower bound on SFG stages: 2)
+   d=2 u=2  SFG[SFG[SHG[SHG[1,1],SHG[1,1]],SHG[1,1]],1]  <- minimal
+   d=2 u=2  SFG[SFG[SHG[SHG[1,1],SHG[1,1]],1],SHG[1,1]]  <- minimal
+   d=2 u=2  SFG[SHG[SHG[1,1],SHG[1,1]],SFG[SHG[1,1],1]]  <- minimal
+   d=3 u=3  SFG[SFG[SFG[SHG[SHG[1,1],SHG[1,1]],1],1],1]
+   d=3 u=3  SFG[SHG[SFG[SHG[1,1],1],SFG[SHG[1,1],1]],1]
+   d=3 u=3  SFG[SFG[SFG[SHG[1,1],1],SHG[1,1]],SHG[1,1]]
+   d=4 u=4  SFG[SFG[SFG[SFG[SHG[1,1],1],SHG[1,1]],1],1]
+   d=4 u=4  SFG[SFG[SFG[SFG[SHG[1,1],1],1],SHG[1,1]],1]
+   d=4 u=4  SFG[SFG[SFG[SFG[SHG[1,1],1],1],1],SHG[1,1]]
+   d=4 u=4  SFG[SFG[SFG[SHG[1,1],1],1],SFG[SHG[1,1],1]]
+   d=5 u=5  SFG[SFG[SFG[SFG[SFG[SHG[1,1],1],1],1],1],1]
+
+real	0m4.325s
+user	0m0.015s
+sys	0m0.000s

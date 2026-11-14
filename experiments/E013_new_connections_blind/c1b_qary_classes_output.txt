@@ -1,0 +1,10 @@
+q = 4 = 2^2 (quadtrees), N = 0..60: number of trees, smallest orbit p^t, count of smallest orbits mod p, fully symmetric iff m is a power of q: OK
+   number of orbits, N = 0..14: [1, 1, 1, 3, 6, 17, 44, 129, 373, 1131, 3453, 10777, 33947, 108272, 348119]
+q = 8 = 2^3 (octrees), N = 0..25: number of trees, smallest orbit p^t, count of smallest orbits mod p, fully symmetric iff m is a power of q: OK
+   number of orbits, N = 0..14: [1, 1, 1, 4, 10, 36, 119, 442, 1643, 6358, 24917, 99542, 402239, 1644285, 6781233]
+q = 9 = 3^2 (9-ary trees), N = 0..20: number of trees, smallest orbit p^t, count of smallest orbits mod p, fully symmetric iff m is a power of q: OK
+   number of orbits, N = 0..14: [1, 1, 1, 3, 11, 37, 141, 561, 2291, 9608, 41063, 178158, 782829, 3476216, 15575313]
+
+real	0m0.439s
+user	0m0.000s
+sys	0m0.015s
