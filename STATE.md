@@ -1,6 +1,6 @@
 # STATE — where we are and what is next
 
-_Last updated: 2026-11-13 21:10 PT by Claude Fable 5.2 (orchestrator)._
+_Last updated: 2026-11-13 22:50 PT by Claude Fable 5.2 (orchestrator)._
 
 ## Status in one paragraph
 
@@ -13,24 +13,25 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 - A human must sign each claim before it is presented as proved.
 - AI disclosure: a summary, able to say which tool produced what. Sources: `JOURNAL.md`, `CLAIMS.md` (Origin column), `logs/delegations/`.
 - Compute: about $15k on Open Math OS (use freely); Claude budget is small (protect it: orchestration and judgment only).
-- Repo is public on GitHub. **Pushing is waiting for Syoma's decision** (other teams could read the proof).
+- Repo is public on GitHub. Syoma approved pushing (2026-11-13 21:15); push after each work block.
 
-## Worker runs in flight (wave 1, launched 2026-11-13 ~21:10)
+## Worker runs in flight (wave 2, launched 2026-11-13 22:39)
 
-| Brief | Output | What "done" looks like |
+Wave 1 outcome: W004 literature scan finished and is reviewed (see JOURNAL 22:45). W001 produced `paper/main.tex` and an 11-page `paper/build/main.pdf` before dying on a connection error; the draft is complete by its author's account and **unreviewed**. W002, W003, W005 died mid-task and are resumed below.
+
+| Run | Output | What "done" looks like |
 |---|---|---|
-| `briefs/W001_proof_draft.md` | `paper/main.tex`, `paper/build/main.pdf`, `paper/GAPS.md` | compiles; every step proved or flagged as a gap |
-| `briefs/W002_independent_replication.md` | `experiments/E001_independent_replication/` | independent code agrees with E000 on C1–C5, C7, C8 |
-| `briefs/W003_extensions_numerics.md` | `experiments/E002_extensions/` | C9, C10, C11 tested; second-order data |
-| `briefs/W004_literature_scan.md` | `references/literature_scan.md` | references verified; ranked overlap shortlist |
-| `briefs/W005_explainer.md` | `explainer/index.html` | opens by double-click; `node explainer/selftest.mjs` passes |
+| W006_review_mistral / _muse / _kimi (`briefs/W006_review_*.md`) | `paper/reviews/review_{mistral,muse,kimi}.md` | a verdict (correct / gap / wrong) on every lemma of `paper/main.tex` |
+| W002c (`briefs/W002b_replication_resume.md`) | `experiments/E001_independent_replication/output.txt`, `README.md` | independent code agrees with E000 on C1-C5, C7, C8 |
+| W003b (`briefs/W003b_extensions_resume.md`) | `experiments/E002_extensions/output.txt`, `README.md` | C9, C10, C11 each marked supported / refuted / not tested |
+| W005b (`briefs/W005b_explainer_resume.md`) | `explainer/index.html` | `node explainer/selftest.mjs` passes; five sections work |
 
-Each run logs to `logs/delegations/<time>_<slug>/` (`brief.md`, `output.md`, `meta.txt`). A run is **not trusted until reviewed**: read `output.md`, look at `git status`/`git diff`, rerun its script, then note the review in `JOURNAL.md`.
+`tools/delegate.sh` relaunches a worker that dies (up to 4 attempts), so these should survive gateway timeouts. They do **not** survive the laptop sleeping. Each run logs to `logs/delegations/<time>_<slug>/`. A run is **not trusted until reviewed**: read `output.md`, look at `git status`/`git diff`, rerun its script, then note the review in `JOURNAL.md`.
 
 ## Next actions (in order)
 
-1. Review wave 1 as runs finish (above). Update `CLAIMS.md` grades (`computed` needs E001 agreement; `ai-proved` needs `paper/` with an empty or resolved `GAPS.md`).
-2. **Adversarial review of the proof** by a different model than the author: `bash tools/delegate.sh W006_adversarial_review briefs/W006_adversarial_review.md -ReadOnly -Model mistralai/mistral-large-4-0` (brief still to be written: "find an error in `paper/main.tex`; for each lemma say correct / gap / wrong with the exact line; try small counterexamples by hand"). Run a second one with `meta/muse-spark-open`. Fix what they find with a Kimi worker, repeat until both come back clean. Then grade C1–C8 `ai-reviewed`.
+1. Read the three reviews in `paper/reviews/`. Adjudicate every GAP/WRONG finding (is it real?), then give a Kimi worker a repair brief for `paper/main.tex` listing the accepted findings; re-review until clean. Review W002c, W003b, W005b as they finish. Update `CLAIMS.md` grades (`computed` needs E001 agreement; `ai-proved` needs `paper/` with an empty or resolved `GAPS.md`).
+2. When the reviews come back clean, grade C1–C8 `ai-reviewed` in `CLAIMS.md`, copy the PDF to `paper/main.pdf` (tracked) and send it to the grad student. Also needed: a full-text overlap check of Gao–Gu 2021, Krattenthaler–Müller 2025, Deutsch–Sagan 2006, Postnikov–Sagan 2007 (by the humans, or by a worker once Syoma allows it to download the open-access PDFs).
 3. **Human gate 1** (Saturday morning): grad student reads `paper/build/main.pdf` and signs C1–C3 or reports the break. Professor is asked two questions: is the argument correct, and does he know this proof in the literature?
 4. **Human gate 2** (Saturday midday): C4–C6 signed or repaired.
 5. Decide extensions from E002 and the literature scan: weighted numbers (C9), level profiles (C10), master statement (C11). Each one accepted gets a section in `paper/` by a worker, then review, then sign-off.
