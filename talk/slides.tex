@@ -9,6 +9,10 @@
 \usepackage{amsmath,amssymb}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
+% colours shared with talk/figures/make_figures.py (symmetric = blue circle, asymmetric = orange square)
+\definecolor{symblue}{HTML}{2A78D6}
+\definecolor{asymorange}{HTML}{EB6834}
+\definecolor{atomgreen}{HTML}{1BAF7A}
 
 % ---- status switches: change these two lines after human sign-off ----
 \newcommand{\claimstatus}{candidate proof, under verification}
@@ -23,10 +27,10 @@
 
 \tikzset{
   intnode/.style={circle,draw,fill=black,inner sep=1.4pt},
-  symnode/.style={circle,draw,blue!70!black,fill=blue!15,inner sep=1.8pt},
-  asymnode/.style={circle,draw,red!75!black,fill=red!15,inner sep=1.8pt},
+  symnode/.style={circle,draw=white,fill=symblue,inner sep=2.2pt},
+  asymnode/.style={rectangle,draw=white,fill=asymorange,inner sep=2.7pt},
   leafdot/.style={circle,draw,fill=white,inner sep=1.2pt},
-  atom/.style={regular polygon,regular polygon sides=3,draw,fill=yellow!25,
+  atom/.style={regular polygon,regular polygon sides=3,draw=atomgreen,fill=atomgreen!18,
                inner sep=1pt,minimum size=9mm,font=\small},
   treeedge/.style={draw,thick}
 }
@@ -78,34 +82,39 @@
   \end{columns}
 \end{frame}
 
+% 2b (added 2026-11-14 by Claude Fable 5.2; figure: talk/figures/make_figures.py) --------
+\begin{frame}{The pattern goes on, for every prime}
+  \centering
+  \includegraphics[width=0.76\textwidth]{figures/fig_pattern.pdf}\\[0pt]
+  \begin{minipage}{0.93\textwidth}\small
+  The power of $p$ is $\bigl(\text{digit sum of the number of leaves in base }p\,-\,1\bigr)/(p-1)$.
+  This is known, \emph{by computing with factorials}.
+  \textbf{Why should the digits of a number have anything to do with trees?}
+  \end{minipage}
+\end{frame}
+
 % 3 ------------------------------------------------------------------
-\begin{frame}{The same trees, elsewhere}
-  \begin{columns}[T]
-    \begin{column}{0.47\textwidth}
-      \textbf{Chemistry ($p=3$).}
-      A carbon atom in a chain has three further bonds. They can be
-      \emph{rotated}, not reflected. So ternary trees up to rotation
-      $=$ alkyl radicals $\mathrm{C}_n\mathrm{H}_{2n+1}$ with stereoisomers:
-      \[1,\ 1,\ 2,\ 5,\ 11,\ 28,\ 74,\ 199,\dots\]
-      {\footnotesize OEIS A000625.
-      \emph{tert}-Butyl, $\mathrm{C(CH_3)_3}$, is perfectly branched: $3^4$ rotations
-      fix it. And the number of ternary trees with $4$ nodes, $55$, is prime to $3$.}
-    \end{column}
-    \begin{column}{0.47\textwidth}
-      \textbf{Biology ($p=2$).}
-      Binary trees up to swapping the two children at every node\\[5pt]
-      $=$ shapes of evolutionary trees:
-      \[1,\ 1,\ 2,\ 3,\ 6,\ 11,\ 23,\ 46,\dots\]
-      {\footnotesize Wedderburn--Etherington numbers, OEIS A001190}\\[4pt]
-      {\small Biologists measure the \emph{balance} of a tree by counting the nodes
-      whose two subtrees differ (Kersting--Fischer 2021). That count is our $d(T)$.}
-    \end{column}
-  \end{columns}
-  \vfill
-  \begin{center}
-  Our question: \emph{how many ordered trees lie over each shape?}\\[2pt]
-  Always a power of $p$. The smallest power that occurs is the valuation.
-  \end{center}
+\begin{frame}{One tree, four sciences}
+  \centering
+  \includegraphics[width=0.88\textwidth]{figures/fig_dialects.pdf}\\[1pt]
+  \begin{minipage}{0.96\textwidth}\small
+  The left-to-right order of the branches means nothing here: only the \emph{shape} counts.
+  \textbf{How many ordered trees stand over one shape? Always a power of $2$.}
+  The smallest power that occurs is the power of $2$ in the Catalan number.\\[2pt]
+  {\footnotesize $6=110_2$: one node has to be lopsided (orange), and one is enough. Biologists count
+  these nodes to measure the balance of an evolutionary tree (Kersting--Fischer 2021).}
+  \end{minipage}
+\end{frame}
+
+% 3b (added 2026-11-14) ----------------------------------------------
+\begin{frame}{Chemistry does it with $p=3$}
+  \centering
+  \includegraphics[width=0.96\textwidth]{figures/fig_butyl.pdf}\\[1pt]
+  \begin{minipage}{0.96\textwidth}\footnotesize
+  The three further bonds of a carbon atom can be \emph{rotated}, not reflected: a cyclic group of
+  order $3$ at every node. Ternary trees up to rotation are the alkyl groups, mirror images counted
+  separately: $1,1,2,5,11,28,\dots$ (OEIS A000625).
+  \end{minipage}
 \end{frame}
 
 % 3 ------------------------------------------------------------------
@@ -167,6 +176,16 @@
       \end{itemize}
   \end{columns}
   \status
+\end{frame}
+
+% 5b (added 2026-11-14) ----------------------------------------------
+\begin{frame}{Why the smaller group works: bits, not bytes}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/fig_bits.pdf}\\[5pt]
+  \begin{minipage}{0.93\textwidth}\small
+  For $q=p^k$: read every $q$-ary node as $k$ levels of $p$-ary nodes, and only \emph{rotate} at each of them.
+  Then every class of trees has $p^{d}$ members, where $d$ is the number of asymmetric nodes.
+  \end{minipage}
 \end{frame}
 
 % 5 ------------------------------------------------------------------
@@ -301,19 +320,14 @@
 
 % 8b (optional; added 2026-11-14 by Claude Fable 5.2: the same step, said with carries) ----
 \begin{frame}{Step 2 again: the carry budget \hfill\normalsize\textcolor{red!70!black}{same statement, a second way to see it}}
-  Add up the leaves of the tree \textbf{in base $p$}, node by node.
-  \begin{enumerate}
-    \item \textbf{The budget is fixed.} Whatever the shape of the tree, the total number
-      of carries is
-      \[ \nu(m)=\frac{m-\sd(m)}{p-1}. \]
-      {\small (A carry is one trade of $p$ units for $1$ unit in the next column; it lowers
-      the digit sum by $p-1$. We start from $m$ ones and end at the digits of $m$.)}
-    \item \textbf{A symmetric node always carries.} It adds $p$ equal numbers.
-    \item A tree has $\frac{m-1}{p-1}$ nodes. At most $\nu(m)$ of them are symmetric, so
-      \[ d(T)\ \ge\ \frac{m-1}{p-1}-\frac{m-\sd(m)}{p-1}\;=\;t. \]
-  \end{enumerate}
-  \textbf{Equality:} no carry is wasted. Asymmetric nodes add without carrying, and
-  symmetric nodes sit only on complete trees. That is Step~3.
+  \centering
+  \includegraphics[width=0.92\textwidth]{figures/fig_carry_budget.pdf}\\[2pt]
+  \begin{minipage}{0.96\textwidth}\small
+  A carry is one trade of $p$ units for $1$ unit in the next column. \textbf{Every} tree with $m$ leaves
+  makes $\nu(m)=\frac{m-\sd(m)}{p-1}$ of them. A symmetric node always makes at least one. So at most
+  $\nu(m)$ of the $\frac{m-1}{p-1}$ nodes are symmetric: $d(T)\ge\frac{m-1}{p-1}-\nu(m)=t$.
+  Equality: no carry is wasted. That is Step~3.
+  \end{minipage}
   \status
 \end{frame}
 
@@ -336,6 +350,17 @@
     Minimal classes $\longleftrightarrow$ cyclic skeleton trees on the digit atoms,
     an atom of height $j$ sitting at depth $\equiv -j \pmod k$.
   \end{block}
+  \status
+\end{frame}
+
+% 9b (added 2026-11-14) ----------------------------------------------
+\begin{frame}{The answer in one picture}
+  \centering
+  \includegraphics[width=0.93\textwidth]{figures/fig_atoms.pdf}\\[3pt]
+  \begin{minipage}{0.93\textwidth}\small
+  The most symmetric tree is made of complete trees, one for each digit of $m$.
+  The digits are not a formula here: \textbf{they are the building blocks.}
+  \end{minipage}
   \status
 \end{frame}
 
@@ -483,19 +508,24 @@
 \end{frame}
 
 % 14b ----------------------------------------------------------------
-\begin{frame}{Two more ways to see it \hfill\normalsize\textcolor{red!70!black}{checked by computer, not yet by us}}
-  \textbf{Algebra only (``Frobenius'').} Trees by number of leaves: $G=x+G^q$.
-  For every series, $f^p=f(x^p)+p\cdot\theta(f)$. Replace that $p$ by a variable $y$
-  (shown for $q=p$):
+\begin{frame}{Why the most symmetric shapes decide}
+  \centering
+  \includegraphics[width=0.93\textwidth]{figures/fig_levels.pdf}\\[2pt]
+  \begin{minipage}{0.95\textwidth}\small
+  For $2$-adic eyes $2^d$ is \emph{small} when $d$ is large, so the lowest row decides.
+  A physicist would say: \textbf{the valuation is the ground-state energy}, and we must check that the number
+  of ground states does not vanish modulo $p$. That is the shape of the proof.
+  \end{minipage}
+\end{frame}
+
+\begin{frame}{Two more proofs \hfill\normalsize\textcolor{red!70!black}{checked by computer and by AI referees, not yet by us}}
+  \textbf{Algebra only.} Trees by number of leaves: $G=x+G^q$.
+  For every series, $f^p=f(x^p)+p\cdot\theta(f)$. Replace that $p$ by a variable $y$ (shown for $q=p$):
   \[ F=x+F(x^p,y^p)+y\,\theta(F). \]
-  {\small $y=p$: plane trees ($F=G$).\quad $y=1$: classes (isomers, tree shapes).\quad
-  $y=0$: $x+x^p+x^{p^2}+\cdots$}\\[3pt]
-  Digit sums show that the lowest power of $y$ in the coefficient of $x^m$ is $y^t$, and
-  its coefficient is prime to $p$. For $p$-adic eyes $y=p$ is small, so the first term
-  decides:
-  \[ 429=\mathbf{1}+2^2+7\cdot2^3+7\cdot2^4+6\cdot2^5+2^6 \]
-  {\small (binary trees with 8 leaves, sorted by number of asymmetric nodes).
-  A complete second proof, sharing no lemma with the first.}
+  {\small $y$ marks asymmetric nodes.\quad $y=p$: ordered trees.\quad $y=1$: shapes.\quad
+  $y=0$: only the complete trees, $x+x^p+x^{p^2}+\cdots$}\\[3pt]
+  Digit sums give the lowest power $y^t$; a derivative identity modulo $p$ gives its coefficient.
+  No tree, no formula for factorials; it shares no lemma with the main proof.
 
   \medskip
   \textbf{Accounting.} Label the leaves: each of the $\frac{m-1}{p-1}$ nodes is worth
@@ -559,6 +589,26 @@
   \textbf{Ours, as far as we could check:} the $p$-group action for $q=p^k$, the digit
   skeleton with its depth condition, the carry--cherry count, the residue for all
   prime powers. \emph{Not a certificate of novelty.}
+\end{frame}
+
+% ---- backup slides (added 2026-11-14) --------------------------------
+\begin{frame}{Backup: a carry is two equal blocks fusing}
+  \centering
+  \includegraphics[width=0.95\textwidth]{figures/fig_fusion.pdf}\\[4pt]
+  \begin{minipage}{0.93\textwidth}\small
+  For a tree with $13$ leaves: $12$ nodes, at most $10$ of them symmetric (one per carry), so at least $2$
+  asymmetric. In the proof, each fusion is a cherry of $p$ equal subtrees collapsing.
+  \end{minipage}
+\end{frame}
+
+\begin{frame}{Backup: tree $=$ cut of an interval $=$ cut into balls}
+  \centering
+  \includegraphics[width=0.95\textwidth]{figures/fig_balls.pdf}\\[4pt]
+  \begin{minipage}{0.93\textwidth}\small
+  The Catalan number $C_{m-1}$ counts the ways to cut the $2$-adic integers into $m$ balls; our rotations are
+  isometries of them. In a computer the same cuts are prefix codes and blocks of addresses; for $q=2^8$ the
+  blocks are aligned to whole bytes.
+  \end{minipage}
 \end{frame}
 
 \end{document}
