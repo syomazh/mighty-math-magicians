@@ -1,474 +1,200 @@
-"""Numerical checks for notes/study_guide.md.
-
-Written by Kimi K3.1 Pro (Open Math OS), 2026-11-13.
-Run from the repository root: uv run python notes/study_guide_check.py
-Tree syntax: () is a leaf; a p-tuple of trees is an internal node.
-These finite computations do not verify the candidate general proof.
+# Written by Claude Fable 5.2 (orchestrator), 2026-11-13. Recomputes every number used in
+# notes/study_guide.md. Run: uv run python notes/study_guide_check.py   (takes a few seconds)
 """
-
-from collections import Counter
+Trees are p-ary: a leaf is the empty tuple (printed as o); a node is a tuple of p trees.
+Two trees are in the same class if one is obtained from the other by rotating the children
+of nodes.  canon(T) picks one representative per class (smallest rotation at every node).
+"""
+import itertools
 from functools import lru_cache
 from math import comb, factorial
 
-LEAF = ()
 
-
-@lru_cache(None)
 def trees(p, n):
-    """All ordered p-ary trees with n internal nodes."""
-    if n == 0:
-        return (LEAF,)
-    result = []
-
-    def fill(left, prefix):
-        if len(prefix) == p - 1:
-            result.extend(prefix + (child,) for child in trees(p, left))
-        else:
-            for used in range(left + 1):
-                for child in trees(p, used):
-                    fill(left - used, prefix + (child,))
-
-    fill(n - 1, ())
-    return tuple(result)
+    """All p-ary trees with n internal nodes."""
+    @lru_cache(maxsize=None)
+    def go(n):
+        if n == 0:
+            return ((),)
+        out = []
+        for split in compositions(n - 1, p):
+            for kids in itertools.product(*[go(c) for c in split]):
+                out.append(tuple(kids))
+        return tuple(out)
+    return go(n)
 
 
-@lru_cache(None)
-def canonical(tree, p):
-    if tree == LEAF:
-        return "."
-    return min(
-        "(" + ",".join(canonical(child, p) for child in tree[i:] + tree[:i]) + ")"
-        for i in range(p)
-    )
+def compositions(total, parts):
+    if parts == 1:
+        yield (total,)
+        return
+    for first in range(total + 1):
+        for rest in compositions(total - first, parts - 1):
+            yield (first,) + rest
 
 
-def d(tree, p):
-    if tree == LEAF:
+@lru_cache(maxsize=None)
+def canon(T):
+    if T == ():
+        return ()
+    kids = tuple(canon(c) for c in T)
+    return min(kids[i:] + kids[:i] for i in range(len(kids)))
+
+
+@lru_cache(maxsize=None)
+def d(T):
+    """Number of asymmetric nodes."""
+    if T == ():
         return 0
-    return (len({canonical(child, p) for child in tree}) != 1) + sum(d(child, p) for child in tree)
+    kids = [canon(c) for c in T]
+    return sum(d(c) for c in T) + (0 if len(set(kids)) == 1 else 1)
 
 
-def leaves(tree):
-    return 1 if tree == LEAF else sum(map(leaves, tree))
+@lru_cache(maxsize=None)
+def leaves(T):
+    return 1 if T == () else sum(leaves(c) for c in T)
 
 
-def class_table(p, n):
-    result = {}
-    for tree in trees(p, n):
-        name = canonical(tree, p)
-        result.setdefault(name, [d(tree, p), 0])
-        result[name][1] += 1
-    return {name: tuple(data) for name, data in result.items()}
-
-
-@lru_cache(None)
-def rotation_class(tree, p):
-    seen = set()
-    todo = [tree]
-    while todo:
-        current = todo.pop()
-        if current in seen:
-            continue
-        seen.add(current)
-        if current != LEAF:
-            todo.extend(current[i:] + current[:i] for i in range(1, p))
-            for i, child in enumerate(current):
-                todo.extend(current[:i] + (new,) + current[i + 1:] for new in rotation_class(child, p))
-    return frozenset(seen)
+def show(T):
+    return 'o' if T == () else '(' + ' '.join(show(c) for c in T) + ')'
 
 
 def digits(m, p):
-    result = []
+    out = []
     while m:
-        result.append(m % p)
+        out.append(m % p)
         m //= p
-    return result
+    return out
 
 
-def base(m, p):
-    return "".join(map(str, reversed(digits(m, p)))) or "0"
+def census(p, n, blocked_k=1):
+    """Classes of p-ary trees with n nodes; if blocked_k > 1 keep only trees whose leaves
+    all have depth divisible by blocked_k."""
+    def ok(T, depth=0):
+        if T == ():
+            return depth % blocked_k == 0
+        return all(ok(c, depth + 1) for c in T)
+    cls = {}
+    for T in trees(p, n):
+        if blocked_k > 1 and not ok(T):
+            continue
+        cls.setdefault(canon(T), []).append(T)
+    return cls
 
 
-def t_value(m, p):
-    return (sum(digits(m, p)) - 1) // (p - 1)
+def report(p, n, blocked_k=1, list_trees=False, label=''):
+    cls = census(p, n, blocked_k)
+    total = sum(len(v) for v in cls.values())
+    m = (p - 1) * n + 1
+    s = sum(digits(m, p))
+    t = (s - 1) // (p - 1)
+    print(f"\n--- {label or f'p={p}, {n} nodes'}: {total} trees, {len(cls)} classes, "
+          f"m={m} leaves = {digits(m, p)[::-1]} in base {p}, digit sum {s}, t={t}")
+    hist = {}
+    for c, members in sorted(cls.items(), key=lambda kv: (d(kv[1][0]), show(kv[0]))):
+        dd = d(members[0])
+        assert len(members) == p ** dd, "class size is not p^d"
+        hist[dd] = hist.get(dd, 0) + 1
+        if list_trees:
+            print(f"   class of size {len(members)} = {p}^{dd}:  " + '   '.join(show(T) for T in members))
+    print("   classes by d:", dict(sorted(hist.items())),
+          "| check sum of p^d =", sum(cnt * p ** dd for dd, cnt in hist.items()))
+    dmin = min(hist)
+    print(f"   smallest d = {dmin} (t = {t}); number of classes with d = t: {hist[dmin]}")
+    return cls
 
 
-def valuation(number, p):
-    exponent = 0
-    while number % p == 0:
-        number //= p
-        exponent += 1
-    return exponent, number
+def atoms_of(T):
+    """Sizes (leaf counts) of the maximal complete subtrees of a minimal tree, as a nested list."""
+    def complete(T):
+        return T == () or (len({canon(c) for c in T}) == 1 and all(complete(c) for c in T))
+    if complete(T):
+        return leaves(T)
+    return [atoms_of(c) for c in T]
 
 
-def fuss_catalan(q, n):
-    numerator = comb(q * n, n)
-    denominator = (q - 1) * n + 1
-    assert numerator % denominator == 0
-    return numerator // denominator
-
-
-def complete(height, p):
-    tree = LEAF
-    for _ in range(height):
-        tree = (tree,) * p
-    return tree
-
-
-def expand_atoms(specification, p):
-    if isinstance(specification, int):
-        return complete(specification, p)
-    return tuple(expand_atoms(child, p) for child in specification)
-
-
-def flatten_atoms(specification):
-    if isinstance(specification, int):
-        return [specification]
-    return sum(map(flatten_atoms, specification), [])
-
-
-def carries(terms, p):
-    columns = [0]
-    for term in terms:
-        for position, digit in enumerate(digits(term, p)):
-            columns.extend([0] * (position + 1 - len(columns)))
-            columns[position] += digit
-    result = []
-    log = []
-    for position in range(len(columns)):
-        carry, digit = divmod(columns[position], p)
-        total = columns[position]
-        log.append((position, total, digit, carry))
-        columns.extend([0] * (position + 2 - len(columns)))
-        columns[position + 1] += carry
-        result.append(carry)
-    return sum(result), log
-
-
-class QOrbits:
-    """Rotation orbits of q-ary trees (q = p^k), with exact orbit sizes.
-
-    Same algorithm as E000: an orbit is represented by an integer id, the id
-    of a p-node is the cyclic minimum of its child-id word, and d is computed
-    bottom-up. Enumerating orbits (not trees) keeps q=4, n=4 (969 trees in
-    11 orbits) well under a second.
-    """
-
-    def __init__(self, p, k):
-        self.p, self.k, self.q = p, k, p ** k
-        self.intern = {}
-        self.d = [0]                 # id 0 = single leaf, d = 0
-        self.by_n = {0: {0: 1}}      # n -> {orbit id: number of trees in that orbit}
-
-    def pnode(self, kids):
-        p = self.p
-        key = min(kids[i:] + kids[:i] for i in range(p))
-        i = self.intern.get(key)
-        if i is None:
-            i = len(self.d)
-            self.intern[key] = i
-            asym = 0 if len(set(key)) == 1 else 1
-            self.d.append(sum(self.d[c] for c in key) + asym)
-        return i
-
-    def qnode(self, kids):
-        level = list(kids)
-        for _ in range(self.k):
-            level = [self.pnode(tuple(level[i:i + self.p])) for i in range(0, len(level), self.p)]
-        return level[0]
-
-    def build(self, n):
-        if n in self.by_n:
-            return self.by_n[n]
-        for j in range(n):
-            self.build(j)
-        res = {}
-        for comp in weak_compositions(n - 1, self.q):
-            lists = [list(self.by_n[c].items()) for c in comp]
-            for combo in itertools.product(*lists):
-                cnt = 1
-                for _, c in combo:
-                    cnt *= c
-                node = self.qnode(tuple(i for i, _ in combo))
-                res[node] = res.get(node, 0) + cnt
-        self.by_n[n] = res
-        return res
-
-
-def _labelled_counter(p, k):
-    """T(a) for labelled cyclic p-ary trees, from E000 (experiments/E000).
-
-    W(delta, a) = T(delta, a) / prod_c a_c!, where T(delta, a) counts cyclic
-    p-ary trees (rotation at every node) with distinctly labelled leaves,
-    a_c labels of class c, the root at depth delta (mod k), and every
-    class-c leaf at depth == -c (mod k). The 1/p factor at each node divides
-    out the cyclic orderings. Only the small states of exercise 9 are used
-    (at most 5 labels, p <= 3), so this finishes in milliseconds.
-    """
-    import itertools
-    from fractions import Fraction
+def labelled_count(p, k, a):
+    """T(a): labelled cyclic p-ary trees, a[c] labels of class c, class-c leaf at depth = -c mod k.
+    Brute force over set partitions; fine for the tiny cases used in the guide."""
+    labels = [(c, i) for c in range(k) for i in range(a[c])]
 
     @lru_cache(maxsize=None)
-    def W(delta, a):
-        s = sum(a)
-        if s == 1:
-            c = a.index(1)
-            return Fraction(1) if (c + delta) % k == 0 else Fraction(0)
-        return conv(p, (delta + 1) % k, a) / p
-
-    @lru_cache(maxsize=None)
-    def conv(r, delta, a):
-        s = sum(a)
-        if s < r:
-            return Fraction(0)
-        if r == 1:
-            return W(delta, a)
-        tot = Fraction(0)
-        for b in itertools.product(*[range(x + 1) for x in a]):
-            sb = sum(b)
-            if sb == 0 or s - sb < r - 1:
+    def count(labset, depth):
+        labset = tuple(sorted(labset))
+        if len(labset) == 1:
+            return 1 if (labset[0][0] + depth) % k == 0 else 0
+        total = 0
+        # ordered p-tuples of non-empty blocks, then divide by p for rotation
+        for assign in itertools.product(range(p), repeat=len(labset)):
+            if len(set(assign)) < p:
                 continue
-            wb = W(delta, b)
-            if wb == 0:
-                continue
-            tot += wb * conv(r - 1, delta, tuple(x - y for x, y in zip(a, b)))
-        return tot
-
-    def T(a):
-        val = W(0, a) * factorial_prod(a)
-        assert val.denominator == 1, ("non-integer labelled count", a, val)
-        return val.numerator
-
-    return T
-
-
-def factorial_prod(a):
-    result = 1
-    for x in a:
-        result *= factorial(x)
-    return result
-
-
-def integer_power(base, exponent):
-    return base ** exponent
-
-
-def print_exercise_10(p, label_classes):
-    counts = Counter(label_classes)
-    labels = [(c, i) for c, count in counts.items() for i in range(count)]
-    label_to_class = dict(labels)
-    # Every permutation of equal-class labels acts on labelled rooted cyclic
-    # trees. A fixed point must fix every child at the root and recursively all
-    # leaves. We verify this concretely by listing all stabilizer elements for
-    # the three-leaf labelled trees in the p=q=2, a=(3) example.
-    assert p == 2 and label_classes == (0, 0, 0)
-    cyclic_trees = ((labels[0], labels[1], labels[2]), (labels[1], labels[0], labels[2]), (labels[2], labels[0], labels[1]))
-    fixed_swaps = []
-    swapped_trees = [((labels[1], labels[0], labels[2]), (labels[0], labels[1], labels[2]), (labels[2], labels[1], labels[0]))]
-    for tree, swapped in zip(cyclic_trees, swapped_trees[0]):
-        fixed_swaps.append(tree == swapped)
-    assert not any(fixed_swaps)
-    return fixed_swaps, len(cyclic_trees)
-
-
-def main():
-    print("Numerical companion to notes/study_guide.md")
-    print("Notation in the tables: (.,.) is a node with two leaf children.")
-
-    print("\nEXERCISE 1: the 5 binary trees with 3 nodes")
-    for name, (exponent, size) in class_table(2, 3).items():
-        print(f"  class {name}: d={exponent}, size={size}")
-    print("  representatives (.,(.,(.,.))), ((.,.),(.,.)), (((.,.),.),.), ((.,(.,.)),.), (.,((.,.),.))")
-    assert sum(size for _, size in class_table(2, 3).values()) == 5
-
-    print("\nEXERCISE 2: the 14 binary trees with 4 nodes")
-    table4 = class_table(2, 4)
-    for name, (exponent, size) in table4.items():
-        print(f"  class {name}: d={exponent}, size={size}")
-    assert sum(size for _, size in table4.values()) == 14
-    print("  all 14 ordered representatives:")
-    for tree in trees(2, 4):
-        print(f"    {canonical(tree, 2)} -> d={d(tree,2)}")
-
-    print("\nEXERCISE 3: d(T) and class sizes for four given trees")
-    examples = {
-        "A = (((.,(.,.)),.),.)": (((LEAF, (LEAF, LEAF)), LEAF), LEAF),
-        "B = ((.,.),(.,.))": ((LEAF, LEAF), (LEAF, LEAF)),
-        "C = ((.,.),((.,.),.))": ((LEAF, LEAF), ((LEAF, LEAF), LEAF)),
-        "D = (((.,.),.),(.,.))": (((LEAF, LEAF), LEAF), (LEAF, LEAF)),
-    }
-    targets = {}
-    for label, tree in examples.items():
-        data = len(rotation_class(tree, 2)), d(tree, 2), leaves(tree)
-        print(f"  {label}: class size={data[0]}, d={data[1]}, leaves={data[2]}; size=2^d: {data[0] == 2**data[1]}")
-        targets[label] = (d(tree, 2), len(rotation_class(tree, 2)))
-    assert targets == {"A = (((.,(.,.)),.),.)": (3, 8), "B = ((.,.),(.,.))": (0, 1), "C = ((.,.),((.,.),.))": (2, 4), "D = (((.,.),.),(.,.))": (2, 4)}
-
-    print("\nEXERCISE 4: binary class sums for p=2, n<=5")
-    for n in range(6):
-        terms = [size for _, size in class_table(2, n).values()]
-        C = fuss_catalan(2, n)
-        print(f"  n={n}: n+1={n+1}=({base(n+1,2)})_2, t={t_value(n+1,2)}, terms={sorted(terms)}, sum={sum(terms)}, C={C}, valuation={valuation(C,2)}")
-        assert sum(terms) == C
-
-    print("\nEXERCISE 5: all binary classes for n=6 and the minimal trees")
-    table6 = class_table(2, 6)
-    skeletons = [((0, 1), 2), ((0, 2), 1), ((1, 2), 0)]
-    minimal = []
-    for name, (exponent, size) in table6.items():
-        print(f"  class {name}: d={exponent}, size={size}")
-        if exponent == 2:
-            minimal.append(size)
-    for skeleton in skeletons:
-        tree = expand_atoms(skeleton, 2)
-        print(f"  skeleton {skeleton}: encoding={canonical(tree,2)}, atoms/heights={flatten_atoms(skeleton)}, leaves={leaves(tree)}, d={d(tree,2)}, class size={len(rotation_class(tree,2))}")
-        assert d(tree, 2) == 2 and leaves(tree) == 7
-    print(f"  C_6={fuss_catalan(2,6)}=2^2*{valuation(fuss_catalan(2,6),2)[1]}, minimum sizes={minimal}, sum of minima={sum(minimal)}")
-    assert len(minimal) == 3
-
-    print("\nEXERCISE 6: ternary n=2 and n=3")
-    for n in (2, 3):
-        m = 2 * n + 1
-        table = class_table(3, n)
-        minimum = [(name, data) for name, data in table.items() if data[0] == t_value(m, 3)]
-        print(f"  n={n}: m={m}=({base(m,3)})_3, t={t_value(m,3)}, C={fuss_catalan(3,n)}, classes={len(table)}")
-        for name, (exponent, size) in minimum:
-            print(f"    minimal {name}: d={exponent}, size={size}")
-        assert len(minimum) == 1 and minimum[0][1][1] == 3
-
-    print("\nEXERCISE 7: q=4, n=2 and n=4, including the depth condition")
-    for n in (2, 4):
-        m = 3 * n + 1
-        sizes = quartic_binary_classes(n)
-        print(f"  n={n}: C={fuss_catalan(4,n)}, m={m}=({base(m,2)})_2, t={t_value(m,2)}, binary rotation-orbit sizes={sizes}")
-        print(f"    size-4 orbits / contribution to minimal q-tree classes: {sizes.count(4)} / {sizes.count(4) * 4 // (3*n+1)}")
-        assert sum(sizes) == fuss_catalan(4, n)
-    for skeleton in (((0, 2), 3), ((0, 3), 2), ((2, 3), 0)):
-        tree = expand_atoms(skeleton, 2)
-        checks = [(child_depth + height) % 2 for child_depth, children in enumerate((tree[0],)) for height in []]
-        leaf_depth_heights = []
-
-        def collect_at_skeleton(subtree, depth):
-            for index, atom_height in enumerate(subtree):
-                if isinstance(atom_height, int):
-                    leaf_depth_heights.append((depth + 1, atom_height, (depth + 1 + atom_height) % 2))
-                else:
-                    collect_at_skeleton(atom_height, depth + 1)
-
-        collect_at_skeleton(skeleton, 0)
-        print(f"    skeleton {skeleton}: (atom depth,height,leaf depth mod 2)={sorted(leaf_depth_heights)}, valid={all(v[2] == 0 for v in leaf_depth_heights)}")
-    print("    n=2 atoms heights=0,0,0,1; only a depth-1 atom of height 1 is valid")
-    print("    n=4 two size-4 orbits contribute one minimal class of size 4, not two classes of size 4")
-
-    print("\nEXERCISE 8: base-p additions and carries")
-    for p, terms in ((2, [3, 5]), (2, [1, 2, 4]), (2, [11, 11]), (3, [5, 20])):
-        count, log = carries(terms, p)
-        digit_count = (sum(sum(digits(x, p)) for x in terms) - sum(digits(sum(terms), p))) // (p - 1)
-        print(f"  base {p}, terms={terms}, columns(log)=(position,total,result,carry)={log}, sum={sum(terms)}=({base(sum(terms),p)})_{p}, carries={count}, digit-sum answer={digit_count}")
-        assert count == digit_count
-
-    print("\nEXERCISE 9: hand carry/cherry reductions")
-    # Exact T(a) values come from the E000 counter (verified there against
-    # brute-force orbit enumeration for q in {2,3,5,7,4,9,8}).
-    expected_chains = {
-        (2, (3,)): [3, 1, 1],
-        (3, (5,)): [40, 2, 1],
-        (2, (2, 1)): [1, 1, 1],
-    }
-    for p, initial in ((2, (3,)), (3, (5,)), (2, (2, 1))):
-        k = len(initial)
-        T = _labelled_counter(p, k)
-        current = initial
-        chain = [T(current)]
-        while True:
-            c = next((i for i, x in enumerate(current) if x >= p), None)
-            if c is None:
-                break
-            old = current
-            values = list(old)
-            values[c] -= p
-            values[(c + 1) % k] += 1
-            current = tuple(values)
-            before, after = T(old), T(current)
-            assert (before + after) % p == 0, (p, old, before, current, after)
-            print(f"  p={p}: {old}, T={before} -> {current}, T={after}; "
-                  f"fixed points=(p-1)*T(new)={(p-1)*after}; "
-                  f"{before}+{after} mod {p}={(before+after)%p}")
-            chain.append(after)
-        terminal_T = T(current)
-        steps = len(chain) - 1
-        print(f"    terminal vector={current}, T={terminal_T}, steps={steps}, sign={(-1)**steps}, "
-              f"T(start) mod {p}={chain[0]%p}")
-        assert chain == expected_chains[p, initial], (p, initial, chain)
-        assert current == (1,) + (0,) * (k - 1)
-        assert chain[0] % p == (-1) ** steps % p
-
-    print("\nEXERCISE 10: free equal-atom action in the three-leaf example")
-    swapped, number_trees = print_exercise_10(2, (0, 0, 0))
-    print(f"  T(3)={number_trees}, trees ((AB)C),((BA)C),((CA)B) in cyclic order; fixed after swapping A and B? {swapped}")
-    print("  no tree is fixed: swapping two distinct labels cannot be a rotation at the root, and root fixes force all descendants fixed")
-
-    print("\nEXERCISE 11: why p must be prime in the class-size argument")
-    word = (0, 1, 0, 1)
-    rotations = {word[i:] + word[:i] for i in range(4)}
-    trivial = (0, 0, 1, 1)
-    nonstabilizing = {trivial[i:] + trivial[:i] for i in range(4)}
-    print(f"  periodic word {word} has cyclic images={sorted(rotations)}; word {trivial} has all 4 cyclic images={sorted(nonstabilizing)}")
-    print("  at a prime p, a nonconstant cyclic word has trivial stabilizer; length 4 word 0101 has stabilizer of size 2")
-
-    print("\nEXERCISE 12: t is the skeleton's number of internal nodes")
-    for p, leaf_count in ((2, 7), (3, 5), (2, 3)):
-        print(f"  p={p}, total digit sum s={leaf_count}: skeleton internal nodes=(s-1)/(p-1)={(leaf_count-1)//(p-1)}")
-    for p, initial in ((2, (3,)), (3, (5,)), (2, (2, 1))):
-        k = len(initial)
-        current = initial
-        weight = sum(current[c] * p**c for c in range(k))
-        values = [weight % (p**k - 1)]
-        while True:
-            c = next((i for i, x in enumerate(current) if x >= p), None)
-            if c is None:
-                break
-            update = list(current)
-            update[c] -= p
-            update[(c + 1) % k] += 1
-            current = tuple(update)
-            weight = sum(current[c] * p**c for c in range(k))
-            values.append(weight % (p**k - 1))
-        print(f"  p={p}, initial vector={initial}: W mod (p^k-1) after each carry={values}")
-
-    print("\nEXERCISE 13: edge cases q=2, q=3, n=0,1")
-    for q in (2, 3, 4):
-        p = 2 if q in (2, 4) else 3
-        for n in (0, 1):
-            m = (q - 1) * n + 1
-            print(f"  q={q},n={n}: C={fuss_catalan(q,n)}, m={m}, base-p={base(m,p)}, t={t_value(m,p)}, valuation={valuation(fuss_catalan(q,n),p)[0]}")
-
-    print("\nEXERCISE 14: residue arithmetic")
-    for q, p, m in ((2, 2, 7), (3, 3, 17), (4, 2, 13)):
-        n = (m - 1) // (q - 1)
-        C = fuss_catalan(q, n)
-        t = t_value(m, p)
-        product = 1
-        for digit in digits(m, p):
-            product *= factorial(digit)
-        unit, residue = valuation(C, p)
-        print(f"  q={q},n={n},C={C}: t={t}, digit factorial product={product}, p^t={p**t}, C/p^t={C//p**t}, residue={C//p**t%p}, sign={(-1)**t}")
-        assert (C // p**t * product - (-1)**t) % p == 0
-
-    print("\nEXERCISE 15: why only minimal classes control the valuation at m=7")
-    C = fuss_catalan(2, 6)
-    minimum_total = sum(size for exponent, size in class_table(2, 6).values() if exponent == 2)
-    rest = C - minimum_total
-    print(f"  C_6={C}, minimum contribution={minimum_total}, rest={rest}, C/4={C//4}, rest/4={rest//4}, rest divisible by 8={rest%8 == 0}")
-    assert rest % 8 == 0 and minimum_total == 12
-
-    # Fixed arithmetic values displayed in the vocabulary and summaries.
-    assert fuss_catalan(2, 4) == 14
-    assert fuss_catalan(3, 3) == 12
-    assert fuss_catalan(4, 4) == 140
-    assert t_value(13, 2) == 2
-    print("\nALL ASSERTIONS PASSED. General claims remain unsigned in CLAIMS.md.")
+            prod = 1
+            for b in range(p):
+                block = tuple(x for x, g in zip(labset, assign) if g == b)
+                prod *= count(block, (depth + 1) % k)
+                if prod == 0:
+                    break
+            total += prod
+        assert total % p == 0
+        return total // p
+    return count(tuple(labels), 0)
 
 
 if __name__ == "__main__":
-    main()
+    print("EXERCISE DATA FOR notes/study_guide.md")
+
+    print("\n== Catalan numbers and powers of 2 ==")
+    for n in range(1, 13):
+        C = comb(2 * n, n) // (n + 1)
+        v = 0
+        x = C
+        while x % 2 == 0:
+            x //= 2
+            v += 1
+        print(f"   n={n:>2}  C_n={C:>6}  2-power={v}  n+1={n+1:>2} = {bin(n+1)[2:]:>5} in binary, "
+              f"ones={bin(n+1).count('1')}, ones-1={bin(n+1).count('1')-1}")
+
+    report(2, 3, list_trees=True, label="binary trees with 3 nodes")
+    report(2, 4, list_trees=True, label="binary trees with 4 nodes")
+    for n in (1, 2, 5):
+        report(2, n)
+    cls = report(2, 6, label="binary trees with 6 nodes")
+    print("   minimal classes (d = 2), one representative each, with atom sizes:")
+    for c, members in cls.items():
+        if d(members[0]) == 2:
+            print("     ", show(c), "  atoms:", atoms_of(c))
+
+    report(3, 2, list_trees=True, label="ternary trees with 2 nodes")
+    cls = report(3, 3, list_trees=True, label="ternary trees with 3 nodes")
+    report(3, 4, label="ternary trees with 4 nodes")
+
+    # q = 4 as binary trees with all leaves at even depth: n q-ary nodes = 3n binary nodes
+    cls = report(2, 6, blocked_k=2, label="q=4, 2 nodes  (binary trees with 6 nodes, leaves at even depth)")
+    for c in cls:
+        print("      representative:", show(c), " atoms:", atoms_of(c))
+    cls = report(2, 12, blocked_k=2, label="q=4, 4 nodes  (binary trees with 12 nodes, leaves at even depth)")
+    for c, members in cls.items():
+        if d(members[0]) == 2:
+            print("      minimal representative:", show(c)[:60], "... atoms:", atoms_of(c))
+
+    print("\n== carries: T(a) = number of labelled cyclic trees ==")
+    for p, k, a in [(2, 1, (1,)), (2, 1, (2,)), (2, 1, (3,)), (2, 1, (4,)),
+                    (3, 1, (1,)), (3, 1, (3,)), (3, 1, (5,)),
+                    (2, 2, (1, 0)), (2, 2, (0, 2)), (2, 2, (2, 1)), (2, 2, (2, 0)), (2, 2, (0, 1))]:
+        print(f"   p={p} k={k} a={a}:  T = {labelled_count(p, k, a)}")
+
+    print("\n== exact count for q = p:  (pt)!/(t! p^t prod m_j!) ==")
+    for p, n in [(2, 6), (3, 8), (3, 6), (5, 3)]:
+        m = (p - 1) * n + 1
+        dg = digits(m, p)
+        t = (sum(dg) - 1) // (p - 1)
+        fact = 1
+        for x in dg:
+            fact *= factorial(x)
+        print(f"   p={p} n={n} m={m} digits={dg[::-1]} t={t}: N_min = "
+              f"{factorial(p*t)//(factorial(t)*p**t*fact)}")
+
+    print("\n== why p must be prime: 4-tuples ==")
+    word = ('A', 'B', 'A', 'B')
+    rots = {word[i:] + word[:i] for i in range(4)}
+    print(f"   the word {word} has {len(rots)} different rotations (not 1 and not 4)")

@@ -1,0 +1,96 @@
+EXERCISE DATA FOR notes/study_guide.md
+
+== Catalan numbers and powers of 2 ==
+   n= 1  C_n=     1  2-power=0  n+1= 2 =    10 in binary, ones=1, ones-1=0
+   n= 2  C_n=     2  2-power=1  n+1= 3 =    11 in binary, ones=2, ones-1=1
+   n= 3  C_n=     5  2-power=0  n+1= 4 =   100 in binary, ones=1, ones-1=0
+   n= 4  C_n=    14  2-power=1  n+1= 5 =   101 in binary, ones=2, ones-1=1
+   n= 5  C_n=    42  2-power=1  n+1= 6 =   110 in binary, ones=2, ones-1=1
+   n= 6  C_n=   132  2-power=2  n+1= 7 =   111 in binary, ones=3, ones-1=2
+   n= 7  C_n=   429  2-power=0  n+1= 8 =  1000 in binary, ones=1, ones-1=0
+   n= 8  C_n=  1430  2-power=1  n+1= 9 =  1001 in binary, ones=2, ones-1=1
+   n= 9  C_n=  4862  2-power=1  n+1=10 =  1010 in binary, ones=2, ones-1=1
+   n=10  C_n= 16796  2-power=2  n+1=11 =  1011 in binary, ones=3, ones-1=2
+   n=11  C_n= 58786  2-power=1  n+1=12 =  1100 in binary, ones=2, ones-1=1
+   n=12  C_n=208012  2-power=2  n+1=13 =  1101 in binary, ones=3, ones-1=2
+
+--- binary trees with 3 nodes: 5 trees, 2 classes, m=4 leaves = [1, 0, 0] in base 2, digit sum 1, t=0
+   class of size 1 = 2^0:  ((o o) (o o))
+   class of size 4 = 2^2:  (o (o (o o)))   (o ((o o) o))   ((o (o o)) o)   (((o o) o) o)
+   classes by d: {0: 1, 2: 1} | check sum of p^d = 5
+   smallest d = 0 (t = 0); number of classes with d = t: 1
+
+--- binary trees with 4 nodes: 14 trees, 3 classes, m=5 leaves = [1, 0, 1] in base 2, digit sum 2, t=1
+   class of size 2 = 2^1:  (o ((o o) (o o)))   (((o o) (o o)) o)
+   class of size 4 = 2^2:  ((o o) (o (o o)))   ((o o) ((o o) o))   ((o (o o)) (o o))   (((o o) o) (o o))
+   class of size 8 = 2^3:  (o (o (o (o o))))   (o (o ((o o) o)))   (o ((o (o o)) o))   (o (((o o) o) o))   ((o (o (o o))) o)   ((o ((o o) o)) o)   (((o (o o)) o) o)   ((((o o) o) o) o)
+   classes by d: {1: 1, 2: 1, 3: 1} | check sum of p^d = 14
+   smallest d = 1 (t = 1); number of classes with d = t: 1
+
+--- p=2, 1 nodes: 1 trees, 1 classes, m=2 leaves = [1, 0] in base 2, digit sum 1, t=0
+   classes by d: {0: 1} | check sum of p^d = 1
+   smallest d = 0 (t = 0); number of classes with d = t: 1
+
+--- p=2, 2 nodes: 2 trees, 1 classes, m=3 leaves = [1, 1] in base 2, digit sum 2, t=1
+   classes by d: {1: 1} | check sum of p^d = 2
+   smallest d = 1 (t = 1); number of classes with d = t: 1
+
+--- p=2, 5 nodes: 42 trees, 6 classes, m=6 leaves = [1, 1, 0] in base 2, digit sum 2, t=1
+   classes by d: {1: 1, 2: 2, 3: 2, 4: 1} | check sum of p^d = 42
+   smallest d = 1 (t = 1); number of classes with d = t: 1
+
+--- binary trees with 6 nodes: 132 trees, 11 classes, m=7 leaves = [1, 1, 1] in base 2, digit sum 3, t=2
+   classes by d: {2: 3, 3: 3, 4: 4, 5: 1} | check sum of p^d = 132
+   smallest d = 2 (t = 2); number of classes with d = t: 3
+   minimal classes (d = 2), one representative each, with atom sizes:
+      (o ((o o) ((o o) (o o))))   atoms: [1, [2, 4]]
+      ((o o) (o ((o o) (o o))))   atoms: [2, [1, 4]]
+      ((o (o o)) ((o o) (o o)))   atoms: [[1, 2], 4]
+
+--- ternary trees with 2 nodes: 3 trees, 1 classes, m=5 leaves = [1, 2] in base 3, digit sum 3, t=1
+   class of size 3 = 3^1:  (o o (o o o))   (o (o o o) o)   ((o o o) o o)
+   classes by d: {1: 1} | check sum of p^d = 3
+   smallest d = 1 (t = 1); number of classes with d = t: 1
+
+--- ternary trees with 3 nodes: 12 trees, 2 classes, m=7 leaves = [2, 1] in base 3, digit sum 3, t=1
+   class of size 3 = 3^1:  (o (o o o) (o o o))   ((o o o) o (o o o))   ((o o o) (o o o) o)
+   class of size 9 = 3^2:  (o o (o o (o o o)))   (o o (o (o o o) o))   (o o ((o o o) o o))   (o (o o (o o o)) o)   (o (o (o o o) o) o)   (o ((o o o) o o) o)   ((o o (o o o)) o o)   ((o (o o o) o) o o)   (((o o o) o o) o o)
+   classes by d: {1: 1, 2: 1} | check sum of p^d = 12
+   smallest d = 1 (t = 1); number of classes with d = t: 1
+
+--- ternary trees with 4 nodes: 55 trees, 5 classes, m=9 leaves = [1, 0, 0] in base 3, digit sum 1, t=0
+   classes by d: {0: 1, 2: 3, 3: 1} | check sum of p^d = 55
+   smallest d = 0 (t = 0); number of classes with d = t: 1
+
+--- q=4, 2 nodes  (binary trees with 6 nodes, leaves at even depth): 4 trees, 1 classes, m=7 leaves = [1, 1, 1] in base 2, digit sum 3, t=2
+   classes by d: {2: 1} | check sum of p^d = 4
+   smallest d = 2 (t = 2); number of classes with d = t: 1
+      representative: ((o o) (o ((o o) (o o))))  atoms: [2, [1, 4]]
+
+--- q=4, 4 nodes  (binary trees with 12 nodes, leaves at even depth): 140 trees, 6 classes, m=13 leaves = [1, 1, 0, 1] in base 2, digit sum 3, t=2
+   classes by d: {2: 1, 3: 1, 4: 2, 5: 1, 6: 1} | check sum of p^d = 140
+   smallest d = 2 (t = 2); number of classes with d = t: 1
+      minimal representative: ((o ((o o) (o o))) (((o o) (o o)) ((o o) (o o)))) ... atoms: [[1, 4], 8]
+
+== carries: T(a) = number of labelled cyclic trees ==
+   p=2 k=1 a=(1,):  T = 1
+   p=2 k=1 a=(2,):  T = 1
+   p=2 k=1 a=(3,):  T = 3
+   p=2 k=1 a=(4,):  T = 15
+   p=3 k=1 a=(1,):  T = 1
+   p=3 k=1 a=(3,):  T = 2
+   p=3 k=1 a=(5,):  T = 40
+   p=2 k=2 a=(1, 0):  T = 1
+   p=2 k=2 a=(0, 2):  T = 1
+   p=2 k=2 a=(2, 1):  T = 1
+   p=2 k=2 a=(2, 0):  T = 0
+   p=2 k=2 a=(0, 1):  T = 0
+
+== exact count for q = p:  (pt)!/(t! p^t prod m_j!) ==
+   p=2 n=6 m=7 digits=[1, 1, 1] t=2: N_min = 3
+   p=3 n=8 m=17 digits=[1, 2, 2] t=2: N_min = 10
+   p=3 n=6 m=13 digits=[1, 1, 1] t=1: N_min = 2
+   p=5 n=3 m=13 digits=[2, 3] t=1: N_min = 2
+
+== why p must be prime: 4-tuples ==
+   the word ('A', 'B', 'A', 'B') has 2 different rotations (not 1 and not 4)

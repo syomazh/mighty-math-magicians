@@ -54,11 +54,8 @@ def leaf(a):
     return ("L", a)
 
 
-    for rotation_class in choose_rotation(tree)[1]:
-        child_options.append(ordered_orbit(choose_rotation(rotation_class)))
-
-
 def canonical(tree):
+    tree = choose_rotation(tree)
     if tree[0] == "L":
         return tree
     children = tuple(canonical(ch) for ch in tree[1])
@@ -67,7 +64,7 @@ def canonical(tree):
 
 
 def choose_rotation(node):
-    return next(iter(node[1])) if isinstance(node[1], frozenset) else node
+    return ("N", next(iter(node[1]))) if isinstance(node[1], frozenset) else node
 
 
 def cyclic_nodes(tree):
@@ -108,11 +105,13 @@ def rotate_tree(tree):
 def relabel(tree, permutation):
     if tree[0] == "L":
         return leaf(permutation.get(tree[1], tree[1]))
-    return canonical(("N", tuple(relabel(ch, permutation) for ch in tree[1])))
+    return canonical(("N", tuple(relabel(ch, permutation) for ch in choose_rotation(tree)[1])))
 
 
 def block_partitions(labels, p):
     """Ordered partitions into p nonempty blocks, with min in the first block."""
+    if len(labels) < p:
+        return
     if p == 1:
         if labels:
             yield (labels,)
@@ -162,8 +161,8 @@ def cherry_collapse(tree, selected):
     selected = set(selected)
     hits = []
     for node in cyclic_nodes(tree):
-        for rotation in node[1] if isinstance(node[1], frozenset) else [node]:
-            if all(ch[0] == "L" for ch in rotation[1]):
+        rotation = choose_rotation(node)
+        if all(ch[0] == "L" for ch in rotation[1]):
                 if {ch[1] for ch in rotation[1]} == selected:
                     hits.append(rotation)
     if len(hits) != 1:
@@ -171,7 +170,8 @@ def cherry_collapse(tree, selected):
     target = hits[0]
 
     def replace(tr):
-        if tr is target:
+        tr = choose_rotation(tr)
+        if tr == target:
             return leaf(0)
         if tr[0] == "L":
             return tr
@@ -203,7 +203,7 @@ class Checks:
 
 def symmetric_nodes(tree):
     return sum(1 for node in cyclic_nodes(tree)
-               if len({frozenset(leaves(ch)) for ch in node[1]}) == 1)
+               if len({frozenset(leaves(ch)) for ch in choose_rotation(node)[1]}) == 1)
 
 def test_L1_L2(C):
     C.begin("L1/L2: actual labelled rotation classes and explicit cherry cycles")
