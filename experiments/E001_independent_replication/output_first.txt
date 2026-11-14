@@ -1,0 +1,42 @@
+C4 literal test: arbitrary prime-to-p-order label permutations, not setwise restriction.
+C4 atom test: exact atom height retained; permutations preserve exact height.
+C5: p selected labels from one residue class; collapse uses a class-c+1 label.
+Independent code: no E000 source read before completing this run.
+FAIL: C0 leaf count (2, 1, 1)
+FAIL: C0 second enum (2, 1, 1)
+FAIL: C0 duplicates (2, 1, 2)
+FAIL: C0 leaf count (2, 1, 2)
+FAIL: C0 second enum (2, 1, 2)
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 597, in worker
+    result=core_task(payload)
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 212, in core_task
+    d = {tree:d_value(tree,classes) for tree in forest}
+              ~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 136, in d_value
+    asym = any(not classes.equivalent(tree[0], child) for child in tree[1:])
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 136, in <genexpr>
+    asym = any(not classes.equivalent(tree[0], child) for child in tree[1:])
+                   ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 130, in equivalent
+    return self.which[left] == self.which[right]
+           ~~~~~~~~~~^^^^^^
+KeyError: None
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 639, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 628, in main
+    results=list(pool.imap_unordered(worker,jobs))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\pool.py", line 873, in next
+    raise value
+KeyError: None

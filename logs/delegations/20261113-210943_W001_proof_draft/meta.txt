@@ -1,0 +1,5 @@
+slug:    W001_proof_draft
+brief:   briefs/W001_proof_draft.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 21:09:43 PST

@@ -40,3 +40,7 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - Pushed the first three commits to GitHub at Syoma's instruction (main at 6cee453).
 - Wrote a 7-page briefing for the grad student: `notes/briefing_grad_student/briefing_for_grad_student.pdf` (source `briefing.tex`). It contains the problem, what Konvalinka does, the candidate argument with proofs of each step, three worked examples, the steps most likely to be wrong, the claim table and the unexamined extensions. Written by Claude Fable 5.2; not human-verified.
 - Checked Konvalinka's Remark 3 against the PDF (page 3): for q = p his residue is (−1)^{(Σa_i − 1)/(p−1) + Σ(a_i − 1)} ∏(p − a_i − 1)!, which equals our (−1)^t/∏ a_i! by Wilson's theorem (a!(p−1−a)! ≡ (−1)^{a+1}).
+
+## 2026-11-13 ~21:55 — Claude Fable 5.2
+
+- Worker status: W004 (literature scan) finished 21:29, not yet reviewed. W002 (independent replication) died at 21:48 with a gateway timeout (Cloudflare 524), not a mathematical failure; it left `run.py` and partial outputs but no final output or README. Relaunched as W002b with a brief to finish from the existing code. W001, W003, W005 still running.

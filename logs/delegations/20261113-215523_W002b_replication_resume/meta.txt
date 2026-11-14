@@ -1,0 +1,5 @@
+slug:    W002b_replication_resume
+brief:   briefs/W002b_replication_resume.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 21:55:24 PST

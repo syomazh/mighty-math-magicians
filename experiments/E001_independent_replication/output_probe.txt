@@ -1,0 +1,54 @@
+C4 literal test: arbitrary prime-to-p-order label permutations, not setwise restriction.
+C4 atom test: exact atom height retained; permutations preserve exact height.
+C5: p selected labels from one residue class; collapse uses a class-c+1 label.
+Independent code: no E000 source read before completing this run.
+CORE {'p': 2, 'k': 1, 'n': 1, 'digits': (0, 1), 't': 0, 'trees': 1, 'classes': 1, 'N_min': 1, 'histogram': {0: 1}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 1, 'raw_moves': 1, 'seconds': 0.0003}
+CORE {'p': 2, 'k': 1, 'n': 2, 'digits': (1, 1), 't': 1, 'trees': 2, 'classes': 1, 'N_min': 1, 'histogram': {1: 2}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 2, 'raw_moves': 4, 'seconds': 0.0004}
+CORE {'p': 2, 'k': 1, 'n': 3, 'digits': (0, 0, 1), 't': 0, 'trees': 5, 'classes': 2, 'N_min': 1, 'histogram': {0: 1, 2: 4}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 1, 'raw_moves': 15, 'seconds': 0.0003}
+CORE {'p': 2, 'k': 1, 'n': 4, 'digits': (1, 0, 1), 't': 1, 'trees': 14, 'classes': 3, 'N_min': 1, 'histogram': {1: 2, 2: 4, 3: 8}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 2, 'raw_moves': 56, 'seconds': 0.0007}
+CORE {'p': 2, 'k': 1, 'n': 5, 'digits': (0, 1, 1), 't': 1, 'trees': 42, 'classes': 6, 'N_min': 1, 'histogram': {1: 2, 2: 8, 3: 16, 4: 16}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 2, 'raw_moves': 210, 'seconds': 0.0024}
+CORE {'p': 2, 'k': 1, 'n': 6, 'digits': (1, 1, 1), 't': 2, 'trees': 132, 'classes': 11, 'N_min': 3, 'histogram': {2: 12, 3: 24, 4: 64, 5: 32}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 3, 'atom_checks': 12, 'raw_moves': 792, 'seconds': 0.0169}
+CORE {'p': 2, 'k': 1, 'n': 7, 'digits': (0, 0, 0, 1), 't': 0, 'trees': 429, 'classes': 23, 'N_min': 1, 'histogram': {0: 1, 2: 4, 3: 56, 4: 112, 5: 192, 6: 64}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 1, 'raw_moves': 3003, 'seconds': 0.046}
+CORE {'p': 3, 'k': 1, 'n': 1, 'digits': (0, 1), 't': 0, 'trees': 1, 'classes': 1, 'N_min': 1, 'histogram': {0: 1}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 1, 'raw_moves': 1, 'seconds': 0.0001}
+CORE {'p': 3, 'k': 1, 'n': 2, 'digits': (2, 1), 't': 1, 'trees': 3, 'classes': 1, 'N_min': 1, 'histogram': {1: 3}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 3, 'raw_moves': 6, 'seconds': 0.0003}
+CORE {'p': 3, 'k': 1, 'n': 3, 'digits': (1, 2), 't': 1, 'trees': 12, 'classes': 2, 'N_min': 1, 'histogram': {1: 3, 2: 9}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 3, 'raw_moves': 36, 'seconds': 0.0005}
+CORE {'p': 3, 'k': 1, 'n': 4, 'digits': (0, 0, 1), 't': 0, 'trees': 55, 'classes': 5, 'N_min': 1, 'histogram': {0: 1, 2: 27, 3: 27}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 1, 'raw_moves': 220, 'seconds': 0.0018}
+CORE {'p': 5, 'k': 1, 'n': 1, 'digits': (0, 1), 't': 0, 'trees': 1, 'classes': 1, 'N_min': 1, 'histogram': {0: 1}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 1, 'raw_moves': 1, 'seconds': 0.0002}
+CORE {'p': 5, 'k': 1, 'n': 2, 'digits': (4, 1), 't': 1, 'trees': 5, 'classes': 1, 'N_min': 1, 'histogram': {1: 5}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 5, 'raw_moves': 10, 'seconds': 0.0005}
+CORE {'p': 5, 'k': 1, 'n': 3, 'digits': (3, 2), 't': 1, 'trees': 35, 'classes': 3, 'N_min': 2, 'histogram': {1: 10, 2: 25}, 'N_min_mod_p': 2, 'expected_mod_p': 2, 'C8_exact': 2, 'atom_checks': 10, 'raw_moves': 105, 'seconds': 0.0032}
+CORE {'p': 7, 'k': 1, 'n': 1, 'digits': (0, 1), 't': 0, 'trees': 1, 'classes': 1, 'N_min': 1, 'histogram': {0: 1}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 1, 'raw_moves': 1, 'seconds': 0.0001}
+CORE {'p': 7, 'k': 1, 'n': 2, 'digits': (6, 1), 't': 1, 'trees': 7, 'classes': 1, 'N_min': 1, 'histogram': {1: 7}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': 1, 'atom_checks': 7, 'raw_moves': 14, 'seconds': 0.001}
+FAIL: C0 leaf count (2, 2, 1)
+FAIL: C0 second enum (2, 2, 1)
+CORE {'p': 2, 'k': 2, 'n': 1, 'digits': (0, 0, 1), 't': 0, 'trees': 1, 'classes': 1, 'N_min': 1, 'histogram': {0: 1}, 'N_min_mod_p': 1, 'expected_mod_p': 1, 'C8_exact': None, 'atom_checks': 1, 'raw_moves': 5, 'seconds': 0.0002}
+FAIL: C0 leaf count (2, 2, 2)
+FAIL: C0 second enum (2, 2, 2)
+FAIL: rotation left blocked set: p=2, tree=((None, None), (None, None), (None, None), (None, ((None, None), (None, None), (None, None), (None, None)))), at=(3,)
+FAIL: C0 leaf count (2, 2, 3)
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 643, in worker
+    result=core_task(payload)
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 265, in core_task
+    classes = ExplicitClasses(p, forest)
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 143, in __init__
+    remaining.remove(image)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+KeyError: ((None, None), (None, None), (None, None), (((None, None), (None, None), (None, None), (None, None)), None))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 685, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E001_independent_replication\run.py", line 674, in main
+    results=list(pool.imap_unordered(worker,jobs))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\pool.py", line 873, in next
+    raise value
+KeyError: ((None, None), (None, None), (None, None), (((None, None), (None, None), (None, None), (None, None)), None))
