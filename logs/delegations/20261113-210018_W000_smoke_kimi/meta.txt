@@ -1,0 +1,7 @@
+slug:    W000_smoke_kimi
+brief:   briefs/W000_smoke_test.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -ReadOnly
+started: 2026-11-13 21:00:18 PST
+ended:   2026-11-13 21:00:40 PST
+exit:    0

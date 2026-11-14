@@ -1,0 +1,7 @@
+slug:    W000_smoke_nemotron-3-super-120b-a12b
+brief:   briefs/W000_smoke_test.md
+model:   nvidia/nemotron-3-super-120b-a12b
+flags:   -ReadOnly -Model nvidia/nemotron-3-super-120b-a12b
+started: 2026-11-13 21:05:33 PST
+ended:   2026-11-13 21:08:03 PST
+exit:    124

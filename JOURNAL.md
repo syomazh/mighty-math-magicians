@@ -1,0 +1,29 @@
+# Journal (append-only, newest at the bottom)
+
+Each entry: time (PT), who/which tool, what was done, what came out, where it is saved.
+
+---
+
+## 2026-11-13 ~20:15 — Claude Fable 5.2 (Claude Code), with Syoma
+
+- Read the problem statement and `caltech_mathathon_ai_reference.md`.
+- Checked the machine: Python 3.13, uv, MiKTeX/latexmk, Node, 8 cores. No Sage, Lean, Julia, gh.
+- Smoke-tested the Open Math OS worker (`om.ps1`, Kimi K3.1 Pro): answered in 7 s.
+
+## 2026-11-13 ~20:40 — Claude Fable 5.2
+
+- While reading the problem, sketched a candidate proof of the exact valuation for all q = p^k: act with rotations (Z_p) at every p-ary node instead of the full symmetric group; minimal orbits are trees on the base-p digits of m; "a carry is a collapsing cherry" gives the count of minimal orbits mod p.
+- Wrote and ran `experiments/E000_first_sanity_check/check.py`: 47 (q, n) cases and 307 carry cases, all checks pass.
+- Saved the sketch: `notes/2026-11-13_candidate_proof_sketch.md`. Not human-verified.
+
+## 2026-11-13 ~21:00 — Claude Fable 5.2
+
+- Team answers received: 20-minute talk, submit by Sunday noon; presenters are Syoma (freshman) and the grad student; professor remote; humans sign off on claims; conserve Claude, use Open Math OS heavily; repo is public.
+- Downloaded Konvalinka's paper from the author's page (link supplied by Syoma) to `references/` (local only) and read it in full.
+- **Overlap assessment.** Konvalinka acts with the full symmetry group of the complete q-ary tree (S_q at each node). Orbit sizes are products of multinomial coefficients. His Lemmas 8–10 describe minimal orbits; his Proposition 7 gives divisibility by p^t and then calls on the factorial formula (Proposition 2) for exactness, and he says explicitly that the combinatorial argument proves only the divisibility. Our candidate differs in the group (a Sylow p-subgroup: Z_p rotations on the p-ary refinement), which makes all orbit sizes powers of p, shortens the lower bound to a short induction, and supplies the missing exactness step. Post-2007 literature not yet checked.
+- **Weighted numbers (claim C9).** In his proof of Theorem 5 the recursion r_b(O)(x) = b(x)·(1/q)·Σ_i r_b(O_i)(x)·∏_{j≠i} r_b(O_j)(x+1) comes from summing over which branch lands in the right-most position. For any group acting transitively on the q positions each branch lands there equally often, so the same recursion holds for our p-group. Needs a numerical check and a careful write-up.
+- New conjectured corollaries recorded as C10 (level-profile refinement) and C11 (master statement).
+
+## 2026-11-13 ~21:20 — Claude Fable 5.2
+
+- Built the project scaffolding: `CLAUDE.md` (operating manual and handoff), `STATE.md`, `CLAIMS.md`, this journal, `tools/delegate.sh` (logged worker launcher), `briefs/`, `pyproject.toml`.

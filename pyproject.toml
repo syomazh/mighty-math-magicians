@@ -1,0 +1,6 @@
+[project]
+name = "mighty-math-magicians"
+version = "0.1.0"
+description = "Caltech Mathathon 2026, Problem 137: tree symmetries and p-adic valuations of Fuss-Catalan numbers"
+requires-python = ">=3.11"
+dependencies = ["sympy", "networkx", "matplotlib", "pypdf"]

@@ -1,0 +1,7 @@
+slug:    W000_smoke_muse-spark-open
+brief:   briefs/W000_smoke_test.md
+model:   meta/muse-spark-open
+flags:   -ReadOnly -Model meta/muse-spark-open
+started: 2026-11-13 21:05:31 PST
+ended:   2026-11-13 21:05:45 PST
+exit:    0

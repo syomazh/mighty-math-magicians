@@ -1,0 +1,7 @@
+slug:    W000_smoke_glm
+brief:   briefs/W000_smoke_test.md
+model:   z-ai/glm-5.3
+flags:   -ReadOnly -Model z-ai/glm-5.3
+started: 2026-11-13 21:00:19 PST
+ended:   2026-11-13 21:07:02 PST
+exit:    0

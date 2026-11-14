@@ -1,0 +1,7 @@
+slug:    W000_smoke_deepseek-v4-1-flash
+brief:   briefs/W000_smoke_test.md
+model:   deepseek/deepseek-v4.1-flash
+flags:   -ReadOnly -Model deepseek/deepseek-v4.1-flash
+started: 2026-11-13 21:05:33 PST
+ended:   2026-11-13 21:05:45 PST
+exit:    0

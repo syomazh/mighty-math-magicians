@@ -1,0 +1,24 @@
+# Copyrighted reference material stays local (the repo is public)
+references/*
+!references/README.md
+!references/literature_scan.md
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# LaTeX build products
+paper/build/
+talk/build/
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+*.toc
+*.nav
+*.snm
+*.bbl
+*.blg

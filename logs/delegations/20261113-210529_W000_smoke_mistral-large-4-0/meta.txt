@@ -1,0 +1,7 @@
+slug:    W000_smoke_mistral-large-4-0
+brief:   briefs/W000_smoke_test.md
+model:   mistralai/mistral-large-4-0
+flags:   -ReadOnly -Model mistralai/mistral-large-4-0
+started: 2026-11-13 21:05:29 PST
+ended:   2026-11-13 21:05:51 PST
+exit:    0
