@@ -99,3 +99,7 @@ Where a human should look hardest (the most recently written text): the lemma "P
 
 - **C16 (Frobenius facts for q = p)** is superseded by C18. The worker draft `paper/alt_proof_frobenius.tex` has four marked gaps (not one, as written earlier in this file and in `FINDINGS.md`); it is kept for the record and is no longer the reference.
 - **Human input, not a sign-off:** Syoma reported on Saturday morning that the professor has so far found nothing wrong. No claim changes grade because of this.
+
+## Update, 2026-11-14 09:51 PT (Claude Fable 5.2)
+
+- **C18 (Frobenius proof): `ai-reviewed`, qualified.** An independent Claude referee who read only `paper/frobenius_proof.tex` judged the theorem proved modulo routine gaps: no false statement, no invalid step; 5 GAP (one classical fact quoted without proof, four omitted routine justifications) and 7 UNCLEAR. It reproduced every numbered statement with its own code (p ≤ 13, k ≤ 5; `paper/reviews/scratch_frobenius/`). All findings accepted and repaired (`paper/reviews/ADJUDICATION_frobenius.md`); the note is now 9 pages. Qualification: one round, one reader, the same model as the author; the repairs are not re-reviewed. In the repaired note C_n^(q) is defined as the coefficient of G = x + G^q, and the claim "no factorial valuation" is stated precisely: neither Legendre's nor Kummer's formula is used; only the trivial facts p ∤ n! for n < p, p | binom(pb, b), p | p!/(n_1!…n_p!) for n_i < p.

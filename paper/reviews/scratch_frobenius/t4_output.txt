@@ -1,0 +1,41 @@
+Part A: recursion G = x + G^q
+   PASS  p=2 k=1 q=2: theorem for n<=400; G matches closed formula: True   [0.0s]
+   PASS  p=2 k=2 q=4: theorem for n<=200; G matches closed formula: True   [0.0s]
+   PASS  p=2 k=3 q=8: theorem for n<=120; G matches closed formula: True   [0.1s]
+   PASS  p=2 k=4 q=16: theorem for n<=80; G matches closed formula: True   [0.2s]
+   PASS  p=2 k=5 q=32: theorem for n<=50; G matches closed formula: True   [0.7s]
+   PASS  p=3 k=1 q=3: theorem for n<=250; G matches closed formula: True   [0.0s]
+   PASS  p=3 k=2 q=9: theorem for n<=120; G matches closed formula: True   [0.1s]
+   PASS  p=3 k=3 q=27: theorem for n<=50; G matches closed formula: True   [0.4s]
+   PASS  p=5 k=1 q=5: theorem for n<=150; G matches closed formula: True   [0.0s]
+   PASS  p=5 k=2 q=25: theorem for n<=50; G matches closed formula: True   [0.3s]
+   PASS  p=5 k=3 q=125: theorem for n<=12; G matches closed formula: True   [2.7s]
+   PASS  p=7 k=1 q=7: theorem for n<=120; G matches closed formula: True   [0.0s]
+   PASS  p=7 k=2 q=49: theorem for n<=25; G matches closed formula: True   [0.9s]
+   PASS  p=11 k=1 q=11: theorem for n<=80; G matches closed formula: True   [0.2s]
+   PASS  p=13 k=1 q=13: theorem for n<=60; G matches closed formula: True   [0.1s]
+Part B: closed formula, large n
+   PASS  p=2 k=1 q=2: theorem for all n<=6000     [6.8s]
+   PASS  p=2 k=2 q=4: theorem for all n<=4000     [2.5s]
+   PASS  p=2 k=3 q=8: theorem for all n<=3000     [1.2s]
+   PASS  p=2 k=4 q=16: theorem for all n<=2000     [0.6s]
+   PASS  p=2 k=5 q=32: theorem for all n<=1500     [0.4s]
+   PASS  p=2 k=6 q=64: theorem for all n<=1000     [0.3s]
+   PASS  p=3 k=1 q=3: theorem for all n<=5000     [4.8s]
+   PASS  p=3 k=2 q=9: theorem for all n<=3000     [2.5s]
+   PASS  p=3 k=3 q=27: theorem for all n<=1500     [0.2s]
+   PASS  p=3 k=4 q=81: theorem for all n<=800     [0.1s]
+   PASS  p=5 k=1 q=5: theorem for all n<=4000     [4.3s]
+   PASS  p=5 k=2 q=25: theorem for all n<=2000     [0.6s]
+   PASS  p=5 k=3 q=125: theorem for all n<=600     [0.0s]
+   PASS  p=7 k=1 q=7: theorem for all n<=3000     [3.4s]
+   PASS  p=7 k=2 q=49: theorem for all n<=1200     [0.1s]
+   PASS  p=11 k=1 q=11: theorem for all n<=2500     [1.0s]
+   PASS  p=11 k=2 q=121: theorem for all n<=500     [0.0s]
+   PASS  p=13 k=1 q=13: theorem for all n<=2000     [0.5s]
+   PASS  p=17 k=1 q=17: theorem for all n<=1500     [0.3s]
+   teeth: p=2, q=3 (not a power of p): formula fails for 153 of 200 values of n
+   teeth: p=3, q=2 (not a power of p): formula fails for 172 of 200 values of n
+   teeth: p=2, q=6 (not a power of p): formula fails for 153 of 200 values of n
+   teeth: p=3, q=4 (not a power of p): formula fails for 178 of 200 values of n
+ALL PASS

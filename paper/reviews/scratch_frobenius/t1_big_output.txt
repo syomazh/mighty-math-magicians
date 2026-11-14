@@ -1,0 +1,183 @@
+p=2 k=1 q=2 N=260
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 100
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=60)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=259)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=259)
+   [22.0s]
+p=2 k=2 q=4 N=520
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 200
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=60)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=173)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=173)
+   [38.8s]
+p=2 k=3 q=8 N=800
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 300
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=60)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=114)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=114)
+   [18.2s]
+p=2 k=4 q=16 N=1100
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 400
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=60)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=73)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=73)
+   [7.3s]
+p=2 k=5 q=32 N=1300
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 400
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=60)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=41)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=41)
+   [2.1s]
+p=3 k=1 q=3 N=420
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 160
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=40)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=209)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=209)
+   [18.9s]
+p=3 k=2 q=9 N=900
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 300
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=40)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=112)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=112)
+   [12.7s]
+p=3 k=3 q=27 N=1500
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 500
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=40)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=57)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=57)
+   [3.6s]
+p=5 k=1 q=5 N=640
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 250
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=16)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=159)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=159)
+   [13.4s]
+p=5 k=2 q=25 N=1900
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 700
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=16)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=79)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=79)
+   [7.2s]
+p=5 k=3 q=125 N=3200
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 700
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=16)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=25)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=25)
+   [21.3s]
+p=7 k=1 q=7 N=800
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 350
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=12)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=133)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=133)
+   [11.2s]
+p=7 k=2 q=49 N=2500
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 700
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=12)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=52)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=52)
+   [6.1s]
+p=11 k=1 q=11 N=1400
+   PASS  Lemma system: F satisfies (system) (generic multiplication) up to x-degree 400
+   PASS  Lemma system: F_0(x,p) = G 
+   PASS  Statement: [x^m]G = binom(qn,n)/((q-1)n+1), zero off m=(q-1)n+1 
+   PASS  Lemma lower: all monomials of all F_delta have weight >= -1 
+         (info) all coefficients of F_delta non-negative: True
+   PASS  Lemma lead(i): F_delta(x,0) = sum_{j = -delta mod k} x^(p^j) 
+   PASS  Lemma lead(ii): ell_d = alpha_d + (1/p) ell_{d+1}^{cf p} (all m<=N, all delta) 
+   PASS  carry-free p-th power: iterated product == literal sum over carry-free p-tuples (m<=0)
+   PASS  Corollary: y^t | [x^m]F_0 and p^t | C_n (n<=139)
+   PASS  Proof of thm: C_n = ell_0(m) p^t mod p^(t+1) 
+   PASS  Theorem: C_n * prod m_j! = (-p)^t mod p^(t+1) (n<=139)
+   [30.9s]
+ALL PASS

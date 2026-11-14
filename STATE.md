@@ -9,8 +9,8 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 ## Saturday work (started 09:15; Syoma's instruction: "work on Frobenius and keep working on analogies to physical fields")
 
 - **Human feedback so far:** the professor has found nothing wrong so far (reported by Syoma, Saturday morning). This is not a sign-off; sign-off comes later.
-- [x] **S1 — A complete Frobenius proof.** `paper/frobenius_proof.pdf` (7 pages, claim C18): algebra only, self-contained, general q = p^k, with the residue. Every lemma passes its own computer check (E010).
-- [ ] **S2 — Independent referee of the Frobenius note.** A fresh-context Claude subagent is reading only `paper/frobenius_proof.tex`; its report goes to `paper/reviews/frobenius_review_claude_fresh.md`. When it arrives: adjudicate in `paper/reviews/ADJUDICATION_frobenius.md`, repair, recompile, regrade C18.
+- [x] **S1 — A complete Frobenius proof.** `paper/frobenius_proof.pdf` (9 pages after the referee's repairs, claim C18): algebra only, self-contained, general q = p^k, with the residue. Every lemma passes its own computer check (E010).
+- [x] **S2 — Independent referee of the Frobenius note.** DONE 09:51. Verdict: proved modulo routine gaps; no wrong statement; 5 gaps and 7 unclear points, all repaired (`paper/reviews/ADJUDICATION_frobenius.md`). C18 is `ai-reviewed` (qualified). The note is now 9 pages.
 - [x] **S3 — Carry budget** (claim C19, `notes/2026-11-14_carry_budget.md`): a more intuitive way to say Steps 2 and 3. One optional slide added after "Step 2".
 - [ ] **S4 — Cross-field readings.** Exact statements are checked in E011. A Claude subagent is verifying references on the web (`notes/2026-11-14_crossfield_literature.md`). When it arrives: write `notes/2026-11-14_crossfield_analogies.md`, add verified references to `references/README.md`, update `FINDINGS.md` and the slides.
 - [ ] **S5 — Bring the digests up to date:** `FINDINGS.md`, `AI_USAGE.md`, slide "Two more ways to see it", `talk/QA.md` (questions on the Frobenius proof and the carry budget).

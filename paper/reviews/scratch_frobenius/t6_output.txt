@@ -1,0 +1,13 @@
+   PASS  p=2 k=1 q=2: Lemma subst for all m<=200, all delta (D=7; 200 non-zero values of ell)   final assembly: PASS   [7.5s]
+   PASS  p=2 k=2 q=4: Lemma subst for all m<=520, all delta (D=9; 347 non-zero values of ell)   final assembly: PASS   [33.4s]
+   PASS  p=2 k=3 q=8: Lemma subst for all m<=800, all delta (D=9; 344 non-zero values of ell)   final assembly: PASS   [21.4s]
+   PASS  p=2 k=4 q=16: Lemma subst for all m<=1100, all delta (D=10; 295 non-zero values of ell)   final assembly: PASS   [7.8s]
+   PASS  p=3 k=1 q=3: Lemma subst for all m<=330, all delta (D=10; 165 non-zero values of ell)   final assembly: PASS   [8.2s]
+   PASS  p=3 k=2 q=9: Lemma subst for all m<=900, all delta (D=12; 226 non-zero values of ell)   final assembly: PASS   [13.1s]
+   PASS  p=3 k=3 q=27: Lemma subst for all m<=1500, all delta (D=13; 174 non-zero values of ell)   final assembly: PASS   [3.0s]
+   PASS  p=5 k=1 q=5: Lemma subst for all m<=640, all delta (D=16; 160 non-zero values of ell)   final assembly: PASS   [13.3s]
+   PASS  p=5 k=2 q=25: Lemma subst for all m<=1900, all delta (D=18; 159 non-zero values of ell)   final assembly: PASS   [5.8s]
+   PASS  p=7 k=1 q=7: Lemma subst for all m<=800, all delta (D=19; 134 non-zero values of ell)   final assembly: PASS   [12.0s]
+   PASS  p=7 k=2 q=49: Lemma subst for all m<=2000, all delta (D=22; 84 non-zero values of ell)   final assembly: PASS   [1.5s]
+   PASS  p=11 k=1 q=11: Lemma subst for all m<=1400, all delta (D=30; 140 non-zero values of ell)   final assembly: PASS   [21.9s]
+ALL PASS

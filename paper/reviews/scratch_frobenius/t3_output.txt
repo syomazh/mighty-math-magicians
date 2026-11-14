@@ -1,0 +1,32 @@
+   PASS  (E1) p=2: s_p(sum) <= sum s_p, equality iff carry-free (zeros allowed too) 
+   PASS  (E1) p=2: s_p(pm)=s_p(m); m+...+m (p times) never carry-free 
+   PASS  (E1) p=3: s_p(sum) <= sum s_p, equality iff carry-free (zeros allowed too) 
+   PASS  (E1) p=3: s_p(pm)=s_p(m); m+...+m (p times) never carry-free 
+   PASS  (E1) p=5: s_p(sum) <= sum s_p, equality iff carry-free (zeros allowed too) 
+   PASS  (E1) p=5: s_p(pm)=s_p(m); m+...+m (p times) never carry-free 
+   PASS  (E1) p=7: s_p(sum) <= sum s_p, equality iff carry-free (zeros allowed too) 
+   PASS  (E1) p=7: s_p(pm)=s_p(m); m+...+m (p times) never carry-free 
+   PASS  (E1) p=11: s_p(sum) <= sum s_p, equality iff carry-free (zeros allowed too) 
+   PASS  (E1) p=11: s_p(pm)=s_p(m); m+...+m (p times) never carry-free 
+   PASS  (E2) p=2: non-constant p-tuples over 5 letters fall into orbits of size p 
+   PASS  (E2) p=3: non-constant p-tuples over 4 letters fall into orbits of size p 
+   PASS  (E2) p=5: non-constant p-tuples over 3 letters fall into orbits of size p 
+   PASS  (E2) p=7: non-constant p-tuples over 2 letters fall into orbits of size p 
+   teeth: for the composite length 4 the tuple (0,1,0,1) has an orbit of size 2 (not 4)
+   PASS  Lemma theta p=2: (f^p - phi f)/p integral (random f, negative coeffs, x-degree-0 terms) 
+   PASS  Lemma theta p=2: formula (theta) reproduces it 
+   PASS  Lemma theta p=3: (f^p - phi f)/p integral (random f, negative coeffs, x-degree-0 terms) 
+   PASS  Lemma theta p=3: formula (theta) reproduces it 
+   PASS  Lemma theta p=5: (f^p - phi f)/p integral (random f, negative coeffs, x-degree-0 terms) 
+   PASS  Lemma theta p=5: formula (theta) reproduces it 
+   PASS  (wprod),(wphi) p=2 
+   PASS  (wprod),(wphi) p=3 
+   PASS  (wprod),(wphi) p=5 
+   PASS  (wprod),(wphi) p=7 
+   PASS  A p=2: commutative, associative, unital, distributive on random functions (N=70) 
+   PASS  A p=2: x_j^(cf b) = indicator of {b p^j} for b<=p-1, and 0 for b>=p 
+   PASS  A p=3: commutative, associative, unital, distributive on random functions (N=90) 
+   PASS  A p=3: x_j^(cf b) = indicator of {b p^j} for b<=p-1, and 0 for b>=p 
+   PASS  A p=5: commutative, associative, unital, distributive on random functions (N=130) 
+   PASS  A p=5: x_j^(cf b) = indicator of {b p^j} for b<=p-1, and 0 for b>=p 
+ALL PASS

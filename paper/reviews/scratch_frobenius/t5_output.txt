@@ -1,0 +1,125 @@
+(a) deeper carry / eval
+ p=2 k=1 q=2 D=150   [2.1s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (149 triples, 149 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (150 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=2 k=2 q=4 D=44   [2.0s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (3784 triples, 1262 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (345 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=2 k=3 q=8 D=24   [1.0s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (20700 triples, 2958 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (418 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=2 k=4 q=16 D=16   [0.8s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (48960 triples, 3264 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (324 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=2 k=5 q=32 D=12   [0.8s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (75075 triples, 2390 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (195 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=3 k=1 q=3 D=151   [0.9s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (149 triples, 75 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (76 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=3 k=2 q=9 D=45   [1.4s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (3784 triples, 484 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (138 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=3 k=3 q=27 D=25   [0.4s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (20700 triples, 846 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (133 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=3 k=4 q=81 D=15   [0.3s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (29120 triples, 340 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (47 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=5 k=1 q=5 D=161   [0.2s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (157 triples, 40 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (41 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=5 k=2 q=25 D=49   [0.1s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (4140 triples, 184 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (57 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=5 k=3 q=125 D=25   [0.1s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (15939 triples, 120 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (27 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=7 k=1 q=7 D=163   [0.1s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (157 triples, 27 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (28 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=7 k=2 q=49 D=49   [0.0s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (3784 triples, 88 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (30 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=11 k=1 q=11 D=171   [0.0s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (161 triples, 17 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (18 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=11 k=2 q=121 D=41   [0.0s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (1984 triples, 16 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (8 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+ p=13 k=1 q=13 D=181   [0.0s]
+   PASS  integrality of all T_delta(a) 
+   PASS  carry congruence, all delta,c,b (169 triples, 15 non-trivial)
+   PASS  evaluation T_0(a) = (-1)^((|a|-1)/(p-1)) mod p (16 vectors a satisfy the hypothesis)
+         (info) T_delta(a) != 0 only when sum a_c p^c = p^(-delta) mod (q-1): True
+(b) the displayed congruences inside the proof of Proposition carry
+   PASS  p=2 k=1 D=30: d_(c+1) H_d = [c+1=-d] + H^(p-1) d_(c+1) H_(d+1)   (exact) 
+   PASS  p=2 k=1 D=30: d_c^p H_d = H^(p-1) d_c^p H_(d+1) - (d_c H_(d+1))^p  mod p Hur 
+   PASS  p=2 k=1 D=30: E H_d = H_(d+1)^(p-1) E H_(d+1)  mod p Hur 
+   PASS  p=2 k=2 D=18: d_(c+1) H_d = [c+1=-d] + H^(p-1) d_(c+1) H_(d+1)   (exact) 
+   PASS  p=2 k=2 D=18: d_c^p H_d = H^(p-1) d_c^p H_(d+1) - (d_c H_(d+1))^p  mod p Hur 
+   PASS  p=2 k=2 D=18: E H_d = H_(d+1)^(p-1) E H_(d+1)  mod p Hur 
+   PASS  p=2 k=3 D=12: d_(c+1) H_d = [c+1=-d] + H^(p-1) d_(c+1) H_(d+1)   (exact) 
+   PASS  p=2 k=3 D=12: d_c^p H_d = H^(p-1) d_c^p H_(d+1) - (d_c H_(d+1))^p  mod p Hur 
+   PASS  p=2 k=3 D=12: E H_d = H_(d+1)^(p-1) E H_(d+1)  mod p Hur 
+   PASS  p=3 k=1 D=31: d_(c+1) H_d = [c+1=-d] + H^(p-1) d_(c+1) H_(d+1)   (exact) 
+   PASS  p=3 k=1 D=31: d_c^p H_d = H^(p-1) d_c^p H_(d+1) - (d_c H_(d+1))^p  mod p Hur 
+   PASS  p=3 k=1 D=31: E H_d = H_(d+1)^(p-1) E H_(d+1)  mod p Hur 
+   PASS  p=3 k=2 D=19: d_(c+1) H_d = [c+1=-d] + H^(p-1) d_(c+1) H_(d+1)   (exact) 
+   PASS  p=3 k=2 D=19: d_c^p H_d = H^(p-1) d_c^p H_(d+1) - (d_c H_(d+1))^p  mod p Hur 
+   PASS  p=3 k=2 D=19: E H_d = H_(d+1)^(p-1) E H_(d+1)  mod p Hur 
+   PASS  p=3 k=3 D=13: d_(c+1) H_d = [c+1=-d] + H^(p-1) d_(c+1) H_(d+1)   (exact) 
+   PASS  p=3 k=3 D=13: d_c^p H_d = H^(p-1) d_c^p H_(d+1) - (d_c H_(d+1))^p  mod p Hur 
+   PASS  p=3 k=3 D=13: E H_d = H_(d+1)^(p-1) E H_(d+1)  mod p Hur 
+   PASS  p=5 k=1 D=33: d_(c+1) H_d = [c+1=-d] + H^(p-1) d_(c+1) H_(d+1)   (exact) 
+   PASS  p=5 k=1 D=33: d_c^p H_d = H^(p-1) d_c^p H_(d+1) - (d_c H_(d+1))^p  mod p Hur 
+   PASS  p=5 k=1 D=33: E H_d = H_(d+1)^(p-1) E H_(d+1)  mod p Hur 
+   PASS  p=5 k=2 D=21: d_(c+1) H_d = [c+1=-d] + H^(p-1) d_(c+1) H_(d+1)   (exact) 
+   PASS  p=5 k=2 D=21: d_c^p H_d = H^(p-1) d_c^p H_(d+1) - (d_c H_(d+1))^p  mod p Hur 
+   PASS  p=5 k=2 D=21: E H_d = H_(d+1)^(p-1) E H_(d+1)  mod p Hur 
+(c) Section 8: rotation classes of trees vs coefficients of F_delta, and class size p^d
+   PASS  p=2 k=1: #classes with m leaves, d asymmetric nodes = [x^m y^d]F_delta (m<=11, 23714 trees) 
+   PASS  p=2 k=1: every class with d asymmetric nodes has exactly p^d trees 
+   PASS  p=3 k=1: #classes with m leaves, d asymmetric nodes = [x^m y^d]F_delta (m<=15, 9525 trees) 
+   PASS  p=3 k=1: every class with d asymmetric nodes has exactly p^d trees 
+   PASS  p=2 k=2: #classes with m leaves, d asymmetric nodes = [x^m y^d]F_delta (m<=16, 1541 trees) 
+   PASS  p=2 k=2: every class with d asymmetric nodes has exactly p^d trees 
+   PASS  p=5 k=1: #classes with m leaves, d asymmetric nodes = [x^m y^d]F_delta (m<=17, 327 trees) 
+   PASS  p=5 k=1: every class with d asymmetric nodes has exactly p^d trees 
+   PASS  p=2 k=3: #classes with m leaves, d asymmetric nodes = [x^m y^d]F_delta (m<=22, 165 trees) 
+   PASS  p=2 k=3: every class with d asymmetric nodes has exactly p^d trees 
+   PASS  p=3 k=2: #classes with m leaves, d asymmetric nodes = [x^m y^d]F_delta (m<=17, 15 trees) 
+   PASS  p=3 k=2: every class with d asymmetric nodes has exactly p^d trees 
+ALL PASS

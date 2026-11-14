@@ -1,0 +1,162 @@
+Lemma hur (random Hurwitz series with integer coefficients in [-6,6])
+   PASS  p=2 k=1 D=14: (i) ring/derivative 
+   PASS  p=2 k=1 D=14: (ii) f^p in p Hur 
+   PASS  p=2 k=1 D=14: (iii) g^p = g_0 mod p Hur 
+   PASS  p=2 k=1 D=14: (iv) d(f^p/p) = f^(p-1) df 
+   PASS  p=2 k=1 D=14: (iv) d^p(f^p/p) = f^(p-1) d^p f - (df)^p mod p Hur 
+   PASS  p=2 k=2 D=9: (i) ring/derivative 
+   PASS  p=2 k=2 D=9: (ii) f^p in p Hur 
+   PASS  p=2 k=2 D=9: (iii) g^p = g_0 mod p Hur 
+   PASS  p=2 k=2 D=9: (iv) d(f^p/p) = f^(p-1) df 
+   PASS  p=2 k=2 D=9: (iv) d^p(f^p/p) = f^(p-1) d^p f - (df)^p mod p Hur 
+   PASS  p=2 k=3 D=7: (i) ring/derivative 
+   PASS  p=2 k=3 D=7: (ii) f^p in p Hur 
+   PASS  p=2 k=3 D=7: (iii) g^p = g_0 mod p Hur 
+   PASS  p=2 k=3 D=7: (iv) d(f^p/p) = f^(p-1) df 
+   PASS  p=2 k=3 D=7: (iv) d^p(f^p/p) = f^(p-1) d^p f - (df)^p mod p Hur 
+   PASS  p=3 k=1 D=14: (i) ring/derivative 
+   PASS  p=3 k=1 D=14: (ii) f^p in p Hur 
+   PASS  p=3 k=1 D=14: (iii) g^p = g_0 mod p Hur 
+   PASS  p=3 k=1 D=14: (iv) d(f^p/p) = f^(p-1) df 
+   PASS  p=3 k=1 D=14: (iv) d^p(f^p/p) = f^(p-1) d^p f - (df)^p mod p Hur 
+   PASS  p=3 k=2 D=10: (i) ring/derivative 
+   PASS  p=3 k=2 D=10: (ii) f^p in p Hur 
+   PASS  p=3 k=2 D=10: (iii) g^p = g_0 mod p Hur 
+   PASS  p=3 k=2 D=10: (iv) d(f^p/p) = f^(p-1) df 
+   PASS  p=3 k=2 D=10: (iv) d^p(f^p/p) = f^(p-1) d^p f - (df)^p mod p Hur 
+   PASS  p=3 k=3 D=7: (i) ring/derivative 
+   PASS  p=3 k=3 D=7: (ii) f^p in p Hur 
+   PASS  p=3 k=3 D=7: (iii) g^p = g_0 mod p Hur 
+   PASS  p=3 k=3 D=7: (iv) d(f^p/p) = f^(p-1) df 
+   PASS  p=3 k=3 D=7: (iv) d^p(f^p/p) = f^(p-1) d^p f - (df)^p mod p Hur 
+   PASS  p=5 k=1 D=16: (i) ring/derivative 
+   PASS  p=5 k=1 D=16: (ii) f^p in p Hur 
+   PASS  p=5 k=1 D=16: (iii) g^p = g_0 mod p Hur 
+   PASS  p=5 k=1 D=16: (iv) d(f^p/p) = f^(p-1) df 
+   PASS  p=5 k=1 D=16: (iv) d^p(f^p/p) = f^(p-1) d^p f - (df)^p mod p Hur 
+   PASS  p=5 k=2 D=11: (i) ring/derivative 
+   PASS  p=5 k=2 D=11: (ii) f^p in p Hur 
+   PASS  p=5 k=2 D=11: (iii) g^p = g_0 mod p Hur 
+   PASS  p=5 k=2 D=11: (iv) d(f^p/p) = f^(p-1) df 
+   PASS  p=5 k=2 D=11: (iv) d^p(f^p/p) = f^(p-1) d^p f - (df)^p mod p Hur 
+   PASS  p=7 k=1 D=16: (i) ring/derivative 
+   PASS  p=7 k=1 D=16: (ii) f^p in p Hur 
+   PASS  p=7 k=1 D=16: (iii) g^p = g_0 mod p Hur 
+   PASS  p=7 k=1 D=16: (iv) d(f^p/p) = f^(p-1) df 
+   PASS  p=7 k=1 D=16: (iv) d^p(f^p/p) = f^(p-1) d^p f - (df)^p mod p Hur 
+   teeth: (iv) with +(df)^p instead of -(df)^p holds mod 3? False (should be False)
+p=2 k=1 q=2: H_delta up to total degree 40
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=40)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (39 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (40 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=140, skipped 0 with s_p(m)>D)
+   [1.2s]
+p=2 k=2 q=4: H_delta up to total degree 20
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=20)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (760 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (77 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 153}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=140, skipped 0 with s_p(m)>D)
+   [0.2s]
+p=2 k=3 q=8: H_delta up to total degree 13
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=13)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (3276 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (80 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 479}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=140, skipped 0 with s_p(m)>D)
+   [0.1s]
+p=2 k=4 q=16: H_delta up to total degree 10
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=10)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (7920 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (67 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 933}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=100, skipped 0 with s_p(m)>D)
+   [0.1s]
+p=3 k=1 q=3: H_delta up to total degree 41
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=41)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (39 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (21 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 20}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=170, skipped 0 with s_p(m)>D)
+   [0.5s]
+p=3 k=2 q=9: H_delta up to total degree 21
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=21)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (760 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (33 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 219}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=170, skipped 0 with s_p(m)>D)
+   [0.0s]
+p=3 k=3 q=27: H_delta up to total degree 13
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=13)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (2574 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (23 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 536}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=120, skipped 0 with s_p(m)>D)
+   [0.0s]
+p=5 k=1 q=5: H_delta up to total degree 41
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=41)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (37 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (11 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 30}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=190, skipped 0 with s_p(m)>D)
+   [0.1s]
+p=5 k=2 q=25: H_delta up to total degree 21
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=21)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (612 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (12 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 240}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=190, skipped 0 with s_p(m)>D)
+   [0.0s]
+p=5 k=3 q=125: H_delta up to total degree 13
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=13)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (1485 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (5 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 554}
+   [0.0s]
+p=7 k=1 q=7: H_delta up to total degree 43
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=43)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (37 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (8 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 35}
+   PASS  Lemma subst: ell_d(m) prod m_j! = T_d(a(m)), all m<=N, all delta (N=200, skipped 0 with s_p(m)>D)
+   [0.1s]
+p=7 k=2 q=49: H_delta up to total degree 19
+   PASS  Lemma H: fixed point of (H), no constant term 
+   PASS  Prop carry: all T_delta(a) are integers (|a|<=19)
+         (info) H_delta supported in degrees = 1 mod (p-1): True
+   PASS  Prop carry: T_d(b+p e_c) + T_d(b+e_{c+1}) = 0 mod p, all delta,c,b (364 triples)
+   PASS  Prop eval: T_0(a) = (-1)^((|a|-1)/(p-1)) mod p under the hypothesis (5 vectors a)
+         (info) residues of T_0(a) mod p when the hypothesis FAILS: {0: 204}
+   [0.0s]
+Lemma subst, second half: (u^{cf a}/a!)(m) = [a=a(m)] / prod m_j!  (literal carry-free products)
+   PASS  p=2 k=1: all |a|<=6, all m<=40 
+   PASS  p=2 k=2: all |a|<=6, all m<=40 
+   PASS  p=2 k=3: all |a|<=5, all m<=40 
+   PASS  p=3 k=1: all |a|<=7, all m<=60 
+   PASS  p=3 k=2: all |a|<=6, all m<=60 
+   PASS  p=5 k=1: all |a|<=6, all m<=60 
+   PASS  p=5 k=2: all |a|<=5, all m<=60 
+ALL PASS
