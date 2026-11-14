@@ -39,7 +39,8 @@ Problem 137: prove, from symmetries of trees and without factorial valuations, t
 | `tools/delegate.sh` | the only way to launch a worker |
 | `lean/` | Lean 4 formalization; status table in `lean/README.md` |
 | `AGENTS.md` | rules for every agent that is not the orchestrator (guests) |
-| `guests/<tag>/` | the only place where a guest agent writes; arrives by pull request, reviewed before anything is carried over |
+| `guests/<tag>/` | the only place where a guest agent writes, on its branch `guest/<tag>`; reviewed before anything is carried over |
+| `tools/guest_setup.sh`, `tools/githooks/` | one-command setup of a guest's clone, and the guards that refuse a guest's commit or push outside its folder and branch |
 
 ## Rules for every agent
 
@@ -51,14 +52,14 @@ Problem 137: prove, from symmetries of trees and without factorial valuations, t
 6. **Do not edit a verification script to make a check pass.** Change the claim, not the test.
 7. **Tooling.** Python: `uv run python ...` (dependencies in `pyproject.toml`). LaTeX: `latexmk -pdf` inside `paper/` or `talk/`. Lean 4 with Mathlib since 2026-11-14 (installed with `elan` in the user's home folder, not on the PATH; see `lean/README.md`). No Sage or Julia on this machine.
 8. **Git.** Single writer: only the orchestrator commits on `main`, after each work block. Never force-push. Never commit anything in `references/` except `README.md`.
-9. **Other people's commits** (orchestrator). Run `git fetch` before each commit. If `origin/main` has a commit you did not make, stop: do not merge or rebase over it, do not force-push, and show it to Syoma first. Guest work arrives as a pull request that touches only `guests/<tag>/`. Treat it like worker output: read the diff, rerun its checks, and carry over what holds up into the record with the guest's tag and model. Merging a pull request is Syoma's decision, and a pull request that touches anything outside `guests/` is not merged as it stands.
+9. **Other people's commits** (orchestrator). Run `git fetch` before each commit. If `origin/main` has a commit you did not make, stop: do not merge or rebase over it, do not force-push, and show it to Syoma first. Guest work arrives as a branch `guest/<tag>` that touches only `guests/<tag>/` (list them with `git branch -r`, read one with `git diff main...origin/guest/<tag>`). Treat it like worker output: read the diff, rerun its checks, and carry over what holds up into the record with the guest's tag and model. Merging a guest branch into `main` is Syoma's decision, and a branch that touches anything outside its own folder is not merged as it stands.
 
 ## Who does what
 
 - **Humans:** direction, sign-off, the talk.
 - **Orchestrator** (Claude Fable in Claude Code on Syoma's machine; if it is unavailable, a model that Syoma starts in this folder on his machine and names as orchestrator in chat): split the work, write briefs, review worker output (`git diff`, rerun the checks), keep `STATE.md`, `CLAIMS.md` and `JOURNAL.md` honest. Since 2026-11-13 23:35 the orchestrator also writes code, checks and documents itself (see the budget rule).
 - **Workers** (Open Math OS models): used sparingly, for what the orchestrator cannot supply: an independent review of a proof by a different model.
-- **Guests** (any other agent, started by anyone with access): work on their own branch and in their own folder under `guests/`, and propose instead of editing. Rules: `AGENTS.md`.
+- **Guests** (any other agent, started by anyone with access, on their own laptop): work on their own branch `guest/<tag>` and in their own folder `guests/<tag>/`, and propose instead of editing. Rules: `AGENTS.md`.
 
 ## Budget rule (set 2026-11-13 23:35 PT by Syoma)
 

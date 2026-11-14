@@ -1,0 +1,34 @@
+#!/bin/sh
+# Written by Claude Fable 5.2 (orchestrator), 2026-11-14. Not human-reviewed.
+# Guard for a guest's clone (see AGENTS.md). Turned on by tools/guest_setup.sh.
+# Refuses a commit that is not on the guest's branch or that touches a path
+# outside the guest's folder. It does nothing in the orchestrator's folder.
+
+root="$(git rev-parse --show-toplevel)"
+[ -f "$root/.orchestrator" ] && exit 0
+
+tag="$(git config --get mmm.guesttag)"
+if [ -z "$tag" ]; then
+  echo "BLOCKED (AGENTS.md): this clone is not set up. Run:  bash tools/guest_setup.sh <name>-<tool>"
+  exit 1
+fi
+
+branch="$(git symbolic-ref --short -q HEAD)"
+if [ "$branch" != "guest/$tag" ]; then
+  echo "BLOCKED (AGENTS.md): you are on '${branch:-no branch}'. You commit only on guest/$tag."
+  echo "  Fix:  git switch guest/$tag"
+  exit 1
+fi
+
+# Finishing a merge of origin/main brings in the team's files; that is allowed.
+[ -f "$(git rev-parse --git-dir)/MERGE_HEAD" ] && exit 0
+
+bad="$(git diff --cached --name-only --no-renames | grep -v "^guests/$tag/")"
+if [ -n "$bad" ]; then
+  echo "BLOCKED (AGENTS.md): these staged paths are outside guests/$tag/ :"
+  echo "$bad" | sed 's/^/    /'
+  echo "  Fix:  git restore --staged <path>     then     git restore <path>"
+  echo "  A change you want there goes into guests/$tag/PROPOSALS.md instead."
+  exit 1
+fi
+exit 0

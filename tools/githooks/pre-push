@@ -1,0 +1,23 @@
+#!/bin/sh
+# Written by Claude Fable 5.2 (orchestrator), 2026-11-14. Not human-reviewed.
+# Guard for a guest's clone (see AGENTS.md). Turned on by tools/guest_setup.sh.
+# Refuses a push to any branch other than the guest's own. It does nothing in
+# the orchestrator's folder.
+
+root="$(git rev-parse --show-toplevel)"
+[ -f "$root/.orchestrator" ] && exit 0
+
+tag="$(git config --get mmm.guesttag)"
+if [ -z "$tag" ]; then
+  echo "BLOCKED (AGENTS.md): this clone is not set up. Run:  bash tools/guest_setup.sh <name>-<tool>"
+  exit 1
+fi
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" != "refs/heads/guest/$tag" ]; then
+    echo "BLOCKED (AGENTS.md): push to '$remote_ref'. You push only guest/$tag."
+    echo "  Use:  git push -u origin guest/$tag"
+    exit 1
+  fi
+done
+exit 0
