@@ -122,6 +122,9 @@ We do not know yet, and we say so. An AI worker read four related papers in full
 **32. Which later papers are closest?**
 Gao and Gu (2021) strengthen Konvalinka's weighted results; Krattenthaler and Müller (2025) obtain congruences for Fuss–Catalan numbers modulo prime powers from differential equations. Both are algebraic rather than orbit-based, as far as the full-text check could tell.
 
+**G+. What did Etherington do in 1939, and what is left for you?** *(added Saturday after reading the paper; reference 36)*
+For binary trees he defined the "mutability" of a shape, the number of nodes whose two branches differ, and observed that a shape has 2^mutability ordered versions. He wrote the generating function with a second variable marking mutability and its functional equation: at y = 2 it gives the Catalan numbers, at y = 1 the count of shapes. He also showed that the number of leaves is a sum of mutability + 1 powers of two, from which our lower bound for p = 2 follows in one line. He did not ask which power of 2 divides the Catalan numbers and did not count the most symmetric shapes; that is Deutsch and Sagan (2006). What is ours, as far as we know: every prime (rotations in place of swaps), prime powers with the depth condition, the description of the most symmetric trees by base-p digits, and the count modulo p that makes the valuation exact. For p = 2 our Step 1 and the binary case of the equation in our second proof are his, and we say so.
+
 ## H. Is it "combinatorial"?
 
 **33. You count fixed points modulo p. Is that combinatorial?**

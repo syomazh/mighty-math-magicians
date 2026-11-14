@@ -189,9 +189,13 @@ where n_v is the number of leaves below v and d(T) is our number of asymmetric n
 
 **Exact core, analogy in the reading (E013, `c7_lineages.py`).** The cell lineage of an organism is the binary tree of its cell divisions. A lineage in which every division has two equivalent halves exists only when the number of final cells is a power of two; otherwise at least popcount(m) − 1 divisions are lopsided. Colonial green algae of the Volvox family have cell numbers that are powers of two, and the adult nematode C. elegans has 959 somatic nuclei, 959 = 1110111111 in binary, so at least 8 lopsided divisions [35]. The bound is weak for real animals; its interest is that it is sharp and that it vanishes only at powers of two. (Biologists call a division asymmetric when the daughters' fates differ, which is a finer notion than ours.)
 
-## 13. An older name, to be checked by a human
+## 13. An older name: Etherington's mutability (1939)
 
-The subagent recalled that I. M. H. Etherington, around 1940, defined for a binary tree up to exchanging factors a number called its **mutability**, with 2^mutability ordered versions. If so, it is our d for p = 2, and the statement "a class has 2^d trees" for p = 2 is that old. Neither of us could confirm it: the paper is behind a paywall [36]. It does not change the position on novelty (the case p = 2 is in any case prior work: Deutsch and Sagan 2006, Kersting and Fischer 2021), but it should be credited if true. **Someone with library access should look at it before the talk.**
+Checked on 2026-11-14: Syoma obtained the paper and the orchestrator read it [36]. For binary trees, Etherington calls a node *balanced* when its two branches have the same shape, and calls the number of unbalanced nodes the **mutability** of the shape. That is our d for p = 2. He observes that a shape of mutability μ has 2^μ ordered versions (our class size), writes down the generating function f(x, y) with y marking mutability and its equation f = x + ½·y·f² + (1 − ½·y)·f(x², y²), notes that y = 2 gives the Catalan numbers and y = 1 the commutative count, and proves that the number of leaves is a sum of μ + 1 powers of two. His polynomials y + y² + y³ and y + 2y² + 2y³ + y⁴ for 5 and 6 leaves are the ones in our tables.
+
+He draws a product as a "pedigree" with "generations": the vocabulary is that of heredity.
+
+What he does not do: ask which power of 2 divides the Catalan numbers, describe or count the most symmetric shapes, or go beyond two branches. So for p = 2 the mobile picture, the class size and the two-variable series are his (1939), and the exact power of 2 by this route is Deutsch and Sagan (2006). Ours, as far as we know: every prime, prime powers, and the count modulo p. **He must be cited**, in the papers and on the reference slide. A human should confirm this reading.
 
 ## 14. The first three minutes of the talk, as a script
 
@@ -222,4 +226,4 @@ The subagent recalled that I. M. H. Etherington, around 1940, defined for a bina
 | divisibility for bounded depth | exact (consequence of the proof); exactness of the power only computed up to depth 7 | E012 C |
 | Yule probability 2^d/∏(n_v − 1) | exact, and in the literature | E012 M; [20] |
 | cell lineages | exact for tree shapes; the biological notion of asymmetric division is finer | E013 `c7_lineages.py`; [35] |
-| Etherington's "mutability" | **not confirmed** | [36] |
+| Etherington's "mutability" is our d for p = 2; his equation (33) is our deformed equation for p = 2 | confirmed by reading the paper (AI); a human should confirm | [36] |

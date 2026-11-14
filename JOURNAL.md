@@ -212,3 +212,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **Note rewritten** (`notes/2026-11-14_motivation_and_connections.md`, second version, 15 sections), **references 17–37 added**, **slides: 33** (mobile, cut a square, two more backups; one Feynman line on the energy-level slide), slide map with a 20-minute path rewritten in `talk/NOTES.md`. C22 recorded.
 - **Open lead for a human:** Etherington 1940, "mutability" (reference 36).
 - End of the block. Nothing is running.
+
+## 2026-11-14 ~11:23 — Claude Fable 5.2
+
+- **Human input.** Syoma asked how to find Etherington's paper and what the Stickelberger question is. I opened the publisher's page in the browser pane (paywalled) and explained both. Syoma then obtained the PDF through a library login and attached it (kept on his machine, outside the repository; not committed).
+- **Etherington (1939–40) read in full by me.** For binary trees: "mutability" μ = number of unbalanced nodes = our d (p. 156); a shape has 2^μ ordered versions (p. 156); recursion for μ ((9), (10)); the degree is a sum of μ + 1 powers of 2 ((17)), which gives d ≥ popcount(m) − 1 in one line; the two-variable generating function and its equation (33), which is the p = 2, k = 1 case of the deformed equation of our Frobenius note, with y = 2 and y = 1 as the Catalan and commutative cases ((34)); his polynomials for 5 and 6 leaves equal ours. Not there: divisibility of Catalan numbers, minimal shapes, other primes, prime powers.
+- **Consequence for the position on novelty:** for p = 2, Step 1, the ingredient of Step 2 and the binary deformed equation are 85 years old. Nothing of ours for p ≥ 3 or q = p^k is in the paper. Recorded in `references/README.md` (entry 36 rewritten), `CLAIMS.md`, `FINDINGS.md` (finding 5), the motivation note (section 13), the Q&A (question G+), the reference slide and the slide on the second proof.
+- **Not yet done, deliberately:** the credit in `paper/main.tex` and `paper/frobenius_proof.tex`. The first is the version the professor approved; the second is being read by the grad student and I said I would not change it under him. Asked Syoma.

@@ -39,6 +39,8 @@ Open Math OS use was stopped on Friday night at the team's instruction (budget);
 
 - Chose the problem, set the priorities, decided what to spend on which tool, approved every push to the public repository and every download.
 - Saturday morning, as reported by Syoma: the professor has so far found nothing wrong. This is not yet a sign-off.
+- Saturday, about 10:35, as reported by Syoma: the professor looked through the main proof and said it is good (his name still to be recorded). The grad student read the Frobenius proof (verdict to be recorded).
+- Saturday midday: Syoma obtained Etherington's 1939–40 paper through a library login after the AI could not get past the paywall; the AI then read it and found that it contains the binary case of three of our steps (reference 36).
 - **Verification and sign-off: to be filled in** (who read which part of the proof, what they found, what they signed, with dates).
 
 ## What we learned about using AI for mathematics
