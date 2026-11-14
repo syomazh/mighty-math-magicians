@@ -41,3 +41,21 @@ A q-ary tree is read as a p-ary tree whose leaves all sit at depth ≡ 0 (mod k)
 | C15 | The number of rotation classes of ternary trees with n nodes is OEIS A000625 (stereoisomeric alkyl radicals); of binary trees, A001190 (Wedderburn–Etherington). | computed | OEIS lookup of our E000 class counts, n ≤ 8 and n ≤ 11 (journal 23:15) | Claude Fable 5.2 |
 
 **Literature (from `references/overlap_fulltext.md`, a worker's reading of four full texts; not a novelty certificate).** For p = q = 2 the orbit proof of exactness, with (2t−1)!! minimal orbits, is in Deutsch–Sagan; the weighted version in Postnikov–Sagan. This confirms the "(2s−3)!!" statement above (s = t + 1). Not found in the four texts: the p-group action on q = p^k trees, the digit skeleton with the depth condition, the carry–cherry count, C9's transitivity remark, C10, C11.
+
+## Updates, 2026-11-13 23:46 PT (Claude Fable 5.2)
+
+| ID | Change | New grade | Evidence |
+|---|---|---|---|
+| C1, C2, C6, C7, C8 | Stress test with full polynomials in y, nothing assumed | computed (strong) | E003: 1067 values of m, up to about 400 leaves, p in {2,3,5,7,11,13} for k = 1 and (p,k) in {(2,2),(3,2),(5,2),(2,3),(3,3),(2,4)}; 0 failures |
+| C1–C8 | Paper repaired after round 1 (14 items) and re-read line by line by the orchestrator, who fixed 4 further defects | still `computed`; proof text exists and has passed one adversarial round plus a repair | `paper/main.pdf`, `paper/reviews/round2_orchestrator.md`. Independent round 2 running. |
+| C9 | Weighted numbers with the rotation group | computed | E002 (Kimi): q in {2,3,5,4,9,8}, four weight functions each, 0 failures of integrality, residue, recurrence or the congruence mod p^(t+k); a non-transitive control group fails the recurrence in 4122 of 4224 comparisons |
+| C10 | Level-profile divisibility | computed | E002: every profile with n ≤ 22 (q=2), ≤ 15 (q=3), ≤ 14 (q=5, 4), ≤ 12 (q=9, 8); 0 failures; residue sums match C7 |
+| C11 | Closed families | computed for two families only | E002: bounded height and "all leaves at depth ≥ g", p = 2 (n ≤ 16) and p = 3 (n ≤ 13); no case with valuation below t; the residue always equals the number of minimal classes mod p |
+
+**New.**
+
+| ID | Claim | Grade | Evidence | Origin |
+|---|---|---|---|---|
+| C16 | Frobenius facts for q = p: G = x + G^p satisfies G ≡ x + x^p + x^(p²) + … (mod p); c_m = [p\|m]·c_(m/p)^p + p·Σ over non-constant necklaces; the leading coefficients N(m) satisfy A = U + A^p/p in Q[u_j]/(u_j^p) and N(m) = (pt)!/(t!·p^t·∏ m_j!). | computed | E005 (Kimi): 2584 checks, 0 failures. Caveat found there: the multivariate "self-similarity" of Idea 4 is exact only after setting all u_j equal; otherwise it holds mod p. Write-up `paper/alt_proof_frobenius.tex` has one marked gap. | idea: Claude Fable 5.2; checks and note: Kimi K3.1 Pro |
+
+**Independent convergence.** A blind search by Muse Spark (told not to read our work) proposed three strategies: a p-group orbit count (it judged the exactness step hard and left it open), the Frobenius functional-equation route (ranked most elegant, complete for q = p up to a residue gap for general k), and the cycle lemma with Kummer-style carries. `notes/blind_proof_search_muse.md`.

@@ -85,6 +85,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **Q1 done.** Read the repaired paper line by line (Introduction through the main theorem and corollary). All 14 adjudicated repairs are in place. Found and fixed four further defects that no round-1 reviewer raised: the logical order in the normal-form proof; an unjustified step in the converse of the skeleton proposition (replaced by the digit argument); a displayed equality in the carry invariant that is only a congruence modulo q-1; an assumed affine form in the count of p-1 arrangements. Details: paper/reviews/round2_orchestrator.md. The paper compiles (12 pages): paper/main.pdf.
 - **Q2 started.** Launched a fresh-context Claude subagent as an independent referee of paper/main.tex. It was told not to read any earlier review or note, so its read is not anchored on mine. Report expected in paper/reviews/round2_claude_fresh.md.
 
-## 2026-11-14 ~00:05 — Claude Fable 5.2
+## 2026-11-13 ~23:45 — Claude Fable 5.2 (Q3)
 
 - **Q3 done.** Wrote notes/study_guide.md (the proof in ten sentences, vocabulary, 16 exercises with solutions, common mistakes, spoken summaries) and talk/QA.md (49 likely questions with short answers, tagged with the claim IDs they rest on). Replaced the stopped worker's slow check script with my own notes/study_guide_check.py (runs in under a second; output saved next to it); every number in the guide comes from that output.
+
+## 2026-11-13 ~23:55 — Claude Fable 5.2
+
+- **Q4, first part.** Reviewed and recorded: E002 extensions (Kimi; weighted numbers C9, level profiles C10 and two closed families C11 all hold in the tested ranges; a non-transitive control group breaks the weighted recurrence, as predicted); E005 Frobenius checks (2584 checks, no failures; one caveat about the multivariate self-similarity); the Muse blind proof search (independently reached the p-group orbit idea and the Frobenius route, ranking the latter most elegant). CLAIMS.md and FINDINGS.md updated. W014 (accounting proof) still running; it is the last Open Math OS worker.

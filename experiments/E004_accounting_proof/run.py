@@ -303,13 +303,24 @@ def forest_from_counts(labels, counts, p):
     if not labels:
         return ((),)  # one empty forest, not an empty set of forests
     if len(labels) == 1:
-        return ((leaf(labels[0]),),) if counts == (1,) else ()
-
+        return ((leaf(labels[0]),),) if sum(counts) == 1 and counts[0] == 1 else ()
     if sum(c*p**j for j,c in enumerate(counts)) != len(labels):
         return ()
     choices = [j for j,c in enumerate(counts) if c]
     if not choices:
         return ()
+    j = choices[0]
+    blocksize = p**j
+    rest_counts = list(counts)
+    rest_counts[j] -= 1
+    result = set()
+    for other in itertools.combinations(labels[1:], blocksize-1):
+        block = (labels[0],)+other
+        remaining = tuple(x for x in labels if x not in block)
+        for tr in complete_trees(block,p,j):
+            for forest in forest_from_counts(remaining,tuple(rest_counts),p):
+                result.add(tuple(sorted((tr,)+forest)))
+    return tuple(sorted(result))
     j = choices[0]
     blocksize = p**j
     rest_counts = list(counts)
