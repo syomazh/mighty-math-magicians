@@ -110,3 +110,9 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-13 ~23:54 — Claude Fable 5.2
 
 - **Prior work for p = 2 found in mathematical biology.** Read the full text of Kersting-Fischer (2021) as a web page (ar5iv; nothing downloaded). Their Theorem 3.5 says the minimum of the symmetry nodes index over binary trees with n leaves is wt(n) - 1, attained exactly by trees obtained from a top tree with wt(n) leaves by hanging fully balanced trees given by the binary digits of n; their Theorem 3.9 counts them as (2 wt(n) - 3)!!. That is our d(T), our lower bound, our skeleton-and-atoms description and the count of minimal classes, for p = 2. They do not mention Catalan numbers. Recorded in references/cross_field_refs.md, FINDINGS.md and talk/QA.md. This must be cited in the talk; it also makes a strong cross-field link.
+
+## 2026-11-13 ~23:55 — Claude Fable 5.2
+
+- Slides: added the Kersting-Fischer link to the opening slide and a final slide "What was known, and references" with verified citations and a cautious statement of what appears to be ours. 19 slides, compiles cleanly.
+- Wrote MORNING_BRIEF.md (draft): status in five lines, what happened overnight, what each human should do first, decisions needed, risks.
+- Queue status: Q1, Q3, Q5, Q6, Q7, Q8 done. Q2 waits for the independent referee. Q4 waits for worker W014. Q9 drafted.

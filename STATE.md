@@ -1,6 +1,6 @@
 # STATE — where we are and what is next
 
-_Last updated: 2026-11-13 23:45 PT by Claude Fable 5.2 (orchestrator)._
+_Last updated: 2026-11-13 23:55 PT by Claude Fable 5.2 (orchestrator)._
 
 ## Status in one paragraph
 
@@ -23,7 +23,7 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 - [x] **Q6 — Cross-field verification with curl** DONE 23:51 (notes/oeis_recon.md, references/cross_field_refs.md). (no PDFs): OEIS lookups for the class-count and N_min sequences printed in `experiments/E003_stress_test/output.txt`; Crossref/OpenAlex checks of the leads in Part 2 of `briefs/W016_crossfield_verify.md`. Write `notes/oeis_recon.md` and `references/cross_field_refs.md`.
 - [x] **Q7 — Refinements numerics.** DONE 23:52 (experiments/E007_refinements: five statistics, all checks pass; part B, non-prime-power q, not done). Part A of `briefs/W017_refinements_and_general_q.md` with an own script in `experiments/E007_refinements/`; update C10, C11.
 - [x] **Q8 — Explainer (optional).** DONE 23:53 (the stopped worker had already repaired it: selftest passes; page opened in the built-in browser and all five sections render; the bar chart in section 2 should be looked at once in a normal browser). Make `node explainer/selftest.mjs` pass following `briefs/W005c_explainer_reduced.md`.
-- [ ] **Q9 — Morning brief.** Write `MORNING_BRIEF.md` for the humans: what happened overnight, what to read first (in order), exactly what needs a signature. Refresh `FINDINGS.md`. Write `AI_USAGE.md` (which tool did what) from `JOURNAL.md`, `CLAIMS.md` and `logs/delegations/INDEX.md`. Then delete the cron job.
+- [ ] **Q9 — Morning brief.** (draft written 23:55 in MORNING_BRIEF.md, AI_USAGE.md written; to finish: update both after Q2 and Q4, refresh FINDINGS.md, add the p = 2 prior-work remark and citations to paper/main.tex once the referee is done, then delete the cron job.) Write `MORNING_BRIEF.md` for the humans: what happened overnight, what to read first (in order), exactly what needs a signature. Refresh `FINDINGS.md`. Write `AI_USAGE.md` (which tool did what) from `JOURNAL.md`, `CLAIMS.md` and `logs/delegations/INDEX.md`. Then delete the cron job.
 
 ## Event and team facts
 

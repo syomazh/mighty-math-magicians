@@ -95,7 +95,9 @@
       Binary trees up to swapping the two children at every node\\[5pt]
       $=$ shapes of evolutionary trees:
       \[1,\ 1,\ 2,\ 3,\ 6,\ 11,\ 23,\ 46,\dots\]
-      {\footnotesize Wedderburn--Etherington numbers, OEIS A001190}
+      {\footnotesize Wedderburn--Etherington numbers, OEIS A001190}\\[4pt]
+      {\small Biologists measure the \emph{balance} of a tree by counting the nodes
+      whose two subtrees differ (Kersting--Fischer 2021). That count is our $d(T)$.}
     \end{column}
   \end{columns}
   \vfill
@@ -507,6 +509,28 @@
   \vfill
   {\small Full provenance: \texttt{JOURNAL.md}, \texttt{CLAIMS.md},
   \texttt{logs/delegations/} in the repository.}
+\end{frame}
+
+% 19 -----------------------------------------------------------------
+\begin{frame}{What was known, and references}
+  \small
+  \begin{itemize}
+    \item \textbf{$p=q=2$, exact valuation by orbits:} E.~Deutsch, B.~E.~Sagan,
+      \emph{J.\ Number Theory} 117 (2006) 191--215. Weighted version: A.~Postnikov,
+      B.~E.~Sagan, \emph{J.\ Combin.\ Theory Ser.\ A} 114 (2007) 970--977.
+    \item \textbf{$q=p^k$, formula by factorials; divisibility by orbits of the full
+      symmetric group:} M.~Konvalinka, \emph{J.\ Combin.\ Theory Ser.\ A} 114 (2007)
+      1089--1100.
+    \item \textbf{$p=2$, the minimal trees again, as most balanced evolutionary trees:}
+      S.~J.~Kersting, M.~Fischer, \emph{Math.\ Biosci.} (2021),
+      doi:10.1016/j.mbs.2021.108690. No mention of Catalan numbers.
+    \item \textbf{Counting trees up to a group at each node:} G.~P\'olya,
+      \emph{Acta Math.} (1937). Sequences: OEIS A000625, A001190.
+  \end{itemize}
+  \medskip
+  \textbf{Ours, as far as we could check:} the $p$-group action for $q=p^k$, the digit
+  skeleton with its depth condition, the carry--cherry count, the residue for all
+  prime powers. \emph{Not a certificate of novelty.}
 \end{frame}
 
 \end{document}
