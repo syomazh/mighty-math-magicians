@@ -1,0 +1,4 @@
+Theorem 1 / Lemma 1 / Section 4 identity: 732 triples (p,k,n) checked, p in (2, 3, 5, 7), k in (1, 2, 3), 0 <= n <= 60; failures: 0
+Corollary 1 (v_p(m!) and residue), binom(m,m0)=1, K(a)=(-1)^a, a+nu(a)=nu(m): 18006 pairs (p,m) checked, 0 <= m <= 3000; failures: 0
+k-blocked p-ary trees with m leaves = q-ary trees (and 0 when m != 1 mod q-1): 195 (p,k,m) cases; failures: 0
+ALL PASS

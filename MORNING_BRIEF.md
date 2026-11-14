@@ -19,7 +19,7 @@ Written by the orchestrator (Claude Fable 5.2) during the night. Last updated Sa
 - The classes of trees in our proof turn out to be known objects: stereoisomers of alkyl radicals for p = 3, shapes of evolutionary trees for p = 2 (checked in the OEIS).
 - **Prior work found for p = 2 in a biology journal.** Kersting and Fischer (2021) characterise the most balanced evolutionary trees as exactly our minimal trees and count them by the same formula, without mentioning Catalan numbers. Together with Deutsch–Sagan (2006), the case p = 2 is known. We must cite both. What is ours is every prime, prime powers, and the carry–cherry count.
 - Extensions checked by computer, not proved: the weighted theorem with our group; divisibility for every level profile, height, and three more statistics.
-- Two further ways to see the theorem were worked out: "every node is worth −p" (a clean 3-page proof is in `paper/accounting_proof.pdf`; its lemmas pass a computer check; unreviewed) and the Frobenius view. Ranked in `FINDINGS.md`.
+- Two further ways to see the theorem were worked out: "every node is worth −p" (a clean proof is in `paper/accounting_proof.pdf`; its lemmas pass a computer check, and an independent Claude referee found it correct apart from small gaps, now repaired) and the Frobenius view. Ranked in `FINDINGS.md`.
 - A bijection between labelled skeleton trees and permutations made of p-cycles holds in every tested case (`experiments/E009_sibling_permutation/`).
 - The interactive explainer works (`explainer/index.html`, open by double-click).
 

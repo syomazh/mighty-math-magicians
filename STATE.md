@@ -8,7 +8,7 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 
 ## Operating mode since 2026-11-13 23:35 (Syoma's instructions)
 
-- **Open Math OS is being phased out.** About 36% of its allowance was left. No new workers. One worker (W014, accounting proof) was still running at 23:55 and is allowed to finish. By Saturday morning all work is done by Claude.
+- **Open Math OS is phased out.** About 36% of its allowance was left on Friday 23:35. The last worker (W014) hit its time limit at 00:48 on Saturday and was stopped. No worker is running and none is to be launched unless a human asks.
 - **Claude does everything:** code, numerics, LaTeX, reviews (use a fresh-context Claude subagent via the Agent tool when an independent read is needed), documents.
 - **Overnight:** the orchestrator works through the queue below without waiting for humans. A recurring in-session cron job re-triggers the session every 30 minutes if it is idle, so work resumes after a Claude usage-limit reset. A small background process asks Windows not to idle-sleep while the app is open. Both are listed under "Overnight machinery".
 - Commit and push after every queue item. Journal every item.
@@ -24,7 +24,7 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 - [x] **Q7 — Refinements numerics.** DONE 23:52 (experiments/E007_refinements: five statistics, all checks pass; part B, non-prime-power q, not done). Part A of `briefs/W017_refinements_and_general_q.md` with an own script in `experiments/E007_refinements/`; update C10, C11.
 - [x] **Q8 — Explainer (optional).** DONE 23:53 (the stopped worker had already repaired it: selftest passes; page opened in the built-in browser and all five sections render; the bar chart in section 2 should be looked at once in a normal browser). Make `node explainer/selftest.mjs` pass following `briefs/W005c_explainer_reduced.md`.
 - [x] **Q9 — Morning brief.** DONE 00:32. MORNING_BRIEF.md, FINDINGS.md and AI_USAGE.md are current as of 00:32.
-- [ ] **Q10 — Referee the second proof.** A fresh-context Claude referee was launched at 00:32 on paper/accounting_proof.tex; its report goes to paper/reviews/accounting_review_claude_fresh.md. When it reports: adjudicate, repair the note, record the result in CLAIMS.md (C13), FINDINGS.md and MORNING_BRIEF.md, commit and push. **Then delete the cron job e7eb20ef** and note it in JOURNAL.md: the overnight queue is then complete, and the next move is the humans' (sign-off).
+- [x] **Q10 — Referee the second proof.** DONE 00:51. Verdict: theorem and lemmas correct; 1 wrong remark and 7 gaps of statement or citation, all repaired (paper/reviews/ADJUDICATION_accounting.md). The cron job was deleted. **The overnight queue is complete. Nothing is running: no worker, no subagent. The next move is the humans' (sign-off).**
 
 ## Event and team facts
 
@@ -44,7 +44,7 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 
 ## Overnight machinery
 
-- Cron job `e7eb20ef` in this Claude session (session-only): fires at minutes 13 and 43 while the session is idle. Delete it with CronDelete when the queue is done.
+- The cron job `e7eb20ef` was deleted at 00:51 on Saturday when the queue was finished. If more unattended work is wanted, create a new one.
 - Keep-awake: background task `b7ckcr8lj` in this session, a PowerShell process holding a Windows "system required" execution state. It changes no settings and ends when stopped or when the app closes. A closed lid still sleeps.
 - If the Claude app is closed or the laptop sleeps, nothing runs. To resume by hand: open this folder in Claude and say "read CLAUDE.md and STATE.md and continue the overnight queue".
 

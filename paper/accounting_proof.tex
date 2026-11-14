@@ -27,10 +27,12 @@
 
 \noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
 \textbf{Status.} This note gives a second, shorter route to the theorem of the main paper
-(\texttt{paper/main.pdf}). It reuses three statements of that paper, quoted in Section~1.
-It passes through the valuation of $m!$, which it \emph{derives} from the same kind of symmetry
-argument rather than quoting Legendre's formula; whether that satisfies ``without relying on
-factorial valuations'' is for the reader to judge. The main paper never mentions $m!$.}}
+(\texttt{paper/main.pdf}). It is not independent of that paper: it relies on the results
+listed in Section~1, in particular on the carry proposition. And it \emph{does} use the
+valuation of $m!$: Lemmas~\ref{L3} and~\ref{L4} together are Legendre's formula, proved here by
+the same kind of symmetry argument rather than quoted. Whether that satisfies ``without
+relying on factorial valuations'' is for the reader to judge. The main paper never mentions
+$m!$.}}
 
 \section{Statement and what is borrowed}
 
@@ -51,23 +53,50 @@ $\displaystyle \C\cdot\prod_j m_j!\;\equiv\;(-p)^{t}\pmod{p^{t+1}}.$
 In particular $v_p(\C)=t$ and $\C/p^t\equiv(-1)^t/\prod_jm_j!\pmod p$.
 \end{theorem}
 
-From the main paper we use:
+We use the following results of the main paper.
 \begin{enumerate}[label=(\Alph*)]
-\item \emph{Class size} (Lemma ``Class size'', in its version for trees with labelled leaves,
-      Lemma ``Plane representatives''): a rotation class of plane $p$-ary trees has $p^{d}$
-      elements, $d$ the number of asymmetric nodes; the classes of plane trees with distinctly
-      labelled leaves are the labelled cyclic trees; with distinct labels every internal node
-      is asymmetric.
-\item \emph{The carry} (Proposition ``A carry collapses a cherry''): if $T(\mathbf a)$ denotes
+\item \emph{Blocked form and class size.} Lemma ``Blocked form'': $q$-ary trees with $n$
+      internal nodes correspond to $k$-blocked $p$-ary trees with $m$ leaves. Lemma ``Class
+      size'', in its version for trees with labelled leaves given by Lemma ``Plane
+      representatives'': a rotation class of plane labelled $p$-ary trees has $p^{d}$ elements,
+      $d$ being the number of asymmetric nodes; rotation-equivalent trees have the same leaf
+      depths and the same labels; and the classes of plane trees with distinctly labelled
+      leaves are the labelled cyclic trees. Lemma ``Skeleton nodes are asymmetric'': with
+      pairwise distinct labels every internal node is asymmetric.
+\item \emph{The carry.} Proposition ``A carry collapses a cherry'': if $T(\mathbf a)$ denotes
       the number of cyclic $p$-ary trees with distinctly labelled leaves, $a_c$ of them of
       class $c\in\Z/k$, a leaf of class $c$ lying at depth $\equiv-c\pmod k$, then
-      $T(\mathbf a)\equiv-T(\mathbf a-p\,e_c+e_{c+1})\pmod p$ whenever $a_c\ge p$.
-\item \emph{Termination} (the proof of Proposition ``Iterated carries''): if
-      $\sum_c a_cp^c\equiv1\pmod{q-1}$ (for $q=2$: if $a_0\ge1$), then carrying ends at $e_0$
-      after exactly $(\sum_ca_c-1)/(p-1)$ carries, so
-      $T(\mathbf a)\equiv(-1)^{(\sum_c a_c-1)/(p-1)}\pmod p$. The proof in the paper is written
-      for the vector of digits of $m$ but uses only this congruence.
+      $T(\mathbf a)\equiv-T(\mathbf a-p\,e_c+e_{c+1})\pmod p$ whenever $a_c\ge p$. Lemma
+      ``Terminal vectors'': if every $a_c<p$ then $T(\mathbf a)=0$ unless $\mathbf a=e_0$, and
+      $T(e_0)=1$. Lemma ``Automorphisms of cyclic trees''\,(i): an automorphism fixing every
+      leaf is the identity.
 \end{enumerate}
+We also use the elementary fact that if $\Z_p$ acts on a finite set $X$ then
+$|X|\equiv|\mathrm{Fix}(X)|\pmod p$, because every orbit has $1$ or $p$ elements, $p$ being
+prime.
+
+The next lemma is the proposition ``Iterated carries'' of the main paper, stated for an
+arbitrary vector; its proof there is written for the vector of digits of $m$, and we repeat it.
+
+\begin{lemma}[Iterated carries, general form]\label{L0}
+Let $\mathbf a=(a_0,\dots,a_{k-1})$ be non-negative integers with $\sum_ca_c\ge1$, and if
+$q>2$ assume $\sum_ca_cp^c\equiv1\pmod{q-1}$. Then $(\sum_ca_c-1)/(p-1)$ is an integer and
+\[
+ T(\mathbf a)\equiv(-1)^{(\sum_ca_c-1)/(p-1)}\pmod p .
+\]
+\end{lemma}
+\begin{proof}
+As long as some $a_c\ge p$, replace $\mathbf a$ by $\mathbf a-p\,e_c+e_{c+1}$ (a \emph{carry});
+by (B) this changes $T$ by the factor $-1$ modulo $p$. A carry lowers $\sum_ca_c$ by $p-1$ and
+needs $p$ labels, so the process stops and $\sum_ca_c\ge1$ throughout. Let $\mathbf b$ be the
+vector at the end, with all $b_c<p$.
+If $q>2$: the quantity $W=\sum_ca_cp^c$ is unchanged modulo $q-1$ by a carry (it changes by $0$
+if $c<k-1$ and by $-p^k+1$ if $c=k-1$), so $W(\mathbf b)\equiv1$; also
+$0<W(\mathbf b)\le(p-1)\sum_{c<k}p^c=q-1$; hence $W(\mathbf b)=1$ and $\mathbf b=e_0$.
+If $q=2$: there is one class and a carry lowers $a_0$ by one, so the process ends at $a_0=1$.
+In both cases $\mathbf b=e_0$, $T(e_0)=1$, and the number of carries is
+$(\sum_ca_c-1)/(p-1)$.
+\end{proof}
 
 \section{Trees: each of the $N(m)$ nodes is worth $-p$}
 
@@ -79,17 +108,21 @@ $1,\dots,m$. Then
 \]
 \end{lemma}
 \begin{proof}
-There are $m!\cdot\C$ plane $k$-blocked trees with leaves labelled $1,\dots,m$. By (A) they
-fall into rotation classes, each a labelled cyclic tree, and each class has $p^{d}$ elements
-where $d$ is the number of asymmetric nodes; with distinct labels all $N(m)$ internal nodes are
-asymmetric. This gives the first identity.
+By (A) there are $m!\cdot\C$ plane $k$-blocked trees with leaves labelled $1,\dots,m$; they
+fall into rotation classes, each consisting of $k$-blocked trees with the same labels and each
+a labelled cyclic tree; and each class has $p^{d}$ elements where $d$ is the number of
+asymmetric nodes. With distinct labels all $N(m)$ internal nodes are asymmetric. This gives
+the first identity.
 
 All leaves are at depth $\equiv0\pmod k$, so in the notation of (B) they have class $0$ and
-$L(m)=T(m\,e_0)$. Since $m\equiv1\pmod{q-1}$, (C) applies with $\mathbf a=m\,e_0$ and gives
-$L(m)\equiv(-1)^{(m-1)/(p-1)}$.
+$L(m)=T(m\,e_0)$. Since $m\ge1$ and $m\equiv1\pmod{q-1}$, Lemma~\ref{L0} applies with
+$\mathbf a=m\,e_0$ and gives $L(m)\equiv(-1)^{(m-1)/(p-1)}$.
 \end{proof}
 
 \section{Labellings: each of the $\nu(m)$ nodes of the digit forest is worth $-p$}
+
+In this section $m\ge0$ is an arbitrary integer (no congruence condition), with base-$p$
+digits $m_j$ and digit sum $s$; $\nu(m)=(m-s)/(p-1)$ as before.
 
 A \emph{digit-forest structure} on $\{1,\dots,m\}$ is a partition of this set into $m_j$
 blocks of size $p^j$ for each $j$, each block arranged as the set of leaves of a cyclic
@@ -107,7 +140,9 @@ height by an isomorphism of cyclic trees. The trees of height $j$ can be permute
 themselves in $m_j!$ ways, and a cyclic complete tree of height $j$ has
 $p^{(p^j-1)/(p-1)}$ automorphisms: an automorphism is a free choice of a rotation at each of
 its $(p^j-1)/(p-1)$ internal nodes (by induction on $j$: a rotation at the root, then an
-automorphism of each of the $p$ subtrees). So the stabilizer has order
+automorphism of each of the $p$ subtrees), and distinct automorphisms induce distinct
+permutations of the leaves, because an automorphism fixing every leaf is the identity (B).
+So the stabilizer has order
 $\prod_j m_j!\,p^{m_j(p^j-1)/(p-1)}=p^{\nu(m)}\prod_jm_j!$, and the orbit--stabilizer count
 gives the identity.
 \end{proof}
@@ -137,8 +172,10 @@ $\binom{m_0}{m_0}=1$.
 
 \emph{$K(a)\equiv(-1)^a\pmod p$.} Let $\Z_p$ act on the permutations of $\{1,\dots,pa\}$ with
 all cycles of length $p$ by conjugation with $c=(1\,2\,\cdots\,p)$. A fixed permutation $\pi$
-commutes with $c$, hence preserves $\{1,\dots,p\}$ and acts there as a power $c^u$; $u\ne0$
-because $\pi$ has no fixed point. The rest of $\pi$ is any such permutation of the other
+commutes with $c$. Then $\pi$ maps the set $\{1,\dots,p\}$ of points moved by $c$ to itself,
+and if $\pi(1)=c^u(1)$ then $\pi(c^i(1))=c^i(\pi(1))=c^{i+u}(1)$ for all $i$, so $\pi$ acts on
+$\{1,\dots,p\}$ as $c^u$; $u\ne0$ because $\pi$ has no fixed point, and each $c^u$ with
+$u\ne0$ is a single $p$-cycle because $p$ is prime. The rest of $\pi$ is any such permutation of the other
 $p(a-1)$ points. So $K(a)\equiv(p-1)K(a-1)\equiv-K(a-1)$, and $K(0)=1$.
 
 By \eqref{rec} and induction, $|\F(m)|\equiv(-1)^a|\F(a)|\equiv(-1)^{a+\nu(a)}$, and
@@ -148,8 +185,12 @@ internal nodes of the digit forest at the lowest level.)
 \end{proof}
 
 \begin{corollary}[Legendre's formula, with its residue]
-$v_p(m!)=\nu(m)$ and $m!/p^{\nu(m)}\equiv(-1)^{\nu(m)}\prod_jm_j!\pmod p$.
+For every integer $m\ge0$, $v_p(m!)=\nu(m)$ and
+$m!/p^{\nu(m)}\equiv(-1)^{\nu(m)}\prod_jm_j!\pmod p$.
 \end{corollary}
+\begin{proof}
+Immediate from Lemmas~\ref{L3} and~\ref{L4}, since $\prod_jm_j!$ is prime to $p$.
+\end{proof}
 
 \section{Proof of the theorem}
 
@@ -182,7 +223,7 @@ one grain on the next site.}
 \textup{(a)} On the half-line of sites $0,1,2,\dots$, starting from $m$ grains on site $0$, every
 sequence of topplings ends, after exactly $\nu(m)$ topplings, in the configuration given by
 the base-$p$ digits of $m$.
-\textup{(b)} On a ring of $k$ sites, starting from $m$ grains on site $0$ with
+\textup{(b)} On a ring of $k$ sites, starting from $m\ge1$ grains on site $0$ with
 $m\equiv1\pmod{p^k-1}$, every sequence of topplings ends, after exactly $N(m)$ topplings, in
 a single grain on site $0$.
 Consequently $v_p(\C)=t$ is the number of topplings on the ring minus the number on the line.
@@ -199,7 +240,8 @@ $(m-1)/(p-1)$.
 \end{proof}
 In the proofs above a toppling on the ring is a cherry collapsing in a labelled tree (Lemma
 \ref{L1}), and a toppling on the line is a cherry of the digit forest being contracted (Lemma
-\ref{L4}); each contributes the factor $-p$. If $p^k-1$ divides $m$ the ring ends instead in
-the full configuration $(p-1,\dots,p-1)$; this case does not occur for $m=(q-1)n+1$.
+\ref{L4}); each contributes the factor $-p$. For $q>2$, if $p^k-1$ divides $m\ge1$ the
+ring ends instead in the full configuration $(p-1,\dots,p-1)$; this case does not occur for
+$m=(q-1)n+1$. (For $q=2$ every $m\ge1$ ends in a single grain.)
 
 \end{document}

@@ -3,13 +3,77 @@ Model: moonshotai/kimi-k3.1-pro (Open Math OS), 2026-11-13
 Python 3.13.14; platform Windows-11-10.0.26200-SP0
 A line beginning FAIL is a failed mathematical check. Range limits are reported separately.
 No check is changed to fit the output; formulas are compared against explicit objects.
-Traceback (most recent call last):
-  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E004_accounting_proof\run.py", line 610, in <module>
-    raise SystemExit(main())
-                     ~~~~^^
-  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E004_accounting_proof\run.py", line 587, in main
-    C = Checks()
-  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E004_accounting_proof\run.py", line 195, in __init__
-    self.counts = Counter()
-                  ^^^^^^^
-NameError: name 'Counter' is not defined
+
+==============================================================================
+L3: explicit digit forests, recurrence, actions and stabilizers
+==============================================================================
+p=2,m=1: |F|=1, formula=1, recurrence RHS=1, nu=0; 0.000s
+p=2,m=2: |F|=1, formula=1, recurrence RHS=1, nu=1; 0.000s
+p=2,m=3: |F|=3, formula=3, recurrence RHS=3, nu=1; 0.000s
+p=2,m=4: |F|=3, formula=3, recurrence RHS=3, nu=3; 0.000s
+p=2,m=5: |F|=15, formula=15, recurrence RHS=15, nu=3; 0.000s
+p=2,m=6: |F|=45, formula=45, recurrence RHS=45, nu=4; 0.001s
+p=2,m=7: |F|=315, formula=315, recurrence RHS=315, nu=4; 0.004s
+p=2,m=8: |F|=315, formula=315, recurrence RHS=315, nu=7; 0.011s
+p=2,m=9: |F|=2835, formula=2835, recurrence RHS=2835, nu=7; 0.059s
+  full S_2 action: orbit=1 (all structures=True), stabilizer=2, expected=2
+  full S_3 action: orbit=3 (all structures=True), stabilizer=2, expected=2
+  full S_4 action: orbit=3 (all structures=True), stabilizer=8, expected=8
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] transitivity p=2,m=7: orbit=315, all structures=315
+  full S_7 action: orbit=315 (all structures=False), stabilizer=16, expected=16
+p=3,m=1: |F|=1, formula=1, recurrence RHS=1, nu=0; 0.000s
+p=3,m=2: |F|=1, formula=1, recurrence RHS=1, nu=0; 0.000s
+p=3,m=3: |F|=2, formula=2, recurrence RHS=2, nu=1; 0.000s
+p=3,m=4: |F|=8, formula=8, recurrence RHS=8, nu=1; 0.000s
+p=3,m=5: |F|=20, formula=20, recurrence RHS=20, nu=1; 0.001s
+p=3,m=6: |F|=40, formula=40, recurrence RHS=40, nu=2; 0.001s
+p=3,m=7: |F|=280, formula=280, recurrence RHS=280, nu=2; 0.002s
+p=3,m=8: |F|=1120, formula=1120, recurrence RHS=1120, nu=2; 0.010s
+p=3,m=9: |F|=4480, formula=4480, recurrence RHS=4480, nu=4; 0.125s
+  full S_3 action: orbit=2 (all structures=True), stabilizer=3, expected=3
+  full S_4 action: orbit=8 (all structures=True), stabilizer=3, expected=3
+  full S_5 action: orbit=20 (all structures=True), stabilizer=6, expected=6
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] transitivity p=3,m=7: orbit=560, all structures=280
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] stabilizer p=3,m=7: actual=9, expected=18
+  full S_7 action: orbit=560 (all structures=False), stabilizer=9, expected=18
+p=5,m=1: |F|=1, formula=1, recurrence RHS=1, nu=0; 0.000s
+p=5,m=2: |F|=1, formula=1, recurrence RHS=1, nu=0; 0.000s
+p=5,m=3: |F|=1, formula=1, recurrence RHS=1, nu=0; 0.000s
+p=5,m=4: |F|=1, formula=1, recurrence RHS=1, nu=0; 0.000s
+p=5,m=5: |F|=24, formula=24, recurrence RHS=24, nu=1; 0.001s
+p=5,m=6: |F|=144, formula=144, recurrence RHS=144, nu=1; 0.003s
+p=5,m=7: |F|=504, formula=504, recurrence RHS=504, nu=1; 0.015s
+p=5,m=8: |F|=1344, formula=1344, recurrence RHS=1344, nu=1; 0.039s
+p=5,m=9: |F|=3024, formula=3024, recurrence RHS=3024, nu=1; 0.066s
+  full S_5 action: orbit=24 (all structures=True), stabilizer=5, expected=5
+  full S_6 action: orbit=144 (all structures=True), stabilizer=5, expected=5
+  full S_7 action: orbit=504 (all structures=True), stabilizer=10, expected=10
+
+==============================================================================
+L3: explicit K(a), binomial and fixed-point actions
+==============================================================================
+p=2,a=1: 2-point permutations all of p-cycle type=1, conjugation fixed=1
+p=2,a=2: 4-point permutations all of p-cycle type=3, conjugation fixed=1
+p=2,a=3: 6-point permutations all of p-cycle type=15, conjugation fixed=3
+p=2,a=4: 8-point permutations all of p-cycle type=105, conjugation fixed=15
+p=3,a=1: 3-point permutations all of p-cycle type=2, conjugation fixed=2
+p=3,a=2: 6-point permutations all of p-cycle type=40, conjugation fixed=4
+p=5,a=1: 5-point permutations all of p-cycle type=24, conjugation fixed=4
+
+==============================================================================
+L3 extended exact arithmetic, including the stabilizer identity
+==============================================================================
+p=2: forest formula/recurrence/residue and binomial residue checked for 1<=m<=1000
+p=3: forest formula/recurrence/residue and binomial residue checked for 1<=m<=1000
+p=5: forest formula/recurrence/residue and binomial residue checked for 1<=m<=1000
+
+==============================================================================
+SUMMARY
+L3: explicit digit forests, recurrence, actions and stabilizers: 130 checks, 3 failures
+L3: explicit K(a), binomial and fixed-point actions: 285 checks, 0 failures
+L3 extended exact arithmetic, including the stabilizer identity: 9000 checks, 0 failures
+TOTAL: 9415 checks, 3 failures; elapsed 1.115s
+FAILURES, VERBATIM
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] transitivity p=2,m=7: orbit=315, all structures=315
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] transitivity p=3,m=7: orbit=560, all structures=280
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] stabilizer p=3,m=7: actual=9, expected=18

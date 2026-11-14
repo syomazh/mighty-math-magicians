@@ -1,0 +1,49 @@
+Part 1: brute force over labelled plane trees
+  p=2 k=1 m=1: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=2 k=1 m=2: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=2 k=1 m=3: L(m)=T(m e_0)=3 by enumeration; m!C/p^N=3; identity ok; L=(-1)^N mod p ok
+  p=2 k=1 m=4: L(m)=T(m e_0)=15 by enumeration; m!C/p^N=15; identity ok; L=(-1)^N mod p ok
+  p=2 k=1 m=5: L(m)=T(m e_0)=105 by enumeration; m!C/p^N=105; identity ok; L=(-1)^N mod p ok
+  p=2 k=1 m=6: L(m)=T(m e_0)=945 by enumeration; m!C/p^N=945; identity ok; L=(-1)^N mod p ok
+  p=2 k=1 m=7: L(m)=T(m e_0)=10395 by enumeration; m!C/p^N=10395; identity ok; L=(-1)^N mod p ok
+  p=2 k=1: vectors a with |a|<=7: 8; classes enumerated: 11465; (B) instances 6 (6 with T(a) or T(a') nonzero); (C) instances 7; terminal vectors 2
+  p=2 k=2 m=1: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=2 k=2 m=4: L(m)=T(m e_0)=3 by enumeration; m!C/p^N=3; identity ok; L=(-1)^N mod p ok
+  p=2 k=2 m=7: L(m)=T(m e_0)=315 by enumeration; m!C/p^N=315; identity ok; L=(-1)^N mod p ok
+  p=2 k=2: vectors a with |a|<=7: 36; classes enumerated: 978; (B) instances 42 (14 with T(a) or T(a') nonzero); (C) instances 12; terminal vectors 4
+  p=2 k=3 m=1: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=2 k=3 m=8: L(m)=T(m e_0)=315 by enumeration; m!C/p^N=315; identity ok; L=(-1)^N mod p ok
+  p=2 k=3: vectors a with |a|<=8: 165; classes enumerated: 1840; (B) instances 252 (36 with T(a) or T(a') nonzero); (C) instances 24; terminal vectors 8
+  p=3 k=1 m=1: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=3 k=1 m=3: L(m)=T(m e_0)=2 by enumeration; m!C/p^N=2; identity ok; L=(-1)^N mod p ok
+  p=3 k=1 m=5: L(m)=T(m e_0)=40 by enumeration; m!C/p^N=40; identity ok; L=(-1)^N mod p ok
+  p=3 k=1 m=7: L(m)=T(m e_0)=2240 by enumeration; m!C/p^N=2240; identity ok; L=(-1)^N mod p ok
+  p=3 k=1: vectors a with |a|<=7: 8; classes enumerated: 2283; (B) instances 5 (3 with T(a) or T(a') nonzero); (C) instances 4; terminal vectors 3
+  p=3 k=2 m=1: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=3 k=2 m=9: L(m)=T(m e_0)=4480 by enumeration; m!C/p^N=4480; identity ok; L=(-1)^N mod p ok
+  p=3 k=2: vectors a with |a|<=9: 55; classes enumerated: 10727; (B) instances 56 (8 with T(a) or T(a') nonzero); (C) instances 8; terminal vectors 9
+  p=3 k=3 m=1: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=3 k=3: vectors a with |a|<=7: 120; classes enumerated: 95; (B) instances 105 (4 with T(a) or T(a') nonzero); (C) instances 5; terminal vectors 27
+  p=5 k=1 m=1: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=5 k=1 m=5: L(m)=T(m e_0)=24 by enumeration; m!C/p^N=24; identity ok; L=(-1)^N mod p ok
+  p=5 k=1 m=9: L(m)=T(m e_0)=72576 by enumeration; m!C/p^N=72576; identity ok; L=(-1)^N mod p ok
+  p=5 k=1: vectors a with |a|<=9: 10; classes enumerated: 72601; (B) instances 5 (2 with T(a) or T(a') nonzero); (C) instances 3; terminal vectors 5
+  p=5 k=2 m=1: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=5 k=2: vectors a with |a|<=9: 55; classes enumerated: 601; (B) instances 30 (2 with T(a) or T(a') nonzero); (C) instances 3; terminal vectors 25
+  p=7 k=1 m=1: L(m)=T(m e_0)=1 by enumeration; m!C/p^N=1; identity ok; L=(-1)^N mod p ok
+  p=7 k=1 m=7: L(m)=T(m e_0)=720 by enumeration; m!C/p^N=720; identity ok; L=(-1)^N mod p ok
+  p=7 k=1: vectors a with |a|<=7: 8; classes enumerated: 721; (B) instances 1 (1 with T(a) or T(a') nonzero); (C) instances 2; terminal vectors 7
+Part 2: T(a) from plane counts by depth class, larger range
+  p=2 k=1 |a|<=40: (B) instances 39 (39 with T(a) or T(a') nonzero); (C) instances 40; random carry runs 120; terminal vectors 2
+  p=2 k=2 |a|<=18: (B) instances 306 (102 with T(a) or T(a') nonzero); (C) instances 63; random carry runs 189; terminal vectors 4
+  p=2 k=3 |a|<=13: (B) instances 1092 (156 with T(a) or T(a') nonzero); (C) instances 80; random carry runs 240; terminal vectors 8
+  p=3 k=1 |a|<=41: (B) instances 39 (20 with T(a) or T(a') nonzero); (C) instances 21; random carry runs 63; terminal vectors 3
+  p=3 k=2 |a|<=19: (B) instances 306 (41 with T(a) or T(a') nonzero); (C) instances 28; random carry runs 84; terminal vectors 9
+  p=3 k=3 |a|<=13: (B) instances 858 (35 with T(a) or T(a') nonzero); (C) instances 23; random carry runs 69; terminal vectors 27
+  p=5 k=1 |a|<=41: (B) instances 37 (10 with T(a) or T(a') nonzero); (C) instances 11; random carry runs 33; terminal vectors 5
+  p=5 k=2 |a|<=21: (B) instances 306 (14 with T(a) or T(a') nonzero); (C) instances 12; random carry runs 36; terminal vectors 25
+  p=5 k=3 |a|<=13: (B) instances 495 (4 with T(a) or T(a') nonzero); (C) instances 5; random carry runs 15; terminal vectors 125
+  p=7 k=1 |a|<=43: (B) instances 37 (7 with T(a) or T(a') nonzero); (C) instances 8; random carry runs 24; terminal vectors 7
+  p=7 k=2 |a|<=19: (B) instances 182 (4 with T(a) or T(a') nonzero); (C) instances 5; random carry runs 15; terminal vectors 49
+  p=7 k=3 |a|<=13: (B) instances 252 (2 with T(a) or T(a') nonzero); (C) instances 3; random carry runs 9; terminal vectors 308
+ALL PASS

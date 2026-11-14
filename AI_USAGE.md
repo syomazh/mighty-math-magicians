@@ -26,7 +26,7 @@ Open Math OS use was stopped on Friday night at the team's instruction (budget);
 | Extensions numerics E002, Frobenius checks E005 | Kimi K3.1 Pro | read by Claude; not re-run independently |
 | Literature scan and full-text overlap check (`references/`) | Kimi K3.1 Pro, from public APIs and four open-access papers | conclusions read by Claude; **a human expert has not confirmed novelty** |
 | Cross-field links (chemistry, biology, sandpile, Frobenius, accounting proof) | ideas: Claude Fable 5.2; OEIS and citation checks: Claude via public APIs | — |
-| Second proof `paper/accounting_proof.tex` ("every node is worth −p") | Claude Fable 5.2 (idea and write-up); an earlier worker draft by Kimi is kept as `alt_proof_accounting.tex` | lemmas checked by computer (E004); not otherwise reviewed |
+| Second proof `paper/accounting_proof.tex` ("every node is worth −p") | Claude Fable 5.2 (idea and write-up); an earlier worker draft by Kimi is kept as `alt_proof_accounting.tex` | lemmas checked by computer (E004); one independent Claude referee (correct; small gaps repaired) |
 | Bijection with permutations made of p-cycles (E009), refinements (E007), OEIS and citation checks | Claude Fable 5.2 | by computer only |
 | Slides `talk/slides.tex` | Kimi K3.1 Pro (draft), revised by Claude Fable 5.2 | — |
 | Study guide and Q&A sheet | Claude Fable 5.2 | numbers recomputed by script |

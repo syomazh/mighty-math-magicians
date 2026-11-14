@@ -1,0 +1,21 @@
+(a) half-line: 15840 runs (p in 2,3,5,7; m in 0..399 and 40 random m < 20000; random and deterministic orders): final = base-p digits, topplings = nu(m); failures so far 0
+(a) half-line, exhaustive over all toppling sequences: 163 pairs (p,m); failures so far 0
+(b) ring: 6588 runs (p in 2,3,5,7; k in 1,2,3; m=(q-1)n+1, 0<=n<=60): final = one grain on site 0, topplings = N(m); failures so far 0
+(b) ring, exhaustive over all toppling sequences: 98 triples (p,k,m); failures so far 0
+ring from a general configuration with sum g_c p^c = 1 mod q-1 (q=2: g_0>=1): 3600 runs end in e_0 after (sum g_c - 1)/(p-1) topplings; failures so far 0
+Remark after the proposition: m divisible by p^k - 1
+  p=2 k=1: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (1,): True; equals e_0: True  <-- q=2: p^k-1 = 1 divides EVERY m, including m=(q-1)n+1; the 'full configuration' (1) is the single grain, so 'instead' and 'does not occur' are inaccurate here
+  p=2 k=2: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (1, 1): True; equals e_0: False
+  p=2 k=3: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (1, 1, 1): True; equals e_0: False
+  p=3 k=1: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (2,): True; equals e_0: False
+  p=3 k=2: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (2, 2): True; equals e_0: False
+  p=3 k=3: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (2, 2, 2): True; equals e_0: False
+  p=5 k=1: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (4,): True; equals e_0: False
+  p=5 k=2: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (4, 4): True; equals e_0: False
+  p=5 k=3: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (4, 4, 4): True; equals e_0: False
+  p=7 k=1: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (6,): True; equals e_0: False
+  p=7 k=2: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (6, 6): True; equals e_0: False
+  p=7 k=3: m = j(q-1), 1<=j<=39: ends in (p-1,...,p-1) = (6, 6, 6): True; equals e_0: False
+  degenerate: q=2, m=0 satisfies 'm = 1 mod p^k-1' vacuously; ring ends in (0,) after 0 topplings; (b) would claim one grain after N(0) = -1 topplings
+  degenerate: m=0 is divisible by p^k-1; ring ends in (0, 0), not the full configuration
+ALL PASS (claims of the proposition for m=(q-1)n+1)

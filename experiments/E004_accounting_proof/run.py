@@ -165,7 +165,7 @@ def cyclic_trees(labels, classes, p, k, depth):
         if possible:
             for children in itertools.product(*options):
                 for root_order in itertools.permutations(children):
-                    answer.add(canonical(ordered_node(tuple(root_order)))))
+                    answer.add(canonical(ordered_node(tuple(root_order))))
     return tuple(sorted(answer))
 
 

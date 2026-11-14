@@ -1,0 +1,77 @@
+Lemma 2 / Lemma 3 by enumeration of digit-forest structures
+  p=2 m=0: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=2 m=1: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=1 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=2 m=2: |F(m)|=1, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=2 ok; recursion (1) bijection [binom=1, K(1)=1 (enumerated), |F(1)|=1] ok
+  p=2 m=3: |F(m)|=3, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=2 ok; recursion (1) bijection [binom=3, K(1)=1 (enumerated), |F(1)|=1] ok
+  p=2 m=4: |F(m)|=3, nu=3; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=8 ok; recursion (1) bijection [binom=1, K(2)=3 (enumerated), |F(2)|=1] ok
+  p=2 m=5: |F(m)|=15, nu=3; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=8 ok; recursion (1) bijection [binom=5, K(2)=3 (enumerated), |F(2)|=1] ok
+  p=2 m=6: |F(m)|=45, nu=4; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=16 ok; recursion (1) bijection [binom=1, K(3)=15 (enumerated), |F(3)|=3] ok
+  p=2 m=7: |F(m)|=315, nu=4; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=16 ok; recursion (1) bijection [binom=7, K(3)=15 (enumerated), |F(3)|=3] ok
+  p=2 m=8: |F(m)|=315, nu=7; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=128 ok; recursion (1) bijection [binom=1, K(4)=105 (enumerated), |F(4)|=3] ok
+  p=2 m=9: |F(m)|=2835, nu=7; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=128 ok; recursion (1) bijection [binom=9, K(4)=105 (enumerated), |F(4)|=3] ok
+  p=2 m=10: |F(m)|=14175, nu=8; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=1, K(5)=945 (enumerated), |F(5)|=15] ok
+  p=2 m=11: |F(m)|=155925, nu=8; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=11, K(5)=945 (enumerated), |F(5)|=15] ok
+  p=2 m=12: |F(m)|=467775, nu=10; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=1, K(6)=10395 (enumerated), |F(6)|=45] ok
+  p=3 m=0: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=3 m=1: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=1 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=3 m=2: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=2 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=3 m=3: |F(m)|=2, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=3 ok; recursion (1) bijection [binom=1, K(1)=2 (enumerated), |F(1)|=1] ok
+  p=3 m=4: |F(m)|=8, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=3 ok; recursion (1) bijection [binom=4, K(1)=2 (enumerated), |F(1)|=1] ok
+  p=3 m=5: |F(m)|=20, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=6 ok; recursion (1) bijection [binom=10, K(1)=2 (enumerated), |F(1)|=1] ok
+  p=3 m=6: |F(m)|=40, nu=2; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=18 ok; recursion (1) bijection [binom=1, K(2)=40 (enumerated), |F(2)|=1] ok
+  p=3 m=7: |F(m)|=280, nu=2; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=18 ok; recursion (1) bijection [binom=7, K(2)=40 (enumerated), |F(2)|=1] ok
+  p=3 m=8: |F(m)|=1120, nu=2; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=36 ok; recursion (1) bijection [binom=28, K(2)=40 (enumerated), |F(2)|=1] ok
+  p=3 m=9: |F(m)|=4480, nu=4; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=81 ok; recursion (1) bijection [binom=1, K(3)=2240 (enumerated), |F(3)|=2] ok
+  p=3 m=10: |F(m)|=44800, nu=4; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=10, K(3)=2240 (enumerated), |F(3)|=2] ok
+  p=3 m=11: |F(m)|=246400, nu=4; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=55, K(3)=2240 (enumerated), |F(3)|=2] ok
+  p=5 m=0: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=5 m=1: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=1 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=5 m=2: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=2 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=5 m=3: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=6 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=5 m=4: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=24 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=5 m=5: |F(m)|=24, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=5 ok; recursion (1) bijection [binom=1, K(1)=24 (enumerated), |F(1)|=1] ok
+  p=5 m=6: |F(m)|=144, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=5 ok; recursion (1) bijection [binom=6, K(1)=24 (enumerated), |F(1)|=1] ok
+  p=5 m=7: |F(m)|=504, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=10 ok; recursion (1) bijection [binom=21, K(1)=24 (enumerated), |F(1)|=1] ok
+  p=5 m=8: |F(m)|=1344, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=30 ok; recursion (1) bijection [binom=56, K(1)=24 (enumerated), |F(1)|=1] ok
+  p=5 m=9: |F(m)|=3024, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=120 ok; recursion (1) bijection [binom=126, K(1)=24 (enumerated), |F(1)|=1] ok
+  p=5 m=10: |F(m)|=72576, nu=2; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=1, K(2)=72576 (enumerated), |F(2)|=1] ok
+  p=5 m=11: |F(m)|=798336, nu=2; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=11, K(2)=72576 (enumerated), |F(2)|=1] ok
+  p=7 m=0: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=7 m=1: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=1 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=7 m=2: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=2 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=7 m=3: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=6 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=7 m=4: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=24 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=7 m=5: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=120 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=7 m=6: |F(m)|=1, nu=0; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=720 ok; recursion (1) bijection [binom=1, K(0)=1 (enumerated), |F(0)|=1] ok
+  p=7 m=7: |F(m)|=720, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=7 ok; recursion (1) bijection [binom=1, K(1)=720 (enumerated), |F(1)|=1] ok
+  p=7 m=8: |F(m)|=5760, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=7 ok; recursion (1) bijection [binom=8, K(1)=720 (enumerated), |F(1)|=1] ok
+  p=7 m=9: |F(m)|=25920, nu=1; Lemma 2 count ok; Lemma 3 ok; S_m transitive ok; |stabiliser|=14 ok; recursion (1) bijection [binom=36, K(1)=720 (enumerated), |F(1)|=1] ok
+  p=7 m=10: |F(m)|=86400, nu=1; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=120, K(1)=720 (enumerated), |F(1)|=1] ok
+  p=7 m=11: |F(m)|=237600, nu=1; Lemma 2 count ok; Lemma 3 ok; recursion (1) bijection [binom=330, K(1)=720 (enumerated), |F(1)|=1] ok
+Automorphisms of a cyclic complete tree of height j: free rotations give distinct leaf permutations
+  p=2 j=1: 2^1=2; distinct permutations from free rotations: 2; all are automorphisms: True; brute force over S_2: 2; ok
+  p=2 j=2: 2^3=8; distinct permutations from free rotations: 8; all are automorphisms: True; brute force over S_4: 8; ok
+  p=2 j=3: 2^7=128; distinct permutations from free rotations: 128; all are automorphisms: True; brute force over S_8: 128; ok
+  p=2 j=4: 2^15=32768; distinct permutations from free rotations: 32768; all are automorphisms: True; ok
+  p=3 j=1: 3^1=3; distinct permutations from free rotations: 3; all are automorphisms: True; brute force over S_3: 3; ok
+  p=3 j=2: 3^4=81; distinct permutations from free rotations: 81; all are automorphisms: True; brute force over S_9: 81; ok
+  p=5 j=1: 5^1=5; distinct permutations from free rotations: 5; all are automorphisms: True; brute force over S_5: 5; ok
+  p=5 j=2: 5^6=15625; distinct permutations from free rotations: 15625; all are automorphisms: True; ok
+  p=7 j=1: 7^1=7; distinct permutations from free rotations: 7; all are automorphisms: True; brute force over S_7: 7; ok
+Z_p action on m0-subsets of {1..pa+m0} through (1 2 ... p)
+  67 cases (p,a,m0) checked: action well defined, orbits of size 1 or p, fixed subsets = subsets avoiding 1..p, count = binom(p(a-1)+m0, m0)
+Z_p action by conjugation with c=(1 2 ... p) on permutations of {1..pa} with all cycles of length p
+  p=2 a=1: K(a)=1; fixed=1; (p-1)K(a-1)=1; K(a)=(-1)^a mod p: True; ok
+  p=2 a=2: K(a)=3; fixed=1; (p-1)K(a-1)=1; K(a)=(-1)^a mod p: True; ok
+  p=2 a=3: K(a)=15; fixed=3; (p-1)K(a-1)=3; K(a)=(-1)^a mod p: True; ok
+  p=2 a=4: K(a)=105; fixed=15; (p-1)K(a-1)=15; K(a)=(-1)^a mod p: True; ok
+  p=2 a=5: K(a)=945; fixed=105; (p-1)K(a-1)=105; K(a)=(-1)^a mod p: True; ok
+  p=2 a=6: K(a)=10395; fixed=945; (p-1)K(a-1)=945; K(a)=(-1)^a mod p: True; ok
+  p=3 a=1: K(a)=2; fixed=2; (p-1)K(a-1)=2; K(a)=(-1)^a mod p: True; ok
+  p=3 a=2: K(a)=40; fixed=4; (p-1)K(a-1)=4; K(a)=(-1)^a mod p: True; ok
+  p=3 a=3: K(a)=2240; fixed=80; (p-1)K(a-1)=80; K(a)=(-1)^a mod p: True; ok
+  p=3 a=4: K(a)=246400; fixed=4480; (p-1)K(a-1)=4480; K(a)=(-1)^a mod p: True; ok
+  p=5 a=1: K(a)=24; fixed=4; (p-1)K(a-1)=4; K(a)=(-1)^a mod p: True; ok
+  p=5 a=2: K(a)=72576; fixed=96; (p-1)K(a-1)=96; K(a)=(-1)^a mod p: True; ok
+  p=7 a=1: K(a)=720; fixed=6; (p-1)K(a-1)=6; K(a)=(-1)^a mod p: True; ok
+ALL PASS

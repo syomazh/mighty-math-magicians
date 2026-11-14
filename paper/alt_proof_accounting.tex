@@ -18,8 +18,8 @@
 \paragraph{Status.} This is an AI-written proof draft, not a human-signed theorem.
 It derives a factorial valuation by symmetry; see Remark~\ref{qualification}.
 Verification is in \texttt{experiments/E004\_accounting\_proof/}, with
-qualifications in \texttt{GAPS\_accounting.md}. No \texttt{\char92 GAP} markers
-are used.
+qualifications in \texttt{GAPS\_accounting.md}. Red gaps, if any, make the
+remaining statement conditional; they are not hidden by the computations.
 
 Fix a prime $p$, $k\ge1$, and $q=p^k$. A $p$-ary tree is a leaf or an ordered
 $p$-tuple of such trees. It has $N(m)=(m-1)/(p-1)$ internal nodes if it has $m$
@@ -29,47 +29,59 @@ leaves. Write $m=\sum_jm_jp^j$ in base $p$, $s=s_p(m)=\sum_jm_j$, and
  \qquad t=N(m)-\nu(m)=\frac{s-1}{p-1}.
 \]
 The Fuss--Catalan number $C_n^{(q)}=\binom{qn}{n}/((q-1)n+1)$ counts ordered
-full $q$-ary trees with $n$ nodes. Set $m=(q-1)n+1$. Expanding every $q$-ary
-node into a complete $p$-ary block of height $k$ converts every such tree to
-a $p$-ary tree with every leaf depth divisible by $k$.
+full $q$-ary trees with $n$ internal nodes. Set $m=(q-1)n+1$. Expanding every
+$q$-ary node into a complete $p$-ary block of height $k$ converts it to a
+$p$-ary tree with every leaf depth divisible by $k$.
 
 \section{L1 and L2: labelled trees and cherries}
 \begin{definition} In a \emph{leaf-labelled cyclic $k$-blocked $p$-ary tree},
 every leaf has one of distinct labels $1,\ldots,m$ and lies at depth divisible
 by $k$; at every internal node the $p$ children form a cyclic sequence. Its
 \emph{rotation class} is the equivalence class of ordered trees obtained by
-rotating any nonempty family of the child cycles.\end{definition}
+rotating any nonempty family of child cycles.\end{definition}
+
 \begin{lemma}[L1]\label{L1} A labelled rotation class has exactly $p^{N(m)}$
 ordered representatives. If $L(m)$ is the number of classes, then
 $m!C_n^{(q)}=p^{N(m)}L(m)$.\end{lemma}
-\begin{proof} A local rotation acting trivially induces an automorphism fixing
-all leaf labels. Recursively it fixes every node and child position, so it is
-the identity. Hence all local rotations act freely on ordered labelled trees.
-This exhibits every orbit as a product of one $\mathbb Z_p$ for each of $N(m)$
-nodes. There are $m!C_n^{(q)}$ ordered labelled trees in total.\end{proof}
+\begin{proof} For one internal node, rotating a labelled ordered tree cannot
+fix it: a root rotation which returned the original child word would force
+the same leaf label to occur more than once. If a composition of local rotations
+fixes the root, recursively restricting it to each child shows it is fixed there;
+then the root rotation is itself trivial. Hence the root action is trivial too.
+Inductively the product of one $\mathbb Z_p$ at each internal node acts freely
+on ordered labelled trees. Its orbits are precisely the labelled rotation
+classes. There are $m!C_n^{(q)}$ ordered labelled trees in total.\end{proof}
 
 For general cyclic trees, each leaf also has \emph{class} $c\in\mathbb Z/k$;
 admissibility requires its depth to be $\equiv-c\pmod k$.
 \begin{lemma}\label{cherry} Cyclicly permuting $p$ distinct same-class labels
 fixes precisely those admissible cyclic trees in which those labels form
 $p$ sibling leaves. Collapsing them on both sides gives a bijection with $p-1$
-copies of admissible trees with one fewer $p$-ary node and one class-$(c+1)$ leaf.\end{lemma}
+copies of admissible trees with one fewer $p$-ary node and one class-$(c+1)$
+leaf.\end{lemma}
 \begin{proof} Let $\varphi$ be the induced automorphism and $v$ the lowest common
-ancestor of the selected leaves. If $\varphi$ acts trivially at $v$, distinct
-subtrees containing those leaves must be preserved; that is impossible because
-their labels are cycled. A nonzero rotation then moves every leaf below $v$.
-All other leaves are fixed, so the children of $v$ are precisely the selected
-leaves. Once $x_1$ is placed in slot $1$, the other labels are forced by powers
-$\sigma^u$ where $u=1,\ldots,p-1$. All $p-1$ choices are fixed. Conversely,
-inverting collapse simply expands a class-$(c+1)$ leaf.\end{proof}
+ancestor of the selected leaves. If $\varphi$ acts trivially at $v$, it fixes
+each child position, and therefore preserves the child subtree containing
+any selected leaf in that position. At most one child subtree could then
+contain more than one selected leaf; since $p\ge2$, repeating the argument in
+that subtree would keep the successive ancestor lower than $v$, contradiction.
+If instead $\varphi$ changes the root child word by nontrivially cycling the
+selected labels, every selected leaf beneath $v$ moves, while all unselected
+leaves of the entire tree are fixed. Since every child of $v$ has a leaf, no
+child containing an offspring remains that was not selected. Consequently
+the children of $v$ are exactly the selected leaves. Once $x_1$ is placed
+in slot $1$, the remaining labels are forced to be $x_2,\ldots,x_p$ in one of
+the $p-1$ starting rotations. All of those are fixed. Conversely, a
+class-$(c+1)$ leaf expands to a sibling $p$-tuple of class $c$, restoring
+the original tree.\end{proof}
 
 \begin{lemma}[L2]\label{L2} Let $\mathcal M(r)$ be the set of all unrestricted
-cyclic p-ary trees with $r$ labelled leaves. Then
+cyclic $p$-ary trees with $r$ labelled leaves. Then
 $|\mathcal M(r)|\equiv(-1)^{N(r)}\pmod p$, and hence
 $L(m)\equiv(-1)^{N(m)}\pmod p$.\end{lemma}
 \begin{proof} If $r=1$ the set is a singleton; otherwise $r\equiv1\pmod{p-1}$
 is necessary. Apply Lemma~\ref{cherry} to fixed labels $1,\ldots,p$. Because
-all orbits other than the fixed points have size $p$,
+all orbits other than fixed points have size $p$,
 $|\mathcal M(r)|\equiv(p-1)|\mathcal M(r-p+1)|\pmod p$. Iterate exactly
 $N(r)$ times. For blocked trees choose the next $p$ of the still present labels;
 all class shifts remain zero at every collapse, giving the same recursion.\end{proof}
@@ -79,20 +91,25 @@ all class shifts remain zero at every collapse, giving the same recursion.\end{p
 $m_j$ cyclic complete $p$-ary trees of height $j$, all disjoint, with leaf sets
 partitioning $[m]$. Let $\F(m)$ denote the set of these structures. A tree of
 height zero is a labelled leaf; the empty forest on $[0]$ is one object.\end{definition}
+
 \begin{lemma}\label{stabilizer} $S_m$ is transitive on $\F(m)$, and its
 stabilizer is $\prod_j(C_p^{N(p^j)}\wr S_{m_j})$, of order
 $p^{\nu(m)}\prod_jm_j!$. Therefore
 \begin{equation}\label{digit}
  m!=p^{\nu(m)}\prod_jm_j!\,|\F(m)|.
 \end{equation}\end{lemma}
-\begin{proof} A full $p$-ary tree of height $j$ with labelled leaves admits
-only local rotations as automorphisms. Induct on $j$. Two top subtrees that
-are exchanged must have different leaf labels (because each child is cyclicly
-rigid or of height zero), so no nontrivial permutation of top subtrees fixes
-the labelled leaves. By induction otherwise, the automorphism is a rotation
-at each internal node. Consequently the orbit-stabilizer relation holds at
-each component and also gives separate root permutations between components
-of equal height. This yields the stated stabilizer and \eqref{digit}.\end{proof}
+\begin{proof} Lift each cyclic component by choosing a root slot, keeping
+the child subtrees cyclic. This gives $p$ root choices, while equal-height
+components are still an unordered collection. A full leaf labelling assigns
+$[m]$ bijectively to the $m$ leaf slots, so it gives $m!$ such objects. By the
+argument of Lemma~\ref{L1}, independent local rotations act freely; an
+automorphism of an ordered labelled component fixes its root slot and then
+all lower nodes. Thus this lifted labelled class has size
+$p^{\nu(m)}\prod_jm_j!$: rotations contribute $p^{\nu(m)}$, and reordering
+components of height $j$ contributes $m_j!$. These lifts form one $S_m$-orbit:
+compare two forests by matching heights, then match leaves through arbitrarily
+chosen orders. Quotienting by their labels therefore shows transitivity of
+$S_m$ on $\F(m)$ and the asserted stabilizer, proving \eqref{digit}.\end{proof}
 
 \begin{lemma}\label{K} Let $K(a)$ count permutations of $[pa]$ all of whose
 cycles have length $p$. For $a\ge1$,
@@ -101,85 +118,32 @@ cycles have length $p$. For $a\ge1$,
  K(a)\equiv(-1)^a\pmod p.
 \end{equation}\end{lemma}
 \begin{proof} To count, choose the other members and the cyclic order of the
-cycle containing $1$, then finish the remainder; this proves the exact
-recursion and product formula. Conjugate the set by the cycle $(1\cdots p)$.
-A fixed permutation preserves that cycle in one of $p-1$ ways and has arbitrary
-$p$-cycle structure on the remaining points. The nonfixed orbits have size $p$,
-so $K(a)\equiv(p-1)K(a-1)\equiv-K(a-1)$. With $K(0)=1$, the result follows.\end{proof}
+cycle containing $1$, then finish the remainder. Conjugate the set by the cycle
+$(1\cdots p)$. A fixed permutation preserves that cycle in one of $p-1$ ways
+and has arbitrary $p$-cycle structure on the remaining points. The nonfixed
+orbits have size $p$, so $K(a)\equiv(p-1)K(a-1)\equiv-K(a-1)$, with $K(0)=1$.\end{proof}
 
 \begin{lemma}\label{recursion} If $a=\lfloor m/p\rfloor$ and $r=m-pa$,
 \begin{equation}\label{forest}
  |\F(m)|=\binom mrK(a)|\F(a)|,\qquad
  |\F(m)|\equiv(-1)^{\nu(m)}\pmod p.
 \end{equation}\end{lemma}
-\begin{proof} We count the quadruples $(R,\pi,G,w)$ specified below.
-Choose an unordered $r$-block $R\subset[m]$; its members are the height-zero
-components. On the other labels take a marked-root \emph{expansion}: a
-height-decreased forest (using the digit counts of $a$), together with a
-mark $*$, ordered abandonment data $L_1,\ldots,L_{p-1}$, and a distinguished
-slot at every node. Start with one component and a marked leaf. At each step
-replace one marked leaf by
-\[
- (*,L_1,\ldots,L_{p-1}),
-\]
-where $*$ is the new marked leaf and $L_i$ are empty slots or completed
-marked-root expansions. The resulting leaves are $R$, $m-a$ marked leaves at
-the $a$ surviving roots, and completed expansions outside those roots. The
-latter are precisely $F(m)-F(a)$, with their ordinary internal slot data.
-Each remaining marked leaf has a further distinguished one of its $p$ parent
-sides at the point of departure; the side and the slot at that departure
-determine a local cyclic order. There are $p-1$ choices at each such
-departure and at the final replacement of its mark by a completed expansion.
-Therefore a marked-root expansion has precisely $(p-1)^{N(a)}$ states.
-
-Choose $\pi$, a permutation of $[pa]$ whose cycles all have length $p$. It
-gives an ordered $p$-cycle $(i_1,\ldots,i_p)$ containing the initial marked
-component. Its indices are the $a$ components of the height-decreased forest
-(including the former root itself), while each index points along the chain
-of marked nodes to the final component. This chain is ordered by the $p$
-slots: the position which completes the cycle carries a completed expansion
-in place of its mark. Every noncycle position is given an expansion or one of
-the empty slots; multiplying by $p-1$ accounts for all cyclic alignments.
-These local data form exactly $K(a)$ possibilities.
-
-Finally, $w$ is a leaf-labelling of the height-decreased forest. Its $a$
-internal leaf labels are chosen as a canonical system of roots ranked by the
-least original leaf in the corresponding component, and its other labels are
-taken from $[m]\setminus R$. There are $(m-r)!/(p^{a+\nu(a)}\prod a_j!)$ such
-choices. No original cyclic orientation is forgotten: the discrete $p$-cycle
-and the $p-1$ alignments jointly recover it. Hence
-\[
- \binom mr\,K(a)(p-1)^{N(a)}\frac{(m-r)!}{p^{a+\nu(a)}\prod a_j!}
-\]
-counts expansions on positive-height components with their $p-1$ departure
-states. Division by $p^{\nu(a)}$ for the height-decreased structure and the
-ordinary $p$-rotation class on surviving components then yields
-\eqref{forest}, with $p^{a+\nu(a)}=p^{\nu(m)}$. \GAP{Formalize the cycle
-indexing and the counting ratio above. It presently describes the intended
-bijection but does not yet demonstrate that the quadruple count equals
-$p^{\nu(m)}|F(m)|/m!$ without circular use of the claimed recurrence. The
-explicit forest enumeration checks the formula, but that is not a proof.}
-
-For the congruence, if the recurrence is granted, rotate separately within let $T$ be its
-$p-1$-element sibling group in root order, and let $U$ be their ordered list
-to the right of $a_1$. The remaining $m-p$ leaves form a forest of digit type
-$a - p+1$, multiplied by the removal of one full cyclic $p$-ary node and the
-addition of $p-1$ leaf roots, with leaf subsets chosen later. Every distinct
-choice of $U,T$ and the remaining forest corresponds to exactly one original
-digit forest, but the remaining forest can itself contain other cyclic
-heights, and the height profiles of the two sides require keeping track of
-all $p-1$ created roots, not just the singleton. \GAP{Finish this bijection
-and its height bookkeeping. It must give $|F(m)|=\binom{m}{p-1}K(a)$ residue
-$\binom{m}{m-pa}K(a)|F(a)|$; at present the numerical verification and the
-cyclic template identities are stronger than the written kernel.}
-For the congruence, rotate separately within each of $a$ consecutive blocks
-
-For the congruence, rotate separately within each of $a$ consecutive blocks
-of $p$ points of $[pa+r]$, holding the last $r$ points. A fixed $r$-subset
-contains only entire moving blocks and fixed points. As $r<p$, there are no
-complete blocks, so the fixed points form the unique fixed subset. Other
-subset orbits of the $\mathbb Z_p$ action have size $p$. Hence
-$\binom mr\equiv1\pmod p$; Lemma~\ref{K} and $\nu(m)=a+\nu(a)$ complete induction.\end{proof}
+\begin{proof} This is a direct algebraic consequence of \eqref{digit} and
+\eqref{Kexact}, not a suppressed new valuation argument. Base-$p$ digit
+identities $\nu(a)=\nu(m)-a$ and $a_j=m_{j+1}$ give
+\begin{align*}
+\binom mrK(a)|\F(a)|
+&=\frac{m!}{r!(pa)!}\frac{(pa)!}{p^a a!}
+ \frac{a!}{p^{\nu(a)}\prod a_j!}\\
+&=\frac{m!}{r!\,p^{\nu(m)}\prod_{j\ge1}m_j!}=|\F(m)|.
+\end{align*}
+For the congruence, rotate separately inside $a$ consecutive blocks of $p$
+points of $[m]$, holding the last $r$ points. A fixed $r$-subset contains only
+entire moving blocks or fixed points. As $r<p$, it is uniquely the fixed points.
+All other subset orbits have size $p$, hence $\binom mr\equiv1\pmod p$.
+If $m<p$, then $\nu(m)=0$ and $|\F(m)|=1$; for $a=0$ the count $K(0)=1$.
+Lemma~\ref{K}, the proven recurrence and $\nu(m)=a+\nu(a)$ complete induction
+on $m$.\end{proof}
 
 \section{The theorem}
 \begin{theorem}\label{main} For every prime $p$, $k\ge1$ and $n\ge1$,
@@ -188,32 +152,32 @@ with $m=(p^k-1)n+1$,
  \boxed{C_n^{(q)}\prod_jm_j!\equiv(-p)^t\pmod{p^{t+1}}}
 \end{equation}
 in $\mathbb Z$, and $v_p(C_n^{(q)})=t=(s_p(m)-1)/(p-1)$.\end{theorem}
-\begin{proof} By Lemma~\ref{L1} and \eqref{digit},
+\begin{proof} By Lemmas~\ref{L1} and \ref{stabilizer},
 \[
  p^{N(m)}L(m)=p^{\nu(m)}\prod_jm_j!|\F(m)|C_n^{(q)}.
 \]
-After cancelling common powers,
+Cancelling $p^\nu$ and recalling $t=N-\nu$ therefore yields the integer
+identity
 \[
  C_n^{(q)}\prod_jm_j!=p^t\frac{L(m)}{|\F(m)|}.
 \]
-The numerator and denominator are integral and $p$-units by
-Lemmas~\ref{L2} and~\ref{recursion}. Write $N=N(m)$ and $\nu=\nu(m)$;
-then $N-\nu=t$. The two integer congruences imply
+Both $L(m)$ and $|\F(m)|$ are $p$-units by Lemmas~\ref{L2} and \ref{recursion}.
+Respectively they are congruent to $(-1)^N$ and $(-1)^\nu$ modulo $p$.
+Since
 \[
- L(m)\equiv(-1)^N\pmod p,\qquad |\F(m)|^{-1}\equiv(-1)^\nu\pmod p,
+ L(m)\equiv(-1)^{N-\nu}|\F(m)|\pmod p,
 \]
-where inversion is in $\mathbb Z/p\mathbb Z$. Cancelling $p^\nu$ in
-\eqref{digit} therefore gives $D\,C_n^{(q)}\equiv(-1)^t p^t\pmod{p^{t+1}}$
-in $\mathbb Z$. Since each $m_j<p$ makes $D=\prod_jm_j!$ a $p$-unit,
-$v_p(C_n^{(q)})=t$, proving \eqref{maineq}.\end{proof}
+their $p$-adic unit quotient is $(-1)^t$ modulo $p$, so its integer expression
+has the form $(-1)^t+p\lambda$. Multiplication by $p^t$ proves \eqref{maineq}.
+Each $m_j<p$ makes $\prod m_j!$ a $p$-unit, so $v_p(C_n^{(q)})=t$.\end{proof}
 \begin{remark}\label{qualification} Here $v_p(m!)$ \emph{is} computed along the
 way but from complete-tree symmetry rather than from Legendre's formula. Thus
-this note does not meet an absolute prohibition on factorial valuations; whether
-the alternative proof satisfies the problem's intended interpretation is for
-the humans to judge. In the original skeleton proof, these digit trees are the
-atoms, and the remaining $t$ internal nodes are the carry skeleton. A carry
-replaces $p$ atoms of one height by one atom of the next height, read modulo
-$k$; label cycling and collapsing translate that carry into Lemma~\ref{cherry}.\end{remark}
+this note does not meet an absolute prohibition on factorial valuations;
+whether that satisfies the intended interpretation is for humans to judge.
+In the original skeleton proof, these digit trees are atoms, with the remaining
+$t$ internal nodes forming the carry skeleton. A carry replaces $p$ atoms of
+one height by one atom of the next height, read modulo $k$; label cycling
+and collapsing translate that carry into Lemma~\ref{cherry}.\end{remark}
 
 \section{Sand on a ring and on a line}
 Take $a_c\ge0$ grains at sites $c=0,1,\ldots$ with finite support, or $c\in
@@ -230,54 +194,82 @@ terminal state is that of the unique $r\in\{1,\ldots,q-1\}$ congruent to $m$
 modulo $q-1$ (with its $k$ digits zero-extended). For $q=2$ the final grain is
 always $1$. For $m=(q-1)n+1$, the terminal state is $e_0$ and topplings total
 $N(m)$.
-\item Starting from the line's terminal digits folded into $k$ sites, exactly $t$
-ring topplings remain. Therefore $v_p(C_n^{(q)})$ is the difference of the
+\item Starting from the line's terminal digits folded into $k$ sites, exactly
+$t$ ring topplings remain. Therefore $v_p(C_n^{(q)})$ is the difference of the
 topplings on the ring and on the line, both starting with $m$ at site zero.
 \item If $S(a)_c=a_{c+1}$ on the ring, then $\mathbb Z^k/\operatorname{im}(pI-S)
 \cong\mathbb Z/(q-1)\mathbb Z$.
 \end{enumerate}\end{proposition}
+\begin{proof} Firing lowers the total grain sum by $p-1$, so every legal
+sequence is finite. For abelianness, induct upon the sum and consider two
+maximal legal words. Their first firings can be interchanged: legal firings
+on all one-site initial states commute straightforwardly on the generic line,
+and on a ring immediate wrap firings also commute because adding grain never
+makes a legal firing illegal. If the first firing of the first word appears
+somewhere in the second, move it to the front using that local diamond
+property. If it never appears, it remains legal after the whole second word,
+contradicting maximality. Cancel that common initial firing and induct.
 
-\begin{proof} Each firing lowers total grains by $p-1$, hence every sequence
-is finite. For abelianness, induct on the initial grain sum. Let $v,w$ be two
-maximal legal words with first letters $c,d$. If $c=d$, remove them. If not,
-other sites' firings only preserve or add grains at $c$. If $c$ never occurs in
-$w$, it remains legal at its end, contradicting maximality. Before $c$'s first
-occurrence in $w$, all firings are by other sites, so $c$ stays legal and each
-commutes with $c$; commuting both orders leaves the other site's firing legal
-because a preceding firing from a neighbour only supplies more grain. Move $c$
-to the front. Remove the common first firing and invoke induction. This proves
-same counts and final state.
+On the half-line, grain preservation gives $m-p x_0=b_0$, and for $c\ge1$,
+$x_{c-1}-p x_c=b_c$ where $b_c$ is the terminal amount. Hence
+$M_0=m$ and $M_c=x_{c-1}$ gives $M_c=p x_c+b_c$. If
+$M_c=\lfloor m/p^c\rfloor$, then $0\le b_c<p$ forces $b_c=m_c$ and
+$x_c=M_{c+1}=\lfloor m/p^{c+1}\rfloor$. This proves (1).
 
-The toppling count $x$ obeys
+On the ring, $p^k\equiv1\pmod{q-1}$ conserves $w(a)$. The terminal digits
+are $0,\ldots,p-1$ and their integer weight lies between $1$ and $q-1$ for
+positive input, namely the stated $r$. It remains to locate the remainder:
+it is a cyclic translate of $b=(b_0,\ldots,b_{k-1})$ on $k$ nodes (with all
+higher digits zero) if and only if there are nonnegative $x$ and positive
+quotient $\ell$ with
 \[
- a-a_{\mathrm{final}}=(pI-S)x,
+ w(b)-r=\sum_j(b_j-r_j)p^j=\ell(q-1).
 \]
-with an extra site carrying grains past the known finite origin on the half-line.
-The half-line preserves the integer weight $\sum a_cp^c$ exactly. Define
-$M_0=m$ and $M_{c+1}=(M_c-a_c^{\mathrm{final}})/p$. Conservation of grains at
-site $0$ gives $M_1=x_0$. The grains which move beyond site $0$ have total
-weight $M_1$ at their future sites. Inducting on the tail, site $c$ sees
-$M_c$ grains arriving, in units of its own weight. Hence
+The difference of two stable vectors has $|w|\le q-2$, since neither has
+all $p-1$ digits: $q-1$ itself is not a terminal remainder for positive
+input reachable from arbitrary positive grain sum? Actually that stable state
+can be reached from inputs, and weight congruence allows only zero difference
+unless the all-$(p-1)$ state is one of them. So the following essential
+boundary exception requires care. \GAP{Prove the positional uniqueness of
+the terminal base-$p$ remainder, with correct handling of the boundary
+$q-1$; the weighted invariant alone is insufficient. I have not verified an
+oriented cyclic-shift invariant. The simulation is not a replacement for
+this argument.}
+
+For the special initial vector $(m,0,\ldots,0)$, $m=(q-1)n+1$, there is one
+state which completely avoids this general positional issue: its candidate
+nonnegative toppling vector is
 \[
- a_c^{\mathrm{final}}=M_c-px_c,\qquad x_c=M_{c+1}=(M_c-m_c)/p,
+ x_c=(p^{k-c}-1)n,\qquad c=0,\ldots,k-1.
 \]
-so induction gives $M_c=\lfloor m/p^c\rfloor$ and $a_c^{\mathrm{final}}=m_c$.
-Thus $x_c=\lfloor m/p^{c+1}\rfloor$ and $\sum x_c=\nu(m)$.
+It satisfies $p x_0-x_{k-1}=m-1$ and $x_{c-1}-p x_c=0$ for $c>0$. Therefore
+with $A=pI-S$, $Ax=me_0-e_0$; the candidate terminal state is $e_0$.
+Because an actual legal sequence exists, it too produces a vector $y$ with
+$Ay=me_0-b$. If $b$ is stable, obviously $w(b)=1$ is one of its valid forms,
+but $A^{-1}(me_0-e_0)=x$ and all forms $b$ are determined solely by toppling
+counts. Since for any transformed stable state $b$ the equation
+$me_0-b=Ay$ has a unique rational solution, its difference $x-y$ must yield
+$b-e_0$ in the image. The nonnegative character and digits of $b$ can be
+considered directly using $A^{-1}(b-e_0)$: if $b=e_c$ for some $c\ne0$, its
+integer weight $p^c$ is not congruent to $1$ modulo $q-1$ because
+$1<p^c<q$; this finally forces $b=e_0$, and hence also $x=y$. At this point
+this argument does not require ring root-shift uniqueness for arbitrary $m$:
+stability, sum and congruence at the actual final state, together with the
+specific $r=1$ single-digit candidate, do imply that no alternate terminal
+position is compatible with weight conservation. The site-count formula
+$x_c=(p^{k-c}-1)n$ is also uniquely recovered from the terminal equation.
+It sums to $n((q-1)-k)/(p-1)=N(m)$. The total toppling count can moreover be
+obtained without identifying the site vector, since total grains begin at $m$
+and end at $s_p(m)$: it is exactly $N(m)$.
 
-On the ring the same weight is conserved modulo $q-1$ because $p^k\equiv1$.
-The terminal digits are in $\{0,\ldots,p-1\}$, so their integer weight lies
-between $0$ and $q-1$. A terminal state reached from positive grains has
-weight not $0$ modulo $q-1$, hence its integer weight cannot be $0$. Its first
-nonzero digit index is shifted by $k$ after a wraparound carry, so the canonical
-weight representative $r$ in $1,\ldots,q-1$ gives precisely the stated final
-state apart from index reposition. From the origin this index stays $0$ by the
-abelian result, and $r=q-1$ if $q-1\mid m$. Since sum drops by $p-1$ the total
-is $(m-s_p(r))/(p-1)$. For $m=(q-1)n+1$, $r=1$ and this is $N(m)$. Input
-folded line digits has total $s_p(m)$, hence remaining $(s_p(m)-1)/(p-1)=t$.
+Starting from the folded line digits uses total $s_p(m)$ grains, so its
+remaining ring firings number $(s_p(m)-1)/(p-1)=t$, using the special-case
+endpoint just proved; its original count from $m$ is the difference
+$N(m)-\nu(m)$.
 
-For (4), $\det(pI-S)=p^k-1$ by expanding the permutation's nonzero term.
-Deleting row $1$ and column $k$ gives a lower-triangular determinant: even for
-$k=2$ this is $[-1]$, and $\det=\pm1$. The $(k-1)$-st determinant divisor of
-the Smith normal form is $1$. By total determinant $|A|$ the final factor is
-$p^k-1$, so the integer cokernel is cyclic of this order.\end{proof}
+For (4), the characteristic calculation is
+$\det(pI-S)=q-1$ by expanding the cycle permutation term. Deleting row $1$
+and column $k$ gives a triangular minor of determinant $\pm1$. Hence all
+Smith divisors except the last are $1$, and the last must be $q-1$. The integer
+cokernel is therefore $\mathbb Z/(q-1)\mathbb Z$.\end{proof}
 \end{document}

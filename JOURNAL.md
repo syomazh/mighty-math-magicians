@@ -149,3 +149,9 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **Q9 done** (morning brief, findings, AI usage all current).
 - Added **Q10**: launched a fresh-context Claude referee on the accounting-proof note. The cron job stays until that is adjudicated.
 - Open Math OS: worker W014 still running at 00:32; it stops by itself at 00:48 at the latest. No other worker exists.
+
+## 2026-11-14 ~00:51 — Claude Fable 5.2
+
+- **Q10 done.** The fresh referee of paper/accounting_proof.tex: the theorem and every lemma are correct, no circularity, the quoted results are used correctly; 1 WRONG (a closing remark false for q = 2) and 7 GAP (missing statements, citations or hypotheses). All repaired: the iterated-carries argument is now a lemma of the note with its own proof and hypothesis, the dependency list is complete, the remaining small points are fixed. Record: paper/reviews/ADJUDICATION_accounting.md.
+- **Open Math OS is fully off.** Worker W014 reached its 90-minute limit at 00:48; its launcher began an automatic retry, which I killed within seconds. No worker process remains. Its partial files stay in experiments/E004_accounting_proof and paper/alt_proof_accounting.tex, superseded by my own check and note.
+- **Overnight queue complete (Q1-Q10).** Deleted the cron job e7eb20ef. The keep-awake background task b7ckcr8lj is left running; it ends when the app closes. Nothing else is running. Waiting for the humans.

@@ -83,3 +83,8 @@ A q-ary tree is read as a p-ary tree whose leaves all sit at depth ≡ 0 (mod k)
 **C1–C8: grade is now `ai-reviewed`, with a qualification.** Three review rounds are done (`paper/reviews/ADJUDICATION_round1.md`, `_round2.md`, `_round3.md`). No reviewer found a counterexample or a step needing a new idea; every round found write-up defects (14, then 4 by the orchestrator, then 10, then 13 smaller ones), all repaired. The repairs made after round 3 have not been re-reviewed by a machine. Human sign-off: none yet.
 
 Where a human should look hardest (the most recently written text): the lemma "Plane representatives", the converse half of "Minimal classes are skeleton trees", and the freeness proposition.
+
+## Update, 2026-11-14 00:51 PT (Claude Fable 5.2)
+
+- **C12, C13 (accounting proof): `ai-reviewed`, qualified.** Clean write-up `paper/accounting_proof.pdf` by the orchestrator; an independent Claude referee found the theorem and all lemmas correct, with one wrong closing remark (the case q = 2) and seven gaps of statement or citation, all repaired (`paper/reviews/ADJUDICATION_accounting.md`). One round only; repairs not re-reviewed. The note depends on the main paper's carry proposition and does compute v_p(m!) (by symmetry).
+- **C14 (sand):** now stated and proved as a proposition in that note, with the case q = 2 and the case where q − 1 divides m made precise.
