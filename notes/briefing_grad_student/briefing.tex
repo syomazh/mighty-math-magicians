@@ -1,0 +1,373 @@
+% Written by Claude Fable 5.2 (AI, Claude Code), 2026-11-13, for the team's grad student.
+% Not human-verified. Source of truth for claim status: CLAIMS.md in the repository.
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=black]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem*{example}{Example}
+
+\newcommand{\vp}{v_p}
+\newcommand{\sd}{s_p}
+\newcommand{\C}[1]{C^{(q)}_{#1}}
+\newcommand{\Z}{\mathbb{Z}}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+\setlist{itemsep=0.15em, topsep=0.2em}
+
+\title{\vspace{-1.5em}Problem 137: a candidate tree-symmetry proof of the\\
+$p$-adic valuation of Fuss--Catalan numbers\\[6pt]
+\large Briefing for verification}
+\author{Mighty Math Magicians, Caltech Mathathon 2026}
+\date{Friday 13 November 2026, evening}
+
+\begin{document}
+\maketitle
+\vspace{-1em}
+
+\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
+\textbf{Read this first.} Every mathematical statement below was produced by an AI model
+(Claude Fable 5.2) on Friday evening, in about an hour, and has been checked only by
+brute-force computation on small cases. \textbf{No human has verified any step.}
+We are asking you to try to break it. The judges question the presenters orally, so nothing
+goes into the talk as a theorem until a human on the team has signed it.}}
+
+\section{What we are asking you to do}
+
+\begin{enumerate}
+\item Read Section~\ref{sec:argument} (the argument, about three pages) and try to break it.
+      Section~\ref{sec:risk} lists the steps most likely to be wrong.
+\item Tell us whether you have seen this proof, or this choice of group, anywhere before.
+\item For each claim in the table of Section~\ref{sec:claims}, tell Syoma either
+      ``signed'' or ``breaks here, because \dots''.
+\item Saturday morning you will receive a full \LaTeX{} write-up (about ten pages, drafted by
+      another AI model and attacked by two more) for a line-by-line check.
+\end{enumerate}
+
+\textbf{Clock.} We submit by Sunday 12:00. The talk is 20 minutes; you and Syoma present.
+The plan is: proof signed or repaired by Saturday midday, slides Saturday evening,
+rehearsal Saturday night and Sunday morning.
+
+\section{The problem}
+
+Fix a prime $p$, an integer $k\ge 1$, and $q=p^k$. A \emph{$q$-ary tree} is a rooted tree in
+which every node has $q$ ordered branches, each empty or again a $q$-ary tree. The number of
+$q$-ary trees with $n$ nodes is the Fuss--Catalan number
+\[
+  \C{n}=\frac{1}{(q-1)n+1}\binom{qn}{n}.
+\]
+Such a tree has $m=(q-1)n+1$ empty branches; we call them \emph{leaves}. Write
+$m=\sum_j m_j p^j$ in base $p$, let $\sd(m)=\sum_j m_j$ be the digit sum, and put
+\[
+  t=t(m)=\frac{\sd(m)-1}{p-1}
+\]
+(an integer, since $\sd(m)\equiv m\equiv 1 \pmod{p-1}$).
+
+\begin{theorem}[Konvalinka 2007, Proposition 2]\label{thm:main}
+$\vp\bigl(\C{n}\bigr)=t$. For $p=q=2$ this is the classical $v_2(C_n)=s_2(n+1)-1$.
+\end{theorem}
+
+Konvalinka proves this with Legendre's formula for $\vp(N!)$. Problem 137 asks for a proof
+from the symmetries of trees, ``without relying on factorial valuations''.
+
+\section{What Konvalinka does, and where it stops}
+
+He lets the \emph{full} symmetry group of the complete $q$-ary tree act on $q$-ary trees:
+at every node, any permutation in $S_q$ of the $q$ branches. The size of an orbit is then a
+product of multinomial coefficients, one for each node whose branches are not all equivalent.
+His Proposition~7 says every orbit has size divisible by $p^t$, which gives
+$p^t\mid \C{n}$. The proof takes three pages (Lemmas 8, 9, 10, describing the orbits of least
+valuation), and its last sentence uses Theorem~\ref{thm:main} itself to conclude that the
+least valuation is exactly $t$. He states explicitly that the combinatorial argument proves
+the divisibility and not the exactness. He then uses Proposition~7 to prove a theorem on
+\emph{weighted} Fuss--Catalan numbers (his Theorem~5).
+
+\textbf{The one change we make:} shrink the group to a $p$-group. Then every orbit has
+$p$-power size, the lower bound becomes a five-line induction, the minimal orbits can be
+listed explicitly, and their number can be counted modulo $p$.
+
+\section{The candidate argument}\label{sec:argument}
+
+\subsection*{Step 0. A $q$-ary tree is a $p$-ary tree}
+
+A \emph{$p$-ary tree} is either a leaf or a $p$-tuple $(T_1,\dots,T_p)$ of $p$-ary trees.
+Replace every node of a $q$-ary tree by a complete $p$-ary tree of height $k$, whose $p^k$
+bottom slots receive the $q$ branches from left to right. This is a bijection between
+$q$-ary trees with $n$ nodes and $p$-ary trees with $m$ leaves in which \emph{every leaf has
+depth divisible by $k$}. From now on all trees are $p$-ary, and $q$ survives only as this
+condition on leaf depths. In particular the answer can only depend on $m$.
+
+\subsection*{Step 1. Rotation classes have $p$-power size}
+
+Let $\sim$ be the equivalence relation on $p$-ary trees generated by one move: cyclically
+rotate the $p$ subtrees of a node. (It is the orbit relation of the iterated wreath product
+$\Z_p\wr\Z_p\wr\cdots$; on a single $q$-ary node this group is a Sylow $p$-subgroup of $S_q$,
+of order $p^{(q-1)/(p-1)}$, inside Konvalinka's $S_q$.) A rotation does not change the depth
+of any leaf, so $\sim$ preserves the number of leaves and the condition of Step~0.
+
+Call a node \emph{symmetric} if its $p$ subtrees are pairwise equivalent, \emph{asymmetric}
+otherwise, and let $d(T)$ be the number of asymmetric nodes of $T$.
+
+\begin{lemma}\label{lem:size}
+The class of $T$ has exactly $p^{d(T)}$ elements.
+\end{lemma}
+\begin{proof}
+Induction. Let $T=(T_1,\dots,T_p)$. The class $[T]$ consists of all rotations of tuples
+$(T_1',\dots,T_p')$ with $T_i'\in[T_i]$. Look at the word of classes $([T_1],\dots,[T_p])$.
+Because $p$ is prime, its $p$ rotations are either all equal (the word is constant: the root
+is symmetric) or pairwise distinct (the root is asymmetric). In the first case
+$[T]=[T_1]\times\cdots\times[T_p]$; in the second $[T]$ is a disjoint union of $p$ such
+products. So $|[T]|=\prod_i|[T_i]|$ or $p\prod_i|[T_i]|$ respectively.
+\end{proof}
+
+Consequently, summing over the classes of trees counted by $\C{n}$,
+\begin{equation}\label{eq:sum}
+  \C{n}=\sum_{\text{classes}} p^{\,d}.
+\end{equation}
+So $\vp(\C{n})\ge \min d$, and if $N_{\min}$ denotes the number of classes attaining the
+minimum then $\C{n}/p^{\min d}\equiv N_{\min}\pmod p$. Everything reduces to two questions:
+what is $\min d$, and is $N_{\min}$ prime to $p$?
+
+\subsection*{Step 2. The lower bound $d(T)\ge t$}
+
+We use two facts about addition in base $p$ (no factorials): $\sd(pa)=\sd(a)$, and
+$\sd(a_1+\dots+a_r)\le \sd(a_1)+\dots+\sd(a_r)$, with equality exactly when the addition
+produces no carries.
+
+\begin{lemma}\label{lem:lower}
+Every $p$-ary tree $T$ with $m$ leaves satisfies $d(T)\ge t(m)$.
+\end{lemma}
+\begin{proof}
+Induction; a leaf has $d=0=t(1)$. Let $T=(T_1,\dots,T_p)$ and let $T_i$ have $m_i$ leaves.
+
+\emph{Symmetric root.} All $m_i$ equal $m_1$, so $m=pm_1$ and $t(m)=t(m_1)$. Then
+$d(T)=p\,d(T_1)\ge p\,t(m_1)\ge t(m)$.
+
+\emph{Asymmetric root.}
+$d(T)=1+\sum_i d(T_i)\ge 1+\sum_i\frac{\sd(m_i)-1}{p-1}
+=\frac{\sum_i \sd(m_i)-1}{p-1}\ge\frac{\sd(m)-1}{p-1}=t(m)$.
+\end{proof}
+
+With \eqref{eq:sum} this already gives $p^t\mid\C{n}$, i.e.\ the content of Konvalinka's
+Proposition~7 for the smaller group.
+
+\subsection*{Step 3. The minimal trees are built from the digits of $m$}
+
+Call $T$ \emph{minimal} if $d(T)=t(m)$. Tracing equality through the proof of
+Lemma~\ref{lem:lower}:
+
+\begin{lemma}\label{lem:min}
+$T$ is minimal if and only if either $T$ is complete (then $m=p^h$ and $d=0$), or the root
+is asymmetric, every $T_i$ is minimal, and the sum $m_1+\dots+m_p=m$ has no carries.
+\end{lemma}
+\begin{proof}
+At a symmetric root equality forces $p\,d(T_1)=t(m_1)\le d(T_1)$, so $d(T_1)=0$; a tree with
+no asymmetric node is complete. At an asymmetric root both inequalities must be equalities.
+\end{proof}
+
+Unwinding the recursion, a minimal tree is a \emph{skeleton} of asymmetric nodes from which
+hang complete trees; call these complete trees \emph{atoms}. ``No carries'' at every skeleton
+node means the digits of $m$ are simply distributed among the subtrees, so
+\begin{center}
+\emph{there are exactly $m_j$ atoms of height $j$: the atoms are the base-$p$ digits of $m$.}
+\end{center}
+Conversely, take any $p$-ary tree $S$ with $\sd(m)$ leaves and hang $m_j$ complete trees of
+height $j$ on its leaves. At every node of $S$ the addition is carry-free (all digit counts
+stay below $p$), and the $p$ subtrees cannot all have the same number of leaves (otherwise
+every digit of their sum would be a multiple of $p$, hence zero), so every node of $S$ is
+asymmetric and, by induction and Lemma~\ref{lem:min}, the tree is minimal. Note that $S$ has $(\sd(m)-1)/(p-1)=t$ internal
+nodes: \emph{$t$ is literally the number of nodes of the skeleton.}
+
+Atoms are unchanged by rotations, so the class of a minimal tree is its skeleton with the
+children of each node known only up to rotation. For the condition of Step~0, an atom of
+height $j$ rooted at depth $\delta$ has its leaves at depth $\delta+j$. Hence:
+
+\begin{proposition}\label{prop:skeleton}
+The minimal classes among the trees counted by $\C{n}$ are in bijection with the set
+$\mathcal S(m,k)$ of \emph{cyclic $p$-ary trees} (each internal node has $p$ children in
+cyclic order) whose leaves are labelled by the multiset of atoms of $m$ ($m_j$ atoms of
+height $j$), an atom of height $j$ sitting at depth $\equiv -j \pmod k$.
+\end{proposition}
+
+\begin{example}[$p=2$, $k=1$]
+$\mathcal S(m,1)$ is the set of rooted binary trees with unordered children whose leaves are
+labelled by the $s$ one-bits of $m=n+1$. These are the rooted phylogenetic trees on $s$
+species; there are $(2s-3)!!$ of them, an odd number. (We believe this is the count used by
+Deutsch and Sagan for $p=2$; we have not yet re-read their paper.)
+\end{example}
+
+\subsection*{Step 4. The number of minimal classes is a unit mod $p$: a carry is a collapsing cherry}
+
+\begin{proposition}\label{prop:count}
+$N_{\min}=|\mathcal S(m,k)|\equiv \dfrac{(-1)^t}{\prod_j m_j!}\pmod p$. In particular
+$p\nmid N_{\min}$.
+\end{proposition}
+
+\textbf{(a) Make the labels distinct.} Replace the $m_j$ equal atoms of height $j$ by
+distinct labels. Give a label coming from height $j$ the \emph{class} $c=j \bmod k\in\Z/k$;
+the depth condition reads: a leaf of class $c$ sits at depth $\equiv -c\pmod k$. For a vector
+$a=(a_0,\dots,a_{k-1})$ let $T(a)$ be the number of cyclic $p$-ary trees with distinctly
+labelled leaves, $a_c$ of class $c$, satisfying the depth condition. Here
+$a_c=\sum_{j\equiv c} m_j$.
+
+The group $Y=\prod_j S_{m_j}$ permutes equal atoms and $\mathcal S(m,k)$ is the set of its
+orbits on labelled trees. \emph{The action is free.} Indeed, if a label permutation $\pi$ of
+order $r$ prime to $p$ fixes a labelled cyclic tree, it is induced by an automorphism of the
+tree; at the root this automorphism rotates the $p$ children by an element whose order
+divides both $p$ and $r$, so it fixes each child; by induction it fixes every leaf, so
+$\pi=1$. Since $|Y|=\prod_j m_j!$ is prime to $p$ (digits are less than $p$), any
+non-identity element of $Y$ has a power of prime order $\ne p$, so no non-identity element
+has a fixed point. Therefore
+\[
+  N_{\min}=\frac{T(a)}{\prod_j m_j!}.
+\]
+
+\textbf{(b) The carry lemma.} Suppose $a_c\ge p$. Choose $p$ labels $x_1,\dots,x_p$ of class
+$c$ and let $\sigma=(x_1\,x_2\,\cdots\,x_p)$ act on labelled trees by relabelling. The $x_i$
+have the same class, so the depth condition is preserved. This is an action of $\Z_p$, so
+$T(a)\equiv|\mathrm{Fix}(\sigma)|\pmod p$.
+
+\emph{Which trees are fixed?} Suppose $\sigma\tau=\tau$, realised by an automorphism
+$\varphi$ of $\tau$. Let $v$ be the lowest common ancestor of $x_1,\dots,x_p$; then
+$\varphi(v)=v$ and $\varphi$ rotates the children of $v$ by some $r\in\Z_p$. If $r=0$ every
+child subtree of $v$ is preserved, but the $x_i$ lie in at least two of them and $\sigma$ is
+transitive on the $x_i$: impossible. So $r\ne0$ and $\varphi$ moves every leaf below $v$.
+Leaves other than the $x_i$ are fixed, so all leaves below $v$ are among the $x_i$; since $v$
+has $p$ non-empty child subtrees, each child of $v$ is one of the leaves $x_i$. That is, the
+$x_i$ form a \emph{cherry}: $p$ sibling leaves. Their cyclic order must be
+$(x_1,x_{1+u},x_{1+2u},\dots)$ for some $u\not\equiv 0 \pmod p$, which leaves $p-1$
+possibilities, and each of these is indeed fixed.
+
+\emph{Collapse the cherry} to a single new leaf at $v$. It sits one level higher, so it has
+class $c+1$. This is a bijection between $\mathrm{Fix}(\sigma)$ and $(p-1)$ copies of the
+trees counted by $T(a-p\,e_c+e_{c+1})$. Hence
+\begin{equation}\label{eq:carry}
+  T(a)\equiv(p-1)\,T(a-p\,e_c+e_{c+1})\equiv -\,T(a-p\,e_c+e_{c+1})\pmod p,
+\end{equation}
+with indices read mod $k$. Trading $p$ units in position $c$ for one unit in position $c+1$
+is exactly a carry in base $p$; reading positions mod $k$ makes it arithmetic modulo
+$p^k-1=q-1$.
+
+\textbf{(c) Termination.} Each carry removes $p-1$ labels. If no carry is possible, every
+$a_c<p$. A tree with at least two leaves has a deepest internal node, whose $p$ children are
+leaves at the same depth, hence of the same class, which needs some $a_c\ge p$. So then
+$T(a)=0$ unless the tree is a single leaf; a single leaf has depth $0$, hence class $0$, so
+$a=e_0$ and $T(e_0)=1$.
+
+The quantity $\sum_c a_c p^c \bmod (p^k-1)$ is unchanged by a carry, and at the start it is
+$\sum_j m_j p^{\,j \bmod k}\equiv m\equiv 1\pmod{q-1}$. When all $a_c<p$ we have
+$0\le\sum_c a_cp^c\le p^k-1$, and being $\equiv1$ it equals $1$, i.e.\ $a=e_0$. (For $q=2$
+the modulus is $1$ and there is one class; the process simply ends with one label.) So the
+carries always end at the single-leaf tree, after exactly $(\sd(m)-1)/(p-1)=t$ steps, and
+\eqref{eq:carry} gives $T(a)\equiv(-1)^t\pmod p$. With (a) this proves
+Proposition~\ref{prop:count}.
+
+\subsection*{Conclusion}
+
+By \eqref{eq:sum}, Lemma~\ref{lem:lower} and Proposition~\ref{prop:count},
+$\vp(\C{n})=t$, and moreover
+\[
+  \frac{\C{n}}{p^{t}}\equiv\frac{(-1)^t}{\prod_j m_j!}\pmod p
+  \qquad\text{for every prime power } q=p^k .
+\]
+For $q=p$ the minimal classes can be counted exactly:
+$N_{\min}=\dfrac{(pt)!}{t!\,p^{t}\,\prod_j m_j!}$ (for $p=2$ this is $(2s-3)!!$).
+Konvalinka's Remark~3 gives a residue formula for $q=p$ that agrees with ours via Wilson's
+theorem; for general $q$ he says only that the formula is much more complicated.
+
+\section{Worked examples}
+
+\textbf{$p=q=2$, $n=6$.} $C_6=132=2^2\cdot 33$, $m=7=111_2$, $\sd(m)=3$, $t=2$. The atoms are
+complete binary trees with $1$, $2$ and $4$ leaves. There are $11$ rotation classes, three of
+them minimal (each of size $4$), with skeletons $((1,2),4)$, $((1,4),2)$, $((2,4),1)$: the
+three rooted binary trees on three labelled leaves. Carries: $T(3)\equiv-T(2)\equiv T(1)=1$,
+and indeed $T(3)=3$ is odd.
+
+\textbf{$p=q=3$, $n=8$.} $C^{(3)}_8=43263=3^2\cdot 4807$, $m=17=122_3$, $\sd(m)=5$, $t=2$.
+Atoms: one of size $9$, two of size $3$, two of size $1$. The formula gives
+$N_{\min}=6!/(2!\cdot 9\cdot 2!\,2!\,1!)=10$, which is what the enumeration finds, and
+$4807\equiv 1\equiv (-1)^2/(2!\,2!\,1!)\pmod 3$.
+
+\textbf{$p=2$, $q=4$, $n=4$.} $C^{(4)}_4=140=2^2\cdot 35$, $m=13=1101_2$, $t=2$. Atoms of
+sizes $1,4,8$ (heights $0,2,3$; classes $0,0,1$). Of the three binary trees on these atoms
+only $((1,4),8)$ meets the depth condition: the atom $8$ is at depth $1$ and $1+3\equiv0$;
+the atoms $1$ and $4$ are at depth $2$ and $2+0\equiv 2+2\equiv 0 \pmod 2$. So $N_{\min}=1$.
+Carries: $a=(2,1)\to(0,2)\to(1,0)=e_0$, two carries, sign $+1$.
+
+\section{Where it is most likely to be wrong}\label{sec:risk}
+
+\begin{itemize}
+\item \textbf{Step 3, both directions.} That ``no carries at every node'' really makes the
+      atoms equal to the digits, and the converse (any skeleton on the digit atoms is minimal).
+\item \textbf{Step 4(a), freeness.} The claim that an automorphism of a cyclic $p$-ary tree
+      of order prime to $p$ is trivial, and that this is what ``fixing a labelled tree'' means.
+\item \textbf{Step 4(b).} The fixed-point analysis: the count $p-1$, and the bookkeeping
+      ``the collapsed leaf has class $c+1$''.
+\item \textbf{Step 4(c).} The invariant modulo $q-1$ and the edge case $q=2$.
+\item \textbf{Is it ``combinatorial''?} Step 4 uses $|X|\equiv|\mathrm{Fix}|\pmod p$ for a
+      $\Z_p$-action. We think this is in the spirit of the problem; your opinion matters.
+\item \textbf{Is it new?} We read Konvalinka's paper in full. The literature after 2007 is
+      being scanned now and has not been assessed.
+\end{itemize}
+
+\section{Claims and evidence}\label{sec:claims}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}llp{0.44\linewidth}l@{}}
+\hline
+ID & Where & Statement & Status \\
+\hline
+C1 & Lemma~\ref{lem:size} & class size is $p^{d(T)}$ & computed \\
+C2 & Lemma~\ref{lem:lower} & $d(T)\ge t$ & computed \\
+C3 & Lemma~\ref{lem:min}, Prop.~\ref{prop:skeleton} & minimal classes $=$ skeletons on the digit atoms & computed \\
+C4 & Step 4(a) & free action, $N_{\min}=T(a)/\prod m_j!$ & computed \\
+C5 & Step 4(b),(c) & carry lemma, $T(a)\equiv(-1)^t$ & computed \\
+C6 & Conclusion & $\vp(\C{n})=t$ without factorial valuations & sketch only \\
+C7 & Conclusion & residue $(-1)^t/\prod m_j!$ mod $p$ & computed \\
+C8 & Conclusion & exact $N_{\min}$ for $q=p$ & computed \\
+\hline
+\end{tabular}
+\end{center}
+
+``Computed'' means: a brute-force script enumerated all rotation classes for
+$q\in\{2,3,5,7,4,9,8\}$ and small $n$ ($47$ cases, up to $n=11$ for $q=2$ and $n=5$ for
+$q=8,9$), plus $307$ instances of the carry lemma, and every check passed. This is evidence
+for the statements, not for the proofs. An independent re-implementation by a different
+model is running.
+
+\section{Ideas not yet examined (do not trust)}
+
+\begin{itemize}
+\item \textbf{Weighted numbers.} Konvalinka's proof of his Theorem~5 seems to use only that
+      the group is transitive on the $q$ branches of a node, which our group is. If so, his
+      weighted theorem also becomes free of factorial valuations.
+\item \textbf{Level profiles.} Rotations preserve the number $n_i$ of nodes at each depth, so
+      $p^t$ should divide $\prod_i\binom{q\,n_i}{n_{i+1}}$ for every profile with $\sum n_i=n$.
+\item \textbf{Any closed family.} For any family $F$ of trees with $m$ leaves closed under
+      rotation, $p^t\mid|F|$ and $|F|/p^t\equiv\#\{\text{minimal classes in }F\}\pmod p$.
+\end{itemize}
+
+\section{Where everything is}
+
+Repository: \url{https://github.com/syomazh/mighty-math-magicians}
+\begin{itemize}
+\item \texttt{STATE.md}: current status and next actions. \texttt{CLAIMS.md}: the claim
+      ledger, with a sign-off column for you. \texttt{JOURNAL.md}: chronological log.
+\item \texttt{notes/2026-11-13\_candidate\_proof\_sketch.md}: the original short sketch.
+\item \texttt{experiments/E000\_first\_sanity\_check/}: the brute-force script and its output.
+\item \texttt{paper/}: the full write-up, in progress.
+\item Konvalinka's paper: \url{https://users.fmf.uni-lj.si/konvalinka/wcatalan.pdf}
+\end{itemize}
+
+\textbf{AI disclosure.} The idea, this briefing and the first script: Claude Fable 5.2.
+The full write-up, the independent re-check, the literature scan and the explainer: Kimi K3.1
+Pro through Open Math OS, each run logged in \texttt{logs/delegations/}.
+
+\end{document}

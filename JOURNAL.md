@@ -34,3 +34,9 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - First commit of the scaffolding (91626ce). Not pushed: waiting for Syoma's decision, because the repo is public.
 - **File of unknown origin.** `problem137/orbits.py` (dated 20:31, 174 lines) was already in the working tree and went into that commit. Claude Fable did not write it and no logged worker did. It studies a different action (Z_q rotation of the q children of a q-ary node). Provenance to be supplied by the team.
 - Launched wave 1 in the background (all Kimi K3.1 Pro, shell allowed): W001 proof draft, W002 independent replication, W003 extensions numerics, W004 literature scan, W005 explainer. Not yet reviewed.
+
+## 2026-11-13 ~21:25 — Claude Fable 5.2
+
+- Pushed the first three commits to GitHub at Syoma's instruction (main at 6cee453).
+- Wrote a 7-page briefing for the grad student: `notes/briefing_grad_student/briefing_for_grad_student.pdf` (source `briefing.tex`). It contains the problem, what Konvalinka does, the candidate argument with proofs of each step, three worked examples, the steps most likely to be wrong, the claim table and the unexamined extensions. Written by Claude Fable 5.2; not human-verified.
+- Checked Konvalinka's Remark 3 against the PDF (page 3): for q = p his residue is (−1)^{(Σa_i − 1)/(p−1) + Σ(a_i − 1)} ∏(p − a_i − 1)!, which equals our (−1)^t/∏ a_i! by Wilson's theorem (a!(p−1−a)! ≡ (−1)^{a+1}).
