@@ -108,7 +108,7 @@ C = sum over classes of p^d with all d ≥ t, so C / p^t is congruent modulo p t
 He proved the valuation formula with factorials, introduced weighted versions of these numbers, and showed by an orbit argument with the full symmetric group that p^t divides every orbit size. He says explicitly that this proves divisibility and not exactness.
 
 **30. Is the case p = 2 new?**
-No. For ordinary Catalan numbers the orbit proof with exactness is due to Deutsch and Sagan, and for weighted Catalan numbers to Postnikov and Sagan. For p = 2, swapping is rotating, so our argument specialises to theirs.
+No. For ordinary Catalan numbers the orbit proof with exactness is due to Deutsch and Sagan, and for weighted Catalan numbers to Postnikov and Sagan. For p = 2, swapping is rotating, so our argument specialises to theirs. The same minimal trees were also found by biologists: Kersting and Fischer (2021) show that the most balanced evolutionary trees, by their symmetry nodes index, are exactly these trees built on the binary digits, and count them by the same double factorial, without mentioning Catalan numbers.
 
 **31. Is your proof new?**
 We do not know yet, and we say so. An AI worker read four related papers in full and scanned 119 citing papers by abstract; it did not find the p-group action for q = p^k, the digit skeleton with its depth condition, or the carry-cherry count. That is not a certificate of novelty. (see `references/overlap_fulltext.md`)
