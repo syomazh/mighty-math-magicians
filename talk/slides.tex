@@ -483,17 +483,23 @@
 
 % 14b ----------------------------------------------------------------
 \begin{frame}{Two more ways to see it \hfill\normalsize\textcolor{red!70!black}{checked by computer, not yet by us}}
-  \textbf{Frobenius.} The generating function of $p$-ary trees by number of leaves
-  satisfies $G=x+G^p$. Modulo $p$, $G^p=G(x^p)$, so
-  \[ G\equiv x+x^p+x^{p^2}+\cdots\pmod p . \]
-  The count is prime to $p$ exactly when $m$ is a power of $p$.
-  Rotation classes keep track of the difference $G^p-G(x^p)$.
+  \textbf{Algebra only (``Frobenius'').} Trees by number of leaves: $G=x+G^q$.
+  For every series, $f^p=f(x^p)+p\cdot\theta(f)$. Replace that $p$ by a variable $y$
+  (shown for $q=p$):
+  \[ F=x+F(x^p,y^p)+y\,\theta(F). \]
+  {\small $y=p$: plane trees ($F=G$).\quad $y=1$: classes (isomers, tree shapes).\quad
+  $y=0$: $x+x^p+x^{p^2}+\cdots$}\\[3pt]
+  Digit sums show that the lowest power of $y$ in the coefficient of $x^m$ is $y^t$, and
+  its coefficient is prime to $p$. For $p$-adic eyes $y=p$ is small, so the first term
+  decides:
+  \[ 429=\mathbf{1}+2^2+7\cdot2^3+7\cdot2^4+6\cdot2^5+2^6 \]
+  {\small (binary trees with 8 leaves, sorted by number of asymmetric nodes).
+  A complete second proof, sharing no lemma with the first.}
 
   \medskip
-  \textbf{Accounting.} Label the leaves. A tree has $\frac{m-1}{p-1}$ nodes, each
-  worth a factor $-p$; the $m!$ labellings absorb $\frac{m-\sd(m)}{p-1}$ of them.
-  What is left over is $t$:
-  \[ \Cq\cdot\prod_j m_j!\;\equiv\;(-p)^{\,t}\pmod{p^{\,t+1}} . \]
+  \textbf{Accounting.} Label the leaves: each of the $\frac{m-1}{p-1}$ nodes is worth
+  $-p$, and $m!$ absorbs $\frac{m-\sd(m)}{p-1}$ of them:\quad
+  $\Cq\cdot\prod_j m_j!\equiv(-p)^{\,t}\pmod{p^{\,t+1}}$.
 \end{frame}
 
 % 15 -----------------------------------------------------------------

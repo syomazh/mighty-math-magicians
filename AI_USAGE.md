@@ -1,6 +1,6 @@
 # How AI was used in this project
 
-Maintained by the orchestrator (Claude Fable 5.2). Last updated 2026-11-14 00:35 PT. This is the summary required for disclosure; the full record is `JOURNAL.md` (chronological), `CLAIMS.md` (origin of every claim) and `logs/delegations/` (every worker run with its brief and output).
+Maintained by the orchestrator (Claude Fable 5.2). Last updated 2026-11-14, Saturday morning (about 10:00 PT). This is the summary required for disclosure; the full record is `JOURNAL.md` (chronological), `CLAIMS.md` (origin of every claim) and `logs/delegations/` (every worker run with its brief and output).
 
 ## Tools
 
@@ -11,7 +11,7 @@ Maintained by the orchestrator (Claude Fable 5.2). Last updated 2026-11-14 00:35
 | **Mistral Large 4.0** via Open Math OS | One adversarial review of the proof (found the flaw in the freeness proof). | Friday 22:39 – 23:15 |
 | **Muse Spark Open** via Open Math OS | One adversarial review of the proof; one blind search for alternative proofs. | Friday 22:39 – 23:22 |
 | DeepSeek Flash, GLM 5.3, Nemotron via Open Math OS | Connectivity tests only. | Friday 21:00 – 21:07 |
-| **Two further Claude instances with no access to our notes** (subagents) | Independent referees of the repaired proof: review rounds 2 and 3. | Friday 23:43 – Saturday 00:25 |
+| **Further Claude instances with no access to our notes** (subagents, fresh context) | Independent referees: review rounds 2 and 3 of the main paper, one round each for the second and third proofs. One web check of references and prior art for the cross-field links. | Friday 23:43 – Saturday |
 
 Open Math OS use was stopped on Friday night at the team's instruction (budget); ten runs were cut short and are marked "stopped" in the log.
 
@@ -27,6 +27,9 @@ Open Math OS use was stopped on Friday night at the team's instruction (budget);
 | Literature scan and full-text overlap check (`references/`) | Kimi K3.1 Pro, from public APIs and four open-access papers | conclusions read by Claude; **a human expert has not confirmed novelty** |
 | Cross-field links (chemistry, biology, sandpile, Frobenius, accounting proof) | ideas: Claude Fable 5.2; OEIS and citation checks: Claude via public APIs | — |
 | Second proof `paper/accounting_proof.tex` ("every node is worth −p") | Claude Fable 5.2 (idea and write-up); an earlier worker draft by Kimi is kept as `alt_proof_accounting.tex` | lemmas checked by computer (E004); one independent Claude referee (correct; small gaps repaired) |
+| Third proof `paper/frobenius_proof.tex` (algebra only, self-contained, all q = p^k) | Claude Fable 5.2, Saturday morning (argument and write-up). The starting observation, G = x + G^p modulo p, was Claude's on Friday; an incomplete draft by Kimi (q = p only, four marked gaps) is kept as `alt_proof_frobenius.tex` and is superseded | every lemma separately by computer (E010); an independent Claude referee (outcome in `paper/reviews/ADJUDICATION_frobenius.md` and `CLAIMS.md`, C18) |
+| Carry budget (`notes/2026-11-14_carry_budget.md`), a second way to prove Steps 2 and 3 | Claude Fable 5.2, Saturday morning | by computer on all classes of small trees (E011); no second reader yet |
+| Cross-field readings of Saturday (`notes/2026-11-14_crossfield_analogies.md`) | ideas and exact statements: Claude Fable 5.2; references and prior art looked up on the web by a Claude subagent (`notes/2026-11-14_crossfield_literature.md`) | exact statements by computer (E011); the statements about other fields only against the sources listed there |
 | Bijection with permutations made of p-cycles (E009), refinements (E007), OEIS and citation checks | Claude Fable 5.2 | by computer only |
 | Slides `talk/slides.tex` | Kimi K3.1 Pro (draft), revised by Claude Fable 5.2 | — |
 | Study guide and Q&A sheet | Claude Fable 5.2 | numbers recomputed by script |
@@ -34,6 +37,7 @@ Open Math OS use was stopped on Friday night at the team's instruction (budget);
 ## What the humans did
 
 - Chose the problem, set the priorities, decided what to spend on which tool, approved every push to the public repository and every download.
+- Saturday morning, as reported by Syoma: the professor has so far found nothing wrong. This is not yet a sign-off.
 - **Verification and sign-off: to be filled in** (who read which part of the proof, what they found, what they signed, with dates).
 
 ## What we learned about using AI for mathematics

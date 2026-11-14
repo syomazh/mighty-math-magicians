@@ -120,6 +120,11 @@ For `(o (o (o o)))` (4 leaves) compare d with t and find the carries.
 
 **Solution.** d = 2, t = 0. At the root the leaf counts are 1 and 3: 1 + 11 = 100 in binary, two carries. At the middle node they are 1 and 2: no carry. Two carries, and d exceeds t by two. A minimal tree is one where no node ever carries (and symmetric nodes sit only inside complete subtrees).
 
+### 11a. The carry budget (added Saturday; claim C19, `notes/2026-11-14_carry_budget.md`)
+(a) Take the two shapes of binary trees with 4 leaves, `((o o) (o o))` and `(o (o (o o)))`. At every node add the leaf counts of the two children in binary and count the carries. What is the total in each case? (b) Why is the total the same for every tree with m leaves? (c) Why does a symmetric node always carry? (d) Deduce d ≥ t.
+
+**Solution.** (a) Balanced tree: the two cherries add 1 + 1 = 10, one carry each; the root adds 10 + 10 = 100, one carry. Total 3. Lopsided tree: the cherry gives one carry, the middle node (1 + 10 = 11) none, the root (1 + 11 = 100) two. Total 3 again. (b) Each carry lowers the sum of all digit sums by p − 1 (Exercise 10). You start with m leaves, each of digit sum 1, and end with the digit sum of m. So the number of carries is (m − s)/(p − 1) whatever the tree: here (4 − 1)/1 = 3. (c) It adds p equal numbers b, and p·b is b shifted one place to the left: every unit of every digit of b is carried once, so the node makes s_p(b) ≥ 1 carries. (d) There are (m − s)/(p − 1) carries in all and every symmetric node uses at least one, so at most that many nodes are symmetric. A tree has (m − 1)/(p − 1) nodes. So at least (m − 1)/(p − 1) − (m − s)/(p − 1) = (s − 1)/(p − 1) = t nodes are asymmetric. In (a): the balanced tree has 3 symmetric nodes and uses the whole budget (d = 0 = t); the lopsided tree has 1 symmetric node and wastes two carries at its root (d = 2).
+
 ### 12. A prime power: q = 4, two nodes
 There are 4 quaternary trees with 2 nodes. Redraw them as binary trees and find the atoms.
 

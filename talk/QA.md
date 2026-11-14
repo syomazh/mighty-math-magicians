@@ -2,7 +2,7 @@
 
 Written by Claude Fable 5.2 (AI), 2026-11-14, for the presenters. Answers are short on purpose. "SG n" points to exercise n of `notes/study_guide.md`.
 
-**Status tags.** As of Saturday 00:00 no claim is human-signed. Each answer that rests on our own claims carries the claim IDs from `CLAIMS.md`; once the grad student or professor signs a claim, strike the tag. Until then say "our argument shows" rather than "we proved".
+**Status tags.** As of Saturday morning no claim is human-signed. Each answer that rests on our own claims carries the claim IDs from `CLAIMS.md`; once the grad student or professor signs a claim, strike the tag. Until then say "our argument shows" rather than "we proved".
 
 ---
 
@@ -61,6 +61,12 @@ Yes. A rotation does not change the depth of any leaf, and a p-ary tree comes fr
 
 **16. Why is d at least t?**
 Induction on the tree. At an asymmetric node, d is one plus the d's of the branches, and digit sums can only go down when you add the leaf counts, by p − 1 for each carry. At a symmetric node the leaf count is multiplied by p, which does not change the digit sum, while d is multiplied by p. (C2; SG 10, 11)
+
+**16a. Can you say that without an induction?** *(added Saturday; claim C19, proof in `notes/2026-11-14_carry_budget.md`)*
+Yes. Add up the leaves of the tree in base p, node by node. Whatever the shape of the tree, you make the same number of carries: (m − s)/(p − 1), because you start from m ones, end at the digits of m, and each carry lowers the digit sum by p − 1. A symmetric node adds p equal numbers, and that always carries. So at most (m − s)/(p − 1) nodes are symmetric. A tree has (m − 1)/(p − 1) nodes, so at least the difference, t, are asymmetric. (C19)
+
+**16b. And when is there equality?**
+When no carry is wasted: asymmetric nodes add without carrying, and each symmetric node makes exactly one carry. A symmetric node whose children have b leaves makes s_p(b) carries, so b must be a power of p, and then the children are complete trees. Those are the trees built from the digits of m. (C19, C3)
 
 **17. Is that not Legendre's formula in disguise?**
 No factorial appears. The only arithmetic fact is that adding numbers in base p lowers the total digit sum by p − 1 per carry, which is how column addition works.
@@ -168,13 +174,30 @@ Novelty is not established, and the proof has been in existence for less than tw
 **46. What would you do with two more months?**
 Have the proof checked formally in Lean; settle the literature question with experts; write up the weighted and refined versions; and work out the residue modulo p².
 
-## M. Other ways to see it (ideas, not yet verified)
+## M. Other ways to see it (written and checked by computer; none human-verified yet)
+
+*Rewritten on Saturday 2026-11-14 by Claude Fable 5.2. Claim IDs refer to `CLAIMS.md`; check the grade there before relying on an answer.*
 
 **47. Is there an even shorter explanation?**
-Possibly: label the leaves. Then every node of a tree contributes a factor −p, a tree has (m−1)/(p−1) nodes, and the m! labellings can account for only (m−s)/(p−1) of them. The difference is t. In one line: C times the product of digit factorials is ≡ (−p)^t modulo p^(t+1). We checked this congruence numerically in 885 cases; the proof behind it is a sketch. (C12, C13; idea, not yet verified)
+Label the leaves. Then every node of a tree contributes a factor −p, a tree has (m−1)/(p−1) nodes, and the m! labellings can account for only (m−s)/(p−1) of them. The difference is t. In one line: C times the product of digit factorials is ≡ (−p)^t modulo p^(t+1). This is written up in `paper/accounting_proof.pdf`; it uses the carry step of the main proof and the valuation of m!, which it derives by the same symmetry. (C12, C13)
 
 **48. Is there a physical picture?**
-With the rule "p grains of sand on a site topple into one grain on the next site", the valuation is the number of topplings needed on a ring of k sites minus the number needed on a line, starting from m grains. (C14; idea, not yet verified)
+Carries. Adding up the leaves of a tree in base p always makes the same number of carries; a symmetric node always carries; so the carries limit the symmetry (question 16a). In sand language: "p grains on a site topple into one grain on the next site", and the valuation is the number of topplings a ring of k sites needs minus the number a line needs. (C19, C14)
 
-**49. An algebraic one?**
-The generating function satisfies G = x + G^p. Modulo p, G^p is G(x^p), which gives the odd coefficients at powers of p at once; the rotation classes are what you see when you keep track of the difference between G^p and G(x^p). (idea, not yet verified)
+**49. An algebraic one? Did you prove it a second time?**
+Yes, by algebra alone, starting only from G = x + G^q. For any series f, f^p equals f(x^p) plus p times a correction. We replace that p by a variable y. The new series still has integer coefficients; at y = p it is G. Digit sums show that the lowest power of y in the coefficient of x^m is y^t, and a derivative identity modulo p shows that its coefficient is ±1 over the digit factorials. That is the theorem again, with no tree and no factorial valuation. The two proofs share no lemma, so each checks the other. (C18; `paper/frobenius_proof.pdf`)
+
+**50. What does the variable y mean?**
+It marks asymmetric nodes. The coefficient of x^m y^d counts the classes of trees with m leaves and d asymmetric nodes. At y = 1 you count classes (tree shapes, or isomers when p = 3); at y = p you count trees, because a class with d asymmetric nodes has p^d trees; at y = 0 only the complete trees survive. Example: the 429 binary trees with 8 leaves are 1 + 4 + 56 + 112 + 192 + 64. (C18; checked by listing all classes)
+
+**51. Why does the smallest term decide?**
+Because p-adically p is small. A sum of terms p^d with different d is divisible by exactly the smallest power that occurs, unless the number of terms with that power is itself divisible by p. So we need two things: the smallest d is t, and the number of classes with d = t is not divisible by p. A physicist would say: the valuation is the ground-state energy, and we must check that the number of ground states does not vanish modulo p. (analogy; the exact statement is the theorem)
+
+**52. What does the theorem say about molecules?**
+For p = 3: the symmetries of an alkyl radical in our model form a group of order 3^(number of symmetric carbons). The number of ternary trees with n nodes is prime to 3 exactly when a perfectly branched radical with n carbons exists: methyl (n = 1), tert-butyl (n = 4, 55 trees), and so on. In general the power of 3 measures how far the most symmetric radical is from perfect branching. (exact for the tree model, E011; what chemists call a symmetry number is in `notes/2026-11-14_crossfield_literature.md`)
+
+**53. Is there a statement inside p-adic numbers themselves?**
+Two. First, the number of ways to cut the p-adic integers into m balls is the Fuss–Catalan number, because cutting a ball into its p sub-balls is growing a node. Second, with π a (p−1)-th root of −p, the constant of Dwork's exponential, C equals π^(m−1)/m! times an integer that is 1 modulo p. (exact, C20 and a direct bijection; `notes/2026-11-14_crossfield_analogies.md`, B1 and B2)
+
+**54. Which of these would you bet on?**
+The main proof is the one we present and the one the problem asks for. The algebraic proof is the independent check. The carry budget is the easiest to explain. The rest are ways of seeing the same structure.
