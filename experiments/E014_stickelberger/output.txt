@@ -1,0 +1,29 @@
+S1: Stickelberger's congruence  G(a) * prod a_i! = -pi^s(a)  (mod pi^(s(a)+1)),  all 0 <= a < q-1
+   p =  2, q =   4:   3 exponents, failures: 0
+   p =  2, q =   8:   7 exponents, failures: 0
+   p =  2, q =  16:  15 exponents, failures: 0
+   p =  2, q =  32:  31 exponents, failures: 0
+   p =  3, q =   3:   2 exponents, failures: 0
+   p =  3, q =   9:   8 exponents, failures: 0
+   p =  3, q =  27:  26 exponents, failures: 0
+   p =  5, q =   5:   4 exponents, failures: 0
+   p =  5, q =  25:  24 exponents, failures: 0
+   p =  7, q =   7:   6 exponents, failures: 0
+   p =  7, q =  49:  48 exponents, failures: 0
+   p = 11, q =  11:  10 exponents, failures: 0
+
+S2: Fuss-Catalan against Gauss sums:  C * prod m_j! * pi + G(m) * prod m_j! = 0  (mod pi^(s(m)+1))
+   p = 2, Q =  2 (trees), Gauss sums over F_16: 13 values of m, failures: 0
+   p = 2, Q =  2 (trees), Gauss sums over F_32: 29 values of m, failures: 0
+   p = 2, Q =  4 (trees), Gauss sums over F_16:  4 values of m, failures: 0
+   p = 2, Q =  8 (trees), Gauss sums over F_32:  4 values of m, failures: 0
+   p = 3, Q =  3 (trees), Gauss sums over F_27: 12 values of m, failures: 0
+   p = 3, Q =  9 (trees), Gauss sums over F_27:  3 values of m, failures: 0
+   p = 5, Q =  5 (trees), Gauss sums over F_25:  5 values of m, failures: 0
+   p = 7, Q =  7 (trees), Gauss sums over F_49:  7 values of m, failures: 0
+
+OVERALL: ALL CHECKS PASSED
+
+real	0m0.401s
+user	0m0.000s
+sys	0m0.000s

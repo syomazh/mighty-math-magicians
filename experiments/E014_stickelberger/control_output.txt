@@ -1,0 +1,4 @@
+p=3 q=9: of 7 exponents, altered statements that still pass: wrong sign 0, no factorials 0, exponent s+1 0
+p=5 q=5: of 3 exponents, altered statements that still pass: wrong sign 0, no factorials 0, exponent s+1 0
+p=5 q=25: of 23 exponents, altered statements that still pass: wrong sign 0, no factorials 0, exponent s+1 0
+p=7 q=7: of 5 exponents, altered statements that still pass: wrong sign 0, no factorials 0, exponent s+1 0
