@@ -21,10 +21,10 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 
 ## Saturday midday: motivation, connections, pictures
 
-- [ ] **M1 — Figures.** One script, `talk/figures/make_figures.py`, writes every figure as PDF (for the slides) and PNG (for notes).
-- [ ] **M2 — Illustrated note** `notes/2026-11-14_motivation_and_connections.md`: why the problem matters, one consistent physical picture, a gallery of incarnations, each marked exact or analogy.
-- [ ] **M3 — Slides:** a motivation opening with pictures, connection slides.
-- [ ] **M4 — Checks** of every new exact statement (`experiments/E012_connections`).
+- [x] **M1 — Figures.** DONE 10:57: eleven figures (`talk/figures/`), one script, PDF and PNG.
+- [x] **M2 — Illustrated note** DONE 10:57: `notes/2026-11-14_motivation_and_connections.md` (13 sections; exact against analogy in section 13).
+- [x] **M3 — Slides** DONE 10:57: 29 slides; picture slides at pages 3–5, 8, 13, 15, 21, 26–29; a 20-minute path is suggested at the end of `talk/NOTES.md`.
+- [x] **M4 — Checks** DONE 10:57: `experiments/E012_connections` (`run.py`, `more.py`), all pass.
 - [ ] **M5 — Sources** for the new connections and an independent hunt for further ones (two Claude subagents).
 
 ## Operating mode since 2026-11-13 23:35 (Syoma's instructions)

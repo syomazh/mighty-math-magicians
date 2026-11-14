@@ -125,3 +125,49 @@ provenance.
 **Slide 3, "The same trees, elsewhere" (Syoma).** Before stating the problem, show that these classes of trees are familiar. For ternary trees, rotating the three branches at a node is what a chemist does with the three other bonds of a carbon atom, and the number of classes is the number of alkyl radicals counted with stereoisomers. For binary trees the classes are the shapes of evolutionary trees. Our question is how many ordered trees sit over each shape; the answer is always a power of p.
 
 **Slide 16, "Two more ways to see it" (grad student; optional, skip if short of time).** Two ideas that are not signed. Frobenius: modulo p the equation G = x + G^p forces G = x + x^p + x^(p^2) + ..., which already says when the count is prime to p. Accounting: with labelled leaves every node is worth a factor -p, the m! labellings absorb some of them, and t are left over.
+
+
+## Slide map after Saturday's picture slides (added 2026-11-14 10:57 by Claude Fable 5.2)
+
+The deck now has 29 slides: more than fit in 20 minutes. The figures come from `talk/figures/make_figures.py`. Numbers below are the page numbers of `slides.pdf`.
+
+| Page | Slide | In the 20-minute path? | Time |
+|---|---|---|---|
+| 1 | Title | yes | 0:15 |
+| 2 | A pattern in the Catalan numbers (table) | yes, quickly | 0:40 |
+| 3 | The pattern goes on, for every prime (picture) | yes | 0:35 |
+| 4 | One tree, four sciences (picture) | **yes** | 1:00 |
+| 5 | Chemistry does it with p = 3 (picture) | **yes** | 1:00 |
+| 6 | The problem | yes | 1:00 |
+| 7 | Konvalinka's symmetries and ours | yes | 1:15 |
+| 8 | Why the smaller group works: bits, not bytes (picture) | yes; it can replace page 9 | 0:45 |
+| 9 | Step 0 | skip if page 8 is shown | — |
+| 10 | Step 1: rotate, don't permute | yes | 1:00 |
+| 11 | Class size = p^d | yes | 1:15 |
+| 12 | Step 2 (induction) | skip if page 13 is shown; keep for questions | — |
+| 13 | Step 2 again: the carry budget (picture) | **yes** | 1:30 |
+| 14 | Step 3 | yes | 1:15 |
+| 15 | The answer in one picture | **yes** | 0:45 |
+| 16 | Running example | yes | 1:15 |
+| 17 | Step 4: a carry is a collapsing cherry | yes | 2:00 |
+| 18 | Conclusion | yes | 0:45 |
+| 19 | Prime-power example | skip (backup) | — |
+| 20 | What else falls out | skip (backup) | — |
+| 21 | Why the most symmetric shapes decide (picture) | yes | 1:00 |
+| 22 | Two more proofs | yes | 1:00 |
+| 23 | The idea in one sentence | optional | 0:20 |
+| 24 | How AI was used | yes | 1:00 |
+| 25 | What was known, and references | yes, briefly | 0:30 |
+| 26–29 | Backup: fusion; tree = interval = balls; polymers; sand on a ring | questions only | — |
+
+Total of the marked path: about 19 minutes. This selection is a suggestion; the humans decide.
+
+**What to say on the new slides.**
+
+- *Page 3.* "The same picture for every prime: the count is not divisible by p exactly at the rings. The height of a bar is a digit sum. This was known, by computing with factorials. Why should digits have anything to do with trees?"
+- *Page 4.* "The same tree four times: species, players, code words, notes. In none of them does left and right mean anything. So ask how many ordered trees stand over one shape: always a power of two. Six is 110 in binary, two ones, so one node must be lopsided. Biologists count exactly these nodes."
+- *Page 5.* "With three branches this is chemistry. The five butyl groups; over them 1, 9, 9, 9 and 27 trees. 55 is not divisible by 3 because tert-butyl stands alone: it is perfectly branched." (If asked: sec-butyl has two mirror-image forms; with reflections allowed there are four butyl groups.)
+- *Page 8.* "Konvalinka permutes all the branches of a node: that is like permuting the 256 values of a byte. We only flip its bits, one level at a time. Then every class has a power of p members."
+- *Page 13.* "Add up the leaves in base p. A carry is one trade of p units for one. Every tree makes the same number of carries. A symmetric node always makes one. So only so many nodes can be symmetric." Point at the two trees: 4 carries each; left none wasted, right three wasted.
+- *Page 15.* "13 is 8 + 4 + 1. The most symmetric tree with 13 leaves is a complete tree of 8, one of 4, and a leaf, joined by two nodes. The digits are the building blocks."
+- *Page 21.* "The 132 trees with 7 leaves, by shape. Each row is a power of two. With 2-adic eyes the big rows are small, and the lowest row decides. A physicist would call the power of 2 the ground-state energy."
