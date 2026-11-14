@@ -142,3 +142,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-14 ~00:30 — Claude Fable 5.2
 
 - **Q4 done.** Read the worker's accounting-proof draft: lemmas L1, L2 and the stabilizer count are fine but terse; its proof of the forest recursion is confused. Wrote a clean note myself, paper/accounting_proof.tex (3 pages, compiles to paper/accounting_proof.pdf): Lemma 1 (m! C = p^N L with L = (-1)^N mod p), Lemma 2 (m! = p^nu prod m_j! |F|), Lemma 3 (|F| = (-1)^nu mod p by peeling one level: binom(m, m_0) K(a) |F(a)|, each factor handled by a Z_p action), the theorem C prod m_j! = (-p)^t mod p^(t+1), Legendre's formula with its residue as a corollary, and the sand statement as a proposition with proof. It quotes three statements of the main paper. Not reviewed by anyone else.
+
+## 2026-11-14 ~00:32 — Claude Fable 5.2
+
+- Looked at slides 6-10 and 15-19 as rendered; fixed one overlap; updated the review history on the AI slide. AI_USAGE.md updated with rounds 2 and 3 and the second proof.
+- **Q9 done** (morning brief, findings, AI usage all current).
+- Added **Q10**: launched a fresh-context Claude referee on the accounting-proof note. The cron job stays until that is adjudicated.
+- Open Math OS: worker W014 still running at 00:32; it stops by itself at 00:48 at the latest. No other worker exists.
