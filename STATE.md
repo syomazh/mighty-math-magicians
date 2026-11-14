@@ -8,7 +8,8 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 
 ## Saturday work (started 09:15; Syoma's instruction: "work on Frobenius and keep working on analogies to physical fields")
 
-- **Human feedback so far:** the professor has found nothing wrong so far (reported by Syoma, Saturday morning). This is not a sign-off; sign-off comes later.
+- **Human feedback so far:** at about 10:37 Syoma reported that the professor looked through the main proof and said it is good. His name is still needed for the sign-off line in `CLAIMS.md`. The grad student is reading the Frobenius proof.
+- **Direction since 10:37 (Syoma):** no more proofs. Put the effort into motivation, into fleshing out the physical connections and finding new ones, and into pictures. Work items for this are listed under "Saturday midday" below.
 - [x] **S1 — A complete Frobenius proof.** `paper/frobenius_proof.pdf` (9 pages after the referee's repairs, claim C18): algebra only, self-contained, general q = p^k, with the residue. Every lemma passes its own computer check (E010).
 - [x] **S2 — Independent referee of the Frobenius note.** DONE 09:51. Verdict: proved modulo routine gaps; no wrong statement; 5 gaps and 7 unclear points, all repaired (`paper/reviews/ADJUDICATION_frobenius.md`). C18 is `ai-reviewed` (qualified). The note is now 9 pages.
 - [x] **S3 — Carry budget** (claim C19, `notes/2026-11-14_carry_budget.md`): a more intuitive way to say Steps 2 and 3. One optional slide added after "Step 2".
@@ -17,6 +18,14 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 - [x] **S6 — Referee of the carry-budget note.** DONE 10:08. Mathematics found correct; 1 wrong analogy sentence, 3 gaps, 3 unclear wordings, all repaired (`paper/reviews/ADJUDICATION_carry_budget.md`). C19 is `ai-reviewed` (qualified).
 - **Nothing is running.** Next moves are the humans': read `paper/main.pdf` and sign; decide whether the carry budget replaces the induction on the Step 2 slide; the professor's view on novelty and on the Stickelberger resemblance (C21); whether to bring in a second agent.
 - Note: an untracked file `AGENTS.md` (a copy of `CLAUDE.md`) was in the folder on Saturday morning; the orchestrator did not create or change it. Syoma asked how a second agent (ChatGPT) could work here without conflicts; the answer given: its own branch, its own folders, proposals instead of edits, provenance headers. Not started.
+
+## Saturday midday: motivation, connections, pictures
+
+- [ ] **M1 — Figures.** One script, `talk/figures/make_figures.py`, writes every figure as PDF (for the slides) and PNG (for notes).
+- [ ] **M2 — Illustrated note** `notes/2026-11-14_motivation_and_connections.md`: why the problem matters, one consistent physical picture, a gallery of incarnations, each marked exact or analogy.
+- [ ] **M3 — Slides:** a motivation opening with pictures, connection slides.
+- [ ] **M4 — Checks** of every new exact statement (`experiments/E012_connections`).
+- [ ] **M5 — Sources** for the new connections and an independent hunt for further ones (two Claude subagents).
 
 ## Operating mode since 2026-11-13 23:35 (Syoma's instructions)
 
