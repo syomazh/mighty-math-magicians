@@ -1,11 +1,12 @@
 # Model: moonshotai/kimi-k3.1-pro (Open Math OS), 2026-11-13.
 """E004: explicit checks for the accounting proof and the sandpile model.
 
-Trees are actually constructed as nested tuples.  A node is ("N", children)
-and a leaf is ("L", label).  Rotations at every node are enumerated; a cyclic
-tree is the lexicographically least rotation at every node.  Nothing in the
-small-object checks uses Fuss--Catalan or Legendre's formula as an input: those
-formulas are compared to the constructed sets afterwards.
+Trees are constructed as immutable objects.  A leaf is ("L", label); an
+ordered node is ("N", OrderedNodes(children)); a cyclic node is ("C",
+frozenset(OrderedNodes)).  The OrderedNodes wrapper prevents tuple comparison
+from descending through the ("N", children) node tag into cyclic frozensets.
+Every internal node stores its whole rotation class.  Small-object checks use
+Fuss--Catalan and valuation formulas only as independent expected answers.
 """
 from __future__ import annotations
 
@@ -16,7 +17,14 @@ import platform
 import random
 import sys
 import time
-from collections import Counter
+class OrderedNodes(tuple):
+    """A tuple of cyclic child trees, ordered lexicographically as a tuple."""
+
+
+def ordered_node(children):
+    return ("N", OrderedNodes(children))
+
+
 from functools import lru_cache
 from pathlib import Path
 
@@ -55,21 +63,23 @@ def leaf(a):
 
 
 def canonical(tree):
-    if tree[0] == "L":
+    if tree[0] in ("L", "C"):
         return tree
     if isinstance(tree[1], frozenset):
-        return tree  # already a quotient: do not iterate integers in labels
+        raise TypeError("ordered node cannot contain a raw cyclic class")
     children = tuple(canonical(ch) for ch in tree[1])
-    # Store the whole cyclic equivalence class at every node.
-    return ("N", frozenset(children[i:]+children[:i] for i in range(len(children))))
+    rotations = (OrderedNodes(children[i:]+children[:i])
+                 for i in range(len(children)))
+    return ("C", frozenset(rotations))
 
 
 def choose_rotation(node):
-    return ("N", next(iter(node[1]))) if isinstance(node[1], frozenset) else node
+    assert node[0] == "C"
+    return ordered_node(min(node[1]))
 
 
 def cyclic_nodes(tree):
-    if tree[0] == "N":
+    if tree[0] == "C":
         yield tree
         for child in choose_rotation(tree)[1]:
             yield from cyclic_nodes(child)
@@ -88,10 +98,8 @@ def node_count(tree):
 def ordered_orbit(tree):
     if tree[0] == "L":
         return [tree]
-    child_options = []
-    for rotation_class in choose_rotation(tree)[1]:
-        child_options.append(ordered_orbit(choose_rotation(rotation_class)))
-    return [("N", children[i:]+children[:i])
+    child_options = [ordered_orbit(ch) for ch in choose_rotation(tree)[1]]
+    return [ordered_node(children[i:]+children[:i])
             for children in itertools.product(*child_options)
             for i in range(len(children))]
 
@@ -100,13 +108,13 @@ def rotate_tree(tree):
     if tree[0] == "L":
         return tree
     children = tree[1]
-    return canonical(("N", children[1:]+children[:1]))
+    return canonical(ordered_node( children[1:]+children[:1]))
 
 
 def relabel(tree, permutation):
     if tree[0] == "L":
         return leaf(permutation.get(tree[1], tree[1]))
-    return canonical(("N", tuple(relabel(ch, permutation) for ch in choose_rotation(tree)[1])))
+    return canonical(ordered_node( tuple(relabel(ch, permutation) for ch in choose_rotation(tree)[1])))
 
 
 def block_partitions(labels, p):
@@ -125,7 +133,7 @@ def block_partitions(labels, p):
             remaining = tuple(x for x in rest if x not in chosen_set)
             if p == 2:
                 yield first, remaining
-            else:
+            elif remaining:
                 for other in block_partitions(remaining, p-1):
                     yield (first,)+other
 
@@ -149,8 +157,9 @@ def cyclic_trees(labels, classes, p, k, depth):
                 break
             options.append(children)
         if possible:
-            for root_order in itertools.permutations(children):
-                answer.add(canonical(("N", root_order)))
+            for children in itertools.product(*options):
+                for root_order in itertools.permutations(children):
+                    answer.add(canonical(ordered_node( root_order)))
     return tuple(sorted(answer))
 
 
@@ -176,7 +185,7 @@ def cherry_collapse(tree, selected):
             return leaf(0)
         if tr[0] == "L":
             return tr
-        return canonical(("N", tuple(replace(ch) for ch in tr[1])))
+        return canonical(ordered_node( tuple(replace(ch) for ch in tr[1])))
     return replace(tree)
 
 
@@ -303,7 +312,7 @@ def complete_trees(labels, p, height):
         options = [complete_trees(block,p,height-1) for block in partition]
         for children in itertools.product(*options):
             for root_order in itertools.permutations(children):
-                result.add(canonical(("N", root_order)))
+                result.add(canonical(ordered_node( root_order)))
     return tuple(sorted(result))
 
 

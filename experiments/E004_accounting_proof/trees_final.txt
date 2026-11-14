@@ -7,63 +7,46 @@ No check is changed to fit the output; formulas are compared against explicit ob
 ==============================================================================
 L1/L2: actual labelled rotation classes and explicit cherry cycles
 ==============================================================================
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=2: constructed 4, factorial*Fuss-Catalan 2
-p=2,k=1,m=2: cyclic classes=1, ordered labelled=4, orbit-size histogram={2: 2}, L mod p=1, expected=1; 0.000s
+  constructing p=2, k=1, n=1, m=2 ...
+p=2,k=1,m=2: cyclic classes=1, ordered labelled=2, orbit-size histogram={2: 1}, L mod p=1, expected=1; 0.000s
   explicit p-cycle: fixed=1, collapsed classes=1, multiplicity histogram={1: 1}
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=3: constructed 24, factorial*Fuss-Catalan 12
-p=2,k=1,m=3: cyclic classes=3, ordered labelled=24, orbit-size histogram={4: 6}, L mod p=1, expected=1; 0.000s
+  constructing p=2, k=1, n=2, m=3 ...
+p=2,k=1,m=3: cyclic classes=3, ordered labelled=12, orbit-size histogram={4: 3}, L mod p=1, expected=1; 0.000s
   explicit p-cycle: fixed=1, collapsed classes=1, multiplicity histogram={1: 1}
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=4: constructed 240, factorial*Fuss-Catalan 120
-p=2,k=1,m=4: cyclic classes=15, ordered labelled=240, orbit-size histogram={8: 30}, L mod p=1, expected=1; 0.002s
+  constructing p=2, k=1, n=3, m=4 ...
+p=2,k=1,m=4: cyclic classes=15, ordered labelled=120, orbit-size histogram={8: 15}, L mod p=1, expected=1; 0.001s
   explicit p-cycle: fixed=3, collapsed classes=3, multiplicity histogram={1: 3}
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=5: constructed 3360, factorial*Fuss-Catalan 1680
-p=2,k=1,m=5: cyclic classes=105, ordered labelled=3360, orbit-size histogram={16: 210}, L mod p=1, expected=1; 0.171s
+  constructing p=2, k=1, n=4, m=5 ...
+p=2,k=1,m=5: cyclic classes=105, ordered labelled=1680, orbit-size histogram={16: 105}, L mod p=1, expected=1; 0.017s
   explicit p-cycle: fixed=15, collapsed classes=15, multiplicity histogram={1: 15}
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=6: constructed 60480, factorial*Fuss-Catalan 30240
-p=2,k=1,m=6: cyclic classes=945, ordered labelled=60480, orbit-size histogram={32: 1890}, L mod p=1, expected=1; 0.721s
+  constructing p=2, k=1, n=5, m=6 ...
+p=2,k=1,m=6: cyclic classes=945, ordered labelled=30240, orbit-size histogram={32: 945}, L mod p=1, expected=1; 0.363s
   explicit p-cycle: fixed=105, collapsed classes=105, multiplicity histogram={1: 105}
 EXPLICIT RANGE LIMIT p=2,k=1: next n=6,m=7 would require 665280 ordered labelled trees (cap 400000); not attempted
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=2,m=4: constructed 48, factorial*Fuss-Catalan 24
-p=2,k=2,m=4: cyclic classes=3, ordered labelled=48, orbit-size histogram={8: 6}, L mod p=1, expected=1; 0.000s
+  constructing p=2, k=2, n=1, m=4 ...
+p=2,k=2,m=4: cyclic classes=3, ordered labelled=24, orbit-size histogram={8: 3}, L mod p=1, expected=1; 0.000s
   explicit p-cycle: fixed=1, collapsed classes=1, multiplicity histogram={1: 1}
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=2,m=7: constructed 40320, factorial*Fuss-Catalan 20160
-p=2,k=2,m=7: cyclic classes=315, ordered labelled=40320, orbit-size histogram={64: 630}, L mod p=1, expected=1; 0.609s
+  constructing p=2, k=2, n=2, m=7 ...
+p=2,k=2,m=7: cyclic classes=315, ordered labelled=20160, orbit-size histogram={64: 315}, L mod p=1, expected=1; 0.327s
   explicit p-cycle: fixed=45, collapsed classes=45, multiplicity histogram={1: 45}
 EXPLICIT RANGE LIMIT p=2,k=2: next n=3,m=10 would require 79833600 ordered labelled trees (cap 400000); not attempted
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=3,k=1,m=3: classes=1, N=1, ordered=6
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L2 residue p=3,k=1,m=3: L=1, residue=1, expected=2
-p=3,k=1,m=3: cyclic classes=1, ordered labelled=6, orbit-size histogram={3: 2}, L mod p=1, expected=2; 0.000s
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=3,k=1,m=3: multiplicities not all 2: Counter({1: 1})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=3,k=1,m=3: 1 != 2
-  explicit p-cycle: fixed=1, collapsed classes=1, multiplicity histogram={1: 1}
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=3,k=1,m=5: constructed 180, factorial*Fuss-Catalan 360
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=3,k=1,m=5: classes=10, N=2, ordered=360
-p=3,k=1,m=5: cyclic classes=10, ordered labelled=180, orbit-size histogram={9: 20}, L mod p=1, expected=1; 0.001s
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=3,k=1,m=5: multiplicities not all 2: Counter({1: 1})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=3,k=1,m=5: 1 != 2
-  explicit p-cycle: fixed=1, collapsed classes=1, multiplicity histogram={1: 1}
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=3,k=1,m=7: constructed 15120, factorial*Fuss-Catalan 60480
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=3,k=1,m=7: classes=280, N=3, ordered=60480
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L2 residue p=3,k=1,m=7: L=280, residue=1, expected=2
-p=3,k=1,m=7: cyclic classes=280, ordered labelled=15120, orbit-size histogram={27: 560}, L mod p=1, expected=2; 0.129s
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=3,k=1,m=7: multiplicities not all 2: Counter({1: 10})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=3,k=1,m=7: 10 != 20
-  explicit p-cycle: fixed=10, collapsed classes=10, multiplicity histogram={1: 10}
+  constructing p=3, k=1, n=1, m=3 ...
+p=3,k=1,m=3: cyclic classes=2, ordered labelled=6, orbit-size histogram={3: 2}, L mod p=2, expected=2; 0.000s
+  explicit p-cycle: fixed=2, collapsed classes=1, multiplicity histogram={2: 1}
+  constructing p=3, k=1, n=2, m=5 ...
+p=3,k=1,m=5: cyclic classes=40, ordered labelled=360, orbit-size histogram={9: 40}, L mod p=1, expected=1; 0.006s
+  explicit p-cycle: fixed=4, collapsed classes=2, multiplicity histogram={2: 2}
+  constructing p=3, k=1, n=3, m=7 ...
+p=3,k=1,m=7: cyclic classes=2240, ordered labelled=60480, orbit-size histogram={27: 2240}, L mod p=2, expected=2; 0.965s
+  explicit p-cycle: fixed=80, collapsed classes=40, multiplicity histogram={2: 40}
 EXPLICIT RANGE LIMIT p=3,k=1: next n=4,m=9 would require 19958400 ordered labelled trees (cap 400000); not attempted
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=3,k=2,m=9: constructed 45360, factorial*Fuss-Catalan 362880
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=3,k=2,m=9: classes=280, N=4, ordered=362880
-p=3,k=2,m=9: cyclic classes=280, ordered labelled=45360, orbit-size histogram={81: 560}, L mod p=1, expected=1; 0.845s
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=3,k=2,m=9: multiplicities not all 2: Counter({1: 10})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=3,k=2,m=9: 10 != 20
-  explicit p-cycle: fixed=10, collapsed classes=10, multiplicity histogram={1: 10}
+  constructing p=3, k=2, n=1, m=9 ...
+p=3,k=2,m=9: cyclic classes=4480, ordered labelled=362880, orbit-size histogram={81: 4480}, L mod p=1, expected=1; 5.482s
+  explicit p-cycle: fixed=160, collapsed classes=80, multiplicity histogram={2: 80}
 EXPLICIT RANGE LIMIT p=3,k=2: next n=2,m=17 would require 3201186852864000 ordered labelled trees (cap 400000); not attempted
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=5,k=1,m=5: constructed 10, factorial*Fuss-Catalan 120
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=5,k=1,m=5: classes=1, N=1, ordered=120
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L2 residue p=5,k=1,m=5: L=1, residue=1, expected=4
-p=5,k=1,m=5: cyclic classes=1, ordered labelled=10, orbit-size histogram={5: 2}, L mod p=1, expected=4; 0.002s
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=5,k=1,m=5: multiplicities not all 4: Counter({1: 1})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=5,k=1,m=5: 1 != 4
-  explicit p-cycle: fixed=1, collapsed classes=1, multiplicity histogram={1: 1}
+  constructing p=5, k=1, n=1, m=5 ...
+p=5,k=1,m=5: cyclic classes=24, ordered labelled=120, orbit-size histogram={5: 24}, L mod p=4, expected=4; 0.003s
+  explicit p-cycle: fixed=4, collapsed classes=1, multiplicity histogram={4: 1}
 EXPLICIT RANGE LIMIT p=5,k=1: next n=2,m=9 would require 1814400 ordered labelled trees (cap 400000); not attempted
 EXPLICIT RANGE LIMIT p=5,k=2: next n=1,m=25 would require 15511210043330985984000000 ordered labelled trees (cap 400000); not attempted
 
@@ -79,36 +62,6 @@ p=5,k=2: exact L(m)=m!C_n^(q)/p^N(m) residue and integrality checked for 1<=n<=2
 
 ==============================================================================
 SUMMARY
-L1/L2: actual labelled rotation classes and explicit cherry cycles: 10267 checks, 29 failures
+L1/L2: actual labelled rotation classes and explicit cherry cycles: 25445 checks, 0 failures
 L2 extended exact-integer formula checks: 2400 checks, 0 failures
-TOTAL: 12667 checks, 29 failures; elapsed 2.919s
-FAILURES, VERBATIM
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=2: constructed 4, factorial*Fuss-Catalan 2
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=3: constructed 24, factorial*Fuss-Catalan 12
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=4: constructed 240, factorial*Fuss-Catalan 120
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=5: constructed 3360, factorial*Fuss-Catalan 1680
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=1,m=6: constructed 60480, factorial*Fuss-Catalan 30240
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=2,m=4: constructed 48, factorial*Fuss-Catalan 24
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=2,k=2,m=7: constructed 40320, factorial*Fuss-Catalan 20160
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=3,k=1,m=3: classes=1, N=1, ordered=6
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L2 residue p=3,k=1,m=3: L=1, residue=1, expected=2
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=3,k=1,m=3: multiplicities not all 2: Counter({1: 1})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=3,k=1,m=3: 1 != 2
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=3,k=1,m=5: constructed 180, factorial*Fuss-Catalan 360
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=3,k=1,m=5: classes=10, N=2, ordered=360
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=3,k=1,m=5: multiplicities not all 2: Counter({1: 1})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=3,k=1,m=5: 1 != 2
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=3,k=1,m=7: constructed 15120, factorial*Fuss-Catalan 60480
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=3,k=1,m=7: classes=280, N=3, ordered=60480
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L2 residue p=3,k=1,m=7: L=280, residue=1, expected=2
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=3,k=1,m=7: multiplicities not all 2: Counter({1: 10})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=3,k=1,m=7: 10 != 20
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=3,k=2,m=9: constructed 45360, factorial*Fuss-Catalan 362880
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=3,k=2,m=9: classes=280, N=4, ordered=362880
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=3,k=2,m=9: multiplicities not all 2: Counter({1: 10})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=3,k=2,m=9: 10 != 20
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 total p=5,k=1,m=5: constructed 10, factorial*Fuss-Catalan 120
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L1 class equation p=5,k=1,m=5: classes=1, N=1, ordered=120
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] L2 residue p=5,k=1,m=5: L=1, residue=1, expected=4
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed p-cycle arrangements p=5,k=1,m=5: multiplicities not all 4: Counter({1: 1})
-FAIL [L1/L2: actual labelled rotation classes and explicit cherry cycles] fixed count p=5,k=1,m=5: 1 != 4
+TOTAL: 27845 checks, 0 failures; elapsed 7.569s

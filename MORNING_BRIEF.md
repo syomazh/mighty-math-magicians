@@ -6,7 +6,7 @@ Written by the orchestrator (Claude Fable 5.2) during the night. Last updated Sa
 
 1. We have a complete written proof of the full problem: `paper/main.pdf` (13 pages).
 2. The statements have passed every computer test, including one on 1067 cases up to 400 leaves and primes up to 13.
-3. Three AI reviewers found no counterexample but 14 defects in the write-up; all were repaired, and a line-by-line read found and fixed 4 more. An independent referee (a second Claude that had seen none of our notes) then judged the theorem proved modulo gaps: one wrong sentence in an example and six gaps, all needing only a missing justification or hypothesis; all repaired (`paper/reviews/ADJUDICATION_round2.md`). A third pass on the final text: **pending**.
+3. Three AI reviewers found no counterexample but 14 defects in the write-up; all were repaired, and a line-by-line read found and fixed 4 more. An independent referee (a second Claude that had seen none of our notes) then judged the theorem proved modulo gaps: one wrong sentence in an example and six gaps, all needing only a missing justification or hypothesis; all repaired (`paper/reviews/ADJUDICATION_round2.md`). A third pass by another fresh reader gave the same verdict with smaller findings (two wrong sentences, six small gaps), also repaired (`ADJUDICATION_round3.md`). In three rounds nobody found a counterexample or a step needing a new idea.
 4. **No human has signed anything.** That is today's job and it is the only thing that makes the result presentable.
 5. Open Math OS is switched off (about a third of the allowance was left); everything since Friday 23:35 was done by Claude.
 
@@ -33,7 +33,7 @@ Written by the orchestrator (Claude Fable 5.2) during the night. Last updated Sa
 **Grad student**
 1. Read `paper/main.pdf`. Sections 2–4 are claims C1–C3; Section 5 is C4–C5; Section 6 is the theorem.
 2. For each claim tell Syoma "signed" or "breaks at …"; Claude records it in `CLAIMS.md`.
-3. Look at `paper/reviews/ADJUDICATION_round1.md` and `round2_orchestrator.md` to see which steps the machines got wrong; those deserve the hardest look (freeness of the label action; termination of the carries; the converse in the skeleton proposition).
+3. The steps the machines got wrong at some point deserve the hardest look: the freeness of the label action (Proposition "Removing labelling"), the termination of the carries, and above all the most recently rewritten text: the lemma "Plane representatives" and the converse half of "Minimal classes are skeleton trees". The three adjudication files in `paper/reviews/` list every defect found and how it was repaired.
 4. Read Theorems 3.5 and 3.9 of Kersting–Fischer (arXiv 2105.00719) and Section 2 of Deutsch–Sagan, and judge how to phrase what is new.
 
 **Professor** (two questions)
@@ -56,6 +56,5 @@ Written by the orchestrator (Claude Fable 5.2) during the night. Last updated Sa
 
 ## What Claude does next unless told otherwise
 
-1. Adjudicate the third-pass report on the final paper and fix what it finds.
-2. Review the last worker's accounting-proof note (its three lemmas already pass an independent numerical check).
-3. Then wait for the humans' findings.
+1. Review the last worker's accounting-proof note (its three lemmas already pass an independent numerical check).
+2. Then wait for the humans' findings.

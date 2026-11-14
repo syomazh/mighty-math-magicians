@@ -85,11 +85,13 @@ $p^{\nu(m)}\prod_jm_j!$. Therefore
 \begin{equation}\label{digit}
  m!=p^{\nu(m)}\prod_jm_j!\,|\F(m)|.
 \end{equation}\end{lemma}
-\begin{proof} Replacing labels one by one moves any listed leaf assignment to
-another, and replacing entire equally high trees acts by separate root
-permutations. Every tree's stabilizers come only from rotations at its $N(p^j)$
-nodes; there cannot be an automorphism exchanging different subtrees and
-preserving all labelled leaves. Since $\nu(m)=\sum m_jN(p^j)$, the order follows.\end{proof}
+\begin{proof} First enumerate an explicit child position at each internal
+node. Each component then has $p^j$ labelled ordered slots. Assigning the
+labels and listing the $m_j$ components shows that $S_m$ is transitive, with
+stabilizer $\prod_j(C_p^{N(p^j)}\wr S_{m_j})$. Quotienting those explicit
+positions by local cyclic rotations yields exactly $\F(m)$, so the same
+statement holds for $\F(m)$. The stabilizer has order
+$p^{\nu(m)}\prod_jm_j!$ since $\nu(m)=\sum m_jN(p^j)$.\end{proof}
 
 \begin{lemma}\label{K} Let $K(a)$ count permutations of $[pa]$ all of whose
 cycles have length $p$. For $a\ge1$,
@@ -109,25 +111,46 @@ so $K(a)\equiv(p-1)K(a-1)\equiv-K(a-1)$. With $K(0)=1$, the result follows.\end{
  |\F(m)|=\binom mrK(a)|\F(a)|,\qquad
  |\F(m)|\equiv(-1)^{\nu(m)}\pmod p.
 \end{equation}\end{lemma}
-\begin{proof} Exactly $r$ trees have height zero, so choose their leaves in
-$\binom mr$ ways. Retain their $p$ cyclic complete subtrees of height $j$. These lower cycles
-form one $p$-cycle-only permutation on the original labelled leaves, and the
-retained upper forest is a digit forest with \(m_{j+1}\) trees of height
-$j+1$ that became height $j$. Temporarily think of every removed root as an
-additional leaf attached to the \(p\) existing child roots: that leaf has the
-same tree's root sequence and can store its $p$-child group.
+\begin{proof} First add a marked root and, independently at each original
+internal node, enumerate the $p$ cyclic child positions before designating
+one position as slot $1$. Once that slot is chosen, the remaining positions
+have an ordered list of $p-1$ children. There are $p-1$ designations at each
+of the $\nu(m)$ internal nodes. These data give every offered object exactly
+once.
 
-To label the new upper forest canonically, list its components increasingly
-by their smallest original leaf and replace the retained components by their
-roots. This assigns exactly the labels $1,\ldots,a$ to the retained roots.
-The leaf lists remain cyclic and fixed under refitting the stored lower
-cycles. The result has base-$p$ digits $a_j=m_{j+1}$ as required. The inverse
-unlabels those \(a\) roots according to the lowest original leaf in each
-$p$-cycle, and restores the \(p\)-tuple of complete subtrees at each stored
-root. Because the collection of groups was disjoint and the child's cycles
-were never altered, this is reconstructive. In particular the object being
-counted $K(a)$ includes cyclic order and not just the partition into child
-roots; no rotated equivalent is double counted. This completes \eqref{forest}.
+Exactly $r$ trees have height zero; choose their labels. Delete the $a$ marked
+roots of the positive-height trees and their slot designations, keeping all
+other data. On each original $p$-slot list there is now a cyclic permutation
+of that root's $p$ children. These are disjoint $p$-cycles covering precisely
+the $pa$ child roots of height at least $1$. Relative to label addition by one
+modulo $p$, write
+\begin{equation}\label{orderedcycle}
+ (x\mapsto x+1\pmod p)\ \pi\ (x\mapsto x-1\pmod p)=\pi .
+\end{equation}
+Consequently the cyclic child permutation, call it $\pi$, has a
+$(p-1)$-element centralizer in each set of cyclic relabelings $\lambda$. More
+precisely, every new height-$1$ tree has $(p-1)$ possible designated-slot
+states, compatible with its actual $\lambda$ if and only if $\lambda\pi\lambda^{-1}=\pi$.
+At greater heights the state is $(g,g_1,\ldots,g_{p-1})$, where $g$ records
+old lower-level designations and $g_u$ is the designation of the child in slot
+$u$. The compatible relabeling satisfies
+$\lambda(g)=(g,g_{1+s},\ldots,g_{p-1+s})$, with indices modulo $p-1$. Hence
+there are exactly $(p-1)^{\nu(a)}$ possible states for the slot data. There
+are $K(a)$ choices for $\pi$.
+
+Finally, the partition into new components is determined by $\pi$. List these
+components by their smallest original leaf and relabel their marked roots
+$1,\ldots,a$. The depleted forest is an object of $\F(a)$ while preserving the
+internal cyclic orders below the retained roots (the marked leaf is removed
+in slot $1$). Conversely, from such a forest and $\pi$, take the original root
+of the $p$-cycle containing the root labelled $i$ to be the $i$-th root,
+putting the children into slots $1,\ldots,p$ in $\pi$-order. The slot data
+then reconstruct exactly the original cyclic child lists. This proves
+\[
+ \binom mr\frac{F(m)}{p^{\nu(m)}}
+ =K(a)\frac{F(a)}{p^{\nu(a)}} .
+\]
+Multiplying by $p^{\nu(m)}=p^{a+\nu(a)}$ gives \eqref{forest}.
 
 For the congruence, rotate separately within each of $a$ consecutive blocks
 of $p$ points of $[pa+r]$, holding the last $r$ points. A fixed $r$-subset
@@ -151,10 +174,16 @@ After cancelling common powers,
 \[
  C_n^{(q)}\prod_jm_j!=p^t\frac{L(m)}{|\F(m)|}.
 \]
-The numerator and denominator are integral, well-defined, and $p$-units by
-Lemmas~\ref{L2} and~\ref{recursion}. Hence $v_p(C_n^{(q)})=t$ because
-each digit $m_j<p$ makes $\prod m_j!$ a $p$-unit. Modulo $p$ the fraction is
-$(-1)^N/(-1)^\nu=(-1)^t$, proving \eqref{maineq}.\end{proof}
+The numerator and denominator are integral and $p$-units by
+Lemmas~\ref{L2} and~\ref{recursion}. Write $N=N(m)$ and $\nu=\nu(m)$;
+then $N-\nu=t$. The two integer congruences imply
+\[
+ L(m)\equiv(-1)^N\pmod p,\qquad |\F(m)|^{-1}\equiv(-1)^\nu\pmod p,
+\]
+where inversion is in $\mathbb Z/p\mathbb Z$. Cancelling $p^\nu$ in
+\eqref{digit} therefore gives $D\,C_n^{(q)}\equiv(-1)^t p^t\pmod{p^{t+1}}$
+in $\mathbb Z$. Since each $m_j<p$ makes $D=\prod_jm_j!$ a $p$-unit,
+$	v_p(C_n^{(q)})=t$, proving \eqref{maineq}.\end{proof}
 \begin{remark}\label{qualification} Here $v_p(m!)$ \emph{is} computed along the
 way but from complete-tree symmetry rather than from Legendre's formula. Thus
 this note does not meet an absolute prohibition on factorial valuations; whether

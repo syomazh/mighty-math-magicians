@@ -133,3 +133,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 
 - **Accounting proof checked independently** (experiments/E004_accounting_proof/claude_check.py): lemmas L1 and L2 in 24 cases (k up to 3), lemma L3 in 27 cases with digit forests enumerated explicitly; all pass. The Kimi worker's intermediate outputs in the same folder show failures that are bugs in its own enumerators; its final run had not finished at the time of writing. C13 is now computed. C14: the worker's sandpile simulation shows no failure and corrects one detail of the idea (the stable state on the ring when q-1 divides m).
 - Updated CLAIMS.md, FINDINGS.md and MORNING_BRIEF.md with the round-2 outcome.
+
+## 2026-11-14 ~00:28 — Claude Fable 5.2
+
+- **Round 3 of review done.** A third Claude instance, reading only the repaired paper: main theorem proved modulo gaps; 2 WRONG (single sentences, no proof affected), 6 GAP (three on the proof chain, each needing one to three lines), 11 notes; its own computations (k up to 4) all pass. All findings accepted and repaired by me: explicit expansion map with well-definedness and mutual inverses in the skeleton proposition, the labelled convention in the plane-representatives lemma, vertices versus nodes, the fibres of the forgetful map in the freeness proposition, the class-level bijection in the carry proposition, two wrong sentences, several leftovers. Record: paper/reviews/ADJUDICATION_round3.md. The paper compiles (13 pages).
+- C1-C8 graded ai-reviewed with the qualification that the last repairs are not re-reviewed. No fourth machine round: each round costs a great deal and finds less; the human check is what matters now.
