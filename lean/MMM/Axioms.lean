@@ -5,6 +5,7 @@ Lean's standard axioms (`propext`, `Classical.choice`, `Quot.sound`) and never `
 -/
 import MMM.Blocked
 import MMM.Exact
+import MMM.ExactB
 
 -- digit sums
 #print axioms MMM.ds_add_le
@@ -76,3 +77,43 @@ example : multiplicity 2 (catalan 6) = 2 := by
 example : multiplicity 2 (catalan 7) = 0 := by
   have h := MMM.multiplicity_two_catalan 7
   simpa using h
+
+-- table entries of the README not printed above (audit, point 4)
+#print axioms MMM.ds_base_mul
+#print axioms MMM.ds_add_eq
+#print axioms MMM.dig_sum_pow
+#print axioms MMM.LTree.ds_wt
+#print axioms MMM.LTree.d_realize
+
+-- prime powers q = p ^ k
+#print axioms MMM.PTree.card_modEq_minimal_of_closed
+#print axioms MMM.LTree.card_minimal_blocked
+#print axioms MMM.LTree.exists_distinct_blocked
+#print axioms MMM.LTree.labelled_valuation_blocked
+#print axioms MMM.step4B
+#print axioms MMM.PTree.card_pow_ary_eq_card_blocked
+#print axioms MMM.PTree.leaves_eq_nodes
+#print axioms MMM.PTree.fussCatalan_valuation_nodes
+#print axioms MMM.PTree.exact_valuation_blocked
+#print axioms MMM.PTree.exact_valuation_primePower
+#print axioms MMM.PTree.problem137_leaves
+#print axioms MMM.PTree.problem137
+
+-- concrete instances for q = 4 (p = 2, k = 2): there are 4 quaternary trees with 2 nodes
+-- (7 = 111 in base 2, so v_2 = 2) and 22 with 3 nodes (10 = 1010 in base 2, so v_2 = 1)
+example : multiplicity 2 (Nat.card {T : MMM.PTree (2 ^ 2) // T.nodes = 2}) = 2 := by
+  have h := MMM.PTree.problem137 (p := 2) 2 2 (by omega)
+  have hd : (Nat.digits 2 ((2 ^ 2 - 1) * 2 + 1)).sum = 3 := by simp
+  rw [hd] at h
+  omega
+example : multiplicity 2 (Nat.card {T : MMM.PTree (2 ^ 2) // T.nodes = 3}) = 1 := by
+  have h := MMM.PTree.problem137 (p := 2) 2 3 (by omega)
+  have hd : (Nat.digits 2 ((2 ^ 2 - 1) * 3 + 1)).sum = 2 := by simp
+  rw [hd] at h
+  omega
+-- q = 9 (p = 3, k = 2): 9 nonary trees with 2 nodes (17 = 122 in base 3, so v_3 = 2)
+example : multiplicity 3 (Nat.card {T : MMM.PTree (3 ^ 2) // T.nodes = 2}) = 2 := by
+  have h := MMM.PTree.problem137 (p := 3) 2 2 (by omega)
+  have hd : (Nat.digits 3 ((3 ^ 2 - 1) * 2 + 1)).sum = 5 := by simp
+  rw [hd] at h
+  omega

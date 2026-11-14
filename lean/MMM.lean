@@ -19,4 +19,11 @@ import MMM.Cherry
 import MMM.ExactCond
 import MMM.ExactAll
 import MMM.Exact
+import MMM.LBlocked
+import MMM.ReductionB
+import MMM.RetypeB
+import MMM.CherryB
+import MMM.BlockedForm
+import MMM.ExactBCond
+import MMM.ExactB
 import MMM.Axioms

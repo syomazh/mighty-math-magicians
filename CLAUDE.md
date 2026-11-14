@@ -72,6 +72,8 @@ Open Math OS credit is the scarce resource: about 36% of the allowance was left 
 
 **Update 2026-11-13 23:45 (Syoma):** phase Open Math OS out completely. From Saturday morning all work is done by Claude. Launch no worker unless a human explicitly asks. For an independent read of a proof, use a fresh-context Claude subagent (Agent tool) that has not seen the orchestrator's reasoning.
 
+**Update 2026-11-14 about 14:40 (Syoma):** Open Math OS compute is effectively unlimited again. Workers may be launched for Lean formalization (everything that is not yet machine-checked, and a start on the Frobenius proof). The scarce resource is now this laptop: every worker compiles Lean locally, so keep to a few workers at a time (three or four), give each its own files, and never let a worker run `lake build`. Each run still gets its reason in `JOURNAL.md`, and a worker's Lean file counts only after the orchestrator has recompiled it and read its statements.
+
 ## Launching a worker
 
 ```bash

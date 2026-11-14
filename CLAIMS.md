@@ -171,3 +171,15 @@ It does not contain: the valuation of the Catalan numbers, the count of minimal 
 - **C7 (residue), C8 (exact number of minimal classes): not in Lean.**
 - **C11 (closed families): the divisibility part is machine-checked** for every finite family closed under rotation (`PTree.pow_dvd_card_of_closed`); the congruence with the number of minimal classes is machine-checked for the family of all trees with m leaves (`PTree.card_trees_modEq_classes`).
 - **Origin and checks.** All Lean files were written by Claude Fable 5.2 on 2026-11-14; `LRot.lean` and `Cherry.lean` by a forked instance of the same session, recompiled by the orchestrator. Every theorem depends only on Lean's three standard axioms (`lean/MMM/Axioms.lean`). No human has read the Lean files. The definitions a reader must compare with the paper for the final statement are `PTree` and `PTree.leaves` (six lines).
+
+## Update, 2026-11-14 14:55 PT (Claude Fable 5.2) — Lean: Problem 137 for every prime power is machine-checked
+
+"Machine-checked" as defined in the update of 13:35. Grades unchanged; this is evidence. Exact statements and the list of differences from the paper: `lean/README.md`. Independent audit of the q = p statements: `lean/AUDIT.md`.
+
+- **C6 (main theorem): machine-checked for every prime p and every k ≥ 1**, by the tree-symmetry proof and without factorial valuations: `PTree.problem137` ((p − 1)·v_p(number of q-ary trees with n internal nodes) + 1 = s_p((q − 1)n + 1), q = p^k), `PTree.exact_valuation_primePower` (the "divides, does not divide" form). The number of trees is defined by counting trees; the closed formula binom(qn, n)/((q − 1)n + 1) is machine-checked only for q = 2.
+- **The lemma "Blocked form" (a q-ary tree is a p-ary tree with leaves at depths divisible by k): machine-checked** (`PTree.card_pow_ary_eq_card_blocked`).
+- **C3 with the depth condition (an atom p^j at a depth δ with k ∣ δ + j): machine-checked** (`LTree.blockedAt_realize`, `LTree.card_minimal_blocked`).
+- **C5 for classes modulo k: machine-checked in the weaker form** of the 14:30 update: `LTree.labelled_valuation_blocked` gives the exact power p^t for labelled trees with the depth condition, under ∑ p^class ≡ 1 (mod p^k − 1); the collapse of a cherry of p labels of class c to one label of class c + 1 is inside its proof. The congruence T(a) ≡ −T(a − p·e_c + e_(c+1)) with the sign is not in Lean.
+- **C4, C7, C8: unchanged** (not in Lean: the free action, the residue, the exact number of minimal classes).
+- **Audit of the q = p statements** (a separate Claude instance, fresh context): verdict "yes, with caveats", no error, seven points of wording and scope, all addressed. It compiled the 22 files independently, scanned the proof term of the final theorem (only standard axioms; no binomial coefficient and no Legendre or Kummer lemma reached), and compared 33 instances proved in Lean with its own Python counts. The prime-power files are not audited.
+- **Origin.** `CherryB.lean` and `BlockedForm.lean` were written by forked instances of the orchestrator's session and recompiled by the orchestrator; the rest by the orchestrator. No human has read the Lean files.
