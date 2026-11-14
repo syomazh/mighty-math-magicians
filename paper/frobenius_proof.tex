@@ -1,0 +1,477 @@
+% Written by Claude Fable 5.2 (AI, orchestrator), 2026-11-14. A third proof, purely algebraic ("Frobenius").
+% Every lemma is checked numerically in experiments/E010_frobenius_complete/run.py. Not human-verified.
+% It replaces the incomplete worker draft alt_proof_frobenius.tex (Kimi K3.1 Pro, four marked gaps).
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Hur}{\mathcal H}
+\newcommand{\A}{\mathcal A}
+\newcommand{\cf}{\circledast}
+\newcommand{\C}{C_n^{(q)}}
+\newcommand{\br}[1]{[\,#1\,]}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+
+\title{A proof by Frobenius:\\ the Fuss--Catalan valuation from $G=x+G^{q}$ alone}
+\author{Mighty Math Magicians, Caltech Mathathon 2026}
+\date{14 November 2026\\\small AI-written draft; every lemma checked by computer; not yet verified by a human}
+
+\begin{document}
+\maketitle
+
+\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
+\textbf{Status.} This note proves the theorem of the main paper (\texttt{paper/main.pdf}) a
+second time, by algebra only. It is \emph{self-contained}: it uses no result of the main paper,
+no formula for the Fuss--Catalan numbers and no valuation of a factorial. The only inputs are
+the equation $G=x+G^q$, Fermat's and Wilson's congruences, and the behaviour of digit sums
+under addition. The two proofs share no lemma, so each is a check on the other.
+Section~\ref{sec:dict} explains that every step here is the generating function of one step of
+the tree proof. Written by an AI (Claude Fable~5.2); the computer checks are in
+\texttt{experiments/E010\_frobenius\_complete}.}}
+
+\section{Statement}
+
+Let $p$ be a prime, $k\ge1$ and $q=p^k$. Let $G(x)\in\Z[[x]]$ be the unique power series
+without constant term such that
+\begin{equation}\label{eq:G}
+ G=x+G^{q}.
+\end{equation}
+(The coefficient of $x^m$ on the right involves only coefficients of $G$ of lower degree, so
+$G$ exists and is unique.) Its coefficients are the Fuss--Catalan numbers:
+$G=\sum_{n\ge0}\C\,x^{(q-1)n+1}$, where $\C$ is the number of $q$-ary trees with $n$ internal
+nodes; such a tree is a leaf or a root with $q$ subtrees, and $x$ marks the leaves. For an
+integer $m\ge1$ write $m=\sum_{j\ge0}m_jp^j$ in base $p$ and $s_p(m)=\sum_jm_j$.
+
+\begin{theorem}\label{thm}
+Let $n\ge0$, $m=(q-1)n+1$ and $t=(s_p(m)-1)/(p-1)$. Then $t$ is a non-negative integer and
+\[
+ \C\cdot\prod_{j}m_j!\;\equiv\;(-p)^{t}\pmod{p^{\,t+1}} .
+\]
+In particular $v_p(\C)=t$ and $\C/p^{t}\equiv(-1)^t/\prod_jm_j!\pmod p$.
+\end{theorem}
+
+($t$ is an integer because $s_p(m)\equiv m\equiv1\pmod{p-1}$. Each $m_j!$ is prime to $p$.)
+
+\section{Three elementary facts}
+
+\begin{enumerate}[label=\textbf{(E\arabic*)},leftmargin=3.2em]
+\item\label{E1} \emph{Digit sums.} Let $m_1,\dots,m_r\ge1$. Call the sum $m_1+\dots+m_r$
+\emph{carry-free} if for every $j$ the $j$-th base-$p$ digits of the $m_i$ add up to at most
+$p-1$. Then
+\[
+ s_p(m_1+\dots+m_r)\le s_p(m_1)+\dots+s_p(m_r),\quad\text{with equality exactly when the sum
+ is carry-free.}
+\]
+\emph{Proof.} Let $D_j$ be the sum of the $j$-th digits, so $\sum_im_i=\sum_jD_jp^j$ and
+$\sum_jD_j=\sum_is_p(m_i)$. While some $D_j\ge p$, replace $(D_j,D_{j+1})$ by
+$(D_j-p,\,D_{j+1}+1)$: the number represented is unchanged and $\sum_jD_j$ drops by $p-1\ge1$.
+This stops, and it stops at the base-$p$ expansion of $\sum_im_i$. So
+$s_p(\sum_im_i)=\sum_is_p(m_i)-(p-1)\cdot(\text{number of steps})$, and no step is made
+exactly when the sum is carry-free. \qed
+
+Two consequences: $s_p(pm)=s_p(m)$; and a sum of $p$ equal numbers $m+\dots+m$ $(m\ge1)$ is
+never carry-free, because a non-zero digit $e$ of $m$ gives $D_j=pe\ge p$.
+
+\item\label{E2} \emph{Cyclic shifts.} The cyclic group of order $p$ acts on $p$-tuples
+(of anything) by cyclic shift. As $p$ is prime, a tuple fixed by a non-trivial shift is
+constant. So the non-constant $p$-tuples fall into orbits of exactly $p$ tuples.
+
+\item\label{E3} \emph{Fermat and Wilson.} $c^p\equiv c\pmod p$ for every integer $c$, and
+$(p-1)!\equiv-1\pmod p$.
+\end{enumerate}
+
+\section{The Frobenius lift and a deformation of the equation}
+
+Let $\Lambda=\Z[y][[x]]$: power series in $x$ whose coefficients are polynomials in $y$. Its
+\emph{monomials} are the $x^my^d$. Let $\varphi\colon\Lambda\to\Lambda$ be the ring
+endomorphism $\varphi(f)(x,y)=f(x^p,y^p)$; on a monomial, $\varphi(\mu)=\mu^p$.
+
+\begin{lemma}\label{lem:theta}
+Let $f=\sum_ic_i\mu_i\in\Lambda$, with distinct monomials $\mu_i$ and integers $c_i$. Then
+\begin{equation}\label{eq:theta}
+ \theta(f):=\frac{f^p-\varphi(f)}{p}
+ =\frac1p\sum_{\substack{(i_1,\dots,i_p)\\ \text{not constant}}}
+   c_{i_1}\cdots c_{i_p}\,\mu_{i_1}\cdots\mu_{i_p}
+  \;+\;\sum_i\frac{c_i^{\,p}-c_i}{p}\,\mu_i^{\,p}
+\end{equation}
+has integer coefficients, that is, $\theta(f)\in\Lambda$. In particular every monomial that
+occurs in $\theta(f)$ is a product of $p$ monomials that occur in $f$.
+\end{lemma}
+
+\begin{proof}
+Expand $f^p$ as a sum over $p$-tuples of indices. The constant tuples give
+$\sum_ic_i^p\mu_i^p$, and $\varphi(f)=\sum_ic_i\mu_i^p$; this gives the formula. The first sum
+is divisible by $p$ by \ref{E2}, since the tuples of an orbit contribute equal terms; the
+second by Fermat.
+\end{proof}
+
+So $f^p=\varphi(f)+p\,\theta(f)$: raising to the $p$-th power is the Frobenius substitution
+plus $p$ times a correction. We now replace that factor $p$ by the variable $y$.
+
+\begin{lemma}\label{lem:system}
+There are unique series $F_\delta\in\Lambda$, $\delta\in\Z/k$, without terms of $x$-degree
+$0$, such that
+\begin{equation}\label{eq:system}
+ F_\delta=\br{\delta=0}\,x+\varphi(F_{\delta+1})+y\,\theta(F_{\delta+1})
+ \qquad(\delta\in\Z/k),
+\end{equation}
+where $\br{\cdot}$ is $1$ if the condition holds and $0$ otherwise. Moreover
+$F_0(x,p)=G(x)$.
+\end{lemma}
+
+\begin{proof}
+The coefficient of $x^m$ in $\varphi(F_{\delta+1})$ is determined by the coefficient of
+$x^{m/p}$ in $F_{\delta+1}$. By Lemma~\ref{lem:theta}, the coefficient of $x^m$ in
+$\theta(F_{\delta+1})$ is determined by coefficients of $F_{\delta+1}$ of $x$-degree at most
+$m-p+1$, because a product of $p$ monomials of positive $x$-degree is involved. So
+\eqref{eq:system} computes the coefficients of $x^m$ from those of lower degree, and they are
+in $\Z[y]$ by Lemma~\ref{lem:theta}.
+
+Setting $y=p$ is a ring homomorphism $\varepsilon\colon\Lambda\to\Z[[x]]$, and
+$\varepsilon(\varphi(f)+y\theta(f))=\varepsilon(\varphi(f)+p\theta(f))=\varepsilon(f^p)
+=\varepsilon(f)^p$. Hence $g_\delta=\varepsilon(F_\delta)$ satisfy
+$g_\delta=\br{\delta=0}x+g_{\delta+1}^{\,p}$, that is,
+$g_0=x+g_1^p$, $g_1=g_2^p$, \dots, $g_{k-1}=g_0^p$. So $g_0=x+g_0^{p^k}$, and $g_0=G$ by
+uniqueness in \eqref{eq:G}.
+\end{proof}
+
+For $k=1$ the system is the single equation $F=x+\varphi(F)+y\,\theta(F)$.
+
+\section{Weights: the lower bound}
+
+\begin{definition}
+The \emph{weight} of a monomial $x^my^d$ with $m\ge1$ is $w(x^my^d)=(p-1)d-s_p(m)$.
+\end{definition}
+
+By \ref{E1}, for monomials $\mu_1,\dots,\mu_r$ of positive $x$-degree,
+\begin{equation}\label{eq:wprod}
+ w(\mu_1\cdots\mu_r)\ge w(\mu_1)+\dots+w(\mu_r),\quad\text{with equality exactly when the
+ $x$-exponents add carry-free,}
+\end{equation}
+and, since $\varphi(x^my^d)=x^{pm}y^{pd}$ and $s_p(pm)=s_p(m)$,
+\begin{equation}\label{eq:wphi}
+ w(\varphi(\mu))=w(\mu)+(p-1)^2d\;\ge\;w(\mu),\quad\text{with equality exactly when }d=0.
+\end{equation}
+
+\begin{lemma}[Lower bound]\label{lem:lower}
+Every monomial occurring in any $F_\delta$ has weight at least $-1$.
+\end{lemma}
+
+\begin{proof}
+Induction on the $x$-degree $m$. By \eqref{eq:system} and Lemma~\ref{lem:theta}, a monomial of
+$F_\delta$ of $x$-degree $m$ is $x$ (weight $-1$), or $\varphi(\mu)$, or $y\mu_1\cdots\mu_p$,
+where $\mu,\mu_1,\dots,\mu_p$ are monomials of $F_{\delta+1}$ of $x$-degree less than $m$. By
+induction these have weight $\ge-1$, so $w(\varphi(\mu))\ge-1$ by \eqref{eq:wphi} and
+$w(y\mu_1\cdots\mu_p)\ge(p-1)-p=-1$ by \eqref{eq:wprod}.
+\end{proof}
+
+\begin{corollary}\label{cor:div}
+For $m=(q-1)n+1$, the polynomial $[x^m]F_0\in\Z[y]$ is divisible by $y^t$. Hence $p^t$
+divides $\C=[x^m]F_0(x,p)$.
+\end{corollary}
+
+\section{The leading part: a carry-free product}
+
+For $\delta\in\Z/k$ and $m\ge1$ with $s_p(m)\equiv1\pmod{p-1}$ let $\ell_\delta(m)\in\Z$ be
+the coefficient of $x^my^{(s_p(m)-1)/(p-1)}$ in $F_\delta$; for all other $m\ge0$ put
+$\ell_\delta(m)=0$. These are the coefficients of the monomials of weight exactly $-1$.
+
+\begin{definition}
+Let $\A$ be the set of functions $f\colon\Z_{\ge0}\to\Q$ with the \emph{carry-free product}
+\[
+ (f\cf g)(m)=\sum_{\substack{a+b=m\\ a+b\text{ carry-free}}}f(a)\,g(b).
+\]
+\end{definition}
+
+$\A$ is a commutative, associative $\Q$-algebra whose unit is the indicator function of
+$\{0\}$: by the definition in \ref{E1}, $(a+b)+c$ is carry-free with $a+b$ carry-free exactly
+when the digits of $a,b,c$ add up to at most $p-1$ in every position, a symmetric condition.
+So $f^{\cf r}(m)$ is the sum of $f(a_1)\cdots f(a_r)$ over the carry-free $r$-tuples with sum
+$m$. Let $\alpha_\delta\in\A$ be the indicator function of
+$\{p^j:\ j\ge0,\ j\equiv-\delta\pmod k\}$.
+
+\begin{lemma}[Leading part]\label{lem:lead}
+\begin{enumerate}[label=(\roman*)]
+\item $F_\delta(x,0)=\sum_{j\ge0,\ j\equiv-\delta\ (k)}x^{p^j}$ for every $\delta$.
+\item $\displaystyle \ell_\delta=\alpha_\delta+\frac1p\,\ell_{\delta+1}^{\;\cf p}$ in $\A$,
+      for every $\delta\in\Z/k$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Put $y=0$ in \eqref{eq:system}: the series $f_\delta=F_\delta(x,0)$ satisfy
+$f_\delta(x)=\br{\delta=0}x+f_{\delta+1}(x^p)$. The series
+$A_\delta=\sum_{j\equiv-\delta}x^{p^j}$ satisfy the same equations, because
+$A_{\delta+1}(x^p)=\sum_{j\ge1,\ j\equiv-\delta}x^{p^{j}}$ and the missing term $x=x^{p^0}$
+belongs to $A_\delta$ exactly when $\delta=0$. The solution is unique (recursion on the degree).
+
+(ii) Collect the monomials of weight $-1$ on both sides of \eqref{eq:system}.
+
+\emph{The terms $\br{\delta=0}x$ and $\varphi(F_{\delta+1})$.} By \eqref{eq:wphi} and
+Lemma~\ref{lem:lower}, $\varphi(\mu)$ has weight $-1$ only if $\mu$ has weight $-1$ and
+contains no $y$. By (i) such $\mu$ are the $x^{p^j}$ with $j\equiv-\delta-1$, each with
+coefficient $1$. Together with $\br{\delta=0}x$ this gives $A_\delta$, as in (i); its
+coefficients are $\alpha_\delta$.
+
+\emph{The term $y\theta(F_{\delta+1})$.} Use \eqref{eq:theta} for $f=F_{\delta+1}$. By
+\eqref{eq:wprod} and Lemma~\ref{lem:lower}, $y\mu_{i_1}\cdots\mu_{i_p}$ has weight
+$\ge(p-1)-p=-1$, with equality exactly when every $\mu_{i_j}$ has weight $-1$ and their
+$x$-exponents add carry-free. A constant tuple is never carry-free \ref{E1}. So the second sum
+in \eqref{eq:theta} contributes nothing in weight $-1$, and the first contributes
+$\frac1p$ times the sum of $c_{i_1}\cdots c_{i_p}$ over the carry-free $p$-tuples of
+monomials of weight $-1$. For a fixed total $x$-exponent $m$ this is
+$\frac1p\,\ell_{\delta+1}^{\;\cf p}(m)$.
+\end{proof}
+
+\section{The labelled series and the carry operator}
+
+Let $z=(z_c)_{c\in\Z/k}$ be $k$ variables. For $a\in\N^k$ (indexed by $\Z/k$) write
+$z^a=\prod_cz_c^{a_c}$, $a!=\prod_ca_c!$, $|a|=\sum_ca_c$, and let $e_c$ be the unit vectors.
+
+\begin{lemma}\label{lem:H}
+There are unique $H_\delta\in\Q[[z]]$, $\delta\in\Z/k$, without constant term, such that
+\begin{equation}\label{eq:H}
+ H_\delta=z_{-\delta}+\frac1p\,H_{\delta+1}^{\,p}\qquad(\delta\in\Z/k).
+\end{equation}
+Write $H_\delta=\sum_{a\ne0}T_\delta(a)\,z^a/a!$ with $T_\delta(a)\in\Q$.
+\end{lemma}
+
+\begin{proof}
+The part of degree $n$ of $H_{\delta+1}^p$ involves the parts of $H_{\delta+1}$ of degree at
+most $n-p+1<n$. Recursion on $n$.
+\end{proof}
+
+\begin{lemma}[From the leading part to the labelled series]\label{lem:subst}
+For every $\delta$ and every $m\ge1$ with digits $m_j$,
+\[
+ \ell_\delta(m)\cdot\prod_jm_j!\;=\;T_\delta\bigl(a(m)\bigr),\qquad
+ a(m)_c=\sum_{j\equiv c\ (k)}m_j .
+\]
+\end{lemma}
+
+\begin{proof}
+Let $u_c\in\A$ be the indicator function of $\{p^j:\ j\equiv c\pmod k\}$, so that
+$\alpha_\delta=u_{-\delta}$. Each $u_c$ vanishes at $0$, so for $P=\sum_aP_az^a\in\Q[[z]]$ the
+value $P(u)(m)=\sum_aP_a\,u^{\cf a}(m)$ is a finite sum (terms with $|a|>m$ vanish), and
+$P\mapsto P(u)$ is a ring homomorphism $\Q[[z]]\to\A$. Applied to \eqref{eq:H} it shows that
+$h_\delta=H_\delta(u)$ satisfy $h_\delta=\alpha_\delta+\frac1p h_{\delta+1}^{\cf p}$ and
+$h_\delta(0)=0$. These equations determine the value at $m$ from the values at smaller
+arguments, so by Lemma~\ref{lem:lead}(ii), $\ell_\delta=H_\delta(u)$.
+
+It remains to evaluate $u^{\cf a}/a!$ at $m$. Let $x_j\in\A$ be the indicator function of
+$\{p^j\}$. A sum of $b$ copies of $p^j$ is carry-free exactly when $b\le p-1$, so
+$x_j^{\cf b}$ is the indicator function of $\{bp^j\}$ for $b\le p-1$ and is $0$ for $b\ge p$;
+and for $b_j\le p-1$ the product of the $x_j^{\cf b_j}$ over $j$ is the indicator function of
+$\{\sum_jb_jp^j\}$. Since $u_c=\sum_{j\equiv c}x_j$ (only the $j$ with $p^j\le m$ matter at
+$m$), the multinomial theorem gives
+\[
+ \frac{u^{\cf a}}{a!}(m)=\sum_{(b_j)}\ \prod_j\frac1{b_j!},
+\]
+the sum being over the families $(b_j)_{j\ge0}$ with $b_j\le p-1$, $\sum_{j\equiv c}b_j=a_c$
+for all $c$, and $\sum_jb_jp^j=m$. By uniqueness of the base-$p$ expansion, the only
+candidate is $b_j=m_j$, and it occurs exactly when $a=a(m)$. Hence
+$H_\delta(u)(m)=T_\delta(a(m))/\prod_jm_j!$.
+\end{proof}
+
+\paragraph{Hurwitz series.} Let $\Hur\subset\Q[[z]]$ be the set of series
+$\sum_af_a\,z^a/a!$ with all $f_a\in\Z$, and $\partial_c=\partial/\partial z_c$.
+
+\begin{lemma}\label{lem:hur}
+\begin{enumerate}[label=(\roman*)]
+\item $\Hur$ is a subring of $\Q[[z]]$, and $\partial_c\Hur\subset\Hur$; indeed
+      $\partial_c(z^a/a!)=z^{a-e_c}/(a-e_c)!$ (zero if $a_c=0$).
+\item If $f\in\Hur$ has no constant term, then $f^p\in p\,\Hur$.
+\item If $g\in\Hur$ has constant term $g_0$, then $g^p\equiv g_0\pmod{p\,\Hur}$.
+\item If $f\in\Hur$ has no constant term and $h=f^p/p$, then for every $c$
+\[
+ \partial_ch=f^{p-1}\,\partial_cf,\qquad
+ \partial_c^{\,p}h\equiv f^{p-1}\,\partial_c^{\,p}f-(\partial_cf)^p\pmod{p\,\Hur}.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) $\frac{z^a}{a!}\cdot\frac{z^b}{b!}=\prod_c\binom{a_c+b_c}{a_c}\cdot\frac{z^{a+b}}{(a+b)!}$.
+
+(ii) Write $f=\sum_{a\ne0}f_a\,z^a/a!$ and expand $f^p$ over $p$-tuples $(a^1,\dots,a^p)$ of
+non-zero indices; each coefficient of $f^p$ receives finitely many contributions. Each term is
+in $\Hur$ by (i), and the non-constant tuples come in orbits of $p$ equal terms \ref{E2}. A
+constant tuple contributes $f_a^p\,(z^a/a!)^p=f_a^p\,\frac{(pa)!}{(a!)^p}\cdot\frac{z^{pa}}{(pa)!}$,
+and $\frac{(pa)!}{(a!)^p}=\prod_c\frac{(pa_c)!}{(a_c!)^p}$ is a product of multinomial
+coefficients. For $b\ge1$,
+$\frac{(pb)!}{(b!)^p}=\binom{pb}{b}\cdot\frac{((p-1)b)!}{(b!)^{p-1}}$ and
+$\binom{pb}{b}=p\binom{pb-1}{b-1}$, so this integer is divisible by $p$ as $a\ne0$.
+
+(iii) Write $g=g_0+g_+$. In $g^p=\sum_i\binom pig_0^{p-i}g_+^{\,i}$ the terms with $0<i<p$
+are in $p\Hur$, $g_+^{\,p}\in p\Hur$ by (ii), and $g_0^p\equiv g_0$ by Fermat.
+
+(iv) The first formula is the chain rule. For the second write $\partial=\partial_c$; by
+Leibniz' rule
+\[
+ \partial^{\,p}(f^p)=\sum_{\substack{(n_1,\dots,n_p)\in\N^p\\ n_1+\dots+n_p=p}}
+ \frac{p!}{n_1!\cdots n_p!}\ \prod_{i=1}^p\partial^{\,n_i}f .
+\]
+The $p$ tuples with one entry equal to $p$ give $p\,f^{p-1}\partial^{\,p}f$. The tuple
+$(1,\dots,1)$ gives $p!\,(\partial f)^p$. Every other tuple is non-constant and has all
+$n_i\le p-1$: its multinomial coefficient is divisible by $p$, and its orbit under cyclic
+shifts consists of $p$ tuples with the same term \ref{E2}. So these tuples contribute an
+element of $p^2\Hur$. Dividing by $p$ and using Wilson, $(p-1)!\equiv-1$, gives the claim.
+\end{proof}
+
+\begin{proposition}[The carry operator]\label{prop:carry}
+All $H_\delta$ lie in $\Hur$, that is, $T_\delta(a)\in\Z$. For all $\delta,c\in\Z/k$,
+\[
+ \bigl(\partial_c^{\,p}+\partial_{c+1}\bigr)H_\delta\in p\,\Hur ,
+ \qquad\text{equivalently}\qquad
+ T_\delta(b+p\,e_c)+T_\delta(b+e_{c+1})\equiv0\pmod p\quad\text{for all }b\in\N^k .
+\]
+\end{proposition}
+
+\begin{proof}
+\emph{Integrality.} Let $H_\delta^{\le n}$ be the part of $H_\delta$ of degree at most $n$.
+$H_\delta^{\le1}=z_{-\delta}\in\Hur$. If $H_{\delta+1}^{\le n}\in\Hur$, then
+$\frac1p(H_{\delta+1}^{\le n})^p\in\Hur$ by Lemma~\ref{lem:hur}(ii), and it agrees with
+$\frac1pH_{\delta+1}^p$ in degrees $\le n+1$; so $H_\delta^{\le n+1}\in\Hur$ by \eqref{eq:H}.
+
+\emph{The congruence.} Fix $c$ and put $E=\partial_c^{\,p}+\partial_{c+1}$. By \eqref{eq:H},
+$H_\delta=z_{-\delta}+h$ with $h=H_{\delta+1}^p/p$. By Lemma~\ref{lem:hur}(iv),
+\begin{align*}
+ \partial_{c+1}H_\delta&=\br{c+1=-\delta}+H_{\delta+1}^{p-1}\,\partial_{c+1}H_{\delta+1},\\
+ \partial_c^{\,p}H_\delta&\equiv H_{\delta+1}^{p-1}\,\partial_c^{\,p}H_{\delta+1}
+   -(\partial_cH_{\delta+1})^p\pmod{p\Hur}
+\end{align*}
+(note $\partial_c^{\,p}z_{-\delta}=0$ as $p\ge2$). By Lemma~\ref{lem:hur}(iii),
+$(\partial_cH_{\delta+1})^p$ is congruent to the constant term of $\partial_cH_{\delta+1}$,
+which is the coefficient of $z_c$ in $H_{\delta+1}$, namely $\br{c=-\delta-1}$ by
+\eqref{eq:H}. The two brackets are the same condition and cancel. Hence
+\[
+ E\,H_\delta\equiv H_{\delta+1}^{p-1}\cdot E\,H_{\delta+1}\pmod{p\Hur}\qquad
+ \text{for all }\delta .
+\]
+Applying this $k$ times, $E\,H_\delta\equiv\Pi\cdot E\,H_\delta$ with
+$\Pi=\prod_{\delta'\in\Z/k}H_{\delta'}^{p-1}\in\Hur$, a series without constant term. So
+$E\,H_\delta\equiv\Pi^{\,r}\,E\,H_\delta$ for every $r$, and $\Pi^r$ has no terms of degree
+below $r$. Hence every coefficient of $E\,H_\delta$ is divisible by $p$. Finally, by
+Lemma~\ref{lem:hur}(i) the coefficient of $z^b/b!$ in $E\,H_\delta$ is
+$T_\delta(b+pe_c)+T_\delta(b+e_{c+1})$.
+\end{proof}
+
+\begin{proposition}[Evaluation]\label{prop:eval}
+Let $a\in\N^k$, $a\ne0$, with $\sum_{c=0}^{k-1}a_cp^c\equiv1\pmod{q-1}$. Then
+$|a|\equiv1\pmod{p-1}$ and
+\[
+ T_0(a)\equiv(-1)^{(|a|-1)/(p-1)}\pmod p .
+\]
+\end{proposition}
+
+\begin{proof}
+$|a|\equiv\sum_ca_cp^c\equiv1\pmod{p-1}$ because $p-1$ divides $q-1$. Induction on $|a|$.
+
+If some $a_c\ge p$, put $a'=a-pe_c+e_{c+1}$ (indices modulo $k$). Then $a'\in\N^k$,
+$|a'|=|a|-(p-1)\ge1$, and $\sum_ca'_cp^c\equiv\sum_ca_cp^c\pmod{q-1}$, because
+$p\cdot p^c=p^{c+1}$ for $c<k-1$ and $p\cdot p^{k-1}=q\equiv1=p^0$. By
+Proposition~\ref{prop:carry} with $b=a-pe_c$ and by induction,
+$T_0(a)\equiv-T_0(a')\equiv(-1)^{1+(|a'|-1)/(p-1)}=(-1)^{(|a|-1)/(p-1)}$.
+
+If every $a_c\le p-1$, then $1\le\sum_ca_cp^c\le(p-1)(1+p+\dots+p^{k-1})=q-1$, and the only
+integer in this range congruent to $1$ modulo $q-1$ is $1$. So $a=e_0$, and $T_0(e_0)=1$ by
+\eqref{eq:H}.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm}}
+
+Let $m=(q-1)n+1$ and write $[x^m]F_0=\sum_dc_dy^d$. By Lemma~\ref{lem:system},
+$\C=\sum_dc_dp^d$. By Lemma~\ref{lem:lower}, $c_d=0$ unless $(p-1)d\ge s_p(m)-1$, that is,
+$d\ge t$; and $c_t=\ell_0(m)$ by definition. Hence
+\[
+ \C\equiv\ell_0(m)\,p^t\pmod{p^{t+1}} .
+\]
+By Lemma~\ref{lem:subst}, $\ell_0(m)\prod_jm_j!=T_0(a(m))$. Now $a(m)\ne0$,
+$|a(m)|=s_p(m)$, and since $p^j\equiv p^{\,j\bmod k}\pmod{q-1}$,
+\[
+ \sum_{c=0}^{k-1}a(m)_c\,p^c\equiv\sum_jm_jp^j=m\equiv1\pmod{q-1}.
+\]
+So Proposition~\ref{prop:eval} gives $T_0(a(m))\equiv(-1)^t\pmod p$, and therefore
+$\C\prod_jm_j!\equiv p^t\,T_0(a(m))\equiv(-p)^t\pmod{p^{t+1}}$. \qed
+
+\section{What each step means for trees}\label{sec:dict}
+
+None of this section is used above. Read a $q$-ary node as a complete $p$-ary block of height
+$k$; then $q$-ary trees are the $p$-ary trees whose leaves all have depth divisible by $k$.
+Call two such trees equivalent if one is obtained from the other by cyclically rotating the
+$p$ subtrees at some nodes, and call a node \emph{symmetric} if its $p$ subtrees are pairwise
+equivalent.
+
+\begin{center}
+\begin{tabular}{p{0.44\linewidth}p{0.5\linewidth}}
+\textbf{In this note} & \textbf{In the tree proof (main paper)}\\\hline
+$F_\delta(x,y)$ & classes of trees with root at depth $\delta$; $x$ marks leaves, $y$ marks
+                  asymmetric nodes\\
+$\varphi(F)$: the Frobenius substitution & a symmetric node: $p$ copies of one class\\
+$y\,\theta(F)$: the correction to Frobenius & an asymmetric node: a non-constant cyclic word
+                  of $p$ classes\\
+$y\mapsto p$ gives $G$ & a class with $d$ asymmetric nodes has $p^d$ trees\\
+weight $\ge-1$ (Lemma~\ref{lem:lower}) & $d\ge t$, by digit sums\\
+$F_\delta(x,0)=\sum x^{p^j}$ & the complete trees (``atoms'') and their depth condition\\
+carry-free product, Lemma~\ref{lem:lead} & minimal classes are skeletons of atoms\\
+division by $\prod m_j!$, Lemma~\ref{lem:subst} & equal atoms can be permuted freely\\
+$H_\delta$, $T_\delta(a)$ & cyclic trees with distinctly labelled leaves\\
+$\partial_c^{\,p}+\partial_{c+1}$ kills $H$ modulo $p$ & a carry is a collapsing cherry\\
+Proposition~\ref{prop:eval} & carries until one atom is left\\
+\end{tabular}
+\end{center}
+
+That the coefficient of $x^my^d$ in $F_0$ is the number of classes with $m$ leaves and $d$
+asymmetric nodes was confirmed by listing all classes for small sizes (check ``TREE'' of
+experiment E010). The two proofs are logically independent: the tree proof never uses a
+generating function, and this note never uses a tree.
+
+\begin{remark}[Modulo $p$]
+At $y=0$ the system is linear: $F_\delta(x,0)=\br{\delta=0}x+F_{\delta+1}(x^p,0)$. Since
+$\C\equiv c_0\pmod p$, Lemma~\ref{lem:lead}(i) gives $G\equiv x+x^{q}+x^{q^2}+\cdots\pmod p$.
+For $k=1$ this is the statement that, modulo $p$, the equation $G-G^p=x$ is additive and is
+solved by $\sum_jx^{p^j}$. The variable $y$ measures the distance from this linear world:
+each use of the correction $\theta$ costs one factor $p$.
+\end{remark}
+
+\begin{remark}[Earlier algebraic work]
+Krattenthaler and M\"uller \cite{KM} determine Fuss--Catalan numbers modulo fixed powers of
+$p$ by writing the generating function as a polynomial in a basic series which, in our
+normalisation, is $\sum_ix^{q^i}=F_0(x,0)$. (This is how our reading notes describe their
+Section~7; see the file \texttt{overlap\_fulltext.md} in the folder \texttt{references}. We
+have not compared the arguments line by line.) What is different here is the extra variable $y$, the weight, and
+the carry-free product, which isolate the lowest power of $p$ for all $m$ at once and give
+its residue for every prime power $q$. We do not claim that this argument is new; that is for
+the experts on the team to judge.
+\end{remark}
+
+\begin{remark}[What was checked by computer]
+Experiment E010 verifies, for $p\le11$ and $k\le4$ and all sizes within its ranges:
+Lemma~\ref{lem:system} (including $F_0(x,p)=G$), Lemma~\ref{lem:lower},
+Lemma~\ref{lem:lead} (with the carry-free product computed literally),
+Lemma~\ref{lem:subst}, the identities of Lemma~\ref{lem:hur} on random series,
+Propositions~\ref{prop:carry} and~\ref{prop:eval}, and Theorem~\ref{thm}. A computer check
+supports the statements; it does not replace reading the proofs.
+\end{remark}
+
+\begin{thebibliography}{9}
+\bibitem{KM}
+Christian Krattenthaler and Thomas W.\ M\"uller, ``A method for determining the
+mod-$p^k$ behaviour of recursive sequences'', \emph{Aequationes Mathematicae} \textbf{99}
+(2025), no.~6, 2505--2547. DOI:
+\href{https://doi.org/10.1007/s00010-025-01195-0}{10.1007/s00010-025-01195-0}.
+\end{thebibliography}
+\end{document}

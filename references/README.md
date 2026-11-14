@@ -29,4 +29,6 @@ See `literature_scan.md` (produced by worker W004) once it exists.
 
 4. Sophie Johanna Kersting and Mareike Fischer, "Measuring tree balance using symmetry nodes — A new balance index and its extremal properties", *Mathematical Biosciences* (2021). DOI: 10.1016/j.mbs.2021.108690. arXiv: 2105.00719. Title, authors, journal, year and DOI as returned by OpenAlex and Semantic Scholar on 2026-11-13; volume and pages not checked. **Read on 2026-11-13 as a web page (ar5iv), Theorems 3.5 and 3.9 and Definition 3.4.** For binary trees it contains our lower bound, our description of minimal trees and their count. See `cross_field_refs.md`.
 
+5. Christian Krattenthaler and Thomas W. Müller, "A method for determining the mod-p^k behaviour of recursive sequences", *Aequationes Mathematicae* 99 (2025), no. 6, 2505–2547. DOI: 10.1007/s00010-025-01195-0. arXiv: 1508.02580. Fields as returned by OpenAlex on 2026-11-13 (recorded in `literature_scan.md`, section 2.3). The arXiv copy was read in full by worker W009 (`overlap_fulltext.md`, section 2); not read by a human. Cited in `paper/frobenius_proof.tex` for its "basic series" Σ z^(p^(nh)/(p^h−1)).
+
 Other references that were verified to exist but only read in abstract are listed in `cross_field_refs.md`; they are not cited in the paper.

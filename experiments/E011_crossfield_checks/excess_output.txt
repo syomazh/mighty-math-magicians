@@ -1,0 +1,5 @@
+p = 2: 1833 classes with up to 13 leaves: F1-F4 ok
+p = 3: 123 classes with up to 15 leaves: F1-F4 ok
+p = 5: 15 classes with up to 17 leaves: F1-F4 ok
+p = 7: 7 classes with up to 19 leaves: F1-F4 ok
+OVERALL: ALL CHECKS PASSED

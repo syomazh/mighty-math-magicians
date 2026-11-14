@@ -1,0 +1,19 @@
+  p  k    M   S    L2    L3   L4a   L4b     H    L5    P7    P8   THM  TREE monomials L5 cases P7 cases P8 cases THM cases   sec
+  2  1  100  12    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok      4727      100       11       12       100     0
+  2  2  100  10    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok      1990      200      180       22        34     0
+  2  3   99   9    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok       711      297     1080       32        15     0
+  2  4   91   8    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok       165      364     3360       32         7     0
+  3  1   91  15    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok       967       46       13        8        46     0
+  3  2   89  13    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok       194       90      264       14        12     0
+  3  3   79  11    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok        16      120     1485       15         4     0
+  5  1   81  21    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok       189       21       17        6        21     0
+  5  2   73  17    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok        10       38      364        8         4     0
+  7  1   73  25    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok        68       13       19        5        13     0
+ 11  1   61  31    ok    ok    ok    ok    ok    ok    ok    ok    ok    ok        17        7       21        4         7     0
+
+H4 (Hurwitz identities), p = 2: ok
+H4 (Hurwitz identities), p = 3: ok
+H4 (Hurwitz identities), p = 5: ok
+H4 (Hurwitz identities), p = 7: ok
+
+OVERALL: ALL CHECKS PASSED

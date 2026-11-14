@@ -298,6 +298,24 @@
   Hence $p^t\mid\Cq$: Konvalinka's divisibility, now a five-line induction.
 \end{frame}
 
+% 8b (optional; added 2026-11-14 by Claude Fable 5.2: the same step, said with carries) ----
+\begin{frame}{Step 2 again: the carry budget \hfill\normalsize\textcolor{red!70!black}{same statement, a second way to see it}}
+  Add up the leaves of the tree \textbf{in base $p$}, node by node.
+  \begin{enumerate}
+    \item \textbf{The budget is fixed.} Whatever the shape of the tree, the total number
+      of carries is
+      \[ \nu(m)=\frac{m-\sd(m)}{p-1}. \]
+      {\small (Each carry lowers the digit sum by $p-1$; we start from $m$ ones and
+      end at the digits of $m$.)}
+    \item \textbf{A symmetric node always carries.} It adds $p$ equal numbers.
+    \item A tree has $\frac{m-1}{p-1}$ nodes. At most $\nu(m)$ of them are symmetric, so
+      \[ d(T)\ \ge\ \frac{m-1}{p-1}-\frac{m-\sd(m)}{p-1}\;=\;t. \]
+  \end{enumerate}
+  \textbf{Equality:} no carry is wasted. Asymmetric nodes add without carrying, and
+  symmetric nodes sit only on complete trees. That is Step~3.
+  \status
+\end{frame}
+
 % 9 ------------------------------------------------------------------
 \begin{frame}{Step 3: minimal trees are built from the digits of $m$}
   \textbf{Minimal} means $d(T)=t$: the smallest classes, size $p^t$.

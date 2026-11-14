@@ -1,10 +1,20 @@
 # STATE — where we are and what is next
 
-_Last updated: 2026-11-14 00:32 PT; earlier stamp 2026-11-13 23:55 PT by Claude Fable 5.2 (orchestrator)._
+_Last updated: 2026-11-14 09:37 PT; before that 00:32 PT; earlier stamp 2026-11-13 23:55 PT by Claude Fable 5.2 (orchestrator)._
 
 ## Status in one paragraph
 
 We have a candidate proof of the full problem (exact valuation for every q = p^k from tree symmetries, no factorial valuations). Evidence: brute force (E000), a no-assumption stress test on 1067 values of m up to 400 leaves, p up to 13, k up to 4 (E003, all checks pass), and three adversarial AI reviews that found no counterexample but 14 write-up defects (`paper/reviews/ADJUDICATION_round1.md`). The paper `paper/main.pdf` (13 pages) has been through three review rounds with repairs after each (`paper/reviews/ADJUDICATION_round1.md`, `_round2.md`, `_round3.md`). **No human has signed anything.** The ranked digest for humans is `FINDINGS.md`.
+
+## Saturday work (started 09:15; Syoma's instruction: "work on Frobenius and keep working on analogies to physical fields")
+
+- **Human feedback so far:** the professor has found nothing wrong so far (reported by Syoma, Saturday morning). This is not a sign-off; sign-off comes later.
+- [x] **S1 — A complete Frobenius proof.** `paper/frobenius_proof.pdf` (7 pages, claim C18): algebra only, self-contained, general q = p^k, with the residue. Every lemma passes its own computer check (E010).
+- [ ] **S2 — Independent referee of the Frobenius note.** A fresh-context Claude subagent is reading only `paper/frobenius_proof.tex`; its report goes to `paper/reviews/frobenius_review_claude_fresh.md`. When it arrives: adjudicate in `paper/reviews/ADJUDICATION_frobenius.md`, repair, recompile, regrade C18.
+- [x] **S3 — Carry budget** (claim C19, `notes/2026-11-14_carry_budget.md`): a more intuitive way to say Steps 2 and 3. One optional slide added after "Step 2".
+- [ ] **S4 — Cross-field readings.** Exact statements are checked in E011. A Claude subagent is verifying references on the web (`notes/2026-11-14_crossfield_literature.md`). When it arrives: write `notes/2026-11-14_crossfield_analogies.md`, add verified references to `references/README.md`, update `FINDINGS.md` and the slides.
+- [ ] **S5 — Bring the digests up to date:** `FINDINGS.md`, `AI_USAGE.md`, slide "Two more ways to see it", `talk/QA.md` (questions on the Frobenius proof and the carry budget).
+- Note: an untracked file `AGENTS.md` (a copy of `CLAUDE.md`) was in the folder on Saturday morning; the orchestrator did not create or change it. Syoma asked how a second agent (ChatGPT) could work here without conflicts; the answer given: its own branch, its own folders, proposals instead of edits, provenance headers. Not started.
 
 ## Operating mode since 2026-11-13 23:35 (Syoma's instructions)
 

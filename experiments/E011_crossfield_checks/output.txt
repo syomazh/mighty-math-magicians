@@ -1,0 +1,45 @@
+A. C*m! = (-p)^N mod p^(N+1): 565 cases, ok
+B. carries while counting to m = carries along any tree = v_p(m!): 3830 random trees, ok
+C. #symmetric nodes <= v_p(m!), with equality attained: 1030 classes, ok
+
+D. Partition functions Z_m(y) = sum over classes of y^d  (value at y = p is C):
+   p=2 q=2 n=4 m=5: Z = y^1 + y^2 + y^3;  Z(2) = 14
+   p=2 q=2 n=6 m=7: Z = 3y^2 + 3y^3 + 4y^4 + y^5;  Z(2) = 132
+   p=2 q=2 n=7 m=8: Z = 1 + y^2 + 7y^3 + 7y^4 + 6y^5 + y^6;  Z(2) = 429
+   p=3 q=3 n=3 m=7: Z = y^1 + y^2;  Z(3) = 12
+   p=3 q=3 n=4 m=9: Z = 1 + 3y^2 + y^3;  Z(3) = 55
+   p=3 q=3 n=5 m=11: Z = y^1 + 3y^2 + 6y^3 + y^4;  Z(3) = 273
+   p=2 q=4 n=3 m=10: Z = y^1 + y^2 + y^4;  Z(2) = 22
+
+E1. Ternary trees with n nodes (alkyl radicals C_nH_(2n+1), m = 2n+1 hydrogens):
+     n   m m in base 3        trees  v_3 largest symmetry group 3^(n-v_3) = 3^v_3(m!)
+     1   3          10            1    0                                3         yes
+     2   5          12            3    1                                3         yes
+     3   7          21           12    1                                9         yes
+     4   9         100           55    0                               81         yes
+     5  11         102          273    1                               81         yes
+     6  13         111         1428    1                              243         yes
+     7  15         120         7752    1                              729         yes
+     8  17         122        43263    2                              729         yes
+     9  19         201       246675    1                             6561         yes
+    10  21         210      1430715    1                            19683         yes
+    11  23         212      8414640    2                            19683         yes
+    12  25         221     50067108    2                            59049         yes
+    13  27        1000    300830572    0                          1594323         yes
+    14  29        1002   1822766520    1                          1594323         yes
+
+E2. Knockout brackets with m entrants (binary trees; v_2 of the Catalan number C_(m-1)):
+      m     binary  unfair matches at least  v_2(Catalan)
+      8       1000                        0             0
+     12       1100                        1             1
+     16      10000                        0             0
+     24      11000                        1             1
+     32     100000                        0             0
+     48     110000                        1             1
+     64    1000000                        0             0
+     68    1000100                        1             1
+     96    1100000                        1             1
+    100    1100100                        2             2
+    128   10000000                        0             0
+
+OVERALL: ALL CHECKS PASSED
