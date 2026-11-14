@@ -175,14 +175,18 @@ See `AI_USAGE.md` and the claim ledger: every claim records which model produced
 Novelty is not established, and the proof has been in existence for less than two days. We would rather say that than overclaim.
 
 **46. What would you do with two more months?**
-Finish the formal check in Lean (see 46a); settle the literature question with experts; write up the weighted and refined versions; and work out the residue modulo p².
+Extend the formal check in Lean from primes to prime powers and to the residue (see 46a); settle the literature question with experts; write up the weighted and refined versions; and work out the residue modulo p².
 
 **46a. Has any of it been checked by a proof assistant?**
 *Added 2026-11-14 by Claude Fable 5.2; the Lean files were written by the AI and no human has read them.*
-Half of it. Lean 4 with Mathlib has checked Step 1 (a class has exactly p^d trees), Step 2 (d ≥ t, from the subadditivity of digit sums) and their consequence: p^t divides the number of p-ary trees with m leaves, for every prime p, and likewise for the p-ary trees that stand for q-ary trees. For p = 2 the checked statement uses only the library's own definitions: 2^(s_2(n+1) − 1) divides the Catalan number C_n. Lean has not checked that the power is exact (Steps 3 and 4), nor the two other proofs. So the machine vouches for "at least p^t", and the humans and the referees for "exactly p^t". The table is in `lean/README.md`.
+*Rewritten 2026-11-14 14:30 after Steps 3 and 4 were formalized.*
+Yes, for q = p. Lean 4 with Mathlib has checked the whole tree-symmetry proof when q is a prime: Step 1 (a class has exactly p^d trees), Step 2 (d ≥ t), Step 3 (the minimal trees are the trees of atoms given by the digits of m), Step 4 (the cherry collapse on labelled trees), and the conclusion: the exact power of p in the number of p-ary trees with m leaves is p^t. For p = 2 the checked statement uses only the library's own definitions: v_2(C_n) = s_2(n + 1) − 1 for the Catalan numbers. No factorial valuation is used. Not checked by Lean: prime powers q = p^k with k ≥ 2 (there Lean has only "at least p^t"), the residue (−1)^t/∏ m_j!, and the two other proofs. The table is in `lean/README.md`.
+
+**46a′. Is the Lean proof the same as the proof in your paper?**
+The same strategy and the same four steps. Two places are organized differently, and we say so in `lean/README.md`. For equal atoms the paper divides by ∏ m_j! with a free action of permutations; Lean renames one atom at a time and only shows that the number of labelled trees is a multiple of the number of minimal trees. In Step 4 the paper counts the classes fixed by the cyclic relabelling exactly, which gives the residue; Lean puts all p! orderings of the cherry on one side and uses that p does not divide (p − 1)!, which gives the exact power but not the residue.
 
 **46b. What does one have to trust in the Lean result?**
-The Lean kernel, Mathlib, and that three short definitions say what we mean: a p-ary tree, its number of leaves, the base-p digit sum. The final statement does not mention rotations; they occur only inside the proof. For the Catalan statement there is nothing of ours to trust.
+The Lean kernel, Mathlib, and that two short definitions say what we mean: a p-ary tree and its number of leaves. The final statement does not mention rotations, atoms, labels or cherries; they occur only inside the proof. For the Catalan statement there is nothing of ours to trust. One more thing to say plainly: the Lean files were written by the AI and no human on the team has read them; what a human can and should read are the two definitions and the three final statements, which fit on half a page.
 
 ## M. Other ways to see it (written and checked by computer; none human-verified yet)
 

@@ -6,4 +6,17 @@ import MMM.ClassSize
 import MMM.Divisibility
 import MMM.Blocked
 import MMM.Catalan
+import MMM.Counting
+import MMM.Reduction
+import MMM.DigitsCarry
+import MMM.DigitsFree
+import MMM.Minimal
+import MMM.LTree
+import MMM.Atoms
+import MMM.Retype
+import MMM.LRot
+import MMM.Cherry
+import MMM.ExactCond
+import MMM.ExactAll
+import MMM.Exact
 import MMM.Axioms
