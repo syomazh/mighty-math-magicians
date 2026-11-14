@@ -295,9 +295,7 @@
     \item \textcolor{red!70!black}{Asymmetric root}:
           $d=1+\sum_i d(T_i)\ge 1+\sum_i t(m_i)\ge t(m)$.
   \end{itemize}
-  \medskip
   Hence $p^t\mid\Cq$: Konvalinka's divisibility, now a five-line induction.
-  \status
 \end{frame}
 
 % 9 ------------------------------------------------------------------
@@ -466,7 +464,7 @@
 \end{frame}
 
 % 14b ----------------------------------------------------------------
-\begin{frame}{Two more ways to see it \hfill\normalsize\textcolor{red!70!black}{ideas, being verified}}
+\begin{frame}{Two more ways to see it \hfill\normalsize\textcolor{red!70!black}{checked by computer, not yet by us}}
   \textbf{Frobenius.} The generating function of $p$-ary trees by number of leaves
   satisfies $G=x+G^p$. Modulo $p$, $G^p=G(x^p)$, so
   \[ G\equiv x+x^p+x^{p^2}+\cdots\pmod p . \]
@@ -499,11 +497,12 @@
       (Open Math OS); independent re-check, literature scan, explainer and further
       drafts by other logged worker models (Mistral Large 4.0, Muse Spark Open,
       DeepSeek Flash).
-    \item \textbf{Attacking:} three adversarial reviews (Mistral Large 4.0, Muse
-      Spark Open, a fresh Kimi K3.1 Pro) found $14$ defects in the write-up and no
-      counterexample; a later line-by-line read by Claude found $4$ more. All
-      repaired. Computer checks: every tree for small sizes, then $1067$ leaf
-      counts up to $400$ leaves and primes up to $13$, no failures.
+    \item \textbf{Attacking:} three review rounds. Mistral Large 4.0, Muse Spark Open
+      and a fresh Kimi K3.1 Pro found $14$ defects in the write-up; a line-by-line
+      read by Claude found $4$ more; two further Claude referees who had seen none
+      of our notes found $23$ smaller ones. No counterexample in any round; all
+      repaired. Computer checks: every tree for small sizes, then $1067$ leaf counts
+      up to $400$ leaves and primes up to $13$, no failures.
     \item \textbf{What humans verified:} \alert{to be filled in.}
   \end{itemize}
   \vfill

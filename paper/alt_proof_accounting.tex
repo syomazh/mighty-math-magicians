@@ -85,13 +85,14 @@ $p^{\nu(m)}\prod_jm_j!$. Therefore
 \begin{equation}\label{digit}
  m!=p^{\nu(m)}\prod_jm_j!\,|\F(m)|.
 \end{equation}\end{lemma}
-\begin{proof} First enumerate an explicit child position at each internal
-node. Each component then has $p^j$ labelled ordered slots. Assigning the
-labels and listing the $m_j$ components shows that $S_m$ is transitive, with
-stabilizer $\prod_j(C_p^{N(p^j)}\wr S_{m_j})$. Quotienting those explicit
-positions by local cyclic rotations yields exactly $\F(m)$, so the same
-statement holds for $\F(m)$. The stabilizer has order
-$p^{\nu(m)}\prod_jm_j!$ since $\nu(m)=\sum m_jN(p^j)$.\end{proof}
+\begin{proof} A full $p$-ary tree of height $j$ with labelled leaves admits
+only local rotations as automorphisms. Induct on $j$. Two top subtrees that
+are exchanged must have different leaf labels (because each child is cyclicly
+rigid or of height zero), so no nontrivial permutation of top subtrees fixes
+the labelled leaves. By induction otherwise, the automorphism is a rotation
+at each internal node. Consequently the orbit-stabilizer relation holds at
+each component and also gives separate root permutations between components
+of equal height. This yields the stated stabilizer and \eqref{digit}.\end{proof}
 
 \begin{lemma}\label{K} Let $K(a)$ count permutations of $[pa]$ all of whose
 cycles have length $p$. For $a\ge1$,
@@ -111,28 +112,55 @@ so $K(a)\equiv(p-1)K(a-1)\equiv-K(a-1)$. With $K(0)=1$, the result follows.\end{
  |\F(m)|=\binom mrK(a)|\F(a)|,\qquad
  |\F(m)|\equiv(-1)^{\nu(m)}\pmod p.
 \end{equation}\end{lemma}
-\begin{proof} There is one unlabelled cyclic complete tree template $T_j$ of
-each height $j$. Expand it into an ordered-encoding tree by choosing all
-possibilities at its nodes, with child subtrees already cyclic. The number of
-these is $c_0=1$ and $c_{j+1}=(p-1)!(c_j/p)^p$; the division by $p$ at each
-child removes the child-root rotation already included in its cyclic type.
-Every cyclic labelled tree has $p^{N(p^j)}$ full ordered lifts with all child
-branches ordered and distinct leaves. For the whole forest, by multiplying
-local rotation groups, each class has $p^{\nu(m)}$ lifts. Reversing this group
-quotient at the root slots gives
-\begin{equation}\label{cyclicordered}
- p^{\nu(m)}|\F(m)|=m!\prod_j(c_j)^{-m_j}.
-\end{equation}
-The remaining forests after parent deletion are encoded locally by $K(a)$
-permutations, but establishing the corresponding relabeling bijection with
-\eqref{cyclicordered} requires more bookkeeping. \GAP{Prove the exact
-recurrence. The template identity \eqref{cyclicordered} and explicit forest
-counts do not by themselves establish that $|F(m)|=\binom mr K(a)|F(a)|$.
-The quotient proof is incomplete here and the theorem remains conditional on
-this computation.}
+\begin{proof} We count the quadruples $(R,\pi,G,w)$ specified below.
+Choose an unordered $r$-block $R\subset[m]$; its members are the height-zero
+components. On the other labels take a marked-root \emph{expansion}: a
+height-decreased forest (using the digit counts of $a$), together with a
+mark $*$, ordered abandonment data $L_1,\ldots,L_{p-1}$, and a distinguished
+slot at every node. Start with one component and a marked leaf. At each step
+replace one marked leaf by
+\[
+ (*,L_1,\ldots,L_{p-1}),
+\]
+where $*$ is the new marked leaf and $L_i$ are empty slots or completed
+marked-root expansions. The resulting leaves are $R$, $m-a$ marked leaves at
+the $a$ surviving roots, and completed expansions outside those roots. The
+latter are precisely $F(m)-F(a)$, with their ordinary internal slot data.
+Each remaining marked leaf has a further distinguished one of its $p$ parent
+sides at the point of departure; the side and the slot at that departure
+determine a local cyclic order. There are $p-1$ choices at each such
+departure and at the final replacement of its mark by a completed expansion.
+Therefore a marked-root expansion has precisely $(p-1)^{N(a)}$ states.
 
-For the congruence, if the recurrence is granted, rotate separately within
-each of $a$ consecutive blocks let $T$ be its
+Choose $\pi$, a permutation of $[pa]$ whose cycles all have length $p$. It
+gives an ordered $p$-cycle $(i_1,\ldots,i_p)$ containing the initial marked
+component. Its indices are the $a$ components of the height-decreased forest
+(including the former root itself), while each index points along the chain
+of marked nodes to the final component. This chain is ordered by the $p$
+slots: the position which completes the cycle carries a completed expansion
+in place of its mark. Every noncycle position is given an expansion or one of
+the empty slots; multiplying by $p-1$ accounts for all cyclic alignments.
+These local data form exactly $K(a)$ possibilities.
+
+Finally, $w$ is a leaf-labelling of the height-decreased forest. Its $a$
+internal leaf labels are chosen as a canonical system of roots ranked by the
+least original leaf in the corresponding component, and its other labels are
+taken from $[m]\setminus R$. There are $(m-r)!/(p^{a+\nu(a)}\prod a_j!)$ such
+choices. No original cyclic orientation is forgotten: the discrete $p$-cycle
+and the $p-1$ alignments jointly recover it. Hence
+\[
+ \binom mr\,K(a)(p-1)^{N(a)}\frac{(m-r)!}{p^{a+\nu(a)}\prod a_j!}
+\]
+counts expansions on positive-height components with their $p-1$ departure
+states. Division by $p^{\nu(a)}$ for the height-decreased structure and the
+ordinary $p$-rotation class on surviving components then yields
+\eqref{forest}, with $p^{a+\nu(a)}=p^{\nu(m)}$. \GAP{Formalize the cycle
+indexing and the counting ratio above. It presently describes the intended
+bijection but does not yet demonstrate that the quadruple count equals
+$p^{\nu(m)}|F(m)|/m!$ without circular use of the claimed recurrence. The
+explicit forest enumeration checks the formula, but that is not a proof.}
+
+For the congruence, if the recurrence is granted, rotate separately within let $T$ be its
 $p-1$-element sibling group in root order, and let $U$ be their ordered list
 to the right of $a_1$. The remaining $m-p$ leaves form a forest of digit type
 $a - p+1$, multiplied by the removal of one full cyclic $p$-ary node and the

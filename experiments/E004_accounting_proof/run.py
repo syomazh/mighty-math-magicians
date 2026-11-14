@@ -106,10 +106,15 @@ def ordered_orbit(tree):
             for i in range(len(children))]
 
 
-def rotate_tree(tree):
+def remove_root_listing(tree):
+    """Return (marked leaf, other child trees, slot position)."""
     if tree[0] != "C":
-    children = tree[1]
-    return canonical(ordered_node(tuple children[1:]+children[:1]))
+        raise TypeError("cyclic tree required")
+    for position, rotation in enumerate(sorted(tree[1])):
+        if any(ch[0] == "L" and ch[1] == 0 for ch in rotation):
+            yield position, tuple(relabel(ch, {0: 1})
+                                   for ch in rotation
+                                   if not (ch[0] == "L" and ch[1] == 0))
 
 
 def relabel(tree, permutation):
@@ -160,7 +165,7 @@ def cyclic_trees(labels, classes, p, k, depth):
         if possible:
             for children in itertools.product(*options):
                 for root_order in itertools.permutations(children):
-                    answer.add(canonical(ordered_node(tuple root_order)))
+                    answer.add(canonical(ordered_node(tuple(root_order)))))
     return tuple(sorted(answer))
 
 
@@ -313,7 +318,7 @@ def complete_trees(labels, p, height):
         options = [complete_trees(block,p,height-1) for block in partition]
         for children in itertools.product(*options):
             for root_order in itertools.permutations(children):
-                result.add(canonical(ordered_node(tuple root_order)))
+                result.add(canonical(ordered_node(tuple(root_order))))
     return tuple(sorted(result))
 
 
