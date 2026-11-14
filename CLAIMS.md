@@ -140,3 +140,7 @@ It does not contain: the valuation of the Catalan numbers, the count of minimal 
 ## Update, 2026-11-14 11:26 PT (Claude Fable 5.2) — the Stickelberger question, tested
 
 - **C21: `computed`** (was `conjecture`). With G(a) = Σ_(x ∈ F_q^*) ω(x)^(−a) ζ^Tr(x) and π = ζ − 1: (S1) Stickelberger's congruence G(a)·∏ a_i! ≡ −π^s(a) (mod π^(s(a)+1)) holds for every exponent in 12 small fields (q up to 49); (S2) C_n^(Q)·∏ m_j! ≡ −G(m)·∏ m_j!/π (mod π^s(m)) holds in all 77 cases tested (Q = 2, 4, 8, 3, 9, 5, 7). Altered statements fail (controls). Evidence: `experiments/E014_stickelberger`. S1 is a classical theorem, so S2 is a consequence of it and of our theorem C6/C7: **to leading order the Fuss–Catalan number with m leaves is −1/π times the Gauss sum of exponent m.** Still open, and for a human: whether this is a known remark and whether it deserves a sentence in the talk. Origin: Claude Fable 5.2; the resemblance was first flagged by a Claude subagent during the web check.
+
+## Update, 2026-11-14 12:02 PT (Claude Fable 5.2)
+
+- On Syoma's go-ahead the credit to Etherington was added to `paper/main.tex` (one sentence in the introduction's paragraph on p = 2, one bibliography entry) and to `paper/frobenius_proof.tex` (one paragraph in the remark "Earlier algebraic work", one bibliography entry). No statement or proof was changed. Note for the sign-off record: the professor approved the main paper *before* this sentence was added; the change is to the introduction only.

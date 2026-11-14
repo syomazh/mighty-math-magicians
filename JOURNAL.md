@@ -224,3 +224,9 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 
 - **Human input.** Syoma asked how he could help with the Stickelberger question and whether it concerns the main proof or the Frobenius proof. Answer: neither proof; it is about the final residue formula. He can ask the professor or supply a standard source; meanwhile I test it.
 - **E014.** Exact arithmetic with Gauss sums over F_q (q up to 49) in the ring of integers of Q_p(ζ_p) unramified-extended, modulo p^N. Stickelberger's congruence holds in the normalisation we quote for every exponent in 12 fields; the Fuss–Catalan number agrees with −G(m)/π to leading order in all 77 cases; three altered statements fail for p = 3, 5, 7. C21 is now `computed`. The remaining question (known? worth saying?) is for the professor.
+
+## 2026-11-14 ~12:02 — Claude Fable 5.2
+
+- **Human input.** Syoma: "Yes, add it" (the Etherington credit to the two papers); then asked for a concise summary of the change; then asked to verify the three proofs in Lean.
+- Added the credit: `paper/main.tex` introduction (one sentence, bibliography entry; PDF 14 pages, one page more because of the added lines), `paper/frobenius_proof.tex` remark on earlier work (one paragraph, bibliography entry; 9 pages). Both compile; no undefined references. No mathematical change in either.
+- **Lean:** nothing has been verified in Lean so far, and Lean is not installed on this machine (CLAUDE.md, rule 7). Reported to Syoma with what a formalization could realistically cover before the deadline; installing it needs his permission (downloads).
