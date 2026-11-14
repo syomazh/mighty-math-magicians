@@ -6,7 +6,7 @@ This folder is a Lean 4 project that depends on Mathlib. A statement listed belo
 
 ## In one paragraph
 
-Lean has checked **the theorem of Problem 137 for every prime power q = p^k, by the tree-symmetry proof**: if v_p is the exponent of p in the number of q-ary trees with n internal nodes, then (p − 1)·v_p + 1 = s_p((q − 1)n + 1), that is, v_p = (s_p((q − 1)n + 1) − 1)/(p − 1). For q = 2 the statement uses only Mathlib's own definitions: **v_2(C_n) = s_2(n + 1) − 1** for the Catalan numbers. No factorial valuation (Legendre, Kummer) is used. In Lean the number of trees is *defined by counting trees*; that it equals the Fuss–Catalan number binom(qn, n)/((q − 1)n + 1) is classical and is checked in Lean only for q = 2. Lean has **not** checked the residue modulo p, nor the accounting and Frobenius proofs.
+Lean has checked **the theorem of Problem 137 for every prime power q = p^k, by the tree-symmetry proof**: if v_p is the exponent of p in the number of q-ary trees with n internal nodes, then (p − 1)·v_p + 1 = s_p((q − 1)n + 1), that is, v_p = (s_p((q − 1)n + 1) − 1)/(p − 1). Lean has also checked **the residue**, in the form (number of q-ary trees with m leaves)·∏ m_j! ≡ (−p)^t (mod p^(t+1)), where the m_j are the base-p digits of m. For q = 2 the valuation statement uses only Mathlib's own definitions: **v_2(C_n) = s_2(n + 1) − 1** for the Catalan numbers. No factorial valuation (Legendre, Kummer) is used. In Lean the number of trees is *defined by counting trees*; that it equals the Fuss–Catalan number binom(qn, n)/((q − 1)n + 1) is classical and is checked in Lean only for q = 2. Lean has **not** checked the accounting and Frobenius proofs.
 
 ## The final statements
 
@@ -25,6 +25,14 @@ Lean has checked **the theorem of Problem 137 for every prime power q = p^k, by 
 
     theorem MMM.multiplicity_two_catalan (n : ℕ) :
         multiplicity 2 (catalan n) = (Nat.digits 2 (n + 1)).sum - 1
+
+    theorem MMM.PTree.residue_primePower {p : ℕ} [Fact p.Prime] (k : ℕ) (hk : 0 < k) (m t : ℕ)
+        (ht : (p - 1) * t + 1 = ds p m) (hm : m ≡ 1 [MOD p ^ k - 1]) :
+        (Nat.card {T : PTree (p ^ k) // T.leaves = m} : ℤ) *
+            ((∏ j ∈ Finset.range m, (dig p j m).factorial : ℕ) : ℤ) ≡
+          (-(p : ℤ)) ^ t [ZMOD (p : ℤ) ^ (t + 1)]
+
+(`dig p j m` is the j-th base-p digit of m; all digits of m have an index below m. The last statement is claim C12 of the ledger; it contains the exact valuation t and the residue (−1)^t/∏ m_j! of the quotient modulo p.)
 
 Here `PTree q` is the type of plane trees in which every internal node has q ordered children, `nodes` and `leaves` count its internal nodes and leaves, `ds p m` is the base-p digit sum `(Nat.digits p m).sum`, `multiplicity p c` is Mathlib's p-adic valuation of a natural number, and `catalan` is Mathlib's Catalan number.
 
@@ -54,10 +62,13 @@ The "divides, does not divide" statements are the convention-free form: Mathlib 
 | **Step 4**, q = p^k | the same when each label has a class modulo k and must sit at a matching depth, provided ∑ p^class ≡ 1 (mod p^k − 1); a cherry of p labels of class c collapses to one label of class c + 1 | `LTree.labelled_valuation_blocked` | `CherryB.lean` |
 | **Theorem, q = p** | exact power of p in the number of p-ary trees | `PTree.exact_valuation`, `PTree.fussCatalan_valuation`, `PTree.fussCatalan_valuation_nodes` | `Exact.lean`, `ExactB.lean` |
 | **Theorem, q = p^k** | exact power of p in the number of q-ary trees: Problem 137 | `PTree.exact_valuation_primePower`, `PTree.problem137_leaves`, `PTree.problem137` | `ExactB.lean` |
+| **Residue**, labelled trees | the number of labelled trees is ≡ (−p)^t (mod p^(t+1)); the sign comes from Wilson's theorem, (p − 1)! ≡ −1 | `LTree.labelled_congruence`, `LTree.labelled_congruence_blocked` | `Residue.lean`, `ResidueB.lean` |
+| **Residue**, equal atoms | the factor between labelled and minimal trees is exactly ∏ (multiplicity)! | `LTree.exists_distinct_fact`, `LTree.exists_distinct_fact_blocked` | `Residue.lean`, `ResidueB.lean` |
+| **Residue**, theorem | #trees · ∏ m_j! ≡ (−p)^t (mod p^(t+1)), for q = p and for q = p^k | `PTree.residue`, `PTree.residue_blocked`, `PTree.residue_primePower` | `Residue.lean`, `ResidueB.lean` |
 | q = 2 | our binary trees with n + 1 leaves are counted by Mathlib's `catalan n` | `PTree.card_binary_trees` | `Catalan.lean` |
 | **Catalan numbers** | v_2(C_n) = s_2(n + 1) − 1 | `multiplicity_two_catalan` | `Exact.lean` |
 
-`MMM/Axioms.lean` prints the axioms behind these theorems (62 lines). Every line shows only `propext`, `Classical.choice`, `Quot.sound` (Lean's standard axioms), and none shows `sorryAx`. It also contains six concrete instances that Lean checks: 2^2 divides `catalan 6`; v_2(`catalan 6`) = 2; v_2(`catalan 7`) = 0; for quaternary trees (q = 4) v_2 = 2 with 2 nodes and v_2 = 1 with 3 nodes; for 9-ary trees v_3 = 2 with 2 nodes.
+`MMM/Axioms.lean` prints the axioms behind these theorems (69 lines). Every line shows only `propext`, `Classical.choice`, `Quot.sound` (Lean's standard axioms), and none shows `sorryAx`. It also contains concrete instances that Lean checks: 2^2 divides `catalan 6`; v_2(`catalan 6`) = 2; v_2(`catalan 7`) = 0; for quaternary trees (q = 4) v_2 = 2 with 2 nodes and v_2 = 1 with 3 nodes; for 9-ary trees v_3 = 2 with 2 nodes; and the residue statement instantiated for binary trees with 7 leaves.
 
 ## Where the Lean proof differs from the paper
 
@@ -66,14 +77,14 @@ The strategy and the order of the steps are the paper's. Five things are organiz
 1. **Rotation equivalence is defined directly in the normal form** (a shift at the root, then child by child). The paper defines it as generated by single rotations and proves the normal form as a lemma; that lemma is not formalized here (an Open Math OS worker is on it). The final statements do not mention the relation.
 2. **Step 3 is stated with trees, not with classes:** a bijection between the minimal trees and the carry-free trees of atoms (`realize`).
 3. **No cyclic trees, no automorphisms.** The paper works with skeletons as cyclic trees and with lemmas about their automorphisms. Lean never forms these objects: it works with plane trees and counts them, and uses rotation classes only as sets of plane trees.
-4. **Equal atoms.** The paper divides by ∏ m_j! using a free action of the permutations of equal atoms. Lean renames one atom at a time, which shows that the number of labelled trees is a multiple K of the number of minimal trees. That is enough for non-divisibility; the value of K is not needed.
-5. **Step 4.** The paper counts the classes fixed by the cyclic relabelling exactly (p − 1 cyclic orders), which also gives the residue (−1)^t. Lean puts all p! orderings of the cherry on one side and uses only that p does not divide (p − 1)!. This gives the exact power of p, not the residue.
+4. **Equal atoms.** The paper divides by ∏ m_j! using a free action of the permutations of equal atoms. Lean renames one atom at a time: each renaming multiplies the number of trees by the current multiplicity, and the product of these factors is ∏ m_j! (`exists_distinct_fact`). No group action is used.
+5. **Step 4.** The paper counts the classes fixed by the cyclic relabelling exactly (p − 1 cyclic orders compatible with it), which gives the sign −1 directly. Lean puts all p! orderings of the cherry on one side. For the exact power of p it then needs only that p does not divide (p − 1)!; for the residue it uses Wilson's theorem, (p − 1)! ≡ −1 (mod p), from Mathlib. Wilson's theorem is a congruence for (p − 1)!, not a factorial valuation, but it is an ingredient the paper's argument does not need.
 
 ## Not checked by Lean
 
 | Part | Why it matters |
 |---|---|
-| **The residue** C/p^t ≡ (−1)^t/∏ m_j! (mod p), and the corollary with the exact number of minimal classes for k = 1 | See differences 4 and 5. |
+| The corollary with the exact number of minimal classes for k = 1, (pt)!/(t!·p^t·∏ m_j!) | It needs the closed formula below. |
 | The closed formula: the number of q-ary trees with n nodes is binom(qn, n)/((q − 1)n + 1) | Classical. In Lean the number of trees is defined by counting; it is tied to a known sequence only for q = 2 (Catalan numbers). Mathlib has no Fuss–Catalan numbers. |
 | Lemma "Normal form"; the paper's definitions and lemmas on skeletons as cyclic trees; the worked examples of the paper | See differences 1 and 3. |
 | The accounting proof and the Frobenius proof | Nothing of either is formalized. |
@@ -84,7 +95,7 @@ The strategy and the order of the steps are the paper's. Five things are organiz
 - For `multiplicity_two_catalan`: nothing of ours.
 - Lean checks that each proof follows from the definitions **as written in the file**. Whether a definition says what the paper means is a matter of reading the definitions.
 - The trust base as it is on this machine: Mathlib's compiled files come from its prebuilt cache and were not rebuilt here; the Lean toolchain is a release candidate (`v4.36.0-rc2`); no external replay of the proofs (`lean4checker`) was run.
-- **An independent audit** of the statements for q = p (a separate AI instance; not a human) is recorded in `AUDIT.md`: no error found, seven points of wording and scope, all addressed above. The prime-power files have not been audited.
+- **An independent audit** of the statements for q = p (a separate AI instance; not a human) is recorded in `AUDIT.md`: no error found, seven points of wording and scope, all addressed above. A second audit, of the prime-power and residue files, was started at 14:57; until its result is recorded in `AUDIT.md` those files count as unaudited.
 
 ## Layout
 
@@ -98,6 +109,7 @@ The strategy and the order of the steps are the paper's. Five things are organiz
 | `MMM/LRot.lean`, `Cherry.lean`, `CherryB.lean` | Step 4: labelled trees, the cherry collapse, with classes modulo k |
 | `MMM/ExactCond.lean`, `ExactAll.lean`, `Exact.lean` | the exact valuation for q = p, first with Step 4 as a hypothesis, then without |
 | `MMM/ExactBCond.lean`, `ExactB.lean` | the same for q = p^k; Problem 137 |
+| `MMM/Residue.lean`, `ResidueB.lean` | the residue, for q = p and for q = p^k |
 | `MMM/Catalan.lean` | the link to Mathlib's Catalan numbers for q = 2 |
 | `MMM/Axioms.lean` | prints the axioms; six concrete instances |
 | `MMM/Smoke.lean` | a one-line test that the project compiles against Mathlib |

@@ -26,4 +26,6 @@ import MMM.CherryB
 import MMM.BlockedForm
 import MMM.ExactBCond
 import MMM.ExactB
+import MMM.Residue
+import MMM.ResidueB
 import MMM.Axioms

@@ -6,6 +6,8 @@ Lean's standard axioms (`propext`, `Classical.choice`, `Quot.sound`) and never `
 import MMM.Blocked
 import MMM.Exact
 import MMM.ExactB
+import MMM.Residue
+import MMM.ResidueB
 
 -- digit sums
 #print axioms MMM.ds_add_le
@@ -117,3 +119,15 @@ example : multiplicity 3 (Nat.card {T : MMM.PTree (3 ^ 2) // T.nodes = 2}) = 2 :
   have hd : (Nat.digits 3 ((3 ^ 2 - 1) * 2 + 1)).sum = 5 := by simp
   rw [hd] at h
   omega
+
+-- the residue (claims C7 and C12): #trees * ∏ m_j! ≡ (-p)^t (mod p^(t+1))
+#print axioms MMM.LTree.labelled_congruence
+#print axioms MMM.LTree.exists_distinct_fact
+#print axioms MMM.PTree.residue
+#print axioms MMM.LTree.labelled_congruence_blocked
+#print axioms MMM.LTree.exists_distinct_fact_blocked
+#print axioms MMM.PTree.residue_blocked
+#print axioms MMM.PTree.residue_primePower
+
+-- an instance of the residue statement: binary trees with 7 leaves (132 of them), t = 2
+example := MMM.PTree.residue (p := 2) 7 2 (by simp [MMM.ds])
