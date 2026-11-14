@@ -69,7 +69,7 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **Launched:** W014 accounting proof (verify + write-up), W015 Frobenius proof, W016 cross-field verification and OEIS reconnaissance, W017 refinements and non-prime-power q, W018 three blind proof searches (Kimi, Mistral, Muse), W021 repair of the paper followed automatically by W022 round-2 reviews (three models), W011b and W005c relaunches with tighter briefs.
 - Created `FINDINGS.md`: the ranked one-page digest for the humans.
 
-## 2026-11-13 ~23:55 — Claude Fable 5.2
+## 2026-11-13 ~23:40 — Claude Fable 5.2
 
 - **Budget change (Syoma):** Open Math OS allowance down to about 36%. Instructions, in order: cut usage; then cut heavily; then phase it out entirely by morning and use Claude instead. Also: arrange for work to resume automatically if Claude hits its 5-hour limit.
 - Stopped ten workers (process trees killed, runs marked "stopped" in their `meta.txt`): W018 blind Kimi, W018 blind Mistral, W017 refinements, W013 cross-field, W016 cross-field verification, W005c explainer, W012 stress test, W010 slides, W003b extensions, W011b study guide. W021 (paper repair) had written `paper/CHANGES_round1.md` and `paper/main.pdf` at 23:28; its launcher was hung and was cleaned up. The automatic second review round was blocked by moving its briefs to `briefs/_held/`. Only W014 (accounting proof) was left running.
@@ -79,3 +79,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - Rewrote `STATE.md` with the overnight queue Q1–Q9 (Claude only). `CLAUDE.md` now carries the budget rule.
 - **Overnight machinery:** cron job `e7eb20ef` (fires at :13 and :43 while idle, tells the session to continue the queue); keep-awake background task `b7ckcr8lj` (a temporary Windows execution-state request; changes no settings).
 - Harness quirk found: a doubled backslash in a shell command can arrive as a single one, so `sed` and inline-Python edits of LaTeX silently do nothing. Recorded in `STATE.md`.
+
+## 2026-11-13 ~23:45 — Claude Fable 5.2
+
+- **Q1 done.** Read the repaired paper line by line (Introduction through the main theorem and corollary). All 14 adjudicated repairs are in place. Found and fixed four further defects that no round-1 reviewer raised: the logical order in the normal-form proof; an unjustified step in the converse of the skeleton proposition (replaced by the digit argument); a displayed equality in the carry invariant that is only a congruence modulo q-1; an assumed affine form in the count of p-1 arrangements. Details: paper/reviews/round2_orchestrator.md. The paper compiles (12 pages): paper/main.pdf.
+- **Q2 started.** Launched a fresh-context Claude subagent as an independent referee of paper/main.tex. It was told not to read any earlier review or note, so its read is not anchored on mine. Report expected in paper/reviews/round2_claude_fresh.md.

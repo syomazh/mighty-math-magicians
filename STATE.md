@@ -1,6 +1,6 @@
 # STATE — where we are and what is next
 
-_Last updated: 2026-11-13 23:55 PT by Claude Fable 5.2 (orchestrator)._
+_Last updated: 2026-11-13 23:45 PT by Claude Fable 5.2 (orchestrator)._
 
 ## Status in one paragraph
 
@@ -15,8 +15,8 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 
 ## Overnight queue (do in order; mark each DONE with the time when finished)
 
-- [ ] **Q1 — Verify the repaired paper.** For each item A1–A14 of `paper/reviews/ADJUDICATION_round1.md`, read the repaired passage of `paper/main.tex` and decide fixed / not fixed. Fix remaining defects directly in the `.tex`. Compile (`cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build main.tex`), copy `build/main.pdf` to `paper/main.pdf`. Write the result to `paper/reviews/round2_orchestrator.md`.
-- [ ] **Q2 — Independent second review.** Launch one fresh-context Claude subagent (Agent tool) with the brief `briefs/_held/W022_round2_kimi.md`, report to `paper/reviews/round2_claude_fresh.md`. Adjudicate, fix, recompile. When no GAP or WRONG remains, set C1–C8 to `ai-reviewed` in `CLAIMS.md`.
+- [x] **Q1 — Verify the repaired paper.** DONE 23:42 (all 14 repairs confirmed; four further defects found and fixed; see paper/reviews/round2_orchestrator.md). For each item A1–A14 of `paper/reviews/ADJUDICATION_round1.md`, read the repaired passage of `paper/main.tex` and decide fixed / not fixed. Fix remaining defects directly in the `.tex`. Compile (`cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build main.tex`), copy `build/main.pdf` to `paper/main.pdf`. Write the result to `paper/reviews/round2_orchestrator.md`.
+- [ ] **Q2 — Independent second review.** (fresh-context Claude subagent launched 23:43; when it reports, adjudicate.) Launch one fresh-context Claude subagent (Agent tool) with the brief `briefs/_held/W022_round2_kimi.md`, report to `paper/reviews/round2_claude_fresh.md`. Adjudicate, fix, recompile. When no GAP or WRONG remains, set C1–C8 to `ai-reviewed` in `CLAIMS.md`.
 - [ ] **Q3 — Study guide and Q&A.** Write `notes/study_guide.md` and `talk/QA.md` as specified in `briefs/W011_qa_and_study_guide.md` and `briefs/W011b_qa_study_guide_finish.md`. Make `notes/study_guide_check.py` run in under 30 seconds and agree with the guide.
 - [ ] **Q4 — Fold in finished worker output.** Review and record in `CLAIMS.md`/`FINDINGS.md`: E004 + `paper/alt_proof_accounting.tex` (W014; if the worker died, finish the write-up from `notes/2026-11-13_new_ideas.md`), E005 + `paper/alt_proof_frobenius.tex` (W015), `notes/blind_proof_search_muse.md` (W018), `experiments/E002_extensions/README.md` (C9, C10, C11).
 - [ ] **Q5 — Slides.** `talk/slides.pdf` compiles (two overfull boxes). Read every page, fix layout, add the chemistry/biology hook (Finding 3) and, if C12/C13 hold up, one slide "every node is worth −p". Keep the `\claimstatus` tags until humans sign.

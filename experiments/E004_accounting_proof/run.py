@@ -54,37 +54,33 @@ def leaf(a):
     return ("L", a)
 
 
+    for rotation_class in choose_rotation(tree)[1]:
+        child_options.append(ordered_orbit(choose_rotation(rotation_class)))
+
+
 def canonical(tree):
     if tree[0] == "L":
         return tree
     children = tuple(canonical(ch) for ch in tree[1])
-    # A quotient object, not a lex-min ordered representative.  The latter is
-    # not in general invariant under rotations at a parent node (p=3 is the
-    # first counterexample found by this run).
+    # Store the whole cyclic equivalence class at every node.
     return ("N", frozenset(children[i:]+children[:i] for i in range(len(children))))
 
 
-def cyclic_nodes(tree):
-    """Each internal node once, represented by any one of its rotations.
+def choose_rotation(node):
+    return next(iter(node[1])) if isinstance(node[1], frozenset) else node
 
-    A root's child entry is its set of rotations, so process the root first;
-    a non-root node arrives as an ordered representative and is processed by
-    its parent's loop.
-    """
-    if tree[0] == "N" and isinstance(tree[1], frozenset):
-        for rotations in tree[1]:
-            node = next(iter(rotations))
-            yield node
-            yield from cyclic_nodes(node)
-    else:
+
+def cyclic_nodes(tree):
+    if tree[0] == "N":
         yield tree
-        yield from cyclic_nodes(("N", tree[1]))
+        for child in choose_rotation(tree)[1]:
+            yield from cyclic_nodes(child)
 
 
 def leaves(tree):
     if tree[0] == "L":
         return (tree[1],)
-    return sum((leaves(ch) for ch in next(iter(tree[1]))[1]), ())
+    return sum((leaves(ch) for ch in choose_rotation(tree)[1]), ())
 
 
 def node_count(tree):
@@ -92,17 +88,11 @@ def node_count(tree):
 
 
 def ordered_orbit(tree):
-    """All ordered representatives of a cyclic quotient tree.
-
-    Never pass an ordered tree here: its children are ordered tuples, whereas
-    this routine deliberately iterates the cyclic rotations stored in a node.
-    """
     if tree[0] == "L":
         return [tree]
     child_options = []
-    for rotations in tree[1]:
-        child_options.append([x for rotation in rotations
-                              for x in ordered_orbit(rotation)])
+    for rotation_class in choose_rotation(tree)[1]:
+        child_options.append(ordered_orbit(choose_rotation(rotation_class)))
     return [("N", children[i:]+children[:i])
             for children in itertools.product(*child_options)
             for i in range(len(children))]
@@ -171,14 +161,15 @@ def trees_with_classes(labels, classes, p, k):
 def cherry_collapse(tree, selected):
     selected = set(selected)
     hits = []
-    for rotations in tree[1]:
-        for rotation in rotations:
+    for node in cyclic_nodes(tree):
+        for rotation in node[1] if isinstance(node[1], frozenset) else [node]:
             if all(ch[0] == "L" for ch in rotation[1]):
                 if {ch[1] for ch in rotation[1]} == selected:
                     hits.append(rotation)
     if len(hits) != 1:
         return None
     target = hits[0]
+
     def replace(tr):
         if tr is target:
             return leaf(0)
@@ -212,8 +203,7 @@ class Checks:
 
 def symmetric_nodes(tree):
     return sum(1 for node in cyclic_nodes(tree)
-               if len({frozenset(leaves(ch)) for ch in node[1]}) == 1) + sum(symmetric_nodes(ch) for ch in tree[1])
-
+               if len({frozenset(leaves(ch)) for ch in node[1]}) == 1)
 
 def test_L1_L2(C):
     C.begin("L1/L2: actual labelled rotation classes and explicit cherry cycles")
