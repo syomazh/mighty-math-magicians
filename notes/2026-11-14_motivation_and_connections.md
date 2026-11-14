@@ -122,14 +122,48 @@ Konvalinka's proof lets all q branches of a node be permuted. That group is too 
 - *Music.* A rhythm obtained by repeatedly halving a bar is a binary tree; the number of rhythms with m notes is a Catalan number, odd exactly when m is a power of 2, which is when the perfectly even rhythm exists. Triplets are p = 3.
 - *Physics.* Nested balls of this kind are the blocks of hierarchical models; a 1989 paper connects such models with field theories on the p-adic numbers (reference 16, abstract only).
 
-## 9. The first three minutes of the talk, as a script
+## 9. Polymers: perfect branching against random branching
+
+![A molecule grown at random and the most symmetric one with the same 39 ends](../talk/figures/fig_dendrimer.png)
+
+Two tree-like molecules with 39 ends and three branches at every junction. Left: grown at random, 10 of its 19 junctions are asymmetric. Right: the most symmetric one possible, with a single asymmetric junction carrying three perfect branches of 27, 9 and 3 ends, because 39 = 1110 in base 3.
+
+**Exact.** With m ends and p branches per junction, at least t junctions are asymmetric, and the molecules with exactly t are a core of t junctions carrying perfect branches, one for each unit of each base-p digit of m.
+
+**Exact (E012, part L; brute force over all labelled trees for small sizes).** The number of ways to join n labelled units, each with f distinguishable reactive groups, into a tree-like molecule is f^n·(fn − n)!/(fn − 2n + 2)!. Divided by n! this is
+
+    f^n · (Fuss–Catalan number for q = f − 1 and n) / ((f − 2)n + 2).
+
+So, up to a simple factor, **Fuss–Catalan numbers are the statistical weights of n-mers in the theory of branched polymers**; units with three reactive groups give the Catalan numbers. (This counting is the starting point of the classical theory of gelation of Flory and Stockmayer; the attribution and the exact form in the literature are in the source check, item 20.)
+
+**Analogy with a real counterpart.** Chemists make both kinds of molecule: hyperbranched polymers, which grow at random, and dendrimers, which are built step by step to be perfect. Our "atoms" are the perfect branches (dendrons). The theorem says how close to a dendrimer a molecule with a given number of ends can come: perfect exactly when m is a power of p, and otherwise t junctions short.
+
+## 10. More computing: logs, running sums, powers
+
+Each of these is the tree of section 3 in working clothes. (**Exact** statements checked in E012, parts H–K; the descriptions of the systems are in the source check, items 16–19.)
+
+- **Tamper-evident logs.** The Merkle tree of a transparency log over n entries is defined by splitting at the largest power of two below n. That tree is one of our most symmetric trees: it has popcount(n) − 1 asymmetric nodes, the minimum, and its perfect subtrees are the binary digits of n. The picture in section 3 *is* the log tree for 13 entries. In the "mountain range" variant the perfect subtrees are kept as separate peaks, one per binary digit; appending an entry merges equal peaks, and after n entries exactly n − popcount(n) merges have been made: the carries of counting to n.
+- **Running sums.** A Fenwick tree answers "sum of the first n items" by adding one stored block for each binary digit 1 of n: popcount(n) − 1 additions.
+- **Powers.** Computing x^n as a product of repeated squares takes popcount(n) − 1 multiplications besides the squarings. A squaring is a symmetric node. Our lower bound says more: however x·x·…·x (n factors) is bracketed, at least popcount(n) − 1 products multiply two differently shaped brackets.
+
+What the theorem adds to these familiar facts: the binary-digit construction is *optimal among all binary trees*, and the number of optimal shapes is odd, which is exactly why the Catalan number has the power of 2 it has.
+
+## 11. Evolution's own probability law
+
+**Exact (E012, part M).** In the simplest model of evolution (every lineage splits at the same rate; the Yule model), the probability of a tree shape T with n leaves is
+
+    P(T) = 2^d(T) / ∏ over nodes v of (n_v − 1),
+
+where n_v is the number of leaves below v and d(T) is our number of asymmetric nodes. So the class size 2^d of the proof is the factor by which this model favours lopsided shapes. The two normalisations sit side by side: Σ 2^d = Catalan number (all ordered trees), Σ 2^d/∏(n_v − 1) = 1 (all probability). (Where this formula is stated in the literature: source check, item 21.)
+
+## 12. The first three minutes of the talk, as a script
 
 1. *(pattern picture)* "Count the binary trees with n nodes: 1, 2, 5, 14, 42, 132, 429. Which of these are odd? Exactly those where n + 1 is a power of two. And the power of 2 in the others is the number of ones in n + 1, minus one. The same happens for every prime."
 2. *(one tree, four sciences)* "Trees like these are everywhere: in evolution, in tournaments, in codes, in music. And in every one of these, the order of the branches means nothing. So the honest question is: how many ordered trees stand over one shape? The answer is always a power of two."
 3. *(butyl groups)* "For p = 3 this is chemistry. These are the five butyl groups. Over them stand 1, 9, 9, 9 and 27 ternary trees. That is 55, and 55 is not divisible by 3 for a reason you can see: tert-butyl is perfectly symmetric, so it stands alone."
 4. "So the power of p measures the best symmetry a tree with m leaves can have. The known proof computes it with factorials. We will read it off the trees: the most symmetric tree is built from the digits of m."
 
-## 10. What is exact and what is not
+## 13. What is exact and what is not
 
 | Item | Kind | Evidence |
 |---|---|---|
@@ -143,3 +177,7 @@ Konvalinka's proof lets all q branches of a node be permuted. That group is too 
 | cuts into balls, codes, address blocks, rhythms | exact as counting statements | E012 C; direct bijection |
 | divisibility for bounded depth | exact (consequence of the proof); exactness of the power only computed up to depth 7 | E012 C |
 | the physics dictionary of section 5 | analogy | — |
+| the count of tree-like n-mers and its relation to Fuss–Catalan numbers | exact as a counting statement; the link to polymer theory rests on the source check | E012 L |
+| the log Merkle tree is a most symmetric tree; mountain-range merges are carries | exact for the tree defined in E012; that this is the tree used in practice rests on the source check | E012 H, I |
+| Fenwick blocks; repeated squaring | exact | E012 J, K |
+| P(T) = 2^d/∏(n_v − 1) | exact for the model as defined in E012; the name "Yule model" rests on the source check | E012 M |

@@ -1,0 +1,8 @@
+H. log Merkle tree M(n): popcount(n) - 1 asymmetric nodes, atoms = binary digits: ok  (explicit trees n <= 512, recursion n <= 200000)
+I. mountain range: peaks = binary digits of n, merges = n - popcount(n), n <= 5000: ok
+J. Fenwick prefix of length n visits popcount(n) blocks, n <= 100000: ok
+K. x^n as a product of repeated squares is a minimal tree, n <= 256: ok; the left-to-right method written without sharing first fails at n = 6 (d = 2, minimum 1)
+L. branched polymers: W(n,f) = f^n (fn-n)!/(fn-2n+2)! and W/n! = f^n FussCatalan(f-1,n)/((f-2)n+2): 24 cases (f = 3..6, n <= 6): ok
+M. Yule probabilities P(T) = 2^d / prod (n_v - 1) add up to 1, and sum of 2^d is the Catalan number, n <= 14 (2179 shapes at n = 14): ok
+
+OVERALL: ALL CHECKS PASSED

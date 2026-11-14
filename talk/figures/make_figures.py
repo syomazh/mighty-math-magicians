@@ -728,7 +728,189 @@ def fig_fusion():
     save(fig, "fig_fusion")
 
 
+# ------------------------------------------------------------------------------------------
+# 10. dendrimer against hyperbranched molecule (radial trees, p = 3)
+# ------------------------------------------------------------------------------------------
+def radial(ax, t, cx, cy, dr=1.0, node_size=20, leaf_size=6, shade_atoms=False):
+    """Root at the centre, depth = radius, each leaf gets an equal angular slot."""
+    import math
+    from matplotlib.patches import Wedge
+
+    m = n_leaves(t)
+    pts, edges, wedges = [], [], []
+    cursor = [0]
+
+    def rec(u, depth):
+        if is_leaf(u):
+            a0 = cursor[0]
+            cursor[0] += 1
+            ang = (a0 + 0.5) / m * 2 * math.pi
+            pts.append((depth, ang, "leaf"))
+            return ang, a0, a0 + 1, depth
+        res = [rec(c, depth + 1) for c in u]
+        lo, hi = res[0][1], res[-1][2]
+        ang = (lo + hi) / 2 / m * 2 * math.pi
+        sym = len({key(c) for c in u}) == 1
+        pts.append((depth, ang, "sym" if sym else "asym"))
+        for (ca, _, _, cd) in res:
+            edges.append((depth, ang, depth + 1, ca))
+        deepest = max(r[3] for r in res)
+        if shade_atoms and d_of(u) == 0 and depth > 0:
+            wedges.append((depth, lo, hi, deepest))
+        return ang, lo, hi, deepest
+
+    rec(t, 0)
+    xy = lambda r, a: (cx + r * dr * math.cos(a + math.pi / 2), cy + r * dr * math.sin(a + math.pi / 2))
+    if shade_atoms:
+        # keep only maximal complete subtrees (smallest depth for a given angular range)
+        wedges.sort()
+        kept = []
+        for w in wedges:
+            if not any(k[1] <= w[1] and w[2] <= k[2] for k in kept):
+                kept.append(w)
+        for (depth, lo, hi, deepest) in kept:
+            th1 = 90 + lo / m * 360
+            th2 = 90 + hi / m * 360
+            ax.add_patch(Wedge((cx, cy), (deepest + 0.45) * dr, th1, th2, width=(deepest + 0.45 - depth + 0.45) * dr,
+                               facecolor=AQUA_SOFT, edgecolor="none", zorder=0))
+    for (r1, a1, r2, a2) in edges:
+        (x1, y1), (x2, y2) = xy(r1, a1), xy(r2, a2)
+        ax.plot([x1, x2], [y1, y2], color=INK2, lw=0.7, zorder=1)
+    for (r, a, kind) in pts:
+        x, y = xy(r, a)
+        if kind == "sym":
+            ax.scatter([x], [y], s=node_size, marker="o", color=BLUE, edgecolors="white", linewidths=0.6, zorder=3)
+        elif kind == "asym":
+            ax.scatter([x], [y], s=node_size, marker="s", color=ORANGE, edgecolors="white", linewidths=0.6, zorder=3)
+        else:
+            ax.scatter([x], [y], s=leaf_size, marker="o", color="white", edgecolors=INK2, linewidths=0.6, zorder=3)
+
+
+def fig_dendrimer():
+    import random
+
+    p, m = 3, 39                                  # 39 = 1110 in base 3 = 27 + 9 + 3
+    best = (complete(3, 3), complete(2, 3), complete(1, 3))
+    assert n_leaves(best) == m and d_of(best) == 1 == (sp(m, 3) - 1) // 2
+
+    rng = random.Random(7)
+
+    def grow(n_nodes):
+        t = ["leaf"]
+
+        def expand(path_tree):
+            return path_tree
+
+        # represent as nested lists while growing
+        tree = []
+        leaves_list = [tree]                      # each leaf is an empty list; expanding fills it with 3 lists
+        for _ in range(n_nodes):
+            i = rng.randrange(len(leaves_list))
+            lf = leaves_list.pop(i)
+            kids = [[], [], []]
+            lf.extend(kids)
+            leaves_list.extend(kids)
+
+        def freeze(u):
+            return tuple(freeze(c) for c in u)
+
+        return freeze(tree)
+
+    rand = grow((m - 1) // 2)
+    assert n_leaves(rand) == m
+    n_nodes = (m - 1) // 2
+    fig, axes = plt.subplots(1, 2, figsize=(6.3, 3.05), gridspec_kw=dict(wspace=0.02))
+    for ax in axes:
+        clean(ax)
+        ax.set_aspect("equal")
+    depth = lambda u: 0 if is_leaf(u) else 1 + max(depth(c) for c in u)
+    for ax, t, title, shade in ((axes[0], rand, "grown at random", False),
+                                (axes[1], best, "the most symmetric one", True)):
+        R = depth(t)
+        radial(ax, t, 0, 0, dr=1.0 / R, node_size=24, leaf_size=7, shade_atoms=shade)
+        d = d_of(t)
+        ax.set_xlim(-1.18, 1.18)
+        ax.set_ylim(-1.5, 1.32)
+        ax.text(0, 1.26, title, ha="center", va="center", fontsize=8.5, fontweight="bold")
+        ax.text(0, -1.25, f"{n_nodes} junctions:  {n_nodes - d} symmetric,  {d} asymmetric", ha="center",
+                va="center", fontsize=7.8, color=INK)
+    axes[1].text(0, -1.43, r"three perfect branches with 27, 9 and 3 ends:  $39 = 1110_3$", ha="center",
+                 va="center", fontsize=7.6, color=INK2)
+    axes[0].text(0, -1.43, "39 ends, 3 branches at every junction", ha="center", va="center", fontsize=7.6,
+                 color=INK2)
+    save(fig, "fig_dendrimer")
+
+
+# ------------------------------------------------------------------------------------------
+# 11. sand on a line and on a ring (q = 4: two sites)
+# ------------------------------------------------------------------------------------------
+def fig_sand():
+    m = 7
+    # line
+    line = [m, 0, 0, 0]
+    topples_line = 0
+    for i in range(3):
+        c = line[i] // 2
+        line[i] -= 2 * c
+        line[i + 1] += c
+        topples_line += c
+    # ring of two sites
+    ring = [m, 0]
+    topples_ring = 0
+    while max(ring) >= 2:
+        for i in range(2):
+            c = ring[i] // 2
+            ring[i] -= 2 * c
+            ring[(i + 1) % 2] += c
+            topples_ring += c
+    assert line == [1, 1, 1, 0] and topples_line == 4 and ring == [1, 0] and topples_ring == 6
+    assert comb(8, 2) // 7 == 4 and vp(4, 2) == topples_ring - topples_line
+
+    fig, ax = plt.subplots(figsize=(6.3, 2.45))
+    clean(ax)
+
+    def pile(x, y, n, label):
+        ax.plot([x - 0.42, x + 0.42], [y, y], color=INK2, lw=1.2)
+        for i in range(n):
+            ax.add_patch(Circle((x - 0.26 + 0.26 * (i % 3), y + 0.16 + 0.27 * (i // 3)), 0.115, facecolor=AQUA,
+                                edgecolor="white", lw=0.5, zorder=3))
+        ax.text(x, y - 0.2, label, ha="center", va="top", fontsize=7, color=INK2)
+
+    # line: before / after
+    ax.text(2.2, 2.95, "on a line", ha="center", va="center", fontsize=8.5, fontweight="bold")
+    for i, n in enumerate([m, 0, 0, 0]):
+        pile(0.6 + i * 1.05, 1.6, n, f"site {i}")
+    ax.annotate("", xy=(2.2, 0.55), xytext=(2.2, 1.05), arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=1.0))
+    for i, n in enumerate(line):
+        pile(0.6 + i * 1.05, -0.2, n, f"site {i}")
+    ax.text(2.2, -0.95, f"{topples_line} topplings; what is left is $7 = 111_2$", ha="center", va="top", fontsize=7.8)
+
+    # ring
+    ax.text(7.6, 2.95, "on a ring of 2 sites", ha="center", va="center", fontsize=8.5, fontweight="bold")
+    for i, n in enumerate([m, 0]):
+        pile(7.0 + i * 1.2, 1.6, n, f"site {i}")
+    ax.annotate("", xy=(7.6, 0.55), xytext=(7.6, 1.05), arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=1.0))
+    for i, n in enumerate(ring):
+        pile(7.0 + i * 1.2, -0.2, n, f"site {i}")
+    ax.text(8.85, 1.85, "site 1 passes\nback to site 0", ha="left", va="center", fontsize=6.6, color=MUTED,
+            linespacing=1.05)
+    ax.text(7.6, -0.95, f"{topples_ring} topplings; one grain is left", ha="center", va="top", fontsize=7.8)
+
+    ax.text(12.6, 1.9, "rule: 2 grains on a site", ha="center", va="center", fontsize=7.8, color=INK2)
+    ax.text(12.6, 1.52, "become 1 grain on the next", ha="center", va="center", fontsize=7.8, color=INK2)
+    ax.text(12.6, 0.6, f"${topples_ring} - {topples_line} = 2$", ha="center", va="center", fontsize=11)
+    ax.text(12.6, 0.05, "= power of 2 in the number", ha="center", va="center", fontsize=7.8)
+    ax.text(12.6, -0.33, "of 4-ary trees with 7 leaves", ha="center", va="center", fontsize=7.8)
+    ax.text(12.6, -0.71, "(there are 4 of them)", ha="center", va="center", fontsize=7.8, color=INK2)
+    ax.set_aspect("equal")
+    ax.set_xlim(-0.2, 15.0)
+    ax.set_ylim(-1.5, 3.3)
+    save(fig, "fig_sand")
+
+
 if __name__ == "__main__":
+    fig_dendrimer()
+    fig_sand()
     fig_fusion()
     fig_pattern()
     fig_butyl()
