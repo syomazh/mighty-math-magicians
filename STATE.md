@@ -22,7 +22,8 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 ## Saturday afternoon (from 12:05)
 
 - **Humans:** the professor approved the main proof (name pending). The grad student gave up on the Frobenius proof for now (12:13, reported by Syoma); the team is working on understanding the main proof. Aid written for that: `notes/main_proof_map.md` (one page, pictures, one example through every step, the three places to read slowly).
-- **Lean** (Syoma said yes to installing): `elan` is in the user's home folder (not on PATH); project in `lean/`; targets are the main proof only: digit lemmas and the lower bound (Step 2), then rotation equivalence and class size (Step 1). Nothing counts until `lake build` passes; status table in `lean/README.md`.
+- **Lean: the divisibility half of the main theorem is machine-checked (13:35).** `lake build` passes on `lean/` with no `sorry`, standard axioms only. Checked: digit-sum lemmas, Step 2 (lower bound), Step 1 (class size p^d, p prime), "p^t divides the number of p-ary trees with m leaves", the same for leaves at depths divisible by k (q = p^k), and for p = 2 the statement in Mathlib's own terms: 2^(s_2(n+1) − 1) divides `catalan n`. **Not checked:** Steps 3 and 4 (so not the exact valuation, not the residue), the lemma "Blocked form", the closed formula for q > 2, the accounting and Frobenius proofs. Table and how to rebuild: `lean/README.md`. `elan` is in the user's home folder (not on PATH); disk use about 10 GB (3.2 GB toolchain, 7 GB `lean/.lake`, not in git).
+  - Possible next Lean targets, in order of cost: the lemma "Blocked form" (moderate); Steps 3 and 4 (large; unlikely before the deadline). Not started; a human decides whether this is worth the time against the talk.
 - **Talk:** with no human having checked the Frobenius proof, keep it to one sentence or move its slide to the backups (the humans decide).
 
 ## Saturday midday: motivation, connections, pictures

@@ -1,6 +1,6 @@
 # How AI was used in this project
 
-Maintained by the orchestrator (Claude Fable 5.2). Last updated 2026-11-14, Saturday morning (about 10:00 PT). This is the summary required for disclosure; the full record is `JOURNAL.md` (chronological), `CLAIMS.md` (origin of every claim) and `logs/delegations/` (every worker run with its brief and output).
+Maintained by the orchestrator (Claude Fable 5.2). Last updated 2026-11-14, Saturday 13:35 PT. This is the summary required for disclosure; the full record is `JOURNAL.md` (chronological), `CLAIMS.md` (origin of every claim) and `logs/delegations/` (every worker run with its brief and output).
 
 ## Tools
 
@@ -32,6 +32,7 @@ Open Math OS use was stopped on Friday night at the team's instruction (budget);
 | Cross-field readings of Saturday (`notes/2026-11-14_crossfield_analogies.md`) | ideas and exact statements: Claude Fable 5.2; references and prior art looked up on the web by a Claude subagent (`notes/2026-11-14_crossfield_literature.md`) | exact statements by computer (E011); the statements about other fields only against the sources listed there |
 | Motivation and connections of Saturday midday: fifteen figures (`talk/figures/make_figures.py`), the illustrated note, the picture slides | Claude Fable 5.2 (ideas, code, text, all figures). Sources looked up on the web by a Claude subagent (`notes/2026-11-14_motivation_sources.md`). A second Claude subagent, given only a brief, searched independently for further connections and contributed the quadtree, triangle, Feynman-diagram, laser, mobile and cell-lineage readings with its own checks (`notes/2026-11-14_new_connections_blind.md`, E013) | every number in a picture by computer (E012); figures inspected by the orchestrator; no human review yet |
 | Bijection with permutations made of p-cycles (E009), refinements (E007), OEIS and citation checks | Claude Fable 5.2 | by computer only |
+| Lean 4 formalization (`lean/`): Steps 1 and 2 of the main proof, the divisibility p^t ∣ (number of p-ary trees with m leaves), its prime-power form, and 2^(s_2(n+1) − 1) ∣ C_n | Claude Fable 5.2, Saturday 12:05 – 13:35 (all definitions, statements and proofs) | **the Lean kernel**: full build, no `sorry`, standard axioms only. No human has read the Lean files; what a human should read are the three definitions (`PTree`, `leaves`, `ds`) and the statements. Steps 3 and 4 are not formalized |
 | Slides `talk/slides.tex` | Kimi K3.1 Pro (draft), revised by Claude Fable 5.2 | — |
 | Study guide and Q&A sheet | Claude Fable 5.2 | numbers recomputed by script |
 

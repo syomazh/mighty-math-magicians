@@ -175,7 +175,14 @@ See `AI_USAGE.md` and the claim ledger: every claim records which model produced
 Novelty is not established, and the proof has been in existence for less than two days. We would rather say that than overclaim.
 
 **46. What would you do with two more months?**
-Have the proof checked formally in Lean; settle the literature question with experts; write up the weighted and refined versions; and work out the residue modulo p².
+Finish the formal check in Lean (see 46a); settle the literature question with experts; write up the weighted and refined versions; and work out the residue modulo p².
+
+**46a. Has any of it been checked by a proof assistant?**
+*Added 2026-11-14 by Claude Fable 5.2; the Lean files were written by the AI and no human has read them.*
+Half of it. Lean 4 with Mathlib has checked Step 1 (a class has exactly p^d trees), Step 2 (d ≥ t, from the subadditivity of digit sums) and their consequence: p^t divides the number of p-ary trees with m leaves, for every prime p, and likewise for the p-ary trees that stand for q-ary trees. For p = 2 the checked statement uses only the library's own definitions: 2^(s_2(n+1) − 1) divides the Catalan number C_n. Lean has not checked that the power is exact (Steps 3 and 4), nor the two other proofs. So the machine vouches for "at least p^t", and the humans and the referees for "exactly p^t". The table is in `lean/README.md`.
+
+**46b. What does one have to trust in the Lean result?**
+The Lean kernel, Mathlib, and that three short definitions say what we mean: a p-ary tree, its number of leaves, the base-p digit sum. The final statement does not mention rotations; they occur only inside the proof. For the Catalan statement there is nothing of ours to trust.
 
 ## M. Other ways to see it (written and checked by computer; none human-verified yet)
 

@@ -13,6 +13,10 @@ subadditivity of digit sums at an asymmetric node and `s(p b) = s(b)` at a symme
 It uses no factorial and no valuation, and it does not need `p` to be prime.
 -/
 import MMM.Digits
+import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Algebra.Group.Fin.Basic
+import Mathlib.Data.Fintype.BigOperators
 
 namespace MMM
 
@@ -76,7 +80,7 @@ theorem Rot.leaves_eq [NeZero p] {S T : PTree p} (h : Rot S T) : S.leaves = T.le
 /-- **The lower bound (Step 2).** For every `p`-ary tree `T`, `p ≥ 2`:
 `s_p(leaves T) ≤ (p - 1) * d(T) + 1`. -/
 theorem lower_bound (hp : 2 ≤ p) (T : PTree p) : ds p T.leaves ≤ (p - 1) * T.d + 1 := by
-  haveI : NeZero p := ⟨by omega⟩
+  have : NeZero p := ⟨by omega⟩
   induction T with
   | leaf => simp [ds_one hp]
   | node f ih =>

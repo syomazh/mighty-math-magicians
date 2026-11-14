@@ -1,1 +1,9 @@
 import MMM.Smoke
+import MMM.Digits
+import MMM.Trees
+import MMM.RotEquiv
+import MMM.ClassSize
+import MMM.Divisibility
+import MMM.Blocked
+import MMM.Catalan
+import MMM.Axioms

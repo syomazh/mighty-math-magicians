@@ -5,7 +5,8 @@ compiles; not human-reviewed.
 Digit sums in base `p`, proved directly from the recursion `s(n) = n % p + s(n / p)`.
 No factorial and no valuation is used anywhere in this file.
 -/
-import Mathlib
+import Mathlib.Data.Nat.Digits.Defs
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 namespace MMM
 
@@ -51,10 +52,12 @@ theorem ds_pos {p : ℕ} (hp : 2 ≤ p) : ∀ n : ℕ, 0 < n → 0 < ds p n := b
     · omega
 
 /-- **Digit sums are subadditive.** Each carry lowers the digit sum. -/
-theorem ds_add_le {p : ℕ} (hp : 2 ≤ p) : ∀ a b : ℕ, ds p (a + b) ≤ ds p a + ds p b := by
-  intro a b
-  induction h : a + b using Nat.strong_induction_on generalizing a b with
+theorem ds_add_le {p : ℕ} (hp : 2 ≤ p) (a b : ℕ) : ds p (a + b) ≤ ds p a + ds p b := by
+  suffices H : ∀ n a b : ℕ, a + b = n → ds p (a + b) ≤ ds p a + ds p b from H _ a b rfl
+  intro n
+  induction n using Nat.strong_induction_on with
   | _ n ih =>
+    intro a b h
     rcases Nat.eq_zero_or_pos n with hn | hn
     · have ha : a = 0 := by omega
       have hb : b = 0 := by omega
@@ -67,7 +70,7 @@ theorem ds_add_le {p : ℕ} (hp : 2 ≤ p) : ∀ a b : ℕ, ds p (a + b) ≤ ds 
       have hlt : (a + b) / p < n := by
         rw [h]; exact Nat.div_lt_self hn (by omega)
       by_cases hc : p ≤ a % p + b % p
-      · rw [if_pos hc] at hdiv hmod
+      · simp only [hc, ↓reduceIte] at hdiv hmod
         -- one carry
         have h1 : ds p (a / p + b / p + 1) ≤ ds p (a / p + b / p) + ds p 1 :=
           ih (a / p + b / p + 1) (by rw [← hdiv]; exact hlt) (a / p + b / p) 1 rfl
@@ -77,7 +80,7 @@ theorem ds_add_le {p : ℕ} (hp : 2 ≤ p) : ∀ a b : ℕ, ds p (a + b) ≤ ds 
         rw [ds_one hp] at h1
         rw [hdiv, hmod]
         omega
-      · rw [if_neg hc] at hdiv hmod
+      · simp only [hc, ↓reduceIte] at hdiv hmod
         have h2 : ds p (a / p + b / p) ≤ ds p (a / p) + ds p (b / p) := by
           have hlt2 : a / p + b / p < n := by omega
           exact ih (a / p + b / p) hlt2 (a / p) (b / p) rfl
