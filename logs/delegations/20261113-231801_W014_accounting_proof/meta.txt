@@ -1,0 +1,5 @@
+slug:    W014_accounting_proof
+brief:   briefs/W014_accounting_proof.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 23:18:02 PST

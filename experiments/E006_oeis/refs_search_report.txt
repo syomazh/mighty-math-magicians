@@ -1,0 +1,23 @@
+[cached] openalex_balance
+
+### OpenAlex: symmetry nodes tree balance index
+  16881 hits
+  {"title": "Measuring tree balance using symmetry nodes — A new balance index and its extremal properties", "authors": "Sophie Johanna Kersting, Mareike Fischer", "year": 2021, "venue": "Mathematical Biosciences", "volume": "341", "pages": "108690", "doi": "https://doi.org/10.1016/j.mbs.2021.108690", "openalex_id": "https://openalex.org/W3159105183"}
+    abstract: (none returned)
+  {"title": "Symmetry nodes index", "authors": "Mareike Fischer, Lina Herbst, Sophie Johanna Kersting, Annemarie Luise Kühn, Kristina Wicke", "year": 2023, "venue": "Springer eBooks", "volume": null, "pages": "211", "doi": "https://doi.org/10.1007/978-3-031-39800-1_18", "openalex_id": "https://openalex.org/W4388053223"}
+    abstract: (none returned)
+  {"title": "A new balance index for phylogenetic trees", "authors": "Arnau Mir, Francesc Rosselló, Lucía Rotger García", "year": 2012, "venue": "Mathematical Biosciences", "volume": "241", "pages": "125", "doi": "https://doi.org/10.1016/j.mbs.2012.10.005", "openalex_id": "https://openalex.org/W2094647384"}
+    abstract: (none returned)
+  {"title": "Study of balance and symmetry of rooted trees", "authors": "Arnau Mir Fuentes", "year": 2020, "venue": "UPCommons institutional repository (Universitat Politècnica de Catalunya)", "volume": null, "pages": null, "doi": null, "openalex_id": "https://openalex.org/W3131934831"}
+    abstract: The Sacking index of a tree is a measure of balance which has beenintroduced in applications to phylogenetics. The study of this parameterin rooted binary trees, identifying its extremal values and enumerationof trees with given index, has been recently achieved by MareikeFischer. The goal of this project is to extend this analysis to particularly for the classes of rootedk-ary trees for general k. Finally, we will study the symmetry of the binary trees and we will propose some indexes to measure how symmetric is a tree
+Traceback (most recent call last):
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E006_oeis\search_refs.py", line 155, in <module>
+    show_oa(openalex_search(q, name), f"OpenAlex: {q}")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semyo\Documents\GitHub\mighty-math-magicians\experiments\E006_oeis\search_refs.py", line 97, in show_oa
+    print("  " + json.dumps(cit, ensure_ascii=False))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u0107' in position 115: character maps to <undefined>

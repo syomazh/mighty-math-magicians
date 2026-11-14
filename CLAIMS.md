@@ -23,3 +23,21 @@ A q-ary tree is read as a p-ary tree whose leaves all sit at depth ≡ 0 (mod k)
 - Konvalinka 2007, Proposition 2: the valuation formula, proved with factorial valuations.
 - Konvalinka 2007, Proposition 7: every orbit of the *full* symmetry group has size divisible by p^t; his proof ends by invoking Proposition 2 for exactness.
 - Deutsch–Sagan 2006: the case p = q = 2, where the number of minimal orbits is (2s−3)!! (stated from memory of the paper; **to be checked against the source**).
+
+## Updates, 2026-11-13 23:30 PT (Claude Fable 5.2)
+
+**Evidence added for C1–C8.**
+
+- Round-1 adversarial reviews of `paper/main.tex` by three models (Mistral Large 4.0, Muse Spark Open, Kimi K3.1 Pro): all conclude the main theorem is proved modulo write-up gaps; no counterexample; hand checks of six small cases agree. Fourteen repairs accepted, two of them for steps that were false as written (freeness proof, termination for p = 2): `paper/reviews/ADJUDICATION_round1.md`. Grades stay at `computed` until the repaired paper passes round 2.
+- E001 (independent code, Kimi): agrees with E000 on C1, C2, C3, C7, C8 for k = 1 and small n only. k > 1 and most labelled cases were not completed. Its two reported failures of C5 at (p,k,a) = (2,3,(2,0,0)) come from counting a one-leaf tree of class 1 as valid; by hand and by E000, T((2,0,0)) = 0 and T((0,1,0)) = 0, so the congruence holds there.
+
+**New claims.**
+
+| ID | Claim | Grade | Evidence | Origin |
+|---|---|---|---|---|
+| C12 | Compact form: C_n^(q)·∏ m_j! ≡ (−p)^t (mod p^(t+1)). (Equivalent to C6 + C7.) | computed | 885 cases, p ≤ 11, k ≤ 3, n < 60 (inline script, journal 23:15) | Claude Fable 5.2 |
+| C13 | Accounting proof: m!·C_n^(q) = p^N(m)·L(m) with L(m) ≡ (−1)^N(m); m! = p^ν(m)·∏ m_j!·\|𝔉(m)\| with \|𝔉(m)\| ≡ (−1)^ν(m); N(m) = (m−1)/(p−1), ν(m) = (m−s)/(p−1). | conjecture (sketch in `notes/2026-11-13_new_ideas.md`) | W014 running | Claude Fable 5.2 |
+| C14 | Sandpile statement: v_p(C_n^(q)) = (topplings of m grains at the origin on a ring of k sites) − (topplings on a half-line), rule "p grains → 1 grain on the next site". | conjecture (the identity t = N − ν is immediate; the toppling counts are to be verified) | W014 running | Claude Fable 5.2 |
+| C15 | The number of rotation classes of ternary trees with n nodes is OEIS A000625 (stereoisomeric alkyl radicals); of binary trees, A001190 (Wedderburn–Etherington). | computed | OEIS lookup of our E000 class counts, n ≤ 8 and n ≤ 11 (journal 23:15) | Claude Fable 5.2 |
+
+**Literature (from `references/overlap_fulltext.md`, a worker's reading of four full texts; not a novelty certificate).** For p = q = 2 the orbit proof of exactness, with (2t−1)!! minimal orbits, is in Deutsch–Sagan; the weighted version in Postnikov–Sagan. This confirms the "(2s−3)!!" statement above (s = t + 1). Not found in the four texts: the p-group action on q = p^k trees, the digit skeleton with the depth condition, the carry–cherry count, C9's transitivity remark, C10, C11.

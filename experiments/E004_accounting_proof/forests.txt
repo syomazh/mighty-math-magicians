@@ -1,0 +1,28 @@
+E004 -- the accounting proof, explicit objects and exact arithmetic
+Model: moonshotai/kimi-k3.1-pro (Open Math OS), 2026-11-13
+Python 3.13.14; platform Windows-11-10.0.26200-SP0
+A line beginning FAIL is a failed mathematical check. Range limits are reported separately.
+No check is changed to fit the output; formulas are compared against explicit objects.
+
+==============================================================================
+L3: explicit digit forests, recurrence, actions and stabilizers
+==============================================================================
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] digit-forest formula p=2,m=1: actual=0, expected=1; nu=0, digits=[1]
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] explicit forest recurrence p=2,m=1: F=0, RHS=1
+p=2,m=1: |F|=0, formula=1, recurrence RHS=1, nu=0; 0.001s
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] digit-forest formula p=2,m=2: actual=0, expected=1; nu=1, digits=[0, 1]
+p=2,m=2: |F|=0, formula=1, recurrence RHS=0, nu=1; 0.000s
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] digit-forest formula p=2,m=3: actual=0, expected=3; nu=1, digits=[1, 1]
+p=2,m=3: |F|=0, formula=3, recurrence RHS=0, nu=1; 0.000s
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] digit-forest formula p=2,m=4: actual=0, expected=3; nu=3, digits=[0, 0, 1]
+p=2,m=4: |F|=0, formula=3, recurrence RHS=0, nu=3; 0.000s
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] digit-forest formula p=2,m=5: actual=0, expected=15; nu=3, digits=[1, 0, 1]
+p=2,m=5: |F|=0, formula=15, recurrence RHS=0, nu=3; 0.000s
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] digit-forest formula p=2,m=6: actual=0, expected=45; nu=4, digits=[0, 1, 1]
+p=2,m=6: |F|=0, formula=45, recurrence RHS=0, nu=4; 0.000s
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] digit-forest formula p=2,m=7: actual=0, expected=315; nu=4, digits=[1, 1, 1]
+p=2,m=7: |F|=0, formula=315, recurrence RHS=0, nu=4; 0.000s
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] digit-forest formula p=2,m=8: actual=0, expected=315; nu=7, digits=[0, 0, 0, 1]
+p=2,m=8: |F|=0, formula=315, recurrence RHS=0, nu=7; 0.000s
+FAIL [L3: explicit digit forests, recurrence, actions and stabilizers] digit-forest formula p=2,m=9: actual=0, expected=2835; nu=7, digits=[1, 0, 0, 1]
+p=2,m=9: |F|=0, formula=2835, recurrence RHS=0, nu=7; 0.000s

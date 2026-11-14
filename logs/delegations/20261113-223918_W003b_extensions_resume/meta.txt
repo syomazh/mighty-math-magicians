@@ -1,0 +1,5 @@
+slug:    W003b_extensions_resume
+brief:   briefs/W003b_extensions_resume.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 22:39:18 PST

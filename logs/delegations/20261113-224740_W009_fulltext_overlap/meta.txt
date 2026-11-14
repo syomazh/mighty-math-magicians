@@ -1,0 +1,8 @@
+slug:    W009_fulltext_overlap
+brief:   briefs/W009_fulltext_overlap.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 22:47:40 PST
+attempt 1: exit 0 at 23:06:55
+ended:   2026-11-13 23:06:55 PST
+exit:    0

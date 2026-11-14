@@ -102,25 +102,27 @@ with subscripts taken modulo $p$.  Let $\sim$ be the smallest equivalence relati
 Two trees in one class are called \emph{rotation equivalent}; $[T]$ denotes the class of $T$.
 \end{definition}
 \begin{remark}
-The generators in (R1)--(R2) are the action of an iterated wreath product of copies of $\Z_p$, with one independent cyclic rotation at each node.  On the $q$ bottom branches of a copy of $K_k$, they induce a Sylow $p$-subgroup of the symmetric group $S_q$.  We do not need this group-theoretic formulation in any argument below.
+The generators in (R1)--(R2) are the action of an iterated wreath product of copies of $\Z_p$, with one independent cyclic rotation at each node.  More precisely, the permutation group induced on the $q$ bottom slots of one block $K_k$ by the rotations at the nodes of that block is $\Z_p\wr\cdots\wr\Z_p$ ($k$ factors), a Sylow $p$-subgroup of the symmetric group $S_q$.  We do not need this group-theoretic formulation in any argument below.
 \end{remark}
 \begin{lemma}[Normal form]\label{lem:normal-form}
-If $T=(T_1,\ldots,T_p)$ and $T'$ is not a leaf, then $T\sim T'$ if and only if
+If $T=(T_1,\ldots,T_p)$ and $T'=(T_1',\ldots,T_p')$ are not leaves, then $T\sim T'$ if and only if there is $r\in\Z_p$ such that
 \[
- T'=(T_{1+r}',\ldots,T_{p+r}')
-\quad\text{for some }r\in\Z_p,
- \qquad T_i\sim T_i'\ \ (1\le i\le p).
+ T_i'\sim T_{i+r}\qquad(1\le i\le p),
 \]
-In other words, relative to $T$, a class member is obtained by replacing the immediate subtrees by equivalent subtrees and cyclically rotating them once.
+with subscripts taken modulo $p$.  In other words, relative to $T$, a class member is obtained by replacing the immediate subtrees by equivalent subtrees and cyclically rotating them once.
 \end{lemma}
 \begin{proof}
-Let $R(T,T')$ be the displayed condition, including $R(\bullet,\bullet)$ at a leaf.  The identity rotation proves reflexivity, the rotation by $-r$ proves symmetry, and addition of the two rotations proves transitivity.  Also, $R(T_1,T_1'),\ldots,R(T_p,T_p')$ imply $R((T_i),(T_i'))$ using $r=0$.  Thus $R$ is an equivalence relation satisfying (R2), and (R1) holds by taking equivalent copies $T_i'=T_i$.  Minimality gives $T\sim T'\Rightarrow R(T,T')$.  Conversely, (R2) followed by (R1) shows that $R(T,T')\Rightarrow T\sim T'$.
+Let $R(T,T')$ be the displayed condition, including $R(\bullet,\bullet)$ at a leaf.  We verify that $R$ is an equivalence relation by induction on the tree; at each non-leaf stage we may use that $\sim$ is symmetric and transitive on the strictly smaller immediate subtrees.
+Reflexivity holds with $r=0$, since $T_i\sim T_i$.
+For symmetry, suppose $R(T,T')$ holds with rotation $r$, so $T_i'\sim T_{i+r}$ for all $i$.  By symmetry of $\sim$ on the smaller subtrees, $T_{i+r}\sim T_i'$, and reindexing $j=i+r$ gives $T_j\sim T_{j-r}'$ for all $j$, which is $R(T',T)$ with rotation $-r$.
+For transitivity, suppose $R(T,T')$ with rotation $r$ and $R(T',T'')$ with rotation $s$.  Then $T_i''\sim T_{i+s}'$ and $T_{i+s}'\sim T_{i+s+r}$, so transitivity of $\sim$ on the smaller subtrees gives $T_i''\sim T_{i+(r+s)}$ for all $i$, which is $R(T,T'')$ with rotation $r+s$.
+Also, $R(T_1,T_1'),\ldots,R(T_p,T_p')$ imply $R((T_i),(T_i'))$ using $r=0$.  Thus $R$ is an equivalence relation satisfying (R2), and (R1) holds by taking $T_i'=T_{i+r}$ and using reflexivity of $\sim$ on subtrees.  Minimality of $\sim$ gives $T\sim T'\Rightarrow R(T,T')$.  Conversely, (R2) followed by (R1) shows that $R(T,T')\Rightarrow T\sim T'$.
 \end{proof}
 \begin{lemma}\label{lem:depth-invariant}
 Rotation equivalence preserves the multiset of leaf depths.  It therefore preserves $\ell(T)$ and $k$-blockedness.
 \end{lemma}
 \begin{proof}
-Rotating the root's $p$ subtrees only permutes subtrees whose leaves all have the same extra final depth $1$.  An application of (R2) applies the same statement recursively inside each subtree, without changing its attachment to the root.  Every generating step preserves the multiset of leaf depths; iterating such steps does too.  The number of leaves is the size of this multiset, and $k$-blockedness is a condition on its entries.
+We show that every generating step (R1) or (R2) preserves the multiset of leaf depths; iterating such steps then does too.  At a leaf there is nothing to prove, since $\bullet\sim\bullet$ and the multiset $\{0\}$ is unchanged.  For (R1), rotating the root's $p$ subtrees only permutes them, and each leaf keeps its depth inside its own subtree plus the same extra final depth $1$, so the multiset of leaf depths is permuted but unchanged.  For (R2), if $T_i\sim T_i'$ for each $i$, then by induction on the generating steps each $T_i$ and $T_i'$ have the same multiset of leaf depths, and passing to $(T_1,\ldots,T_p)$ and $(T_1',\ldots,T_p')$ adds $1$ to every entry, so the multisets again agree.  The number of leaves is the size of this multiset, and $k$-blockedness is a condition on its entries.
 \end{proof}
 \begin{definition}
 A node is \emph{asymmetric} if its immediate subtrees $(T_1,\ldots,T_p)$ do not all have the same rotation class.  Otherwise it is \emph{symmetric}.  Let $d(T)$ be the number of asymmetric nodes of $T$.

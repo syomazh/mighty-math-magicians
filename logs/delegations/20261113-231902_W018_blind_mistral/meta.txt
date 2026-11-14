@@ -1,0 +1,5 @@
+slug:    W018_blind_mistral
+brief:   briefs/W018_blind_mistral.md
+model:   mistralai/mistral-large-4-0
+flags:   -AllowBash -Model mistralai/mistral-large-4-0
+started: 2026-11-13 23:19:02 PST

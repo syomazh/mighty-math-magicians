@@ -1,0 +1,5 @@
+slug:    W010_slides
+brief:   briefs/W010_slides.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 22:47:55 PST

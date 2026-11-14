@@ -1,0 +1,337 @@
+[cached] search_classes_p2_k1
+
+### classes_p2_k1
+  2 hit(s); showing up to 4
+  A001190: Wedderburn-Etherington numbers: unlabeled binary rooted trees (every node has outdegree 0 or 2) with n endpoints (and 2n-1 nodes in all).
+    data: 0,1,1,1,2,3,6,11,23,46,98,207,451,983,2179,4850,10905,24631,56011,127912,293547,676157,1563372,3626149,8436379
+    [comment] Also number of n-node binary rooted trees (every node has outdegree <= 2) where root has degree 0 (only for n=1) or 1.
+    [comment] a(n+1) is the number of rooted trees with n nodes where the outdegree of every node is <= 2, see example. These trees are obtained by removing the root of the trees in the comment above. - _Joerg Arndt_, Jun 29 2014
+    [comment] For n > 1, a(n) is the number of unordered pairs of not necessarily distinct unlabeled full binary rooted trees having a total of n leaves. See the first entry in the formula section. - _Geoffrey Critzer_, Nov 09 2014 [Corrected by _Eric W. Weisstein_, Oct 13 2026]
+    [comment] Named after the English mathematician Ivor Etherington (1908-1994) and the Scottish mathematician Joseph Wedderburn (1882-1948). - _Amiram Eldar_, May 29 2021
+    [link] Lily Agranat-Tamir, Michael Fuchs, Bernhard Gittenberger, Noah A. Rosenberg, and Karthik V. Seetharaman, <a href="https://arxiv.org/abs/2601.08062">Combinatorial comparison of general galled trees, time-consistent galled trees, and simplex time-consistent galled trees</a>, arXiv:2601.08062 [math.CO], 2026. See p. 5.
+    [link] Mayfawny Bergmann, <a href="https://scholar.rose-hulman.edu/rhumj/vol15/iss2/1/"> Efficiency of Lossless Compression of a Binary Tree via its Minimal Directed Acyclic Graph Representation</a>, Rose-Hulman Undergrad. Math. J. 15(2) (2014), Art. 1.
+    [link] Sara Billey, MatjaÅ¾ Konvalinka, and Frederick A. Matsen IV, <a href="https://hal.archives-ouvertes.fr/hal-02173394">On trees, tanglegrams, and tangled chains</a>, hal-02173394 [math.CO], 2020.
+    [link] Daniel Brosch and Diane Puges, <a href="https://doi.org/10.1007/s10107-025-02305-1">Getting to the root of the problem: sums of squares for limits of trees</a>, Math. Prog. B (2025). See p. 4.
+    [link] Nicolas Broutin and Philippe Flajolet, <a href="https://doi.org/10.1002/rsa.20393">The distribution of height and diameter in random non-plane binary trees</a>, Random Struct. Algorithms 41(2) (2012), 215-252.
+    [link] Peter J. Cameron, <a href="https://doi.org/10.1093/qmath/38.2.155">Some treelike objects</a>, Quart. J. Math. Oxford Ser. 38(2) (1987), Art. 150, 155-183. MR0891613 (89a:05009). See p. 155. - _N. J. A. Sloane_, Apr 18 2014
+    [link] Sean Cleary, M. Fischer, R. C. Griffiths, and R. Sainudiin, <a href="https://web.archive.org/web/20240924115150/http://lamastex.org/preprints/20151231_SomeDistsFRBTrees.pdf">Some distributions on finite rooted binary trees</a>, UCDMS Research Report NO. UCDMS2015/2, School of Mathematics and Statistics, University of Canterbury, Christchurch, NZ, 2015.
+    [link] S. J. Cyvin, J. Brunvoll, and B. N. Cyvin, <a href="https://doi.org/10.1016/0166-1280(95)04329-6">Enumeration of constitutional isomers of polyenes</a>, J. Molec. Struct. (Theochem) 357(3) (1995), 255-261.
+    [link] Luc Devroye, Michael R. Doboli, Noah A. Rosenberg, and Stephan Wagner, <a href="https://arxiv.org/abs/2409.18956">Tree height and the asymptotic mean of the Colijn-Plazzotta rank of unlabeled binary rooted trees</a>, arXiv:2409.18956 [math.CO], 2024. See p. 21.
+    [link] Luc Devroye, Michael R. Doboli, Noah A. Rosenberg, and Stephan Wagner, <a href="https://doi.org/10.1007/s11538-025-01538-7">Tree height and the asymptotic mean of the Colijn-Plazzotta rank of unlabeled binary rooted trees</a>, Bull. Math. Biol. 87 (2025), Art. 172. See p. 5.
+    [link] Filippo Disanto and Thomas Wiehe, <a href="https://arxiv.org/abs/1112.1295">Some combinatorial problems on binary rooted trees occurring in population genetics</a>, arXiv preprint arXiv:1112.1295 [math.CO], 2011-2012.
+    [link] Michael R. Doboli, Hsien-Kuei Hwang, and Noah A. Rosenberg, <a href="https://doi.org/10.4230/LIPIcs.AofA.2024.18">Periodic Behavior of the Minimal Colijn-Plazzotta Rank for Trees with a Fixed Number of Leaves</a>, In 35th Int'l Conf. Probab. Comb. Asympt. Methods Anal. Algor. (AofA 2024). Leibniz Int'l Proc. Inform. (LIPIcs) 302 (2024), 18:1-18:14, Schloss Dagstuhl - Leibniz-Zentrum fÃ¼r Informatik.
+    [link] A. Erdelyi and I. M. H. Etherington, <a href="https://doi.org/10.1017/S0950184300002640">Some problems of non-associative combinations (II)</a>, Edinburgh Math. Notes, 32 (1940), pp. vii-xiv.
+    [link] I. M. H. Etherington, <a href="https://www.jstor.org/stable/3605743">Non-associate powers and a functional equation</a>, Math. Gaz. 21 (1937), 36-39 and 153.
+    [link] I. M. H. Etherington, <a href="/A000108/a000108_13.pdf">On non-associative combinations</a>, Proc. Royal Soc. Edinburgh, 59 (Part 2, 1938-39), 153-162. [Annotated scanned copy]
+    [link] I. M. H. Etherington, <a href="https://doi.org/10.1017/S0370164600012244">On non-associative combinations</a>, Proc. Royal Soc. Edinburgh, 59 (Part 2, 1938-39), 153-162.
+    [link] I. M. H. Etherington, <a href="https://doi.org/10.1017/S0950184300002639">Some problems of non-associative combinations (I)</a>, Edinburgh Math. Notes, 32 (1940), pp. i-vi.
+    [link] V. Fack, S. Lievens, and J. Van der Jeugt, <a href="https://doi.org/10.1016/S0012-365X(01)00418-6">On the diameter of the rotation graph of binary coupling trees</a>. Disc. Math. 245(1-3) (2002), 1-18. MR1887046 (2003i:05047).
+    [link] Steven R. Finch, <a href="http://www.people.fas.harvard.edu/~sfinch/constant/otter/otter.html">Otter's Tree Enumeration Constants</a>. [Broken link]
+    [link] Steven R. Finch, <a href="https://web.archive.org/web/20010207195939/http://www.mathsoft.com/asolve/constant/otter/otter.html">Otter's Tree Enumeration Constants</a>. [Wayback Machine]
+    [link] Antoine Genitrini, <a href="https://hal.sorbonne-universite.fr/hal-05856690">Smooth disturbances of tree functions: full asymptotic expansions and uniform random sampling of PÃ³lya structures</a>, hal-05856690, 2026. See pp. 6, 29, 54 (Appendix A).
+    [link] Virginia P. Johnson, <a href="https://people.math.sc.edu/czabarka/Theses/JohnsonThesis.pdf">Enumeration Results on Leaf Labeled Trees</a>, Ph. D. Dissertation, Univ. South Carolina, 2012.
+    [link] Alice Ledda, Guillaume Achaz, Thomas Wiehe, Sebastian E. Ramos-Onsins, and Luca Ferretti, <a href="https://arxiv.org/abs/1510.06748">Decomposing the site frequency spectrum: the impact of tree topology on neutrality tests</a>, arXiv preprint arXiv:1510.06748 [q-bio.PE], 2015.
+    [link] Eunjeong Lee, Mikiya Masuda, and Seonjeong Park, <a href="https://arxiv.org/abs/2105.12274">Toric Richardson varieties of Catalan type and Wedderburn-Etherington numbers</a>, arXiv:2105.12274 [math.AG], 2021.
+    [link] Fionn Murtagh, <a href="https://doi.org/10.1016/0166-218X(84)90066-0">Counting dendrograms: a survey</a>, Disc. Appl. Math. 7 (1984), 191-199.
+    [link] David Serena and William J. Buchanan, <a href="https://arxiv.org/abs/2503.02663">Equivalence Classes Induced by Binary Tree Isomorphism -- Generating Functions</a>, arXiv:2503.02663 [math.CO], 2025. See p. 5.
+    [link] Chloe E. Shiff and Noah A. Rosenberg, <a href="https://arxiv.org/abs/2410.14915">Enumeration of rooted binary perfect phylogenies</a>, arXiv:2410.14915 [q-bio.PE], 2024. See pp. 2, 5, 9.
+    [link] Chloe E. Shiff and Noah A. Rosenberg, <a href="https://doi.org/10.1016/j.dam.2025.10.053">Enumeration of rooted binary perfect phylogenies</a>, Discr. Appl. Math. 380 (2026), 538-561. See Tables 1 and 2.
+    [link] Fabian Sievers, Graham M. Hughes, and Desmond G. Higgins, <a href="https://doi.org/10.1186/1471-2105-15-338">Systematic Exploration of Guide-Tree Topology Effects for Small Protein Alignments</a>, BMC Bioinformatics 15 (2014), Art. 338. (Mentions this sequence).
+    [link] J. H. M. Wedderburn, <a href="https://www.jstor.org/stable/1967710">The functional equation g(x^2) = 2ax + [g(x)]^2</a>, Ann. Math., 24 (1922-23), 121-140.
+    [link] Eric Weisstein's World of Mathematics, <a href="https://mathworld.wolfram.com/RootedTree.html">Rooted Tree</a>.
+    [link] Eric Weisstein's World of Mathematics, <a href="https://mathworld.wolfram.com/StronglyBinaryTree.html">Strongly Binary Tree</a>.
+    [link] Eric Weisstein's World of Mathematics, <a href="https://mathworld.wolfram.com/WeaklyBinaryTree.html">Weakly Binary Tree</a>.
+    [link] Wikipedia, <a href="https://en.wikipedia.org/wiki/Wedderburn-Etherington_number">Wedderburn-Etherington numbers</a>.
+    [link] <a href="/index/Ro#rooted">Index entries for sequences related to rooted trees</a>
+    [link] <a href="/index/Tra#trees">Index entries for sequences related to trees</a>
+    [example] The a(6+1) = 11 rooted trees with 6 nodes as described in the comment are:
+  A036656: Number of n-node rooted unlabeled trees with outdegree <= 2 and exactly 1 edge at the root.
+    data: 0,0,1,1,2,3,6,11,23,46,98,207,451,983,2179,4850,10905,24631,56011,127912,293547,676157,1563372,3626149,8436379
+    [link] <a href="/index/Ro#rooted">Index entries for sequences related to rooted trees</a>
+[cached] search_classes_p3_k1
+
+### classes_p3_k1
+  1 hit(s); showing up to 4
+  A000625: Number of n-node steric rooted ternary trees; number of n carbon alkyl radicals C(n)H(2n+1) taking stereoisomers into account.
+    data: 1,1,1,2,5,11,28,74,199,551,1553,4436,12832,37496,110500,328092,980491,2946889,8901891,27012286,82300275,251670
+    [comment] Steric, or including stereoisomers, means that the children of a node are taken in a certain cyclic order. If the children are rotated it is still the same tree, but any other permutation yields a different tree. See A000598 for the analogous sequence with stereoisomers not counted.
+    [comment] Other descriptions of this sequence: steric planted trees with n nodes; total number of monosubstituted alkanes C(n)H(2n+1)-X with n carbon atoms.
+    [comment] Let the entries in the nine columns of Blair and Henze's Table I (JACS 54 (1932), p. 1098) be denoted by Ps(n), Pn(n), Ss(n), Sn(n), Ts(n), Tn(n), As(n), An(n), T(n) respectively (here P = Primary, S = Secondary, T = Tertiary, s = stereoisomers, n = non-stereoisomers and the last column T(n) gives total).
+    [link] C. M. Blair and H. R. Henze, <a href="https://doi.org/10.1021/ja01342a036">The number of stereoisomeric and non-stereoisomeric mono-substitution products of the paraffins</a>, J. Amer. Chem. Soc., 54 (3) (1932), 1098-1106.
+    [link] C. M. Blair and H. R. Henze, <a href="/A000620/a000620.pdf">The number of stereoisomeric and non-stereoisomeric mono-substitution products of the paraffins</a>, J. Amer. Chem. Soc., 54 (3) (1932), 1098-1105. (Annotated scanned copy)
+    [link] Casper AsbjÃ¸rn Eriksen and Daniel Merkle, <a href="https://arxiv.org/abs/2609.02932">Enumerating Chemical Structures, Stereoisomers, and Stereogenic Units with Analytic Combinatorics</a>, arXiv:2609.02932 [physics.chem-ph], 2026. See p. 13.
+    [link] R. C. Read, <a href="/A000598/a000598.pdf">The Enumeration of Acyclic Chemical Compounds</a>, pp. 25-61 of A. T. Balaban, ed., Chemical Applications of Graph Theory, Ac. Press, 1976. [Annotated scanned copy] See p. 44.
+    [link] <a href="/index/Ro#rooted">Index entries for sequences related to rooted trees</a>
+    [link] <a href="/index/Tra#trees">Index entries for sequences related to trees</a>
+[cached] search_classes_p5_k1
+
+### classes_p5_k1
+  4 hit(s); showing up to 4
+  A369440: Expansion of (1/x) * Series_Reversion( x / ((1+x) * (1+x^2)^2) ).
+    data: 1,1,3,9,30,107,396,1513,5915,23554,95202,389555,1610588,6717816,28234064,119452553,508330809,2174393331,934391
+  A036727: G.f. satisfies A(x) = 1 + x*cycle_index(G,A(x)) where G = cyclic group of order 5 generated by (1,2,3,4,5).
+    data: 1,1,1,3,9,30,107,392,1489,5783,22874,91822,373111,1531744,6343528,26469872,111180537,469696489,1994490659,8508
+  A128725: Number of skew Dyck paths of semilength n having no LL's.
+    data: 1,1,3,9,30,107,399,1537,6069,24434,99924,413943,1733394,7325471,31203159,133825441,577418430,2504681465,109162
+  A053022: Number of subdiagonal directed diagonally-convex animals with given diagonal semiperimeter.
+    data: 1,1,3,9,30,107,396,1506,5848,23087,92381,373830,1527192,6290054,26090780,108895558,456992576,1927176941,816255
+[cached] search_classes_p7_k1
+
+### classes_p7_k1
+  4 hit(s); showing up to 4
+  A305027: Array read by antidiagonals: T(n,m) is the number of nonisomorphic binary n X m matrices with 3 1's per column under row and column permutations (m >= 3).
+    data: 1,1,1,1,1,1,1,1,2,1,1,1,3,3,1,1,1,4,7,5,1,1,1,4,11,17,6,1,1,1,4,14,40,35,9,1,1,1,4,15,62,122,76,11,1,1,1,4,16,
+  A036728: G.f. satisfies A(x) = 1 + x*cycle_index(G,A(x)) where G = cyclic group of order 7 generated by (1,2,...,7).
+    data: 1,1,1,4,15,62,274,1260,5973,28975,143176,718070,3645876,18703560,96799076,504797258,2649947859,13992164283,742
+  A007161: Number of blobs with vertical symmetry.
+    data: 1,1,4,15,62,262,1148,5123,23316,107570,502664,2372786,11302858,54256236,262226900,1274944859,6231845040,306053
+  A007167: Number of skeins with 2n+1 edges.
+    data: 1,1,4,15,62,271,1247,5938,29113,145815,743384,3844314,20118681,106348391,567002169,3045455865,16463622763,8950
+[cached] search_classes_p2_k2
+
+### classes_p2_k2
+  1 hit(s); showing up to 4
+  A398109: Number of 4-ary dyslexic mobiles with n internal nodes.
+    data: 1,1,1,3,6,17,44,129,373,1131,3453,10777,33947,108272,348119,1128561,3682369,12087951,39885099,132221790,440144
+[cached] search_classes_p3_k2
+
+### classes_p3_k2
+  8 hit(s); showing up to 4
+  A094392: Antidiagonals of the tables formed from b(m,2,n,n), which is defined in Du 1989.
+    data: 1,1,1,1,1,2,1,1,1,3,1,1,1,1,5,1,1,1,1,2,8,1,1,1,1,1,3,13,1,1,1,1,1,1,5,21,1,1,1,1,1,1,2,7,34,1,1,1,1,1,1,1,3,1
+  A109000: Antidiagonal sums of square array A108998, in which row n equals the coordination sequence of B_n lattice.
+    data: 1,1,3,11,37,133,479,1719,6121,21609,75675,263171,909901,3131053,10733367,36683759,125079121,425691729,14467222
+  A393341: Number of Cayley permutations of size n avoiding 123 and 321.
+    data: 1,1,3,11,37,105,263,607,1329,2813,5827,11907,24125,48625,97695,195911,392425,785541,1571867,3144619,6290229,12
+  A027062: a(n) = A027052(n, 2n-6).
+    data: 1,1,3,11,37,123,401,1281,4023,12461,38175,115939,349701,1049063,3133493,9327357,27687947,82009215,242473197,71
+[cached] search_classes_p2_k3
+
+### classes_p2_k3
+  10 hit(s); showing up to 4
+  A197552: Number of free poly-IH19-tiles (holes allowed) with n cells.
+    data: 1,1,4,10,36,146,631,2815,12987,60601,286376,1364399,6546220,31585133
+  A196880: Number of partitions of n^2 into powers of 2.
+    data: 1,1,4,10,36,94,284,692,1828,4124,9828,20798,45564,91018,186788,355906,692004,1264678,2347716,4138358,7389572,1
+  A345245: G.f. A(x) satisfies: A(x) = x + x^2 * exp(4 * Sum_{k>=1} (-1)^(k+1) * A(x^k) / k).
+    data: 1,1,4,10,36,135,504,2000,8072,33099,138132,582930,2485412,10692219,46340984,202175344,887175352,3913032212,173
+  A088013: Binomial transform of A001541 (with interpolated zeros).
+    data: 1,1,4,10,36,116,400,1352,4624,15760,53824,183712,627264,2141504,7311616,24963200,85229824,290992384,993510400,
+[cached] search_nmin_p2_k1
+
+### nmin_p2_k1
+  10 hit(s); showing up to 4
+  A326918: Squares visited by a knight moving on a single-digit square-spiral numbered board where the knight moves to the smallest numbered unvisited square; the minimum distance from the origin is used if the square numbers are equal; the smallest spiral number ordering is used if the distances are equal.
+    data: 0,0,1,0,1,0,1,1,2,2,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,2,1,1,0,1,1,1,1,1,1,0,1,1,1,0,2,2,1,1,0,2,3,2,2,1,3,1,1,1,
+  A326413: Successive squares visited by a knight on the single-digit square spiral, with ties resolved towards the left.
+    data: 0,0,1,0,1,0,1,1,2,2,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,2,1,1,0,1,1,1,1,1,1,0,1,1,1,0,2,2,1,1,0,2,3,2,2,1,3,1,1,1,
+  A336850: a(n) = gcd(A003961(n), sigma(A003961(n))), where A003961 is the prime shift towards larger primes.
+    data: 1,1,1,1,1,3,1,1,1,1,1,3,1,3,1,1,1,1,1,1,1,1,1,15,1,3,1,3,1,3,1,1,1,1,1,1,1,3,1,1,1,3,1,13,1,3,1,3,1,3,5,9,1,3,
+  A091887: Irregularity index of the n-th irregular prime A000928(n).
+    data: 1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1,2,3,1,1,2,1,1,2,1,1,1,3,1,2,3,1,1,2,1,1,2,1,1,1,1,1,1,2,1,
+[cached] search_nmin_p3_k1
+
+### nmin_p3_k1
+  4 hit(s); showing up to 4
+  A324396: a(1) = 0; for n > 1, a(n) = A009194(A156552(n)).
+    data: 0,1,1,1,1,1,1,1,6,1,1,1,1,1,2,3,1,1,1,1,3,3,1,1,4,1,2,1,1,1,1,1,2,1,2,1,1,1,6,1,1,1,1,1,2,1,1,1,12,1,2,1,1,1,1
+  A210501: Number of odd solutions to phi(k) = prime(n) - 1.
+    data: 1,1,1,2,1,2,1,2,1,1,1,3,3,2,1,1,1,4,1,1,6,1,1,2,4,2,1,1,4,2,1,1,1,1,1,1,3,2,1,1,1,5,1,4,1,1,1,1,1,1,2,1,10,1,1
+  A179229: a(n) = number of Abelian groups of order 2*n which are not isomorphic to the group of units of the ring Z/kZ for any k.
+    data: 0,0,0,1,0,0,1,2,1,0,0,1,1,1,0,3,1,1,1,0,0,1,0,2,2,1,2,2,0,0,1,6,0,2,0,1,1,2,0,2,0,1,1,0,2,1,1,2,2,3,0,2,0,3,0,
+  A328228: Simple continued fraction expansion of 2^(7/12).
+    data: 1,2,147,5,1,3,5,4,4,1,1,159,6,1,1,1,4,1,2,1,2,3,1,8,15,47,1,103,1,1,1,1,2,1,1,1,1,1,1,2,1,10,3,1,2,1,2,4,1,1,1
+
+### nmin_p5_k1
+  10 hit(s); showing up to 4
+  A008284: Triangle of partition numbers: T(n,k) = number of partitions of n in which the greatest part is k, 1 <= k <= n. Also number of partitions of n into k positive parts, 1 <= k <= n.
+    data: 1,1,1,1,1,1,1,2,1,1,1,2,2,1,1,1,3,3,2,1,1,1,3,4,3,2,1,1,1,4,5,5,3,2,1,1,1,4,7,6,5,3,2,1,1,1,5,8,9,7,5,3,2,1,1,
+    [reference] D. E. Knuth, The Art of Computer Programming, Volume 4, Fascicle 3: Generating All Combinations and Partitions, Addison-Wesley Professional, 2005, pp. 38, 45, 50 [From Frederik Beaujean (beaujean(AT)mpp.mpg.de), Apr 09 2010]
+    [reference] D. E. Knuth, The Art of Computer Programming, vol. 4A, Combinatorial Algorithms, Section 7.2.1.4, p. 400.
+    [link] D. J. Broadhurst and D. Kreimer, <a href="http://arXiv.org/abs/hep-th/0001202">Towards cohomology of renormalization: bigrading the combinatorial Hopf algebra of rooted trees</a>, arXiv:hep-th/0001202, 2000.
+  A124010: Triangle in which first row is 0, n-th row (n>1) lists the exponents of distinct prime factors ("ordered prime signature") in the prime factorization of n.
+    data: 0,1,1,2,1,1,1,1,3,2,1,1,1,2,1,1,1,1,1,1,4,1,1,2,1,2,1,1,1,1,1,1,3,1,2,1,1,3,2,1,1,1,1,1,1,5,1,1,1,1,1,1,2,2,1,
+  A051903: Maximum exponent in the prime factorization of n.
+    data: 0,1,1,2,1,1,1,3,2,1,1,2,1,1,1,4,1,2,1,2,1,1,1,3,2,1,3,2,1,1,1,5,1,1,1,2,1,1,1,3,1,1,1,2,2,1,1,4,2,2,1,2,1,3,1,
+    [link] Benjamin Merlin Bumpus and Zoltan A. Kocsis, <a href="https://arxiv.org/abs/2104.01841">Spined categories: generalizing tree-width beyond graphs</a>, arXiv:2104.01841 [math.CO], 2021.
+  A118914: Table of the prime signatures (sorted lists of exponents of distinct prime factors) of the positive integers.
+    data: 1,1,2,1,1,1,1,3,2,1,1,1,1,2,1,1,1,1,1,4,1,1,2,1,1,2,1,1,1,1,1,1,3,2,1,1,3,1,2,1,1,1,1,1,5,1,1,1,1,1,1,2,2,1,1,
+
+### nmin_p7_k1
+  10 hit(s); showing up to 4
+  A327858: Greatest common divisor of the arithmetic derivative and the primorial base exp-function: a(n) = gcd(A003415(n), A276086(n)).
+    data: 1,2,1,1,1,1,5,1,3,6,1,1,1,1,3,2,1,1,1,1,3,10,1,1,1,10,15,3,1,1,1,1,1,14,1,6,5,1,21,2,1,1,1,1,3,3,25,1,7,14,15,
+  A321620: The Riordan square of the Riordan numbers, triangle read by rows, T(n, k) for 0 <= k <= n.
+    data: 1,1,1,0,1,1,1,1,1,1,1,3,2,1,1,3,5,5,3,1,1,6,13,10,7,4,1,1,15,29,26,16,9,5,1,1,36,73,61,42,23,11,6,1,1,91,181,1
+    [comment]   ternary trees      ||A109956|| u = sqrt(x*3/4); sin(arcsin(3*u)/3)/u.
+  A047996: Triangle read by rows: T(n,k) is the (n,k)-th circular binomial coefficient, where 0 <= k <= n.
+    data: 1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,2,2,1,1,1,1,3,4,3,1,1,1,1,3,5,5,3,1,1,1,1,4,7,10,7,4,1,1,1,1,4,10,14,14,10,4
+    [comment] Equivalently, T(n,k) = number of necklaces with k black beads and n-k white beads (binary necklaces of weight k).
+    [comment] The same sequence arises if we take the table U(n,k) = number of necklaces with n black beads and k white beads and read it by antidiagonals (cf. A241926). - _Franklin T. Adams-Watters_, May 02 2014
+    [comment] U(n,k) is also equal to the number of ways to express 0 as a sum of k elements in Z/nZ. - _Jens Voß_, _Franklin T. Adams-Watters_, _N. J. A. Sloane_, Apr 30 2014 - May 05 2014. See link ("A Note on Modular Partitions and Necklaces") for proof.
+    [link] Alexander Elashvili, Mamuka Jibladze, and D. Pataraia, <a href="https://doi.org/10.1023/A:1018727630642">Combinatorics of necklaces and "Hermite reciprocity"</a>, J. Algebraic Combin. 10(2) (1999), 173-188. MR1719140 (2000j:05009). See p. 174. - _N. J. A. Sloane_, Aug 06 2014
+    [link] Harold Fredricksen, <a href="https://doi.org/10.1016/0012-365X(86)90089-0">An algorithm for generating necklaces of beads in two colors</a>, Disc. Math. 61(2-3) (September 1986), 181-188.
+    [link] Donald E. Knuth, <a href="https://www.jstor.org/stable/2318994">Computer science and its relation to mathematics</a>, Amer. Math. Monthly, 81 (1974), 323-343.
+    [link] Petr Lisonek, <a href="http://www3.risc.jku.at/publications/download/risc_2382/thesis.pdf">Computer-assisted Studies in Algebraic Combinatorics</a>, Thesis, Univ. Linz (Austria) Sep. 1994, pp. 72-73.
+    [link] Frank Ruskey, <a href="http://combos.org/necklace">Generate Necklaces, Lyndon words, and relatives</a>, The Combinatorial Object Server.
+    [link] Frank Ruskey and Joe Sawada, <a href="https://doi.org/10.1137/S0097539798344112">An Efficient Algorithm for Generating Necklaces with Fixed Density</a>, SIAM J. Comput. 29 (1999) 671-684.
+    [link] Frank Ruskey, <a href="/A000011/a000011.pdf">Necklaces, Lyndon words, De Bruijn sequences, etc.</a> [Cached copy, with permission, pdf format only]
+    [link] N. J. A. Sloane, <a href="/A047996/a047996.pdf">A Note on Modular Partitions and Necklaces</a>, 2014.
+    [link] Wikipedia, <a href="http://commons.wikimedia.org/wiki/Image:A31.gif">Necklaces Animation</a> [Broken link]
+    [link] Wolfram Research, <a href="https://demonstrations.wolfram.com/MakingNecklaces/">Necklaces Applet</a> 2007.
+    [link] <a href="/index/Ne#necklaces">Index entries for sequences related to necklaces</a>
+  A027023: Tribonacci array: triangular array T read by rows: T(n,0)=1 for n >= 0, T(n,1) = T(n,2n) = 1 for n >= 1, T(n,2)=1 for n >= 2 and for n >= 3, T(n,k) = T(n-1,k-3) + T(n-1,k-2) + T(n-1,k-1) for 3 <= k <= 2n-1.
+    data: 1,1,1,1,1,1,1,3,1,1,1,1,3,5,5,1,1,1,1,3,5,9,13,11,1,1,1,1,3,5,9,17,27,33,25,1,1,1,1,3,5,9,17,31,53,77,85,59,1,
+
+### nmin_p3_k2
+  10 hit(s); showing up to 4
+  A001221: Number of distinct primes dividing n (also called omega(n)).
+    data: 0,1,1,1,1,2,1,1,1,2,1,2,1,2,2,1,1,2,1,2,2,2,1,2,1,2,1,2,1,3,1,1,2,2,2,2,1,2,2,2,1,3,1,2,2,2,1,2,1,2,2,2,1,2,2,
+  A007318: Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.
+    data: 1,1,1,1,2,1,1,3,3,1,1,4,6,4,1,1,5,10,10,5,1,1,6,15,20,15,6,1,1,7,21,35,35,21,7,1,1,8,28,56,70,56,28,8,1,1,9,36
+    [comment] Named "Table de M. Pascal pour les combinaisons" by Pierre Remond de Montmort (1708) after the French mathematician, physicist and philosopher Blaise Pascal (1623-1662). - _Amiram Eldar_, Jun 11 2021
+    [reference] Donald E. Knuth, The Art of Computer Programming, Vol. 1, 2nd ed., p. 52.
+    [link] Subhash Kak, <a href="https://doi.org/10.1007/978-0-8176-4695-0_7">The golden mean and the physics of aesthetics</a>, in: B. Yadav and M. Mohan (eds.), Ancient Indian Leaps into Mathematics, Birkhäuser, Boston, MA, 2009, pp. 111-119; <a href="https://arxiv.org/abs/physics/0411195">arXiv preprint</a>, arXiv:physics/0411195 [physics.hist-ph], 2004.
+    [link] Eric Lehman, F. Thomson Leighton, and Albert R. Meyer, <a href="https://people.csail.mit.edu/meyer/mcs.pdf">Mathematics for Computer Science</a>, Massachusetts Institute of Technology, 2015. See pp. 562-563, 566-567, 587-589, 633.
+    [link] Donatella Merlini, Renzo Sprugnoli, and Maria C. Verri, <a href="https://doi.org/10.1007/978-3-0348-8405-1_11">An algebra for proper generating trees</a>, in: D. Gardy and A. Mokkadem (eds.), Mathematics and Computer Science, Trends in Mathematics, Birkhäuser, Basel, 2000, pp. 127-139; <a href="https://www.researchgate.net/profile/Renzo-Sprugnoli/publication/2386023">ResearchGate link</a>.
+    [link] Yuriy Shablya, Dmitry Kruchinin, and Vladimir Kruchinin, <a href="https://doi.org/10.3390/math8060962">Method for Developing Combinatorial Generation Algorithms Based on AND/OR Trees and Its Application</a>, Mathematics 8(6) (2020), 962.
+  A112798: Table where n-th row is factorization of n, with each prime p_i replaced by i.
+    data: 1,2,1,1,3,1,2,4,1,1,1,2,2,1,3,5,1,1,2,6,1,4,2,3,1,1,1,1,7,1,2,2,8,1,1,3,2,4,1,5,9,1,1,1,2,3,3,1,6,2,2,2,1,1,4,
+    [comment] Row n contains the Matula numbers of the rooted trees obtained from the rooted tree with Matula number n by deleting the edges emanating from the root. Example: row 8 is 1,1,1; indeed the rooted tree with Matula number 8 is \|/ and deleting the edges emanating from the root we obtain three one-vertex trees, having Matula numbers 1, 1, 1. Example: row 7 is 4; indeed, the rooted tree with Matula number 7 is Y and deleting the edges emanating from the root we obtain the rooted tree V, having Matula number 4.
+    [comment] The Matula (or Matula-Goebel) number of a rooted tree can be defined in the following recursive manner: to the one-vertex tree there corresponds the number 1; to a tree T with root degree 1 there corresponds the t-th prime number, where t is the Matula-Goebel number of the tree obtained from T by deleting the edge emanating from the root; to a tree T with root degree m >= 2 there corresponds the product of the Matula-Goebel numbers of the m branches of T. (End)
+    [link] Emeric Deutsch, <a href="https://arxiv.org/abs/1111.4288">Rooted tree statistics from Matula numbers</a>, arXiv:1111.4288 [math.CO], 2011.
+    [link] Emeric Deutsch, <a href="https://doi.org/10.1016/j.dam.2012.05.012">Rooted tree statistics from Matula numbers</a>, Discrete Appl. Math., 160, 2012, 2314-2322.
+    [link] F. Goebel, <a href="https://doi.org/10.1016/0095-8956(80)90049-0">On a 1-1-correspondence between rooted trees and natural numbers</a>, J. Combin. Theory, B 29 (1980), 141-143.
+    [link] I. Gutman and Yeong-Nan Yeh, <a href="https://eudml.org/doc/257915">Deducing properties of trees from their Matula numbers</a>, Publ. Inst. Math., 53 (67), 1993, 17-22.
+    [link] D. W. Matula, <a href="https://www.jstor.org/stable/2027327">A natural rooted tree enumeration by prime factorization</a>, SIAM Rev. 10 (1968) 273.
+  A000700: Expansion of Product_{k>=0} (1 + x^(2k+1)); number of partitions of n into distinct odd parts; number of self-conjugate partitions; number of symmetric Ferrers graphs with n nodes.
+    data: 1,1,0,1,1,1,1,1,2,2,2,2,3,3,3,4,5,5,5,6,7,8,8,9,11,12,12,14,16,17,18,20,23,25,26,29,33,35,37,41,46,49,52,57,63
+    [link] Christian Kassel and Christophe Reutenauer, <a href="https://arxiv.org/abs/1505.07229v3">The zeta function of the Hilbert scheme of n points on a two-dimensional torus</a>, arXiv:1505.07229v3 [math.AG], 2015. [A later version of this paper has a different title and different contents, and the number-theoretical part of the paper was moved to the publication below.]
+    [link] Christian Kassel and Christophe Reutenauer, <a href="https://arxiv.org/abs/1610.07793">Complete determination of the zeta function of the Hilbert scheme of n points on a two-dimensional torus</a>, arXiv:1610.07793 [math.NT], 2016.
+
+### tri_p2_flat
+  fetch failed
+
+### tri_p2_col2
+  9 hit(s); showing up to 4
+  A237593: Triangle read by rows in which row n lists the elements of the n-th row of A237591 followed by the same elements in reverse order.
+    data: 1,1,2,2,2,1,1,2,3,1,1,3,3,2,2,3,4,1,1,1,1,4,4,2,1,1,2,4,5,2,1,1,2,5,5,2,2,2,2,5,6,2,1,1,1,1,2,6,6,3,1,1,1,1,3,
+  A225224: A continuous "look-and-say" sequence (without repetition, seed 1,1,1).
+    data: 1,1,1,3,1,1,3,2,1,1,3,1,2,2,1,1,3,1,1,2,2,2,1,1,3,2,1,3,2,2,1,1,3,1,2,1,1,1,3,2,2,2,1,1,3,1,1,1,2,3,1,1,3,3,2,
+  A088203: Infinite audioactive word that shifts 1 place left under "Look and Say" method A, starting with a(1)=2.
+    data: 2,1,2,1,1,1,2,3,1,1,2,1,3,2,1,1,2,1,1,1,3,1,2,2,1,1,2,3,1,1,3,1,1,2,2,2,1,1,2,1,3,2,1,1,3,2,1,3,2,2,1,1,2,1,1,
+    [reference] J. H. Conway, The weird and wonderful chemistry of audioactive decay, in T. M. Cover and Gopinath, eds., Open Problems in Communication and Computation, Springer, NY 1987, pp. 173-188.
+  A245509: Smallest m such that the first odd number after n^m is composite.
+    data: 3,5,3,2,3,1,1,3,3,2,2,1,1,3,3,2,2,1,1,3,2,1,1,1,1,2,2,2,2,1,1,1,1,2,3,1,1,3,3,2,2,1,1,5,2,1,1,1,1,2,2,1,1,1,1,
+
+### tri_p3_flat
+  fetch failed
+
+### tri_p3_col2
+  1 hit(s); showing up to 4
+  A200174: Number of -1..1 arrays x(0..n-1) of n elements with zero sum and no two consecutive declines, no adjacent equal elements, and no element more than one greater than the previous (random base sawtooth pattern).
+    data: 1,1,3,3,2,6,10,7,12,28,29,29,70,105,96,169,327,363,449,914,1302,1426,2455,4220,5030,6925,12579,17582,21687,361
+
+### labelled_p2
+  5 hit(s); showing up to 4
+  A001147: Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).
+    data: 1,1,3,15,105,945,10395,135135,2027025,34459425,654729075,13749310575,316234143225,7905853580625,21345804667687
+    [comment] a(n) is the number of binary total partitions of n+1 (each non-singleton block must be partitioned into exactly two blocks) or, equivalently, the number of unordered full binary trees with n+1 labeled leaves (Stanley, ex 5.2.6). - _Mitch Harris_, Aug 01 2006
+    [comment] a(n) is the number of increasing ordered rooted trees on n+1 vertices where "increasing" means the vertices are labeled 0,1,2,...,n so that each path from the root has increasing labels. Increasing unordered rooted trees are counted by the factorial numbers A000142. - _David Callan_, Oct 26 2006
+    [comment] a(n) is the number of increasing ternary trees on n vertices. Increasing binary trees are counted by ordinary factorials (A000142) and increasing quaternary trees by triple factorials (A007559). - _David Callan_, Mar 30 2007
+    [comment] a(n) = the number of relaxed compacted binary trees of right height at most one of size n. A relaxed compacted binary tree of size n is a directed acyclic graph consisting of a binary tree with n internal nodes, one leaf, and n pointers. It is constructed from a binary tree of size n, where the first leaf in a post-order traversal is kept and all other leaves are replaced by pointers. These links may point to any node that has already been visited by the post-order traversal. The right height is the maximal number of right-edges (or right children) on all paths from the root to any leaf after deleting all pointers. The number of unbounded relaxed compacted binary trees of size n is A082161(n). See the Genitrini et al. link. - _Michael Wallner_, Jun 20 2017
+    [comment] a(n) = the number of essentially different ways of writing a probability distribution taking n+1 values as a sum of products of binary probability distributions. See comment of Mitch Harris above. This is because each such way corresponds to a full binary tree with n+1 leaves, with the leaves labeled by the values. (This comment is due to Niko Brummer.)
+    [comment] Also the number of binary trees with root labeled by an (n+1)-set S, its n+1 leaves by the singleton subsets of S, and other nodes labeled by subsets T of S so that the two daughter nodes of the node labeled by T are labeled by the two parts of a 2-partition of T. This also follows from Mitch Harris' comment above, since the leaf labels determine the labels of the other vertices of the tree.
+    [comment] Speyer and Sturmfels (p. 6) state that the number of facets of the abstract simplicial complex known as the tropical Grassmannian G'''(2,n), the space of phylogenetic T_n trees (see A134991), or Whitehouse complex is a shifted double factorial.
+    [comment] a(n-1) is the number of assembly trees of the complete graph K_n, for n >= 1. - _Eric W. Weisstein_, Jul 03 2026
+    [reference] F. K. Hwang, D. S. Richards and P. Winter, The Steiner Tree Problem, North-Holland, 1992, see p. 14.
+    [reference] R. Vein and P. Dale, Determinants and Their Applications in Mathematical Physics, Springer-Verlag, New York, 1999, p. 73.
+    [link] Lily Agranat-Tamir, Michael Fuchs, Bernhard Gittenberger, Noah A. Rosenberg, and Karthik V. Seetharaman, <a href="https://arxiv.org/abs/2601.08062">Combinatorial comparison of general galled trees, time-consistent galled trees, and simplex time-consistent galled trees</a>, arXiv:2601.08062 [math.CO], 2026. See p. 10.
+    [link] O. Bodini, M. Dien, X. Fontaine, A. Genitrini, and H. K. Hwang, <a href="https://doi.org/10.1007/978-3-662-49529-2_16">Increasing Diamonds</a>, in LATIN 2016: 12th Latin American Symposium, Ensenada, Mexico, April 11-15, 2016, Proceedings Pages pp. 207-219 2016 DOI 10.1007/978-3-662-49529-2_16; Lecture Notes in Computer Science Series Volume 9644.
+    [link] Peter J. Cameron, <a href="https://doi.org/10.1093/qmath/38.2.155">Some treelike objects</a>, Quart. J. Math. Oxford Ser. 38 (1987), 155-183. MR0891613 (89a:05009). See p. 155.
+    [link] Thanh Can and Thomas Rüd, <a href="https://arxiv.org/abs/2603.03690">Measures on Cameron's treelike classes and applications to tensor categories</a>, arXiv:2603.03690 [math.CO], 2026. See p. 46 (Prop. 6.12).
+    [link] Filippo Disanto and Thomas Wiehe, <a href="https://arxiv.org/abs/1112.1295">Some combinatorial problems on binary rooted trees occurring in population genetics</a>, arXiv preprint arXiv:1112.1295 [math.CO], 2011.
+    [link] J. Felsenstein, <a href="/A005373/a005373.pdf">The number of evolutionary trees</a>, Systematic Zoology, 27 (1978), 27-33. (Annotated scanned copy)
+    [link] Andrew Francis and Peter D. Jarvis, <a href="https://doi.org/10.1098/rspa.2022.0044">Brauer and partition diagram models for phylogenetic trees and forests</a>, Proc. Roy. Soc. A, Vol. 478, No. 2262 (2022), p. 2.
+    [link] A. Genitrini, B. Gittenberger, M. Kauers and M. Wallner, <a href="https://arxiv.org/abs/1703.10031">Asymptotic Enumeration of Compacted Binary Trees</a>, arXiv:1703.10031 [math.CO], 2017.
+    [link] J. Jakes-Schauer, D. Anekstein, and P. Wocjan, <a href="https://arxiv.org/abs/1908.11034">Carving-width and contraction trees for tensor networks</a>, arXiv:1908.11034 [cs.DM], 2019.
+    [link] M. Klazar, <a href="https://doi.org/10.1006/eujc.1995.0095">Twelve countings with rooted plane trees</a>, European Journal of Combinatorics 18 (1997), 195-210; Addendum, 18 (1997), 739-740.
+    [link] MathOverflow, <a href="https://mathoverflow.net/questions/112062/geometric-physical-probabilistic-interpretations-of-riemann-zetan1/401540#401540">Geometric / physical / probabilistic interpretations of Riemann zeta(n>1)?</a>, answer by Tom Copeland posted in Aug 2021.
+    [link] F. Murtagh, <a href="https://doi.org/10.1016/0166-218X(84)90066-0">Counting dendrograms: a survey</a>, Discrete Applied Mathematics, 7 (1984), 191-199.
+    [link] J.-C. Novelli and J.-Y. Thibon, <a href="https://arxiv.org/abs/1403.5962">Hopf Algebras of m-permutations,(m+1)-ary trees, and m-parking functions</a>, arXiv preprint arXiv:1403.5962 [math.CO], 2014.
+    [link] L. Pachter and B. Sturmfels, <a href="https://arxiv.org/abs/math/0409132">The mathematics of phylogenomics</a>, arXiv:math/0409132 [math.ST], 2004-2005.
+    [link] Helmut Prodinger, <a href="https://doi.org/10.37236/1253">Descendants in heap ordered trees or a triumph of computer algebra</a>, The Electronic Journal of Combinatorics, Volume 3, Issue 1 (1996), R29.
+    [link] D. F. Robinson, <a href="https://doi.org/10.1016/0095-8956(71)90020-7">Comparison of labeled trees with valency three</a>, J. Combin. Theory Ser. B, 11 (1971), 105-119.
+    [link] Carsten Schneider, <a href="https://arxiv.org/abs/2003.01921">The Absent-Minded Passengers Problem: A Motivating Challenge Solved by Computer Algebra</a>, arXiv:2003.01921 [math.CO], 2020.
+    [link] Y. S. Song, <a href="https://doi.org/10.1007/s00026-003-0192-0">On the combinatorics of rooted binary phylogenetic trees</a>, Annals of Combinatorics, 7, 2003, 365-379. See Lemma 2.1. - _N. J. A. Sloane_, Aug 22 2014
+    [link] Michael Wallner, <a href="https://arxiv.org/abs/1706.07163">A bijection of plane increasing trees with relaxed binary trees of right height at most one</a>, arXiv:1706.07163 [math.CO], 2017.
+    [link] Elena L. Wang and Guoce Xin, <a href="https://arxiv.org/abs/2507.15654">On Ward Numbers and Increasing Schröder Trees</a>, arXiv:2507.15654 [math.CO], 2025. See pp. 12-13.
+  A294000: Number of linear chord diagrams having n chords and no chord length larger than eight.
+    data: 1,1,3,15,105,945,10395,135135,2027025,11486475,72025173,497809599,3759823201,30676852011,265149012989,23419155
+  A294001: Number of linear chord diagrams having n chords and no chord length larger than nine.
+    data: 1,1,3,15,105,945,10395,135135,2027025,34459425,218243025,1512548793,11451456921,94099903993,832822929881,78501
+  A294002: Number of linear chord diagrams having n chords and no chord length larger than ten.
+    data: 1,1,3,15,105,945,10395,135135,2027025,34459425,654729075,4583103525,34788783519,286302699633,2541730502259,242
+
+### labelled_p3
+  2 hit(s); showing up to 4
+  A052502: Number of permutations sigma of [3n] without fixed points such that sigma^3 = Id.
+    data: 1,2,40,2240,246400,44844800,12197785600,4635158528000,2345390215168000,1524503639859200000,1237896955565670400
+  A060079: Duplicate of A052502.
+    data: 1,2,40,2240,246400,44844800,12197785600,4635158528000,2345390215168000
+
+### labelled_p5
+  1 hit(s); showing up to 4
+  A052504: Number of permutations sigma of [5n] without fixed points such that sigma^5 = Id.
+    data: 1,24,72576,1743565824,162193467211776,41363226782215962624,23578031983305871878782976,262429154701870347420105
+
+### byleaves_p2
+  1 hit(s); showing up to 4
+  A001190: Wedderburn-Etherington numbers: unlabeled binary rooted trees (every node has outdegree 0 or 2) with n endpoints (and 2n-1 nodes in all).
+    data: 0,1,1,1,2,3,6,11,23,46,98,207,451,983,2179,4850,10905,24631,56011,127912,293547,676157,1563372,3626149,8436379
+    [comment] Also number of n-node binary rooted trees (every node has outdegree <= 2) where root has degree 0 (only for n=1) or 1.
+    [comment] a(n+1) is the number of rooted trees with n nodes where the outdegree of every node is <= 2, see example. These trees are obtained by removing the root of the trees in the comment above. - _Joerg Arndt_, Jun 29 2014
+    [comment] For n > 1, a(n) is the number of unordered pairs of not necessarily distinct unlabeled full binary rooted trees having a total of n leaves. See the first entry in the formula section. - _Geoffrey Critzer_, Nov 09 2014 [Corrected by _Eric W. Weisstein_, Oct 13 2026]
+    [comment] Named after the English mathematician Ivor Etherington (1908-1994) and the Scottish mathematician Joseph Wedderburn (1882-1948). - _Amiram Eldar_, May 29 2021
+    [link] Lily Agranat-Tamir, Michael Fuchs, Bernhard Gittenberger, Noah A. Rosenberg, and Karthik V. Seetharaman, <a href="https://arxiv.org/abs/2601.08062">Combinatorial comparison of general galled trees, time-consistent galled trees, and simplex time-consistent galled trees</a>, arXiv:2601.08062 [math.CO], 2026. See p. 5.
+    [link] Mayfawny Bergmann, <a href="https://scholar.rose-hulman.edu/rhumj/vol15/iss2/1/"> Efficiency of Lossless Compression of a Binary Tree via its Minimal Directed Acyclic Graph Representation</a>, Rose-Hulman Undergrad. Math. J. 15(2) (2014), Art. 1.
+    [link] Sara Billey, Matjaž Konvalinka, and Frederick A. Matsen IV, <a href="https://hal.archives-ouvertes.fr/hal-02173394">On trees, tanglegrams, and tangled chains</a>, hal-02173394 [math.CO], 2020.
+    [link] Daniel Brosch and Diane Puges, <a href="https://doi.org/10.1007/s10107-025-02305-1">Getting to the root of the problem: sums of squares for limits of trees</a>, Math. Prog. B (2025). See p. 4.
+    [link] Nicolas Broutin and Philippe Flajolet, <a href="https://doi.org/10.1002/rsa.20393">The distribution of height and diameter in random non-plane binary trees</a>, Random Struct. Algorithms 41(2) (2012), 215-252.
+    [link] Peter J. Cameron, <a href="https://doi.org/10.1093/qmath/38.2.155">Some treelike objects</a>, Quart. J. Math. Oxford Ser. 38(2) (1987), Art. 150, 155-183. MR0891613 (89a:05009). See p. 155. - _N. J. A. Sloane_, Apr 18 2014
+    [link] Sean Cleary, M. Fischer, R. C. Griffiths, and R. Sainudiin, <a href="https://web.archive.org/web/20240924115150/http://lamastex.org/preprints/20151231_SomeDistsFRBTrees.pdf">Some distributions on finite rooted binary trees</a>, UCDMS Research Report NO. UCDMS2015/2, School of Mathematics and Statistics, University of Canterbury, Christchurch, NZ, 2015.
+    [link] S. J. Cyvin, J. Brunvoll, and B. N. Cyvin, <a href="https://doi.org/10.1016/0166-1280(95)04329-6">Enumeration of constitutional isomers of polyenes</a>, J. Molec. Struct. (Theochem) 357(3) (1995), 255-261.
+    [link] Luc Devroye, Michael R. Doboli, Noah A. Rosenberg, and Stephan Wagner, <a href="https://arxiv.org/abs/2409.18956">Tree height and the asymptotic mean of the Colijn-Plazzotta rank of unlabeled binary rooted trees</a>, arXiv:2409.18956 [math.CO], 2024. See p. 21.
+    [link] Luc Devroye, Michael R. Doboli, Noah A. Rosenberg, and Stephan Wagner, <a href="https://doi.org/10.1007/s11538-025-01538-7">Tree height and the asymptotic mean of the Colijn-Plazzotta rank of unlabeled binary rooted trees</a>, Bull. Math. Biol. 87 (2025), Art. 172. See p. 5.
+    [link] Filippo Disanto and Thomas Wiehe, <a href="https://arxiv.org/abs/1112.1295">Some combinatorial problems on binary rooted trees occurring in population genetics</a>, arXiv preprint arXiv:1112.1295 [math.CO], 2011-2012.
+    [link] Michael R. Doboli, Hsien-Kuei Hwang, and Noah A. Rosenberg, <a href="https://doi.org/10.4230/LIPIcs.AofA.2024.18">Periodic Behavior of the Minimal Colijn-Plazzotta Rank for Trees with a Fixed Number of Leaves</a>, In 35th Int'l Conf. Probab. Comb. Asympt. Methods Anal. Algor. (AofA 2024). Leibniz Int'l Proc. Inform. (LIPIcs) 302 (2024), 18:1-18:14, Schloss Dagstuhl - Leibniz-Zentrum für Informatik.
+    [link] A. Erdelyi and I. M. H. Etherington, <a href="https://doi.org/10.1017/S0950184300002640">Some problems of non-associative combinations (II)</a>, Edinburgh Math. Notes, 32 (1940), pp. vii-xiv.
+    [link] I. M. H. Etherington, <a href="https://www.jstor.org/stable/3605743">Non-associate powers and a functional equation</a>, Math. Gaz. 21 (1937), 36-39 and 153.
+    [link] I. M. H. Etherington, <a href="/A000108/a000108_13.pdf">On non-associative combinations</a>, Proc. Royal Soc. Edinburgh, 59 (Part 2, 1938-39), 153-162. [Annotated scanned copy]
+    [link] I. M. H. Etherington, <a href="https://doi.org/10.1017/S0370164600012244">On non-associative combinations</a>, Proc. Royal Soc. Edinburgh, 59 (Part 2, 1938-39), 153-162.
+    [link] I. M. H. Etherington, <a href="https://doi.org/10.1017/S0950184300002639">Some problems of non-associative combinations (I)</a>, Edinburgh Math. Notes, 32 (1940), pp. i-vi.
+    [link] V. Fack, S. Lievens, and J. Van der Jeugt, <a href="https://doi.org/10.1016/S0012-365X(01)00418-6">On the diameter of the rotation graph of binary coupling trees</a>. Disc. Math. 245(1-3) (2002), 1-18. MR1887046 (2003i:05047).
+    [link] Steven R. Finch, <a href="http://www.people.fas.harvard.edu/~sfinch/constant/otter/otter.html">Otter's Tree Enumeration Constants</a>. [Broken link]
+    [link] Steven R. Finch, <a href="https://web.archive.org/web/20010207195939/http://www.mathsoft.com/asolve/constant/otter/otter.html">Otter's Tree Enumeration Constants</a>. [Wayback Machine]
+    [link] Antoine Genitrini, <a href="https://hal.sorbonne-universite.fr/hal-05856690">Smooth disturbances of tree functions: full asymptotic expansions and uniform random sampling of Pólya structures</a>, hal-05856690, 2026. See pp. 6, 29, 54 (Appendix A).
+    [link] Virginia P. Johnson, <a href="https://people.math.sc.edu/czabarka/Theses/JohnsonThesis.pdf">Enumeration Results on Leaf Labeled Trees</a>, Ph. D. Dissertation, Univ. South Carolina, 2012.
+    [link] Alice Ledda, Guillaume Achaz, Thomas Wiehe, Sebastian E. Ramos-Onsins, and Luca Ferretti, <a href="https://arxiv.org/abs/1510.06748">Decomposing the site frequency spectrum: the impact of tree topology on neutrality tests</a>, arXiv preprint arXiv:1510.06748 [q-bio.PE], 2015.
+    [link] Eunjeong Lee, Mikiya Masuda, and Seonjeong Park, <a href="https://arxiv.org/abs/2105.12274">Toric Richardson varieties of Catalan type and Wedderburn-Etherington numbers</a>, arXiv:2105.12274 [math.AG], 2021.
+    [link] Fionn Murtagh, <a href="https://doi.org/10.1016/0166-218X(84)90066-0">Counting dendrograms: a survey</a>, Disc. Appl. Math. 7 (1984), 191-199.
+    [link] David Serena and William J. Buchanan, <a href="https://arxiv.org/abs/2503.02663">Equivalence Classes Induced by Binary Tree Isomorphism -- Generating Functions</a>, arXiv:2503.02663 [math.CO], 2025. See p. 5.
+    [link] Chloe E. Shiff and Noah A. Rosenberg, <a href="https://arxiv.org/abs/2410.14915">Enumeration of rooted binary perfect phylogenies</a>, arXiv:2410.14915 [q-bio.PE], 2024. See pp. 2, 5, 9.
+    [link] Chloe E. Shiff and Noah A. Rosenberg, <a href="https://doi.org/10.1016/j.dam.2025.10.053">Enumeration of rooted binary perfect phylogenies</a>, Discr. Appl. Math. 380 (2026), 538-561. See Tables 1 and 2.
+    [link] Fabian Sievers, Graham M. Hughes, and Desmond G. Higgins, <a href="https://doi.org/10.1186/1471-2105-15-338">Systematic Exploration of Guide-Tree Topology Effects for Small Protein Alignments</a>, BMC Bioinformatics 15 (2014), Art. 338. (Mentions this sequence).
+    [link] J. H. M. Wedderburn, <a href="https://www.jstor.org/stable/1967710">The functional equation g(x^2) = 2ax + [g(x)]^2</a>, Ann. Math., 24 (1922-23), 121-140.
+    [link] Eric Weisstein's World of Mathematics, <a href="https://mathworld.wolfram.com/RootedTree.html">Rooted Tree</a>.
+    [link] Eric Weisstein's World of Mathematics, <a href="https://mathworld.wolfram.com/StronglyBinaryTree.html">Strongly Binary Tree</a>.
+    [link] Eric Weisstein's World of Mathematics, <a href="https://mathworld.wolfram.com/WeaklyBinaryTree.html">Weakly Binary Tree</a>.
+    [link] Wikipedia, <a href="https://en.wikipedia.org/wiki/Wedderburn-Etherington_number">Wedderburn-Etherington numbers</a>.
+    [link] <a href="/index/Ro#rooted">Index entries for sequences related to rooted trees</a>
+    [link] <a href="/index/Tra#trees">Index entries for sequences related to trees</a>
+    [example] The a(6+1) = 11 rooted trees with 6 nodes as described in the comment are:
+
+### byleaves_p3
+  fetch failed
+
+All queries done.

@@ -1,0 +1,421 @@
+% Written by moonshotai/kimi-k3.1-pro (Open Math OS worker W015), 2026-11-13.
+% Develops Idea 4 of notes/2026-11-13_new_ideas.md (Claude Fable 5.2).
+% Not human-verified. Companion computation: experiments/E005_frobenius_proof/.
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\GAP}[1]{\textcolor{red}{\textbf{GAP: }#1}}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Nn}{N}
+\newcommand{\sd}{s_p}
+\newcommand{\vp}{v_p}
+\newcommand{\Kc}{K}
+
+\title[The Frobenius proof]{The Frobenius proof of the $p$-adic valuation\\
+of Fuss--Catalan numbers}
+\author{Mighty Math Magicians --- worker draft, not human-verified}
+\date{13 November 2026}
+
+\begin{document}
+\maketitle
+
+\noindent\emph{Status.} AI-written note (model named in the first comment
+line). All numerical ingredients are checked in
+\texttt{experiments/E005\_frobenius\_proof/} (2584 checks, 0 failures); no
+human has verified the proofs. No literature is cited. Gaps are marked in red
+and listed in \texttt{paper/GAPS\_frobenius.md}.
+
+\section{Setup and statement}
+
+Fix a prime $p$. A \emph{$p$-ary tree} is either a leaf or a $p$-tuple
+$(T_1,\dots,T_p)$ of $p$-ary trees. Let $c_m$ be the number of $p$-ary trees
+with $m$ leaves and $G(x)=\sum_{m\ge1}c_mx^m$. Then $c_m=0$ unless
+$m\equiv1\pmod{p-1}$ and $c_{(p-1)n+1}=C_n^{(p)}$, the Fuss--Catalan number
+for $q=p$. Decomposing at the root,
+\begin{equation}\label{eq:G}
+  G=x+G^p,\qquad
+  c_1=1,\qquad c_m=\sum_{m_1+\dots+m_p=m}\ \prod_{i=1}^p c_{m_i}\quad(m>1),
+\end{equation}
+the sum over \emph{ordered} $p$-tuples of nonnegative integers (terms with an
+$m_i=0$ vanish).
+
+For $m\equiv1\pmod{p-1}$ write $m=\sum_jm_jp^j$ in base $p$, $\sd(m)=\sum_jm_j$,
+and $t(m)=(\sd(m)-1)/(p-1)$, a nonnegative integer since
+$\sd(m)\equiv m\equiv1\pmod{p-1}$. Define
+\[
+  \Nn(m)\ :=\ \frac{(pt)!}{t!\,p^t\,\prod_j m_j!},
+  \qquad t=t(m),\quad s=\sd(m)=(p-1)t+1 .
+\]
+\begin{theorem}[proved below as Theorem~\ref{thm:main}]\label{thm:statement}
+$\Nn(m)$ is a positive integer prime to $p$, and for every
+$m\equiv1\pmod{p-1}$:
+\[
+  \vp(c_m)=t(m),\qquad \frac{c_m}{p^{t(m)}}\equiv\Nn(m)\pmod p .
+\]
+In particular $\vp\bigl(C_n^{(p)}\bigr)=t\bigl((p-1)n+1\bigr)$.
+\end{theorem}
+
+\section{The induction proof}\label{sec:proof}
+
+\subsection{Grouping $p$-tuples by rotation}
+
+$\Z/p$ acts on ordered $p$-tuples by rotation. A tuple fixed by any nontrivial
+rotation is fixed by a generator (as $p$ is prime), hence is constant. The
+constant tuples in \eqref{eq:G} exist only when $p\mid m$ and contribute
+$c_{m/p}^p$; all other rotation classes have exactly $p$ elements. Therefore
+\begin{equation}\label{eq:neck}
+  c_m=[\,p\mid m\,]\;c_{m/p}^{\,p}
+   \;+\;p\!\!\sum_{\text{non-constant rotation classes}}\ \prod_i c_{m_i}.
+\end{equation}
+
+\subsection{The digit-sum inequality}
+
+I use, without any factorial input: $\sd(pa)=\sd(a)$, and
+\begin{equation}\label{eq:subadd}
+  \sd(a_1+\dots+a_r)\ \le\ \sd(a_1)+\dots+\sd(a_r),
+\end{equation}
+with equality iff the addition of the $a_i$ produces no carries (proved by
+induction on $r$: one carry at weight $p^j$ reduces the digit sum by exactly
+$p-1$, and the total is subadditive at each binary addition).
+
+\begin{definition}\label{def:cf}
+An ordered $p$-tuple $(m_1,\dots,m_p)$ of \emph{positive} integers summing to
+$m$ is \emph{carry-free} if the digits of the $m_i$ add digitwise to those of
+$m$; equivalently $\sum_i\sd(m_i)=\sd(m)$. A carry-free tuple is never
+constant unless $p\nmid m$ is impossible: if $m_i=m/p$ for all $i$, then
+$\sum_i\sd(m_i)=p\,\sd(m/p)=p\,\sd(m)>\sd(m)$, so constant tuples are never
+carry-free.
+\end{definition}
+
+\begin{lemma}[recursion for $\Nn$]\label{lem:Nrec}
+$\Nn$ satisfies $\Nn(p^h)=1$ for $h\ge0$, and for every other admissible $m$,
+\begin{equation}\label{eq:Nrec}
+  \Nn(m)=\frac1p\sum_{\text{carry-free }(m_i)}\ \prod_{i=1}^p\Nn(m_i).
+\end{equation}
+\end{lemma}
+\begin{proof}
+For a carry-free tuple, each positive $m_i$ has $\sd(m_i)\equiv
+m_i\pmod{p-1}$, so $\sd(m_i)\ge1$ and $\sd(m_i)-1$ is divisible by $p-1$;
+define $t_i=t(m_i)\ge0$. Since the tuple is carry-free,
+$\sd(m)=\sum_i\sd(m_i)$, hence $t=1+\sum_it_i$, i.e.\
+$pt=p+\sum_i pt_i$. Also the digits of $m$ split among the parts, so
+$\prod_jm_j!=\prod_i D_i$ where $D_i=\prod_j(\text{digits of }m_i)_j!$.
+Substituting $\Nn(m)=\frac{(pt)!}{t!p^t\prod_jm_j!}$ and
+$\Nn(m_i)=\frac{(pt_i)!}{t_i!p^{t_i}D_i}$, and using $t=1+\sum_it_i$
+(so $pt=p+\sum_ipt_i$) and $\prod_jm_j!=\prod_iD_i$, the equation
+$\Nn(m)=\frac1p\sum\prod_i\Nn(m_i)$ is equivalent to
+\[
+  \frac{(pt)!}{t!\,p^t}\cdot\frac1p
+  =\frac1p\sum\prod_i\frac{(pt_i)!}{t_i!\,p^{t_i}}
+  \quad\Longleftrightarrow\quad
+  \frac{(pt)!}{t!}=\sum\prod_i\frac{(pt_i)!}{t_i!},
+\]
+i.e., setting $B(a):=(pa)!/a!$:
+\begin{equation}\label{eq:ptsum}
+  \sum_{\text{carry-free }(m_i)}\ \prod_{i=1}^p\frac{(pt_i)!}{t_i!}
+   \;=\;\frac{(pt)!}{t!},
+  \qquad t=1+\textstyle\sum_i t_i .
+\end{equation}
+\GAP{this factorial identity, taken over all carry-free tuples with their
+digit-distribution multiplicity, has not been given a completed algebraic
+proof in this draft. It is equivalent to Lemma~\ref{lem:Nrec} and is checked
+numerically in E005 for all tested $m$ (as part of the $\Nn$ recursion). The
+proof actually used below is the bijective one (Lemma~\ref{lem:trees} and
+Proposition~\ref{prop:K}), modulo one marked bijection gap there.}
+\end{proof}
+
+Instead of the algebraic manipulation we use the tree meaning of $\Nn$.
+
+\begin{lemma}[trees counted by $\Nn$]\label{lem:trees}
+$\Nn(m)$ equals the number of cyclic $p$-ary trees (each internal node has
+its $p$ children in cyclic order) on $s=\sd(m)$ leaves, with $m_j$ leaves
+labelled ``height $j$'', labels of the same height indistinguishable.
+\end{lemma}
+\begin{proof}
+First count such trees with all $s$ leaves \emph{distinctly} labelled, times
+a height assignment. There are $t$ internal nodes and $s=(p-1)t+1$ leaves, so
+$pt$ non-root nodes. Claim: distinctly leaf-labelled cyclic $p$-ary trees
+with $t$ internal nodes are in bijection with permutations of $pt$ points all
+of whose cycles have length $p$. \GAP{the bijection, via canonical labelling
+of internal nodes and cyclic orders at nodes, is Idea~5 of the source notes
+and is used here as a counting input; its well-definedness (canonically
+ordering internal nodes, independence of choices) is asserted, not proved in
+full. See GAPS.} The number of such permutations is
+$\Kc(t)=\frac{(pt)!}{p^t t!}$: order the points, group them into $t$
+consecutive blocks of $p$ ($(pt)!$ ways), divide by $p$ per block to fix the
+starting point of each cycle, and by $t!$ for the block order. Assigning
+heights to the $s$ leaves gives $\binom{s}{m_0,m_1,\dots}$ choices, so the
+number of distinctly-leaf-labelled height-assigned trees is
+$\Kc(t)\binom{s}{m_0,\dots}=\frac{(pt)!\,s!}{p^tt!\prod_jm_j!}$.
+The group $\prod_jS_{m_j}$, permuting labels of equal height, has order
+$\prod_jm_j!$ and acts freely: if a label permutation $\pi$ of prime order
+$r\ne p$ fixes a labelled tree, $\pi$ is realised by an automorphism of the
+underlying cyclic tree; at the root this automorphism rotates the children by
+an element of $\Z/p$ whose order divides $r$, hence fixes each child subtree,
+and inductively fixes every leaf, forcing $\pi=1$. Since $\prod_jm_j!$ has
+only prime factors $<p$, every non-identity element has a power of prime
+order $\ne p$, so no non-identity element fixes any tree. The number of
+indistinguishable-label trees is therefore
+$\frac{(pt)!\,s!}{p^tt!\prod_jm_j!}\big/\bigl(s!\cdot1\bigr)$-free count
+$=\frac{\Kc(t)}{\prod_jm_j!}\cdot\frac{s!}{s!}$: dividing the distinct-label
+count by $s!$ overcounts; correctly, for a fixed height assignment the number
+of trees with indistinguishable labels times $\prod_jm_j!$ equals the number
+with distinct labels \emph{within} that assignment, which is
+$\Kc(t)$-per-height-pattern. Assembling: with heights fixed as a pattern on
+unlabelled leaves there are $\Nn$ trees, and $\Nn(m)\prod_jm_j!=\Kc(t)$ is
+\emph{not} the right relation (the multinomial $\binom{s}{m_0,\dots}$ would
+be missing). The correct assembly is
+$\Nn(m)\,s!=\Kc(t)\binom{s}{m_0,\dots}$, giving
+$\Nn(m)=\frac{\Kc(t)}{\prod_jm_j!}$, since
+$\binom{s}{m_0,\dots}/s!=1/\prod_jm_j!$. Hence
+$\Nn(m)=\Kc(t)/\prod_jm_j!=(pt)!/(p^tt!\prod_jm_j!)$, as claimed.
+\end{proof}
+
+\begin{proposition}[$\Nn$ from the tree recursion]\label{prop:K}
+The tree count of Lemma~\ref{lem:trees} satisfies the initial condition
+$\Nn(p^h)=1$ and the recursion \eqref{eq:Nrec}. Hence \eqref{eq:Nrec} holds
+for the closed formula.
+\end{proposition}
+\begin{proof}
+A single-leaf tree has $\sd(m)=1$, so $m=p^h$ and there is exactly one such
+tree per height: $\Nn(p^h)=1$. For $t\ge1$ decompose at the root. Each cyclic
+tree counted by $\Nn(m)$ has a root with a cyclic order of its $p$ subtrees;
+the cyclic order has a nontrivial rotation symmetry iff the tuple of subtrees
+is constant, which is impossible (the $p$ subtrees would have equal leaf
+multsets, giving $\sd(m)=p\,\sd(m_1)\equiv0\pmod p$, while
+$\sd(m)\equiv1\pmod{p-1}$ and, for $t\ge1$, $\sd(m)\ge p$... to avoid this
+side condition: constant tuples contradict carry-freeness by
+Definition~\ref{def:cf}, and below only carry-free tuples occur). Cutting the
+cycle at each of its $p$ positions produces $p$ ordered tuples, and distinct
+cyclic trees produce disjoint sets of ordered tuples. An ordered tuple
+arising this way has positive leaf counts $m_i$ summing to $m$, and the total
+digit condition $\sum_i\sd(m_i)=\sd(m)$ is exactly the carry-free condition
+(each subtree's label multiset is the digit vector of its $m_i$, and the
+union is the digit vector of $m$). Conversely, for each carry-free ordered
+tuple and each choice of subtrees, reassembling gives $\prod_i\Nn(m_i)$
+trees, each obtained $p$ times when ranging over the cyclic orderings.
+Hence $\Nn(m)=\frac1p\sum\prod_i\Nn(m_i)$ over carry-free ordered tuples.
+\end{proof}
+
+\subsection{The main induction}
+
+\begin{theorem}\label{thm:main}
+For every admissible $m$: $\vp(c_m)=t(m)$ and
+$c_m\equiv p^{t(m)}\Nn(m)\pmod{p^{t(m)+1}}$, where $\Nn(m)$ is prime to $p$
+(Lemma~\ref{lem:unit} or Lemma~\ref{lem:cherry}, neither of which uses this
+theorem).
+\end{theorem}
+\begin{proof}
+Induction on $m$. Base $m=1$: $c_1=1$, $t(1)=0$, $\Nn(1)=1$.
+
+Let $m>1$, and apply \eqref{eq:neck}.
+
+\emph{Constant term} (present only if $p\mid m$). By induction
+$\vp(c_{m/p})\ge t(m/p)=t(m)$, so $\vp(c_{m/p}^p)\ge p\,t(m)\ge t(m)$, with
+equality iff $t(m)=0$, i.e.\ $m=p^h$. In that case, inductively
+$c_{m/p}\equiv\Nn(p^{h-1})=1\pmod p$, hence $c_{m/p}^p\equiv1\pmod p$, and
+the necklace part of \eqref{eq:neck} is divisible by $p=p^{t(m)+1}$. So
+$c_m\equiv1=\Nn(p^h)\pmod p$, as required.
+
+\emph{Necklace terms.} Consider a non-constant ordered tuple with $r\ge2$
+nonzero parts (non-constant forces $r\ge2$). Its class contributes
+$p\prod_ic_{m_i}$, divisible by $p^{1+\sum_it(m_i)}$. By \eqref{eq:subadd},
+$\sum_i\sd(m_i)\ge\sd(m)$, where the sum runs over nonzero parts, so
+\[
+  1+\sum_{i:\,m_i>0}t(m_i)
+   =1+\frac{\sum_i\sd(m_i)-r}{p-1}
+   \ \ge\ 1+\frac{\sd(m)-r}{p-1}
+   =t(m)+1-\frac{r-1}{p-1}\ \ge\ t(m),
+\]
+the last step because $r\le p$. Tracing the two inequalities:
+$1+\sum it(m_i)=t(m)$ iff $r=p$ and $\sum_i\sd(m_i)=\sd(m)$, i.e.\ iff the
+tuple is carry-free with all parts positive.
+
+Consequently, modulo $p^{t(m)+1}$ only carry-free full-support classes
+survive; for each such class, by induction
+$c_{m_i}\equiv p^{t(m_i)}\Nn(m_i)\pmod{p^{t(m_i)+1}}$, so the product is
+$\equiv p^{t(m)-1}\prod_i\Nn(m_i)\pmod{p^{t(m)}}$, and after the outer factor
+$p$ the total necklace contribution is
+\[
+  p^{t(m)}\sum_{\text{carry-free classes}}\prod_i\Nn(m_i)
+  =p^{t(m)}\cdot\frac1p\sum_{\text{carry-free ordered}}\prod_i\Nn(m_i)
+  =p^{t(m)}\Nn(m)
+  \pmod{p^{t(m)+1}},
+\]
+using that all classes have size $p$ and Lemma~\ref{lem:Nrec}. The constant
+term, when present with $t(m)\ge1$, is divisible by $p^{p\,t(m)}$ and
+$p\,t(m)\ge t(m)+1$, so it does not disturb the congruence. Since
+$p\nmid\Nn(m)$, the valuation is exactly $t(m)$.
+\end{proof}
+
+\subsection{$\Nn(m)$ is prime to $p$: two proofs}
+
+\begin{lemma}[via the explicit formula]\label{lem:unit}
+$\Nn(m)=(pt)!/(t!p^t\prod_jm_j!)$ is an integer prime to $p$.
+\end{lemma}
+\begin{proof}
+$\Nn(m)=\Kc(t)/\prod_jm_j!$ with $\Kc(t)=(pt)!/(p^tt!)$ the number of
+permutations of $pt$ points consisting of $t$ cycles of length $p$. The
+denominator $\prod_jm_j!$ involves only primes $<p$, so the whole question is
+$\vp(\Kc(t))=0$. The cyclic group $\Z/p$ acts on the set of such permutations
+by simultaneously conjugating... simplest: $\Z/p$ acts on the \emph{blocks}
+structure by rotating each cycle's points relative to a fixed ground set;
+equivalently, pair up configurations: given such a permutation $\pi$ on a
+fixed $pt$-set, let $\Z/p$ act by relabelling the $pt$ ground points with a
+fixed $p$-cycle $\rho$ placed on the first $p$ points, i.e.\ $\pi\mapsto
+\rho\pi\rho^{-1}$. A fixed point would mean $\rho$ commutes with $\pi$; then
+$\rho$ permutes the cycles of $\pi$, and since $\rho$ has order $p$ it either
+fixes each cycle setwise or moves them in $p$-groups. \GAP{a clean
+fixed-point-free $\Z/p$ action on the $\Kc(t)$ configurations is not pinned
+down in this draft; the standard residue $\Kc(t)\equiv(-1)^t\pmod p$ is
+instead fully proved by Lemma~\ref{lem:cherry}, which needs no factorial
+valuations. The explicit-formula proof also gives integrality, which follows
+independently from the tree interpretation (Lemma~\ref{lem:trees}).}
+\end{proof}
+
+\begin{lemma}[via the cherry lemma; no factorial valuations]\label{lem:cherry}
+$\Nn(m)\equiv(-1)^{t(m)}/\prod_jm_j!\pmod p$; in particular $\Nn(m)$ is an
+integer prime to $p$, and equivalently $\Kc(t)\equiv(-1)^t\pmod p$.
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:trees}, $\Nn(m)=T(a)/\prod_jm_j!$ where $T(a)$ is the
+number of cyclic $p$-ary trees with distinctly labelled leaves, $a_j=m_j$ of
+them carrying height $j$ (no depth condition for $k=1$); the freeness of the
+relabelling action was proved there. Whenever some $a_j\ge p$, choose $p$
+labels $x_1,\dots,x_p$ of height $j$ and let
+$\sigma=(x_1\,x_2\,\cdots\,x_p)$ act on labelled trees. Since $\sigma$ has
+prime order $p$, $T(a)\equiv|\Fix(\sigma)|\pmod p$. If $\sigma$ fixes a tree
+$\tau$ (via an automorphism $\varphi$), let $v$ be the lowest common ancestor
+of the $x_i$. Then $\varphi(v)=v$; $\varphi$ rotates the children of $v$ by
+$r\in\Z/p$. If $r=0$, each child subtree is preserved, but the $x_i$ occupy
+at least two children and $\sigma$ is transitive on them --- impossible. So
+$r\ne0$, and $\varphi$ moves every leaf under $v$; all other leaves are fixed,
+hence the leaves under $v$ are exactly the $x_i$, and $v$'s $p$ children are
+the $x_i$ themselves: a \emph{cherry}. Its cyclic order must be compatible
+with $\sigma$, giving $p-1$ possibilities, each realised. Collapsing the
+cherry to one leaf of height $j+1$ is a bijection of $\Fix(\sigma)$ with
+$(p-1)$ copies of the trees counted by $T(a-pe_j+e_{j+1})$. Hence
+$T(a)\equiv(p-1)T(a-pe_j+e_{j+1})\equiv-T(a-pe_j+e_{j+1})\pmod p$.
+Each step reduces $\sum_j a_j$ by $p-1$; if no $a_j\ge p$ and there is more
+than one leaf, a deepest internal node has $p$ leaf children of equal height,
+contradiction. So the process ends at a single leaf ($T=1$) after exactly
+$(\sd(m)-1)/(p-1)=t$ steps, giving $T(a)\equiv(-1)^t\pmod p$ and the claim.
+\end{proof}
+
+\noindent\textbf{Facts used.} Lemma~\ref{lem:unit}: the closed formula,
+integrality from the tree count, and a $\Z/p$ action argument left as a gap.
+Lemma~\ref{lem:cherry}: the tree interpretation, freeness of relabelling, the
+$\Z/p$ fixed-point congruence $|X|\equiv|\Fix|\pmod p$, and the cherry
+collapse. No factorial valuation is used anywhere in
+Lemmas~\ref{lem:trees}--\ref{lem:cherry} or Theorem~\ref{thm:main}.
+
+\begin{remark}
+In fact the proof yields more: $c_m/p^{t(m)}\equiv(-1)^t/\prod_jm_j!
+\pmod p$, and the number of minimal rotation classes is exactly $\Nn(m)$ ---
+this is claim C8 of the ledger, now with a proof of the same content.
+\end{remark}
+
+\section{The atom ring}\label{sec:atom}
+
+The recursion \eqref{eq:Nrec} is the coefficient form of a single equation.
+In $R=\Q[u_0,u_1,\dots]/(u_0^p,u_1^p,\dots)$ put $U=\sum_ju_j$ and
+\[
+  A=\sum_{t\ge0}\frac{C_t^{(p)}}{p^t}\,U^{(p-1)t+1},
+  \qquad C_t^{(p)}=\frac1{(p-1)t+1}\binom{pt}{t}=\frac{(pt)!}{t!\,s!},
+  \quad s=(p-1)t+1.
+\]
+By the multinomial theorem the coefficient of $\prod_ju_j^{m_j}$ in $A$ is
+nonzero only for $m_j<p$, and then equals
+$\frac{C_t^{(p)}}{p^t}\binom{s}{m_0,m_1,\dots}
+=\frac{(pt)!}{t!\,p^t\,\prod_jm_j!}=\Nn(m)$, where $m=\sum_jm_jp^j$ has digit
+vector $(m_j)$. The relation $u_j^p=0$ is exactly the statement that base-$p$
+digits are $<p$.
+
+\begin{proposition}[atom-ring equation]
+$A=U+A^p/p$ in $R$ (as a formal identity in the $u_j$, degree by degree).
+\end{proposition}
+\begin{proof}
+Coefficients of total degree $s=(p-1)t+1$ with digit vector $(m_j)$: on the
+left, $\Nn(m)$; on the right, the $U$ contributes when $s=1$ (i.e.\ $m=p^h$,
+$\Nn=1$), and $A^p/p$ contributes $\frac1p\sum\prod_i\Nn(m_i)$ over ordered
+$p$-tuples of digit vectors adding to $(m_j)$ componentwise --- precisely the
+carry-free tuples of Definition~\ref{def:cf}, because componentwise addition
+in $R$ \emph{is} digit-distribution with no carries. So the equation is
+\eqref{eq:Nrec} with $\Nn(p^h)=1$.
+\end{proof}
+
+Since $c_{(p-1)t+1}=C_t^{(p)}$, in \emph{one} variable $u$ (all $u_j=u$) this
+gives the self-similarity
+\[
+  A(u)=\lambda^{-1}G(\lambda u),\qquad\lambda^{p-1}=1/p,
+\]
+coefficientwise: $\lambda^{-1}(\lambda u)^s c_s=u^s c_s/p^t$.
+\textbf{Caveat (E005, item~4):} multivariately the comparison
+$\Nn(m)=c_m/p^{t(m)}$ holds only modulo $p$, not as rational numbers, so the
+self-similarity is exact only in this one-variable sense, or mod $p$ in $R$.
+
+\section{Extension to general $k=p$... to $q=p^k$}\label{sec:k}
+
+Counting $p$-ary trees by leaf depth, with the root at depth $\delta\in\Z/k$
+and leaves required at depth $\equiv0\pmod k$, gives
+\[
+  F_\delta=[\,\delta\equiv0\,]\,x+F_{\delta+1}^{\,p},
+  \qquad\delta\in\Z/k,\qquad
+  F_0=\sum_m c_m^{(k)}x^m,\quad c_{(q-1)n+1}^{(k)}=C_n^{(q)}.
+\]
+Modulo $p$, Frobenius gives $F_\delta\equiv x^{(\delta)}+F_{\delta+1}(x^p)$,
+hence $F_\delta\equiv\sum_{h\equiv-\delta\ (k)}x^{p^h}$ (E005, item~5,
+verified). Rotation-class recursion holds verbatim per $\delta$, with all
+tuple parts drawn from $F_{\delta+1}$.
+
+\GAP{the induction of Theorem~\ref{thm:main} has not been translated to the
+depth-graded system. Specifically one needs a depth-dependent refinement of
+$t$ and the statement that only carry-free skeletons with the correct atom
+depths survive modulo $p^{t+1}$; the skeleton/carry proof of the companion
+note already proves the conclusion, so this is a translation exercise, not a
+new obstruction.} Computations for $k=2$, $p\in\{2,3\}$ (E005): no valuation
+anomalies ($\vp(c_m^{(0)})=t(m)$ throughout), and the leading residue
+$c_m^{(0)}/p^t\bmod p$ equals $\Nn(m)\bmod p$ in all tested cases ($50$ for
+$p=2$, $12$ for $p=3$). Whether this $k$-independent residue formula holds
+for all $k$ is open; $k=1$ and $k=2$ only are evidenced.
+
+\section{Remarks (not part of the proof)}\label{sec:remarks}
+
+\begin{remark}[Artin--Schreier inverse]
+Modulo $p$, $G^p=G(x^p)$, so \eqref{eq:G} becomes $G\equiv x+G(x^p)$, with
+unique solution $G\equiv x+x^p+x^{p^2}+\cdots$: $c_m\equiv1\pmod p$ exactly
+at $m=p^h$, and $c_m\equiv0$ otherwise. $G$ inverts the Artin--Schreier map
+$g\mapsto g-g^p$ in characteristic $p$: $G-G^p\equiv x$. E005 item~1.
+\end{remark}
+
+\begin{remark}[The dictionary]
+For a characteristic-$0$ series $f$, $f(x)^p=f(x^p)+p\,\delta(f)$, where
+$\delta(f)$ collects the non-constant rotation classes of $p$-fold products.
+In \eqref{eq:G}: a \emph{symmetric} node (all $p$ subtrees equal) contributes
+through $G(x^p)$ --- Frobenius, no factor $p$; an \emph{asymmetric} node
+contributes through $p\,\delta(G)$. This is the generating-function shadow of
+``rotation class size $=p^d$'', and the proof above is exactly the orbit
+proof read through this dictionary.
+\end{remark}
+
+\begin{remark}[Self-similarity]
+$\lambda^{-1}G(\lambda x)$ with $\lambda^{p-1}=1/p$ rescales $G$ to its own
+leading terms. In the atom ring, $A=U+A^p/p$ says: a minimal tree is an atom,
+or $p$ minimal trees at an asymmetric node, with $1/p$ the price of
+forgetting the root rotation.
+\end{remark}
+
+\end{document}

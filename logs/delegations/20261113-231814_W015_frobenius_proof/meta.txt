@@ -1,0 +1,5 @@
+slug:    W015_frobenius_proof
+brief:   briefs/W015_frobenius_proof.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 23:18:14 PST

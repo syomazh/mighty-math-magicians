@@ -1,0 +1,49 @@
+E004 -- the accounting proof, explicit objects and exact arithmetic
+Model: moonshotai/kimi-k3.1-pro (Open Math OS), 2026-11-13
+Python 3.13.14; platform Windows-11-10.0.26200-SP0
+A line beginning FAIL is a failed mathematical check. Range limits are reported separately.
+No check is changed to fit the output; formulas are compared against explicit objects.
+
+==============================================================================
+IDEA 2: line and half-line; base-p digits, toppling counts, random orders
+==============================================================================
+p=2: m=1..200; final digits, nu(m), site counts and 8 random orders checked; failures so far=0
+p=3: m=1..200; final digits, nu(m), site counts and 8 random orders checked; failures so far=0
+p=5: m=1..200; final digits, nu(m), site counts and 8 random orders checked; failures so far=0
+
+==============================================================================
+IDEA 2: ring Z/k; conserved weight, final states, count N(m), random orders
+==============================================================================
+p=2,k=1: all m<=200 with 6 random orders; special m=(p^k-1)n+1, n<=300, final e0 and N(m) topplings
+p=2,k=2: all m<=200 with 6 random orders; special m=(p^k-1)n+1, n<=300, final e0 and N(m) topplings
+p=3,k=1: all m<=200 with 6 random orders; special m=(p^k-1)n+1, n<=300, final e0 and N(m) topplings
+p=3,k=2: all m<=200 with 6 random orders; special m=(p^k-1)n+1, n<=300, final e0 and N(m) topplings
+p=5,k=1: all m<=200 with 6 random orders; special m=(p^k-1)n+1, n<=300, final e0 and N(m) topplings
+p=5,k=2: all m<=200 with 6 random orders; special m=(p^k-1)n+1, n<=300, final e0 and N(m) topplings
+
+==============================================================================
+IDEA 2: toppling Laplacian pI-S and its integer cokernel
+==============================================================================
+p=2,k=1: det(pI-S)=1, Smith diagonal=[1], cokernel Z/1Z
+p=2,k=2: det(pI-S)=3, Smith diagonal=[1, 3], cokernel Z/3Z
+p=2,k=3: det(pI-S)=7, Smith diagonal=[1, 1, 7], cokernel Z/7Z
+p=2,k=4: det(pI-S)=15, Smith diagonal=[1, 1, 1, 15], cokernel Z/15Z
+p=3,k=1: det(pI-S)=2, Smith diagonal=[2], cokernel Z/2Z
+p=3,k=2: det(pI-S)=8, Smith diagonal=[1, 8], cokernel Z/8Z
+p=3,k=3: det(pI-S)=26, Smith diagonal=[1, 1, 26], cokernel Z/26Z
+p=3,k=4: det(pI-S)=80, Smith diagonal=[1, 1, 1, 80], cokernel Z/80Z
+p=5,k=1: det(pI-S)=4, Smith diagonal=[4], cokernel Z/4Z
+p=5,k=2: det(pI-S)=24, Smith diagonal=[1, 24], cokernel Z/24Z
+p=5,k=3: det(pI-S)=124, Smith diagonal=[1, 1, 124], cokernel Z/124Z
+p=5,k=4: det(pI-S)=624, Smith diagonal=[1, 1, 1, 624], cokernel Z/624Z
+p=7,k=1: det(pI-S)=6, Smith diagonal=[6], cokernel Z/6Z
+p=7,k=2: det(pI-S)=48, Smith diagonal=[1, 48], cokernel Z/48Z
+p=7,k=3: det(pI-S)=342, Smith diagonal=[1, 1, 342], cokernel Z/342Z
+p=7,k=4: det(pI-S)=2400, Smith diagonal=[1, 1, 1, 2400], cokernel Z/2400Z
+
+==============================================================================
+SUMMARY
+IDEA 2: line and half-line; base-p digits, toppling counts, random orders: 8285 checks, 0 failures
+IDEA 2: ring Z/k; conserved weight, final states, count N(m), random orders: 13200 checks, 0 failures
+IDEA 2: toppling Laplacian pI-S and its integer cokernel: 32 checks, 0 failures
+TOTAL: 21517 checks, 0 failures; elapsed 3.163s

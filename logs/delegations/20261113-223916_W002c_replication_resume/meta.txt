@@ -1,0 +1,8 @@
+slug:    W002c_replication_resume
+brief:   briefs/W002b_replication_resume.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 22:39:16 PST
+attempt 1: exit 0 at 22:53:57
+ended:   2026-11-13 22:53:57 PST
+exit:    0

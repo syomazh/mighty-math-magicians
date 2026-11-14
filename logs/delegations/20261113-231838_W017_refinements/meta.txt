@@ -1,0 +1,5 @@
+slug:    W017_refinements
+brief:   briefs/W017_refinements_and_general_q.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 23:18:38 PST

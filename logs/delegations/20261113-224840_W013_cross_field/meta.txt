@@ -1,0 +1,5 @@
+slug:    W013_cross_field
+brief:   briefs/W013_cross_field_angles.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 22:48:40 PST

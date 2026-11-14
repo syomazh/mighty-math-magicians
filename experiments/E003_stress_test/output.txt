@@ -1,0 +1,13 @@
+E003: generating-function stress test
+Model: moonshotai/kimi-k3.1-pro (Open Math OS), 2026-11-13
+Command: uv run python experiments/E003_stress_test/run.py
+Python: 3.13.14; platform: Windows-11-10.0.26200-SP0
+Exact integers; the current implementation truncates at actual y degree max(t(m))+2.
+
+p k q M_reached n_tested min_fail residue_fail exact_fail Catalan_fail vanish_fail E000_fail seconds
+ 2 1     2        13       12        0            0          0            0           0         0   0.030238
+ 3 2     9        17        2        0            0          0            0           0         0   0.241986
+CSV rows: 14
+Total elapsed seconds: 0.242
+TOTAL FAILURES: 0
+All implemented checks passed.

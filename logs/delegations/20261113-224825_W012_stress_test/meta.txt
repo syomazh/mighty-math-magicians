@@ -1,0 +1,5 @@
+slug:    W012_stress_test
+brief:   briefs/W012_stress_test.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 22:48:25 PST

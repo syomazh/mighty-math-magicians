@@ -1,0 +1,116 @@
+
+===== p = 2, m up to 150 =====
+item 1: G mod p checked for m <= 150.
+item 2: necklace recursion checked.
+item 3: N(m) recursion, integrality, congruence, explicit formula, primality to p checked.
+  item 4: multivariate self-similarity is exact in only 3/63 coefficients; in the rest it holds mod p (as predicted by item 3).
+item 4: atom-ring functional equation, N(m) coefficients and one-variable self-similarity checked.
+  item 5 (k=2): Fuss-Catalan match and mod-p Frobenius checked for m <= 150.
+  item 5 (k=2): valuation anomalies: []
+  item 5 (k=2): leading residue equals N(m) mod p in 50 cases; mismatches (m, t, residue, N(m) mod p): []
+item 6: data (m, t, N(m) mod p^2, c_m/p^t mod p^2):
+    (1, 0, 1, 1)
+    (2, 0, 1, 1)
+    (3, 1, 1, 1)
+    (4, 0, 1, 1)
+    (5, 1, 1, 3)
+    (6, 1, 1, 1)
+    (7, 2, 3, 1)
+    (8, 0, 1, 1)
+    (9, 1, 1, 3)
+    (10, 1, 1, 3)
+    (11, 2, 3, 3)
+    (12, 1, 1, 1)
+    (13, 2, 3, 3)
+    (14, 2, 3, 1)
+    (15, 3, 3, 1)
+    (16, 0, 1, 1)
+    (17, 1, 1, 3)
+    (18, 1, 1, 3)
+    (19, 2, 3, 3)
+    (20, 1, 1, 3)
+    (21, 2, 3, 1)
+    (22, 2, 3, 3)
+    (23, 3, 3, 3)
+    (24, 1, 1, 1)
+    (25, 2, 3, 3)
+    (26, 2, 3, 3)
+    (27, 3, 3, 3)
+    (28, 2, 3, 1)
+    (29, 3, 3, 3)
+    (30, 3, 3, 1)
+    (31, 4, 1, 1)
+    (32, 0, 1, 1)
+    (33, 1, 1, 3)
+    (34, 1, 1, 3)
+    (35, 2, 3, 3)
+    (36, 1, 1, 3)
+    (37, 2, 3, 1)
+    (38, 2, 3, 3)
+    (39, 3, 3, 3)
+    (40, 1, 1, 3)
+    (41, 2, 3, 1)
+    (42, 2, 3, 1)
+    (43, 3, 3, 1)
+    (44, 2, 3, 3)
+    (45, 3, 3, 1)
+
+===== p = 3, m up to 90 =====
+item 1: G mod p checked for m <= 90.
+item 2: necklace recursion checked.
+item 3: N(m) recursion, integrality, congruence, explicit formula, primality to p checked.
+  item 4: multivariate self-similarity is exact in only 3/40 coefficients; in the rest it holds mod p (as predicted by item 3).
+item 4: atom-ring functional equation, N(m) coefficients and one-variable self-similarity checked.
+  item 5 (k=2): Fuss-Catalan match and mod-p Frobenius checked for m <= 90.
+  item 5 (k=2): valuation anomalies: []
+  item 5 (k=2): leading residue equals N(m) mod p in 12 cases; mismatches (m, t, residue, N(m) mod p): []
+item 6: data (m, t, N(m) mod p^2, c_m/p^t mod p^2):
+    (1, 0, 1, 1)
+    (3, 0, 1, 1)
+    (5, 1, 1, 1)
+    (7, 1, 1, 4)
+    (9, 0, 1, 1)
+    (11, 1, 1, 1)
+    (13, 1, 2, 8)
+    (15, 1, 1, 1)
+    (17, 2, 1, 1)
+    (19, 1, 1, 1)
+    (21, 1, 1, 4)
+    (23, 2, 1, 4)
+    (25, 2, 1, 4)
+    (27, 0, 1, 1)
+    (29, 1, 1, 1)
+    (31, 1, 2, 5)
+    (33, 1, 1, 1)
+    (35, 2, 1, 1)
+    (37, 1, 2, 5)
+    (39, 1, 2, 8)
+
+===== p = 5, m up to 45 =====
+item 1: G mod p checked for m <= 45.
+item 2: necklace recursion checked.
+item 3: N(m) recursion, integrality, congruence, explicit formula, primality to p checked.
+  item 4: multivariate self-similarity is exact in only 22/31 coefficients; in the rest it holds mod p (as predicted by item 3).
+item 4: atom-ring functional equation, N(m) coefficients and one-variable self-similarity checked.
+item 6: data (m, t, N(m) mod p^2, c_m/p^t mod p^2):
+    (1, 0, 1, 1)
+    (5, 0, 1, 1)
+    (9, 1, 1, 1)
+    (13, 1, 2, 7)
+    (17, 1, 2, 7)
+    (21, 1, 1, 6)
+    (25, 0, 1, 1)
+
+===== p = 7, m up to 40 =====
+item 1: G mod p checked for m <= 40.
+item 2: necklace recursion checked.
+item 3: N(m) recursion, integrality, congruence, explicit formula, primality to p checked.
+  item 4: multivariate self-similarity is exact in only 53/57 coefficients; in the rest it holds mod p (as predicted by item 3).
+item 4: atom-ring functional equation, N(m) coefficients and one-variable self-similarity checked.
+item 6: data (m, t, N(m) mod p^2, c_m/p^t mod p^2):
+    (1, 0, 1, 1)
+    (7, 0, 1, 1)
+    (13, 1, 1, 1)
+    (19, 1, 3, 10)
+
+Total checks: 2584; failures: 0

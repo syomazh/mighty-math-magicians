@@ -1,0 +1,5 @@
+slug:    W021_repair_paper
+brief:   briefs/W021_repair_paper.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 23:20:00 PST

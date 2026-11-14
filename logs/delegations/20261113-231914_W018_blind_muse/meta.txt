@@ -1,0 +1,8 @@
+slug:    W018_blind_muse
+brief:   briefs/W018_blind_muse.md
+model:   meta/muse-spark-open
+flags:   -AllowBash -Model meta/muse-spark-open
+started: 2026-11-13 23:19:14 PST
+attempt 1: exit 0 at 23:22:27
+ended:   2026-11-13 23:22:27 PST
+exit:    0

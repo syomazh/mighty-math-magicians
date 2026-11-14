@@ -15,3 +15,11 @@
 | 20261113-210943 | W001_proof_draft | moonshotai/kimi-k3.1-pro | 1 | logs/delegations/20261113-210943_W001_proof_draft |
 | 20261113-215523 | W002b_replication_resume | moonshotai/kimi-k3.1-pro | 1 | logs/delegations/20261113-215523_W002b_replication_resume |
 | 20261113-223735 | W000_conn_check | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261113-223735_W000_conn_check |
+| 20261113-223910 | W006_review_muse | meta/muse-spark-open | 0 (attempts: 1) | logs/delegations/20261113-223910_W006_review_muse |
+| 20261113-223912 | W006_review_kimi | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261113-223912_W006_review_kimi |
+| 20261113-223930 | W005b_explainer_resume | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261113-223930_W005b_explainer_resume |
+| 20261113-223916 | W002c_replication_resume | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261113-223916_W002c_replication_resume |
+| 20261113-224810 | W011_qa_study_guide | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261113-224810_W011_qa_study_guide |
+| 20261113-224740 | W009_fulltext_overlap | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261113-224740_W009_fulltext_overlap |
+| 20261113-223908 | W006_review_mistral | mistralai/mistral-large-4-0 | 0 (attempts: 2) | logs/delegations/20261113-223908_W006_review_mistral |
+| 20261113-231914 | W018_blind_muse | meta/muse-spark-open | 0 (attempts: 1) | logs/delegations/20261113-231914_W018_blind_muse |

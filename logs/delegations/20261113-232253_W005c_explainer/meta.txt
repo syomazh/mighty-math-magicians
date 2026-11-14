@@ -1,0 +1,5 @@
+slug:    W005c_explainer
+brief:   briefs/W005c_explainer_reduced.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 23:22:53 PST

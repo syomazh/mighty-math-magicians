@@ -1,0 +1,5 @@
+slug:    W011b_qa_study_guide
+brief:   briefs/W011b_qa_study_guide_finish.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 23:22:43 PST

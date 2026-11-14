@@ -1,0 +1,5 @@
+slug:    W018_blind_kimi
+brief:   briefs/W018_blind_kimi.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-13 23:18:50 PST
