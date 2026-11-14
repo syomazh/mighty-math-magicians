@@ -1,0 +1,205 @@
+% Written by Claude Fable 5.2 (AI, orchestrator), 2026-11-14. A second proof ("every node is worth -p").
+% Lemmas checked numerically in experiments/E004_accounting_proof/claude_check.py. Not human-verified.
+% A separate draft of the same idea by a Kimi worker is in alt_proof_accounting.tex; this note supersedes it.
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\F}{\mathfrak F}
+\newcommand{\C}{C_n^{(q)}}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+
+\title{Every node is worth $-p$:\\ a second proof by counting labelled trees}
+\author{Mighty Math Magicians, Caltech Mathathon 2026}
+\date{14 November 2026\\\small AI-written draft; lemmas checked by computer; not yet verified by a human}
+
+\begin{document}
+\maketitle
+
+\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
+\textbf{Status.} This note gives a second, shorter route to the theorem of the main paper
+(\texttt{paper/main.pdf}). It reuses three statements of that paper, quoted in Section~1.
+It passes through the valuation of $m!$, which it \emph{derives} from the same kind of symmetry
+argument rather than quoting Legendre's formula; whether that satisfies ``without relying on
+factorial valuations'' is for the reader to judge. The main paper never mentions $m!$.}}
+
+\section{Statement and what is borrowed}
+
+Let $p$ be prime, $k\ge1$, $q=p^k$, and let $\C$ be the number of $q$-ary trees with $n$
+internal nodes, equivalently of $p$-ary trees with $m=(q-1)n+1$ leaves all of whose leaves have
+depth divisible by $k$ (``$k$-blocked''). Write $m=\sum_j m_jp^j$ in base $p$ and
+$s=\sum_j m_j$. Put
+\[
+ N(m)=\frac{m-1}{p-1},\qquad \nu(m)=\frac{m-s}{p-1},\qquad t=N(m)-\nu(m)=\frac{s-1}{p-1}.
+\]
+Here $N(m)$ is the number of internal nodes of any $p$-ary tree with $m$ leaves, and $\nu(m)$
+is the number of internal nodes of the \emph{digit forest} of $m$: $m_j$ complete $p$-ary
+trees of height $j$ for each $j$ (a complete tree of height $j$ has $(p^j-1)/(p-1)$ internal
+nodes, and $\sum_j m_j\frac{p^j-1}{p-1}=\frac{m-s}{p-1}$).
+
+\begin{theorem}\label{thm}
+$\displaystyle \C\cdot\prod_j m_j!\;\equiv\;(-p)^{t}\pmod{p^{t+1}}.$
+In particular $v_p(\C)=t$ and $\C/p^t\equiv(-1)^t/\prod_jm_j!\pmod p$.
+\end{theorem}
+
+From the main paper we use:
+\begin{enumerate}[label=(\Alph*)]
+\item \emph{Class size} (Lemma ``Class size'', in its version for trees with labelled leaves,
+      Lemma ``Plane representatives''): a rotation class of plane $p$-ary trees has $p^{d}$
+      elements, $d$ the number of asymmetric nodes; the classes of plane trees with distinctly
+      labelled leaves are the labelled cyclic trees; with distinct labels every internal node
+      is asymmetric.
+\item \emph{The carry} (Proposition ``A carry collapses a cherry''): if $T(\mathbf a)$ denotes
+      the number of cyclic $p$-ary trees with distinctly labelled leaves, $a_c$ of them of
+      class $c\in\Z/k$, a leaf of class $c$ lying at depth $\equiv-c\pmod k$, then
+      $T(\mathbf a)\equiv-T(\mathbf a-p\,e_c+e_{c+1})\pmod p$ whenever $a_c\ge p$.
+\item \emph{Termination} (the proof of Proposition ``Iterated carries''): if
+      $\sum_c a_cp^c\equiv1\pmod{q-1}$ (for $q=2$: if $a_0\ge1$), then carrying ends at $e_0$
+      after exactly $(\sum_ca_c-1)/(p-1)$ carries, so
+      $T(\mathbf a)\equiv(-1)^{(\sum_c a_c-1)/(p-1)}\pmod p$. The proof in the paper is written
+      for the vector of digits of $m$ but uses only this congruence.
+\end{enumerate}
+
+\section{Trees: each of the $N(m)$ nodes is worth $-p$}
+
+\begin{lemma}\label{L1}
+Let $L(m)$ be the number of cyclic $k$-blocked $p$-ary trees whose $m$ leaves are labelled
+$1,\dots,m$. Then
+\[
+ m!\cdot\C=p^{N(m)}\cdot L(m),\qquad L(m)\equiv(-1)^{N(m)}\pmod p .
+\]
+\end{lemma}
+\begin{proof}
+There are $m!\cdot\C$ plane $k$-blocked trees with leaves labelled $1,\dots,m$. By (A) they
+fall into rotation classes, each a labelled cyclic tree, and each class has $p^{d}$ elements
+where $d$ is the number of asymmetric nodes; with distinct labels all $N(m)$ internal nodes are
+asymmetric. This gives the first identity.
+
+All leaves are at depth $\equiv0\pmod k$, so in the notation of (B) they have class $0$ and
+$L(m)=T(m\,e_0)$. Since $m\equiv1\pmod{q-1}$, (C) applies with $\mathbf a=m\,e_0$ and gives
+$L(m)\equiv(-1)^{(m-1)/(p-1)}$.
+\end{proof}
+
+\section{Labellings: each of the $\nu(m)$ nodes of the digit forest is worth $-p$}
+
+A \emph{digit-forest structure} on $\{1,\dots,m\}$ is a partition of this set into $m_j$
+blocks of size $p^j$ for each $j$, each block arranged as the set of leaves of a cyclic
+complete $p$-ary tree of height $j$ (for $j=0$: a single point). Let $\F(m)$ be the set of
+these structures; $\F(0)$ has one element.
+
+\begin{lemma}\label{L3}
+$m!=p^{\nu(m)}\cdot\prod_jm_j!\cdot|\F(m)|$.
+\end{lemma}
+\begin{proof}
+The symmetric group $S_m$ acts on $\F(m)$ by relabelling points, transitively: two structures
+have the same number of trees of each height, so some bijection of points carries one to the
+other. A permutation fixes a structure exactly when it maps each tree to a tree of the same
+height by an isomorphism of cyclic trees. The trees of height $j$ can be permuted among
+themselves in $m_j!$ ways, and a cyclic complete tree of height $j$ has
+$p^{(p^j-1)/(p-1)}$ automorphisms: an automorphism is a free choice of a rotation at each of
+its $(p^j-1)/(p-1)$ internal nodes (by induction on $j$: a rotation at the root, then an
+automorphism of each of the $p$ subtrees). So the stabilizer has order
+$\prod_j m_j!\,p^{m_j(p^j-1)/(p-1)}=p^{\nu(m)}\prod_jm_j!$, and the orbit--stabilizer count
+gives the identity.
+\end{proof}
+
+\begin{lemma}\label{L4}
+$|\F(m)|\equiv(-1)^{\nu(m)}\pmod p$.
+\end{lemma}
+\begin{proof}
+Write $m=pa+m_0$ with $a=\lfloor m/p\rfloor$. In a digit-forest structure the $m_0$ points
+that are trees of height $0$ form a subset $R$, and the other $pa$ points are grouped into $a$
+\emph{cherries}: the sets of $p$ leaves below the lowest internal nodes, each with its cyclic
+order. Contracting every cherry to a point leaves a digit-forest structure on the set of the
+$a$ cherries (the digits of $a$ are $m_1,m_2,\dots$, and a tree of height $j\ge1$ becomes one
+of height $j-1$). Conversely $R$, the cherries with their cyclic orders, and a digit-forest
+structure on the set of cherries determine the structure. A way of grouping $pa$ points into
+$a$ cyclically ordered $p$-sets is the same thing as a permutation of those points all of
+whose cycles have length $p$; let $K(a)$ be the number of such permutations. Hence
+\begin{equation}\label{rec}
+ |\F(m)|=\binom{m}{m_0}\cdot K(a)\cdot|\F(a)| .
+\end{equation}
+
+\emph{$\binom{pa+m_0}{m_0}\equiv1\pmod p$ for $0\le m_0<p$.} Let $\Z_p$ act on the
+$m_0$-subsets of $\{1,\dots,pa+m_0\}$ through the permutation $(1\,2\,\cdots\,p)$. A fixed
+subset contains all or none of $1,\dots,p$; having fewer than $p$ elements it contains none.
+So $\binom{pa+m_0}{m_0}\equiv\binom{p(a-1)+m_0}{m_0}$, and after $a$ steps we reach
+$\binom{m_0}{m_0}=1$.
+
+\emph{$K(a)\equiv(-1)^a\pmod p$.} Let $\Z_p$ act on the permutations of $\{1,\dots,pa\}$ with
+all cycles of length $p$ by conjugation with $c=(1\,2\,\cdots\,p)$. A fixed permutation $\pi$
+commutes with $c$, hence preserves $\{1,\dots,p\}$ and acts there as a power $c^u$; $u\ne0$
+because $\pi$ has no fixed point. The rest of $\pi$ is any such permutation of the other
+$p(a-1)$ points. So $K(a)\equiv(p-1)K(a-1)\equiv-K(a-1)$, and $K(0)=1$.
+
+By \eqref{rec} and induction, $|\F(m)|\equiv(-1)^a|\F(a)|\equiv(-1)^{a+\nu(a)}$, and
+$a+\nu(a)=\nu(m)$: indeed $pa=m-m_0$ and the digit sum of $a$ is $s-m_0$, so
+$a+\frac{a-(s-m_0)}{p-1}=\frac{pa+m_0-s}{p-1}=\frac{m-s}{p-1}$. (The $a$ cherries are the
+internal nodes of the digit forest at the lowest level.)
+\end{proof}
+
+\begin{corollary}[Legendre's formula, with its residue]
+$v_p(m!)=\nu(m)$ and $m!/p^{\nu(m)}\equiv(-1)^{\nu(m)}\prod_jm_j!\pmod p$.
+\end{corollary}
+
+\section{Proof of the theorem}
+
+Divide the identity of Lemma~\ref{L1} by that of Lemma~\ref{L3}:
+\[
+ \C\cdot\prod_jm_j!\cdot|\F(m)|=p^{\,N(m)-\nu(m)}\cdot L(m)=p^{\,t}\cdot L(m).
+\]
+By Lemma~\ref{L4}, $|\F(m)|$ is prime to $p$, so $p^t$ divides $\C\prod_jm_j!$; write
+$\C\prod_jm_j!=p^tx$. Then $x\,|\F(m)|=L(m)$, and modulo $p$ this reads
+$x\,(-1)^{\nu(m)}\equiv(-1)^{N(m)}$, that is, $x\equiv(-1)^t$. Hence
+$\C\prod_jm_j!\equiv(-1)^tp^t\pmod{p^{t+1}}$. Since $\prod_jm_j!$ is prime to $p$ (every factor
+is less than $p$), $v_p(\C)=t$ and the residue follows. \qed
+
+\section{What it means}
+
+\textbf{The accounting.} A tree with labelled leaves has $N(m)$ internal nodes, and each
+contributes a factor $p$ (the $p$ rotations at that node give different labelled trees) and a
+sign $-1$ (from the carry: $p-1\equiv-1$). The $m!$ labellings contain $\nu(m)$ such factors
+of their own, one for each internal node of the digit forest, and again each comes with a
+sign $-1$. The difference, $t$ nodes, is what is left in the number of unlabelled trees.
+
+\textbf{Relation to the main proof.} There, a minimal tree is a skeleton of $t$ asymmetric
+nodes carrying atoms, and the atoms are the digit forest of $m$. So the $N(m)$ nodes of a
+minimal tree split as $\nu(m)$ nodes inside atoms plus $t$ skeleton nodes: the same
+subtraction, seen inside one tree.
+
+\textbf{Sand.} Consider grains on sites with the rule: \emph{$p$ grains on a site topple into
+one grain on the next site.}
+\begin{proposition}
+\textup{(a)} On the half-line of sites $0,1,2,\dots$, starting from $m$ grains on site $0$, every
+sequence of topplings ends, after exactly $\nu(m)$ topplings, in the configuration given by
+the base-$p$ digits of $m$.
+\textup{(b)} On a ring of $k$ sites, starting from $m$ grains on site $0$ with
+$m\equiv1\pmod{p^k-1}$, every sequence of topplings ends, after exactly $N(m)$ topplings, in
+a single grain on site $0$.
+Consequently $v_p(\C)=t$ is the number of topplings on the ring minus the number on the line.
+\end{proposition}
+\begin{proof}
+Each toppling removes $p-1$ grains, so every sequence ends, and it ends when every site holds
+fewer than $p$ grains. (a) The quantity $\sum_jg_jp^j$ ($g_j$ grains on site $j$) is unchanged
+by a toppling and equals $m$ at the start, so the final configuration is the base-$p$
+expansion of $m$, with $s$ grains; the number of topplings is $(m-s)/(p-1)$. (b) The quantity
+$\sum_cg_cp^c$ modulo $p^k-1$ is unchanged and is $\equiv1$; a final configuration has
+$0<\sum_cg_cp^c\le p^k-1$, hence $\sum_cg_cp^c=1$, a single grain on site $0$ (for $q=2$ there
+is one site and the count of grains simply drops to $1$); the number of topplings is
+$(m-1)/(p-1)$.
+\end{proof}
+In the proofs above a toppling on the ring is a cherry collapsing in a labelled tree (Lemma
+\ref{L1}), and a toppling on the line is a cherry of the digit forest being contracted (Lemma
+\ref{L4}); each contributes the factor $-p$. If $p^k-1$ divides $m$ the ring ends instead in
+the full configuration $(p-1,\dots,p-1)$; this case does not occur for $m=(q-1)n+1$.
+
+\end{document}

@@ -17,6 +17,13 @@ import platform
 import random
 import sys
 import time
+from collections import Counter
+from functools import lru_cache
+
+from sympy import Matrix, ZZ
+from sympy.matrices.normalforms import smith_normal_form
+
+
 class OrderedNodes(tuple):
     """A tuple of cyclic child trees, ordered lexicographically as a tuple."""
 
@@ -25,11 +32,6 @@ def ordered_node(children):
     return ("N", OrderedNodes(children))
 
 
-from functools import lru_cache
-from pathlib import Path
-
-from sympy import Matrix, ZZ
-from sympy.matrices.normalforms import smith_normal_form
 
 
 def digits(m, p):
@@ -105,16 +107,15 @@ def ordered_orbit(tree):
 
 
 def rotate_tree(tree):
-    if tree[0] == "L":
-        return tree
+    if tree[0] != "C":
     children = tree[1]
-    return canonical(ordered_node( children[1:]+children[:1]))
+    return canonical(ordered_node(tuple children[1:]+children[:1]))
 
 
 def relabel(tree, permutation):
     if tree[0] == "L":
         return leaf(permutation.get(tree[1], tree[1]))
-    return canonical(ordered_node( tuple(relabel(ch, permutation) for ch in choose_rotation(tree)[1])))
+    return canonical(ordered_node(tuple(relabel(ch, permutation) for ch in choose_rotation(tree)[1])))
 
 
 def block_partitions(labels, p):
@@ -159,7 +160,7 @@ def cyclic_trees(labels, classes, p, k, depth):
         if possible:
             for children in itertools.product(*options):
                 for root_order in itertools.permutations(children):
-                    answer.add(canonical(ordered_node( root_order)))
+                    answer.add(canonical(ordered_node(tuple root_order)))
     return tuple(sorted(answer))
 
 
@@ -185,7 +186,7 @@ def cherry_collapse(tree, selected):
             return leaf(0)
         if tr[0] == "L":
             return tr
-        return canonical(ordered_node( tuple(replace(ch) for ch in tr[1])))
+        return canonical(ordered_node(tuple(replace(ch) for ch in tr[1])))
     return replace(tree)
 
 
@@ -224,7 +225,7 @@ def test_L1_L2(C):
             q = p**k
             feasible = []
             skipped = []
-            for n in range(1, 80):
+            for n in range(1,201):
                 m = (q-1)*n+1
                 count = math.factorial(m)*fuss(p, k, n)
                 if count > cap:
@@ -312,7 +313,7 @@ def complete_trees(labels, p, height):
         options = [complete_trees(block,p,height-1) for block in partition]
         for children in itertools.product(*options):
             for root_order in itertools.permutations(children):
-                result.add(canonical(ordered_node( root_order)))
+                result.add(canonical(ordered_node(tuple root_order)))
     return tuple(sorted(result))
 
 

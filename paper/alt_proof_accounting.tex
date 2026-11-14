@@ -111,46 +111,40 @@ so $K(a)\equiv(p-1)K(a-1)\equiv-K(a-1)$. With $K(0)=1$, the result follows.\end{
  |\F(m)|=\binom mrK(a)|\F(a)|,\qquad
  |\F(m)|\equiv(-1)^{\nu(m)}\pmod p.
 \end{equation}\end{lemma}
-\begin{proof} First add a marked root and, independently at each original
-internal node, enumerate the $p$ cyclic child positions before designating
-one position as slot $1$. Once that slot is chosen, the remaining positions
-have an ordered list of $p-1$ children. There are $p-1$ designations at each
-of the $\nu(m)$ internal nodes. These data give every offered object exactly
-once.
-
-Exactly $r$ trees have height zero; choose their labels. Delete the $a$ marked
-roots of the positive-height trees and their slot designations, keeping all
-other data. On each original $p$-slot list there is now a cyclic permutation
-of that root's $p$ children. These are disjoint $p$-cycles covering precisely
-the $pa$ child roots of height at least $1$. Relative to label addition by one
-modulo $p$, write
-\begin{equation}\label{orderedcycle}
- (x\mapsto x+1\pmod p)\ \pi\ (x\mapsto x-1\pmod p)=\pi .
+\begin{proof} There is one unlabelled cyclic complete tree template $T_j$ of
+each height $j$. Expand it into an ordered-encoding tree by choosing all
+possibilities at its nodes, with child subtrees already cyclic. The number of
+these is $c_0=1$ and $c_{j+1}=(p-1)!(c_j/p)^p$; the division by $p$ at each
+child removes the child-root rotation already included in its cyclic type.
+Every cyclic labelled tree has $p^{N(p^j)}$ full ordered lifts with all child
+branches ordered and distinct leaves. For the whole forest, by multiplying
+local rotation groups, each class has $p^{\nu(m)}$ lifts. Reversing this group
+quotient at the root slots gives
+\begin{equation}\label{cyclicordered}
+ p^{\nu(m)}|\F(m)|=m!\prod_j(c_j)^{-m_j}.
 \end{equation}
-Consequently the cyclic child permutation, call it $\pi$, has a
-$(p-1)$-element centralizer in each set of cyclic relabelings $\lambda$. More
-precisely, every new height-$1$ tree has $(p-1)$ possible designated-slot
-states, compatible with its actual $\lambda$ if and only if $\lambda\pi\lambda^{-1}=\pi$.
-At greater heights the state is $(g,g_1,\ldots,g_{p-1})$, where $g$ records
-old lower-level designations and $g_u$ is the designation of the child in slot
-$u$. The compatible relabeling satisfies
-$\lambda(g)=(g,g_{1+s},\ldots,g_{p-1+s})$, with indices modulo $p-1$. Hence
-there are exactly $(p-1)^{\nu(a)}$ possible states for the slot data. There
-are $K(a)$ choices for $\pi$.
+The remaining forests after parent deletion are encoded locally by $K(a)$
+permutations, but establishing the corresponding relabeling bijection with
+\eqref{cyclicordered} requires more bookkeeping. \GAP{Prove the exact
+recurrence. The template identity \eqref{cyclicordered} and explicit forest
+counts do not by themselves establish that $|F(m)|=\binom mr K(a)|F(a)|$.
+The quotient proof is incomplete here and the theorem remains conditional on
+this computation.}
 
-Finally, the partition into new components is determined by $\pi$. List these
-components by their smallest original leaf and relabel their marked roots
-$1,\ldots,a$. The depleted forest is an object of $\F(a)$ while preserving the
-internal cyclic orders below the retained roots (the marked leaf is removed
-in slot $1$). Conversely, from such a forest and $\pi$, take the original root
-of the $p$-cycle containing the root labelled $i$ to be the $i$-th root,
-putting the children into slots $1,\ldots,p$ in $\pi$-order. The slot data
-then reconstruct exactly the original cyclic child lists. This proves
-\[
- \binom mr\frac{F(m)}{p^{\nu(m)}}
- =K(a)\frac{F(a)}{p^{\nu(a)}} .
-\]
-Multiplying by $p^{\nu(m)}=p^{a+\nu(a)}$ gives \eqref{forest}.
+For the congruence, if the recurrence is granted, rotate separately within
+each of $a$ consecutive blocks let $T$ be its
+$p-1$-element sibling group in root order, and let $U$ be their ordered list
+to the right of $a_1$. The remaining $m-p$ leaves form a forest of digit type
+$a - p+1$, multiplied by the removal of one full cyclic $p$-ary node and the
+addition of $p-1$ leaf roots, with leaf subsets chosen later. Every distinct
+choice of $U,T$ and the remaining forest corresponds to exactly one original
+digit forest, but the remaining forest can itself contain other cyclic
+heights, and the height profiles of the two sides require keeping track of
+all $p-1$ created roots, not just the singleton. \GAP{Finish this bijection
+and its height bookkeeping. It must give $|F(m)|=\binom{m}{p-1}K(a)$ residue
+$\binom{m}{m-pa}K(a)|F(a)|$; at present the numerical verification and the
+cyclic template identities are stronger than the written kernel.}
+For the congruence, rotate separately within each of $a$ consecutive blocks
 
 For the congruence, rotate separately within each of $a$ consecutive blocks
 of $p$ points of $[pa+r]$, holding the last $r$ points. A fixed $r$-subset
@@ -183,7 +177,7 @@ then $N-\nu=t$. The two integer congruences imply
 where inversion is in $\mathbb Z/p\mathbb Z$. Cancelling $p^\nu$ in
 \eqref{digit} therefore gives $D\,C_n^{(q)}\equiv(-1)^t p^t\pmod{p^{t+1}}$
 in $\mathbb Z$. Since each $m_j<p$ makes $D=\prod_jm_j!$ a $p$-unit,
-$	v_p(C_n^{(q)})=t$, proving \eqref{maineq}.\end{proof}
+$v_p(C_n^{(q)})=t$, proving \eqref{maineq}.\end{proof}
 \begin{remark}\label{qualification} Here $v_p(m!)$ \emph{is} computed along the
 way but from complete-tree symmetry rather than from Legendre's formula. Thus
 this note does not meet an absolute prohibition on factorial valuations; whether
@@ -231,16 +225,16 @@ The toppling count $x$ obeys
  a-a_{\mathrm{final}}=(pI-S)x,
 \]
 with an extra site carrying grains past the known finite origin on the half-line.
-The half-line preserves the integer $\sum a_cp^c=m$ exactly. A firing from site
-$c$ loses $p$ grains there and gains one at $c+1$, so $m=(p-1)\sum x_cp^{c+1}
-+\sum a_cp^c$. Modulo $p$, this gives $a_0=m_0$; subtract $a_0$, divide by $p$,
-and repeat to identify every final digit. This also identifies the coefficients
-$x_c$, since $x_c$ occurs with coefficient $(p-1)p^{c+1}$, and the inequality
-$x_c\ge\sum_{i\ge c+1}m_ip^{i-c-1}$ follows from looking at grain flow as
-an ordinary carry. (This conclusion is $x_c=
-\lfloor m^{(c)}/p\rfloor$, where $m^{(0)}=m$ and $m^{(c+1)}
-=(m^{(c)}-m_c)/p$; $\sum m_ip^{i-c-1}$ is its stable configuration.)
-Consequently $\sum x_c=\nu(m)$.
+The half-line preserves the integer weight $\sum a_cp^c$ exactly. Define
+$M_0=m$ and $M_{c+1}=(M_c-a_c^{\mathrm{final}})/p$. Conservation of grains at
+site $0$ gives $M_1=x_0$. The grains which move beyond site $0$ have total
+weight $M_1$ at their future sites. Inducting on the tail, site $c$ sees
+$M_c$ grains arriving, in units of its own weight. Hence
+\[
+ a_c^{\mathrm{final}}=M_c-px_c,\qquad x_c=M_{c+1}=(M_c-m_c)/p,
+\]
+so induction gives $M_c=\lfloor m/p^c\rfloor$ and $a_c^{\mathrm{final}}=m_c$.
+Thus $x_c=\lfloor m/p^{c+1}\rfloor$ and $\sum x_c=\nu(m)$.
 
 On the ring the same weight is conserved modulo $q-1$ because $p^k\equiv1$.
 The terminal digits are in $\{0,\ldots,p-1\}$, so their integer weight lies
