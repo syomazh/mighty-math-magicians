@@ -1,0 +1,8 @@
+slug:    W026_lean_accounting_start
+brief:   briefs/W026_lean_accounting_start.md
+model:   meta/muse-spark-open
+flags:   -AllowBash -Model meta/muse-spark-open
+started: 2026-11-14 14:59:31 PST
+attempt 1: exit 0 at 15:47:18
+ended:   2026-11-14 15:47:18 PST
+exit:    0
