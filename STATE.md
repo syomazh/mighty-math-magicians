@@ -1,6 +1,6 @@
 # STATE — where we are and what is next
 
-_Last updated: 2026-11-13 21:45 PT by Claude Fable 5.2 (orchestrator)._
+_Last updated: 2026-11-13 21:10 PT by Claude Fable 5.2 (orchestrator)._
 
 ## Status in one paragraph
 
@@ -15,7 +15,7 @@ We have a candidate proof of the full problem (exact valuation for every q = p^k
 - Compute: about $15k on Open Math OS (use freely); Claude budget is small (protect it: orchestration and judgment only).
 - Repo is public on GitHub. **Pushing is waiting for Syoma's decision** (other teams could read the proof).
 
-## Worker runs in flight (wave 1, launched 2026-11-13 ~21:50)
+## Worker runs in flight (wave 1, launched 2026-11-13 ~21:10)
 
 | Brief | Output | What "done" looks like |
 |---|---|---|

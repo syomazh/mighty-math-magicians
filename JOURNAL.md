@@ -24,11 +24,11 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **Weighted numbers (claim C9).** In his proof of Theorem 5 the recursion r_b(O)(x) = b(x)·(1/q)·Σ_i r_b(O_i)(x)·∏_{j≠i} r_b(O_j)(x+1) comes from summing over which branch lands in the right-most position. For any group acting transitively on the q positions each branch lands there equally often, so the same recursion holds for our p-group. Needs a numerical check and a careful write-up.
 - New conjectured corollaries recorded as C10 (level-profile refinement) and C11 (master statement).
 
-## 2026-11-13 ~21:20 — Claude Fable 5.2
+## 2026-11-13 ~21:05 — Claude Fable 5.2
 
 - Built the project scaffolding: `CLAUDE.md` (operating manual and handoff), `STATE.md`, `CLAIMS.md`, this journal, `tools/delegate.sh` (logged worker launcher), `briefs/`, `pyproject.toml`.
 
-## 2026-11-13 ~21:50 — Claude Fable 5.2
+## 2026-11-13 ~21:10 — Claude Fable 5.2
 
 - Smoke-tested the wrapper on six gateway models. Working: Kimi K3.1 Pro (7–20 s), Mistral Large 4.0 (22 s), Muse Spark Open (15 s), DeepSeek Flash (12 s). GLM 5.3 took almost 7 minutes on a one-line task. Nemotron timed out at 150 s.
 - First commit of the scaffolding (91626ce). Not pushed: waiting for Syoma's decision, because the repo is public.
