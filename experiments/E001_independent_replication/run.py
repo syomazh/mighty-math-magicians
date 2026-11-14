@@ -95,7 +95,7 @@ def continuation(p,k,q_child,depth):
     if q_child is None:
         return full(p,k-depth)
     return ((continuation(p,k,q_child,depth+1),)+(full(p,k-depth-1),)*(p-1)
-            if depth%p==0 else
+            if depth==0 else
             (full(p,k-depth-1),)*(p-1)+(continuation(p,k,q_child,depth+1),))
 
 
@@ -495,7 +495,8 @@ def labelled_case(arguments):
             fixed=[tree for tree in trees if relabel(tree,permutation)==tree]
             if fixed:
                 literal_fixed.append((permutation,fixed))
-                break
+    if valid_classes:
+        check(not literal_fixed,f"C4 arbitrary label action not free {(p,k,counts)}: count {len(literal_fixed)}")
     if literal_fixed:
         print("C4_LITERAL_COUNTEREXAMPLE",dict(p=p,k=k,counts=counts,
               permutation=literal_fixed[0][0],fixed=literal_fixed[0][1]),flush=True)
@@ -603,7 +604,7 @@ def atom_freeness_case(p,k,maximum_atoms):
     trees=set()
     for shape in by_leaves(p,len(ds)):
         for heights in permutations(explicit_atoms):
-            if all(h%k==d%k for h,d in zip(heights,leaf_depths(shape))):
+            if all((-d)%k==h%k for h,d in zip(heights,leaf_depths(shape))):
                 # Tag names by height class, with no alphabetical class ambiguity.
                 labels=iter(tuple(i+1,j) for i,j in enumerate(heights))
                 trees.add(canonical_labelled(shape,labels))

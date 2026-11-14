@@ -2,6 +2,7 @@
 references/*
 !references/README.md
 !references/literature_scan.md
+!references/overlap_fulltext.md
 
 # Python
 .venv/

@@ -44,3 +44,11 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-13 ~21:55 — Claude Fable 5.2
 
 - Worker status: W004 (literature scan) finished 21:29, not yet reviewed. W002 (independent replication) died at 21:48 with a gateway timeout (Cloudflare 524), not a mathematical failure; it left `run.py` and partial outputs but no final output or README. Relaunched as W002b with a brief to finish from the existing code. W001, W003, W005 still running.
+
+## 2026-11-13 ~22:45 — Claude Fable 5.2
+
+- Laptop was closed 22:00–22:30 for the move to the hotel. A snapshot of everything had been committed and pushed first (d1e51ba).
+- Worker outcomes: W004 literature scan finished cleanly. W003 died at 21:56 (gateway timeout, Cloudflare 524). W001, W005 and W002b died at 22:29 on reconnect ("self-signed certificate": the hotel network intercepting the connection). All left usable files: `paper/main.tex` (487 lines) with `paper/build/main.pdf` (11 pages, compiled 21:58, the author reports no gaps), `explainer/index.html` (selftest currently crashes), `experiments/E001/run.py`, `experiments/E002/run.py` with a partial output.
+- **Reviewed W004** (`references/literature_scan.md`, top sections). The three given references match Crossref exactly. No abstract found that states a tree-symmetry or p-group proof of the exact valuation for prime-power q. This is not a novelty proof: full texts were not read and arXiv search failed. Papers needing a full-text check: Gao–Gu 2021 (weighted Catalan arithmetic, strengthens Konvalinka; bears on C9), Krattenthaler–Müller 2025 (Fuss–Catalan numbers modulo prime powers; bears on C7), Kauers–Krattenthaler–Müller 2012, Bobrowski–He–Shiue 2019, and Deutsch–Sagan 2006 and Postnikov–Sagan 2007 themselves.
+- `tools/delegate.sh` now relaunches a worker that dies, with an instruction to continue from its files (up to 4 attempts).
+- Launched: three adversarial reviews of `paper/main.tex` (W006: Mistral Large 4.0, Muse Spark Open, and a fresh Kimi K3.1 Pro), reports to `paper/reviews/`; resumes W002c (replication), W003b (extensions), W005b (explainer).
