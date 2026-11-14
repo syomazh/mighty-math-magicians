@@ -1,12 +1,12 @@
 # Morning brief — Saturday 14 November 2026
 
-Written by the orchestrator (Claude Fable 5.2) during the night. Last updated Friday 23:58 PT. **If this says "pending" somewhere, check `STATE.md` and the end of `JOURNAL.md` for what happened after.**
+Written by the orchestrator (Claude Fable 5.2) during the night. Last updated Saturday 00:04 PT. **If this says "pending" somewhere, check `STATE.md` and the end of `JOURNAL.md` for what happened after.**
 
 ## Where we stand, in five lines
 
-1. We have a complete written proof of the full problem: `paper/main.pdf` (12 pages).
+1. We have a complete written proof of the full problem: `paper/main.pdf` (13 pages).
 2. The statements have passed every computer test, including one on 1067 cases up to 400 leaves and primes up to 13.
-3. Three AI reviewers found no counterexample but 14 defects in the write-up; all were repaired, and a line-by-line read found and fixed 4 more. An independent referee (a second Claude that has seen none of our notes) is reading the repaired paper: **pending**.
+3. Three AI reviewers found no counterexample but 14 defects in the write-up; all were repaired, and a line-by-line read found and fixed 4 more. An independent referee (a second Claude that had seen none of our notes) then judged the theorem proved modulo gaps: one wrong sentence in an example and six gaps, all needing only a missing justification or hypothesis; all repaired (`paper/reviews/ADJUDICATION_round2.md`). A third pass on the final text: **pending**.
 4. **No human has signed anything.** That is today's job and it is the only thing that makes the result presentable.
 5. Open Math OS is switched off (about a third of the allowance was left); everything since Friday 23:35 was done by Claude.
 
@@ -56,7 +56,6 @@ Written by the orchestrator (Claude Fable 5.2) during the night. Last updated Fr
 
 ## What Claude does next unless told otherwise
 
-1. Adjudicate the independent referee's report and fix what it finds.
-2. Review the last worker's accounting-proof note.
-3. Add a short remark and the two citations (Deutsch–Sagan, Kersting–Fischer) to the paper's introduction for the case p = 2.
-4. Then wait for the humans' findings.
+1. Adjudicate the third-pass report on the final paper and fix what it finds.
+2. Review the last worker's accounting-proof note (its three lemmas already pass an independent numerical check).
+3. Then wait for the humans' findings.

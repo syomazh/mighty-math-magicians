@@ -128,3 +128,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - Adjudicated and repaired everything myself in paper/main.tex (two new lemmas, a recursive definition of the contraction, the missing hypothesis, rewritten proofs, corrected example, a paragraph on prior work for p = 2 citing Deutsch-Sagan, Postnikov-Sagan and Kersting-Fischer). Record: paper/reviews/ADJUDICATION_round2.md. The paper compiles: paper/main.pdf, 13 pages.
 - Added Kersting-Fischer to references/README.md with the verified data.
 - Launching a third fresh-context review of the final text.
+
+## 2026-11-14 ~00:04 — Claude Fable 5.2
+
+- **Accounting proof checked independently** (experiments/E004_accounting_proof/claude_check.py): lemmas L1 and L2 in 24 cases (k up to 3), lemma L3 in 27 cases with digit forests enumerated explicitly; all pass. The Kimi worker's intermediate outputs in the same folder show failures that are bugs in its own enumerators; its final run had not finished at the time of writing. C13 is now computed. C14: the worker's sandpile simulation shows no failure and corrects one detail of the idea (the stable state on the ring when q-1 divides m).
+- Updated CLAIMS.md, FINDINGS.md and MORNING_BRIEF.md with the round-2 outcome.

@@ -1,0 +1,56 @@
+L1, L2: labelled trees
+  p=2 k=1 m=1: C=1 N(m)=0 L(m)=1  L1 ok  L2 ok
+  p=2 k=1 m=2: C=1 N(m)=1 L(m)=1  L1 ok  L2 ok
+  p=2 k=1 m=3: C=2 N(m)=2 L(m)=3  L1 ok  L2 ok
+  p=2 k=1 m=4: C=5 N(m)=3 L(m)=15  L1 ok  L2 ok
+  p=2 k=1 m=5: C=14 N(m)=4 L(m)=105  L1 ok  L2 ok
+  p=2 k=1 m=6: C=42 N(m)=5 L(m)=945  L1 ok  L2 ok
+  p=2 k=1 m=7: C=132 N(m)=6 L(m)=10395  L1 ok  L2 ok
+  p=2 k=1 m=8: C=429 N(m)=7 L(m)=135135  L1 ok  L2 ok
+  p=3 k=1 m=1: C=1 N(m)=0 L(m)=1  L1 ok  L2 ok
+  p=3 k=1 m=3: C=1 N(m)=1 L(m)=2  L1 ok  L2 ok
+  p=3 k=1 m=5: C=3 N(m)=2 L(m)=40  L1 ok  L2 ok
+  p=3 k=1 m=7: C=12 N(m)=3 L(m)=2240  L1 ok  L2 ok
+  p=3 k=1 m=9: C=55 N(m)=4 L(m)=246400  L1 ok  L2 ok
+  p=5 k=1 m=1: C=1 N(m)=0 L(m)=1  L1 ok  L2 ok
+  p=5 k=1 m=5: C=1 N(m)=1 L(m)=24  L1 ok  L2 ok
+  p=5 k=1 m=9: C=5 N(m)=2 L(m)=72576  L1 ok  L2 ok
+  p=2 k=2 m=1: C=1 N(m)=0 L(m)=1  L1 ok  L2 ok
+  p=2 k=2 m=4: C=1 N(m)=3 L(m)=3  L1 ok  L2 ok
+  p=2 k=2 m=7: C=4 N(m)=6 L(m)=315  L1 ok  L2 ok
+  p=2 k=2 m=10: C=22 N(m)=9 L(m)=155925  L1 ok  L2 ok
+  p=3 k=2 m=1: C=1 N(m)=0 L(m)=1  L1 ok  L2 ok
+  p=3 k=2 m=9: C=1 N(m)=4 L(m)=4480  L1 ok  L2 ok
+  p=2 k=3 m=1: C=1 N(m)=0 L(m)=1  L1 ok  L2 ok
+  p=2 k=3 m=8: C=1 N(m)=7 L(m)=315  L1 ok  L2 ok
+
+L3: explicit digit forests
+  p=2 m=1 digits=[1] nu=0: enumerated=1 formula=1 recursion=1 residue=1 expected=1  ok
+  p=2 m=2 digits=[1, 0] nu=1: enumerated=1 formula=1 recursion=1 residue=1 expected=1  ok
+  p=2 m=3 digits=[1, 1] nu=1: enumerated=3 formula=3 recursion=3 residue=1 expected=1  ok
+  p=2 m=4 digits=[1, 0, 0] nu=3: enumerated=3 formula=3 recursion=3 residue=1 expected=1  ok
+  p=2 m=5 digits=[1, 0, 1] nu=3: enumerated=15 formula=15 recursion=15 residue=1 expected=1  ok
+  p=2 m=6 digits=[1, 1, 0] nu=4: enumerated=45 formula=45 recursion=45 residue=1 expected=1  ok
+  p=2 m=7 digits=[1, 1, 1] nu=4: enumerated=315 formula=315 recursion=315 residue=1 expected=1  ok
+  p=2 m=8 digits=[1, 0, 0, 0] nu=7: enumerated=315 formula=315 recursion=315 residue=1 expected=1  ok
+  p=2 m=9 digits=[1, 0, 0, 1] nu=7: enumerated=2835 formula=2835 recursion=2835 residue=1 expected=1  ok
+  p=3 m=1 digits=[1] nu=0: enumerated=1 formula=1 recursion=1 residue=1 expected=1  ok
+  p=3 m=2 digits=[2] nu=0: enumerated=1 formula=1 recursion=1 residue=1 expected=1  ok
+  p=3 m=3 digits=[1, 0] nu=1: enumerated=2 formula=2 recursion=2 residue=2 expected=2  ok
+  p=3 m=4 digits=[1, 1] nu=1: enumerated=8 formula=8 recursion=8 residue=2 expected=2  ok
+  p=3 m=5 digits=[1, 2] nu=1: enumerated=20 formula=20 recursion=20 residue=2 expected=2  ok
+  p=3 m=6 digits=[2, 0] nu=2: enumerated=40 formula=40 recursion=40 residue=1 expected=1  ok
+  p=3 m=7 digits=[2, 1] nu=2: enumerated=280 formula=280 recursion=280 residue=1 expected=1  ok
+  p=3 m=8 digits=[2, 2] nu=2: enumerated=1120 formula=1120 recursion=1120 residue=1 expected=1  ok
+  p=3 m=9 digits=[1, 0, 0] nu=4: enumerated=4480 formula=4480 recursion=4480 residue=1 expected=1  ok
+  p=3 m=10 digits=[1, 0, 1] nu=4: enumerated=44800 formula=44800 recursion=44800 residue=1 expected=1  ok
+  p=5 m=1 digits=[1] nu=0: enumerated=1 formula=1 recursion=1 residue=1 expected=1  ok
+  p=5 m=2 digits=[2] nu=0: enumerated=1 formula=1 recursion=1 residue=1 expected=1  ok
+  p=5 m=3 digits=[3] nu=0: enumerated=1 formula=1 recursion=1 residue=1 expected=1  ok
+  p=5 m=4 digits=[4] nu=0: enumerated=1 formula=1 recursion=1 residue=1 expected=1  ok
+  p=5 m=5 digits=[1, 0] nu=1: enumerated=24 formula=24 recursion=24 residue=4 expected=4  ok
+  p=5 m=6 digits=[1, 1] nu=1: enumerated=144 formula=144 recursion=144 residue=4 expected=4  ok
+  p=5 m=7 digits=[1, 2] nu=1: enumerated=504 formula=504 recursion=504 residue=4 expected=4  ok
+  p=5 m=8 digits=[1, 3] nu=1: enumerated=1344 formula=1344 recursion=1344 residue=4 expected=4  ok
+
+OVERALL: ALL CHECKS PASSED
