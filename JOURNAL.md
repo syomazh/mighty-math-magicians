@@ -27,3 +27,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-13 ~21:20 — Claude Fable 5.2
 
 - Built the project scaffolding: `CLAUDE.md` (operating manual and handoff), `STATE.md`, `CLAIMS.md`, this journal, `tools/delegate.sh` (logged worker launcher), `briefs/`, `pyproject.toml`.
+
+## 2026-11-13 ~21:50 — Claude Fable 5.2
+
+- Smoke-tested the wrapper on six gateway models. Working: Kimi K3.1 Pro (7–20 s), Mistral Large 4.0 (22 s), Muse Spark Open (15 s), DeepSeek Flash (12 s). GLM 5.3 took almost 7 minutes on a one-line task. Nemotron timed out at 150 s.
+- First commit of the scaffolding (91626ce). Not pushed: waiting for Syoma's decision, because the repo is public.
+- **File of unknown origin.** `problem137/orbits.py` (dated 20:31, 174 lines) was already in the working tree and went into that commit. Claude Fable did not write it and no logged worker did. It studies a different action (Z_q rotation of the q children of a q-ary node). Provenance to be supplied by the team.
+- Launched wave 1 in the background (all Kimi K3.1 Pro, shell allowed): W001 proof draft, W002 independent replication, W003 extensions numerics, W004 literature scan, W005 explainer. Not yet reviewed.
