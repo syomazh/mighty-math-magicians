@@ -23,3 +23,4 @@ talk/build/
 *.snm
 *.bbl
 *.blg
+!references/cross_field_refs.md
