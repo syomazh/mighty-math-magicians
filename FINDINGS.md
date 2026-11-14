@@ -26,7 +26,7 @@ _Purpose: one short page telling the humans what matters most. Details live in t
 ## Tier 3 — parked
 
 - Other closed families (bounded height, all leaves deep): divisibility holds in all tested cases.
-- A bijection between labelled cyclic p-ary trees and permutations made of p-cycles: not tested.
+- A bijection between labelled cyclic p-ary trees and permutations made of p-cycles: **holds in every case tested** (E009; p = 2, 3, 5). It replaces the one place where the paper quotes the Fuss–Catalan formula, and for p = 2 it is the known tree–matching correspondence.
 - q not a prime power: not explored (worker stopped).
 - Residues modulo p²: data only.
 - An observation from the data: for binary trees the number of level profiles with valuation exactly t is 1, 3, 13 for t = 1, 2, 3. These look like the ordered Bell numbers. Unexplained.

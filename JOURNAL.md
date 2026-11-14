@@ -116,3 +116,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - Slides: added the Kersting-Fischer link to the opening slide and a final slide "What was known, and references" with verified citations and a cautious statement of what appears to be ours. 19 slides, compiles cleanly.
 - Wrote MORNING_BRIEF.md (draft): status in five lines, what happened overnight, what each human should do first, decisions needed, risks.
 - Queue status: Q1, Q3, Q5, Q6, Q7, Q8 done. Q2 waits for the independent referee. Q4 waits for worker W014. Q9 drafted.
+
+## 2026-11-13 ~23:57 — Claude Fable 5.2 (watchdog turn)
+
+- The cron watchdog fired at 23:57. The independent referee and worker W014 were both still running, so Q2 and Q4 could not advance.
+- Used the wait to test Idea 5 myself (experiments/E009_sibling_permutation): the map from labelled cyclic p-ary trees to permutations made of p-cycles is a bijection in every case tested (p = 2, 3, 5). Recorded as claim C17. It gives the exact count of minimal classes for q = p without the Fuss-Catalan formula.

@@ -65,3 +65,9 @@ A q-ary tree is read as a p-ary tree whose leaves all sit at depth ≡ 0 (mod k)
 - **C11 (closed families)** now also `computed` for five rotation-invariant statistics (height, level profile, degree vector, leaves by depth, number of childless nodes) and every value of each: E007, q in {2,3,5,4,9,8}, small n, 0 failures of divisibility by p^t or of the residue rule.
 - **C15** extended: q = 5 and 7 are OEIS A036727 and A036728; q = 4 is A398109; labelled cyclic ternary trees are A052502. See `notes/oeis_recon.md`.
 - Literature for p = 2: the phylogenetics paper Kersting–Fischer 2021 (symmetry nodes index) studies the extremal values of what is our n − d(T). Whether it already contains our lower bound for p = 2 is **unverified**; see `references/cross_field_refs.md`.
+
+## Update, 2026-11-13 23:57 PT (Claude Fable 5.2)
+
+| ID | Claim | Grade | Evidence | Origin |
+|---|---|---|---|---|
+| C17 | Bijection: cyclic p-ary trees with (p−1)t+1 labelled leaves ↔ permutations of {1..pt} with t cycles of length p (label internal nodes in order of readiness; read off the children's cyclic orders). Hence their number is (pt)!/(p^t·t!) without the Fuss–Catalan formula, which gives C8 bijectively. For p = 2 this is the tree–matching correspondence. | computed | E009: p = 2 (t ≤ 5), p = 3 (t ≤ 3), p = 5 (t ≤ 2); the OEIS lists the p = 3 counts as A052502 | Claude Fable 5.2 |

@@ -1,0 +1,12 @@
+p=2 t=1 s=2: trees=1 distinct images=1 (pt)!/(p^t t!)=1 cycle type ok=True inverse ok=True -> OK
+p=2 t=2 s=3: trees=3 distinct images=3 (pt)!/(p^t t!)=3 cycle type ok=True inverse ok=True -> OK
+p=2 t=3 s=4: trees=15 distinct images=15 (pt)!/(p^t t!)=15 cycle type ok=True inverse ok=True -> OK
+p=2 t=4 s=5: trees=105 distinct images=105 (pt)!/(p^t t!)=105 cycle type ok=True inverse ok=True -> OK
+p=2 t=5 s=6: trees=945 distinct images=945 (pt)!/(p^t t!)=945 cycle type ok=True inverse ok=True -> OK
+p=3 t=1 s=3: trees=2 distinct images=2 (pt)!/(p^t t!)=2 cycle type ok=True inverse ok=True -> OK
+p=3 t=2 s=5: trees=40 distinct images=40 (pt)!/(p^t t!)=40 cycle type ok=True inverse ok=True -> OK
+p=3 t=3 s=7: trees=2240 distinct images=2240 (pt)!/(p^t t!)=2240 cycle type ok=True inverse ok=True -> OK
+p=5 t=1 s=5: trees=24 distinct images=24 (pt)!/(p^t t!)=24 cycle type ok=True inverse ok=True -> OK
+p=5 t=2 s=9: trees=72576 distinct images=72576 (pt)!/(p^t t!)=72576 cycle type ok=True inverse ok=None -> OK
+
+OVERALL: ALL CHECKS PASSED
