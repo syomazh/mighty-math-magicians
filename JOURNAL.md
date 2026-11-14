@@ -101,3 +101,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-13 ~23:52 — Claude Fable 5.2
 
 - **Q7 done.** Own script experiments/E007_refinements/run.py: for five statistics preserved by rotations (height, level profile, degree vector, leaves by depth, childless nodes) every refined count is divisible by p^t and its residue equals the number of minimal classes with that value, in all tested cases (q = 2, 3, 5, 4, 9, 8; small n). Observation recorded as a conjecture: for binary trees the only tight value of the number of childless nodes is the largest one.
+
+## 2026-11-13 ~23:53 — Claude Fable 5.2
+
+- Wrote AI_USAGE.md (which tool produced and checked what).
+- **Q8 done.** The explainer self-test passes (the worker stopped at 23:33 had already repaired the logic and re-inlined it). Opened explainer/index.html in the built-in browser: controls, atoms, a tree with symmetric and asymmetric nodes coloured, the gallery of minimal classes and the carry stepper all render with correct numbers for p = 2, n = 6. The bar chart in section 2 looked partly blank in the snapshot and should be checked in a normal browser.
