@@ -24,3 +24,9 @@ Bibliographic data below is copied from the Mathathon problem statement. Status:
 ## Literature scan
 
 See `literature_scan.md` (produced by worker W004) once it exists.
+
+## Added during the project (verified through public APIs)
+
+4. Sophie Johanna Kersting and Mareike Fischer, "Measuring tree balance using symmetry nodes — A new balance index and its extremal properties", *Mathematical Biosciences* (2021). DOI: 10.1016/j.mbs.2021.108690. arXiv: 2105.00719. Title, authors, journal, year and DOI as returned by OpenAlex and Semantic Scholar on 2026-11-13; volume and pages not checked. **Read on 2026-11-13 as a web page (ar5iv), Theorems 3.5 and 3.9 and Definition 3.4.** For binary trees it contains our lower bound, our description of minimal trees and their count. See `cross_field_refs.md`.
+
+Other references that were verified to exist but only read in abstract are listed in `cross_field_refs.md`; they are not cited in the paper.

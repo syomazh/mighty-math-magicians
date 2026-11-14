@@ -1,5 +1,6 @@
 % Drafted by moonshotai/kimi-k3.1-pro (Open Math OS worker), 2026-11-13, from a sketch by Claude Fable 5.2. Not yet human-verified.
 % Repaired 2026-11-13 by moonshotai/kimi-k3.1-pro (W021) per paper/reviews/ADJUDICATION_round1.md items A1-A14; see paper/CHANGES_round1.md.
+% Revised 2026-11-13/14 by Claude Fable 5.2 (orchestrator): four corrections (paper/reviews/round2_orchestrator.md) and the round-2 repairs (paper/reviews/ADJUDICATION_round2.md).
 \documentclass[11pt]{amsart}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb}
@@ -48,8 +49,9 @@ For an integer $n\ge 1$ and a prime power $q$, let $\fc$ be the number of rooted
 \]
 leaves, and the standard tree-counting identity is
 \[
- \fc=\frac1m\binom{qn}{n}.
+ \fc=\frac1m\binom{qn}{n}
 \]
+(recalled as well known in \cite{Konvalinka}).  Throughout, $\fc$ denotes the number of trees.  The binomial expression is used only to recognise that number as the Fuss--Catalan number, for the numerical values in Section~7, and in Corollary~\ref{cor:exact-count}.
 For a positive integer $a$, write $s_p(a)$ for the sum of the digits in its base-$p$ expansion.  We prove the following result using elementary counting, base-$p$ digits, and fixed points of an action of $\Z_p=\Z/p\Z$.
 \begin{theorem}\label{thm:main}
 If $p$ is prime, $k\ge1$, $q=p^k$, $n\ge1$, and $m=(q-1)n+1$, then
@@ -61,11 +63,13 @@ More precisely, if $m=\sum_jm_jp^j$ with $0\le m_j<p$, then
  \frac{\fc}{p^t}\equiv \frac{(-1)^t}{\prod_jm_j!}
  \pmod p,
 \]
-where the denominator is inverted modulo $p$.  In particular, it is prime to $p$.
+where the denominator is inverted modulo $p$.  In particular $\fc/p^t$ is prime to $p$.
 \end{theorem}
 Konvalinka obtains this valuation with factorial valuations and also studies the orbits of the full symmetric symmetry group of a $q$-ary tree \cite{Konvalinka}.  In that group-action argument, the branches at each node are permuted by a full symmetric group, orbit sizes are products of multinomial coefficients, and the argument proves divisibility; the factorial formula is then invoked to obtain exactness.  Here we instead rotate the $p$ branches at each node of a $p$-ary expansion, so that the symmetries form a $p$-group.  We give a proof of exactness by separately counting the orbits of minimum possible size modulo $p$.  The same fixed-point step gives the displayed residue, for every prime power $q$.
 
-No valuation of a factorial, a binomial coefficient, or a multinomial coefficient is used below.  The only occurrence of the Fuss--Catalan formula in a proof is in the separately marked exact count for $k=1$ in Corollary~\ref{cor:exact-count}; it is not used to prove Theorem~\ref{thm:main}.
+For $p=q=2$ the statement is the classical formula $v_2(C_n)=s_2(n+1)-1$.  In that case a rotation is a swap of the two children, and the orbit argument with exactness, including the count $(2s-3)!!$ of minimal orbits for $s=s_2(n+1)$, is due to Deutsch and Sagan \cite{DeutschSagan}; Postnikov and Sagan \cite{PostnikovSagan} extend it to weighted Catalan numbers.  The same minimal trees were described independently in mathematical phylogenetics: Kersting and Fischer \cite{KerstingFischer} show that the binary trees with $m$ leaves having the fewest nodes with two inequivalent subtrees are exactly those obtained from a tree with $s_2(m)$ leaves by attaching fully balanced trees according to the binary digits of $m$, and that there are $(2s_2(m)-3)!!$ of them.  Propositions~\ref{prop:lower-bound} and~\ref{prop:skeleton} extend that description to every prime $p$ and, with a depth condition, to prime powers $q=p^k$; Proposition~\ref{prop:carry} replaces the explicit double factorial by a fixed-point count that works for all $p$ and $k$.  We have not made a complete search of the literature.
+
+No valuation of a factorial, a binomial coefficient, or a multinomial coefficient is used in the proof of Theorem~\ref{thm:main}, apart from the trivial fact that $a!$ is prime to $p$ when $a<p$.  The only occurrence of the Fuss--Catalan formula in a proof is in the separately marked exact count for $k=1$ in Corollary~\ref{cor:exact-count}; it is not used to prove Theorem~\ref{thm:main}.
 
 \section{Trees, rotations, and class sizes}
 \subsection{Basic definitions and the \texorpdfstring{$k$}{k}-blocked form}
@@ -100,7 +104,7 @@ with subscripts taken modulo $p$.  Let $\sim$ be the smallest equivalence relati
 \item[\textup{(R1)}] $(U_1,\ldots,U_p)\sim\rot_r(U_1,\ldots,U_p)$ for every $r$;
 \item[\textup{(R2)}] if $T_i\sim T_i'$ for each $i$, then $(T_1,\ldots,T_p)\sim(T_1',\ldots,T_p')$.
 \end{enumerate}
-Two trees in one class are called \emph{rotation equivalent}; $[T]$ denotes the class of $T$.
+Such a smallest relation exists: the relation in which all trees are related satisfies (R1) and (R2), and the intersection of any family of equivalence relations satisfying (R1) and (R2) again satisfies them.  Two trees in one class are called \emph{rotation equivalent}; $[T]$ denotes the class of $T$.
 \end{definition}
 \begin{remark}
 The generators in (R1)--(R2) are the action of an iterated wreath product of copies of $\Z_p$, with one independent cyclic rotation at each node.  More precisely, the permutation group induced on the $q$ bottom slots of one block $K_k$ by the rotations at the nodes of that block is $\Z_p\wr\cdots\wr\Z_p$ ($k$ factors), a Sylow $p$-subgroup of the symmetric group $S_q$.  We do not need this group-theoretic formulation in any argument below.
@@ -123,7 +127,7 @@ Next, $R(T,T')\Rightarrow T\sim T'$, with no appeal to minimality: if $T_i'\sim 
 Rotation equivalence preserves the multiset of leaf depths.  It therefore preserves $\ell(T)$ and $k$-blockedness.
 \end{lemma}
 \begin{proof}
-We show that every generating step (R1) or (R2) preserves the multiset of leaf depths; iterating such steps then does too.  At a leaf there is nothing to prove, since $\bullet\sim\bullet$ and the multiset $\{0\}$ is unchanged.  For (R1), rotating the root's $p$ subtrees only permutes them, and each leaf keeps its depth inside its own subtree plus the same extra final depth $1$, so the multiset of leaf depths is permuted but unchanged.  For (R2), if $T_i\sim T_i'$ for each $i$, then by induction on the generating steps each $T_i$ and $T_i'$ have the same multiset of leaf depths, and passing to $(T_1,\ldots,T_p)$ and $(T_1',\ldots,T_p')$ adds $1$ to every entry, so the multisets again agree.  The number of leaves is the size of this multiset, and $k$-blockedness is a condition on its entries.
+Let $D(T,T')$ mean that $T$ and $T'$ have the same multiset of leaf depths.  This is an equivalence relation on $p$-ary trees.  The multiset of leaf depths of $(U_1,\ldots,U_p)$ is the union of those of the $U_i$ with every entry increased by $1$.  Hence $D$ satisfies (R1), because a rotation only permutes the $U_i$, and $D$ satisfies (R2), because if $D(T_i,T_i')$ holds for each $i$ then the two unions agree.  By minimality of $\sim$, $T\sim T'$ implies $D(T,T')$.  The number of leaves is the size of this multiset, and $k$-blockedness is a condition on its entries.
 \end{proof}
 \begin{definition}
 A node is \emph{asymmetric} if its immediate subtrees $(T_1,\ldots,T_p)$ do not all have the same rotation class.  Otherwise it is \emph{symmetric}.  Let $d(T)$ be the number of asymmetric nodes of $T$.
@@ -132,7 +136,7 @@ A node is \emph{asymmetric} if its immediate subtrees $(T_1,\ldots,T_p)$ do not 
 The integer $d(T)$ is constant on each $\sim$-class: if $T\sim T'$ then $d(T)=d(T')$.
 \end{lemma}
 \begin{proof}
-It suffices to check the generating steps.  By Lemma~\ref{lem:normal-form}, a member of $[T]$ is obtained by replacing immediate subtrees by equivalent ones and rotating once.  Both operations leave the tuple of child rotation classes unchanged up to permutation, so whether those classes are all equal is unchanged; hence the root is symmetric in $T$ if and only if it is symmetric after the step.  Applying this recursively at the corresponding nodes of each immediate subtree shows that whether a node is symmetric or asymmetric is invariant under $\sim$ at every node.  Hence the total count $d(T)$ of asymmetric nodes is constant on the class.
+Induct on the number of nodes of $T$.  A leaf is equivalent only to a leaf, and $d=0$ for a leaf.  Let $T=(T_1,\ldots,T_p)\sim T'=(T_1',\ldots,T_p')$.  By Lemma~\ref{lem:normal-form} there is $r$ with $T_i'\sim T_{i+r}$ for all $i$.  Hence the tuple of classes $([T_1'],\ldots,[T_p'])$ is a rotation of $([T_1],\ldots,[T_p])$, so the root of $T'$ is symmetric if and only if the root of $T$ is.  By induction $d(T_i')=d(T_{i+r})$, so $\sum_id(T_i')=\sum_id(T_i)$.  Since $d$ of a non-leaf is the sum of the $d$ of its immediate subtrees, plus $1$ if its root is asymmetric (this is \eqref{eq:d-recursion} below), $d(T')=d(T)$.
 \end{proof}
 At a non-leaf,
 \begin{equation}\label{eq:d-recursion}
@@ -190,7 +194,7 @@ For the remaining assertions we use column addition.  Write $a_i=\sum_j a_{i,j}p
 \begin{equation}\label{eq:column}
  \sum_{i=1}^r a_{i,j}+c_{j-1}=b_j+p\,c_j\qquad(j\ge0),
 \end{equation}
-where $b_j$ is the digit of $\sum_i a_i$ in column $j$, so $s_p(\sum_i a_i)=\sum_j b_j$.  Each $c_j$ is a nonnegative integer, and $c_j=0$ for $j$ beyond the top column.  Summing \eqref{eq:column} over all $j$ gives
+where $b_j$ is the digit of $\sum_i a_i$ in column $j$, so $s_p(\sum_i a_i)=\sum_j b_j$.  Each $c_j$ is a nonnegative integer, and $c_j=0$ for all sufficiently large $j$.  Summing \eqref{eq:column} over all $j$ gives
 \[
  \sum_i s_p(a_i)+\sum_j c_{j-1}=\sum_j b_j+p\sum_j c_j,
 \]
@@ -223,7 +227,7 @@ If the root is asymmetric, $d(T)=1+\sum_id(T_i)$.  Induction and subadditivity o
 \]
 If the root is symmetric, all $T_i$ have the same leaf count $b$
 by Lemma~\ref{lem:depth-invariant}, and $T_i\sim T_1$.
-Hence $a=pb$ and, by \eqref{eq:d-recursion}, induction,
+Hence $a=pb$ and, by \eqref{eq:d-recursion}, Lemma~\ref{lem:d-invariant} (which gives $d(T_i)=d(T_1)$), induction,
 and Lemma~\ref{lem:digit},
 \[
  d(T)=p\,d(T_1)\ge p\,t(b)\ge t(b)=t(pb)=t(a).
@@ -257,17 +261,27 @@ For $m=\sum_jm_jp^j$, an \emph{atom of height $j$} is a complete tree $K_j$.  Th
 
 A \emph{cyclic $p$-ary tree} is a $p$-ary tree with the ordered tuple of children at every node regarded only up to cyclic rotation.  A \emph{cyclic skeleton tree for $m$} is a cyclic $p$-ary tree whose leaves bear the atom multiset of $m$, such that
 \begin{enumerate}
-\item[\textup{(S1)}] at every internal node, the $p$ cyclic child subtrees are not all equivalent;
-\item[\textup{(S2)}] an atom of height $j$ occurs at depth $r$ satisfying $r+j\equiv0\pmod k$.
+\item[\textup{(S)}] an atom of height $j$ occurs at depth $r$ satisfying $r+j\equiv0\pmod k$.
 \end{enumerate}
-Concretely, an \emph{isomorphism of cyclic trees} $\alpha:S\to S'$ is a root-preserving bijection on the set of nodes that preserves the parent--child relation and, at every internal node $v$, maps the ordered $p$-tuple of children of $v$ to the children of $\alpha(v)$ by a cyclic rotation; for labelled cyclic trees we additionally require that $\alpha$ preserves leaf labels and atom heights.  Two cyclic trees are \emph{equivalent} if such an isomorphism exists; this is exactly the equivalence generated by independent cyclic rotations at every node, and it preserves leaf labels and depths.  An \emph{automorphism} of a cyclic tree is an isomorphism from the tree to itself; automorphisms compose and invert, and an automorphism restricted to the subtree below a fixed node is an automorphism of that subtree.
+Concretely, an \emph{isomorphism of cyclic trees} $\alpha:S\to S'$ is a root-preserving bijection on the set of nodes that preserves the parent--child relation and, at every internal node $v$, maps the ordered $p$-tuple of children of $v$ to the children of $\alpha(v)$ by a cyclic rotation; for labelled cyclic trees we additionally require that $\alpha$ preserves leaf labels and atom heights.  Two cyclic trees are \emph{equivalent} if such an isomorphism exists; an isomorphism preserves depths and, in the labelled case, leaf labels.  Lemma~\ref{lem:plane-cyclic} below identifies this equivalence with rotation equivalence of plane representatives.  An \emph{automorphism} of a cyclic tree is an isomorphism from the tree to itself; automorphisms compose and invert, and an automorphism restricted to the subtree below a fixed node is an automorphism of that subtree.
 \end{definition}
-In particular, (S1) excludes a cyclic root all of whose child skeletons are equivalent, even if it looks nontrivial before labels are compared.  When all leaves carry distinct labels, (S1) is automatic: equivalent child subtrees would have the same leaf-label set, whereas sibling subtrees have disjoint nonempty sets of labels.
+\begin{lemma}[Plane representatives]\label{lem:plane-cyclic}
+Consider plane $p$-ary trees whose leaves carry labels from some set (repetitions allowed), and let $\sim$ be the smallest equivalence relation on them satisfying (R1) and (R2), a single labelled leaf being a tree.  Then Lemmas~\ref{lem:normal-form}, \ref{lem:d-invariant} and~\ref{lem:class-size} hold for these trees with the same proofs; a leaf is equivalent only to a leaf with the same label.  Moreover, two plane labelled trees are rotation equivalent if and only if the labelled cyclic trees they define are isomorphic.
+\end{lemma}
+\begin{proof}
+The proofs of the three lemmas never use that leaves are indistinguishable.  For the last assertion induct on the number of nodes; for two leaves both conditions say that the labels agree, and a leaf is neither equivalent nor isomorphic to a non-leaf.  Let $T=(T_1,\ldots,T_p)$ and $T'=(T_1',\ldots,T_p')$.  An isomorphism of cyclic trees from $T$ to $T'$ sends the root to the root, maps the children of the root by a cyclic rotation, say the $(i+r)$-th child of $T$ to the $i$-th child of $T'$ for all $i$, and restricts to isomorphisms from $T_{i+r}$ to $T_i'$; conversely a rotation $r$ together with isomorphisms from $T_{i+r}$ to $T_i'$ assembles to an isomorphism from $T$ to $T'$.  By induction the existence of such data says $T_i'\sim T_{i+r}$ for all $i$, which is $T\sim T'$ by Lemma~\ref{lem:normal-form}.
+\end{proof}
+\begin{lemma}[Skeleton nodes are asymmetric]\label{lem:skeleton-asym}
+Let $S$ be a cyclic $p$-ary tree whose leaves bear atoms, with fewer than $p$ atoms of each height in all.  Then at no internal node of $S$ are the $p$ child subtrees all equivalent.  This applies to every cyclic $p$-ary tree whose leaves bear the atom multiset of $m$.  The same conclusion holds for a cyclic tree whose leaves carry pairwise distinct labels.
+\end{lemma}
+\begin{proof}
+Let $v$ be an internal node and let $b_j<p$ be the number of atoms of height $j$ below $v$.  If the $p$ child subtrees at $v$ were all equivalent, each would contain the same number $b_j'$ of atoms of height $j$, so $b_j=p\,b_j'$; as $b_j<p$ this forces $b_j=0$ for every $j$, which is absurd because there is at least one leaf below $v$.  With pairwise distinct labels, equivalent child subtrees would have the same set of leaf labels, whereas sibling subtrees have disjoint non-empty sets of labels.
+\end{proof}
 \begin{proposition}[Minimal classes are skeleton trees]\label{prop:skeleton}
-After expanding every atom $K_j$, cyclic skeleton trees for $m$ satisfying (S2) correspond bijectively to minimal $\sim$-classes of $k$-blocked $p$-ary trees with $m$ leaves.  A minimal tree has exactly $m_j$ maximal complete subtrees of height $j$, and such a subtree of height $j$ begins at a depth congruent to $-j\pmod k$.
+After expanding every atom $K_j$, equivalence classes of cyclic skeleton trees for $m$ correspond bijectively to minimal $\sim$-classes of $k$-blocked $p$-ary trees with $m$ leaves.  A minimal tree $T$ has exactly $m_j(T)$ maximal complete subtrees of height $j$, where the $m_j(T)$ are the base-$p$ digits of $\ell(T)$; if $T$ is $k$-blocked, such a subtree of height $j$ begins at a depth congruent to $-j\pmod k$.
 \end{proposition}
 \begin{proof}
-First let $T$ be minimal and $k$-blocked.  Proposition~\ref{prop:minimal-local} shows inductively that every subtree of $T$ is minimal and that a symmetric minimal tree is complete.  Contract each maximal complete subtree to a leaf labelled by its height.  A complete subtree hanging below an asymmetric node is indeed maximal: its parent is asymmetric, so the parent is not the root of a complete subtree (a complete tree has every node symmetric), and hence no larger complete subtree contains it.  The remaining internal nodes are precisely the asymmetric nodes of $T$.  Give the resulting tree the same cyclic quotient as $[T]$.
+First let $T$ be minimal and $k$-blocked.  Proposition~\ref{prop:minimal-local} shows inductively that every subtree of $T$ is minimal and that a minimal tree with a symmetric root is complete.  Define the \emph{contraction} $\kappa(T)$ of a plane minimal tree recursively: $\kappa(K_h)$ is a single leaf bearing an atom of height $h$, and if $T=(T_1,\ldots,T_p)$ is minimal and not complete then $\kappa(T)=(\kappa(T_1),\ldots,\kappa(T_p))$.  Thus $\kappa$ contracts each maximal complete subtree to a leaf labelled by its height: a complete subtree hanging below an asymmetric node is indeed maximal, since its parent is asymmetric and therefore is not a node of any complete subtree (a complete tree has every node symmetric).  The internal nodes of $\kappa(T)$ are precisely the asymmetric nodes of $T$.  We regard $\kappa(T)$ as a cyclic tree with labelled leaves.
 
 We determine the atom multiset by an induction on minimal trees $U$.  For a minimal tree $U$, let $m_j(U)$ be the number of atoms of height $j$ produced by contracting its maximal complete subtrees.  We claim
 \begin{equation}\label{eq:atom-digits}
@@ -275,9 +289,9 @@ We determine the atom multiset by an induction on minimal trees $U$.  For a mini
 \end{equation}
 so the $m_j(U)$ are exactly the base-$p$ digits of $\ell(U)$.  The atom base case is $U=K_h$: then $\ell(U)=p^h$ and $m_h(U)=1$ with all other $m_j(U)=0$.  If $U$ is not complete, Proposition~\ref{prop:minimal-local} says its root is asymmetric, all $p$ immediate subtrees $U_i$ are minimal, and their leaf counts $\ell(U_i)$ add without carries.  The maximal complete subtrees of $U$ are exactly those of the $U_i$, so $m_j(U)=\sum_i m_j(U_i)$ for every $j$.  By the induction hypothesis, $\ell(U_i)=\sum_j m_j(U_i)p^j$ is the base-$p$ expansion of each $\ell(U_i)$.  Carry-free addition, by Lemma~\ref{lem:digit}, means the digit vectors add componentwise: $\ell(U)=\sum_i\ell(U_i)$ has digits $\sum_i m_j(U_i)=m_j(U)$, which remain below $p$.  This proves \eqref{eq:atom-digits} by induction.  Applied to $T$ itself, $\ell(T)=m$ gives $m_j(T)=m_j$ for every $j$: the leaves of the contracted skeleton carry exactly the atom multiset of $m$.
 
-If an atom $K_j$ begins at depth $r$ in $T$, its final leaves have depth $r+j$.  The leaf depths of an atom are all $j$ more than the depth of its starting node, while the depths of the other leaves are unchanged by the contraction.  Since $T$ is $k$-blocked, $r+j\equiv0\pmod k$.  Thus (S1)--(S2) hold.  Contraction is well defined on $\sim$-classes: by Lemma~\ref{lem:normal-form}, equivalent minimal trees differ by replacing immediate subtrees by equivalent ones and rotating, and complete subtrees of equal height are equivalent, so the contracted skeletons are isomorphic as cyclic trees via the same rotations.
+If an atom $K_j$ begins at depth $r$ in $T$, its final leaves have depth $r+j$.  The leaf depths of an atom are all $j$ more than the depth of its starting node, while the depths of the other leaves are unchanged by the contraction.  Since $T$ is $k$-blocked, $r+j\equiv0\pmod k$.  Thus (S) holds, and $\kappa(T)$ is a cyclic skeleton tree for $m$.  Contraction is well defined on $\sim$-classes, by induction on the number of nodes.  Let $T\sim T'$ be minimal.  If $T$ is complete then $d(T)=0$, so its class has a single element by Lemma~\ref{lem:class-size} and $T'=T$.  Otherwise $T'$ is not complete either, and by Lemma~\ref{lem:normal-form} there is $r$ with $T_i'\sim T_{i+r}$ for all $i$; by induction $\kappa(T_i')$ and $\kappa(T_{i+r})$ are isomorphic, so $\kappa(T')$ is obtained from $\kappa(T)$ by replacing the children of the root by isomorphic cyclic trees and rotating them, and is therefore isomorphic to $\kappa(T)$.
 
-Conversely, expand each labelled leaf $K_j$ of a cyclic skeleton tree.  The result is well defined up to $\sim$ because rotating a skeleton node rotates the corresponding expanded subtrees.  It has $\sum_jm_jp^j=m$ leaves.  Its leaves in an expanded atom $K_j$ have depth $r+j\equiv0\pmod k$, and every other leaf is unchanged, so it is $k$-blocked.
+Conversely, expand each labelled leaf $K_j$ of a cyclic skeleton tree.  The result is well defined up to $\sim$: by Lemma~\ref{lem:plane-cyclic} isomorphic cyclic skeleton trees have rotation-equivalent plane representatives, and replacing equal atom labels by equal complete trees turns rotation-equivalent labelled trees into rotation-equivalent trees.  It has $\sum_jm_jp^j=m$ leaves.  Its leaves in an expanded atom $K_j$ have depth $r+j\equiv0\pmod k$, and every other leaf is unchanged, so it is $k$-blocked.
 
 Every skeleton node $v$ is asymmetric in the expanded tree.  Indeed, let a skeleton subtree contain $b_j$ atoms of height $j$.  Its expansion has $\sum_jb_jp^j$ leaves, and $b_j\le m_j<p$, so the $b_j$ are the base-$p$ digits of that leaf count.  If the $p$ expanded child subtrees at $v$ were all rotation equivalent, they would have the same number of leaves (Lemma~\ref{lem:depth-invariant}), hence the same digits $b_j'$, and the subtree at $v$ would contain $b_j=p\,b_j'$ atoms of height $j$.  As $b_j<p$, this forces $b_j=0$ for every $j$, which is absurd because the subtree contains at least one atom.  Nodes inside atoms are symmetric.  Consequently no skeleton node lies inside a complete subtree of the expansion, so the maximal complete subtrees of the expansion are exactly the expanded atoms, and contraction recovers the skeleton.  Thus, if there are $r$ skeleton nodes, then $d(T)=r$.  The skeleton is a full $p$-ary tree with $\sum_jm_j=s_p(m)$ leaves, so \eqref{eq:leaves} with $q=p$ gives
 \[
@@ -292,7 +306,7 @@ Fix $m$ and $q=p^k$, and for each $c\in\Z_k=\Z/k\Z$ define
 \[
  a_c=\sum_{j\equiv c\pmod k}m_j.
 \]
-Thus $a_c$ counts atoms whose height is in class $c$, and $\sum_ca_c=s_p(m)$.  Make all these atoms distinct.  A \emph{label of class $c$} is one of these distinguished atoms of height $j\equiv c\pmod k$.  Let $T(\mathbf a)=T(a_0,\ldots,a_{k-1})$ be the number of equivalence classes of cyclic $p$-ary trees with these distinctly labelled leaves, a class-$c$ leaf lying at depth $r\equiv-c\pmod k$.  As remarked after Definition~\ref{def:skeleton}, every internal node automatically satisfies (S1).  More generally, we shall use the same definition for an arbitrary vector $\mathbf a=(a_0,\ldots,a_{k-1})$ of nonnegative integers, with $a_c$ distinct labels of class $c$; their heights need not be explicitly specified apart from their class.
+Thus $a_c$ counts atoms whose height is in class $c$, and $\sum_ca_c=s_p(m)$.  Make all these atoms distinct.  A \emph{label of class $c$} is one of these distinguished atoms of height $j\equiv c\pmod k$.  Let $T(\mathbf a)=T(a_0,\ldots,a_{k-1})$ be the number of equivalence classes of cyclic $p$-ary trees with these distinctly labelled leaves, a class-$c$ leaf lying at depth $r\equiv-c\pmod k$.  By Lemma~\ref{lem:skeleton-asym}, at no internal node of such a tree are the $p$ child subtrees all equivalent.  More generally, we shall use the same definition for an arbitrary vector $\mathbf a=(a_0,\ldots,a_{k-1})$ of nonnegative integers, with $a_c$ distinct labels of class $c$; their heights need not be explicitly specified apart from their class.
 \begin{lemma}[Automorphisms of cyclic trees]\label{lem:aut-order}
 Let $\alpha$ be an automorphism of a cyclic $p$-ary tree.
 \begin{enumerate}
@@ -327,7 +341,7 @@ Division by this orbit size gives the formula, and the coprimality of $\prod_jm_
 Let $\alpha$ be an automorphism of an unlabelled cyclic $p$-ary tree.  Suppose $\alpha^p=1$ and $\alpha$ moves exactly $p$ leaves.  Then these $p$ leaves are precisely the children of one node.
 \end{lemma}
 \begin{proof}
-Choose a moved leaf $x$ and let $v$ be its parent.  If $\alpha(v)=v$, then $\alpha$ acts on the $p$ child positions at $v$ by a nontrivial rotation, because the leaf below the child containing $x$ moves.  A nontrivial rotation of $p$ positions has no fixed child position.  All $p$ child subtrees at $v$ consequently have the same number of leaves, and every leaf under $v$ lies in one of their disjoint $\alpha$-orbits of size $p$.  If that common number were greater than $1$, more than $p$ leaves would move.  Hence every child is a single leaf, and the $p$ children of $v$ are the moved leaves.
+Choose a moved leaf $x$ and let $v$ be its parent.  If $\alpha(v)=v$, then $\alpha$ acts on the $p$ child positions at $v$ by a nontrivial rotation, because the child $x$ itself moves.  A nontrivial rotation of $p$ positions has no fixed child position.  All $p$ child subtrees at $v$ consequently have the same number of leaves, and every leaf under $v$ lies in one of their disjoint $\alpha$-orbits of size $p$.  If that common number were greater than $1$, more than $p$ leaves would move.  Hence every child is a single leaf, and the $p$ children of $v$ are the moved leaves.
 
 Suppose instead $\alpha(v)\ne v$.  Since $\alpha^p=1$ and its order divides the prime $p$, the $p$ parents $v,\alpha(v),\ldots,\alpha^{p-1}(v)$ are distinct.  Their leaf sets are pairwise disjoint: they are distinct nodes of equal depth, and no two different nodes of equal depth can be ancestors of one leaf.  Every leaf under any of these parents moves, because a leaf fixed by $\alpha$ could not belong to the disjoint leaf sets of two consecutive parents.  There are at least $p$ leaves under each parent, hence at least $p^2>p$ moved leaves, a contradiction.  Thus the second case is impossible.
 \end{proof}
@@ -358,7 +372,7 @@ If $a_c<p$ for every $c$, then $T(\mathbf a)=0$ unless $\mathbf a=e_0$.  Also $T
 A tree with an internal node has an internal node of maximum depth.  By maximality, all $p$ children of that node are leaves: if any child were internal, it would be a deeper internal node.  These $p$ leaves are at the same depth, so all have the same class $c$, and they are distinct leaves bearing $p$ distinct labels of class $c$.  This forces $a_c\ge p$, contradicting $a_c<p$ for every class.  Therefore the only possible tree is one leaf at depth zero.  Its class satisfies $c\equiv0\pmod k$, giving exactly $T(e_0)=1$ and zero in every other case.
 \end{proof}
 \begin{proposition}[Iterated carries]\label{prop:carry-termination}
-For $\mathbf a$ obtained from the digits of $m$,
+Assume $m\equiv1\pmod{q-1}$, as is the case for $m=(q-1)n+1$.  For $\mathbf a$ obtained from the digits of $m$,
 \[
  T(\mathbf a)\equiv(-1)^t\pmod p.
 \]
@@ -392,7 +406,7 @@ The initial vector has $\sum_ca_c=s_p(m)$ labels and the final vector has one, s
 
 \section{The main theorem and an exact count for \texorpdfstring{$k=1$}{k=1}}
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
-By Lemma~\ref{lem:blocked}, $\fc$ is the number of $k$-blocked $p$-ary trees with $m$ leaves.  Partition that finite set into $\sim$-classes.  Lemma~\ref{lem:class-size} and Proposition~\ref{prop:lower-bound} give
+By Lemma~\ref{lem:blocked}, $\fc$ is the number of $k$-blocked $p$-ary trees with $m$ leaves.  By Lemma~\ref{lem:depth-invariant} the class of such a tree consists of such trees, so this finite set is a union of $\sim$-classes.  Lemma~\ref{lem:class-size} and Proposition~\ref{prop:lower-bound} give
 \[
  \fc=\sum_{\substack{[T]\text{ $k$-blocked}\\\ell(T)=m}}p^{d(T)}
  =p^t\sum_{[T]}p^{d(T)-t},
@@ -406,7 +420,7 @@ where $N_{\min}$ is the number of minimal classes.  Propositions~\ref{prop:free}
  \frac{\fc}{p^t}\equiv\frac{T(\mathbf a)}{\prod_jm_j!}
  \equiv\frac{(-1)^t}{\prod_jm_j!}\pmod p.
 \]
-The inner sum on the right-hand side is an integer, so every term in the class-sum formula for $\fc$ is divisible by $p^t$.  Therefore $\fc/p^t$ is an integer, not divisible by $p$ by the preceding congruence.  Its denominator is prime to $p$ by Proposition~\ref{prop:free}.  Hence $v_p(\fc)=t$.
+Here $\fc/p^t=\sum_{[T]}p^{d(T)-t}$ is an integer, as used in \eqref{eq:unit-sum}, and $\prod_jm_j!$ is prime to $p$ by Proposition~\ref{prop:free}, so the right-hand side is a non-zero residue modulo $p$.  Hence $p$ does not divide $\fc/p^t$, that is, $v_p(\fc)=t$.
 \end{proof}
 \begin{corollary}[Exact count when $k=1$]\label{cor:exact-count}
 For $q=p$, the number of minimal rotation classes is exactly
@@ -415,7 +429,7 @@ For $q=p$, the number of minimal rotation classes is exactly
 \]
 \end{corollary}
 \begin{proof}
-When $k=1$, condition (S2) imposes no restriction on leaf depths.  A cyclic skeleton tree has $t$ internal nodes and $s=s_p(m)=(p-1)t+1$ leaves.  Because all leaves are distinctly labelled in $T(\mathbf a)$, its $p$ child cyclic subtrees at each node are never all equivalent.  Hence each internal cyclic tuple has $p$ different left-to-right representatives.  Ordering independently at all $t$ nodes shows that the number of plane $p$-ary trees with $s$ distinctly labelled leaves is $p^tT(\mathbf a)$.
+When $k=1$, condition (S) imposes no restriction on leaf depths.  A cyclic skeleton tree has $t$ internal nodes and $s=s_p(m)=(p-1)t+1$ leaves.  Because all leaves are distinctly labelled in $T(\mathbf a)$, its $p$ child cyclic subtrees at each node are never all equivalent.  By Lemma~\ref{lem:plane-cyclic}, the plane representatives of one labelled cyclic tree form one rotation class of plane labelled trees, and by Lemma~\ref{lem:skeleton-asym} each of its $t$ internal nodes is asymmetric, so this class has $p^t$ elements by Lemma~\ref{lem:class-size} (for labelled trees).  Hence the number of plane $p$-ary trees with $s$ distinctly labelled leaves is $p^tT(\mathbf a)$.
 
 For this paragraph only, we use the standard Fuss--Catalan formula \cite{Konvalinka}: the number of plane $p$-ary trees with $t$ internal nodes is
 \[
@@ -430,7 +444,7 @@ where $s-1=(p-1)t$.  Dividing by $\prod_jm_j!$ using Proposition~\ref{prop:free}
 \end{proof}
 
 \section{Worked examples}
-We draw the cyclic skeleton, not the full expansion of every atom.  A boxed $K_j^{(i)}$ is a distinctly labelled atom $K_j$; in a picture of an unlabelled class, repeated atoms of one height may be identified.  Filled circles are asymmetric skeleton nodes.
+We draw the cyclic skeleton, not the full expansion of every atom.  A boxed $K_j$ or $K_j'$ is a distinctly labelled atom of height $j$; in a picture of an unlabelled class, repeated atoms of one height may be identified.  Filled circles are asymmetric skeleton nodes.
 \begin{example}[Binary trees: $(p,k,n)=(2,1,6)$]\label{ex:binary}
 Here $m=7=4+2+1$, so the base-$2$ expansion is $111_2$ and
 \[
@@ -477,16 +491,15 @@ Two of the ten skeletons, using distinct labels for equal-height atoms, are
     child{node[atom]{$K_2$}};
 \end{tikzpicture}
 \end{center}
-The right skeleton is one of two rotations for its atom partition.
-In the first picture the cherry contains a repeated atom of height $0$; in the second its three atoms are all different, giving two cyclic orders when the other two upper atoms are fixed.  Since $k=1$, all atoms are in one depth class and the vector is $(5)$.  Distinct labelling yields $T(5)=10(2!2!)=40$.  Two applications of the carry congruence give
+Both pictured cherries contain a repeated height, so as unlabelled skeletons each cherry has a single cyclic order, and each pictured choice of atoms gives two skeletons, which differ by the cyclic order of the three children of the root.  Sorting the ten skeletons by the two atoms that sit at the root next to the internal node: $\{K_0,K_0\}$ and $\{K_1,K_1\}$ give one skeleton each; $\{K_0,K_2\}$ and $\{K_1,K_2\}$ give two each; $\{K_0,K_1\}$ gives four (two cyclic orders at the root times two for the cherry $K_0,K_1,K_2$).  In all $1+1+2+2+4=10$.  Since $k=1$, all atoms are in one depth class and the vector is $(5)$.  Distinct labelling yields $T(5)=10(2!2!)=40$.  Two applications of the carry congruence give
 \[
  T(5)\equiv-T(5-3+1)=-T(3)\equiv T(1)\pmod3,
 \]
-so $T(5)\equiv1\pmod3$, as $40$ confirms.  Here $C_8=43263$, $43263/3^2=4807$, and $4807\equiv1\pmod3$.  Proposition~\ref{prop:carry-termination} predicts $(-1)^2/(2!2!1!)=4^{-1}\equiv1\pmod3$.
+so $T(5)\equiv1\pmod3$, as $40$ confirms.  Here $C_8=43263$, $43263/3^2=4807$, and $4807\equiv1\pmod3$.  Theorem~\ref{thm:main} predicts $(-1)^2/(2!2!1!)=4^{-1}\equiv1\pmod3$.
 \end{example}
 
 \begin{example}[Quaternary trees: $(p,k,n)=(2,2,4)$]\label{ex:quaternary}
-In this case $q=4$ and $m=13=8+4+1=1101_2$, so $t=2$, with atoms $K_0,K_2,K_3$.  Condition (S2) is now essential: at depth $r$,
+In this case $q=4$ and $m=13=8+4+1=1101_2$, so $t=2$, with atoms $K_0,K_2,K_3$.  Condition (S) is now essential: at depth $r$,
 \[
  K_0\text{ and }K_2\text{ require }r\equiv0\pmod2,
  \qquad K_3\text{ requires }r\equiv1\pmod2.
@@ -498,8 +511,8 @@ A binary cyclic skeleton with two internal nodes has two leaves at depth $2$ and
     child{node[internal]{} child{node[atom]{$K_0$}} child{node[atom]{$K_2$}}}
     child{node[atom]{$K_3$}};
   \node at (-2.2,0) {\small depth $0$};
-  \node at (-2.2,-0.85) {\small depth $1$};
-  \node at (-2.2,-1.75) {\small depth $2$};
+  \node at (-2.2,-1.4) {\small depth $1$};
+  \node at (-2.2,-2.8) {\small depth $2$};
 \end{tikzpicture}
 \end{center}
 After atom expansion, the leaves of $K_0$ are at depth $2$, those of $K_2$ at depth $2+2=4$, and those of $K_3$ at depth $1+3=4$.  All these depths are even, as required for $q=4$.  There is one minimal class.
@@ -524,5 +537,8 @@ Emeric Deutsch and Bruce E. Sagan, ``Congruences for Catalan and Motzkin numbers
 
 \bibitem{PostnikovSagan}
 Alexander Postnikov and Bruce E. Sagan, ``What power of two divides a weighted Catalan number?'', \emph{Journal of Combinatorial Theory, Series A} \textbf{114} (2007), no.~5, 970--977. DOI: \href{https://doi.org/10.1016/j.jcta.2006.09.007}{10.1016/j.jcta.2006.09.007}.
+
+\bibitem{KerstingFischer}
+Sophie Johanna Kersting and Mareike Fischer, ``Measuring tree balance using symmetry nodes --- A new balance index and its extremal properties'', \emph{Mathematical Biosciences} (2021). DOI: \href{https://doi.org/10.1016/j.mbs.2021.108690}{10.1016/j.mbs.2021.108690}. arXiv:2105.00719.
 \end{thebibliography}
 \end{document}

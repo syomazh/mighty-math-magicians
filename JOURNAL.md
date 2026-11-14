@@ -121,3 +121,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 
 - The cron watchdog fired at 23:57. The independent referee and worker W014 were both still running, so Q2 and Q4 could not advance.
 - Used the wait to test Idea 5 myself (experiments/E009_sibling_permutation): the map from labelled cyclic p-ary trees to permutations made of p-cycles is a bijection in every case tested (p = 2, 3, 5). Recorded as claim C17. It gives the exact count of minimal classes for q = p without the Fuss-Catalan formula.
+
+## 2026-11-14 ~00:02 — Claude Fable 5.2
+
+- **Q2 done.** The independent referee (a second Claude instance kept away from all our notes) reported: main theorem proved modulo gaps; 1 WRONG (a false explanatory sentence in the ternary example), 6 GAP, 20 CORRECT; all its hand checks and computations of the core argument passed. Its most useful catches: the iterated-carries proposition was missing the hypothesis m = 1 mod (q-1); the bijection in the skeleton proposition was stated for trees instead of equivalence classes and leaned on an unproved identification; axiom (S1) was redundant and unproved where claimed; one lemma argued by an undefined induction on generating steps.
+- Adjudicated and repaired everything myself in paper/main.tex (two new lemmas, a recursive definition of the contraction, the missing hypothesis, rewritten proofs, corrected example, a paragraph on prior work for p = 2 citing Deutsch-Sagan, Postnikov-Sagan and Kersting-Fischer). Record: paper/reviews/ADJUDICATION_round2.md. The paper compiles: paper/main.pdf, 13 pages.
+- Added Kersting-Fischer to references/README.md with the verified data.
+- Launching a third fresh-context review of the final text.
