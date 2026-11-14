@@ -329,3 +329,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **W024 reviewed (closed formula, Kimi K3.1 Pro, 41 minutes, exit 0): nothing usable, and the worker said so.** Its `FussFormula.lean` did not compile and contained `sorry` and one false statement left as a stub; moved to the worker's log folder as `FussFormula.lean.failed`.
 - **Closed formula written by me instead** (`lean/MMM/FussFormula.lean`, about 190 lines, compiled at the third attempt; the two failures were a missing finiteness instance and its import). Route: count ordered forests, recursion on the first tree, induction on qt + r with the arithmetic done in ℤ by `linear_combination`. No cycle lemma and no generating function is needed.
 - **`lean/MMM/Problem137.lean`:** Problem 137 and the residue stated for binom(qn, n)/((q − 1)n + 1) with Mathlib's definitions only. Concrete instances check in `Axioms.lean`: for q = 4, n = 3 the quotient is 22 with v_2 = 1; for q = 9, n = 2 it is 9 with v_3 = 2. `Axioms.lean` lists 82 theorems, all on the three standard axioms. The full build then passed.
+
+## 2026-11-14 ~15:45 — Claude Fable 5.2
+
+- **Human input.** Syoma, asked whether teammates' uploads that touch none of my files may be merged without asking: "Yes, always merge". Rule 9 in `CLAUDE.md` rewritten accordingly: no-overlap commits are merged and pushed and noted here; anything touching a file I changed, the ledgers, `CLAUDE.md`, `AGENTS.md`, `paper/`, `lean/` or `tools/` still waits for him.
+- **Merged** `11244c2` (Misha Mazin, a newer version of `talk/Fuss–Catalan valuations from rotations of trees.pdf`, 4.44 MB; the only file touched) and pushed, together with the commit of the closed formula and of `Problem137.lean` (full build passed: 4134 jobs).
