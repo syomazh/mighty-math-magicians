@@ -10,8 +10,9 @@ compiles; not human-reviewed.
 Rotations do not change depths, so the blocked trees are a union of rotation classes, and the
 argument of `MMM/Divisibility.lean` applies to them unchanged.
 
-Not proved here: the bijection between `q`-ary trees and `k`-blocked `p`-ary trees (Lemma
-"Blocked form" of the paper), so the statement is about blocked `p`-ary trees.
+Not proved in this file: the bijection between `q`-ary trees and `k`-blocked `p`-ary trees (Lemma
+"Blocked form" of the paper), so the statement here is about blocked `p`-ary trees. The bijection
+is in `MMM/BlockedForm.lean`.
 -/
 import MMM.Divisibility
 

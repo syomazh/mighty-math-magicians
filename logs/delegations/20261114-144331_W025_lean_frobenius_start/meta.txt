@@ -1,0 +1,8 @@
+slug:    W025_lean_frobenius_start
+brief:   briefs/W025_lean_frobenius_start.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 14:43:31 PST
+attempt 1: exit 0 at 15:05:48
+ended:   2026-11-14 15:05:48 PST
+exit:    0

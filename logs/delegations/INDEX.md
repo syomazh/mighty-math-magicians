@@ -35,3 +35,5 @@
 | 20261113-223918 | W003b_extensions_resume | (see meta) | STOPPED to save budget | logs/delegations/20261113-223918_W003b_extensions_resume |
 | 20261113-232243 | W011b_qa_study_guide | (see meta) | STOPPED to save budget | logs/delegations/20261113-232243_W011b_qa_study_guide |
 | 20261113-231801 | W014_accounting_proof | moonshotai/kimi-k3.1-pro | TIMED OUT at 90 min, retry stopped | logs/delegations/20261113-231801_W014_accounting_proof |
+| 20261114-144331 | W025_lean_frobenius_start | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-144331_W025_lean_frobenius_start |
+| 20261114-144331 | W023_lean_normal_form | mistralai/mistral-large-4-0 | 0 (attempts: 1) | logs/delegations/20261114-144331_W023_lean_normal_form |

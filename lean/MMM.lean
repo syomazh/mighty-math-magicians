@@ -28,4 +28,6 @@ import MMM.ExactBCond
 import MMM.ExactB
 import MMM.Residue
 import MMM.ResidueB
+import MMM.ResidueForms
+import MMM.NormalForm
 import MMM.Axioms

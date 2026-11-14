@@ -27,7 +27,8 @@ Proof, by induction on `t`, along the lines of `MMM/Cherry.lean`.
 No factorial valuation is used; the only fact about a factorial is that `p ∤ (p - 1)!`.
 
 Difference from the paper: as in `Cherry.lean`, all `p !` orderings of the cherry are put on one
-side, so Lean gets the exact power of `p` but not the residue. The paper records the classes of
+side, so this file gets the exact power of `p` but not the residue (the residue is added in
+`MMM/ResidueB.lean`, with Wilson's theorem). The paper records the classes of
 the labels as a vector `a` indexed by `Z/k` and proves `T(a) ≡ -T(a - p e_c + e_{c+1})`; here
 the classes are a function `κ` on the labels, the collapse changes `κ` at one label, and the
 vector `a` enters only through the congruence `∑ p ^ κ x ≡ 1 (mod p ^ k - 1)`.

@@ -8,6 +8,8 @@ import MMM.Exact
 import MMM.ExactB
 import MMM.Residue
 import MMM.ResidueB
+import MMM.ResidueForms
+import MMM.NormalForm
 
 -- digit sums
 #print axioms MMM.ds_add_le
@@ -27,7 +29,7 @@ import MMM.ResidueB
 -- divisibility
 #print axioms MMM.PTree.finite_leaves_eq
 #print axioms MMM.PTree.pow_dvd_card_trees
--- prime powers (blocked trees): divisibility only
+-- prime powers (blocked trees): the divisibility (the exact valuation is further down)
 #print axioms MMM.PTree.Rot.blockedAt
 #print axioms MMM.PTree.pow_dvd_card_blocked_trees
 -- p = 2: Catalan numbers, divisibility (a statement in Mathlib's vocabulary only)
@@ -131,3 +133,14 @@ example : multiplicity 3 (Nat.card {T : MMM.PTree (3 ^ 2) // T.nodes = 2}) = 2 :
 
 -- an instance of the residue statement: binary trees with 7 leaves (132 of them), t = 2
 example := MMM.PTree.residue (p := 2) 7 2 (by simp [MMM.ds])
+
+-- further forms of the final statements (lemmas of the second auditor)
+#print axioms MMM.PTree.problem137_exact
+#print axioms MMM.PTree.residue_paper_form
+#print axioms MMM.PTree.prod_dig_eq_digits
+#print axioms MMM.PTree.residue_nodes
+#print axioms MMM.PTree.exact_of_residue
+#print axioms MMM.LTree.blockedAt_realize
+
+-- the paper's lemma "Normal form" (worker W023)
+#print axioms MMM.PTree.rot_iff_eqvGen

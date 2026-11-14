@@ -20,7 +20,8 @@ No factorial valuation (Legendre, Kummer) is used anywhere.
 
 The number of trees is *defined* by counting trees. That it equals the Fuss-Catalan number
 `binom(p n, n) / ((p - 1) n + 1)` is classical and is formalized only for `p = 2`
-(Mathlib's `catalan`). Prime powers `q = p ^ k` and the residue modulo `p` are not in Lean.
+(Mathlib's `catalan`). Prime powers `q = p ^ k` are in `MMM/ExactB.lean`, the residue modulo `p` in
+`MMM/Residue.lean` and `MMM/ResidueB.lean`.
 -/
 import MMM.ExactAll
 import MMM.Cherry
