@@ -3,3 +3,4 @@ brief:   briefs/W011b_qa_study_guide_finish.md
 model:   moonshotai/kimi-k3.1-pro
 flags:   -AllowBash
 started: 2026-11-13 23:22:43 PST
+stopped: 2026-11-13 23:32:10 PST by the orchestrator to save Open Math OS budget (work incomplete; files left as they were)

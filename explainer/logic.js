@@ -395,227 +395,35 @@ function minimalTrees(orb, n, limit = 30) {
   return out;
 }
 
-// --- Carry / cherry animation ---------------------------------------------
-// A labelled skeleton is built by the same memoized split recursion that
-// counts W(delta,a).  Each place j of m starts as one abstract atom p^j.
-// The physical complete q-ary subtree represented by that atom can sit at
-// any depth congruent to -j (mod k), at most j levels below the root.
-// A collapse puts a cherry one level higher, so the column place is exp-depth.
+// --- Carries on the class vector -------------------------------------------
+// The base-p digit m_j contributes m_j atoms of class j (mod k).  A carry
+// replaces p atoms of one class by one atom of the next class and flips the
+// sign.  No particular skeleton tree is constructed here.
 
-function buildCarrySkeleton(p, k, exps) {
-  const total = exps.reduce((acc, j) => acc + BigInt(p) ** BigInt(j), 0n);
-  const q = p ** k;
-  const n = (total - 1n) / BigInt(q - 1);
-  if (n < 0n || BigInt(q - 1) * n + 1n !== total) {
-    throw new Error('atoms do not sum to 1 mod (q-1)');
-  }
-  const counter = makeLabelledCounter(p, k);
+function classVectorOf(m, p, k) {
   const a = new Array(k).fill(0);
-  exps.forEach((j) => { a[j % k]++; });
-  if (counter.W(0, a)[0] === 0n) return null;
-
-  // Construct a witness for W(delta,a) > 0, keeping each atom's absolute
-  // exponent attached while allocating the class counts to child subtrees.
-  // The search backtracks on the physical exponent constraints.
-  // W-positive does not by itself pin down physical exponents.  Try every
-  // consistent partition at the root, backtracking on incomplete witnesses.
-  const memo = new Map();
-  function search(delta, atoms, depth) {
-    const key = delta + '|' + depth + '|' + atoms.map((x) => x.exp).join(',');
-    if (memo.has(key)) return memo.get(key);
-    if (atoms.length === 1) {
-      const x = atoms[0];
-      const out = depth <= x.exp && (depth + x.cls) % k === 0
-        ? { leaf: true, exp: x.exp, cls: x.cls, depth } : null;
-      memo.set(key, out);
-      return out;
-    }
-    const aa = new Array(k).fill(0);
-    atoms.forEach((x) => { aa[x.cls]++; });
-    if (counter.W(delta, aa)[0] === 0n) { memo.set(key, null); return null; }
-    const cd = (delta + 1) % k;
-    const parts = [];
-    const b = new Array(k).fill(0);
-    let result = null;
-    function select(r, left) {
-      if (result) return;
-      if (r === 1) {
-        if (left.some((x) => x < 0) || counter.W(cd, left)[0] === 0n) return;
-        parts.push(left.slice());
-        if (buildChildren()) return true;
-        parts.pop();
-        return false;
-      }
-      function choose(c) {
-        if (result) return;
-        if (c === k) {
-          if (b.every((x) => x === 0) || counter.W(cd, b)[0] === 0n) return;
-          const rest = left.map((x, j) => x - b[j]);
-          if (rest.some((x) => x < 0)) return;
-          parts.push(b.slice());
-          select(r - 1, rest);
-          parts.pop();
-          return;
-        }
-        for (let v = 0; v <= left[c]; v++) {
-          b[c] = v;
-          choose(c + 1);
-          if (result) return;
-        }
-        b[c] = 0;
-      }
-      choose(0);
-    }
-    function buildChildren() {
-      const pool = atoms.slice().sort((x, y) => y.exp - x.exp);
-      const children = [];
-      const orderedParts = parts.slice().reverse();
-      for (const part of orderedParts) {
-        const sub = [];
-        for (let c = 0; c < k; c++) for (let z = 0; z < part[c]; z++) {
-          const at = pool.findIndex((x) => x.cls === c);
-          sub.push(pool.splice(at, 1)[0]);
-        }
-        const child = search(cd, sub, depth + 1);
-        if (!child) return false;
-        children.push(child);
-      }
-      result = { leaf: false, children, depth, qnode: depth % k === 0, asym: true };
-      return true;
-    }
-    select(p, aa); // p nonempty parts; the last one is the W remainder
-    memo.set(key, result || null);
-    return result || null;
-  }
-  const root = search(0, exps.map((exp) => ({ exp, cls: exp % k })), 0);
-  if (!root) throw new Error('could not realize these labelled atoms');
-  let next = 0;
-  (function stamp(u) {
-    if (u.leaf) {
-      const i = next++;
-      u.label = String.fromCharCode(97 + (i % 26)) + (i >= 26 ? String(Math.floor(i / 26)) : '');
-    } else u.children.forEach(stamp);
-  })(root);
-  return root;
+  digitsOf(m, p).forEach((mj, j) => { a[j % k] += mj; });
+  return a;
 }
 
-// Collect every full p-sibling atom cherry at one place.  Rather than compare
-// absolute exponents, compare represented exponents j = exp-depth at the
-// sibling level; these are the labels cycled by the carry action.
-function findCherries(u, p, out = []) {
-  if (u.leaf) return out;
-  const byPlace = new Map();
-  u.children.forEach((c, i) => {
-    if (!c.leaf) return;
-    const j = c.exp - c.depth;
-    if (j < 0) return;
-    if (!byPlace.has(j)) byPlace.set(j, []);
-    byPlace.get(j).push(i);
-  });
-  for (const [place, idx] of byPlace) {
-    if (idx.length >= p) {
-      const leaf = u.children[idx[0]];
-      out.push({ node: u, indices: idx.slice(0, p), cls: leaf.cls, exp: leaf.exp, place });
-    }
-  }
-  u.children.forEach((c) => findCherries(c, p, out));
-  return out;
+// Choose the smallest eligible class.  Returns null when no carry is possible.
+function carryClassVector(a, p, k) {
+  const c = a.findIndex((count) => count >= p);
+  if (c < 0) return null;
+  const next = a.slice();
+  next[c] -= p;
+  next[(c + 1) % k]++;
+  return { a: next, move: { from: c, to: (c + 1) % k } };
 }
 
-
-// At the root a p^k-sized block collapses to one p-ary leaf, not a q-ary
-// atom: m ≡ 1 (mod p^k − 1), so the eventual top exponent is a multiple of k.
-function topExponent(exp, k) {
-  return Math.ceil(exp / k) * k;
-}
-
-// Collapse one cherry; returns info about the move.  Mutates the tree.
-function collapseCherry(tree, cherry, k) {
-  const group = cherry.indices.map((i) => cherry.node.children[i]);
-  const exp = group[0].exp;
-  const collapsed = {
-    leaf: true,
-    exp: exp + 1,
-    cls: (group[0].cls + 1) % k,
-    depth: (cherry.node.depth || 0) + 1,
-    label: group.map((g) => g.label).join(''),
-    fused: group.map((g) => g.label),
-  };
-  const rest = cherry.node.children.filter((_, i) => !cherry.indices.includes(i));
-  // keep the collapsed leaf at the position of the first cherry member
-  const at = Math.min(...cherry.indices);
-  rest.splice(Math.min(at, rest.length), 0, collapsed);
-  if (rest.length === 1 && cherry.node.isRoot) {
-    // The root collapses to a single p-ary leaf.
-    return { root: { ...rest[0], depth: 0 }, fromExp: exp, fused: collapsed.fused };
-  }
-  cherry.node.children = rest;
-  return { root: tree, fromExp: exp, fused: collapsed.fused };
-}
-
-// Precompute the whole carry sequence as snapshots (deep copies).
-function carrySequence(p, k, root) {
-  const frames = [{ tree: cloneTree(root), sign: 1, step: 0, move: null }];
-  let cur = cloneTree(root);
-  cur.isRoot = true;
-  let sign = 1, step = 0;
-  while (true) {
-    const cherries = findCherries(cur, p);
-    if (!cherries.length) break;
-    // deterministic: smallest class, then leftmost
-    cherries.sort((a, b) => a.cls - b.cls);
-    const ch = cherries[0];
-    const exp = ch.node.children[ch.indices[0]].exp;
-    const labels = ch.indices.map((i) => ch.node.children[i].label);
-    const res = collapseCherry(cur, ch, k);
-    cur = res.root;
-    cur.isRoot = true;
-    sign = -sign;
-    step++;
-    frames.push({
-      tree: cloneTree(cur), sign, step,
-      move: { exp, labels, cls: ch.cls, fused: res.fused },
-    });
+// Every carry removes p-1 atoms, so exactly t carries leave one atom.
+function carryClassSequence(m, p, k) {
+  const frames = [{ a: classVectorOf(m, p, k), sign: 1, move: null }];
+  while (frames[frames.length - 1].a.reduce((x, y) => x + y, 0) > 1) {
+    const previous = frames[frames.length - 1];
+    const step = carryClassVector(previous.a, p, k);
+    if (!step) throw new Error('carry stopped before one atom remained');
+    frames.push({ a: step.a, sign: -previous.sign, move: step.move });
   }
   return frames;
-}
-
-function cloneTree(u) {
-  if (u.leaf) return { ...u };
-  return { ...u, children: u.children.map(cloneTree) };
-}
-
-// Track base-p digit vectors alongside the frames.  An atom of actual size
-// p^exp at depth r is a complete q-ary subtree with p^(exp-r) leaves, so its
-// place is exp-r (nonnegative by the depth compatibility condition).  Each
-// collapse removes p entries in one place and adds one in the next place.
-function carryDigits(frames, m, p) {
-  const base = digitsOf(m, p);
-  function relCounts(u, out) {
-    if (u.leaf) {
-      const j = u.exp - (u.depth || 0);
-      if (j < 0) throw new Error('atom is smaller than its depth permits');
-      while (out.length <= j) out.push(0);
-      out[j]++;
-      return out;
-    }
-    u.children.forEach((c) => relCounts(c, out));
-    return out;
-  }
-  const seq = frames.map((fr) => {
-    const v = relCounts(fr.tree, []);
-    while (v.length < base.length) v.push(0);
-    // A carry can reach a new highest place late in the sequence.
-    while (v.length > 1 && v[v.length - 1] === 0 && v.length > base.length) v.pop();
-    return v;
-  });
-  const out = [{ digits: seq[0].slice(), addedColumn: null }];
-  for (let i = 1; i < seq.length; i++) {
-    let col = -1;
-    for (let j = 0; j < Math.max(seq[i].length, seq[i - 1].length); j++) {
-      if ((seq[i - 1][j] || 0) - (seq[i][j] || 0) > 0) { col = j; break; }
-    }
-    out.push({ digits: seq[i].slice(), addedColumn: col });
-  }
-  return out;
 }

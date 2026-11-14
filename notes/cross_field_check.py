@@ -9,7 +9,7 @@ representative. No factorial valuation is used.
 
 from collections import Counter
 from functools import lru_cache
-from itertools import combinations, product
+from itertools import combinations, permutations, product
 from math import comb, factorial
 from math import prod
 from time import perf_counter
@@ -219,45 +219,42 @@ def collapse_cherry(tree, selected, p, new=-1):
 
 
 def test_phylogenetics_and_cherries():
-    for p, smax in ((2, 7), (3, 5), (5, 4)):
-        classes = {x: 0 for x in range(smax)}
-        for s in range(1, smax + 1):
-            labels = tuple(range(s))
-            type_set = explicit_labelled(labels, p, 1, classes)
-            if p == 2:
-                expected = 1 if s == 1 else prod(range(1, 2*s - 2, 2))
-                assert len(type_set) == expected
-                print(f"phylogeny s={s}: {len(type_set)} = (2s-3)!!")
-            if s == p:
-                assert len(type_set) == factorial(p - 1)
-            if s >= p:
-                assert all(cherry_nodes(t, p) for t in type_set)
-                for tree in type_set:
-                    for cherry in cherry_nodes(tree, p):
-                        remaining = [x for x in labels if x not in cherry]
-                        assert collapse_cherry(tree, cherry, p) in explicit_labelled(
-                            remaining + [-1], p, 1, {x: 0 for x in remaining + [-1]})
+    for s in range(1, 8):
+        labels = tuple(range(s))
+        types = explicit_labelled(labels, 2, 1, {x: 0 for x in labels})
+        assert len(types) == (1 if s == 1 else prod(range(1, 2*s-2, 2)))
+        print(f"phylogeny s={s}: {len(types)} = (2s-3)!!")
+    for p in (2, 3, 5):
+        roots = {labelled_class(x, p) for x in permutations(range(p))}
+        assert len(roots) == factorial(p - 1)
+    for s in (3, 5):
+        p = 3
+        types = explicit_labelled(tuple(range(s)), p, 1, {x: 0 for x in range(s)})
+        for tree in types:
+            assert len(cherry_nodes(tree, p)) >= 1
+            for cherry in cherry_nodes(tree, p):
+                remainder = tuple(x for x in range(s) if x not in cherry)
+                assert collapse_cherry(tree, cherry, p) in explicit_labelled(
+                    remainder + (-1,), p, 1, {x: 0 for x in remainder + (-1,)})
+    print("cherry collapse preserves admissible binary/ternary trees; cyclic roots have (p-1)! orders")
 
     def check_fixed(p, k, selected, others):
-        selected = tuple(selected)
-        others = tuple(others)
+        selected, others = tuple(selected), tuple(others)
         labels = selected + others
         class_of = {x: 0 for x in selected}
         class_of.update({x: 1 for x in others})
         trees_before = explicit_labelled(labels, p, k, class_of)
         fixed = [t for t in trees_before if relabel(t, selected) == t]
-        for t in fixed:
-            assert any(set(node) == set(selected) for node in cherry_nodes(t, p))
+        for tree in fixed:
+            assert any(set(node) == set(selected) for node in cherry_nodes(tree, p))
         collapsed_class = dict(class_of)
         collapsed_class[-1] = 1
         collapsed_set = explicit_labelled(others + (-1,), p, k, collapsed_class)
         assert len(fixed) == (p - 1) * len(collapsed_set)
-        for t in fixed:
-            assert collapse_cherry(t, selected, p) in collapsed_set
-        print(f"explicit cherry bijection p={p}, k={k}: "
-              f"{len(fixed)} = {p-1} * {len(collapsed_set)}")
+        assert all(collapse_cherry(t, selected, p) in collapsed_set for t in fixed)
+        print(f"explicit cherry bijection p={p}, k={k}: {len(fixed)} = {p-1} * {len(collapsed_set)}")
 
-    check_fixed(2, 2, (0, 1), (2,))       # atoms 1,4,8 in m=13
+    check_fixed(2, 2, (0, 1), (2,))
     check_fixed(2, 2, (0, 1), (2, 3, 4))
     check_fixed(3, 2, (0, 1, 2), (3, 4))
 
@@ -288,36 +285,21 @@ def multinomial(a):
 
 def labelled_counter(p, k):
     @lru_cache(maxsize=None)
-    def count(depth, a):
+    def W(depth, a):
         if sum(a) == 1:
             return int((depth + a.index(1)) % k == 0)
-        total = 0
+        subtotal = 0
         for parts in count_partitions(a, p):
             weight = multinomial(a)
-            for b in parts:
-                weight *= unlabelled_counts[(depth + 1) % k, b]
-            total += weight if len(set(parts)) == 1 else weight // p
-        return total
+            for part in parts:
+                weight *= W((depth + 1) % k, part)
+            subtotal += weight if len(set(parts)) == 1 else weight // p
+        assert subtotal % prod(factorial(x) for x in a) == 0
+        return subtotal // prod(factorial(x) for x in a)
 
-    unlabelled_counts = {}
-    for total in range(1, 10):
-        for a in product(range(total + 1), repeat=k):
-            if sum(a) != total:
-                continue
-            for depth in range(k):
-                # Compute unlabelled counts recursively, then T exactly.
-                def W(delta, b):
-                    if sum(b) == 1:
-                        return int((delta + b.index(1)) % k == 0)
-                    subtotal = 0
-                    for parts in count_partitions(b, p):
-                        weight = multinomial(b)
-                        for part in parts:
-                            weight *= W((delta + 1) % k, part)
-                        subtotal += weight if len(set(parts)) == 1 else weight // p
-                    assert subtotal % prod(factorial(x) for x in b) == 0
-                    return subtotal // prod(factorial(x) for x in b)
-                unlabelled_counts[depth, a] = W(depth, a)
+    @lru_cache(maxsize=None)
+    def count(depth, a):
+        return W(depth, a) * prod(factorial(x) for x in a)
     return count
 
 

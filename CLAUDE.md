@@ -42,8 +42,19 @@ Problem 137: prove, from symmetries of trees and without factorial valuations, t
 ## Who does what
 
 - **Humans:** direction, sign-off, the talk.
-- **Orchestrator** (Claude Fable in Claude Code; if it is unavailable, any capable model started in this folder): split the work, write briefs, review worker output (`git diff`, rerun the checks), keep `STATE.md`, `CLAIMS.md` and `JOURNAL.md` honest. Claude budget is scarce: the orchestrator does not write long code or LaTeX itself.
-- **Workers** (Open Math OS models): proof drafts, code, LaTeX, figures, summaries, adversarial reviews.
+- **Orchestrator** (Claude Fable in Claude Code; if it is unavailable, any capable model started in this folder): split the work, write briefs, review worker output (`git diff`, rerun the checks), keep `STATE.md`, `CLAIMS.md` and `JOURNAL.md` honest. Since 2026-11-13 23:35 the orchestrator also writes code, checks and documents itself (see the budget rule).
+- **Workers** (Open Math OS models): used sparingly, for what the orchestrator cannot supply: an independent review of a proof by a different model.
+
+## Budget rule (set 2026-11-13 23:35 PT by Syoma)
+
+Open Math OS credit is the scarce resource: about 36% of the allowance was left at 23:35 on Friday, for the rest of the event. Claude usage has plenty of headroom. Therefore:
+
+1. **At most two workers at a time, and none without a reason written in `JOURNAL.md`.** No exploratory or nice-to-have worker tasks unless a human asks.
+2. **Reserve workers for independent proof review** (a second model reading a proof the first model or the orchestrator wrote). Prefer `meta/muse-spark-open` (finished a full review in 4 minutes) or `mistralai/mistral-large-4-0`; use Kimi only when the task needs its strength.
+3. The orchestrator does scripts, numerics, LaTeX fixes, the study guide and digests itself.
+4. Ask the humans for the remaining percentage before launching more than one worker.
+
+**Update 2026-11-13 23:45 (Syoma):** phase Open Math OS out completely. From Saturday morning all work is done by Claude. Launch no worker unless a human explicitly asks. For an independent read of a proof, use a fresh-context Claude subagent (Agent tool) that has not seen the orchestrator's reasoning.
 
 ## Launching a worker
 

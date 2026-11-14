@@ -1,62 +1,55 @@
 # STATE — where we are and what is next
 
-_Last updated: 2026-11-13 22:50 PT by Claude Fable 5.2 (orchestrator)._
+_Last updated: 2026-11-13 23:55 PT by Claude Fable 5.2 (orchestrator)._
 
 ## Status in one paragraph
 
-We have a candidate proof of the full problem (exact valuation for every q = p^k, from tree symmetries, no factorial valuations) and it has passed brute-force checks, but **no human has verified it and nothing is signed**. The idea: act with rotations (Z_p) on the p-ary refinement of a q-ary tree instead of Konvalinka's full symmetric group; then every class has p^d trees, the minimal classes are trees built on the base-p digits of m, and "a carry is a collapsing cherry" shows their number is a unit mod p. Sketch: `notes/2026-11-13_candidate_proof_sketch.md`. Claims and grades: `CLAIMS.md`.
+We have a candidate proof of the full problem (exact valuation for every q = p^k from tree symmetries, no factorial valuations). Evidence: brute force (E000), a no-assumption stress test on 1067 values of m up to 400 leaves, p up to 13, k up to 4 (E003, all checks pass), and three adversarial AI reviews that found no counterexample but 14 write-up defects (`paper/reviews/ADJUDICATION_round1.md`). A worker has revised `paper/main.tex` (`paper/CHANGES_round1.md`); **the revision is not yet checked**. **No human has signed anything.** The ranked digest for humans is `FINDINGS.md`.
+
+## Operating mode since 2026-11-13 23:35 (Syoma's instructions)
+
+- **Open Math OS is being phased out.** About 36% of its allowance was left. No new workers. One worker (W014, accounting proof) was still running at 23:55 and is allowed to finish. By Saturday morning all work is done by Claude.
+- **Claude does everything:** code, numerics, LaTeX, reviews (use a fresh-context Claude subagent via the Agent tool when an independent read is needed), documents.
+- **Overnight:** the orchestrator works through the queue below without waiting for humans. A recurring in-session cron job re-triggers the session every 30 minutes if it is idle, so work resumes after a Claude usage-limit reset. A small background process asks Windows not to idle-sleep while the app is open. Both are listed under "Overnight machinery".
+- Commit and push after every queue item. Journal every item.
+
+## Overnight queue (do in order; mark each DONE with the time when finished)
+
+- [ ] **Q1 — Verify the repaired paper.** For each item A1–A14 of `paper/reviews/ADJUDICATION_round1.md`, read the repaired passage of `paper/main.tex` and decide fixed / not fixed. Fix remaining defects directly in the `.tex`. Compile (`cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build main.tex`), copy `build/main.pdf` to `paper/main.pdf`. Write the result to `paper/reviews/round2_orchestrator.md`.
+- [ ] **Q2 — Independent second review.** Launch one fresh-context Claude subagent (Agent tool) with the brief `briefs/_held/W022_round2_kimi.md`, report to `paper/reviews/round2_claude_fresh.md`. Adjudicate, fix, recompile. When no GAP or WRONG remains, set C1–C8 to `ai-reviewed` in `CLAIMS.md`.
+- [ ] **Q3 — Study guide and Q&A.** Write `notes/study_guide.md` and `talk/QA.md` as specified in `briefs/W011_qa_and_study_guide.md` and `briefs/W011b_qa_study_guide_finish.md`. Make `notes/study_guide_check.py` run in under 30 seconds and agree with the guide.
+- [ ] **Q4 — Fold in finished worker output.** Review and record in `CLAIMS.md`/`FINDINGS.md`: E004 + `paper/alt_proof_accounting.tex` (W014; if the worker died, finish the write-up from `notes/2026-11-13_new_ideas.md`), E005 + `paper/alt_proof_frobenius.tex` (W015), `notes/blind_proof_search_muse.md` (W018), `experiments/E002_extensions/README.md` (C9, C10, C11).
+- [ ] **Q5 — Slides.** `talk/slides.pdf` compiles (two overfull boxes). Read every page, fix layout, add the chemistry/biology hook (Finding 3) and, if C12/C13 hold up, one slide "every node is worth −p". Keep the `\claimstatus` tags until humans sign.
+- [ ] **Q6 — Cross-field verification with curl** (no PDFs): OEIS lookups for the class-count and N_min sequences printed in `experiments/E003_stress_test/output.txt`; Crossref/OpenAlex checks of the leads in Part 2 of `briefs/W016_crossfield_verify.md`. Write `notes/oeis_recon.md` and `references/cross_field_refs.md`.
+- [ ] **Q7 — Refinements numerics.** Part A of `briefs/W017_refinements_and_general_q.md` with an own script in `experiments/E007_refinements/`; update C10, C11.
+- [ ] **Q8 — Explainer (optional).** Make `node explainer/selftest.mjs` pass following `briefs/W005c_explainer_reduced.md`.
+- [ ] **Q9 — Morning brief.** Write `MORNING_BRIEF.md` for the humans: what happened overnight, what to read first (in order), exactly what needs a signature. Refresh `FINDINGS.md`. Write `AI_USAGE.md` (which tool did what) from `JOURNAL.md`, `CLAIMS.md` and `logs/delegations/INDEX.md`. Then delete the cron job.
 
 ## Event and team facts
 
-- Submit by **Sunday 2026-11-15 12:00 PT**. 20-minute talk. Criteria: motivation, correctness, interest, clarity. No written rubric.
-- Presenters: Syoma (first-year undergraduate) and the grad student (combinatorics). Professor (combinatorics) is remote and may join by Zoom.
-- A human must sign each claim before it is presented as proved.
-- AI disclosure: a summary, able to say which tool produced what. Sources: `JOURNAL.md`, `CLAIMS.md` (Origin column), `logs/delegations/`.
-- Compute: about $15k on Open Math OS (use freely); Claude budget is small (protect it: orchestration and judgment only).
-- Repo is public on GitHub. Syoma approved pushing (2026-11-13 21:15); push after each work block.
+- Submit by **Sunday 2026-11-15 12:00 PT**. 20-minute talk. Criteria: motivation, correctness, interest, clarity.
+- Presenters: Syoma (first-year undergraduate) and the grad student (combinatorics). Professor (combinatorics) is remote.
+- A human must sign each claim before it is presented as proved. The grad student has the briefing PDF (`notes/briefing_grad_student/`); the professor was sent the link.
+- AI disclosure: a summary, able to say which tool produced what. Sources: `JOURNAL.md`, `CLAIMS.md`, `logs/delegations/`.
+- Repo is public; Syoma approved pushing.
+- Syoma approved downloading open-access copies of four papers only (Gao–Gu, Krattenthaler–Müller, Deutsch–Sagan, Postnikov–Sagan); they are in `references/raw/fulltext/` (not tracked).
 
-## Worker runs in flight (wave 2, launched 2026-11-13 22:39)
+## Human gates (Saturday)
 
-Wave 1 outcome: W004 literature scan finished and is reviewed (see JOURNAL 22:45). W001 produced `paper/main.tex` and an 11-page `paper/build/main.pdf` before dying on a connection error; the draft is complete by its author's account and **unreviewed**. W002, W003, W005 died mid-task and are resumed below.
+1. Morning: grad student reads the briefing and then `paper/main.pdf`; signs C1–C3 or reports the break. Professor: is it correct, has he seen it?
+2. Midday: C4–C6 signed or repaired; decide which extras go in the talk (see `FINDINGS.md`).
+3. Evening: rehearsal with `talk/slides.pdf`, `talk/QA.md`, `notes/study_guide.md`.
+4. Sunday: rehearse, freeze 10:30, submit by 11:30.
 
-| Run | Output | What "done" looks like |
-|---|---|---|
-| W006_review_mistral / _muse / _kimi (`briefs/W006_review_*.md`) | `paper/reviews/review_{mistral,muse,kimi}.md` | a verdict (correct / gap / wrong) on every lemma of `paper/main.tex` |
-| W002c (`briefs/W002b_replication_resume.md`) | `experiments/E001_independent_replication/output.txt`, `README.md` | independent code agrees with E000 on C1-C5, C7, C8 |
-| W003b (`briefs/W003b_extensions_resume.md`) | `experiments/E002_extensions/output.txt`, `README.md` | C9, C10, C11 each marked supported / refuted / not tested |
-| W005b (`briefs/W005b_explainer_resume.md`) | `explainer/index.html` | `node explainer/selftest.mjs` passes; five sections work |
+## Overnight machinery
 
-`tools/delegate.sh` relaunches a worker that dies (up to 4 attempts), so these should survive gateway timeouts. They do **not** survive the laptop sleeping. Each run logs to `logs/delegations/<time>_<slug>/`. A run is **not trusted until reviewed**: read `output.md`, look at `git status`/`git diff`, rerun its script, then note the review in `JOURNAL.md`.
-
-## Next actions (in order)
-
-1. Read the three reviews in `paper/reviews/`. Adjudicate every GAP/WRONG finding (is it real?), then give a Kimi worker a repair brief for `paper/main.tex` listing the accepted findings; re-review until clean. Review W002c, W003b, W005b as they finish. Update `CLAIMS.md` grades (`computed` needs E001 agreement; `ai-proved` needs `paper/` with an empty or resolved `GAPS.md`).
-2. When the reviews come back clean, grade C1–C8 `ai-reviewed` in `CLAIMS.md`, copy the PDF to `paper/main.pdf` (tracked) and send it to the grad student. Also needed: a full-text overlap check of Gao–Gu 2021, Krattenthaler–Müller 2025, Deutsch–Sagan 2006, Postnikov–Sagan 2007 (by the humans, or by a worker once Syoma allows it to download the open-access PDFs).
-3. **Human gate 1** (Saturday morning): grad student reads `paper/build/main.pdf` and signs C1–C3 or reports the break. Professor is asked two questions: is the argument correct, and does he know this proof in the literature?
-4. **Human gate 2** (Saturday midday): C4–C6 signed or repaired.
-5. Decide extensions from E002 and the literature scan: weighted numbers (C9), level profiles (C10), master statement (C11). Each one accepted gets a section in `paper/` by a worker, then review, then sign-off.
-6. Talk: worker drafts Beamer slides in `talk/` from the signed paper (outline below) and a Q&A sheet `talk/QA.md` (30 likely questions with short answers). Rehearse Saturday evening and Sunday morning.
-7. AI-usage summary `AI_USAGE.md` generated from `JOURNAL.md` and `logs/delegations/INDEX.md` by a Flash worker; humans check it.
-8. Freeze Sunday 10:30, submit by 11:30.
-
-## Talk outline (proposal, 20 minutes)
-
-1. (2 min) Why care: C_n is odd exactly when n+1 is a power of 2; in general the power of p is a digit sum. A counting fact deserves a counting proof.
-2. (3 min) The existing proof and where it stops: full symmetric group, three pages of minimal-orbit lemmas, divisibility only, exactness borrowed from factorials.
-3. (4 min) Rotate, don't permute: the p-ary refinement and the Z_p rotations. Every class has p^(number of asymmetric nodes) trees. Live example.
-4. (4 min) Minimal trees are built from the digits of m (atoms). For p = 2: evolutionary trees whose species are the 1-bits of n+1.
-5. (4 min) A carry is a collapsing cherry. Exactness, and the residue formula.
-6. (2 min) What else falls out: weighted numbers, level profiles (whatever is signed by then).
-7. (1 min) How AI was used and what humans verified.
-
-## Human to-do
-
-- **Syoma:** read the sketch; work the case p = 2, n = 6 (m = 7) by hand; decide about pushing to the public repo; ask the organizers who proposed problem 137 and whether a mentor can say if a "count fixed points of a Z_p action" argument counts as combinatorial.
-- **Grad student:** read the sketch tonight or first thing Saturday; try to break Steps 3 and 4; sign or report in `CLAIMS.md`.
-- **Professor:** read the sketch; opinion on correctness and on prior literature.
+- Cron job `e7eb20ef` in this Claude session (session-only): fires at minutes 13 and 43 while the session is idle. Delete it with CronDelete when the queue is done.
+- Keep-awake: background task `b7ckcr8lj` in this session, a PowerShell process holding a Windows "system required" execution state. It changes no settings and ends when stopped or when the app closes. A closed lid still sleeps.
+- If the Claude app is closed or the laptop sleeps, nothing runs. To resume by hand: open this folder in Claude and say "read CLAUDE.md and STATE.md and continue the overnight queue".
 
 ## Notes for whoever resumes
 
-- Models that pass the wrapper smoke test: Kimi K3.1 Pro (default), Mistral Large 4.0, Muse Spark Open, DeepSeek Flash. GLM 5.3 is very slow; Nemotron timed out.
-- Workers load `CLAUDE.md` automatically and are told there not to delegate further.
-- `references/konvalinka_wcatalan.{pdf,txt}` exist only on this machine (gitignored). Re-download from the URL in `references/README.md` if missing.
+- **Shell gotcha:** in commands sent through this harness a doubled backslash can arrive as a single one, so `sed`/inline Python edits of LaTeX silently fail. Edit `.tex` files with the Edit tool, or build backslashes with `chr(92)` in Python.
+- MiKTeX works with plain `latexmk`; TikZ shapes need `\usetikzlibrary{shapes.geometric}`.
+- Worker launcher `tools/delegate.sh` still works (default 2 attempts) but is not to be used without a human asking.
+- `problem137/orbits.py` is of unknown origin (see JOURNAL 21:10); ask Syoma.

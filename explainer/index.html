@@ -77,6 +77,14 @@ svg .cherry-halo{fill:none;stroke:var(--accent2);stroke-width:2.2;stroke-dasharr
 .legend i{display:inline-block;width:.8rem;height:.8rem;border-radius:50%;margin-right:.3rem;vertical-align:-.05rem}
 .carrygrid{display:grid;grid-template-columns:1.2fr .8fr;gap:1rem}
 @media(max-width:760px){.carrygrid{grid-template-columns:1fr}}
+.ringhost{min-height:360px;display:flex;align-items:center}
+.ring-col-title{fill:var(--muted);font-size:13px}
+.ring-chip{fill:var(--chip);stroke:var(--line)}
+.ring-count{fill:var(--chipink);font-weight:650}
+.ring-arrow{stroke:var(--muted);fill:none;marker-end:url(#ringArrow)}
+.merge-chip{fill:var(--atom);stroke:var(--accent2);stroke-width:1.5}
+.cherry-static line{stroke:var(--muted);stroke-width:1.5}
+.cherry-static .cherry-node{fill:var(--asym)}
 .digitrow{display:flex;gap:.3rem;justify-content:flex-start;margin:.45rem 0;flex-wrap:wrap}
 .dcol{min-width:2.4rem;text-align:center;border:1px solid var(--line);border-radius:8px;padding:.25rem .2rem;background:var(--panel)}
 .dcol.hi{border-color:var(--accent2);background:var(--chip)}
@@ -205,28 +213,35 @@ Why is the number <span class="math">N<sub>t</sub></span> of minimal classes nev
 skeleton exactly when those <span class="math">p</span> labels are <em>siblings</em> — a
 <em>cherry</em>. Counting fixed points modulo <span class="math">p</span> gives
 <span class="math">T(a) ≡ −T(a − p·e<sub>c</sub> + e<sub>c+1</sub>)</span>: collapse the cherry
-into one atom one size up. That is precisely a <em>carry</em> in base
-<span class="math">p</span>. Step through it:
+into one atom of the next class, with indices taken modulo <span class="math">k</span>.
+</p>
+<p class="note">
+Below we follow only the class vector <span class="math">a = (a<sub>0</sub>, …, a<sub>k−1</sub>)</span>,
+where the base-<span class="math">p</span> digit <span class="math">m<sub>j</sub></span> puts
+<span class="math">m<sub>j</sub></span> atoms in class <span class="math">j mod k</span>.
+We do not construct an individual fixed tree. The static picture illustrates the cherry behind one carry.
 </p>
 <div class="card">
   <div class="controls">
-    <button class="action primary" id="btnStep">Collapse next cherry</button>
+    <button class="action primary" id="btnStep">Carry once</button>
     <button class="action" id="btnBack">Back</button>
     <button class="action" id="btnPlay">Play</button>
     <button class="action" id="btnCarryReset">Reset</button>
     <span class="note" id="carryStepInfo"></span>
   </div>
   <div class="carrygrid">
-    <div id="carryTreeHost"></div>
     <div>
-      <span class="ctl-label">the same carry in base-p columns</span>
-      <div id="carryDigits"></div>
+      <span class="ctl-label">class-vector carry (cyclic columns when k &gt; 1)</span>
+      <div id="carryTreeHost" class="ringhost"></div>
+    </div>
+    <div>
+      <span class="ctl-label">one illustrative cherry (static)</span>
+      <div id="cherryPicture"></div>
       <div class="signline" id="carrySign"></div>
       <p class="note" id="carryExpl">
-        Each collapse multiplies the sign by −1. When only one leaf remains, every
-        class has fewer than p labels, so no cherry is left — and after exactly
-        t carries the sign is (−1)<sup>t</sup>. Dividing by the number of labelings,
-        ∏ m<sub>j</sub>! (a unit mod p), the number of minimal classes is a unit mod p.
+        Each carry replaces p atoms by one and multiplies the sign by −1.
+        Since m ≡ 1 (mod q−1), exactly t carries leave one atom of class 0.
+        Dividing by ∏ m<sub>j</sub>! (a unit mod p), the number of minimal classes is a unit mod p.
       </p>
     </div>
   </div>
@@ -642,151 +657,38 @@ function minimalTrees(orb, n, limit = 30) {
   return out;
 }
 
-// --- Carry / cherry animation ---------------------------------------------
-// A labelled skeleton is built once by guided splitting (W(delta,. ) > 0),
-// then cherries are collapsed one at a time.  Each collapse carries p atoms
-// p^j into one atom p^(j+1); base-p digits play the same game in a column.
+// --- Carries on the class vector -------------------------------------------
+// The base-p digit m_j contributes m_j atoms of class j (mod k).  A carry
+// replaces p atoms of one class by one atom of the next class and flips the
+// sign.  No particular skeleton tree is constructed here.
 
-// Build one labelled skeleton for the atom multiset `exps` (the places j of
-// the digits of m).  Leaves carry an ABSOLUTE exponent exp, so a cherry
-// (p sibling leaves of one absolute exp) collapses into exp+1, and the
-// relative exponent exp - depth performs the base-p carry.
-//
-// Strategy: a minimal rotation class (built by the already-tested census)
-// is, by definition, a carry-free skeleton.  Convert the canonical id into
-// a plain tree via idToTree and stamp a distinct label on every atom.
-function buildCarrySkeleton(p, k, exps) {
-  const total = exps.reduce((acc, j) => acc + BigInt(p) ** BigInt(j), 0n);
-  const q = p ** k;
-  const n = Number((total - 1n) / BigInt(q - 1));
-  if (BigInt(q - 1) * BigInt(n) + 1n !== total) {
-    throw new Error('atoms do not sum to 1 mod (q-1)');
-  }
-  const orb = createOrbits(p, k);
-  const t = tOfM(total, p);
-  const cls = orb.census(n);
-  let root = null;
-  for (const [id] of cls) {
-    if (orb.d[id] === t) { root = idToTree(orb, id); break; }
-  }
-  if (!root) throw new Error('no minimal class for these atoms');
-  let next = 0;
-  (function stamp(u) {
-    if (u.leaf) {
-      const i = next++;
-      u.label = String.fromCharCode(97 + (i % 26)) + (i >= 26 ? String(Math.floor(i / 26)) : '');
-      u.cls = u.exp % k;
-      return;
-    }
-    u.children.forEach(stamp);
-  })(root);
-  return root;
-}
-// Collect every cherry: >= p siblings that are leaves of the SAME exponent
-// (equivalently, the same atom size and the same depth).  Row keys exp.
-function findCherries(u, p, out = []) {
-  if (u.leaf) return out;
-  const byExp = new Map();
-  u.children.forEach((c, i) => {
-    if (!c.leaf) return;
-    if (!byExp.has(c.exp)) byExp.set(c.exp, []);
-    byExp.get(c.exp).push(i);
-  });
-  for (const [exp, idx] of byExp) {
-    if (idx.length >= p) out.push({ node: u, indices: idx.slice(0, p), cls: u.children[idx[0]].cls, exp });
-  }
-  u.children.forEach((c) => findCherries(c, p, out));
-  return out;
+function classVectorOf(m, p, k) {
+  const a = new Array(k).fill(0);
+  digitsOf(m, p).forEach((mj, j) => { a[j % k] += mj; });
+  return a;
 }
 
-// Collapse one cherry; returns info about the move.  Mutates the tree.
-function collapseCherry(tree, cherry, k) {
-  const group = cherry.indices.map((i) => cherry.node.children[i]);
-  const exp = group[0].exp;
-  const collapsed = {
-    leaf: true,
-    exp: exp + 1,
-    cls: (group[0].cls + 1) % k,
-    depth: (cherry.node.depth || 0) + 1,
-    label: group.map((g) => g.label).join(''),
-    fused: group.map((g) => g.label),
-  };
-  const rest = cherry.node.children.filter((_, i) => !cherry.indices.includes(i));
-  // keep the collapsed leaf at the position of the first cherry member
-  const at = Math.min(...cherry.indices);
-  rest.splice(Math.min(at, rest.length), 0, collapsed);
-  if (rest.length === 1 && cherry.node.isRoot) {
-    // the whole tree collapses to a single atom leaf (depth resets to 0)
-    return { root: { ...rest[0], depth: 0 }, fromExp: exp, fused: collapsed.fused };
-  }
-  cherry.node.children = rest;
-  return { root: tree, fromExp: exp, fused: collapsed.fused };
+// Choose the smallest eligible class.  Returns null when no carry is possible.
+function carryClassVector(a, p, k) {
+  const c = a.findIndex((count) => count >= p);
+  if (c < 0) return null;
+  const next = a.slice();
+  next[c] -= p;
+  next[(c + 1) % k]++;
+  return { a: next, move: { from: c, to: (c + 1) % k } };
 }
 
-// Precompute the whole carry sequence as snapshots (deep copies).
-function carrySequence(p, k, root) {
-  const frames = [{ tree: cloneTree(root), sign: 1, step: 0, move: null }];
-  let cur = cloneTree(root);
-  cur.isRoot = true;
-  let sign = 1, step = 0;
-  while (true) {
-    const cherries = findCherries(cur, p);
-    if (!cherries.length) break;
-    // deterministic: smallest class, then leftmost
-    cherries.sort((a, b) => a.cls - b.cls);
-    const ch = cherries[0];
-    const exp = ch.node.children[ch.indices[0]].exp;
-    const labels = ch.indices.map((i) => ch.node.children[i].label);
-    const res = collapseCherry(cur, ch, k);
-    cur = res.root;
-    cur.isRoot = true;
-    sign = -sign;
-    step++;
-    frames.push({
-      tree: cloneTree(cur), sign, step,
-      move: { exp, labels, cls: ch.cls, fused: res.fused },
-    });
+// Every carry removes p-1 atoms, so exactly t carries leave one atom.
+function carryClassSequence(m, p, k) {
+  const frames = [{ a: classVectorOf(m, p, k), sign: 1, move: null }];
+  while (frames[frames.length - 1].a.reduce((x, y) => x + y, 0) > 1) {
+    const previous = frames[frames.length - 1];
+    const step = carryClassVector(previous.a, p, k);
+    if (!step) throw new Error('carry stopped before one atom remained');
+    frames.push({ a: step.a, sign: -previous.sign, move: step.move });
   }
   return frames;
 }
-
-function cloneTree(u) {
-  if (u.leaf) return { ...u };
-  return { ...u, children: u.children.map(cloneTree) };
-}
-
-// Track base-p digit vectors alongside the frames.  The digit at place j is
-// the number of leaves whose RELATIVE exponent (exp - depth) equals j; it
-// starts as exactly m_j and each cherry collapse carries p of place j into
-// one of place j+1.
-function carryDigits(frames, m, p) {
-  const base = digitsOf(m, p);
-  function relCounts(u, out) {
-    if (u.leaf) {
-      const j = u.exp - (u.depth || 0);
-      while (out.length <= j) out.push(0);
-      out[j]++;
-      return out;
-    }
-    u.children.forEach((c) => relCounts(c, out));
-    return out;
-  }
-  const seq = frames.map((fr) => {
-    const v = relCounts(fr.tree, []);
-    while (v.length < base.length) v.push(0);
-    return v;
-  });
-  const out = [{ digits: seq[0].slice(), addedColumn: null }];
-  for (let i = 1; i < seq.length; i++) {
-    let col = -1;
-    for (let j = 0; j < Math.max(seq[i].length, seq[i - 1].length); j++) {
-      if ((seq[i - 1][j] || 0) - (seq[i][j] || 0) > 0) { col = j; break; }
-    }
-    out.push({ digits: seq[i].slice(), addedColumn: col });
-  }
-  return out;
-}
-
 /* LOGIC-END */
 </script>
 <script>
@@ -1050,77 +952,160 @@ function carryDigits(frames, m, p) {
       : 'For p = 2 the gallery degenerates to rooted binary trees on the 1-bits of m (phylogenetic trees). Here p is odd, so each node has p ordered-up-to-rotation children.';
   }
 
-  // ---- Section 5 ----
+  // ---- Section 5: the class vector only, with a static cherry illustration ----
   function rebuildCarry() {
     const p = state.p, k = state.k, m = mNow();
-    // keep atoms bounded for a readable drawing
-    const maxAtoms = 24;
-    let nUse = state.n;
-    const expsFor = (nn) => {
-      const mm = BigInt(p ** k - 1) * BigInt(nn) + 1n;
-      const dg = digitsOf(mm, p);
-      const exps = [];
-      dg.forEach((d, j) => { for (let i = 0; i < d; i++) exps.push(j); });
-      return { mm, exps };
+    state.carry = {
+      frames: carryClassSequence(m, p, k), m,
+      animating: false, epoch: (state.carry ? state.carry.epoch + 1 : 0),
     };
-    let cur = expsFor(nUse);
-    while (cur.exps.length > maxAtoms && nUse > 1) { nUse--; cur = expsFor(nUse); }
-    state.carryN = nUse;
-    const root = buildCarrySkeleton(p, k, cur.exps);
-    const frames = carrySequence(p, k, root);
-    const digits = carryDigits(frames, cur.mm, p);
-    state.carry = { frames, digits, m: cur.mm };
     state.carryIdx = 0;
+  }
+
+  function ringPoint(cx, cy, r, c, k) {
+    const angle = -Math.PI / 2 + 2 * Math.PI * c / k;
+    return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+  }
+
+  function atomPositions(center, count) {
+    const out = [];
+    const cols = Math.min(5, Math.max(1, count));
+    const rows = Math.ceil(count / cols);
+    for (let i = 0; i < count; i++) {
+      const col = i % cols, row = Math.floor(i / cols);
+      out.push({ x: center.x + (col - (Math.min(cols, count) - 1) / 2) * 23,
+                 y: center.y + (row - (rows - 1) / 2) * 23 });
+    }
+    return out;
+  }
+
+  // SVG SMIL gives a local, dependency-free merge animation; reduced-motion
+  // users get static snapshots and the same immediately updated sign.
+  function drawCarryRing(host, frame, nextFrame, p, k, animate) {
+    const W = 560, H = 360, cx = 280, cy = 180, radius = k === 1 ? 70 : 118;
+    const centers = Array.from({ length: k }, (_, c) => ringPoint(cx, cy, radius, c, k));
+    const parts = [`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Class vector carry">` +
+      '<defs><marker id="ringArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">' +
+      '<path d="M0,0 L7,3.5 L0,7 z" fill="currentColor"/></marker></defs>'];
+    if (k > 1) {
+      for (let c = 0; c < k; c++) {
+        const u = ringPoint(cx, cy, radius - 37, c, k);
+        const v = ringPoint(cx, cy, radius - 37, (c + 1) % k, k);
+        parts.push(`<path class="ring-arrow" d="M${u.x},${u.y} L${v.x},${v.y}"/>`);
+      }
+    }
+    centers.forEach((center, c) => {
+      const points = atomPositions(center, frame.a[c]);
+      parts.push(`<text class="ring-col-title" x="${center.x}" y="${center.y - 65}" text-anchor="middle">` +
+        `class ${c} · a${sub(c)} = ${frame.a[c]}</text>`);
+      points.forEach((pt, i) => {
+        // Hide exactly the p chips that depart.  The product chip is drawn
+        // separately, so no chip is ever double-counted during the animation.
+        const hidden = nextFrame && (
+          (c === nextFrame.move.from && i < p) ||
+          (c !== nextFrame.move.from && c === nextFrame.move.to &&
+            nextFrame.a[nextFrame.move.from] === 0 && i === points.length - 1));
+        if (hidden) return;
+        parts.push(`<g class="carry-atom" transform="translate(${pt.x},${pt.y})">` +
+          '<circle r="10" class="ring-chip"/>' +
+          `<text class="ring-count" text-anchor="middle" y="4" style="font-size:10px">${c}</text></g>`);
+      });
+    });
+    if (nextFrame && animate) {
+      const move = nextFrame.move;
+      const source = centers[move.from], target = centers[move.to];
+      const starts = atomPositions(source, frame.a[move.from]).slice(0, p);
+      const targets = atomPositions(target, nextFrame.a[move.to]);
+      const landing = targets[targets.length - 1];
+      starts.forEach((pt, i) => {
+        // Motion and shrinking use separate nested groups.  A negative final
+        // scale sends the local chip opacity to zero after the merge.
+        parts.push(`<g transform="translate(${pt.x},${pt.y})"><g>` +
+          `<animateMotion path="M0,0 L${(landing.x - pt.x).toFixed(2)},${(landing.y - pt.y).toFixed(2)}" dur="0.85s" fill="freeze"/>` +
+          '<g><animateTransform attributeName="transform" type="scale" values="1;0.12;0" ' +
+          'keyTimes="0;0.8;1" dur="0.85s" fill="freeze"/>' +
+          '<circle r="10" class="merge-chip"/>' +
+          `<text class="ring-count" text-anchor="middle" y="4" style="font-size:10px">${move.from}</text>` +
+          '</g></g></g>');
+      });
+      parts.push(`<g transform="translate(${landing.x},${landing.y})">` +
+        '<circle class="merge-chip" r="0">' +
+        '<animate attributeName="r" values="0;0;12" keyTimes="0;0.78;1" dur="0.85s" fill="freeze"/></circle>' +
+        `<text class="ring-count" text-anchor="middle" y="4" style="font-size:10px" opacity="0">` +
+        `${move.to}<animate attributeName="opacity" values="0;0;1" keyTimes="0;0.78;1" dur="0.85s" fill="freeze"/></text></g>`);
+    }
+    parts.push(`<text class="ring-col-title" x="${cx}" y="${H - 10}" text-anchor="middle">` +
+      `a = (${frame.a.join(', ')})</text></svg>`);
+    host.innerHTML = parts.join('');
+  }
+
+  function drawStaticCherry(p, k) {
+    const xLeaf = 48, xNode = 166, xNew = 329;
+    const ys = Array.from({ length: p }, (_, i) => 25 + i * (120 / (p - 1)));
+    const parts = ['<svg class="cherry-static" viewBox="0 0 400 180" width="100%" role="img" aria-label="A cherry of p leaves collapses into one leaf">'];
+    ys.forEach((y) => {
+      parts.push(`<line x1="${xLeaf + 14}" y1="${y}" x2="${xNode - 9}" y2="90"/>`);
+      parts.push(`<circle class="ring-chip" cx="${xLeaf}" cy="${y}" r="12"/>` +
+        `<text class="ring-count" x="${xLeaf}" y="${y + 4}" text-anchor="middle" style="font-size:10px">c</text>`);
+    });
+    parts.push(`<circle class="cherry-node" cx="${xNode}" cy="90" r="9"/>`);
+    parts.push(`<line x1="210" y1="90" x2="270" y2="90" marker-end="url(#staticArrow)"/>` +
+      '<defs><marker id="staticArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">' +
+      '<path d="M0,0 L7,3.5 L0,7 z" fill="currentColor"/></marker></defs>');
+    parts.push(`<circle class="ring-chip" cx="${xNew}" cy="90" r="16"/>` +
+      `<text class="ring-count" x="${xNew}" y="94" text-anchor="middle" style="font-size:11px">c+1</text>`);
+    parts.push(`<text class="ring-col-title" x="200" y="174" text-anchor="middle">` +
+      `p = ${p} leaves of class c → one leaf of class c+1 (mod ${k})</text></svg>`);
+    $('cherryPicture').innerHTML = parts.join('');
+  }
+
+  function renderCarry(nextFrame = null, animate = false) {
+    const p = state.p, k = state.k;
+    const { frames, m } = state.carry;
+    const i = state.carryIdx;
+    const fr = frames[i], displayedNext = nextFrame || frames[i + 1];
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    drawCarryRing($('carryTreeHost'), fr, displayedNext, p, k, animate && !reduced);
+    const t = tOfM(m, p), done = i === frames.length - 1;
+    $('carryStepInfo').textContent = `m = ${m}, a = (${fr.a.join(', ')}) — carry ${i} of ${t}`;
+    $('carrySign').innerHTML = done
+      ? `<span class="math"><strong>${t} carries, sign (−1)<sup>${t}</sup> = ${fr.sign === 1 ? '+1' : '−1'}</strong><br>One atom of class 0 remains.</span>`
+      : `<span class="math">running sign: <strong>${fr.sign === 1 ? '+1' : '−1'}</strong> = (−1)<sup>${i}</sup><br>` +
+        `<span class="note">next: ${p} atoms of class ${displayedNext.move.from} → 1 atom of class ${displayedNext.move.to}</span></span>`;
+    $('btnStep').disabled = done || state.carry.animating;
+    $('btnBack').disabled = i <= 0 || state.carry.animating;
+    if (done) stopPlay();
   }
 
   function refreshCarry() {
     if (!state.carry) rebuildCarry();
-    const p = state.p;
-    const { frames, digits, m } = state.carry;
-    const i = state.carryIdx;
-    const fr = frames[i];
-    const next = frames[i + 1];
-    let cherrySet = null;
-    if (next) {
-      // highlight the leaves that are about to be collapsed, on the current tree
-      const wanted = new Set(next.move.labels);
-      cherrySet = new Set();
-      (function w(u) {
-        if (u.leaf) { if (wanted.has(u.label)) cherrySet.add(u); return; }
-        u.children.forEach(w);
-      })(fr.tree);
-    }
-    drawTree($('carryTreeHost'), fr.tree, {
-      labels: true, dx: p >= 5 ? 58 : 44, dy: 66, bands: false, maxH: 380, cherryOf: cherrySet,
-    });
-    const t = tOfM(m, p);
-    $('carryStepInfo').textContent =
-      `n = ${state.carryN}, m = ${m} — step ${i} of ${frames.length - 1} (= t = ${t})`;
-    // digits panel
-    const dfr = digits[i];
-    const dNext = digits[i + 1];
-    const cells = [];
-    for (let j = dfr.digits.length - 1; j >= 0; j--) {
-      const hi = dNext && (j === dNext.addedColumn || j === dNext.addedColumn + 1);
-      let delta = '';
-      if (dNext && j === dNext.addedColumn) delta = `−${p}`;
-      if (dNext && j === dNext.addedColumn + 1) delta = '+1';
-      cells.push(`<div class="dcol${hi ? ' hi' : ''}"><div class="place">${p}${sup(j)}</div>` +
-        `<div class="val">${dfr.digits[j]}</div><div class="delta">${delta}</div></div>`);
-    }
-    $('carryDigits').innerHTML = `<div class="digitrow">${cells.join('')}</div>` +
-      (dNext ? `<p class="note">next: ${p} atoms ${p}${sup(dNext.addedColumn)} → one atom ${p}${sup(dNext.addedColumn + 1)} (dashed leaves on the left)</p>`
-             : '<p class="note">no cherry left: every class has fewer than p labels.</p>');
-    $('carrySign').innerHTML =
-      `<span class="math">running sign: <strong>${fr.sign === 1 ? '+1' : '−1'}</strong> = (−1)<sup>${i}</sup>` +
-      `${i === frames.length - 1 ? `; &nbsp; N<sub>t</sub> ≡ (−1)<sup>${t}</sup>/∏ m<sub>j</sub>! (mod ${p})` : ''}</span>`;
-    $('btnStep').disabled = i >= frames.length - 1;
-    $('btnBack').disabled = i <= 0;
-    if (i >= frames.length - 1) stopPlay();
+    drawStaticCherry(state.p, state.k);
+    renderCarry();
+  }
+
+  function stepCarry() {
+    const carry = state.carry;
+    if (!carry || carry.animating || state.carryIdx >= carry.frames.length - 1) return;
+    stopPlay();
+    carry.animating = true;
+    const epoch = carry.epoch;
+    const old = carry.frames[state.carryIdx];
+    const next = carry.frames[state.carryIdx + 1];
+    renderCarry(next, true);
+    const finish = () => {
+      if (carry !== state.carry || carry.epoch !== epoch) return;
+      state.carryIdx++;
+      carry.animating = false;
+      renderCarry();
+    };
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      carry.animating = false;
+      finish();
+    } else carry.timer = setTimeout(finish, 880);
   }
 
   function stopPlay() {
-    if (state.playTimer) { clearInterval(state.playTimer); state.playTimer = null; $('btnPlay').textContent = 'Play'; }
+    if (state.playTimer) { clearTimeout(state.playTimer); state.playTimer = null; $('btnPlay').textContent = 'Play'; }
   }
 
   // ---- master refresh ----
@@ -1136,6 +1121,11 @@ function carryDigits(frames, m, p) {
       if (newTree) { state.tree = null; refreshTree(false); } else refreshTree(false);
       try { refreshGallery(); } catch (e) { $('galleryNote').textContent = 'gallery error: ' + e.message; }
       stopPlay();
+      if (state.carry) {
+        clearTimeout(state.carry.timer);
+        state.carry.epoch++;
+        state.carry.animating = false;
+      }
       state.carry = null;
       try { refreshCarry(); } catch (e) { $('carryStepInfo').textContent = 'carry error: ' + e.message; }
     }, 20);
@@ -1154,23 +1144,32 @@ function carryDigits(frames, m, p) {
     const tr = firstMinimalTree(orbits(), Math.min(state.n, cap()));
     if (tr) { state.tree = tr; refreshTree(false); }
   });
-  $('btnStep').addEventListener('click', () => {
-    if (state.carryIdx < state.carry.frames.length - 1) { state.carryIdx++; refreshCarry(); }
-  });
+  $('btnStep').addEventListener('click', stepCarry);
   $('btnBack').addEventListener('click', () => {
     stopPlay();
-    if (state.carryIdx > 0) { state.carryIdx--; refreshCarry(); }
+    if (state.carry.animating || state.carryIdx <= 0) return;
+    state.carryIdx--;
+    renderCarry();
   });
-  $('btnCarryReset').addEventListener('click', () => { stopPlay(); state.carryIdx = 0; refreshCarry(); });
+  $('btnCarryReset').addEventListener('click', () => {
+    stopPlay();
+    if (state.carry.animating) return;
+    state.carryIdx = 0;
+    renderCarry();
+  });
   $('btnPlay').addEventListener('click', () => {
     if (state.playTimer) { stopPlay(); return; }
+    if (state.carry.animating) return;
     if (state.carryIdx >= state.carry.frames.length - 1) state.carryIdx = 0;
     $('btnPlay').textContent = 'Pause';
-    state.playTimer = setInterval(() => {
+    const tick = () => {
+      state.playTimer = null;
       if (state.carryIdx >= state.carry.frames.length - 1) { stopPlay(); return; }
-      state.carryIdx++;
-      refreshCarry();
-    }, 900);
+      stepCarry();
+      if (state.carryIdx < state.carry.frames.length - 1) state.playTimer = setTimeout(tick, 1120);
+      else stopPlay();
+    };
+    tick();
   });
 
   refreshAll();

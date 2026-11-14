@@ -67,3 +67,41 @@ The finite-profile iterator uses only binomial bounded compositions; all leaves 
 14 1 3712 0 0 0 1 1 1
 A(a,b,c) summary: failures=0
 A direct plane-tree/product agreement: n=1..5; total_failures=0
+
+=== A p=2,k=2,q=4: finite profiles formula alone n=1..14 ===
+n t profiles mismatch div_fail sum_fail tight residue predicted
+The finite-profile iterator uses only binomial bounded compositions; all leaves below the last internal level are implicit.
+1 0 1 0 0 0 1 1 1
+2 2 1 0 0 0 1 1 1
+3 1 2 0 0 0 1 1 1
+4 2 4 0 0 0 1 1 1
+5 0 8 0 0 0 1 1 1
+6 2 15 0 0 0 1 1 1
+7 2 29 0 0 0 1 1 1
+8 2 57 0 0 0 1 1 1
+9 2 112 0 0 0 1 1 1
+10 4 220 0 0 0 7 1 1
+11 1 432 0 0 0 1 1 1
+12 2 848 0 0 0 1 1 1
+13 1 1666 0 0 0 1 1 1
+14 3 3273 0 0 0 3 1 1
+A(a,b,c) summary: failures=0
+A direct plane-tree/product agreement: n=1..5; total_failures=0
+
+=== A p=3,k=2,q=9: finite profiles formula alone n=1..12 ===
+n t profiles mismatch div_fail sum_fail tight residue predicted
+The finite-profile iterator uses only binomial bounded compositions; all leaves below the last internal level are implicit.
+1 0 1 0 0 0 1 1 1
+2 2 1 0 0 0 1 1 1
+3 2 2 0 0 0 1 1 1
+4 1 4 0 0 0 1 1 1
+5 2 8 0 0 0 1 2 2
+6 2 16 0 0 0 1 2 2
+7 1 32 0 0 0 1 1 1
+8 2 64 0 0 0 1 1 1
+9 2 128 0 0 0 1 1 1
+10 0 256 0 0 0 1 1 1
+11 2 511 0 0 0 1 1 1
+12 2 1021 0 0 0 1 2 2
+A(a,b,c) summary: failures=0
+A direct plane-tree/product agreement: n=1..5; total_failures=0

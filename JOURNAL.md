@@ -68,3 +68,14 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **Reviewed W009** (full-text overlap, four arXiv texts): see the note added to `CLAIMS.md`. **Reviewed W002c** (replication): partial, k = 1 only; its two failures are its own bug (verified by hand and with E000 code). **W005b** (explainer) did not finish; **W011** (study guide, Q&A) stopped after writing only its check script.
 - **Launched:** W014 accounting proof (verify + write-up), W015 Frobenius proof, W016 cross-field verification and OEIS reconnaissance, W017 refinements and non-prime-power q, W018 three blind proof searches (Kimi, Mistral, Muse), W021 repair of the paper followed automatically by W022 round-2 reviews (three models), W011b and W005c relaunches with tighter briefs.
 - Created `FINDINGS.md`: the ranked one-page digest for the humans.
+
+## 2026-11-13 ~23:55 — Claude Fable 5.2
+
+- **Budget change (Syoma):** Open Math OS allowance down to about 36%. Instructions, in order: cut usage; then cut heavily; then phase it out entirely by morning and use Claude instead. Also: arrange for work to resume automatically if Claude hits its 5-hour limit.
+- Stopped ten workers (process trees killed, runs marked "stopped" in their `meta.txt`): W018 blind Kimi, W018 blind Mistral, W017 refinements, W013 cross-field, W016 cross-field verification, W005c explainer, W012 stress test, W010 slides, W003b extensions, W011b study guide. W021 (paper repair) had written `paper/CHANGES_round1.md` and `paper/main.pdf` at 23:28; its launcher was hung and was cleaned up. The automatic second review round was blocked by moving its briefs to `briefs/_held/`. Only W014 (accounting proof) was left running.
+- Finished earlier: W015 (Frobenius proof note and E005), W018 blind Muse (report in `notes/`). Not yet reviewed.
+- **E003 stress test, written and run by me:** 1067 values of m, p up to 13, k up to 4, up to about 400 leaves, no truncation: 0 failures on every check (`experiments/E003_stress_test/`).
+- **Slides:** the stopped worker's `talk/slides.tex` had three LaTeX errors (two missing braces, a missing TikZ library); fixed; `talk/slides.pdf` now builds. Content not yet reviewed.
+- Rewrote `STATE.md` with the overnight queue Q1–Q9 (Claude only). `CLAUDE.md` now carries the budget rule.
+- **Overnight machinery:** cron job `e7eb20ef` (fires at :13 and :43 while idle, tells the session to continue the queue); keep-awake background task `b7ckcr8lj` (a temporary Windows execution-state request; changes no settings).
+- Harness quirk found: a doubled backslash in a shell command can arrive as a single one, so `sed` and inline-Python edits of LaTeX silently do nothing. Recorded in `STATE.md`.

@@ -13,7 +13,7 @@
 #
 # Environment:
 #   DELEGATE_TIMEOUT  seconds before one attempt is killed (default 5400)
-#   DELEGATE_RETRIES  maximum number of attempts (default 4)
+#   DELEGATE_RETRIES  maximum number of attempts (default 2)
 set -u
 if [ $# -lt 2 ]; then
   echo "usage: bash tools/delegate.sh <slug> <brief.md> [om.ps1 flags]" >&2
@@ -50,7 +50,7 @@ resume="A previous worker was carrying out the brief in $rel/brief.md and was cu
 
 cd "$root"
 attempt=1
-max="${DELEGATE_RETRIES:-4}"
+max="${DELEGATE_RETRIES:-2}"
 while :; do
   MSYS_NO_PATHCONV=1 timeout "${DELEGATE_TIMEOUT:-5400}" \
     powershell -NoProfile -File "$USERPROFILE/.claude/bin/om.ps1" -Task "$task" "$@" \

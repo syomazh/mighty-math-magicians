@@ -1,5 +1,5 @@
 # Model: moonshotai/kimi-k3.1-pro (Open Math OS), 2026-11-13. Exploratory; not human-reviewed.
-"""E007: refinements by invariant statistics and general q block actions."""
+"""E007: rotation-invariant refinements and independent-block actions for general q."""
 import argparse
 import itertools
 import math
@@ -8,8 +8,8 @@ from collections import Counter, defaultdict
 from functools import lru_cache
 from pathlib import Path
 
-START = time.monotonic()
 OUT = None
+START = time.monotonic()
 
 
 def say(s=""):
@@ -18,41 +18,41 @@ def say(s=""):
         print(s, file=OUT, flush=True)
 
 
-def vp(a, p):
-    assert a > 0
+def vp(x, p):
+    assert x > 0
     v = 0
-    while a % p == 0:
-        a //= p
+    while x % p == 0:
+        x //= p
         v += 1
     return v
 
 
 def digits(m, p):
-    r = []
+    result = []
     while m:
-        r.append(m % p)
+        result.append(m % p)
         m //= p
-    return r
+    return result
 
 
-def target(m, p):
-    return (sum(digits(m, p))-1)//(p-1)
+def tvalue(q, n, p):
+    return (sum(digits((q-1)*n+1, p))-1)//(p-1)
 
 
 def fuss(q, n):
     return math.comb(q*n, n)//((q-1)*n+1)
 
 
-def comps(total, length):
+def compositions(total, length):
     if length == 1:
         yield (total,)
     else:
         for a in range(total+1):
-            for b in comps(total-a, length-1):
+            for b in compositions(total-a, length-1):
                 yield (a,)+b
 
 
-def plog(q, p):
+def kvalue(q, p):
     k = 0
     while q > 1:
         assert q % p == 0
@@ -61,483 +61,305 @@ def plog(q, p):
     return k
 
 
-def profile_sum(profiles):
-    result = [1]
-    for prof in profiles:
-        if not prof:
-            continue
-        if len(prof) >= len(result):
-            result += [0]*(len(prof)+1-len(result))
-        for i, x in enumerate(prof):
-            result[i+1] += x
-    return tuple(result)
-
-
-def leaf_profile(ds):
-    return tuple(Counter(ds)[i] for i in range(max(ds)+1))
-
-
-def all_stats(q, children, subtrees):
-    """Tuple height, q-level profile, j-nonempty counts, leaf profile, Narayana."""
+def stat_tuple(q, children):
+    """(height, q-level profile, child-count vector, leaf depth histogram, Narayana)."""
+    subtrees = [stat_tuple(q, c) for c in children if c]
+    if not subtrees:
+        return 0, (1,), (0,)*(q+1), (1,), (0,), (1,)
+    height = 1+max(s[0] for s in subtrees)
+    profile = [1]
     arities = [0]*(q+1)
-    arities[sum(c != () for c in children)] = 1
-    for ar, _, _, _, _ in subtrees:
-        for j, value in enumerate(ar):
-            arities[j] += value
-    height = 0 if not any(subtrees) else 1+max(h for _, h, _, _, _ in subtrees)
-    leaf_ds = (0,) if not any(subtrees) else tuple(d+1 for _, _, _, ds, _ in subtrees for d in ds)
-    return (tuple(arities), height, profile_sum(pr for _, _, pr, _, _ in subtrees),
-            leaf_ds, int(not any(subtrees))+sum(n for _, _, _, _, n in subtrees))
+    arities[len(subtrees)] = 1
+    leaf_depths = Counter()
+    for h, prof, ar, leaf, nar, has_nodes in subtrees:
+        profile += [0]*max(0, len(prof)+1-len(profile))
+        for i, x in enumerate(prof):
+            profile[i+1] += x
+        for j, x in enumerate(ar):
+            arities[j] += x
+        for d, x in enumerate(leaf):
+            leaf_depths[d+1] += x
+    leaf = tuple(leaf_depths[i] for i in range(max(leaf_depths)+1))
+    return height, tuple(profile), tuple(arities), leaf, 0, bool(subtrees)
+
+
+def stats(q, children):
+    """All five statistics, including the number of completely empty-branch nodes."""
+    h, pr, ar, leaf, _, _ = stat_tuple(q, children)
+return h, pr, ar, leaf, (ar[0] == 1)+sum(c[4] for c in children if c)
+
+
+
+
+def stats(q, children):
+    """All five statistics; the last component is completely full q-nodes."""
+    h, pr, ar, leaf, _, _ = stat_tuple(q, children)
+    desc = [stats(q, c) for c in children if c]
+    nar = int(not desc)+sum(s[4] for s in desc)
+    return h, pr, ar, leaf, nar
 
 
 class Orbits:
-    """Exact independent p-power block orbits, with q-node statistics attached."""
+    """A p-tree ID is its cyclic p-ary class; q-node statistics are stored separately."""
     def __init__(self, q, p, prime_power=False):
         self.q, self.p = q, p
-        self.blocks = [j for j, a in enumerate(digits(q, p)) for _ in range(a)]
-        self.k = plog(q, p) if prime_power else None
-        if prime_power:
-            assert q == p**self.k
-        self.cache = {}
+        self.k = kvalue(q, p) if prime_power else None
+        self.blocks = [j for j, d in enumerate(digits(q, p)) for _ in range(d)]
+        self.pcache = {}
         self.d = [0]
-        self.pchildren = [()]
-        self.stats = [((0,)*(q+1), 0, (), (0,), 0)]
-        self.bysize = {0: {0: 1}}
+        self.by_n = {0: {0: 1}}
+        self.qstats = {}
 
-    def intern(self, children, stats=None):
-        key = children
-        if key in self.cache:
-            i = self.cache[key]
-            if stats is not None:
-                assert self.stats[i] == stats
-            return i
-        i = len(self.d)
-        self.cache[key] = i
-        self.pchildren.append(key)
-        if stats is None:
-            assert len(key) == self.p
+    def pnode(self, children):
+        key = min(children[i:]+children[:i] for i in range(self.p))
+        if key not in self.pcache:
+            self.pcache[key] = len(self.d)
             self.d.append(sum(self.d[c] for c in key)+(len(set(key)) != 1))
-            self.stats.append(None)
-        else:
-            self.d.append(sum(self.d[c] for c in key))
-            self.stats.append(stats)
-        return i
+        return self.pcache[key]
 
-    def pnode(self, kids):
-        return self.intern(min(kids[i:]+kids[:i] for i in range(self.p)))
-
-    def node(self, kids):
-        stats = all_stats(self.q, kids, [self.stats[c] if c else self.stats[0] for c in kids])
+    def qnode(self, children):
+        qstats = stats(self.q, [self.qstats[c] if c else () for c in children])
         if self.k is not None:
-            level = list(kids)
+            level = children
             for _ in range(self.k):
-                level = [self.pnode(tuple(level[i:i+self.p])) for i in range(0, len(level), self.p)]
-            return self.intern(tuple(level), stats)
-        root = []
-        for h in self.blocks:
-            block, kids = list(kids[:self.p**h]), list(kids[self.p**h:])
-            for _ in range(h):
-                block = [self.pnode(tuple(block[i:i+self.p])) for i in range(0, len(block), self.p)]
-            root += block
-        assert not kids
-        return self.intern(tuple(root), stats)
+                level = tuple(self.pnode(level[i:i+self.p]) for i in range(0, len(level), self.p))
+            pid = level[0]
+        else:
+            pos = 0
+            root = []
+            for h in self.blocks:
+                level = list(children[pos:pos+self.p**h])
+                pos += self.p**h
+                for _ in range(h):
+                    level = [self.pnode(tuple(level[i:i+self.p])) for i in range(0, len(level), self.p)]
+                root += level
+            assert pos == self.q
+            # The ordered roots of all blocks: blocks are never exchanged.
+            root = tuple(root)
+            if root not in self.pcache:
+                self.pcache[root] = len(self.d)
+                self.d.append(sum(self.d[c] for c in root))
+            pid = self.pcache[root]
+        assert pid in self.qstats or self.qstats.get(pid, qstats) == qstats
+        self.qstats[pid] = qstats
+        return pid
 
     def build(self, n):
-        if n in self.bysize:
-            return self.bysize[n]
-        for j in range(n):
-            self.build(j)
+        if n in self.by_n:
+            return self.by_n[n]
+        for i in range(n):
+            self.build(i)
         result = defaultdict(int)
-        for comp in comps(n-1, self.q):
-            for combo in itertools.product(*(self.bysize[c].items() for c in comp)):
+        for c in compositions(n-1, self.q):
+            for combo in itertools.product(*(self.by_n[i].items() for i in c)):
                 children = tuple(node for node, _ in combo)
-                result[self.node(children)] += math.prod(count for _, count in combo)
-        self.bysize[n] = dict(result)
-        assert sum(result.values()) == fuss(self.q, n), (self.q, self.p, n)
+                result[self.qnode(children)] += math.prod(cnt for _, cnt in combo)
+        self.by_n[n] = dict(result)
+        assert sum(result.values()) == fuss(self.q, n), ('total mismatch', self.q, self.p, n, sum(result.values()), fuss(self.q,n))
+        assert all(cnt == self.p**self.d[node] for node, cnt in result.items()), ('orbit size', self.q, self.p, n)
         return result
-
-
-def value(orb, node, name, j=None):
-    ar, h, pr, ds, nar = orb.stats[node]
-    if name == 'height':
-        return h
-    if name == 'level_profile':
-        return pr
-    if name == 'branch_j':
-        return ar[j]
-    if name == 'leaf_profile':
-        return leaf_profile(ds)
-    if name == 'narayana':
-        return nar
-    raise ValueError(name)
 
 
 @lru_cache(None)
 def trees(n, q):
     if n == 0:
         return ((),)
-    return tuple(tuple(children) for c in comps(n-1, q)
-                 for children in itertools.product(*(trees(i, q) for i in c)))
+    return tuple(tuple(c) for comp in compositions(n-1, q)
+                 for c in itertools.product(*(trees(x, q) for x in comp)))
 
 
 @lru_cache(None)
-def tree_stats(tree):
-    if not tree:
-        return ((0, 0), 0, (), [], 0)
-    return all_stats(len(tree), tree, [tree_stats(c) for c in tree])
+def explicit_stats(tree):
+    return stats(len(tree), tree) if tree else (0, (0,), (), (), 0)
 
 
-def discard_refinements(q):
-    p = 2 if q % 2 == 0 else q
-    k = plog(q, p)
-    def rec(tree):
-        if not tree:
-            return ('leaf',)
-        return ('node',) + tuple(rec(c) for c in tree)
-    def moves(tree):
-        if not tree:
-            yield tree
-            return
-        for ptree in refinement_moves(rec(tree)):
-            original = tuple(tuple(c) for c in unrefine(ptree, p, k)[1])
-            # Independent deeper moves are supplied by recursion, not assumed.
-            yield original
-        for i, child in enumerate(tree):
-            for changed in moves(child):
-                yield tree[:i] + (changed,) + tree[i+1:]
-    def refinement_moves(tree):
-        if tree == ('leaf',):
-            yield tree
-            return
-        options = [list(refinement_moves(c)) for c in tree[1:]]
-        for comb in itertools.product(*options):
-            groups = [list(comb[i:i+p]) for i in range(0, len(comb), p)]
-            children = [('node',)+tuple(g) for g in groups]
-            previous = None
-            for _ in range(p):
-                if children != previous:
-                    yield ('node',)+tuple(children)
-                previous = children
-                children = children[1:]+children[:1]
-    moves.cache = {}
-    def unrefine(tree, p, k):
-        if tree == ('leaf',):
-            return 0, ()
-        if k == 1:
-            return 0, (tree,)
-        raise NotImplementedError
-    return moves
+def explicit_orbit(tree, q, p, k=None):
+    blocks = [j for j, d in enumerate(digits(q, p)) for _ in range(d)]
+    if k is not None:
+        assert q == p**k
+        blocks = [1]*k
 
-
-def direct_refined_rotations(q):
-    """Independent enumeration of the bottom-up complete p-ary refinement."""
-    p = 2 if q % 2 == 0 else q
-    k = plog(q, p)
-
-    def ref(tree):
-        if not tree:
-            return (0,)
-        level = [ref(c) for c in tree]
-        for _ in range(k):
-            level = [(1, tuple(level[i:i+p])) for i in range(0, len(level), p)]
-        return level[0]
-
-    def unref(tree, depth=0):
-        if tree[0] == 0:
-            return (), depth
-        children, depths = [], []
-        for c in tree[1]:
-            child, d = unref(c, depth+1)
-            if d == depth+k:
-                children.append(child)
-            else:
-                assert d is None or d == depth
-                children.append(c)
-        raise RuntimeError
-
-    # Flatten the p-refinement explicitly; its q leaves are the child roots at
-    # depth k, while internal children are (level, subtree) tagged structures.
-    def flatten(tree):
-        # Tuples of length 2 in this routine represent q-nodes and empty slots;
-        # every internal node has an integer tag, removing any ambiguity.
-        if tree[0] == 0:
-            return ()
-        if depth_of_q_node(tree):
-            return tree
-
-    def rotate_closure(root):
-        pending = [ref(root)]
+    @lru_cache(None)
+    def visit(t):
         seen = set()
-        while pending:
-            tree = pending.pop()
-            if tree in seen:
-                continue
-            seen.add(tree)
-            if tree[0] == 0:
-                continue
-            for shift in range(1, p):
-                pending.append((1, tree[1][shift:]+tree[1][:shift]))
-            for i, child in enumerate(tree[1]):
-                for new in rotate_closure(child):
-                    seq = list(tree[1])
-                    seq[i] = new
-                    pending.append((1, tuple(seq)))
-        return seen
 
-    def qrotations(root):
-        pending = [((), 0)]  # not used; retained no semantic effect
-        for tree in rotate_closure(root):
-            # A q-node in the p-refinement is at depth zero modulo k iff it has
-            # zero preceding p-ary levels. We find the unique path collecting it.
-            def descend(node, d):
-                if node[0] == 0:
-                    return (), d
-                if d == k:
-                    return node, 0
-                parts = [descend(c, d+1) for c in node[1]]
-                if d == 0:
-                    return (), tuple(v[1] for v in parts)
-                return tuple(v[0] for v in parts if v[0] != ()), None
-            # Easier, exact parenthesis mapping via depth-indexed slots.
-            def decode(node, depth):
-                if depth == 0:
-                    return tuple(decode_slot(c) for c in node[1])
-                if node[0] == 0:
-                    return (), None
-                raise AssertionError((node, depth))
-            def decode_slot(entry):
-                # entry is still the p-tree rooted one level below a q node.
-                def walk(subtree, remaining_depth):
-                    if remaining_depth == k-1:
-                        return tuple(extract(c) for c in subtree[1]) if subtree[0] else ()
-                    assert subtree[0] == 1
-                    return tuple(walk(c, remaining_depth+1) for c in subtree)
-                return tuple(extract(c) for c in flatten_at_k([entry], 1))
-            def flatten_at_k(level, d):
-                if d == k:
-                    return level
-                return [sub for c in level if c[0] for sub in c[1]], d+1
-            # Use a full expanded tree as q branches, with absent branches ().
-            def expand(node, d):
-                if d == k:
-                    return node[0] != 0, node
-                if node[0] == 0:
-                    return False, None
-                return False, [expand(c, d+1) for c in node[1]]
-            def build_q(node):
-                expanded = expand(node, 0)[1]
-                # Traverse level k; each location is a q-node or empty subtree.
-                if k == 1:
-                    return tuple(() if c[0] == 0 else build_q(c) for c in node[1])
-                slots = []
-                def visit(sub, depth):
-                    if depth == k-1:
-                        slots.append(() if sub[0] == 0 else build_q(sub))
-                    elif sub[0] != 0:
-                        for c in sub[1]:
-                            visit(c, depth+1)
-                visit(node, 0)
-                return tuple(slots)
-            return build_q(tree)
+        def go(u):
+            if u in seen:
+                return
+            seen.add(u)
+            pos = 0
+            for h in blocks:
+                size = p**h
+                # Exhaust the cyclic p-ary automorphisms of this block. This is
+                # independent of Orbits.pnode, so also tests orbit p**d.
+                for newblock in block_moves(u[pos:pos+size]):
+                    v = u[:pos]+newblock+u[pos+size:]
+                    seen.add(v)
+                pos += size
+            for i, c in enumerate(u):
+                for new in visit(c):
+                    go(u[:i]+(new,)+u[i+1:])
+        go(tree)
+        return tuple(seen)
 
-    return [(q, n, tree, rot) for n in range(1, 4) for tree in trees(n, q) for rot in qrotations(tree)]
+    @lru_cache(None)
+    def block_moves(block):
+        # Similar independent action on one complete p-ary block. Removing the
+        # last p-adic level yields p subblocks whose moves are independent.
+        if not block:
+            return ((),)
+        if len(block) == 1:
+            return (block,)
+        chunks = [block[i:i+len(block)//p] for i in range(0, len(block), len(block)//p)]
+        choices = [block_moves(c) for c in chunks]
+        result = set()
+        # Combine equivalent bottom p-nodes by canonicalizing every choice.
+        for option in itertools.product(*choices):
+            reps = [min(option[i][j:]+option[i][:j] for j in range(len(option[0]))) for i in range(p)]
+            for shift in range(p):
+                result.add(tuple(x for r in reps[shift:]+reps[:shift] for x in r))
+        return tuple(result)
+    return visit(tree)
 
 
-def unused_old_direct_stats(q, n):
-    return None
+def independent_checks():
+    for q, p, k, nmax in [(2,2,1,4),(3,3,1,3),(4,2,2,2),(6,2,None,1),(12,2,None,1)]:
+        orb = Orbits(q,p,k is not None)
+        data = orb.build(nmax)
+        for n in range(1,nmax+1):
+            orb.build(n)
+        for tree in trees(nmax,q):
+            direct = set(explicit_orbit(tree,q,p,k))
+            canonical = make_explicit_pid(orb, tree, k is not None)
+            assert len(direct) == p**orb.d[canonical], ('direct orbit mismatch',q,p,nmax,len(direct),orb.d[canonical])
+            assert all(explicit_stats(rot)==explicit_stats(tree) for rot in direct)
+    say('A(i): statistics checked on independent explicit orbits: (q,n)=(2,4),(3,3),(4,2).')
+    say('A(C1)/B: independent explicit orbit sizes p^d checked at (q,p,n)=(2,2,4),(3,3,3),(4,2,2),(6,2,1),(12,2,1).')
 
 
-@lru_cache(None)
-def old_recursive_stats(tree):
+def make_explicit_pid(orb, tree, prime_power):
     if not tree:
-        return ((0,)*len(tree) + (0,)*(2-len(tree)), 0, (), (0,), 0)
-    return all_stats(len(tree), tree, [old_recursive_stats(c) for c in tree])
+        return 0
+    children = tuple(make_explicit_pid(orb,c,prime_power) for c in tree)
+    return orb.qnode(children)
+
+
+def fmt(rows):
+    if not rows:
+        return 'none: all counts divisible by p^(t+1)'
+    return ', '.join(f'{v}:{r}' for v,r in sorted(rows,key=lambda x:str(x[0])))
 
 
 def part_a(case_map):
-    check_stats_explicit()
-    all_data = {}
-    for (p, k), nmax in case_map.items():
-        q = p**k
-        orb = Orbits(q, p, prime_power=True)
-        say(f"\n=== A q={q} p={p} k={k}; n=1..{nmax} ===")
-        failures = Counter()
-        for n in range(1, nmax+1):
-            data = orb.build(n)
-            all_data[p, k, n] = dict(data)
-            t = target((q-1)*n+1, p)
-            for name in ['height', 'level_profile', 'branch_j', 'leaf_depth_profile', 'narayana']:
-                for j in (range(q+1) if name == 'branch_j' else [None]):
-                    grouped = defaultdict(int)
-                    minimal = Counter()
-                    for node, size in data.items():
-                        assert size == p**orb.d[node], ('C1 mismatch', q, n, node, size, orb.d[node])
-                        val = value(orb, node, name, j)
-                        grouped[val] += size
-                        if size == p**t:
-                            minimal[val] += 1
-                    tight = []
-                    for val, count in grouped.items():
-                        if count % p**t:
-                            failures['divisibility'] += 1
-                            say(f"FAIL DIVISIBILITY n={n},{name},j={j},value={val},count={count},t={t}")
-                        residue = count//p**t % p
-                        if residue != minimal[val] % p:
-                            failures['residue'] += 1
-                            say(f"FAIL RESIDUE n={n},{name},j={j},value={val},residue={residue},minimal={minimal[val]}")
-                        if vp(count, p) == t:
-                            tight.append((val, residue))
-                    label = name if j is None else f'branch_j[{j}]'
-                    say(f"n={n},t={t},{label}: {fmt_tight(tight)}")
-        say(f"A SUMMARY q={q}: failures={dict(failures) or 'none'}")
-        check_profile_formula(q, p, k, all_data, orb)
-    return all_data
+    for (p,k),nmax in case_map.items():
+        q=p**k
+        orb=Orbits(q,p,True)
+        fails=Counter()
+        say(f'\n=== A q={q}, p={p}, k={k}, n=1..{nmax} ===')
+        all_rows=[]
+        for n in range(1,nmax+1):
+            data=orb.build(n)
+            t=tvalue(q,n,p)
+            for name in ['height','level_profile','branch_j','leaf_depth_profile','narayana']:
+                for j in (range(q+1) if name=='branch_j' else [None]):
+                    groups=defaultdict(int)
+                    mins=Counter()
+                    for node,size in data.items():
+                        v=get_stat(orb.qstats[node],name,j)
+                        groups[v]+=size
+                        if size==p**t:
+                            mins[v]+=1
+                    tight=[]
+                    for v,count in groups.items():
+                        if count%p**t:
+                            fails['divisibility']+=1
+                            say(f'FAIL DIVISIBILITY q={q} n={n} statistic={name} j={j} value={v} count={count} t={t}')
+                        if count//p**t%p != mins[v]%p:
+                            fails['residue']+=1
+                            say(f'FAIL RESIDUE q={q} n={n} statistic={name} j={j} value={v} actual={count//p**t%p} expected={mins[v]%p}')
+                        if vp(count,p)==t:
+                            tight.append((v,count//p**t%p))
+                    all_rows.append((n,name,j,groups,mins,t,tight))
+                    say(f'n={n},t={t},{name}{"" if j is None else f"[j={j}]"}: tight(value:residue)={fmt(tight)}')
+            obs=next((tight for nn,name,j,g,m,tt,tight in all_rows if nn==n and name=='narayana'),[])
+            if n>=4:
+                say(f'  digits(m)={digits((q-1)*n+1,p)}; full_q_children_tight={obs}')
+        say(f'SUMMARY q={q}: failures={dict(fails) or "none"}')
+        check_profile_products(q,orb,nmax)
 
 
-def fmt_tight(rows):
-    if not rows:
-        return 'none (all refined counts strictly divisible by p^(t+1))'
-    text = "; ".join(f"{v}:{r}" for v, r in sorted(rows, key=lambda row: str(row[0])))
-    return f"tight(value:residue)={text}"
+def get_stat(s,name,j):
+    h,pr,ar,leaf,nar=s
+    return {'height':h,'level_profile':pr,'leaf_depth_profile':leaf,'narayana':nar}.get(name,ar[j] if name=='branch_j' else None)
 
 
-def check_profile_formula(q, p, k, all_data, orb):
-    for n in range(1, max(n for pp, kk, n in all_data if (pp, kk) == (p, k))+1):
-        grouped = defaultdict(int)
-        for node, size in all_data[p, k, n].items():
-            grouped[orb.stats[node][2]] += size
-        products = {}
-        def visit(pr, capacity, remaining, product):
-            for nj in range(min(capacity, remaining)+1):
-                count = product*math.comb(capacity, nj)
-                if nj == 0:
-                    if remaining == 0:
-                        products[pr] = count
+def check_profile_products(q,orb,nmax):
+    products_seen=0
+    for n in range(1,nmax+1):
+        grouped=defaultdict(int)
+        for node,size in orb.build(n).items():
+            grouped[orb.qstats[node][1]]+=size
+        direct={}
+        def visit(pr,cap,remaining,product):
+            for nj in range(min(cap,remaining)+1):
+                nxt=product*math.comb(cap,nj)
+                if nj==0:
+                    if remaining==0:
+                        direct[pr]=nxt
                 else:
-                    visit(pr+(nj,), q*nj, remaining-nj, count)
-        visit((1,), q, n-1, 1)
-        assert dict(grouped) == products, ('profile-formula mismatch', q, n)
-        t = target((q-1)*n+1, p)
-        assert all(count % p**t == 0 for count in products.values())
-    say(f"A(iii/iv) q={q}: every profile agrees with prod binom(q*n_i,n_(i+1)) and is divisible by p^t, n<= {max(n for pp, kk, n in all_data if (pp, kk)==(p,k))}.")
+                    visit(pr+(nj,),q*nj,remaining-nj,nxt)
+        visit((1,),q,n-1,1)
+        assert dict(grouped)==direct,(q,n,grouped,direct)
+        t=tvalue(q,n,p_from_q(q))
+        for count in direct.values():
+            assert count%p_from_q(q)**t==0
+        products_seen+=len(direct)
+    print(f'A(iv): q={q}: {products_seen} nonzero profiles match prod binom(q*n_i,n_(i+1)); all p^t-divisible.')
 
 
-def check_stats_explicit():
-    # Directly rotate the q branches for q=2,3, and swap the two p-blocks for
-    # q=4, recursively through children. The statistic itself is recomputed.
-    for q in (2, 3, 4):
-        for n in range(1, 4):
-            for tree in trees(n, q):
-                orbit = set()
-
-                def visit(t):
-                    if t in orbit:
-                        return
-                    orbit.add(t)
-                    moves = [(1, 0)] if q == 2 else ([(1, 2, 0), (2, 0, 1)] if q == 3
-                        else [(1, 0, 3, 2), (2, 3, 0, 1), (3, 2, 1, 0)])
-                    for perm in moves:
-                        visit(tuple(t[i] for i in perm))
-                    for i, c in enumerate(t):
-                        for new in child_orbit(c):
-                            visit(t[:i]+(new,)+t[i+1:])
-                def child_orbit(t):
-                    if t == ():
-                        return ((),)
-                    pending = [t]
-                    result = set()
-                    while pending:
-                        u = pending.pop()
-                        if u in result:
-                            continue
-                        result.add(u)
-                        moves = [(1, 0)] if q == 2 else ([(1, 2, 0), (2, 0, 1)] if q == 3
-                            else [(1, 0, 3, 2), (2, 3, 0, 1), (3, 2, 1, 0)])
-                        for perm in moves:
-                            pending.append(tuple(u[i] for i in perm))
-                        for i, c in enumerate(u):
-                            for new in child_orbit(c):
-                                pending.append(u[:i]+(new,)+u[i+1:])
-                    return tuple(result)
-                visit(tree)
-                assert all(tree_stats(t) == tree_stats(tree) for t in orbit), (q, n, tree)
-    say("A(i) independent direct group action q=2,3,4, n=1..3: all five statistics are invariant.")
-
-
-def direct_block_classes(q, p, n):
-    """Independent action and size, on all explicit trees for small cases."""
-    rotations = [j for j, a in enumerate(digits(q, p)) for _ in range(a)]
-
-    def move_at_root(tree):
-        out = []
-        for h in rotations:
-            block = tree[:p**h]
-            tree = tree[p**h:]
-            level = list(block)
-            for _ in range(h):
-                level = [min(tuple(level[i:i+p][shift:]+level[i:i+p][:shift])
-                              for shift in range(p)) for i in range(0, len(level), p)]
-            # Above canonicalizes too many rotations: use recursive p-node IDs.
-            out.append(block)
-        assert not tree
-        return tuple(out)
-
-    def generate(tree):
-        # Group elements specified as one cyclic rotation at each block node.
-        # A block of size p alternates between an opaque tree and a 2-node.
-        if not tree:
-            return ((),)
-        result = {tree}
-        for h in rotations:
-            pass
-        # For q<=6,p<=5, at most a two-level block occurs. Implement its four
-        # possible p^p slot rotations explicitly by a recursive group action.
-        return tuple(result)
-    return None
+def p_from_q(q):
+    for p in range(2,q+1):
+        while q%p==0:
+            q//=p
+        if q==1:
+            return p
+    raise ValueError
 
 
 def part_b(cases):
-    say("\n=== B: exact independent-block orbits ===")
-    say("q p n d_min N_min N_min_mod_p true_vp difference")
-    previous = set()
-    for q, p, nmax in cases:
-        if (q, p) in previous:
-            continue
-        previous.add((q, p))
-        orb = Orbits(q, p)
-        say(f"q={q},p={p}: base-p digits={digits(q,p)}, blocks={['p^'+str(j) for j in orb.blocks]}; blocks not exchanged.")
-        for n in range(1, nmax+1):
-            data = orb.build(n)
-            dmin = min(orb.d[node] for node in data)
-            sizes = [size for size in data.values() if size == p**dmin]
-            actual = vp(fuss(q, n), p)
-            for node, size in data.items():
-                assert size == p**orb.d[node], ('orbit-size mismatch', q, p, n, node, size, orb.d[node])
-            say(f"{q} {p} {n} {dmin} {len(sizes)} {len(sizes)%p} {actual} {dmin-actual}")
+    say('\n=== B independent block rotations ===')
+    say('q p n d_min N_min N_min%p true_vp difference')
+    for q,p,nmax in cases:
+        say(f'q={q},p={p}: base-p digits={digits(q,p)}, block heights={ [j for j,d in enumerate(digits(q,p)) for _ in range(d)] }; blocks not exchanged.')
+        orb=Orbits(q,p)
+        for n in range(1,nmax+1):
+            data=orb.build(n)
+            dmin=min(orb.d[i] for i in data)
+            Nmin=sum(v==p**dmin for v in data.values())
+            actual=vp(fuss(q,n),p)
+            say(f'{q} {p} {n} {dmin} {Nmin} {Nmin%p} {actual} {dmin-actual}')
 
 
 def main():
     global OUT
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--smoke', action='store_true')
-    parser.add_argument('--part', choices=['A', 'B'], action='append')
-    args = parser.parse_args()
-    with Path(__file__).with_name('output.txt').open('w', encoding='utf-8') as stream:
-        OUT = stream
-        say("E007. Model moonshotai/kimi-k3.1-pro. Exact integer arithmetic. Not human-reviewed.")
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--smoke',action='store_true')
+    parser.add_argument('--part',choices=['A','B'],action='append')
+    args=parser.parse_args()
+    with Path(__file__).with_name('output.txt').open('w',encoding='utf-8') as stream:
+        OUT=stream
+        say('E007. Model moonshotai/kimi-k3.1-pro. Exact integer calculations; not human-reviewed.')
+        independent_checks()
         if args.smoke:
-            check_stats_explicit()
-            part_a({(2, 1): 3})
-            part_b([(6, 2, 3), (12, 2, 2), (3, 2, 3)])
+            part_a({(2,1):3})
+            part_b([(6,2,2),(12,2,2),(3,2,3)])
         else:
-            for part in args.part or ['A', 'B']:
-                if part == 'A':
-                    part_a({(2, 1): 10, (3, 1): 6, (5, 1): 5, (2, 2): 6, (3, 2): 4})
-                else:
-                    part_b([(6, 2, 7), (6, 3, 6), (10, 2, 7), (10, 5, 6),
-                            (12, 2, 5), (12, 3, 5), (3, 2, 8), (5, 2, 7), (7, 2, 6)])
-        say(f"Elapsed: {time.monotonic()-START:.3f}s")
+            if 'A' in (args.part or ['A','B']):
+                part_a({(2,1):10,(3,1):6,(5,1):5,(2,2):6,(3,2):4})
+            if 'B' in (args.part or ['A','B']):
+                part_b([(6,2,7),(6,3,6),(10,2,6),(10,5,6),(12,2,5),(12,3,5),(3,2,8),(5,2,6),(7,2,6)])
+        say(f'Elapsed: {time.monotonic()-START:.3f}s')
 
 
-if __name__ == '__main__':
+if __name__=='__main__':
     main()

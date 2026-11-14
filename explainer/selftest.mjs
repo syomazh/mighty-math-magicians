@@ -32,7 +32,7 @@ vm.createContext(sandbox);
 vm.runInContext(logicSrc + `
   this.api = { digitsOf, digitSum, fussCatalan, vOf, tOfM, createOrbits,
                censusRows, minClassCount, makeLabelledCounter,
-               buildCarrySkeleton, carrySequence, carryDigits, CENSUS_CAP };
+               classVectorOf, carryClassVector, carryClassSequence, CENSUS_CAP };
 `, sandbox);
 const L = sandbox.api;
 
@@ -88,37 +88,48 @@ if (failures) {
   process.exit(1);
 }
 
-// 3. Carry animation invariant: after all t collapses one atom of exponent
-//    floor(log_p m) remains, and (-1)^t equals the product of signs.
-const cases = [
-  [2, 1, 6], [2, 1, 10], [3, 1, 8], [5, 1, 3], [2, 2, 4], [3, 2, 5], [2, 1, 11],
-];
-for (const [pp, kk, nn] of cases) {
-  const qq = pp ** kk;
-  const mm = BigInt(qq - 1) * BigInt(nn) + 1n;
-  const dg = L.digitsOf(mm, pp);
-  const exps = [];
-  dg.forEach((d, j) => { for (let i = 0; i < d; i++) exps.push(j); });
-  const root = L.buildCarrySkeleton(pp, kk, exps);
-  const frames = L.carrySequence(pp, kk, root);
+// 3. Reduced carry animation: exactly t class-vector carries leave one atom
+//    of class 0, and the running sign is (-1)^t.  Check every E000 row and
+//    some larger inputs; no skeleton-tree construction is claimed.
+const carryCases = [[null, null, null]];
+for (const line of lines) {
+  const mch = line.match(/^=== p=(\d+), k=(\d+), q=(\d+) ===$/);
+  if (mch) { p = Number(mch[1]); k = Number(mch[2]); q = Number(mch[3]); continue; }
+  const row = line.match(/^\s*(\d+)\s+(\d+)\s+/);
+  // E000 also has p-power summary rows that are not UI configurations.
+  if (row && [2, 3, 5].includes(p) && q === p ** k) carryCases.push([p, k, BigInt(row[2])]);
+}
+for (const pp of [2, 3, 5]) {
+  for (const kk of [1, 2]) {
+    const qq = pp ** kk;
+    for (const nn of [1, 2, 17, 40, 100, 257]) {
+      carryCases.push([pp, kk, BigInt(qq - 1) * BigInt(nn) + 1n]);
+    }
+  }
+}
+for (const [pp, kk, mm] of carryCases.slice(1)) {
   const t = L.tOfM(mm, pp);
+  const frames = L.carryClassSequence(mm, pp, kk);
   const last = frames[frames.length - 1];
-  const leaves = [];
-  (function walk(u) { if (u.leaf) leaves.push(u); else u.children.forEach(walk); })(last.tree);
+  const expected = new Array(kk).fill(0);
+  expected[0] = 1;
   const okSteps = frames.length - 1 === t;
-  const okLeaf = leaves.length === 1;
-  const okSign = last.sign === (t % 2 === 0 ? 1 : -1);
-  const dig = L.carryDigits(frames, mm, pp);
-  const startDigits = dig[0].digits;
-  const okStartDigits = startDigits.length === dg.length && startDigits.every((d, j) => d === dg[j]);
-  const finalDigits = dig[dig.length - 1].digits;
-  const okDigits = finalDigits.every((d, j) => d === (j === dg.length - 1 ? 1 : 0));
-  if (!(okSteps && okLeaf && okSign && okDigits && okStartDigits)) {
-    console.log(`FAIL carry p=${pp} k=${kk} n=${nn}: steps=${frames.length - 1} (t=${t}) ` +
-      `leaves=${leaves.length} sign=${last.sign} digits=${finalDigits} startDigits=${startDigits} expected=${dg}`);
+  const okStart = frames[0].a.every((v, c) => v === L.classVectorOf(mm, pp, kk)[c]);
+  const okFinal = last.a.every((v, c) => v === expected[c]);
+  const okSign = frames.every((fr, i) => fr.sign === (i % 2 === 0 ? 1 : -1));
+  const okMoves = frames.every((fr, i) => {
+    if (i === 0) return fr.move === null;
+    return fr.move.to === (fr.move.from + 1) % kk &&
+      fr.a[fr.move.from] === frames[i - 1].a[fr.move.from] - pp + (fr.move.to === fr.move.from ? 1 : 0) &&
+      fr.a[fr.move.to] === frames[i - 1].a[fr.move.to] + (fr.move.to === fr.move.from ? 1 - pp : 1);
+  });
+  const exhausted = L.carryClassVector(last.a, pp, kk) === null;
+  if (!(okSteps && okStart && okFinal && okSign && okMoves && exhausted)) {
+    console.log(`FAIL class carry p=${pp} k=${kk} m=${mm}: ` +
+      JSON.stringify({ okSteps, okStart, okFinal, okSign, okMoves, exhausted, last }));
     failures++;
   }
 }
 if (failures) process.exit(1);
-console.log('OK  carry/cherry animation invariants');
+console.log(`OK  ${carryCases.length - 1} class-vector carry sequences`);
 console.log('ALL SELFTESTS PASSED');

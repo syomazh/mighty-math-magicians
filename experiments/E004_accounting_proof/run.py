@@ -58,24 +58,54 @@ def canonical(tree):
     if tree[0] == "L":
         return tree
     children = tuple(canonical(ch) for ch in tree[1])
-    return ("N", min(children[i:]+children[:i] for i in range(len(children))))
+    # A quotient object, not a lex-min ordered representative.  The latter is
+    # not in general invariant under rotations at a parent node (p=3 is the
+    # first counterexample found by this run).
+    return ("N", frozenset(children[i:]+children[:i] for i in range(len(children))))
+
+
+def cyclic_nodes(tree):
+    """Each internal node once, represented by any one of its rotations.
+
+    A root's child entry is its set of rotations, so process the root first;
+    a non-root node arrives as an ordered representative and is processed by
+    its parent's loop.
+    """
+    if tree[0] == "N" and isinstance(tree[1], frozenset):
+        for rotations in tree[1]:
+            node = next(iter(rotations))
+            yield node
+            yield from cyclic_nodes(node)
+    else:
+        yield tree
+        yield from cyclic_nodes(("N", tree[1]))
 
 
 def leaves(tree):
     if tree[0] == "L":
         return (tree[1],)
-    return sum((leaves(ch) for ch in tree[1]), ())
+    return sum((leaves(ch) for ch in next(iter(tree[1]))[1]), ())
 
 
 def node_count(tree):
-    return 0 if tree[0] == "L" else 1 + sum(map(node_count, tree[1]))
+    return sum(1 for _ in cyclic_nodes(tree))
 
 
 def ordered_orbit(tree):
+    """All ordered representatives of a cyclic quotient tree.
+
+    Never pass an ordered tree here: its children are ordered tuples, whereas
+    this routine deliberately iterates the cyclic rotations stored in a node.
+    """
     if tree[0] == "L":
         return [tree]
-    possibilities = [ordered_orbit(ch) for ch in tree[1]]
-    return [("N", children) for children in itertools.product(*possibilities)]
+    child_options = []
+    for rotations in tree[1]:
+        child_options.append([x for rotation in rotations
+                              for x in ordered_orbit(rotation)])
+    return [("N", children[i:]+children[:i])
+            for children in itertools.product(*child_options)
+            for i in range(len(children))]
 
 
 def rotate_tree(tree):
@@ -141,14 +171,11 @@ def trees_with_classes(labels, classes, p, k):
 def cherry_collapse(tree, selected):
     selected = set(selected)
     hits = []
-    def visit(tr):
-        if tr[0] == "N" and all(ch[0] == "L" for ch in tr[1]):
-            if {ch[1] for ch in tr[1]} == selected:
-                hits.append(tr)
-        if tr[0] == "N":
-            for ch in tr[1]:
-                visit(ch)
-    visit(tree)
+    for rotations in tree[1]:
+        for rotation in rotations:
+            if all(ch[0] == "L" for ch in rotation[1]):
+                if {ch[1] for ch in rotation[1]} == selected:
+                    hits.append(rotation)
     if len(hits) != 1:
         return None
     target = hits[0]
@@ -184,10 +211,8 @@ class Checks:
 
 
 def symmetric_nodes(tree):
-    if tree[0] == "L":
-        return 0
-    sets = [frozenset(leaves(ch)) for ch in tree[1]]
-    return (len(set(sets)) == 1) + sum(symmetric_nodes(ch) for ch in tree[1])
+    return sum(1 for node in cyclic_nodes(tree)
+               if len({frozenset(leaves(ch)) for ch in node[1]}) == 1) + sum(symmetric_nodes(ch) for ch in tree[1])
 
 
 def test_L1_L2(C):
@@ -207,6 +232,7 @@ def test_L1_L2(C):
                     break
                 feasible.append((n, m, count))
             for n, m, expected in feasible:
+                print(f"  constructing p={p}, k={k}, n={n}, m={m} ...", flush=True)
                 start = time.perf_counter()
                 trees = trees_with_classes(tuple(range(1, m+1)), (0,)*m, p, k)
                 classes = len(trees)
@@ -221,13 +247,6 @@ def test_L1_L2(C):
                     sizes[len(orbit)] += 1
                     total += len(orbit)
                     C.check(symmetric_nodes(tr) == 0, f"p={p},k={k},m={m}: a symmetric labelled node exists: {tr}")
-                    orbit = ordered_orbit(tr)
-                    C.check(len(orbit) == len(set(orbit)) and
-                            all(canonical(o) == tr for o in orbit),
-                            f"orbit representatives p={p},k={k},m={m}: {tr}")
-                    C.check(len(orbit) == p**N(m,p), f"p={p},k={k},m={m}: orbit size {len(orbit)} != {p**N(m,p)}; tree={tr}")
-                    sizes[len(orbit)] += 1
-                    total += len(orbit)
                 C.check(total == expected == math.factorial(m)*fuss(p,k,n), f"L1 total p={p},k={k},m={m}: constructed {total}, factorial*Fuss-Catalan {expected}")
                 C.check(classes*p**N(m,p) == expected, f"L1 class equation p={p},k={k},m={m}: classes={classes}, N={N(m,p)}, ordered={expected}")
                 C.check(classes % p == (-1)**N(m,p) % p, f"L2 residue p={p},k={k},m={m}: L={classes}, residue={classes%p}, expected={(-1)**N(m,p)%p}")
@@ -286,13 +305,16 @@ def complete_trees(labels, p, height):
 
 @lru_cache(maxsize=None)
 def digit_forests(m, p):
-    return forest_from_counts((m,), tuple(digits(m,p)), p)
+    return forest_from_counts(tuple(range(1,m+1)), tuple(digits(m,p)), p)
 
 
 @lru_cache(maxsize=None)
 def forest_from_counts(labels, counts, p):
     if not labels:
-        return ()
+        return ((),)  # one empty forest, not an empty set of forests
+    if len(labels) == 1:
+        return ((leaf(labels[0]),),) if counts == (1,) else ()
+
     if sum(c*p**j for j,c in enumerate(counts)) != len(labels):
         return ()
     choices = [j for j,c in enumerate(counts) if c]
@@ -480,6 +502,22 @@ def expected_ring_state(p,k,m):
 
 
 def test_sand(C):
+    C.begin("IDEA 2: local diamond, including ring wraparound")
+    for p in (2,3,5):
+        for k in (0,1,2,3):
+            ring = k > 0
+            length = k if ring else 4
+            for state in itertools.product(range(p+1),repeat=length):
+                def fire(x,i):
+                    y=list(x)
+                    y[i]-=p
+                    y[(i+1)%length if ring else i+1]+=1
+                    return tuple(y)
+                for i,j in itertools.product(range(length),repeat=2):
+                    if i != j and state[i]>=p and state[j]>=p:
+                        first,second = fire(fire(state,i),j),fire(fire(state,j),i)
+                        C.check(first == second, f"diamond p={p},k={k},state={state},sites={i},{j}: {first} != {second}")
+            C.note(f"p={p}, ring length={k}: all sites 0..{p}, all legal distinct pairs commute")
     C.begin("IDEA 2: line and half-line; base-p digits, toppling counts, random orders")
     for p in (2,3,5):
         rng = random.Random(20261113+p)

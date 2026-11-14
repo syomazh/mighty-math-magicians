@@ -23,3 +23,14 @@
 | 20261113-224740 | W009_fulltext_overlap | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261113-224740_W009_fulltext_overlap |
 | 20261113-223908 | W006_review_mistral | mistralai/mistral-large-4-0 | 0 (attempts: 2) | logs/delegations/20261113-223908_W006_review_mistral |
 | 20261113-231914 | W018_blind_muse | meta/muse-spark-open | 0 (attempts: 1) | logs/delegations/20261113-231914_W018_blind_muse |
+| 20261113-231814 | W015_frobenius_proof | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261113-231814_W015_frobenius_proof |
+| 20261113-231850 | W018_blind_kimi | (see meta) | STOPPED to save budget | logs/delegations/20261113-231850_W018_blind_kimi |
+| 20261113-231902 | W018_blind_mistral | (see meta) | STOPPED to save budget | logs/delegations/20261113-231902_W018_blind_mistral |
+| 20261113-231838 | W017_refinements | (see meta) | STOPPED to save budget | logs/delegations/20261113-231838_W017_refinements |
+| 20261113-224840 | W013_cross_field | (see meta) | STOPPED to save budget | logs/delegations/20261113-224840_W013_cross_field |
+| 20261113-231825 | W016_crossfield_verify | (see meta) | STOPPED to save budget | logs/delegations/20261113-231825_W016_crossfield_verify |
+| 20261113-232253 | W005c_explainer | (see meta) | STOPPED to save budget | logs/delegations/20261113-232253_W005c_explainer |
+| 20261113-224825 | W012_stress_test | (see meta) | STOPPED to save budget | logs/delegations/20261113-224825_W012_stress_test |
+| 20261113-224755 | W010_slides | (see meta) | STOPPED to save budget | logs/delegations/20261113-224755_W010_slides |
+| 20261113-223918 | W003b_extensions_resume | (see meta) | STOPPED to save budget | logs/delegations/20261113-223918_W003b_extensions_resume |
+| 20261113-232243 | W011b_qa_study_guide | (see meta) | STOPPED to save budget | logs/delegations/20261113-232243_W011b_qa_study_guide |

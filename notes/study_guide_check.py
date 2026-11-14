@@ -145,113 +145,108 @@ def carries(terms, p):
     return sum(result), log
 
 
-@lru_cache(None)
-def quartic_trees(n):
-    """Quartic ordered trees, represented by 4-tuples with () as an empty child."""
-    if n == 0:
-        return (LEAF,)
-    result = []
+class QOrbits:
+    """Rotation orbits of q-ary trees (q = p^k), with exact orbit sizes.
 
-    def fill(left, prefix):
-        if len(prefix) == 3:
-            result.extend(prefix + (child,) for child in quartic_trees(left))
-        else:
-            for used in range(left + 1):
-                for child in quartic_trees(used):
-                    fill(left - used, prefix + (child,))
-
-    fill(n - 1, ())
-    return tuple(result)
-
-
-def quartic_to_binary(tree):
-    return tuple((quartic_to_binary(child), quartic_to_binary(child)) if child else LEAF for child in tree)
-
-
-def quartic_binary_classes(n):
-    result = {}
-    for tree in quartic_trees(n):
-        orbit = rotation_class(quartic_to_binary(tree), 2)
-        result.setdefault(min(map(repr, orbit)), set()).update(orbit)
-    return sorted(map(len, result.values()))
-
-
-@lru_cache(None)
-def labelled_cyclic_trees(p, label_classes):
-    """Count labelled cyclic p-ary trees satisfying every depth condition.
-
-    label_classes is a tuple in Z/k, one entry per distinct leaf. A leaf of
-    class c must occur at depth -c modulo k. A cyclic tree is an ordered
-    p-ary tree modulo independent rotations at every node. With distinct
-    labels no nontrivial root rotation fixes a tree, so the number of cyclic
-    trees equals the number of ordered trees divided by p.
+    Same algorithm as E000: an orbit is represented by an integer id, the id
+    of a p-node is the cyclic minimum of its child-id word, and d is computed
+    bottom-up. Enumerating orbits (not trees) keeps q=4, n=4 (969 trees in
+    11 orbits) well under a second.
     """
-    number_labels = len(label_classes)
-    k = max(label_classes) + 1
-    if number_labels == 1:
-        return int(label_classes[0] == 0)
-    assert (number_labels - 1) % (p - 1) == 0
 
-    @lru_cache(None)
-    def ordered(counts, residue):
-        # counts is a sorted tuple of multiplicities per class index, class
-        # order fixed as 0..k-1 internally via the full tuple. residue is the
-        # allowed leaf depth modulo k at this subtree root.
-        full_counts = counts  # tuple of length k, counts[c] >= 0
-        total_labels = sum(full_counts)
-        if total_labels == 0:
-            return 0
-        if total_labels == 1:
-            return int(full_counts[residue] == 1)
-        # Partition the multiset into p ordered non-empty slots; each slot
-        # becomes an independent ordered subtree at residue-1 mod k.
-        # Recursively enumerate slot multisets via bounded compositions.
-        index = [(c, i) for c in range(k) for i in range(full_counts[c])]
-        # Enumerate assignments of distinct items to ordered slots with
-        # per-class symmetry removed by dividing at the end is expensive;
-        # instead enumerate per-class distributions (compositions) and use
-        # independent ordered counts per slot.
+    def __init__(self, p, k):
+        self.p, self.k, self.q = p, k, p ** k
+        self.intern = {}
+        self.d = [0]                 # id 0 = single leaf, d = 0
+        self.by_n = {0: {0: 1}}      # n -> {orbit id: number of trees in that orbit}
 
-        # For each class c, distribute its full_counts[c] identical items into
-        # p ordered non-negative parts. The slots' combined count tuples are
-        # formed class by class. Weight each split by the product of slot
-        # counts (no multinomial factor: items of one class are identical).
-        total = 0
-        slots = [[0] * k for _ in range(p)]
+    def pnode(self, kids):
+        p = self.p
+        key = min(kids[i:] + kids[:i] for i in range(p))
+        i = self.intern.get(key)
+        if i is None:
+            i = len(self.d)
+            self.intern[key] = i
+            asym = 0 if len(set(key)) == 1 else 1
+            self.d.append(sum(self.d[c] for c in key) + asym)
+        return i
 
-        def distribute(c):
-            nonlocal total
-            if c == k:
-                if all(sum(slot) > 0 for slot in slots):
-                    product = 1
-                    for slot in slots:
-                        product *= ordered(tuple(slot), (residue - 1) % k)
-                        if product == 0:
-                            break
-                    total += product
-                return
-            remaining = full_counts[c]
+    def qnode(self, kids):
+        level = list(kids)
+        for _ in range(self.k):
+            level = [self.pnode(tuple(level[i:i + self.p])) for i in range(0, len(level), self.p)]
+        return level[0]
 
-            def compositions(slot, left):
-                if slot == p - 1:
-                    slots[slot][c] = left
-                    distribute(c + 1)
-                    slots[slot][c] = 0
-                    return
-                for value in range(left + 1):
-                    slots[slot][c] = value
-                    compositions(slot + 1, left - value)
-                slots[slot][c] = 0
+    def build(self, n):
+        if n in self.by_n:
+            return self.by_n[n]
+        for j in range(n):
+            self.build(j)
+        res = {}
+        for comp in weak_compositions(n - 1, self.q):
+            lists = [list(self.by_n[c].items()) for c in comp]
+            for combo in itertools.product(*lists):
+                cnt = 1
+                for _, c in combo:
+                    cnt *= c
+                node = self.qnode(tuple(i for i, _ in combo))
+                res[node] = res.get(node, 0) + cnt
+        self.by_n[n] = res
+        return res
 
-            compositions(0, remaining)
 
-        distribute(0)
-        return total
+def _labelled_counter(p, k):
+    """T(a) for labelled cyclic p-ary trees, from E000 (experiments/E000).
 
-    full_counts = tuple(label_classes.count(c) for c in range(k))
-    ordered_count = ordered(full_counts, 0)
-    assert ordered_count % p == 0
-    return ordered_count // p
+    W(delta, a) = T(delta, a) / prod_c a_c!, where T(delta, a) counts cyclic
+    p-ary trees (rotation at every node) with distinctly labelled leaves,
+    a_c labels of class c, the root at depth delta (mod k), and every
+    class-c leaf at depth == -c (mod k). The 1/p factor at each node divides
+    out the cyclic orderings. Only the small states of exercise 9 are used
+    (at most 5 labels, p <= 3), so this finishes in milliseconds.
+    """
+    import itertools
+    from fractions import Fraction
+
+    @lru_cache(maxsize=None)
+    def W(delta, a):
+        s = sum(a)
+        if s == 1:
+            c = a.index(1)
+            return Fraction(1) if (c + delta) % k == 0 else Fraction(0)
+        return conv(p, (delta + 1) % k, a) / p
+
+    @lru_cache(maxsize=None)
+    def conv(r, delta, a):
+        s = sum(a)
+        if s < r:
+            return Fraction(0)
+        if r == 1:
+            return W(delta, a)
+        tot = Fraction(0)
+        for b in itertools.product(*[range(x + 1) for x in a]):
+            sb = sum(b)
+            if sb == 0 or s - sb < r - 1:
+                continue
+            wb = W(delta, b)
+            if wb == 0:
+                continue
+            tot += wb * conv(r - 1, delta, tuple(x - y for x, y in zip(a, b)))
+        return tot
+
+    def T(a):
+        val = W(0, a) * factorial_prod(a)
+        assert val.denominator == 1, ("non-integer labelled count", a, val)
+        return val.numerator
+
+    return T
+
+
+def factorial_prod(a):
+    result = 1
+    for x in a:
+        result *= factorial(x)
+    return result
 
 
 def integer_power(base, exponent):
@@ -373,28 +368,40 @@ def main():
         assert count == digit_count
 
     print("\nEXERCISE 9: hand carry/cherry reductions")
+    # Exact T(a) values come from the E000 counter (verified there against
+    # brute-force orbit enumeration for q in {2,3,5,7,4,9,8}).
+    expected_chains = {
+        (2, (3,)): [3, 1, 1],
+        (3, (5,)): [40, 2, 1],
+        (2, (2, 1)): [1, 1, 1],
+    }
     for p, initial in ((2, (3,)), (3, (5,)), (2, (2, 1))):
-        classes = tuple(i for i, count in enumerate(initial) for _ in range(count))
-        assert labelled_cyclic_trees(p, classes) == ((3, 20, 2)[(2, 3, 2).index(p)] if False else { (2, (3,)): 3, (3, (5,)): 20, (2, (2, 1)): 2 }[p, initial])
+        k = len(initial)
+        T = _labelled_counter(p, k)
         current = initial
-        step = 0
+        chain = [T(current)]
         while True:
             c = next((i for i, x in enumerate(current) if x >= p), None)
             if c is None:
                 break
             old = current
-            old_labels = tuple(i for i, count in enumerate(old) for _ in range(count))
             values = list(old)
             values[c] -= p
-            values[(c + 1) % len(values)] += 1
+            values[(c + 1) % k] += 1
             current = tuple(values)
-            new_labels = tuple(i for i, count in enumerate(current) for _ in range(count))
-            before, after = labelled_cyclic_trees(p, old_labels), labelled_cyclic_trees(p, new_labels)
-            print(f"  p={p}: {old}, T={before} -> {current}, T={after}; fixed shy cherries={(p-1)*after}; ({p-1})*{after} mod {p}={((p-1)*after)%p}; {before}+{after} mod {p}={(before+after)%p}")
-            assert (before + after) % p == 0
-            step += 1
-        print(f"    terminal vector={current}, T={labelled_cyclic_trees(p, tuple(i for i,count in enumerate(current) for _ in range(count)))}, steps={step}, sign={(-1)**step}")
-        assert current == (1,) + (0,) * (len(current) - 1)
+            before, after = T(old), T(current)
+            assert (before + after) % p == 0, (p, old, before, current, after)
+            print(f"  p={p}: {old}, T={before} -> {current}, T={after}; "
+                  f"fixed points=(p-1)*T(new)={(p-1)*after}; "
+                  f"{before}+{after} mod {p}={(before+after)%p}")
+            chain.append(after)
+        terminal_T = T(current)
+        steps = len(chain) - 1
+        print(f"    terminal vector={current}, T={terminal_T}, steps={steps}, sign={(-1)**steps}, "
+              f"T(start) mod {p}={chain[0]%p}")
+        assert chain == expected_chains[p, initial], (p, initial, chain)
+        assert current == (1,) + (0,) * (k - 1)
+        assert chain[0] % p == (-1) ** steps % p
 
     print("\nEXERCISE 10: free equal-atom action in the three-leaf example")
     swapped, number_trees = print_exercise_10(2, (0, 0, 0))
