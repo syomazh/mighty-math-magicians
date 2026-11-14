@@ -515,19 +515,36 @@ generating function, and this note uses trees only to say what $\C$ counts (Sect
 At $y=0$ the system is linear: $F_\delta(x,0)=\br{\delta=0}x+F_{\delta+1}(x^p,0)$. Since
 $\C\equiv c_0\pmod p$, Lemma~\ref{lem:lead}(i) gives $G\equiv x+x^{q}+x^{q^2}+\cdots\pmod p$.
 For $k=1$ this is the statement that, modulo $p$, the equation $G-G^p=x$ is additive and is
-solved by $\sum_jx^{p^j}$. The variable $y$ measures the distance from this linear world:
-each use of the correction $\theta$ costs one factor $p$.
+solved by $\sum_jx^{p^j}$. This starting point is known: the relation
+$\Phi^p-\Phi+z\equiv0\pmod p$ for $\Phi=\sum_nz^{p^n}$, and its use for Fuss--Catalan
+generating functions, are in \cite{KKM} (for $p=2$) and \cite{KM}. The variable $y$ measures
+the distance from this linear world: each use of the correction $\theta$ costs one factor $p$.
+\end{remark}
+
+\begin{remark}[The language of $\delta$-rings]
+Put $\delta=-\theta$, so that $\varphi(f)=f^p+p\,\delta(f)$. This is the sign convention of
+\cite[Definition~2.1 and Remark~2.2]{BS}, where a ring with such an operator is called a
+$\delta$-ring and $\delta$ a $p$-derivation: on a ring without $p$-torsion, a lift $\varphi$
+of the Frobenius map and a $p$-derivation determine each other. (The rings of \cite{BS} are
+algebras over the integers localised at $p$; our formulas happen to have integer
+coefficients.) In these words the deformed equation is
+$F=x+\varphi(F)-y\,\delta(F)$, and the Fuss--Catalan equation is its value at $y=p$. We use
+nothing from the theory of $\delta$-rings; the remark only names the structure.
 \end{remark}
 
 \begin{remark}[Earlier algebraic work]
-Krattenthaler and M\"uller \cite{KM} determine Fuss--Catalan numbers modulo fixed powers of
+Kauers, Krattenthaler and M\"uller \cite{KKM} (for $p=2$) and Krattenthaler and M\"uller
+\cite{KM} (for all primes) determine Fuss--Catalan numbers modulo fixed powers of
 $p$ by writing the generating function as a polynomial in a basic series which, in our
 normalisation, is $\sum_ix^{q^i}=F_0(x,0)$. (This is how our reading notes describe their
 Section~7; see the file \texttt{overlap\_fulltext.md} in the folder \texttt{references}. We
 have not compared the arguments line by line.) What is different here is the extra variable $y$, the weight, and
 the carry-free product, which isolate the lowest power of $p$ for all $m$ at once and give
-its residue for every prime power $q$. We do not claim that this argument is new; that is for
-the experts on the team to judge.
+its residue for every prime power $q$. A keyword search of OpenAlex and arXiv on 14 November
+2026 found no proof of the valuation formula by a Frobenius lift, $\delta$-rings or Witt
+vectors; such a search cannot establish novelty. (The queries are listed in the repository,
+in the notes file \nolinkurl{2026-11-14_crossfield_literature.md}.) We do not claim that this argument is new; that is for the
+experts on the team to judge.
 \end{remark}
 
 \begin{remark}[What was checked by computer]
@@ -542,6 +559,17 @@ A computer check supports the statements; it does not replace reading the proofs
 \end{remark}
 
 \begin{thebibliography}{9}
+\bibitem{BS}
+Bhargav Bhatt and Peter Scholze, ``Prisms and prismatic cohomology'', \emph{Annals of
+Mathematics} \textbf{196} (2022), no.~3, 1135--1275. DOI:
+\href{https://doi.org/10.4007/annals.2022.196.3.5}{10.4007/annals.2022.196.3.5}.
+
+\bibitem{KKM}
+Manuel Kauers, Christian Krattenthaler and Thomas W.\ M\"uller, ``A method for determining
+the mod-$2^k$ behaviour of recursive sequences, with applications to subgroup counting'',
+\emph{The Electronic Journal of Combinatorics} \textbf{18} (2) (2012), Article P37. DOI:
+\href{https://doi.org/10.37236/2433}{10.37236/2433}.
+
 \bibitem{KM}
 Christian Krattenthaler and Thomas W.\ M\"uller, ``A method for determining the
 mod-$p^k$ behaviour of recursive sequences'', \emph{Aequationes Mathematicae} \textbf{99}

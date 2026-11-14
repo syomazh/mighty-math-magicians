@@ -84,11 +84,12 @@
     \begin{column}{0.47\textwidth}
       \textbf{Chemistry ($p=3$).}
       A carbon atom in a chain has three further bonds. They can be
-      \emph{rotated}, not reflected.\\[5pt]
-      Ternary trees up to rotation at every node\\
-      $=$ alkyl radicals $\mathrm{C}_n\mathrm{H}_{2n+1}$, counting stereoisomers:
+      \emph{rotated}, not reflected. So ternary trees up to rotation
+      $=$ alkyl radicals $\mathrm{C}_n\mathrm{H}_{2n+1}$ with stereoisomers:
       \[1,\ 1,\ 2,\ 5,\ 11,\ 28,\ 74,\ 199,\dots\]
-      {\footnotesize OEIS A000625}
+      {\footnotesize OEIS A000625.
+      \emph{tert}-Butyl, $\mathrm{C(CH_3)_3}$, is perfectly branched: $3^4$ rotations
+      fix it. And the number of ternary trees with $4$ nodes, $55$, is prime to $3$.}
     \end{column}
     \begin{column}{0.47\textwidth}
       \textbf{Biology ($p=2$).}
@@ -536,7 +537,7 @@
 
 % 19 -----------------------------------------------------------------
 \begin{frame}{What was known, and references}
-  \small
+  \footnotesize
   \begin{itemize}
     \item \textbf{$p=q=2$, exact valuation by orbits:} E.~Deutsch, B.~E.~Sagan,
       \emph{J.\ Number Theory} 117 (2006) 191--215. Weighted version: A.~Postnikov,
@@ -547,6 +548,10 @@
     \item \textbf{$p=2$, the minimal trees again, as most balanced evolutionary trees:}
       S.~J.~Kersting, M.~Fischer, \emph{Math.\ Biosci.} (2021),
       doi:10.1016/j.mbs.2021.108690. No mention of Catalan numbers.
+    \item \textbf{Generating functions modulo prime powers, via $\sum z^{p^n}$:}
+      M.~Kauers, C.~Krattenthaler, T.~W.~M\"uller, \emph{Electron.\ J.\ Combin.} 18(2)
+      (2012) P37; C.~Krattenthaler, T.~W.~M\"uller, \emph{Aequationes Math.} 99 (2025)
+      2505--2547. The starting point of our second, algebraic proof.
     \item \textbf{Counting trees up to a group at each node:} G.~P\'olya,
       \emph{Acta Math.} (1937). Sequences: OEIS A000625, A001190.
   \end{itemize}
