@@ -27,3 +27,6 @@ talk/build/
 
 # Lean build products and downloaded packages (several GB)
 lean/.lake/
+
+# Marks the orchestrator's working folder on the owner's machine; never committed (see AGENTS.md)
+.orchestrator
