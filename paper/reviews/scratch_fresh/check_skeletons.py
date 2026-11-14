@@ -102,7 +102,7 @@ def make_T(p, k):
             return 0
         tot = 0
         for sub in product(*[range(x + 1) for x in b]):
-            if sum(sub) == 0:
+            if sum(sub) == 0 or sum(b) - sum(sub) < parts - 1:
                 continue
             w = N(tuple(sub), delta)
             if w == 0:

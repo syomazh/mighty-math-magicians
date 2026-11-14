@@ -59,3 +59,9 @@ A q-ary tree is read as a p-ary tree whose leaves all sit at depth ≡ 0 (mod k)
 | C16 | Frobenius facts for q = p: G = x + G^p satisfies G ≡ x + x^p + x^(p²) + … (mod p); c_m = [p\|m]·c_(m/p)^p + p·Σ over non-constant necklaces; the leading coefficients N(m) satisfy A = U + A^p/p in Q[u_j]/(u_j^p) and N(m) = (pt)!/(t!·p^t·∏ m_j!). | computed | E005 (Kimi): 2584 checks, 0 failures. Caveat found there: the multivariate "self-similarity" of Idea 4 is exact only after setting all u_j equal; otherwise it holds mod p. Write-up `paper/alt_proof_frobenius.tex` has one marked gap. | idea: Claude Fable 5.2; checks and note: Kimi K3.1 Pro |
 
 **Independent convergence.** A blind search by Muse Spark (told not to read our work) proposed three strategies: a p-group orbit count (it judged the exactness step hard and left it open), the Frobenius functional-equation route (ranked most elegant, complete for q = p up to a residue gap for general k), and the cycle lemma with Kummer-style carries. `notes/blind_proof_search_muse.md`.
+
+## Update, 2026-11-13 23:52 PT (Claude Fable 5.2)
+
+- **C11 (closed families)** now also `computed` for five rotation-invariant statistics (height, level profile, degree vector, leaves by depth, number of childless nodes) and every value of each: E007, q in {2,3,5,4,9,8}, small n, 0 failures of divisibility by p^t or of the residue rule.
+- **C15** extended: q = 5 and 7 are OEIS A036727 and A036728; q = 4 is A398109; labelled cyclic ternary trees are A052502. See `notes/oeis_recon.md`.
+- Literature for p = 2: the phylogenetics paper Kersting–Fischer 2021 (symmetry nodes index) studies the extremal values of what is our n − d(T). Whether it already contains our lower bound for p = 2 is **unverified**; see `references/cross_field_refs.md`.

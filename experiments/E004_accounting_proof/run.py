@@ -286,10 +286,22 @@ def complete_trees(labels, p, height):
         assert len(labels) == 1
         return (leaf(labels[0]),)
     assert len(labels) == p**height
+    if height == 1:
+        return (canonical(("N", tuple(leaf(x) for x in labels))),)
+    childsize = p**(height-1)
+
+    def equal_partitions(block):
+        if not block:
+            yield ()
+            return
+        for extra in itertools.combinations(block[1:], childsize-1):
+            first = (block[0],)+extra
+            remainder = tuple(x for x in block if x not in first)
+            for rest in equal_partitions(remainder):
+                yield (first,)+rest
+
     result = set()
-    for partition in block_partitions(labels,p):
-        if any(len(block) != p**(height-1) for block in partition):
-            continue
+    for partition in equal_partitions(labels):
         options = [complete_trees(block,p,height-1) for block in partition]
         for children in itertools.product(*options):
             result.add(canonical(("N",children)))
@@ -391,9 +403,9 @@ def test_L3(C):
             C.check(len(objects) == K(a,p), f"K enumeration p={p},a={a}: actual={len(objects)}, formula={K(a,p)}")
             sigma = tuple((i+1) % p if i<p else i for i in range(p*a))
             def conjugate(pi):
-                return tuple(sigma[pi[sigma[x]]] for x in range(p*a))
+                return tuple(sigma[pi[sigma[-x-1]]] for x in range(p*a))
             fixed = [pi for pi in objects if conjugate(pi) == pi]
-            C.check(len(fixed) == K(a-1,p), f"K fixed action p={p},a={a}: fixed={len(fixed)}, K(a-1)={K(a-1,p)}")
+            C.check(len(fixed) == (p-1)*K(a-1,p), f"K fixed action p={p},a={a}: fixed={len(fixed)}, (p-1)K(a-1)={(p-1)*K(a-1,p)}")
             C.check(len(objects)%p == len(fixed)%p, f"K orbit congruence p={p},a={a}")
             C.note(f"p={p},a={a}: {p*a}-point permutations all of p-cycle type={len(objects)}, conjugation fixed={len(fixed)}")
         for a in range(0,31):
