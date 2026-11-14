@@ -1,0 +1,2 @@
+arity 4 (composite), up to 34 leaves: 40263 classes; violations of Facts 1-3 / Consequences 1-2: none; 'class size = p^d' (sum p^d = number of trees) holds for all m: False
+arity 6 (composite), up to 41 leaves: 4631 classes; violations of Facts 1-3 / Consequences 1-2: none; 'class size = p^d' (sum p^d = number of trees) holds for all m: False

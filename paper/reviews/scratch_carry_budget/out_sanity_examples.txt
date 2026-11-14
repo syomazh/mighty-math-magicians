@@ -1,0 +1,29 @@
+
+--- p = 2, up to 12 leaves, 850 classes ---
+2b. bullet 2 holds, bullet 1 fails: m = 4, d = 2, t = 0
+   tree (*(*(**)))
+3. d > t: m = 4, d = 2, t = 0
+   tree (*(*(**)))
+2a. bullet 1 holds, bullet 2 fails: m = 6, d = 2, t = 1
+   tree ((*(**))(*(**)))
+   (no example of type cols in this range)
+
+--- p = 3, up to 21 leaves, 2426 classes ---
+2b. bullet 2 holds, bullet 1 fails: m = 7, d = 2, t = 1
+   tree (**(**(***)))
+3. d > t: m = 7, d = 2, t = 1
+   tree (**(**(***)))
+1. columns-reading fails Fact 1: m = 15 (base 3: [1, 2, 0]), nu = 6, total amount carried = 6, carrying columns = 5
+   tree ((**(***))(**(***))(**(***)))
+2a. bullet 1 holds, bullet 2 fails: m = 15, d = 3, t = 1
+   tree ((**(***))(**(***))(**(***)))
+
+--- p = 5, up to 49 leaves, 495623 classes ---
+2b. bullet 2 holds, bullet 1 fails: m = 13, d = 2, t = 1
+   tree (****(****(*****)))
+3. d > t: m = 13, d = 2, t = 1
+   tree (****(****(*****)))
+1. columns-reading fails Fact 1: m = 21 (base 5: [4, 1]), nu = 4, total amount carried = 4, carrying columns = 3
+   tree (***(****(*****))(****(*****)))
+2a. bullet 1 holds, bullet 2 fails: m = 45, d = 5, t = 1
+   tree ((****(*****))(****(*****))(****(*****))(****(*****))(****(*****)))

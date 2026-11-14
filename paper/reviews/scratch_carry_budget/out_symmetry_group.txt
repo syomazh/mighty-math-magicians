@@ -1,0 +1,4 @@
+p = 2, up to 14 leaves: 4012 classes; group built explicitly for 4012 (|Aut| <= 2048), skipped 0; 22 of the built groups are Sylow; problems: 0
+p = 3, up to 21 leaves: 2426 classes; group built explicitly for 2426 (|Aut| <= 19683), skipped 0; 21 of the built groups are Sylow; problems: 0
+p = 5, up to 29 leaves: 544 classes; group built explicitly for 544 (|Aut| <= 15625), skipped 0; 10 of the built groups are Sylow; problems: 0
+p = 7, up to 25 leaves: 22 classes; group built explicitly for 22 (|Aut| <= 343), skipped 0; 11 of the built groups are Sylow; problems: 0

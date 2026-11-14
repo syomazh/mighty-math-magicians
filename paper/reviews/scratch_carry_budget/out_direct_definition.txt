@@ -1,0 +1,38 @@
+
+=== p = 2: every tree, literal definition, up to 11 leaves ===
+m=  1: trees=      1 classes(literal)=    1 classes(canonical)=    1 minimal trees=     1 violations=0 class checks=OK count match=OK
+m=  2: trees=      1 classes(literal)=    1 classes(canonical)=    1 minimal trees=     1 violations=0 class checks=OK count match=OK
+m=  3: trees=      2 classes(literal)=    1 classes(canonical)=    1 minimal trees=     2 violations=0 class checks=OK count match=OK
+m=  4: trees=      5 classes(literal)=    2 classes(canonical)=    2 minimal trees=     1 violations=0 class checks=OK count match=OK
+m=  5: trees=     14 classes(literal)=    3 classes(canonical)=    3 minimal trees=     2 violations=0 class checks=OK count match=OK
+m=  6: trees=     42 classes(literal)=    6 classes(canonical)=    6 minimal trees=     2 violations=0 class checks=OK count match=OK
+m=  7: trees=    132 classes(literal)=   11 classes(canonical)=   11 minimal trees=    12 violations=0 class checks=OK count match=OK
+m=  8: trees=    429 classes(literal)=   23 classes(canonical)=   23 minimal trees=     1 violations=0 class checks=OK count match=OK
+m=  9: trees=   1430 classes(literal)=   46 classes(canonical)=   46 minimal trees=     2 violations=0 class checks=OK count match=OK
+m= 10: trees=   4862 classes(literal)=   98 classes(canonical)=   98 minimal trees=     2 violations=0 class checks=OK count match=OK
+m= 11: trees=  16796 classes(literal)=  207 classes(canonical)=  207 minimal trees=    12 violations=0 class checks=OK count match=OK
+
+=== p = 3: every tree, literal definition, up to 15 leaves ===
+m=  1: trees=      1 classes(literal)=    1 classes(canonical)=    1 minimal trees=     1 violations=0 class checks=OK count match=OK
+m=  3: trees=      1 classes(literal)=    1 classes(canonical)=    1 minimal trees=     1 violations=0 class checks=OK count match=OK
+m=  5: trees=      3 classes(literal)=    1 classes(canonical)=    1 minimal trees=     3 violations=0 class checks=OK count match=OK
+m=  7: trees=     12 classes(literal)=    2 classes(canonical)=    2 minimal trees=     3 violations=0 class checks=OK count match=OK
+m=  9: trees=     55 classes(literal)=    5 classes(canonical)=    5 minimal trees=     1 violations=0 class checks=OK count match=OK
+m= 11: trees=    273 classes(literal)=   11 classes(canonical)=   11 minimal trees=     3 violations=0 class checks=OK count match=OK
+m= 13: trees=   1428 classes(literal)=   28 classes(canonical)=   28 minimal trees=     6 violations=0 class checks=OK count match=OK
+m= 15: trees=   7752 classes(literal)=   74 classes(canonical)=   74 minimal trees=     3 violations=0 class checks=OK count match=OK
+
+=== p = 5: every tree, literal definition, up to 25 leaves ===
+m=  1: trees=      1 classes(literal)=    1 classes(canonical)=    1 minimal trees=     1 violations=0 class checks=OK count match=OK
+m=  5: trees=      1 classes(literal)=    1 classes(canonical)=    1 minimal trees=     1 violations=0 class checks=OK count match=OK
+m=  9: trees=      5 classes(literal)=    1 classes(canonical)=    1 minimal trees=     5 violations=0 class checks=OK count match=OK
+m= 13: trees=     35 classes(literal)=    3 classes(canonical)=    3 minimal trees=    10 violations=0 class checks=OK count match=OK
+m= 17: trees=    285 classes(literal)=    9 classes(canonical)=    9 minimal trees=    10 violations=0 class checks=OK count match=OK
+m= 21: trees=   2530 classes(literal)=   30 classes(canonical)=   30 minimal trees=     5 violations=0 class checks=OK count match=OK
+m= 25: trees=  23751 classes(literal)=  107 classes(canonical)=  107 minimal trees=     1 violations=0 class checks=OK count match=OK
+
+=== p = 7: every tree, literal definition, up to 19 leaves ===
+m=  1: trees=      1 classes(literal)=    1 classes(canonical)=    1 minimal trees=     1 violations=0 class checks=OK count match=OK
+m=  7: trees=      1 classes(literal)=    1 classes(canonical)=    1 minimal trees=     1 violations=0 class checks=OK count match=OK
+m= 13: trees=      7 classes(literal)=    1 classes(canonical)=    1 minimal trees=     7 violations=0 class checks=OK count match=OK
+m= 19: trees=     70 classes(literal)=    4 classes(canonical)=    4 minimal trees=    21 violations=0 class checks=OK count match=OK

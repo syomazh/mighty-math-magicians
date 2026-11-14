@@ -1,0 +1,14 @@
+Part C: 220000 pairs (p, b): carried amount of p*b == s_p(b) fails in 0 cases; 'number of carrying columns' differs from the carried amount in 199146 cases (only the amount satisfies Fact 2)
+   smallest tree-realisable example for p = 3: b = 5 (digits [1, 2]), amount carried 3 = s_p(b), carrying columns 2
+   smallest tree-realisable example for p = 5: b = 9 (digits [1, 4]), amount carried 5 = s_p(b), carrying columns 2
+   smallest tree-realisable example for p = 7: b = 13 (digits [1, 6]), amount carried 7 = s_p(b), carrying columns 2
+Part A, p = 2, m <= 18: constructed 188 trees from skeleton + digit atoms; set of classes == set of minimal classes for every m: OK
+Part A, p = 3, m <= 27: constructed 297 trees from skeleton + digit atoms; set of classes == set of minimal classes for every m: OK
+Part A, p = 5, m <= 49: constructed 3262 trees from skeleton + digit atoms; set of classes == set of minimal classes for every m: OK
+Part A, p = 7, m <= 55: constructed 135 trees from skeleton + digit atoms; set of classes == set of minimal classes for every m: OK
+Part B, p = 2: 2697 random root trees, 149687 distinct subtrees checked, largest 2501 leaves; 105052 contain a symmetric node with s_p(b) > 1; 206 are minimal (750 built from digits); violations: none
+Part B, p = 3: 3029 random root trees, 138344 distinct subtrees checked, largest 5001 leaves; 62295 contain a symmetric node with s_p(b) > 1; 454 are minimal (750 built from digits); violations: none
+Part B, p = 5: 3245 random root trees, 153608 distinct subtrees checked, largest 15553 leaves; 31537 contain a symmetric node with s_p(b) > 1; 948 are minimal (750 built from digits); violations: none
+Part B, p = 7: 3239 random root trees, 144892 distinct subtrees checked, largest 117625 leaves; 15249 contain a symmetric node with s_p(b) > 1; 1146 are minimal (750 built from digits); violations: none
+Part B, p = 11: 3258 random root trees, 131840 distinct subtrees checked, largest 1762301 leaves; 5606 contain a symmetric node with s_p(b) > 1; 1366 are minimal (750 built from digits); violations: none
+Part B, p = 13: 3287 random root trees, 135347 distinct subtrees checked, largest 4818877 leaves; 4056 contain a symmetric node with s_p(b) > 1; 1812 are minimal (750 built from digits); violations: none
