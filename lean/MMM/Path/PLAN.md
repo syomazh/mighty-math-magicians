@@ -127,3 +127,78 @@ Closed recursion proved for one block (`minCount p h a` = number of blocks of he
 letters E attaining the bound): `minCount p h 0 = minCount p h (p^h) = 1`;
 `minCount p (h+1) (k p^h) = binom(p, k)` for `0 < k < p`;
 `minCount p (h+1) (k p^h + r) = p * binom(p-1, k) * minCount p h r` for `k < p`, `0 < r < p^h`.
+
+---
+
+# Path proof, part 5 — brief W044 (Claude Fable 5.2, a subagent of the orchestrator, 2026-11-15, not human-reviewed)
+
+Kummer's theorem with its residue (the note's Lemma `lem:carries`, the congruence of Proposition
+`prop:count`, Theorem `thm:binom`) and Problem 137 for the Fuss–Catalan numbers (the note's last
+section), **all from the hypothesis `SlotHyp p`** (the statement that `Slots.lean`, brief W043,
+proves: `minWords p L n = slotCount p L n B`). Neither file imports `Slots.lean`. To remove the
+hypothesis: `H := fun L n B hn hB => minWords_eq_slotCount hp.out.two_le L n B hn hB`.
+
+| Statement | File | Status |
+|---|---|---|
+| `SlotHyp p` (definition, as in the brief) | `KummerExact.lean` | done |
+| `exists_digit_blocks (hp : 2 ≤ p) (N) : ∃ L, len p L = N ∧ L.length = ds p N ∧ (∀ j, L.count j = dig p j N) ∧ ∀ j, topAt p L j = N / p ^ j` | `KummerExact.lean` | done |
+| `carryAt` (definition), `carryAt_zero`, `carryAt_le_one`, `carryAt_rec`, `sum_carryAt` (as in the brief; `N n` implicit) | `KummerExact.lean` | done |
+| helper `div_eq_add_carryAt : N / p^j = n / p^j + (N - n) / p^j + carryAt p N n j ∧ carryAt p N n j ≤ 1` | `KummerExact.lean` | done |
+| `digFact` (definition), `digFact_eq_prod_range` (the product over any range that contains all digits) | `KummerExact.lean` | done |
+| `slotCount_digits` (as in the brief) | `KummerExact.lean` | done |
+| `factorial_add_prime_modEq [Fact p.Prime] (r) (hr : r < p) : ((r + p)! : ℤ) ≡ -p * r! [ZMOD p ^ 2]` | `KummerExact.lean` | done |
+| `choose_residue_of [Fact p.Prime] (H : SlotHyp p) (N n c) (hn) (hc) : binom(N, n) * (digFact p n * digFact p (N - n)) ≡ (-p)^c * digFact p N [ZMOD p^(c+1)]` | `KummerExact.lean` | done |
+| `coprime_digFact : Nat.Coprime p (digFact p x)` | `KummerExact.lean` | done |
+| `kummer_exact_of [Fact p.Prime] (H : SlotHyp p) (N n c) (hn) (hc) : p^c ∣ N.choose n ∧ ¬ p^(c+1) ∣ N.choose n` | `KummerExact.lean` | done |
+| `digFact_eq_digits : digFact p m = ((Nat.digits p m).map Nat.factorial).prod` | `Problem137.lean` | done |
+| `fussCatalan_exact_residue_of` (exactness and residue of the Fuss–Catalan number in terms of `ds` and `digFact`) | `Problem137.lean` | done |
+| `residue_fussCatalan_path_of`, `problem137_fussCatalan_exact_path_of`, `problem137_fussCatalan_path_of` (as in the brief) | `Problem137.lean` | done |
+
+Compile (`lake env lean … -o …`): `KummerExact.lean` two warnings (unused `hn` in `carryAt_zero`
+and unused `hr` in `factorial_add_prime_modEq`; both hypotheses are those of the brief and the
+proofs do not need them); `Problem137.lean` clean. `#print axioms` of `choose_residue_of`,
+`kummer_exact_of`, `residue_fussCatalan_path_of`, `problem137_fussCatalan_exact_path_of`,
+`problem137_fussCatalan_path_of`: `[propext, Classical.choice, Quot.sound]`.
+
+Notes.
+
+- From Mathlib's number theory the proofs use Wilson's theorem (`ZMod.wilsons_lemma`),
+  `Nat.Prime.dvd_factorial`, `Nat.choose_mul_factorial_mul_factorial`,
+  `Nat.factorial_mul_ascFactorial`; no valuation of a factorial or of a binomial coefficient, no
+  Lucas, no Kummer, no Legendre. `multiplicity` occurs only in `problem137_fussCatalan_path_of`
+  (through `multiplicity_eq_of_exact` of `MMM/ExactCond.lean`).
+- `Problem137.lean` imports, besides the brief's four files, `MMM.Exact` (for `ds_modEq`, which
+  the brief names; it was already imported through `MMM.ResidueForms`) and
+  `Mathlib.RingTheory.Coprime.Lemmas`. What the three theorems reach outside `MMM/Path/` and the
+  digit files (checked with `#project_modules` of `MMM/Frob/Deps.lean`): `MMM.Counting` (through
+  `kummer_dvd`), `MMM.Trees` and `MMM.FussFormula` (`choose_div_eq_card`,
+  `card_nodes_mul_eq_choose`), `MMM.ResidueForms` (`prod_dig_eq_digits`, `prod_range_getD`),
+  `MMM.Exact` (`ds_modEq`), `MMM.ExactCond` (`multiplicity_eq_of_exact`).
+- In `Problem137.lean` the instance `instNeZeroOfPrimePath` is given priority over the tree
+  proof's `PTree.instNeZeroOfPrime` (both are in scope there), so that `SlotHyp p` is the same
+  term as in `KummerExact.lean` and nothing of `MMM/ClassSize.lean` is reached.
+- Helper lemmas with general names (`topAt_*`, `ds_mul_add`, …) are `private`, because
+  `Slots.lean` lives in the same namespace and a later file imports both.
+
+---
+
+# Path proof, part 4 — brief W043 (Claude Fable 5.2, a subagent of the orchestrator, 2026-11-15, not human-reviewed)
+
+The count of the minimal words for every list of top blocks:
+`minWords_eq_slotCount [NeZero p] (hp : 2 ≤ p) (L : List ℕ) (n B : ℕ) (hn : n ≤ len p L) (hB : len p L < p ^ B) : minWords p L n = slotCount p L n B`
+is proved (`Slots.lean`), from `SlotsDef.lean` (unchanged). `p` need not be prime.
+
+| Step of the brief | Statement | File | Status |
+|---|---|---|---|
+| 1 | `minWords_nil`, `minWords_cons : minWords p (h :: L) n = cfConv p (p ^ h) (len p L) (minCount p h) (minWords p L) n` | `Slots1.lean` | done |
+| 2 | `minWords_append : minWords p (L₁ ++ L₂) n = cfConv p (len p L₁) (len p L₂) (minWords p L₁) (minWords p L₂) n` (general lists; from `cfConv_assoc`) | `Slots1.lean` | done |
+| 3 | `minWords_replicate` (statement of the brief) | `Slots1.lean` | done |
+| 4 | `minWords_cons_succ`, `minWords_cons_zero` | `Slots1.lean` | done |
+| 5 | `slotCount_cons_succ`, `slotCount_cons_zero` (the same recursion; `trinomial_pascal`) | `Slots2.lean` | done |
+| 6 | `minWords_eq_slotCount` (strong induction on `∑ (p + 1) ^ h`) | `Slots.lean` | done |
+
+Changes to the statements of the brief:
+- Steps 1 and 2 are stated with `cfConv p X Y f g n = ∑ a ∈ range (n + 1), if cfCond p X Y a (n - a) then f a * g (n - a) else 0`, where `cfCond p X Y a b` is the condition of the brief with `ds p (a + b)` in place of `ds p n` and `X + Y - (a + b)` in place of `X + Y - n` (the same for `a + b = n`). They hold for every `n`; the hypothesis `hn` of the brief is not needed.
+- Step 4: the conditions are `1 ≤ dig p H n` (all E) and `1 ≤ dig p H (p ^ H + len p L - n)` (all S); the extra conjuncts `p ^ H ≤ n` and `n ≤ len p L` of the brief follow from them and are left out.
+
+Compile (`lake env lean … -o …`): `Slots1.lean`, `Slots2.lean`, `Slots.lean` all clean (exit 0, no warning). `#print axioms minWords_eq_slotCount`: `[propext, Classical.choice, Quot.sound]`. Binomial coefficients are used only through `Nat.choose_succ_succ`, `Nat.choose_zero_right` and `Nat.choose_eq_zero_of_lt`.
