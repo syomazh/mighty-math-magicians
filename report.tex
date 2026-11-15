@@ -160,7 +160,7 @@ cyclic shifts of paths (Section~\ref{sec:lean}).}
 % ===== TITLE BLOCK (removed before the AI review) =====
 \author{TEAM MEMBERS: Misha Mazin, Josh Venick, Syoma Zharkov, Andrei Mazin\\[2pt]
 REPOSITORY: \url{https://github.com/syomazh/mighty-math-magicians}\\[2pt]
-COMMIT: \texttt{3e4b814b9d5d21dae5eaa06dd10b8f33b262aee9}\\[2pt]
+COMMIT: \texttt{to be filled in the next commit}\\[2pt]
 {\footnotesize (the state that this report describes; the commit submitted is its successor,}\\
 {\footnotesize which adds only this line, the PDF built from it and the record of this step)}}
 % ===== END TITLE BLOCK =====
@@ -189,15 +189,21 @@ one for each unit of each base-$p$ digit of the number of leaves; and their numb
 fixed-point argument in which a carry in base $p$ is the collapse of $p$ sibling leaves. The result is a
 proof, from the symmetries of the trees, of the valuation and of the residue
 $C_n^{(q)}/p^t\equiv(-1)^t/\prod_jm_j!\pmod p$ for every prime power; as statements about numbers both follow
-from classical theorems on binomial coefficients (Section~\ref{sec:attribution}). The report
-contains this proof in full; three further proofs found during the event (one on lattice paths, which proves
-Kummer's theorem with its residue by a known kind of group action; one by algebra alone; one by counting
-labelled trees); the computations; a formalization in Lean~4 of the main proof, of the lattice-path proof, of
-the algebraic proof and, with two steps proved differently from the text, of the proof by counting labelled
-trees; and, for every claim, how it is supported and whether a human has read it. A faculty
-member of the team looked through the main proof and said it is good, and read and verified the lattice-path
-proof (both as reported; Section~\ref{sec:status} says what is on record); the algebraic proof has been checked
-only by AI systems and by Lean. For $p=2$ the statements are in the literature (Etherington, Deutsch and Sagan, Kersting
+from classical theorems on binomial coefficients (Section~\ref{sec:attribution}). The report offers six
+things. \textbf{(1)~The main proof}, by rotation symmetries of trees (Section~\ref{sec:mainproof}): verified in
+Lean and, by the team's statement, by a human, a faculty member of the team (Section~\ref{sec:status}).
+\textbf{(2)~Three further proofs} (Section~\ref{sec:further}): one on lattice paths, which proves by symmetry
+the classical congruence for binomial coefficients (Kummer's theorem with its residue; the kind of action is
+known), read and verified by the same faculty member; one by algebra alone; one by counting labelled trees.
+\textbf{(3)~Lean certificates} (Section~\ref{sec:lean}) for the main, lattice-path and algebraic proofs, and
+for the counting proof with two steps proved differently from its text. \textbf{(4)~A connection with
+chemistry} (Section~\ref{sec:connections}): for $p=3$ the rotation classes number as the stereoisomers of
+alcohols; a reading and a computation, not a result in chemistry. \textbf{(5)~A review of the literature}
+(Sections~\ref{sec:known}, \ref{sec:attribution}): what was known, and what is therefore claimed.
+\textbf{(6)~Directions for further work} (Sections~\ref{sec:extensions}, \ref{sec:event}): statistics that
+rotations preserve (proved), weighted Fuss--Catalan numbers (a conjecture), statistics that rotations change.
+For every claim the report says how it is supported and whether a human has read
+it; the algebraic proof has been checked only by AI systems and by Lean. For $p=2$ the statements are in the literature (Etherington, Deutsch and Sagan, Kersting
 and Fischer). The proofs were found and written by AI systems under the direction of the team; Section~\ref{sec:ai} says which.
 \end{abstract}
 
@@ -261,16 +267,15 @@ divisibility by a group action and the shape of the smallest orbits \cite{Konval
 principle \cite{Gessel}.
 
 \noindent\textbf{What supports it} (Section~\ref{sec:status}). The written proof (Section~\ref{sec:mainproof})
-went through three rounds of review by AI systems; a faculty member of the team looked through it and said it
-is good (as reported; no more is on record about that reading). Three proofs are formalized in Lean (the main
-proof, the lattice-path proof, the algebraic proof), and the accounting proof with two steps proved
-differently from the text, each with the theorem stated in Mathlib's terms; the project
-builds on \LeanVersions{} with no \texttt{sorry} (Section~\ref{sec:lean}, with the differences from the
-written proofs). No failure in $1067$ values of $m$. The lattice-path proof (Appendix~\ref{app:path})
-was read and verified by the faculty member (as reported); the accounting proof (Appendix~\ref{app:acc}) was
-read, not signed; the algebraic proof (Appendix~\ref{app:frob}) and Section~\ref{sec:extensions} have been
-checked only by AI systems and by Lean. The proofs were found and written by AI systems under the direction
-of the team (Section~\ref{sec:ai}).\par}
+went through three rounds of review by AI systems; a faculty member of the team looked through it, said it
+is good and, by the team's statement, verified it. Formalized in Lean, with the theorem stated in Mathlib's
+terms: the main proof, the lattice-path proof, the algebraic proof, and the accounting proof with two steps
+proved differently from the text; the project builds on \LeanVersions{} with no \texttt{sorry}
+(Section~\ref{sec:lean}). No failure in $1067$ values of $m$. The lattice-path proof
+(Appendix~\ref{app:path}) was read and verified by the faculty member; the accounting proof
+(Appendix~\ref{app:acc}) was read, not signed; the algebraic proof (Appendix~\ref{app:frob}) and
+Section~\ref{sec:extensions} were checked only by AI systems and by Lean. The proofs were found and written
+by AI systems under the direction of the team (Section~\ref{sec:ai}).\par}
 
 \clearpage
 \setcounter{tocdepth}{1}
@@ -519,6 +524,26 @@ skeleton with its depth condition, or the carry--cherry count. A search of this 
 and no specialist has been asked.
 
 \section{Results at a glance}\label{sec:results}
+% Added 2026-11-15 by Claude Fable 5.2 (orchestrator): the six results that the team asked to be emphasized,
+% in the team's order, each with the place where the report has it. Not human-reviewed.
+\noindent\textbf{The six results of this report}, in the order in which the team ranks them:
+\begin{enumerate}[itemsep=0pt,topsep=2pt]
+\item the main proof, from rotation symmetries of trees, verified in Lean and by a human
+ (Section~\ref{sec:mainproof}; status in Section~\ref{sec:status});
+\item three further proofs, among them one on lattice paths that proves by symmetry the classical congruence
+ for binomial coefficients, Kummer's theorem with its residue (Section~\ref{sec:further},
+ Appendices~\ref{app:path}, \ref{app:frob} and~\ref{app:acc});
+\item Lean certificates for the main, lattice-path and algebraic proofs, and for the accounting proof with two
+ steps proved differently from its text (Section~\ref{sec:lean}, with every difference between the formal
+ statements and the written ones);
+\item a connection with chemistry: the case $p=3$ read as alcohols and their stereoisomers
+ (Section~\ref{sec:connections}; a reading and computations, not a result in chemistry);
+\item a review of the literature, with what is known, what was read and by whom, and what is and is not claimed
+ (Sections~\ref{sec:known} and~\ref{sec:attribution});
+\item directions for further work: statistics that rotations preserve (proved), weighted Fuss--Catalan numbers
+ (a conjecture), statistics that rotations change (Sections~\ref{sec:extensions} and~\ref{sec:event}).
+\end{enumerate}
+
 
 \subsection{The theorem}
 Throughout, $p$ is a prime, $k\ge1$, $q=p^k$, $n\ge1$, $m=(q-1)n+1$ is the number of leaves,
@@ -800,7 +825,8 @@ Claim & How it is supported & Read and approved by a human?\\
  that system): no counterexample and no step needing a new idea; every defect found was
  repaired; the last repairs were not re-reviewed by a machine.
  & \textbf{Yes.} A faculty member of the team looked through the proof and said it is good (reported
- 14 November 2026). What is known about the extent of that reading is this sentence. The approval predates one
+ 14 November 2026). On 15 November the same person, listing the results that this report should emphasize,
+ described the main proof as ``lean and human verified''. No more is on record about the extent of that reading. The approval predates one
  sentence of credit to \cite{Etherington} in the introduction and one bracketed note on notation in
  Section~\ref{main:sec:count}, added on 15 November; no statement or proof changed.\\
 \midrule
@@ -2479,7 +2505,7 @@ are Pacific time, as recorded in the journal and the ledger):
 
 \subsection{Limitations}
 \begin{itemize}[itemsep=1pt]
-\item \emph{Human reading.} Of the four proofs, a human looked through one and approved it (the main proof)
+\item \emph{Human reading.} Of the four proofs, a human looked through one, approved it and describes it as verified (the main proof)
  and read and verified one (the lattice-path proof); one was read without a verdict that every step was
  checked (the accounting proof); and one was begun by a team member and put aside, so that no human has
  checked it (the algebraic proof). What is recorded about the extent of the reading of the main
