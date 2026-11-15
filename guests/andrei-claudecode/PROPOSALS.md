@@ -60,3 +60,12 @@ No proposal here says that a proof is wrong. Entry 1 is a wording that a chemist
 - **Not proposed for a slide yet:** "one pot of an AB3 monomer gives the five shapes in the ratio 27 : 9 : 9 : 9 : 1". It is exact in an ideal model (rows 9 and 10 of `CLAIMS_PROPOSED.md`), but it has no printed source and no chemist has heard it. If it is said, say "in the ideal model", and do not say that the butyl alcohols form in that ratio: the statement is about a polymer of an AB3 monomer.
 - **A caution on weight.** The chemistry is illustration. It defends the choice of rotations and makes 55 = 1 + 9 + 9 + 9 + 27 visible. It is not the reason for the problem, and it is a safer cut than any step of the proof if the talk runs long.
 - **Evidence.** Note C, sections 2 and 10; note P, sections 4 and 7.
+
+## 7. The deck in `talk/` ("Fuss–Catalan valuations from rotations of trees"): three slides of introduction, for the humans
+
+Added 2026-11-14 at about 21:30 PT; changed at about 22:15 PT, when the slides were made again with fewer words, and at about 22:40 and 23:00 PT (last slide).
+
+- **What is offered.** `guests/andrei-claudecode/talk/intro_slides.pdf`, three pages in the look of that deck, numbered 2 to 4: Catalan numbers and binary trees next to Fuss–Catalan numbers and q-ary trees (the formula only on the Catalan side); the problem as one formula with three examples; the formula with one arrow to the statement (marked "Legendre's formula", "Konvalinka 2007"), and under it the problem and "Our proof does not use the formula". The outline is Andrei's.
+- **What it touches.** Slide 2 of the deck states the problem with the formula on it. Either the three slides replace it and the residue moves to the slide where it is proved, or slide 2 follows them as the precise statement. The deck is a PDF of images and its source is not in the repository, so nothing was changed in it.
+- **Evidence.** `guests/andrei-claudecode/talk/make_intro.py` (9 checks, all pass; the tree counts come from listing trees or from the recursion, not from the formula). The line "Our proof does not use the formula" is the statement of `paper/main.tex`, lines 54 and 72 at 9a4ff85.
+- **Limits.** The proof by Legendre's formula behind the arrow of slide 4 was written out by us (in `intro_notes.md`) and not compared with Konvalinka's text. Two cautions for the speaker are in `intro_notes.md`: his tree argument (divisibility) and the exact tree proof for p = 2 by Deutsch and Sagan are earlier work on trees.

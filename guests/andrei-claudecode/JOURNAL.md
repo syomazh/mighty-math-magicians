@@ -77,3 +77,63 @@ The first two entries were written on 2026-11-14 at about 18:15 PT, when the wor
 **Failed.** Nothing.
 
 **Open.** W029 was still running. Its report may cover items 1 and 3 of the digest; whoever reviews it can compare with section 5 of the chemistry note and with checks F1 and F2 of EC01.
+
+## 2026-11-14 21:30 PT — Claude Fable 5.2, Claude Code (local session), started by Andrei
+
+**Asked.** "I am tasked with creating the mathematical introduction to the presentation": Catalan numbers with their formula and binary trees; Fuss–Catalan numbers as the generalization, counting q-ary trees, without the formula; the problem, stated so that it can be understood; then the formula, the old solution that uses it, and that we do not. "If you see anything wrong with this let me know but otherwise make me some slides."
+
+**Read.** At `origin/main` 9a4ff85: slides 1 to 5 of the 16-slide deck in `talk/` (text and images), the head of `talk/slides.tex`, the problem statement, `paper/main.tex` lines 44 to 73, `talk/QA.md` questions 2, 17 and 33, `references/README.md` entries 1 and 2. Also: this branch was merged into `main` at 19:00 PT (b625f0a, ba15aec) and carried over as C25, C26 and references 71 to 76.
+
+**Done.**
+- `talk/intro_slides.tex` and `.pdf`: four slides in the look of the team's deck. `talk/make_intro.py` draws the trees by listing them and checks every number on the slides (10 checks, all pass). `talk/intro_notes.md`: where the slides go, what to say, four cautions.
+- The outline holds. Two wording points were found and are in the notes: the known proof with the formula is not the only earlier work on trees (Konvalinka's tree argument gives divisibility), and for p = 2 an exact proof from trees exists (Deutsch and Sagan).
+- `PROPOSALS.md`, entry 7.
+
+**Failed or corrected on the way.**
+- First version of slide 5 had the brace "= 0" over s_p(qn) + s_p(n), without the minus sign. Seen on the rendered page and corrected: the brace is over −s_p(qn) + s_p(n).
+- The pages were too tall three times; the text on slides 4 and 5 was shortened to fit. A sentence on Konvalinka's tree argument was cut from slide 5 for space and is in the notes.
+
+**Open.** A person reads the four slides. The team decides what happens to slide 2 of its deck, which these slides overlap. The three lines on slide 5 were not compared with the text of Konvalinka's paper.
+
+## 2026-11-14 22:15 PT — Claude Fable 5.2, Claude Code (local session), started by Andrei
+
+**Asked.** On the four slides of the previous entry: "these slides are super crowded and a bit ugly. Rethink the organization of them." The twelve ternary trees with n = 3 are not worth their space; Catalan and Fuss–Catalan numbers can share one slide, side by side; the speaker says most of it, so far fewer words.
+
+**Done.** The slides were made again from nothing: three instead of four, numbered 2 to 4.
+- Slide 2: Catalan numbers on the left (the five binary trees, the formula, the values), Fuss–Catalan numbers on the right (the three ternary trees with n = 2, the values, no formula).
+- Slide 3: the statement as one formula, a legend of four lines, three examples. Two of the examples are the pictures of slide 2.
+- Slide 4: the formula, then two boxes, "Known proof" and "Our proof".
+- Everything is now placed by hand on the page instead of flowing in columns. `make_intro.py` draws only the two families shown and checks the numbers of this version (9 checks, all pass). `intro_notes.md` rewritten: it now holds what the slides no longer say.
+
+**Dropped from the slides, kept in the notes.** The count of leaves (q − 1)n + 1 as a sentence; "C_n is odd exactly when n + 1 is a power of 2"; the question "why would the digits know about the trees?"; the three lines of the proof by Legendre's formula. The first version's files were overwritten; it was never committed.
+
+**Failed.** Nothing.
+
+**Open.** As in the previous entry: a person reads the slides; the team decides about slide 2 of its deck.
+
+## 2026-11-14 22:40 PT — Claude Fable 5.2, Claude Code (local session), started by Andrei
+
+**Asked.** "I don't like the last slide, it's not at all math presentation vibe."
+
+**Done.** Slide 4 made again. The two boxes ("Known proof", "Our proof") are gone. The slide is now the derivation: the formula, Legendre's formula and their combination, aligned at the equals signs, with a grey word in front of each line and the reason for the last step in small type; under a rule, "Problem 137" and "Our proof does not use the formula." Title: "The known proof uses a formula". Slides 2 and 3 unchanged. `intro_notes.md` and entry 7 of `PROPOSALS.md` brought in line. The checks are unchanged (check 6 covers the three lines).
+
+**Failed.** Nothing.
+
+**Open.** As before.
+
+## 2026-11-14 23:00 PT — Claude Fable 5.2, Claude Code (local session), started by Andrei
+
+**Asked.** On the slide of the previous entry: "I don't think you need to give that much background on the other proof, it's taking up too high of a percentage of the slide."
+
+**Done.** Slide 4 made a third time. The known proof is now one arrow: the formula on the left, the statement on the right, and over and under the arrow "Legendre's formula" and "Konvalinka 2007". The three written-out lines went back into `intro_notes.md`. Under a rule, as before: "Problem 137" and "Our proof does not use the formula: it only looks at the trees." Title: "There is a formula, and the known proof uses it". Entry 7 of `PROPOSALS.md` brought in line. Checks unchanged.
+
+**Failed.** Nothing.
+
+**Open.** As before.
+
+## 2026-11-14 23:10 PT — Claude Fable 5.2, Claude Code (local session), started by Andrei
+
+**Asked.** The title of slide 4, "There is a formula, and the known proof uses it", "seems strange".
+
+**Done.** Title changed to "A closed formula for the number of trees", with "THE KNOWN PROOF" as the small line above it. Nothing else on the slide changed.
+

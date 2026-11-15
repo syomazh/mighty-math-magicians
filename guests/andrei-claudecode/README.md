@@ -28,6 +28,7 @@ In chat, on 2026-11-14:
 1. "I have been tasked with investigating connections of our problem with other things such as the chemistry. Look deeply into some stuff."
 2. "Dive deeper on the polymers and decide which one seems better for motivation."
 3. "Look at updates, I think mmazin added something interesting", and then: move the two notes into a guest folder and bring the clone up to date.
+4. (2026-11-14, evening) Slides for the mathematical introduction of the talk, on Andrei's outline: Catalan numbers, Fuss–Catalan numbers without the formula, the problem, then the formula and the known proof.
 
 ## Done
 
@@ -42,7 +43,8 @@ In chat, on 2026-11-14:
   - In the ideal one-pot reaction all bond patterns with the same number of bonds are equally likely (a lemma with a five-line proof), so an isomer occurs with probability p^d/FussCatalan. For AB3 and four units: 27 : 9 : 9 : 9 : 1 of 55.
   - The gel point of Flory's theory is the radius of convergence of the Fuss–Catalan series.
 - **A second reading of the path proof (C24).** I read `guests/andrei-claude/notes/2026-11-14_path_proof/path_proof.tex` line by line and re-derived every lemma; I found no failing step. `experiments/EC03_path_proof_check/` tests its statements by a different method (328 + 26 cases, all pass).
-- Proposed claims in `CLAIMS_PROPOSED.md`, six proposals in `PROPOSALS.md`, the work blocks in `JOURNAL.md`.
+- **Three slides for the mathematical introduction.** `talk/intro_slides.pdf` (source `talk/intro_slides.tex`), in the look of the team's 16-slide deck, with few words: the speaker says the rest. Every number on them is checked by `talk/make_intro.py` (9 checks). Where they go, what to say and four cautions: `talk/intro_notes.md`. (A first version with four crowded slides was replaced on Andrei's word.) They overlap slide 2 of the team's deck; see `PROPOSALS.md`, entry 7.
+- Proposed claims in `CLAIMS_PROPOSED.md`, seven proposals in `PROPOSALS.md`, the work blocks in `JOURNAL.md`.
 
 ## Not done, not verified
 

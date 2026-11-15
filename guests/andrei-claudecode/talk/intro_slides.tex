@@ -1,0 +1,159 @@
+% Written by Claude Fable 5.2 (claude-fable-5-2) in Claude Code, started by Andrei, 2026-11-15.
+% Not human-reviewed.
+%
+% The mathematical introduction of the talk: three slides, on Andrei's outline.
+%   2  Catalan and Fuss--Catalan numbers side by side (binary trees with the formula,
+%      q-ary trees without it)
+%   3  the problem
+%   4  the formula; the known proof as one arrow; the problem; we do not use the formula
+% Second version: few words, the speaker says the rest (see intro_notes.md).
+% Colours, fonts and layout imitate the 16-slide deck in talk/ ("Fuss–Catalan valuations
+% from rotations of trees.pdf"), so that these pages can stand in front of its slide 3.
+%
+% Build:  python3 make_intro.py > make_intro_output.txt   (pictures and checks of the numbers)
+%         latexmk -pdf intro_slides.tex
+\documentclass[aspectratio=169,10pt,t]{beamer}
+
+% ---- the number of the first of these slides in the whole deck (the title slide is 1)
+\newcommand{\firstslide}{2}
+% ---------------------------------------------------------------------------------
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{plex-sans}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,array,colortbl}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usefonttheme[onlymath]{serif}
+
+\definecolor{paper}{HTML}{F9F8F3}
+\definecolor{panel}{HTML}{F1EEE6}
+\definecolor{ink}{HTML}{161F26}
+\definecolor{body}{HTML}{4A5262}
+\definecolor{accent}{HTML}{BE4526}
+\definecolor{callout}{HTML}{FBE7DE}
+\definecolor{footgray}{HTML}{82878A}
+\definecolor{hair}{HTML}{D8D5CC}
+\arrayrulecolor{hair}
+
+\setbeamercolor{background canvas}{bg=paper}
+\setbeamercolor{normal text}{fg=body}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=1.05cm,text margin right=1.05cm}
+
+\newcommand{\serifbold}{\fontfamily{EBGaramond-LF}\fontseries{b}\selectfont}
+\newcommand{\kicker}[1]{{\fontsize{6.2}{7}\selectfont\bfseries\color{accent}\textls[150]{#1}}}
+\newcommand{\fs}[1]{\fontsize{#1}{#1}\selectfont}
+
+% frame title: small red kicker (the frame subtitle), then the title in bold Garamond
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.72cm}%
+  \kicker{\insertframesubtitle}\par\vspace{0.2cm}%
+  {\serifbold\fontsize{17.5}{20}\selectfont\color{ink}\insertframetitle}\par}
+
+\setbeamertemplate{footline}{%
+  \fontsize{6}{7}\selectfont\color{footgray}%
+  \hspace*{1.05cm}Mighty Math Magicians \textperiodcentered{} Caltech Mathathon 2026\hfill
+  \insertframenumber\hspace*{1.05cm}\vspace{0.62cm}}
+
+% formulas in the dark ink of the titles, text in grey, as in the team's deck
+\everymath\expandafter{\the\everymath\color{ink}}
+\everydisplay\expandafter{\the\everydisplay\color{ink}}
+
+\newcommand{\hl}[1]{{\bfseries\color{accent}#1}}
+\newcommand{\mhl}[1]{\textcolor{accent}{\mathbf{#1}}}  % the same inside a formula
+\newcommand{\head}[1]{{\serifbold\fs{13.5}\color{ink}#1}}   % heading of a panel
+\newcommand{\quiet}[1]{{\fs{8}\color{footgray}#1}}           % small grey line
+
+% Everything on a slide is placed by hand, in centimetres from the top left corner of
+% the page (the page is 16 cm by 9 cm; x to the right, y downwards).
+\newenvironment{canvas}
+  {\begin{tikzpicture}[remember picture,overlay,shift={(current page.north west)},x=1cm,y=-1cm]}
+  {\end{tikzpicture}}
+\newcommand{\at}[3][base west]{\node[anchor=#1,inner sep=0pt,outer sep=0pt] at (#2) {#3};}
+
+% trees: black dot = internal node, small square = leaf (as in the team's deck)
+\newlength{\tx}\newlength{\ty}\newlength{\tsep}\newlength{\trowsep}
+\tikzset{
+  tedge/.style={draw=ink,line width=0.55pt},
+  tin/.style={circle,fill=ink,inner sep=0pt,minimum size=4pt},
+  tlf/.style={rectangle,draw=body,fill=paper,line width=0.45pt,inner sep=0pt,minimum size=3.6pt},
+}
+\input{intro_trees.tex}
+\newsavebox{\bintrees}\newsavebox{\tertrees}
+
+\newcommand{\Cq}{C_n^{(q)}}
+\newcommand{\sd}{s_p}
+\newcommand{\vp}{v_p}
+
+\begin{document}
+\setcounter{framenumber}{\numexpr\firstslide-1\relax}
+
+% 2 ---------------------------------------------------------------------------------
+\begin{frame}{From binary trees to $q$-ary trees}{THE NUMBERS}
+\sbox{\bintrees}{\setlength{\tx}{0.30cm}\setlength{\ty}{0.50cm}\setlength{\tsep}{0.36cm}\TreesBinaryThree}%
+\sbox{\tertrees}{\setlength{\tx}{0.33cm}\setlength{\ty}{0.60cm}\setlength{\tsep}{0.62cm}\TreesTernaryTwo}%
+\begin{canvas}
+  \draw[draw=hair,line width=0.6pt] (8,2.9)--(8,7.75);
+
+  % left: Catalan
+  \at{1.05,3.2}{\head{Catalan numbers}}
+  \at{1.05,3.7}{\fs{9}every node has 2 children or none}
+  \at[base]{4.3,4.6}{\usebox{\bintrees}}
+  \at[base]{4.3,6.6}{\quiet{the 5 trees with $n=3$ internal nodes \,\tikz[baseline=-0.55ex]\node[tin]{};}}
+  \at[base]{4.3,7.35}{\fs{10}$C_n=\dfrac{1}{n+1}\dbinom{2n}{n}$\qquad $1,\;2,\;\mhl{5},\;14,\;42,\;\dots$}
+
+  % right: Fuss--Catalan
+  \at{8.95,3.2}{\head{Fuss--Catalan numbers}}
+  \at{8.95,3.7}{\fs{9}every node has $q$ children or none}
+  \at[base]{11.95,4.7}{\usebox{\tertrees}}
+  \at[base]{11.95,6.6}{\quiet{the 3 trees with $q=3$ and $n=2$ internal nodes}}
+  \at[base]{11.95,7.35}{\fs{10}$C_n^{(3)}$\,:\qquad $1,\;\mhl{3},\;12,\;55,\;273,\;\dots$}
+\end{canvas}
+\end{frame}
+
+% 3 ---------------------------------------------------------------------------------
+\begin{frame}{How often does $p$ divide the number of trees?}{THE PROBLEM}
+\begin{canvas}
+  % the statement
+  \at[base]{4.55,3.95}{\fs{15}$\vp\bigl(\Cq\bigr)\;=\;\dfrac{\sd(m)-1}{p-1}$}
+
+  % what the letters mean
+  \node[anchor=west,inner sep=0pt] at (8.35,3.8) {\fontsize{9}{15.5}\selectfont
+    \begin{tabular}{@{}r@{\hspace{0.45cm}}l@{}}
+      $q$      & a power of the prime $p$\\
+      $m$      & the number of leaves, $(q-1)\,n+1$\\
+      $\sd(m)$ & the sum of the digits of $m$ in base $p$\\
+      $\vp$    & how many times $p$ divides
+    \end{tabular}};
+
+  % three examples
+  \node[anchor=north,inner sep=0pt] at (8,5.2) {\fontsize{9.5}{12}\selectfont\renewcommand{\arraystretch}{1.45}
+    \begin{tabular}{@{}l@{\hspace{1.0cm}}l@{\hspace{1.0cm}}c@{\hspace{0.9cm}}c@{\hspace{0.9cm}}c@{}}
+      & \quiet{trees} & \quiet{leaves} & \quiet{in base $p$} & \quiet{power of $p$}\\\hline
+      binary, $n=3$  & $5$ & $4$ & $100_2$ & \hl{0}\\
+      ternary, $n=2$ & $3$ & $5$ & $12_3$ & \hl{1}\\
+      ternary, $n=8$ & $43263=3^2\cdot 4807$ & $17$ & $122_3$ & \hl{2}
+    \end{tabular}};
+\end{canvas}
+\end{frame}
+
+% 4 ---------------------------------------------------------------------------------
+\begin{frame}{A closed formula for the number of trees}{THE KNOWN PROOF}
+\begin{canvas}
+  % one line: the formula, an arrow for the known proof, the statement
+  \at[base]{4.0,4.4}{\fs{12}$\Cq\;=\;\dfrac{1}{(q-1)\,n+1}\dbinom{qn}{n}$}
+  \draw[draw=ink,line width=0.6pt,-{Stealth[length=5pt,width=4.5pt]}] (7.25,4.3)--(9.35,4.3);
+  \at[base]{8.3,4.0}{\quiet{Legendre's formula}}
+  \at[base]{8.3,4.72}{\quiet{Konvalinka 2007}}
+  \at[base]{12.15,4.4}{\fs{12}$\vp\bigl(\Cq\bigr)\;=\;\dfrac{\sd(m)-1}{p-1}$}
+
+  \draw[draw=hair,line width=0.6pt] (1.05,6.0)--(14.95,6.0);
+  \at{1.05,6.65}{\fs{10}{\bfseries\color{ink}Problem 137.} Prove this from the symmetries of the trees, without factorial
+    valuations.}
+  \at{1.05,7.15}{\fs{10}Our proof does not use the formula: it only looks at the trees.}
+\end{canvas}
+\end{frame}
+
+\end{document}
