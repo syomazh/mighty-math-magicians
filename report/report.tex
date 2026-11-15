@@ -114,8 +114,9 @@
 % jobs); in the sense of the rules the declarations listed as checked below are Lean-verified.").
 \newcommand{\LeanVersions}{Lean \texttt{v4.35.0} with Mathlib \texttt{v4.35.0}}
 \newcommand{\LeanVersionStatus}{\textbf{The project builds on the versions that the rules require,
-\LeanVersions{}} (a full build from scratch on 15 November 2026: 3272 jobs, no error; a fresh clone of the
-repository was built from scratch in the same way, to imitate the automated check). The build prints the
+\LeanVersions{}}: a fresh clone of the repository was built from scratch on 15 November 2026 at 03:41, to
+imitate the automated check ($3279$ jobs, no error; no Lean source has changed since that state). The build
+prints the
 axioms behind every final theorem named in this report: each depends only on \texttt{propext},
 \texttt{Classical.choice} and \texttt{Quot.sound}; there is no \texttt{sorry} and no
 \texttt{native\_decide} in the project. In this report ``machine-checked'' and ``Lean'' therefore mean
@@ -124,9 +125,7 @@ that statement says what the text claims is the subject of the table of differen
 own automated check is what counts: if its result differs from this paragraph, its result stands. (The
 project was developed during the event on Lean \texttt{v4.36.0-rc2}; moving it to the required versions
 needed two kinds of change in five files: the name of one lemma of Mathlib about \texttt{multiplicity}, and
-the name of a case in four inductions. The number of jobs is that of the build of the state of 01:30; the
-later additions of the night were built on top of it, and the final state is built once more from a fresh
-clone before submission.)}
+the name of a case in four inductions.)}
 % Updated by the orchestrator (Claude Fable 5.2), 2026-11-15: the path proof is in the build. Original note: when the count, the residue and exactness of the lattice-path proof
 % are in the build, replace this macro (for example by: "The lattice-path proof is machine-checked in full:
 % ... declarations ...") and update the row of C24 in the status table (Section 2.3), the row of the
