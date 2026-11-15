@@ -111,8 +111,10 @@ Lean-verified in the sense of the rules, for the formal statement as it is writt
 that statement says what the text claims is the subject of the table of differences below. The competition's
 own automated check is what counts: if its result differs from this paragraph, its result stands. (The
 project was developed during the event on Lean \texttt{v4.36.0-rc2}; moving it to the required versions
-needed two changes in the sources: the name of one lemma of Mathlib about \texttt{multiplicity}, and the name
-of a case in four inductions.)}
+needed two kinds of change in five files: the name of one lemma of Mathlib about \texttt{multiplicity}, and
+the name of a case in four inductions. The number of jobs is that of the build of the state of 01:30; the
+later additions of the night were built on top of it, and the final state is built once more from a fresh
+clone before submission.)}
 % Updated by the orchestrator (Claude Fable 5.2), 2026-11-15: the path proof is in the build. Original note: when the count, the residue and exactness of the lattice-path proof
 % are in the build, replace this macro (for example by: "The lattice-path proof is machine-checked in full:
 % ... declarations ...") and update the row of C24 in the status table (Section 2.3), the row of the
@@ -122,9 +124,11 @@ of a case in four inductions.)}
 coefficient (\lean{MMM.Path.choose_residue}), and from them the valuation and the residue of the
 Fuss--Catalan number a third time (\lean{MMM.Path.problem137_fussCatalan_path},
 \lean{MMM.Path.residue_fussCatalan_path}; file \file{Path/Final.lean}). The formal proof differs from the
-text in one step: the number of minimal words is computed for every list of top blocks, by an induction that
-removes one block, where the text describes the choices level by level for the digits of $N$
-(Section~\ref{sec:lean}).}
+text in three respects: the number of minimal words is computed for every list of top blocks, by an induction
+that removes one block, where the text describes the choices level by level for the digits of $N$; Lean
+counts minimal words and never forms classes of them; and the identity $(qn+1)\,C_n^{(q)}=\binom{qn+1}{n}$,
+with the exactness of the division, is taken from the file that counts trees and not from the lemma on
+cyclic shifts of paths (Section~\ref{sec:lean}).}
 % =====================================================================================================
 
 \title{The exact $p$-adic valuation of Fuss--Catalan numbers\\ from rotations of $p$-ary trees\\[4pt]
@@ -1350,11 +1354,10 @@ Section~\ref{sec:computations}, and C27 is checked by Lean but has no written pr
  The sum of these products over all profiles with $\sum_in_i=n$ is $C_n^{(q)}$, so the corollary refines the
  divisibility half of the theorem; it is a statement about binomial coefficients, and its proof uses no
  valuation of a factorial. For the formal proof this is supported by a listing that the Lean build prints
- (file \file{lean/MMM/AxiomsExtra.lean}): the declarations of Mathlib to which the project's proof of the
- corollary refers directly and whose name contains one of ten strings such as \texttt{factorial},
- \texttt{multiplicity}, \texttt{padicval}, \texttt{legendre} or \texttt{kummer} (the full list is in
- Section~\ref{sec:lean}). According to the project's records the list is empty; it covers direct references
- only and does not look inside Mathlib's own proofs. The statement was computed beforehand for every profile
+ (file \file{lean/MMM/AxiomsExtra.lean}): the declarations in the full closure of the theorem, through Mathlib
+ and the core library, whose names contain one of nine strings such as \texttt{multiplicity\_choose},
+ \texttt{multiplicity\_factorial}, \texttt{padicval}, \texttt{legendre}, \texttt{kummer} or \texttt{lucas}
+ (Section~\ref{sec:lean}). The list is empty. The statement was computed beforehand for every profile
  in the ranges of Section~\ref{sec:computations}. It was not found in the four papers that an AI system read in full early
  in the project to look for overlap; no other search of the literature was made for it, and we do not claim
  that it is new.
@@ -1762,7 +1765,9 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
 \lean{MMM.Frob.problem137_fussCatalan_frobenius}, \lean{MMM.Frob.problem137_fussCatalan_exact_frobenius},
  \lean{MMM.Frob.residue_fussCatalan_frobenius} (\file{Frob/Problem137.lean})
  & Theorem~\ref{frob:thm}, for the binomial expression
- & The same statements as the three of \file{Problem137.lean}, proved a second time. In the text $C_n^{(q)}$
+ & The same statements as the three of \file{Problem137.lean}, proved a second time (the valuation and the
+ residue are identical by definition; the companion ``$p^t$ divides and $p^{t+1}$ does not'' lacks the conjunct
+ $C>0$, which follows, and takes $p$ as an explicit argument). In the text $C_n^{(q)}$
  is the coefficient of $G=x+G^q$; in Lean it is the number of trees, and the generating function of the trees
  is shown to satisfy the system.\\\addlinespace[3pt]
 \lean{MMM.Frob.residue_frobenius}, \lean{MMM.Frob.exact_valuation_blocked_frobenius} (\file{Frob/Final.lean})
@@ -1773,7 +1778,17 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  \lean{eval_of_carry} (in the namespace \lean{MMM.Frob}; files under \file{Frob/})
  & Lemmas~\ref{frob:lem:system}, \ref{frob:lem:lower} with Corollary~\ref{frob:cor:div},
  \ref{frob:lem:lead}, \ref{frob:lem:subst}, Propositions~\ref{frob:prop:carry}, \ref{frob:prop:eval}
- & Three differences of method. (i) Lemma~\ref{frob:lem:subst} is proved by induction on $m$ with a
+ & Four differences of method, and one correction made after an audit. (iv, the correction) The congruence
+ $\varphi(f)\equiv f^p\pmod p$ behind $\theta$ is proved in \file{Frob/Theta.lean} from the binomial theorem
+ and $p\mid\binom pk$ for $0<k<p$, as in the text. \textbf{Until 03:00 on 15 November the Lean file used
+ Mathlib's Frobenius endomorphism instead, and in the pinned Mathlib the additivity of that map is derived
+ through Kummer's theorem and Legendre's formula}; so the formal proof depended, inside the library, on the
+ valuations of factorials that the problem asks to avoid. The project's listing of direct references could
+ not see this; an independent AI audit of the statements found it (file \file{lean/AUDIT3.md} of the
+ repository), and the file was rewritten. The build now lists the full closure of each final theorem
+ (below), and it contains none of these. (v) Smaller differences of form: several identities are stated
+ multiplied by $p$; the integrality of the series $H_\delta$ holds by construction; $F_\delta$ is obtained as a
+ limit of iterates; some intermediate statements allow $k=0$. (i) Lemma~\ref{frob:lem:subst} is proved by induction on $m$ with a
  regrouping identity, not through the algebra with the carry-free product. (ii) The carry congruence is
  applied $n$ times along $\delta,\delta+1,\dots,\delta+n$. (iii) Hurwitz series are functions on
  multi-indices with the binomial convolution. Also: $\theta$ is not expanded into monomials in the lower
@@ -1855,7 +1870,13 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  the number $\mu_{j+1}$ of mixed blocks one level up, and $\mu_j=(\text{length of the blocks of height}\ge j)/p^j
  -\lfloor n/p^j\rfloor-\lfloor m/p^j\rfloor$. The proof is an induction that removes one top block (all
  \textsf{E}, all \textsf{S}, or mixed, and then replaced by its $p$ sub-blocks) and the Pascal rule for
- trinomial coefficients; Lemmas~\ref{path:lem:atoms} and~\ref{path:lem:mixed} are not stated. For the digits of
+ trinomial coefficients; Lemmas~\ref{path:lem:atoms} and~\ref{path:lem:mixed} are not stated. Three points of
+ reading: the left side is defined as a sum, over the letter counts of the top blocks, of products of the
+ numbers of minimal blocks, and it is the number of words with $d=c$ whenever a natural number $c$ with
+ $(p-1)c+\#\text{blocks}=s_p(n)+s_p(m)$ exists; for an arbitrary list ``minimal'' means ``attains the bound of
+ Proposition~\ref{path:prop:bound}'', not ``has the least $d$'', and when no word attains the bound both
+ sides are $0$ although words exist; and $\mu_j$ is formed with truncated subtraction, so it is $0$ where the
+ formula above would be negative. For the digits of
  $N$ the product becomes $\prod_j(N_j+p\,c_{j+1})!/(n_j!\,m_j!)$, as in the text.\\\addlinespace[3pt]
 \lean{carryAt_rec}, \lean{sum_carryAt}, \lean{factorial_add_prime_modEq} (\file{Path/KummerExact.lean})
  & Lemma~\ref{path:lem:carries}; the congruence in Proposition~\ref{path:prop:count} (Wilson's theorem)
@@ -1871,7 +1892,8 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
 \lean{MMM.Path.problem137_fussCatalan_path}, \lean{MMM.Path.problem137_fussCatalan_exact_path},
  \lean{MMM.Path.residue_fussCatalan_path} (\file{Path/Final.lean})
  & Theorem~\ref{path:thm:main}
- & The same statements as the three of \file{Problem137.lean}, proved a third time. The identity
+ & The same statements as the three of \file{Problem137.lean}, proved a third time (with the same remark on
+ the companion statement as for the algebraic proof). The identity
  $(qn+1)\,C_n^{(q)}=\binom{qn+1}{n}$ is taken from the file that counts trees (\file{FussFormula.lean}), not
  from Lemma~\ref{path:lem:shift} on cyclic shifts of paths; paths are words in two letters, and
  Remark~\ref{path:rem:dyck} is not formalized.\\\addlinespace[3pt]
@@ -1904,8 +1926,26 @@ defined in \file{lean/MMM/Frob/Deps.lean} follows a proof term through every dec
 its output shows that \lean{MMM.Frob.residue_frobenius} reaches, outside the files of the algebraic proof
 and the digit files, only the definition of the trees and of the number of leaves, one definition about
 depths, and three elementary facts about the number of leaves; the form for the Fuss--Catalan number reaches
-in addition the tree-count formula, the blocked form of a $q$-ary tree and three arithmetic lemmas. Neither
-reaches a rotation, a class of trees or a cherry.
+in addition the tree-count formula, the blocked form of a $q$-ary tree, the lemma that a tree with $n$ nodes
+has $(q-1)n+1$ leaves, and three arithmetic lemmas. Neither reaches a rotation, a class of trees or a cherry.
+(The lattice-path proof reaches, from the files of the tree proof, one counting lemma on classes of an
+equivalence relation, the tree-count formula, two arithmetic lemmas, and one instance saying that a prime is
+not zero.) The independent audit reproduced these listings with its own program.
+
+\emph{``Without valuations of factorials'', as far as Lean can list it.} A second command follows the
+\emph{full closure} of a theorem, through Mathlib and the core library (for an inductive type its
+constructors, for a recursor its rules), and lists the declarations outside the project whose names contain
+one of the strings \texttt{multiplicity\_choose}, \texttt{multiplicity\_factorial}, \texttt{padicval},
+\texttt{legendre}, \texttt{kummer}, \texttt{lucas}, \texttt{dvd\_choose\_pow}, \texttt{add\_pow\_char},
+\texttt{add\_pow\_expchar}. In the build of 15 November, 03:08, the list is empty for every final theorem of
+the three proofs (closures of about $12{,}700$ to $13{,}500$ declarations for the tree proof, $20{,}100$ to
+$20{,}400$ for the algebraic proof, $12{,}200$ to $12{,}600$ for the lattice-path proof) and for the exact
+count, the carry budget, the closed families, the level profiles and the weights. This is a search by names:
+it shows that no theorem of Mathlib on the power of $p$ in a factorial or in a binomial coefficient, and
+nothing named after Kummer, Legendre or Lucas, lies behind these proofs; it cannot show that no library proof
+reasons in such a way under another name. What the proofs do use from the library about factorials and
+binomial coefficients: that a prime $p$ divides $n!$ only if $n\ge p$, that $p$ divides $\binom pk$ for
+$0<k<p$, the formula $\binom nk\,k!\,(n-k)!=n!$, and Wilson's theorem for the residues.
 
 
 % ---- Sections 9 and 10: written by Claude Fable 5.2 (worker W046), 2026-11-15, from JOURNAL.md, STATE.md,
