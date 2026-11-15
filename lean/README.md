@@ -59,7 +59,7 @@ Here `PTree q` is the type of plane trees in which every internal node has q ord
 
 The "divides, does not divide" statements are the convention-free form: Mathlib sets `multiplicity p 0 = 0` and `Nat.card` of an infinite type to 0, and the second half of those statements excludes both cases.
 
-## Status (last full build: 2026-11-15 01:29, on Lean v4.35.0 and Mathlib v4.35.0, `lake build` succeeded, 3277 jobs after the additions of 02:09, no `sorry`)
+## Status (last full build: 2026-11-15 01:29, on Lean v4.35.0 and Mathlib v4.35.0, `lake build` succeeded, 3278 jobs after the additions of 02:39, no `sorry`)
 
 | Step of the paper | Statement | Lean name | File |
 |---|---|---|---|
@@ -150,6 +150,7 @@ The strategy and the order of the steps are the paper's. Five things are organiz
 | `MMM/Path/Slots1.lean`, `Slots2.lean`, `Slots.lean`, `KummerExact.lean`, `Problem137.lean`, `Final.lean` | the path proof, fourth and fifth parts (Claude agents, briefs W043 and W044; `Final.lean` by the orchestrator; all recompiled and read): the number of minimal words over any list of top blocks satisfies a three-term recursion (`minWords_cons_succ`) and so does the closed formula (`slotCount_cons_succ`, by `trinomial_pascal`), hence they agree (`minWords_eq_slotCount`); the carries (`carryAt_rec`, `sum_carryAt`); the count for the digits of N is ∏ (N_j + p c_(j+1))!/(n_j! m_j!) (`slotCount_digits`); (r + p)! ≡ −p·r! modulo p² (`factorial_add_prime_modEq`, Wilson); `kummer_exact`, `choose_residue`; the three statements for the Fuss–Catalan number |
 | `MMM/ExactCount.lean`, `MMM/CarryBudget.lean`, `MMM/AxiomsExtra.lean` | added 2026-11-15 (Claude agents, briefs W048 and W049; the audit file by the orchestrator): the exact number of minimal classes for q = p (`card_minimal_classes_mul`, with the exact number of trees with pairwise different labels, `card_labelled_mul_factorial`); the carry budget (`PTree.totalDrop_add_ds`, `PTree.drop_of_symmetric`, `PTree.excess`: (p − 1)·d(T) + 1 = s_p(m) + slack(T), `PTree.d_eq_iff_slack`), a second proof of the lower bound with the exact difference |
 | `MMM/Closed.lean`, `MMM/Profile.lean` | added 2026-11-15 (a Claude agent, brief W047; recompiled and read): the congruence for rotation-closed families (`card_closed_modEq_classes`); the level profile `prof`, its invariance under rotation (`Rot.prof_eq`), the number of q-ary trees with a given profile (`card_prof`, by a count of forests level by level), its behaviour under the blocked form (`prof_expand`), and the divisibility (`pow_dvd_card_prof`, `pow_dvd_prod_choose_profile`) |
+| `MMM/Weighted.lean` | added 2026-11-15 (a Claude agent, brief W051; recompiled and read): the sum of a rotation-invariant integer weight over a rotation-closed family is divisible by p^e (`pow_dvd_sum_weight_of_closed`, from `dvd_sum_of_classes`); the depth weight ∏ b_i^(nodes at depth i) and its recursion (`depthWeight_node`); for q = p^k the depth-weighted sum over the q-ary trees with n nodes is divisible by p^t (`pow_dvd_sum_depthWeight`) |
 | `MMM/Smoke.lean` | a one-line test that the project compiles against Mathlib |
 | `MMM/ClassSizeDraft.md` | the plan that `RotEquiv.lean` and `ClassSize.lean` carried out (a working note) |
 | `AUDIT.md` | the independent audit of the statements for q = p |

@@ -586,6 +586,13 @@ Claim & How it is supported & Read and approved by a human?\\
  (Section~\ref{sec:lean}); for the digits of a number it is Proposition~\ref{path:prop:count}.
  & No.\\
 \midrule
+\textbf{C28.} A rotation-invariant integer weight summed over a rotation-closed family is divisible by $p^t$;
+ depth-weighted Fuss--Catalan numbers.
+ & \emph{Proved in this report:} Section~\ref{sec:extensions}. \emph{Lean:}
+ \lean{PTree.pow_dvd_sum_weight_of_closed}, \lean{PTree.pow_dvd_sum_depthWeight}. \emph{Computation:} random
+ integer weights, $q\in\{2,3,4,5,8,9\}$, $n\le14$.
+ & No (written on the last night; checked by Lean only).\\
+\midrule
 \textbf{C21.} To leading order $C_n^{(q)}$ is $-1/\pi$ times a Gauss sum, $\pi=\zeta_p-1$.
  & \emph{Computation}: $77$ cases, $q\in\{2,3,4,5,7,8,9\}$ (E014). It would follow from Stickelberger's
  congruence (classical; quoted from \cite{Blache}, not from a primary source) and C6, C7; the deduction is
@@ -1255,7 +1262,7 @@ appears. (Checked by computation on explicit groups for small trees, claim C23(c
 order is sketched in the note and is not reproduced here.)
 
 \subsection{Extensions: other statistics}\label{sec:extensions}
-The problem statement suggests weighted numbers and other statistics. The first two items below are proved:
+The problem statement suggests weighted numbers and other statistics. The first three items below are proved:
 the proofs are a few lines from Steps~1 and~2, and both statements are checked by Lean
 (Section~\ref{sec:lean}). They were written on the last night of the event, and no human has read them. The
 remaining items are conjectures, with the computations listed in Section~\ref{sec:computations}.
@@ -1284,6 +1291,22 @@ remaining items are conjectures, with the computations listed in Section~\ref{se
  valuations at all, Section~\ref{sec:lean}). It was computed beforehand for every profile in the ranges of
  Section~\ref{sec:computations}. We made no search of the literature for this statement and do not claim
  that it is new.
+\item \emph{Weights that rotations do not change} (C28). \textbf{Corollary.} \emph{Let $w$ be an
+ integer-valued function on $p$-ary trees with $w(S)=w(T)$ whenever $S$ and $T$ are rotation equivalent, and
+ let $F$ be a rotation-closed family of trees with $m$ leaves. Then $p^t$ divides $\sum_{T\in F}w(T)$. In
+ particular, for $q=p^k$ and arbitrary integers $b_0,b_1,\dots$,}
+ \[
+  p^t\ \Big|\ \sum_{T}\ \prod_{v}b_{\operatorname{depth}(v)},
+ \]
+ \emph{the sum over the $q$-ary trees $T$ with $n$ internal nodes, the product over the internal nodes $v$
+ of $T$, and $t=(s_p((q-1)n+1)-1)/(p-1)$.} \emph{Proof.} The sum of $w$ over a rotation class of $p^d$ trees is
+ $p^d$ times the value of $w$ on the class, and $d\ge t$. The weight $\prod_vb_{\operatorname{depth}(v)}$
+ depends only on the level profile, which rotations do not change. \qed\ With all $b_i=1$ this is the
+ divisibility half of the theorem. It is \emph{not} the weighted theorem of
+ \cite{Konvalinka} or of \cite{PostnikovSagan}, whose weights depend on more than the depth and are not
+ invariant under rotation, and it says nothing about exactness; it records what the rotation argument gives
+ for weights with no further idea. Tested beforehand on random integer weights ($q\in\{2,3,4,5,8,9\}$,
+ $n\le14$). No search of the literature was made for it.
 \item \emph{Weighted Fuss--Catalan numbers} (C9). Konvalinka's Theorem~5 \cite{Konvalinka} appears to need
  only that the group is transitive on the $q$ branches of a node; the rotation group is transitive, so the
  weighted theorem should also become free of factorial valuations. Supported numerically; not proved.
@@ -1676,6 +1699,13 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  $n(L)=0$ and $(p-1)t+1$ equal to the digit sum of $(p^k-1)\sum_{i<L}n(i)+1$, $p^t$ divides
  $\prod_{i<L}\binom{p^kn(i)}{n(i+1)}$. The profile of a tree is fixed by prescribing it up to level $L$ with
  $n(L)=0$. One instance is evaluated in \file{AxiomsExtra.lean}.\\\addlinespace[3pt]
+\lean{PTree.pow_dvd_sum_weight_of_closed}, \lean{PTree.pow_dvd_sum_depthWeight}, \lean{PTree.depthWeight_node}
+ (\file{Weighted.lean})
+ & the corollary on weights of Section~\ref{sec:extensions} (C28)
+ & The sums are Mathlib's \lean{finsum} over the subtype of the family (finite here). The depth weight is
+ defined as $\prod_ib_i^{\,\text{number of nodes at depth }i}$; that this is the product over the nodes is the
+ recursion \lean{depthWeight_node}. The second statement is about the project's type of $q$-ary trees with $n$
+ nodes, not a statement in Mathlib's terms only.\\\addlinespace[3pt]
 \midrule
 \multicolumn{3}{@{}l}{\emph{Accounting proof (Appendix~\ref{app:acc}, C13, C20): conclusions only}}\\
 \lean{MMM.dwork_form}, \lean{MMM.factorial_eq_pow_mul_prod_mul} (\file{Dwork.lean})
@@ -1823,7 +1853,7 @@ are Pacific time, as recorded in the journal and the ledger):
  in Section~\ref{sec:lean}; in particular the formal main proof uses Wilson's theorem where the written one
  does not, and it does not formalize cyclic trees or the free action.
 \item \emph{Extensions.} The weighted theorem is supported by computation only. The statements on closed
- families and on level profiles (Section~\ref{sec:extensions}) were proved and checked by Lean on the last
+ families, level profiles and invariant weights (Section~\ref{sec:extensions}) were proved and checked by Lean on the last
  night; no human has read them, and no search of the literature was made for them. The case where $q$ is not
  a prime power was not explored.
 \item \emph{Connections.} They are readings, not results; one earlier claim about tabulated symmetry numbers
@@ -1930,7 +1960,7 @@ and audited, and a human reads and signs. Concretely:
 
 \subsection{What no human has checked}
 The algebraic proof (Appendix~\ref{app:frob}); every Lean file; the carry budget
-(Section~\ref{sec:carrybudget}); the two statements on closed families and level profiles
+(Section~\ref{sec:carrybudget}); the three statements on closed families, level profiles and weights
 (Section~\ref{sec:extensions}); the programs behind Section~\ref{sec:computations}; the connections of
 Section~\ref{sec:connections} and all sources cited for them; the literature search behind
 Section~\ref{sec:attribution}, apart from the fact that team members obtained two of the papers. Of the papers

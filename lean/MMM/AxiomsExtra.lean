@@ -9,6 +9,7 @@ import MMM.ExactCount
 import MMM.CarryBudget
 import MMM.Closed
 import MMM.Profile
+import MMM.Weighted
 import MMM.Frob.Deps
 
 #print axioms MMM.card_labelled_mul_factorial
@@ -62,3 +63,11 @@ example : 2 ^ 1 ∣ ∏ i ∈ Finset.range 3,
       ((fun i : ℕ => if i = 0 then 1 else if i = 1 then 2 else if i = 2 then 1 else 0) (i + 1)) := by
   have : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
   exact MMM.pow_dvd_prod_choose_profile 2 1 Nat.one_pos 3 _ (by decide) (by decide) 1 (by decide)
+
+-- Weights that rotations do not change (`Weighted.lean`, brief W051)
+#print axioms MMM.dvd_sum_of_classes
+#print axioms MMM.PTree.pow_dvd_sum_weight_of_closed
+#print axioms MMM.PTree.depthWeight_node
+#print axioms MMM.PTree.pow_dvd_sum_depthWeight
+#print axioms MMM.PTree.finsum_depthWeight_one
+#external_consts_matching MMM.PTree.pow_dvd_sum_depthWeight "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson" "factorial"
