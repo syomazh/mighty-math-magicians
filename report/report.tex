@@ -1289,7 +1289,8 @@ remaining items are conjectures, with the computations listed in Section~\ref{se
  divisibility half of the theorem; it is a statement about binomial coefficients, and its proof uses no
  valuation of a factorial (the Lean proof refers to no declaration of Mathlib about factorials or
  valuations at all, Section~\ref{sec:lean}). It was computed beforehand for every profile in the ranges of
- Section~\ref{sec:computations}. We made no search of the literature for this statement and do not claim
+ Section~\ref{sec:computations}. It was not found in the four papers that an AI system read in full early
+ in the project to look for overlap; no other search of the literature was made for it, and we do not claim
  that it is new.
 \item \emph{Weights that rotations do not change} (C28). \textbf{Corollary.} \emph{Let $w$ be an
  integer-valued function on $p$-ary trees with $w(S)=w(T)$ whenever $S$ and $T$ are rotation equivalent, and
@@ -1302,10 +1303,11 @@ remaining items are conjectures, with the computations listed in Section~\ref{se
  of $T$, and $t=(s_p((q-1)n+1)-1)/(p-1)$.} \emph{Proof.} The sum of $w$ over a rotation class of $p^d$ trees is
  $p^d$ times the value of $w$ on the class, and $d\ge t$. The weight $\prod_vb_{\operatorname{depth}(v)}$
  depends only on the level profile, which rotations do not change. \qed\ With all $b_i=1$ this is the
- divisibility half of the theorem. It is \emph{not} the weighted theorem of
- \cite{Konvalinka} or of \cite{PostnikovSagan}, whose weights depend on more than the depth and are not
- invariant under rotation, and it says nothing about exactness; it records what the rotation argument gives
- for weights with no further idea. Tested beforehand on random integer weights ($q\in\{2,3,4,5,8,9\}$,
+ divisibility half of the theorem. It is \emph{not} the weighted theorem of \cite[Theorem~5]{Konvalinka}:
+ there the weight of a vertex depends on the number of non-right edges on the path from the root, which
+ rotations change, and the conclusion is a congruence, not only a divisibility. (The paper
+ \cite{PostnikovSagan} on weighted Catalan numbers was not read in the project.) The corollary says nothing
+ about exactness; it records what the rotation argument gives for weights with no further idea. Tested beforehand on random integer weights ($q\in\{2,3,4,5,8,9\}$,
  $n\le14$). No search of the literature was made for it.
 \item \emph{Weighted Fuss--Catalan numbers} (C9). Konvalinka's Theorem~5 \cite{Konvalinka} appears to need
  only that the group is transitive on the $q$ branches of a node; the rotation group is transitive, so the
