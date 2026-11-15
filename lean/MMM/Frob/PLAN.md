@@ -398,3 +398,68 @@ No `sorry`, `admit`, `axiom`, `native_decide` or `unsafe`. `#print axioms` for
 Not done here (outside the brief): `Eval.lean` is not imported by `MMM.lean`,
 and `eval_of_carry` is not yet applied to `T0 := T p k 0` of `Carry.lean`
 (that needs `carry` at `δ = 0` and the value of `T p k 0` at `Pi.single 0 1`).
+
+## W040 — `Subst.lean`: Lemma "From the leading part to the labelled series" (2026-11-14/15)
+
+Started by Kimi K3.1 Pro (Open Math OS worker W040, cut off), continued by
+Claude Fable 5.2 (a subagent of the orchestrator). Not human-reviewed. Brief:
+`briefs/W040_lean_frobenius_subst.md`. Three files, to be compiled in this
+order: `SubstDigits.lean`, `SubstVandermonde.lean`, `Subst.lean`.
+
+The five definitions of the brief (`digitVec`, `digitFact`, `tuplesOf`,
+`mmultinomial`, `LabelledRec`) are in `Subst.lean`, unchanged. New definition:
+`cfTuples p m` (`SubstDigits.lean`), the index set of `cfpow`
+(`cfpow_eq_sum_cfTuples`, by `rfl`).
+
+| File | Statement | Status |
+|---|---|---|
+| `Subst.lean` | fact 1, `alpha_mul_digitFact`: `alpha p k δ m * (digitFact p m : ℤ) = if digitVec p k m = Pi.single (-δ) 1 then 1 else 0` | done |
+| `SubstDigits.lean` | fact 2, `mem_cfTuples_iff_dig`: `c ∈ cfTuples p m ↔ ∑ i, c i = m ∧ ∀ j, ∑ i, dig p j (c i) = dig p j m`; `le_of_mem_cfTuples`; `sum_cfTuples_divMod` (a carry-free tuple of `m` is a tuple of last digits with sum `m % p` and a carry-free tuple of `m / p`) | done |
+| `Subst.lean` | fact 2, `digitVec_eq_sum_of_mem_cfTuples`: `digitVec p k m = ∑ i, digitVec p k (c i)`; `digitFact_eq_of_mem_cfTuples`: `digitFact p m = (∏ j ∈ range (m + 1), Nat.multinomial univ (fun i => dig p j (c i))) * ∏ i, digitFact p (c i)` | done |
+| `SubstVandermonde.lean` | `sum_cfTuples_weighted`, `prod_sum_pow_eq_sum_tuples`, `sum_cfTuples_poly`, `monomial_extract`, `sum_cfTuples_regroup` (fact 3 without the definitions of `Subst.lean`, for positions sorted into classes by any `κ : ℕ → ι`) | done |
+| `Subst.lean` | fact 3, `sum_cfTuples_digitVec` (for an arbitrary `G : (Fin p → ZMod k → ℕ) → ℤ`) and `vandermonde_digits` (as in the brief: for `u ∈ tuplesOf p (digitVec p k m)`, the sum over `c ∈ cfTuples p m` with `∀ i, digitVec p k (c i) = u i` of `∏ j ∈ range (m + 1), Nat.multinomial univ (fun i => dig p j (c i))` is `mmultinomial u`) | done |
+| `Subst.lean` | `lead_mul_digitFact` (statement of the brief, unchanged) | done |
+
+Method. Facts 1 and 2 as in the brief. Fact 3 is not proved through a
+Vandermonde identity for multinomial coefficients, but by comparing
+coefficients: in a commutative semiring, for elements `x i d`
+(`i : Fin p`, `d` a class), both sides of fact 3 are expansions of
+`∏_d (∑_i x i d) ^ (a(m) d)`. The left one (`sum_cfTuples_weighted`) is an
+induction on the number of digits, with one use of the multinomial theorem
+(`Finset.sum_pow_eq_sum_piAntidiag`) per digit and `sum_cfTuples_divMod`; the
+right one (`prod_sum_pow_eq_sum_tuples`) is the multinomial theorem for every
+class and `Finset.prod_univ_sum`. The identity is then read in
+`MvPolynomial (Fin p × ι) ℤ`, where the monomials are a basis
+(`MvPolynomial.basisMonomials`), so that every monomial may be replaced by an
+arbitrary integer `G u` (`monomial_extract`). `lead_mul_digitFact` is the
+strong induction of the brief: `lead_solution`, fact 1, and for the p-th power
+`digitFact_eq_of_mem_cfTuples`, the induction hypothesis (a tuple with an
+entry 0 contributes 0 on both sides, otherwise all entries are `< m`), and
+`sum_cfTuples_digitVec` with `G u = ∏ i, T (δ + 1) (u i)`.
+
+Compile, in this order (the first two with no output, the third prints the
+axioms; exit code 0):
+
+```bash
+lake env lean MMM/Frob/SubstDigits.lean -o .lake/build/lib/lean/MMM/Frob/SubstDigits.olean
+lake env lean MMM/Frob/SubstVandermonde.lean -o .lake/build/lib/lean/MMM/Frob/SubstVandermonde.olean
+lake env lean MMM/Frob/Subst.lean -o .lake/build/lib/lean/MMM/Frob/Subst.olean
+```
+
+No `sorry`, `admit`, `axiom`, `native_decide` or `unsafe`. `#print axioms` for
+`lead_mul_digitFact`, `alpha_mul_digitFact`, `mem_cfTuples_iff_dig`,
+`digitVec_eq_sum_of_mem_cfTuples`, `digitFact_eq_of_mem_cfTuples`,
+`sum_cfTuples_digitVec`, `vandermonde_digits`, `sum_cfTuples_regroup`,
+`sum_cfTuples_weighted`, `monomial_extract` gives
+`[propext, Classical.choice, Quot.sound]`.
+
+Checked in scratch files, nothing written: `FinalGlue.lean` and `Final.lean`
+type-check from source against the new `Subst.olean`, and
+`lead_mul_digitFact p k (T p k) (labelledRec_T p k) δ m` is accepted (with the
+`Final.olean` of 14 November 23:46). The lemma of this file that adds up the
+entries of `digitVec` is called `digitVec_sum_eq_ds`, because `FinalGlue.lean`
+already declares `sum_digitVec`.
+
+Not done here (outside the brief): the three files are not imported by
+`MMM.lean`; `FinalGlue.olean`, `Final.olean` and what depends on them were
+compiled against the earlier `Subst.olean` and have to be compiled again.

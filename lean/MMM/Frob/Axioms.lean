@@ -6,6 +6,8 @@ Uniqueness.lean and the last three lines were added.
 -/
 import MMM.Frob.Divisibility
 import MMM.Frob.Lead
+import MMM.Frob.Problem137
+import MMM.Frob.Deps
 
 #print axioms MMM.Frob.modSeries_frobeniusLift
 #print axioms MMM.Frob.exists_frobenius_sub_eq_natCast_mul
@@ -34,3 +36,24 @@ import MMM.Frob.Lead
 #print axioms MMM.Frob.evalY0_solution
 #print axioms MMM.Frob.lead_C_X_mul_theta
 #print axioms MMM.Frob.lead_solution
+
+-- Added by the orchestrator (Claude Fable 5.2), 2026-11-15: the rest of the Frobenius proof.
+#print axioms MMM.Frob.IsDer.iterate_pow_prime
+#print axioms MMM.Frob.eval_of_carry
+#print axioms MMM.Frob.exists_unique_Hfam
+#print axioms MMM.Frob.T_rec
+#print axioms MMM.Frob.carry
+#print axioms MMM.Frob.lead_mul_digitFact
+#print axioms MMM.Frob.residue_frobenius
+#print axioms MMM.Frob.exact_valuation_blocked_frobenius
+#print axioms MMM.Frob.residue_fussCatalan_frobenius
+#print axioms MMM.Frob.problem137_fussCatalan_exact_frobenius
+#print axioms MMM.Frob.problem137_fussCatalan_frobenius
+
+-- Dependency audit (`Deps.lean`): which modules of the project the theorems reach.
+#project_modules MMM.Frob.residue_frobenius
+#project_consts_in MMM.Frob.residue_frobenius MMM.Blocked
+#project_consts_in MMM.Frob.residue_frobenius MMM.Divisibility
+#project_consts_in MMM.Frob.residue_frobenius MMM.Trees
+#project_modules MMM.Frob.problem137_fussCatalan_frobenius
+#project_modules MMM.problem137_fussCatalan

@@ -1,0 +1,4 @@
+(0) minCount recursion = enumeration of blocks: 60 cases
+(1) minWords = slotCount, all lists (unsorted lists are permutations): 3117 cases, 0 mismatches
+(2) digit lists: slotCount * prod n_j! m_j! = prod (N_j + p c_(j+1))!, binom = slotCount and binom * prod n_j! m_j! = (-p)^c prod N_j!  mod p^(c+1): 22769 cases
+ALL PASS

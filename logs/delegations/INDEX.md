@@ -51,3 +51,5 @@
 | 20261114-193040 | W036_lean_frobenius_lead | moonshotai/kimi-k3.1-pro | 1 (attempts: 2) | logs/delegations/20261114-193040_W036_lean_frobenius_lead |
 | 20261114-224328 | W038_lean_frobenius_powderiv | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-224328_W038_lean_frobenius_powderiv |
 | 20261114-212615 | W037_lean_frobenius_hurwitz | moonshotai/kimi-k3.1-pro | 1 (attempts: 2) | logs/delegations/20261114-212615_W037_lean_frobenius_hurwitz |
+| 20261114-224328 | W040_lean_frobenius_subst | moonshotai/kimi-k3.1-pro | 1 (attempts: 2) | logs/delegations/20261114-224328_W040_lean_frobenius_subst |
+| 20261114-224328 | W039_lean_frobenius_eval | moonshotai/kimi-k3.1-pro | 1 (attempts: 2) | logs/delegations/20261114-224328_W039_lean_frobenius_eval |

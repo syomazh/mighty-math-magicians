@@ -97,3 +97,33 @@ The only valuation named in these files occurs in the comments saying none is us
   equivalence classes, and digit-sum subadditivity. No factorial valuations or binomial
   divisibility theorems are used.
 
+
+---
+
+# Path proof, part 3 — brief W041 (Claude Fable 5.2, a subagent of the orchestrator, 2026-11-14, not human-reviewed)
+
+Reduction to the minimal words, the equality cases of `lem:bound` and `prop:bound`, and the count
+of the minimal blocks. No Mathlib theorem about valuations of factorials or binomial coefficients
+is used; binomial coefficients appear only through `card_cntEW` and `Finset.card_powersetCard`.
+
+| Statement | File | Status |
+|---|---|---|
+| `card_cntEW_modEq_minimal [Fact p.Prime] (L n c) (hc : ∀ w, cntEW w = n → c ≤ dW w) : Nat.card {w // cntEW w = n} ≡ Nat.card {w // cntEW w = n ∧ dW w = c} [MOD p ^ (c + 1)]` | `Minimal.lean` | done |
+| `choose_modEq_minimal [Fact p.Prime] (L n c) (hn : n ≤ len p L) (hc : (p - 1) * c + L.length = ds p n + ds p (len p L - n)) : (len p L).choose n ≡ Nat.card {w // cntEW w = n ∧ dW w = c} [MOD p ^ (c + 1)]` | `Minimal.lean` | done |
+| `MinBlk`, `d_eq_zero_of_mono`, `mono_of_d_eq_zero`, `minBlk_of_mono`, `minBlk_succ_iff` (statements as in the brief) | `MinBlock.lean` | done |
+| helpers `eq_of_cntE_eq_zero`, `eq_of_cntE_eq_pow`, `not_minBlk_of_sym`, `not_sym_of_minBlk`, `sum_ds_ne_of_sym` | `MinBlock.lean` | done |
+| `minCount`, `minCount_mono`, `minCount_succ` (statements as asked, with `[NeZero p]` added) | `MinCount.lean` | done |
+| `dW_eq_iff` (equality case of `prop:bound`), `card_minimal_words`, `choose_modEq_sum_minCount` | `MinCount.lean` | done |
+| `tuple_shape` (`lem:mixed` for one block), `minCount_succ_mul_pow`, `minCount_succ_add`, `minCount_succ_eq` | `MinCount.lean` | done |
+| closed form of the sum in `card_minimal_words` (several top blocks) | — | not done, not started |
+| residue modulo `p` of `prop:count`, exactness half of Kummer's theorem | — | not done, not started |
+
+Compile (`lake env lean … -o …`): `Minimal.lean` one warning (unused `hn`, prescribed by the
+brief); `MinBlock.lean` two warnings (unused `hp` in `d_eq_zero_of_mono` and `mono_of_d_eq_zero`,
+prescribed by the brief); `MinCount.lean` clean. `#print axioms` of every theorem listed above:
+`[propext, Classical.choice, Quot.sound]`.
+
+Closed recursion proved for one block (`minCount p h a` = number of blocks of height `h` with `a`
+letters E attaining the bound): `minCount p h 0 = minCount p h (p^h) = 1`;
+`minCount p (h+1) (k p^h) = binom(p, k)` for `0 < k < p`;
+`minCount p (h+1) (k p^h + r) = p * binom(p-1, k) * minCount p h r` for `k < p`, `0 < r < p^h`.
