@@ -126,7 +126,8 @@
 \newcommand{\LeanVersionStatus}{\textbf{The project builds on the versions that the rules require,
 \LeanVersions{}}: a fresh clone of the repository was built from scratch on 15 November 2026 at 03:41, to
 imitate the automated check ($3279$ jobs, no error). On the same morning the files of the accounting proof
-were added, and the full build was repeated, the last time at 09:13 ($3316$ jobs, no error). The build
+were added, and a fresh clone of the final state was again built from scratch, finished at 09:31 ($3316$
+jobs, no error; no Lean source has changed since that state). The build
 prints the
 axioms behind every final theorem named in this report: each depends only on \texttt{propext},
 \texttt{Classical.choice} and \texttt{Quot.sound}; there is no \texttt{sorry} and no
@@ -547,6 +548,18 @@ from the trivial fact that $a!$ is prime to $p$ when $a<p$. Its steps:
 In one sentence: shrink the symmetry group until it is a $p$-group; then orbit sizes are powers of $p$, the
 smallest orbits are built from the digits of $m$, and a carry in base $p$ is a cherry collapsing.
 
+% Added 2026-11-15 by Claude Fable 5.2 (orchestrator) from talk/SLIDES_VS_REPORT.md (sentences L-A1, L-A2),
+% after team members uploaded slides of their deck: notation and step numbers of that deck.
+\emph{Notation and numbering of the team members' slides.} On those slides the set of equivalence classes of
+cyclic skeleton trees for $m$ (Definition~\ref{main:def:skeleton}) is written $\mathcal S(m,k)$, so that
+$N_{\min}=|\mathcal S(m,k)|$ (Proposition~\ref{main:prop:skeleton}), and $\mathcal T(\mathbf a)$ is the set
+of labelled cyclic trees whose number is $T(\mathbf a)$ in Section~\ref{main:sec:count}, so that
+$|\mathcal T(\mathbf a)|=T(\mathbf a)$. The slides number the same steps from $1$ to $7$: their Step~1 is
+Step~0 here; their Step~2 is Step~1; their Steps~3 and~4 are Step~2 and the criterion for equality
+(Proposition~\ref{main:prop:minimal-local}); their Step~5 is Step~3; their Step~6 is the first sentence of
+Step~4 (Proposition~\ref{main:prop:free}); their Step~7 is the rest of Step~4
+(Propositions~\ref{main:prop:carry} and~\ref{main:prop:carry-termination}).
+
 \subsection{Small examples, in words}\label{sec:smallexamples}
 We write a tree in bracket notation: $\bullet$ is a leaf and $(A,B)$ or $(A,B,C)$ is a node with the listed
 subtrees, from left to right. The numbers in this subsection are direct enumerations from the definitions, or
@@ -573,7 +586,9 @@ leaves.
 \emph{Five leaves.} $C_4=14=2+4+8$: the classes of $(((\bullet,\bullet),(\bullet,\bullet)),\bullet)$ ($d=1$),
 of $(((\bullet,\bullet),\bullet),(\bullet,\bullet))$ ($d=2$) and of $((((\bullet,\bullet),\bullet),\bullet),\bullet)$
 ($d=3$). Here $m=5=101_2$, $t=1$, and the one minimal class consists of atoms with $4$ and $1$ leaves:
-$1+4=001_2+100_2$ adds without a carry, whereas $2+3=10_2+11_2$ carries and gives $d=2$.
+$1+4=001_2+100_2$ adds without a carry, whereas $2+3=10_2+11_2$ carries and gives $d=2$. (The smallest
+instance of a strict inequality between digit sums, Lemma~\ref{main:lem:digit}: $s_2(3+1)=s_2(4)=1$,
+while $s_2(3)+s_2(1)=3$.)
 
 \emph{Seven leaves.} $C_6=132$, $m=7=111_2$, $t=2$: there are $11$ classes, with $132=3\cdot4+3\cdot8+4\cdot16+1\cdot32$;
 the three classes of size $4$ are the three ways to hang atoms with $1$, $2$ and $4$ leaves on a skeleton with
@@ -589,6 +604,16 @@ butyl groups; the complete tree is \emph{tert}-butyl.)
 $m=10$ leaves, all at even depths (depths $2$ and $4$ for six of them, depths $2$, $4$ and $6$ for the other
 sixteen). There are $22$ of them, in classes of sizes $2$, $4$ and $16$
 ($22=2+4+16$); $m=10=1010_2$, $t=1$, and there is one class of size $2$.
+For example, the $4$-ary tree whose root has an internal node as first and as fourth child, each with four
+leaves, and a leaf as second and as third child becomes $((K_2,\bullet),(\bullet,K_2))$ with
+$K_2=((\bullet,\bullet),(\bullet,\bullet))$: two leaves at depth $2$ and eight at depth $4$. Its root is
+symmetric, the two nodes below the root are asymmetric, and its class is the one of size $4$.
+
+\emph{A minimal ternary tree.} For $p=q=3$, $n=8$: $m=17=122_3$, $t=2$, and the atoms have $9,3,3,1,1$ leaves.
+The first skeleton pictured in Example~\ref{main:ex:ternary}, $((K_0,K_0',K_1),K_1',K_2)$, expands to a tree
+whose root has subtrees with $5$, $3$ and $9$ leaves, and $5+3+9=012_3+010_3+100_3=122_3$ is added without a
+carry; the node below the root adds $1+1+3=001_3+001_3+010_3=012_3$, again without a carry. Both nodes are
+asymmetric, and $d=t=2$.
 
 \emph{Values of the theorem} (direct arithmetic, recomputed while assembling this report):
 \begin{center}\small
@@ -609,7 +634,17 @@ $q$ & $n$ & $C_n^{(q)}$ & $m$ in base $p$ & $t$ & $C_n^{(q)}/p^t \bmod p$ & $(-1
 number of cyclic trees with distinctly labelled leaves, $a_c$ of them of depth class $c$: for $p=3$, $k=1$,
 $T(5)=40=2!\cdot2!\cdot1!\cdot10$; a $3$-cycle of labels moves $36$ of these $40$ trees, in $12$ orbits of
 size $3$, and fixes $4=(p-1)\cdot T(3)$, in each of which the three labels form a cherry
-(Example~\ref{main:ex:ternary}). For $p=3$, $k=2$: $T(3,2)=4$, $T(0,3)=2$, $T(1,0)=1$, and
+(Example~\ref{main:ex:ternary}).
+With labels $x_1,x_2,x_3,y_1,y_2$ and the $3$-cycle $(x_1\,x_2\,x_3)$, one orbit of size $3$ is
+\[
+ (x_1,x_2,(x_3,y_1,y_2)),\quad(x_2,x_3,(x_1,y_1,y_2)),\quad(x_3,x_1,(x_2,y_1,y_2)),
+\]
+and the four fixed trees are
+\[
+ (y_1,y_2,(x_1,x_2,x_3)),\quad(y_1,y_2,(x_1,x_3,x_2)),\quad(y_1,(x_1,x_2,x_3),y_2),\quad(y_1,(x_1,x_3,x_2),y_2),
+\]
+the children of a node being taken up to cyclic rotation; collapsing the cherry to one leaf $z$ gives the two
+trees $(y_1,y_2,z)$ and $(y_1,z,y_2)$ counted by $T(3)=2$. For $p=3$, $k=2$: $T(3,2)=4$, $T(0,3)=2$, $T(1,0)=1$, and
 $4\equiv-2\equiv1\pmod3$, two carries (the four trees: a root carrying the two labels of class $1$ and a
 cherry of the three labels of class $0$, in $2\cdot2$ cyclic orders). In general, if $\mathbf a\ne0$ and
 $\sum_ca_cp^c\equiv1\pmod{q-1}$ then $T(\mathbf a)\equiv\pm1\pmod p$, in particular $T(\mathbf a)\ne0$
@@ -1714,7 +1749,8 @@ Not explored: $q$ that is not a prime power; residues modulo $p^2$.
 \section{Connections with other fields}\label{sec:connections}
 The trees of the theorem occur in several sciences, and in none of them does the left-to-right order of the
 branches mean anything: what matters is the shape, and the question ``how many ordered trees stand over one
-shape?'' has the answer $p^d$ of Step~1. This section lists the connections that the team's slides show, each
+shape?'' has the answer $p^d$ of Step~1. This section lists the connections shown on the AI-written deck of slides that is in the repository (it may
+not be the deck that is presented), each
 with its status: \textbf{[known]} means a statement of the other field, taken from a source in the reference
 list (all of these sources were opened by AI systems only; none was read by a human on the team, and no
 practitioner of these fields was consulted); \textbf{[computed]} means an observation of the project, checked
@@ -1736,7 +1772,7 @@ uniform splitting, the probability of a shape is $2^{d}/\prod_v(m_v-1)$, $m_v$ t
 node $v$, with our $d$ (\cite{Steel2025} states the Yule--Harding probability as $2^{n-1-s}/\prod n(v)$, in
 its notation). \textbf{[computed]} Exchanging two labels fixes a labelled tree exactly when the two leaves form a cherry
 ($m\le7$). One tree with $6$ leaves can be drawn as an evolutionary tree, a knockout tournament, a prefix
-code and a bar of music (four pictures of one slide of the talk); $6=110_2$, so one node has to be lopsided,
+code and a bar of music (four pictures of one slide of that deck); $6=110_2$, so one node has to be lopsided,
 and one is enough.
 
 \item \textbf{Sylow subgroups of symmetric groups (every $p$ and $q$).} \textbf{[known]} The group that the
@@ -1906,7 +1942,7 @@ E010 & every numbered statement of the algebraic proof, separately & $p\le11$, $
 E011 & the carry budget C19; the Dwork form C20 & C19: all $1{,}978$ classes with up to $13$ to $19$
  leaves, $p\in\{2,3,5,7\}$; the referee: $1{,}364{,}923$ classes and random trees up to $4.8$ million leaves;
  C20: $565$ cases, $p\le13$, $k\le4$ & no violation\\\addlinespace[3pt]
-E012, E013 & the numbers shown in the pictures of the slides (C22) & small cases, as stated in
+E012, E013 & the numbers shown in the pictures of the AI-written deck (C22) & small cases, as stated in
  Section~\ref{sec:connections} & all pass\\\addlinespace[3pt]
 E014 & Stickelberger's congruence, and C21 & $12$ fields with $q\le49$; $77$ cases,
  $q\in\{2,3,4,5,7,8,9\}$ & holds; altered statements fail\\\addlinespace[3pt]
@@ -2497,9 +2533,11 @@ Further sessions of Claude Fable 5.2 with a fresh context or forked from the orc
 Claude Fable 5.2 in the Claude app (a chat session started by a team member) & The lattice-path proof: the
  question was the team member's; the proof, the note, its figures and its check scripts are the AI's.\\\addlinespace[3pt]
 Claude Fable 5.2 in Claude Code on another team member's machine & Chemistry and polymer checks against
- printed sources; a second, independent reading of the lattice-path proof with its own program.\\\addlinespace[3pt]
-Claude Opus 5.5 in Claude Code & One slide of the talk (the diagram of the workflow), according to a comment
- in the source of the slides.\\\addlinespace[3pt]
+ printed sources; a second, independent reading of the lattice-path proof with its own program. On
+ 15 November: two outlook slides for the team members' deck, with the polynomial example of
+ Section~\ref{sec:extensions} and a program that checks the numbers on them.\\\addlinespace[3pt]
+Claude Opus 5.5 in Claude Code & One slide of the AI-written deck (the diagram of the workflow), according to
+ a comment in the source of that deck.\\\addlinespace[3pt]
 DeepSeek Flash, GLM 5.3, Nemotron, through Open Math OS & Connectivity tests only.\\\addlinespace[3pt]
 Claude Fable 5.2 (this session, a worker with a fresh context) & Assembled this report from the existing
  material; wrote the abstract and Sections~\ref{sec:problem}, \ref{sec:results} and \ref{sec:further} to
@@ -2512,7 +2550,7 @@ Lean~4 with Mathlib; Python; the OEIS; Crossref, OpenAlex, Semantic Scholar, arX
 The project's rule was that a claim moves through grades: \emph{conjecture}; \emph{computed} (a program
 passes); \emph{AI-proved} (a written proof exists); \emph{AI-reviewed} (a different model, or a session that
 has not seen the author's reasoning, tried to break it and failed); \emph{human-signed}. In words, the
-diagram on the slides: the people set the direction; the orchestrating AI introduces one claim at a time;
+diagram of the workflow on the AI-written deck: the people set the direction; the orchestrating AI introduces one claim at a time;
 the claim is first tested by heavy computation; a proof is written lemma by lemma; other models read it and
 mark every step correct, gap or wrong (for the main proof three models in the first round; the other proofs
 had one or two AI readers each, as listed below); the orchestrator checks who is right and repairs the proof, and
