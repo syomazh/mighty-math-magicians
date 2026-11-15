@@ -1,0 +1,8 @@
+slug:    W038_lean_frobenius_powderiv
+brief:   briefs/W038_lean_frobenius_powderiv.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 22:43:28 PST
+attempt 1: exit 0 at 22:46:47
+ended:   2026-11-14 22:46:47 PST
+exit:    0

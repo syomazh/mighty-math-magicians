@@ -1,0 +1,9 @@
+slug:    W036_lean_frobenius_lead
+brief:   briefs/W036_lean_frobenius_lead.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 19:30:40 PST
+attempt 1: exit 124 at 21:00:41
+attempt 2: exit 1 at 22:30:14
+ended:   2026-11-14 22:30:14 PST
+exit:    1

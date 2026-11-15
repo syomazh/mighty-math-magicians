@@ -5,6 +5,7 @@ Extended by the orchestrator (Claude Fable 5.2) on review: the import now reache
 Uniqueness.lean and the last three lines were added.
 -/
 import MMM.Frob.Divisibility
+import MMM.Frob.Lead
 
 #print axioms MMM.Frob.modSeries_frobeniusLift
 #print axioms MMM.Frob.exists_frobenius_sub_eq_natCast_mul
@@ -30,3 +31,6 @@ import MMM.Frob.Divisibility
 #print axioms MMM.Frob.treeGF_eq
 #print axioms MMM.Frob.evalY_solution_eq_treeGF
 #print axioms MMM.Frob.pow_dvd_card_blocked_frobenius
+#print axioms MMM.Frob.evalY0_solution
+#print axioms MMM.Frob.lead_C_X_mul_theta
+#print axioms MMM.Frob.lead_solution

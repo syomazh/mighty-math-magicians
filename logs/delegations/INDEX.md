@@ -48,3 +48,5 @@
 | 20261114-190018 | W034_lean_frobenius_weights | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-190018_W034_lean_frobenius_weights |
 | 20261114-184647 | W033_lean_path_kummer_dvd | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-184647_W033_lean_path_kummer_dvd |
 | 20261114-190018 | W035_lean_frobenius_tree_gf | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-190018_W035_lean_frobenius_tree_gf |
+| 20261114-193040 | W036_lean_frobenius_lead | moonshotai/kimi-k3.1-pro | 1 (attempts: 2) | logs/delegations/20261114-193040_W036_lean_frobenius_lead |
+| 20261114-224328 | W038_lean_frobenius_powderiv | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-224328_W038_lean_frobenius_powderiv |

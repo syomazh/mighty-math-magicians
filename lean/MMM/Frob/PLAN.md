@@ -195,7 +195,52 @@ not done here; likewise, an explicit generating-series equation beyond
 
 ### State inherited from W025
 
-`Basic.lean` proves Λ, φ as a ring hom, φ(X)=X^p and φ(C Y)=C(Y^p).
-`Theta.lean` proves the mod-p reduction lemmas and Frobenius congruence listed
-above.  No `sorry`, `admit`, `axiom`, `native_decide`, or `unsafe` is used in
-proof files.
+### W036: the value at y=0 and leading Frobenius terms
+
+Written by Kimi K3.1 Pro, 2026-11-14. Not human-reviewed.
+
+`YZero.lean` compiles and proves the closed form at `y=0` exactly as
+
+```lean
+noncomputable def alpha (p k : ℕ) (δ : ZMod k) (m : ℕ) : ℤ :=
+  if ∃ j : ℕ, m = p ^ j ∧ (j : ZMod k) + δ = 0 then 1 else 0
+
+theorem evalY0_solution (p : ℕ) [Fact p.Prime] (k : ℕ) (δ : ZMod k) :
+    evalY0 (solution p k δ) = PowerSeries.mk (alpha p k δ)
+```
+
+The proof checks explicitly that these indicators obey the expanded cyclic
+recursion and then uses induction on coefficient degree to identify it with the
+solution. The implementation makes the predicate in `alpha` classically
+decidable, and its helper `alpha_zeroConstant` therefore assumes primality.
+No statement about `alpha` at nonprime `p` is claimed.
+
+The four targets in `Lead.lean` have different status:
+
+1. `lead` and `cfpow` have the requested definitions, and the three required
+lemmas `lead_add`, `lead_X`, and `lead_frobeniusLift` are proved. The latter
+uses the weight bound to show that a leading Frobenius coefficient must come
+from a term of zero `y`-degree, hence from a power of `p`. Supporting lemmas
+identify numbers of digit sum one with powers of the base.
+2. No proof of `lead_C_X_mul_theta` is retained. Its remaining work is the
+expansion of the polynomial coefficient of a `p`-fold product as a double
+finite tuple sum, followed by a termwise weight and carry argument. An
+independent helper `coe_prod_coeff` (expressing a coefficient of a finite
+polynomial product using the corresponding power-series product) does compile,
+but it is not the required carry-free product theorem.
+3. Consequently neither an unconditional `lead_solution` nor a conditional
+`lead_solution_of_theta` is stated. In particular there is no provisional
+weakened substitute or unconditional claim smuggled in as an axiom.
+
+Both retained Lean files compile separately with
+
+```bash
+lake env lean MMM/Frob/YZero.lean -o .lake/build/lib/lean/MMM/Frob/YZero.olean
+lake env lean MMM/Frob/Lead.lean -o .lake/build/lib/lean/MMM/Frob/Lead.olean
+```
+
+(with the local elan directory on `PATH`). No `sorry`, `admit`, `axiom`,
+`native_decide`, or `unsafe` is used. The reported axiom checks for
+`evalY0_solution`, `lead_add`, `lead_X` and `lead_frobeniusLift` all give only
+`[propext, Classical.choice, Quot.sound]`.
+
