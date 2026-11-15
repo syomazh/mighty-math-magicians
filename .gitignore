@@ -37,3 +37,7 @@ guests/*/experiments/*/tmp/
 
 # temporary copy for the port to Lean v4.35.0 (orchestrator, 2026-11-15)
 /lean435/
+
+# LaTeX build files of the report (logs contain local paths)
+/report/build/
+/report/build_stdout.txt

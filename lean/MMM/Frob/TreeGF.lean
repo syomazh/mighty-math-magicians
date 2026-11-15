@@ -422,7 +422,7 @@ theorem treeSystem_unique (hp : 2 ≤ p) {G H : ℕ → PowerSeries ℤ}
   apply PowerSeries.ext
   intro m
   induction m using Nat.strong_induction_on generalizing δ with
-  | ind m ih =>
+  | _ m ih =>
     by_cases hm : m = 0
     · subst m
       rw [hG0, hH0]

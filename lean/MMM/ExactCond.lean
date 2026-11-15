@@ -28,9 +28,11 @@ def Step4 (p : ℕ) : Prop :=
 theorem multiplicity_eq_of_exact {p : ℕ} [hp : Fact p.Prime] {c t : ℕ} (h1 : p ^ t ∣ c)
     (h2 : ¬ p ^ (t + 1) ∣ c) : multiplicity p c = t := by
   have hc : c ≠ 0 := fun h => h2 (h ▸ dvd_zero _)
-  have e1 := (Nat.pow_dvd_iff_le_multiplicity hp.out.ne_one hc).mp h1
+  have hfin : FiniteMultiplicity p c :=
+    Nat.finiteMultiplicity_iff.mpr ⟨hp.out.ne_one, Nat.pos_of_ne_zero hc⟩
+  have e1 := hfin.pow_dvd_iff_le_multiplicity.mp h1
   have e2 : ¬ t + 1 ≤ multiplicity p c := fun h =>
-    h2 ((Nat.pow_dvd_iff_le_multiplicity hp.out.ne_one hc).mpr h)
+    h2 (hfin.pow_dvd_iff_le_multiplicity.mpr h)
   omega
 
 namespace PTree

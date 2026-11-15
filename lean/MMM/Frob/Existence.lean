@@ -34,7 +34,7 @@ theorem iter_stable_eq (p : ℕ) [Fact p.Prime] :
       (iter p k n δ).coeff m = (iter p k (m + 1) δ).coeff m := by
   intro m
   induction m using Nat.strong_induction_on with
-  | ind m ih =>
+  | _ m ih =>
     by_cases hm : m = 0
     · subst m
       intro n hn δ

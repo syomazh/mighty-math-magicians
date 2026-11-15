@@ -94,7 +94,7 @@ theorem expand_cyclic_unique {p : ℕ} [Fact p.Prime] {k : ℕ}
   apply PowerSeries.ext
   intro m
   induction m using Nat.strong_induction_on generalizing δ with
-  | ind m ih =>
+  | _ m ih =>
     by_cases hm : m = 0
     · subst m
       exact (hFzero δ).trans (hGzero δ).symm
