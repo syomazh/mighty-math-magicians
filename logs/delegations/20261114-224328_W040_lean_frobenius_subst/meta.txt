@@ -1,0 +1,6 @@
+slug:    W040_lean_frobenius_subst
+brief:   briefs/W040_lean_frobenius_subst.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 22:43:28 PST
+attempt 1: exit 1 at 23:19:04

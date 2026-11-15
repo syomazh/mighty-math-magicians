@@ -76,6 +76,8 @@ Open Math OS credit is the scarce resource: about 36% of the allowance was left 
 
 **Update 2026-11-14 about 18:15 (Syoma):** Claude's five-hour limit is low until it resets at 22:00 ("use open math os slaves whenever u can"). Use Open Math OS workers wherever they can do the job: Lean formalization of everything that is not yet machine-checked, and the search for connections with other fields (`-AllowBash`, with `curl` against public interfaces; workers have no web-search tool). When no worker is running, start such workers without asking ("run lean proofs on everythings that not preoved if ur not running anything. also keep up the physical search"). Until the reset the orchestrator keeps its own turns short: launch, record, and review what has finished; no Claude subagents unless a human asks. The laptop limit stands for workers that compile Lean (three or four at a time); workers that only search do not count towards it.
 
+**Update 2026-11-14 23:20:** Open Math OS is used up: the gateway rejects every request with "the weekly usage limit of this key is used up; it resets at 2026-11-21T22:43:38Z" (Syoma had warned at about 22:40 that 17% was left and that only a person who was asleep could reset it). No worker can be launched until a human resets the key. Since Claude's own limit reset at 22:00 and Syoma asked for the Frobenius proof in Lean by the morning ("keep working on the frobenius lemma especially"), the Lean work continues with fresh-context Claude agents given the same briefs, a few at a time, Frobenius first, then the path proof.
+
 ## Launching a worker
 
 ```bash

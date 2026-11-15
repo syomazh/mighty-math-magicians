@@ -1,0 +1,6 @@
+slug:    W039_lean_frobenius_eval
+brief:   briefs/W039_lean_frobenius_eval.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 22:43:28 PST
+attempt 1: exit 1 at 23:19:17

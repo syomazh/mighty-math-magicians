@@ -520,3 +520,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 
 - **Human input.** Syoma, to the question what the professor's name is: "misha".
 - **Recorded.** `CLAIMS.md`: C24 (lattice-path proof) and C1 to C8 (main proof) are now `human-signed` by Misha, 2026-11-14, on Syoma's report of his verdicts (verified; approved). The accounting proof stays "read, not signed". I recorded the first name as given and added no surname. These are the first `human-signed` claims of the project.
+
+## 2026-11-14 23:22 — Claude Fable 5.2
+
+- **Open Math OS ran out at 23:19.** W037, W039 and W040 all ended with "Request rejected (429): the weekly usage limit of this key is used up; it resets at 2026-11-21T22:43:38Z". What they left: `Hurwitz.lean` (612 lines; the ring instance, the constant term, the variables and the derivations are written, with five compile errors; the p-th powers are missing); `Eval.lean` (113 lines, helper lemmas, no main theorem, three errors); `Subst.lean` (80 lines: the five definitions and helpers, two errors). None is accepted; none is in the build.
+- **Continued with Claude agents** (fresh context, the same briefs): one on the evaluation (`Eval.lean`, brief W039), one on the passage from the leading coefficients to the labelled coefficients (`Subst.lean`, brief W040). The agent launched at 23:05 on the family H and the carry congruence (brief W042) had found `Hurwitz.lean` incomplete and is writing the ring itself in `HurwitzC.lean`. Recorded as a standing note in `CLAUDE.md`.
+- **Plan for the assembly** (mine, when the three are in): the coefficient of x^m of F_0 is a polynomial in y divisible by y^t whose coefficient of y^t is the leading coefficient ℓ_0(m); so the number of trees is ≡ p^t·ℓ_0(m) modulo p^(t+1); ℓ_0(m)·∏ m_j! = T_0(a(m)); the weight of a(m) is ≡ m ≡ 1 modulo q − 1 and its total is s_p(m); so T_0(a(m)) ≡ (−1)^t modulo p. Three small digit lemmas are needed for the glue.
+- Misha's path proof (brief W041): not launched; Open Math OS is gone and the Claude agents are on the Frobenius proof first, as Syoma asked.
