@@ -59,3 +59,41 @@ no `unsafe`.
   `Nat.card {v // Eqv h v u}` by `Eqv.symm`, then follows `MMM/ClassSize.lean` verbatim. The
   induction hypothesis at height `h` is also transported the same way for the product formula.
 - No other files were touched. No git commands were run.
+
+---
+
+# Path proof, part 2 — worker W033 (Kimi K3.1 Pro, 2026-11-14, not human-reviewed)
+
+## Status
+
+| Statement | File | Status |
+|---|---|---|
+| `card_cntE [NeZero p] (h n) : Nat.card {u : Blk p h // cntE h u = n} = (p ^ h).choose n` | `Count.lean` | done |
+| `pow_dvd_choose_pow [Fact p.Prime] (h n c) (hc : ds p n + ds p (p ^ h - n) = (p - 1) * c + 1) (hn : n ≤ p ^ h) : p ^ c ∣ (p ^ h).choose n` | `Count.lean` | done |
+| `Word p L := (i : Fin L.length) → Blk p (L.get i)`, `len`, `cntEW`, `EqvW`, `dW` | `Word.lean` | done |
+| `card_classW [Fact p.Prime] {L} (w) : Nat.card {w' : Word p L // EqvW w w'} = p ^ dW w` | `Word.lean` | done |
+| `lower_boundW [NeZero p] (hp : 2 ≤ p) {L} (w) : ds p (cntEW w) + ds p (len p L - cntEW w) ≤ (p - 1) * dW w + L.length` | `Word.lean` | done |
+| `card_cntEW [NeZero p] (L) (n) : Nat.card {w : Word p L // cntEW w = n} = (len p L).choose n` | `Word.lean` | done |
+| `pow_dvd_choose_of_blocks [Fact p.Prime] (L n c) (hn : n ≤ len p L) : (p - 1) * c + L.length ≤ ds p n + ds p (len p L - n) → p ^ c ∣ (len p L).choose n` | `Kummer.lean` | done |
+| `exists_blocks (hp : 2 ≤ p) (N) : ∃ L, len p L = N ∧ L.length = ds p N` | `Kummer.lean` | done |
+| `kummer_dvd [Fact p.Prime] (N n c) (hn : n ≤ N) : (p - 1) * c + ds p N ≤ ds p n + ds p (N - n) → p ^ c ∣ N.choose n` | `Kummer.lean` | done |
+
+## Compile results
+
+- `MMM/Path/Count.lean`: compiles clean.
+- `MMM/Path/Word.lean`: compiles clean.
+- `MMM/Path/Kummer.lean`: compiles, with the intentionally unused `hn` hypothesis in
+  `pow_dvd_choose_of_blocks` (exactly as prescribed by the brief).
+
+## Axioms of the final result
+
+`#print axioms MMM.Path.kummer_dvd`:
+`[propext, Classical.choice, Quot.sound]`.
+
+All three targets are done. No theorem is left weakened, commented out, or replaced by a
+vacuous statement. There is no `sorry`, `admit`, `axiom`, `native_decide`, or `unsafe`.
+The only valuation named in these files occurs in the comments saying none is used.
+- The proofs use generating functions (coefficients of `(1 + X)^N`), products of block
+  equivalence classes, and digit-sum subadditivity. No factorial valuations or binomial
+  divisibility theorems are used.
+

@@ -46,3 +46,4 @@
 | 20261114-183258 | W031_lean_frobenius_existence | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-183258_W031_lean_frobenius_existence |
 | 20261114-183258 | W029_search_rotor_chemistry | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-183258_W029_search_rotor_chemistry |
 | 20261114-190018 | W034_lean_frobenius_weights | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-190018_W034_lean_frobenius_weights |
+| 20261114-184647 | W033_lean_path_kummer_dvd | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-184647_W033_lean_path_kummer_dvd |
