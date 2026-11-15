@@ -835,3 +835,7 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - This commit, after the submitted one, writes the new hash into `MORNING_BRIEF.md`, `STATE.md` and `SUBMISSION_RULES.md`. It does not change the report or Lean.
 - **A fresh-clone build of the new submitted commit was started at 10:00**; its result is in the next entry.
 - **Open, for the people:** the spelling "Andrei" (the message had "Andrie"); affiliations, if the team wants them in the title block; the track; the entry on the platform before 12:00, with this hash and not the one of 09:40.
+
+## 2026-11-15 10:01 — Claude Fable 5.2
+
+- **Syoma, at about 10:01, on the spelling in the title block: "Yes, Andrei".** The title block stands as it is; the commit to submit stays `4945e9a0e6413308d3080fd680e0f57ec290f257`.
