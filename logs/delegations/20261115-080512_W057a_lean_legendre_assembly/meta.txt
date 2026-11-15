@@ -1,0 +1,8 @@
+slug:    W057a_lean_legendre_assembly
+brief:   briefs/W057a_lean_legendre_assembly.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-15 08:05:12 PST
+attempt 1: exit 0 at 08:15:42
+ended:   2026-11-15 08:15:42 PST
+exit:    0

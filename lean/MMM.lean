@@ -33,7 +33,13 @@ import MMM.NormalForm
 import MMM.FussFormula
 import MMM.Problem137
 import MMM.Dwork
+import MMM.LegendreDefs
+import MMM.LegendreSym
+import MMM.AccountingL1
+import MMM.AccountingDiv
+import MMM.Accounting
 import MMM.Axioms
 import MMM.AxiomsExtra
 import MMM.Frob.Axioms
 import MMM.Path.Axioms
+import MMM.AxiomsAccounting
