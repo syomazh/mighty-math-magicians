@@ -1862,7 +1862,9 @@ Claude Fable 5.2 in Claude Code, on a team member's machine (the ``orchestrator'
  main proof while reading the problem. Wrote the briefs for other models, reviewed and adjudicated their
  output, kept the record. Wrote the brute-force check, the stress test and most other programs; the
  accounting proof; the algebraic proof; the carry budget; the notes on connections and the figures; the Lean
- definitions, statements, proof plans and most Lean proofs of the main proof.\\\addlinespace[3pt]
+ definitions, statements, proof plans and most Lean proofs of the main proof; the statements, plans and last
+ files of the other formalizations; the two proofs of Section~\ref{sec:extensions}; the move of the Lean
+ project to the required versions; the updates of this report after it was assembled.\\\addlinespace[3pt]
 Kimi K3.1 Pro, through the Open Math OS service (a headless agent) & The first full \LaTeX{} write-up of the
  main proof and its repair after the first review round; an independent replication of the brute-force check;
  numerical experiments on the extensions; a literature scan through public interfaces; one of the three
@@ -1876,9 +1878,11 @@ Further sessions of Claude Fable 5.2 with a fresh context or forked from the orc
  orchestrator's reasoning unless forked) & Referees: review rounds 2 and 3 of the main proof; one round each
  for the accounting proof, the algebraic proof and the carry budget. Two audits of the Lean statements. Web
  checks of references. An independent search for connections and an attempt to break the ranked list. The
- literature search for the lattice-path proof. Lean files for the second half of the algebraic proof and for
- part of the lattice-path proof. Four Lean files of the main proof (forked sessions, from the orchestrator's
- plans).\\\addlinespace[3pt]
+ literature search for the lattice-path proof. Lean files for the second half of the algebraic proof, for
+ the second half of the lattice-path proof, and for the exact count, the carry budget, the closed families
+ and the level profiles (each from a brief with fixed statements and a proof plan). A review of the chemistry
+ statements against their sources. Four Lean files of the main proof (forked sessions, from the
+ orchestrator's plans).\\\addlinespace[3pt]
 Claude Fable 5.2 in the Claude app (a chat session started by a team member) & The lattice-path proof: the
  question was the team member's; the proof, the note, its figures and its check scripts are the AI's.\\\addlinespace[3pt]
 Claude Fable 5.2 in Claude Code on another team member's machine & Chemistry and polymer checks against
@@ -1909,8 +1913,8 @@ and audited, and a human reads and signs. Concretely:
  any round; all repaired); the Lean formalization with two AI audits; approval by a faculty member of the
  team.
 \item \emph{Lattice-path proof.} Three scripts by its author, rerun; read line by line by two AI sessions
- that had not written it; a second program of different design; the divisibility half in Lean; read and
- verified by a faculty member of the team.
+ that had not written it; a second program of different design; formalized in Lean in full (after the
+ reading by the faculty member, and not read by any human); read and verified by a faculty member of the team.
 \item \emph{Algebraic proof.} Every lemma checked separately by computer; one AI referee who saw only the
  note and reimplemented every numbered statement; formalized in Lean in full, every file recompiled and its
  statements read by the orchestrator.
@@ -1926,7 +1930,8 @@ and audited, and a human reads and signs. Concretely:
 
 \subsection{What no human has checked}
 The algebraic proof (Appendix~\ref{app:frob}); every Lean file; the carry budget
-(Section~\ref{sec:carrybudget}); the programs behind Section~\ref{sec:computations}; the connections of
+(Section~\ref{sec:carrybudget}); the two statements on closed families and level profiles
+(Section~\ref{sec:extensions}); the programs behind Section~\ref{sec:computations}; the connections of
 Section~\ref{sec:connections} and all sources cited for them; the literature search behind
 Section~\ref{sec:attribution}, apart from the fact that team members obtained two of the papers. Of the papers
 in the reference list, none has been read by a human on the team for the purpose of this report; the notes
@@ -1935,8 +1940,8 @@ after each entry say what an AI system opened.
 This report was assembled by an AI system; at the time of writing no human has read it.
 
 \subsection{What the people on the team did}
-They chose the problem, set the priorities, decided which tool was used for what and when, and approved every
-publication of the repository and every download. A faculty member of the team read the main proof, the
+They chose the problem, set the priorities, decided which tool was used for what and when, and decided that
+the repository is public. A faculty member of the team read the main proof, the
 lattice-path proof and the accounting proof, with the verdicts recorded in Section~\ref{sec:status}. A team
 member asked whether the theorem can be proved by symmetries of lattice paths, which led to
 Appendix~\ref{app:path}; a team member directed the comparison with chemistry and polymers. A team member obtained
