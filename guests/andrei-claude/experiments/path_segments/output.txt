@@ -1,0 +1,64 @@
+$ python check_paths.py
+general binomials checked: 456
+p=2 q=2 n=1: N=3 C=1 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=2 n=2: N=5 C=2 t=1 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=2 n=3: N=7 C=5 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=2 n=4: N=9 C=14 t=1 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=2 n=5: N=11 C=42 t=1 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=2 n=6: N=13 C=132 t=2 minimal classes=3  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=2 n=7: N=15 C=429 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=2 n=8: N=17 C=1430 t=1 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=2 n=9: N=19 C=4862 t=1 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=2 n=10: N=21 C=16796 t=2 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=4 n=1: N=5 C=1 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=4 n=2: N=9 C=4 t=2 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=4 n=3: N=13 C=22 t=1 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=4 n=4: N=17 C=140 t=2 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=4 n=5: N=21 C=969 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=8 n=1: N=9 C=1 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=8 n=2: N=17 C=8 t=3 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=2 q=8 n=3: N=25 C=92 t=2 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=3 q=3 n=1: N=4 C=1 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=3 q=3 n=2: N=7 C=3 t=1 minimal classes=4  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=3 q=3 n=3: N=10 C=12 t=1 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=3 q=3 n=4: N=13 C=55 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=3 q=3 n=5: N=16 C=273 t=1 minimal classes=4  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=3 q=3 n=6: N=19 C=1428 t=1 minimal classes=2  C/p^t mod p=2 = (-1)^t/prod m_j! mod p=2
+p=3 q=9 n=1: N=10 C=1 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=3 q=9 n=2: N=19 C=9 t=2 minimal classes=4  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=3 q=9 n=3: N=28 C=117 t=2 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=5 q=5 n=1: N=6 C=1 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=5 q=5 n=2: N=11 C=5 t=1 minimal classes=6  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=5 q=5 n=3: N=16 C=35 t=1 minimal classes=12  C/p^t mod p=2 = (-1)^t/prod m_j! mod p=2
+p=5 q=5 n=4: N=21 C=285 t=1 minimal classes=12  C/p^t mod p=2 = (-1)^t/prod m_j! mod p=2
+p=7 q=7 n=1: N=8 C=1 t=0 minimal classes=1  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=7 q=7 n=2: N=15 C=7 t=1 minimal classes=8  C/p^t mod p=1 = (-1)^t/prod m_j! mod p=1
+p=7 q=7 n=3: N=22 C=70 t=1 minimal classes=24  C/p^t mod p=3 = (-1)^t/prod m_j! mod p=3
+
+$ python check_models.py
+both path models give C; every cyclic class has exactly N paths
+BFS orbits under the moves have size p^d(w)
+p=3 q=3 n=3: orbit sizes [(3, 1), (9, 1), (27, 4)]
+['EEESSSSSSS', 'SSSEEESSSS', 'SSSSSSEEES']
+p=3 q=3 n=2: orbit sizes [(3, 4), (9, 1)]
+
+$ python facts.py
+cycle lemma: exactly one shift is S.v with v under the line
+SSSSESESSE d = 3
+SESESSSSSE d = 3
+ESSESSSSSE d = 3
+EEESSSSSSS d = 1
+EESSSSSSSE d = 2
+EESESSSSSS d = 3
+under line SSSESESSE: True
+ESSE p=2 d = 2
+SEES p=2 d = 2
+ESES p=2 d = 2
+SESE p=2 d = 2
+EESS p=2 d = 1
+SSEE p=2 d = 1
+N=4,n=2,p=2 classes: [['EESS', 'SSEE'], ['ESES', 'ESSE', 'SEES', 'SESE']]
+N=10 sizes: [(3, 1), (9, 1), (27, 4)]
+size-9 class sample: ['EESSSSSSSE', 'ESESSSSSSE', 'SEESSSSSSE']
+example B word d = 2 carries ([2, 0, 0, 0], [2, 2, 1, 0], [1, 0, 2, 0], [0, 1, 1, 0, 0])
+N=19 n=2: words by d: [(2, 36), (3, 54), (4, 81)] classes by d: {2: 4, 3: 2, 4: 1} binom 171
