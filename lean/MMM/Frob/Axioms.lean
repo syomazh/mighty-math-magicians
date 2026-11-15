@@ -67,3 +67,12 @@ import MMM.Frob.Deps
 #external_consts_matching MMM.residue_fussCatalan "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"
 #external_consts_matching MMM.Frob.problem137_fussCatalan_frobenius "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"
 #external_consts_matching MMM.Frob.residue_fussCatalan_frobenius "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"
+
+-- Full closures (through Mathlib): no valuation of a factorial or of a binomial coefficient, no
+-- Kummer, Legendre or Lucas, and not the additivity of Mathlib's Frobenius map (which Mathlib
+-- derives through Kummer's theorem). Added after the audit `lean/AUDIT3.md`, finding 1.
+#closure_consts_matching MMM.problem137_fussCatalan "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.residue_fussCatalan "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.Frob.residue_frobenius "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.Frob.problem137_fussCatalan_frobenius "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.Frob.residue_fussCatalan_frobenius "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"

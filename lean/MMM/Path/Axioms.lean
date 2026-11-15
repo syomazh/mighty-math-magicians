@@ -45,3 +45,9 @@ import MMM.Frob.Deps
 #print axioms MMM.Path.kummer_exact_digits
 #print axioms MMM.Path.multiplicity_choose_eq_carries
 #print axioms MMM.Path.choose_residue_digits
+
+-- Full closures (through Mathlib), as in `MMM/Frob/Axioms.lean`.
+#closure_consts_matching MMM.Path.kummer_exact "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.Path.choose_residue "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.Path.problem137_fussCatalan_path "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.Path.residue_fussCatalan_path "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"

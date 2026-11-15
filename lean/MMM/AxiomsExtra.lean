@@ -71,3 +71,10 @@ example : 2 ^ 1 ∣ ∏ i ∈ Finset.range 3,
 #print axioms MMM.PTree.pow_dvd_sum_depthWeight
 #print axioms MMM.PTree.finsum_depthWeight_one
 #external_consts_matching MMM.PTree.pow_dvd_sum_depthWeight "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson" "factorial"
+
+-- Full closures (through Mathlib), as in `MMM/Frob/Axioms.lean`.
+#closure_consts_matching MMM.card_minimal_classes_mul "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.PTree.excess "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.PTree.card_closed_modEq_classes "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.pow_dvd_prod_choose_profile "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
+#closure_consts_matching MMM.PTree.pow_dvd_sum_depthWeight "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
