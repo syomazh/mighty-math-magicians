@@ -1006,3 +1006,7 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
   - **Slide 23 says "checked by script up to 14 carbons" for the interchangeable hydrogens; the guest's check covers n ≤ 8.** New experiment `experiments/E018_hydrogen_orbits/` (mine): all 167,690 classes of ternary trees with n ≤ 14, the number of orbits computed by recursion over the tree, not by listing the groups: at least s_3(2n + 1) orbits always, exactly that many whenever d = t, and classes with equality and d > t first at n = 7, as the guest found. The report states both checks with their methods; the slide's range is now covered. Ledger: C25 (e), see `CLAIMS.md`.
 - **What a person still has to do or decide (not checkable by me):** the track on the platform; that no official Lean statement is shown on the problem's page when signed in (none is shown publicly); affiliations were not given and are not in the title block; the report's sentence that no human has read the report itself.
 - **Seventh finalization, step 1:** this commit contains everything, with the commit line of the title block open.
+
+## 2026-11-15 11:32 — Claude Fable 5.2
+
+- **Seventh finalization, step 2 (this commit):** the content commit is `965ddd77a5245a5d02a9e0995bf186d54b529af8`; its hash is in the title block of `report.tex`, the report is recompiled (85 pages), and this commit changes only that line, `report.pdf` and this entry. **The hash of this commit replaces `445915f...` of 11:22 as the hash to submit.**
