@@ -9,10 +9,11 @@ Written by the orchestrator (Claude Fable 5.2) during the night; last updated Su
 **The commit to give to the platform: `6b1d7e039dc7e257065c6b877febff712394f541`** (repository https://github.com/syomazh/mighty-math-magicians).
 
 - It contains the report with the commit line of the title block filled (the title block names `0a1b89dac67c2e89f25860cfea12d6a0ff89ef50`, the commit with all the content; the submitted commit is its successor and adds only that line, the rebuilt PDF and the journal entry of the step; a commit cannot contain its own hash).
-- Its Lean sources are those of the commit whose fresh clone was built from scratch at 09:31 (3316 jobs, no `sorry`). A fresh-clone build of the submitted commit itself was started at 09:40; its result is at the end of `JOURNAL.md`.
+- Its Lean sources are those of the commit whose fresh clone was built from scratch at 09:31 (3316 jobs, no `sorry`). **A fresh clone of the submitted commit itself was built from scratch from 09:40 to 09:49: 3316 jobs, no `sorry`.**
 - **Still open in it: the names and affiliations in the title block read "to be filled by the team".** Tell the orchestrator the names and affiliations (or edit the line under `TITLE BLOCK` in `report/report.tex`); then the two commits are repeated and **the hash to submit changes**.
 - The same holds for any later change to the report or to `lean/`: say "finalize again". Commits that only add slides or logs after it do not matter for the submission; the platform takes the hash it is given.
 - On the platform: choose the track, paste the repository link and this hash, and upload the slides the team presents.
+- `talk/josh_slides3.pdf` (uploaded 09:45) adds to the slide "Step 3" the two properties of t; they are the inequality of the report's proof of the lower bound, so the report did not change. **The sign there must be "at most": t(u_1 + ... + u_p) ≤ 1 + Σ t(u_i).**
 - Slides uploaded this morning (`talk/josh_slides.pdf`, `talk/josh_slides2.pdf`, `talk/slides_proof_second_half_misha_k2.pdf`, and the two outlook slides of pull request 1) were compared with the report; what was missing is in the report now (Sections 2.1, 2.2 and 4.5). Not seen: new versions of slides 1, 2, 14 and 15 of that deck, and the formulas of the slide "The engine".
 
 ## What a person must do, in this order
