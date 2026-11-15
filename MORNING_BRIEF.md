@@ -4,6 +4,17 @@ Written by the orchestrator (Claude Fable 5.2) during the night; last updated Su
 
 **Deadline: 12:00 PT today. After it nothing can be changed. The rules are summarised in `SUBMISSION_RULES.md`.**
 
+## FINALIZED at 09:40 (Syoma: "Finalize now")
+
+**The commit to give to the platform: `6b1d7e039dc7e257065c6b877febff712394f541`** (repository https://github.com/syomazh/mighty-math-magicians).
+
+- It contains the report with the commit line of the title block filled (the title block names `0a1b89dac67c2e89f25860cfea12d6a0ff89ef50`, the commit with all the content; the submitted commit is its successor and adds only that line, the rebuilt PDF and the journal entry of the step; a commit cannot contain its own hash).
+- Its Lean sources are those of the commit whose fresh clone was built from scratch at 09:31 (3316 jobs, no `sorry`). A fresh-clone build of the submitted commit itself was started at 09:40; its result is at the end of `JOURNAL.md`.
+- **Still open in it: the names and affiliations in the title block read "to be filled by the team".** Tell the orchestrator the names and affiliations (or edit the line under `TITLE BLOCK` in `report/report.tex`); then the two commits are repeated and **the hash to submit changes**.
+- The same holds for any later change to the report or to `lean/`: say "finalize again". Commits that only add slides or logs after it do not matter for the submission; the platform takes the hash it is given.
+- On the platform: choose the track, paste the repository link and this hash, and upload the slides the team presents.
+- Slides uploaded this morning (`talk/josh_slides.pdf`, `talk/josh_slides2.pdf`, `talk/slides_proof_second_half_misha_k2.pdf`, and the two outlook slides of pull request 1) were compared with the report; what was missing is in the report now (Sections 2.1, 2.2 and 4.5). Not seen: new versions of slides 1, 2, 14 and 15 of that deck, and the formulas of the slide "The engine".
+
 ## What a person must do, in this order
 
 1. **Read the report** `report/report.pdf` (one file, 84 pages; this is what the panel of AI models scores, and judges may read it). **Page 2 is "The result on one page": start there.** Then at least: Sections 1.2 to 1.4 (what was known, what we claim and what we do not); the status table in Section 2.3; Section 4.5 (three short proofs written last night that no human has seen); Section 7 (Lean); Section 9 (use of AI). Two things in Section 1.2 are marked "to be confirmed by a person": what Konvalinka's Remark 3 says for general q, and the sign it prints. If you have the paper open, check them. You must be able to explain everything in it. Tell the orchestrator what to change, or change `report/report.tex` and recompile (`cd report && latexmk -pdf -outdir=build report.tex`, then copy `build/report.pdf` to `report/report.pdf`).
