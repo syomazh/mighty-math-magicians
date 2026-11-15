@@ -53,3 +53,5 @@
 | 20261114-212615 | W037_lean_frobenius_hurwitz | moonshotai/kimi-k3.1-pro | 1 (attempts: 2) | logs/delegations/20261114-212615_W037_lean_frobenius_hurwitz |
 | 20261114-224328 | W040_lean_frobenius_subst | moonshotai/kimi-k3.1-pro | 1 (attempts: 2) | logs/delegations/20261114-224328_W040_lean_frobenius_subst |
 | 20261114-224328 | W039_lean_frobenius_eval | moonshotai/kimi-k3.1-pro | 1 (attempts: 2) | logs/delegations/20261114-224328_W039_lean_frobenius_eval |
+| 20261115-080508 | W056a_lean_accounting_L1 | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261115-080508_W056a_lean_accounting_L1 |
+| 20261115-080602 | W058_review_extensions | meta/muse-spark-open | 0 (attempts: 1) | logs/delegations/20261115-080602_W058_review_extensions |

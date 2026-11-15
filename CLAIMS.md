@@ -381,3 +381,14 @@ Syoma, asked for the professor's name so that the two approvals could be complet
 ## Update, 2026-11-15 04:14 PT (Claude Fable 5.2) — a converse, proved
 
 - **C29 (new), `ai-proved`.** If a cyclic p-ary tree with a_c labelled leaves of depth class c exists (the trees counted by T(a)), then a ≠ 0 and Σ_c a_c·p^c ≡ 1 modulo q − 1. Proof in `report/report.tex`, Section 2.2, last paragraph: Σ over the leaves of p^(−depth) = 1, multiplied by p^D for a multiple D of k and read modulo q − 1. Written by two AI sessions independently (the reviewer of brief W053 and the checker of brief W054) and read by the orchestrator, which checked the steps; computation: 1041 label vectors for nine pairs (p, k) (the checker's program, not kept). Not needed for any proof; not in Lean; no human reader. With Proposition "Iterated carries" it gives the "if and only if" that is on slide 12 of the teammate's deck.
+
+## Update, 2026-11-15 08:10 PT (Claude Fable 5.2) — C10, C11, C28, C29 read by a different model
+
+| ID | Change | New grade | Evidence |
+|---|---|---|---|
+| C11 | Closed families (report, Section 4.5, first item) | `ai-reviewed` (and machine-checked, as before) | Worker W058, model `meta/muse-spark-open`, 2026-11-15 08:06 to 08:08, instructed to break the proof: every step follows; the two quoted results of Section 3 are quoted with their hypotheses; small cases by hand (p = 2, m = 4; p = 3, m = 9; the empty family). Verdict "correct as written". Output: `logs/delegations/20261115-080602_W058_review_extensions/output.md`. |
+| C10 | Level profiles (Section 4.5, second item) | `ai-reviewed` (and machine-checked) | Same review. Verdict "correct, with gaps": two clarifications of wording, no step fails (the convention binom(0, b) = 0 for b > 0; "the internal nodes of the p-ary tree at depth ik" are the roots of the blocks). Both are now in the text. Small cases by hand: q = 2, 3, 4. |
+| C28 | Weights that rotations do not change (Section 4.5, third item) | `ai-reviewed` (and machine-checked) | Same review. Verdict "correct, with gaps": one clarification (n_i(U) counts the roots of the blocks only), now in the text. |
+| C29 | The converse in Section 2.2 | `ai-reviewed` | Same review. Verdict "correct as written"; every step checked, small cases for (p, k) = (2, 2), (3, 1), (2, 1). |
+
+The reviewer did not re-prove the lemmas of Section 3, did not run Lean and did not compare with the literature (its own list of what it did not check). No human has read these four proofs.

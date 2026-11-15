@@ -620,7 +620,8 @@ of $k$ that is at least the depth of every leaf; then $\sum_{\text{leaves}}p^{D-
 integers. Since $p^k=q\equiv1\pmod{q-1}$, we have $p^{D}\equiv1$, and $p^{D-\ell}\equiv p^{c}\pmod{q-1}$ for a
 leaf of depth class $c\in\{0,\dots,k-1\}$, because $D-\ell\ge0$ and $D-\ell\equiv c\pmod k$. Hence
 $\sum_ca_cp^c\equiv1\pmod{q-1}$, and $\mathbf a\ne0$ because a tree has a leaf. \qed\ (This proof was written by
-AI systems on 15 November and has been read by no human. The equivalence was also checked by computer for nine
+AI systems on 15 November and has been read by no human; a model of another family read it the same morning
+with the instruction to break it and found no error, see Section~\ref{sec:extensions}. The equivalence was also checked by computer for nine
 pairs $(p,k)$ with $p\le5$, $k\le4$ and every label vector with at most $7$ to $10$ labels, $1041$ vectors, by
 a program that is not kept in the repository. In the algebraic proof the corresponding statement is
 Remark~\ref{frob:rem:support}.)
@@ -1536,7 +1537,10 @@ the proofs are a few lines from Steps~1 and~2, and all three statements are chec
 (Section~\ref{sec:lean}). They were written on the last night of the event, and no human has read them. An AI
 referee read them on 15 November and wrote out one step that the two corollaries had used without proof
 (rotations do not change the depths of the internal nodes); the present wording of the proofs is the
-referee's and has had no other reader. Of the
+referee's. On the morning of 15 November a model of another family (Muse Spark Open, through Open Math OS) read
+the three proofs and the converse in Section~\ref{sec:smallexamples} with the instruction to break them, step
+by step and on small cases by hand: it found no error, and three clarifications that it asked for are in the
+text (the convention for $\binom{0}{b}$, and twice which internal nodes of a blocked tree are counted). Of the
 remaining items, C9 and C17 are conjectures supported by the computations listed in
 Section~\ref{sec:computations}, and C27 is checked by Lean but has no written proof in this report.
 \begin{itemize}[itemsep=1pt]
@@ -1571,9 +1575,11 @@ Section~\ref{sec:computations}, and C27 is checked by Lean but has no written pr
  \emph{Proof.} The product is the number of $q$-ary trees that have exactly $n_i$ internal nodes at depth $i$
  for every $i\le L$ (and therefore none at any depth $\ge L$): the $n_i$ nodes at depth $i$ have $q\,n_i$
  children, and $n_{i+1}$ of these are chosen to be internal nodes; if some $n_i=0<n_{i+1}$ there is no such
- tree and the product is $0$. In the blocked form (Lemma~\ref{main:lem:blocked}) the internal nodes of the
- $q$-ary tree at depth $i$ become the roots of the blocks at depth $ik$, and these are all the internal nodes
- of the $p$-ary tree at depth $ik$. So the trees in question become the set $F$ of the $k$-blocked $p$-ary
+ tree and the product is $0$ (a binomial coefficient $\binom{0}{b}$ with $b>0$ is $0$). In the blocked form
+ (Lemma~\ref{main:lem:blocked}) the internal nodes of the
+ $q$-ary tree at depth $i$ become the roots of the blocks at depth $ik$, and these are exactly the internal
+ nodes of the $p$-ary tree whose depth is $ik$ (the other internal nodes of the $p$-ary tree lie inside the
+ blocks, at depths that are not multiples of $k$). So the trees in question become the set $F$ of the $k$-blocked $p$-ary
  trees with $(q-1)n+1$ leaves that have exactly $n_i$ internal nodes at depth $ik$ for every $i\le L$.
  Rotation-equivalent trees have the same multiset of depths of internal nodes. The proof is that of
  Lemma~\ref{main:lem:depth-invariant}: ``the same multiset of depths of internal nodes'' is an equivalence
@@ -1605,7 +1611,8 @@ Section~\ref{sec:computations}, and C27 is checked by Lean but has no written pr
  the value of $w$ on the class, and $d\ge t$ (Lemma~\ref{main:lem:class-size},
  Proposition~\ref{main:prop:lower-bound}). For the second statement put
  $w(U)=\prod_ib_i^{\,n_i(U)}$ for a $p$-ary tree $U$, where $n_i(U)$ is the number of internal nodes of $U$ at
- depth $ik$. Rotations do not change the numbers $n_i(U)$ (proof of the previous corollary), so $w$ takes the
+ depth $ik$ (in a blocked tree these are the roots of the blocks; the internal nodes inside the blocks, at
+ depths that are not multiples of $k$, are not counted). Rotations do not change the numbers $n_i(U)$ (proof of the previous corollary), so $w$ takes the
  same value on rotation-equivalent trees. Let $F$ be the set of all $k$-blocked $p$-ary trees with
  $m=(q-1)n+1$ leaves; it is closed under rotation (Lemma~\ref{main:lem:depth-invariant}) and corresponds to the
  $q$-ary trees with $n$ internal nodes (Lemma~\ref{main:lem:blocked}), and for a blocked tree $U$ the number
