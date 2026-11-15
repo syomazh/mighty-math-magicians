@@ -1,12 +1,12 @@
 # Morning brief — Sunday 15 November 2026 (submission day)
 
-Written by the orchestrator (Claude Fable 5.2) during the night; last updated Sunday 04:37 PT. It replaces the brief of Saturday. If something here says "running", look at the end of `JOURNAL.md` for what happened after. Not human-reviewed.
+Written by the orchestrator (Claude Fable 5.2) during the night; last updated Sunday 08:30 PT. It replaces the brief of Saturday. If something here says "running", look at the end of `JOURNAL.md` for what happened after. Not human-reviewed.
 
 **Deadline: 12:00 PT today. After it nothing can be changed. The rules are summarised in `SUBMISSION_RULES.md`.**
 
 ## What a person must do, in this order
 
-1. **Read the report** `report/report.pdf` (one file, 77 pages; this is what the panel of AI models scores, and judges may read it). **Page 2 is "The result on one page": start there.** Then at least: Sections 1.2 to 1.4 (what was known, what we claim and what we do not); the status table in Section 2.3; Section 4.5 (three short proofs written last night that no human has seen); Section 7 (Lean); Section 9 (use of AI). Two things in Section 1.2 are marked "to be confirmed by a person": what Konvalinka's Remark 3 says for general q, and the sign it prints. If you have the paper open, check them. You must be able to explain everything in it. Tell the orchestrator what to change, or change `report/report.tex` and recompile (`cd report && latexmk -pdf -outdir=build report.tex`, then copy `build/report.pdf` to `report/report.pdf`).
+1. **Read the report** `report/report.pdf` (one file, 81 pages; this is what the panel of AI models scores, and judges may read it). **Page 2 is "The result on one page": start there.** Then at least: Sections 1.2 to 1.4 (what was known, what we claim and what we do not); the status table in Section 2.3; Section 4.5 (three short proofs written last night that no human has seen); Section 7 (Lean); Section 9 (use of AI). Two things in Section 1.2 are marked "to be confirmed by a person": what Konvalinka's Remark 3 says for general q, and the sign it prints. If you have the paper open, check them. You must be able to explain everything in it. Tell the orchestrator what to change, or change `report/report.tex` and recompile (`cd report && latexmk -pdf -outdir=build report.tex`, then copy `build/report.pdf` to `report/report.pdf`).
 2. **Choose the track** on the platform: Combinatorics or Algebra/Number Theory (the problem lists both).
 3. **Choose the deck, and fix it.** Both decks were compared with the report slide by slide: `talk/SLIDES_VS_REPORT.md` (tables, the smallest fix for each item, sentences ready to paste). Every number on both decks was recomputed and is right.
    - **The teammate's deck (16 slides): close. Six things must change.** The important ones: slide 15, "New here": all three bullets go beyond what the report claims (the rotation group is not new as an object, only its use for this theorem; the digit skeleton's shape is Konvalinka's Lemmas 8 to 10; the valuation and the residue are not new as statements), and the "Known" column has no line for Konvalinka; replacement text is in the file. Slide 15, "under line-by-line human review": not what is recorded (the main proof was looked through and judged good; the lattice-path proof was read and verified). Slide 2 credits the residue for all prime powers to Konvalinka (his Remark 3 is for q = p). Slide 11, "exactly when", reads as false for p ≥ 5. Slide 12's "if and only if" is now covered: the report proves the missing direction in Section 2.2 (a few lines, written last night, not read by a person); the slide does not define r. The deck says nothing about AI, Lean or who read what; the judges will ask.
@@ -18,6 +18,14 @@ Written by the orchestrator (Claude Fable 5.2) during the night; last updated Su
 6. **Check the Problem 137 page while signed in:** if it shows an official Lean statement, tell the orchestrator at once (we would have to prove that statement unchanged). Without signing in, none is shown.
 7. **Submit on the platform** (any team member): the GitHub link and the full commit hash. Do it with time to spare; a submission can be replaced until 12:00.
 8. **Talk:** 20 minutes at most, then up to 10 minutes of questions. `talk/QA.md` has answers to the questions the judges are told to ask (definitions; the key step; what is new and what is known; what the AI did and whether you understand it; how sure you are).
+
+## What changed on Sunday morning (08:00 to 08:30)
+
+- **The fourth proof is in Lean too.** Syoma asked "all 4 proofs?" at about 07:55 and said that Open Math OS was available again. Its workers (Kimi K3.1 Pro) wrote three Lean files from statements that the orchestrator had fixed; the orchestrator recompiled and read them and wrote the file that joins them. The accounting proof now ends in the same three statements about binom(qn, n)/((q − 1)n + 1) as the other proofs (`MMM.Acc.problem137_fussCatalan_accounting` and its two companions). Full build at 08:25: 3292 jobs, no `sorry`, standard axioms.
+- **What to say about it, exactly:** Lemma L1 (m! times the number of trees), the recursion for m! and the final division are checked as in the text. **Two small congruences inside Lemma L4 are checked by a different argument** (an elementary computation and Wilson's theorem, where the text lets a group of order p act), and the "digit forests" appear only through their number. The report says this in Sections 2.3, 4.3 and 7 and in Appendix C. Do not say "four proofs fully formalized"; say "three, and the fourth with two steps proved differently".
+- **Last night's four new proofs were read by a model of another company** (Muse Spark Open), told to break them: no error; three clarifications of wording, now in the report (Section 4.5 and the converse in Section 2.2).
+- **The bibliography was compared with our reference list by a third model** (Mistral Large): all 35 entries agree. Four places where the report said more than our list recorded were checked against the local texts or were already marked.
+- The report has 81 pages now (the two tables grew).
 
 ## What changed in the night
 
@@ -32,7 +40,7 @@ Written by the orchestrator (Claude Fable 5.2) during the night; last updated Su
 
 - Main proof and lattice-path proof: read and approved by the faculty member of the team; also machine-checked.
 - Algebraic proof: machine-checked; no human has read it.
-- Accounting proof: read by the faculty member ("looks like it makes sense"), not signed; Lean has only its conclusions, by another route.
+- Accounting proof: read by the faculty member ("looks like it makes sense"), not signed; machine-checked since Sunday 08:25, with two congruences proved differently from the text (see above).
 - Everything about other fields: readings and computations, sources opened by AI only.
 - No human has read any Lean file. What a human can read in five lines is the final statement in `lean/README.md`.
 

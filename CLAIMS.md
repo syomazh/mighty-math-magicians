@@ -392,3 +392,10 @@ Syoma, asked for the professor's name so that the two approvals could be complet
 | C29 | The converse in Section 2.2 | `ai-reviewed` | Same review. Verdict "correct as written"; every step checked, small cases for (p, k) = (2, 2), (3, 1), (2, 1). |
 
 The reviewer did not re-prove the lemmas of Section 3, did not run Lean and did not compare with the literature (its own list of what it did not check). No human has read these four proofs.
+
+## Update, 2026-11-15 08:30 PT (Claude Fable 5.2) — Lean: the accounting proof (C13, C20)
+
+| ID | Change | Grade | Evidence |
+|---|---|---|---|
+| C13 | The accounting proof is machine-checked down to the theorem, with two steps proved differently from the text | unchanged as a written proof (`ai-reviewed` by one referee; read by the faculty member, not signed); **machine-checked** for the formal statements | `lean/MMM/Accounting.lean`: `MMM.Acc.residue_accounting`, `residue_fussCatalan_accounting`, `problem137_fussCatalan_exact_accounting`, `problem137_fussCatalan_accounting`. As in the text: L1 (`factorial_mul_card_blocked_modEq`), the recursion of L3 (`forestCount`, `factorial_eq_forestCount`, with `Kcount` a count of permutations and `Kcount_mul` from Mathlib's count by cycle type), L4 from its two congruences (`forestCount_modEq_of`), the last step (`residue_of_L1_of_legendre`). **Not as in the text:** `Acc.choose_congruence` (elementary, `choose_cast`) and `Acc.Kcount_congruence` (Wilson's theorem); the digit forests only through their number; the cyclic trees and L(m) not formalized. Full build 08:25, 3292 jobs; audit `lean/MMM/AxiomsAccounting.lean`: standard axioms; the closure contains `ZMod.wilsons_lemma` and nothing named after valuations of factorials or binomials, Kummer, Legendre, Lucas. Files by Kimi K3.1 Pro (W056a, W056b, W057a) and by the orchestrator; no separate audit. |
+| C20 | Lemma L1 by its own argument | machine-checked | `MMM.factorial_mul_card_blocked_modEq` (for the blocked p-ary trees); `MMM.dwork_form` (earlier, derived from the residue theorem) stays. |
