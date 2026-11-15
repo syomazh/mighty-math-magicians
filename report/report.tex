@@ -160,7 +160,7 @@ cyclic shifts of paths (Section~\ref{sec:lean}).}
 % ===== TITLE BLOCK (removed before the AI review) =====
 \author{TEAM MEMBERS: Misha Mazin, Josh Venick, Syoma Zharkov, Andrei Mazin\\[2pt]
 REPOSITORY: \url{https://github.com/syomazh/mighty-math-magicians}\\[2pt]
-COMMIT: \texttt{0002feb8451e206cbf94a9990419335fddff9899}\\[2pt]
+COMMIT: \texttt{to be filled in the next commit}\\[2pt]
 {\footnotesize (the state that this report describes; the commit submitted is its successor,}\\
 {\footnotesize which adds only this line, the PDF built from it and the record of this step)}}
 % ===== END TITLE BLOCK =====
@@ -480,6 +480,11 @@ certificate of novelty):
  residue obtained in this way. As far as one search and these two readings show, it is a new proof of a
  classical theorem by a known method; that is a statement about what was found, not a proof that nothing else
  exists.
+ One further paper is known to the project by its bibliographic record and its abstract only: Collins
+ \cite{Collins}, whose abstract announces combinatorial proofs of some cases of Kummer's theorem, the case
+ $p=2$ by permutations of binary vectors and arbitrary primes when there is no carry. A guest session met it
+ in a web search on 14 November; it reached the project's reference list on the morning of 15 November and
+ has not been read, so the proof of Appendix~\ref{app:path} has not been compared with it.
 \item The starting point of the algebraic proof modulo $p$: the series $\Phi=\sum_nz^{p^n}$, the relation
  $\Phi^p-\Phi+z\equiv0\pmod p$ and its use for Fuss--Catalan generating functions are in Kauers,
  Krattenthaler and M\"uller \cite{KKM} (for $p=2$) and in Krattenthaler and M\"uller \cite{KM}; for $p=2$,
@@ -1819,7 +1824,22 @@ equation~(25)). \textbf{[computed]} The deformed equation of Appendix~\ref{app:f
 indexed by the number of nodes, becomes this equation at $y=1$ ($n\le14$). \textbf{[computed]} For four
 carbons there are five (\emph{tert}-butyl,
 isobutyl, the two mirror forms of \emph{sec}-butyl, $n$-butyl), and over them stand $1,9,9,9,27$ ordered
-ternary trees: $55=1+9+9+9+27$ is not divisible by $3$ because \emph{tert}-butyl is alone in its class. The
+ternary trees: $55=1+9+9+9+27$ is not divisible by $3$ because \emph{tert}-butyl is alone in its class.
+% Added 2026-11-15 by Claude Fable 5.2 (orchestrator), for the chemistry slides of the final deck: the
+% alcohols by name, the reference to Blair and Henze (reference list, entry 71), and the statement on
+% interchangeable hydrogens (ledger, C25 (a) and (e); the guest's experiment EC01, rows F1 and F2).
+With a hydroxyl group at the root these are the alcohols C$_n$H$_{2n+1}$OH: the carbons are the nodes and the
+$2n+1$ hydrogens are the leaves (ethanol, $n=2$, is a root with one further node and five leaves), and the
+five trees are \emph{tert}-butanol, isobutanol, the two mirror forms of butan-2-ol and butan-1-ol, with
+$d=0,2,2,2,3$ and $3^d=1,9,9,9,27$ ordered trees. The model C$_n$H$_{2n+1}$X of a mono-substituted paraffin
+and the counting of its stereoisomers are in a paper of Blair and Henze \cite{BlairHenze}, of which an AI
+system read two pages; that the rotation classes number as the printed stereoisomers was checked for
+$n\le14$ (claim C25 of the project's ledger). \textbf{[computed; the reading is ours]} The rotations that
+map such a tree to itself form a group of order $3^{n-d}$, which permutes the leaves, that is, the
+hydrogens. It has at least $s_3(2n+1)$ orbits, and exactly $s_3(2n+1)$, of the sizes given by the base-$3$
+digits of $2n+1$, when $d=t$; in chemical words, the hydrogens fall into at least $s_3(2n+1)$ sets of
+interchangeable ones. Equality does not characterise $d=t$: the tree of 3-ethylpentan-3-ol ($n=7$, $d=3$,
+$t=1$) reaches it. Checked by the program of a guest session for $n\le8$ (claim C25). The
 ternary tree numbers are prime to $3$ exactly for $n=1,4,13,40,\dots$, the sizes at which a perfectly branched
 group exists (this case $t=0$, with residue $1$, is in the OEIS without proof \cite{OEISA201823}).
 \textbf{[computed; the reading is ours]} For a rooted ternary tree with $n$ nodes, (class size) $\times$
@@ -2680,11 +2700,23 @@ R\'egis Blache, ``A Stickelberger theorem for $p$-adic Gauss sums'', \emph{Acta 
 (2005), 11--26. DOI: \href{https://doi.org/10.4064/aa118-1-2}{10.4064/aa118-1-2}. arXiv: math/0303226.
 [Introduction and Section~1 read by an AI.]
 
+\bibitem{BlairHenze}
+Charles M. Blair and Henry R. Henze, ``The number of stereoisomeric and non-stereoisomeric mono-substitution
+products of the paraffins'', \emph{Journal of the American Chemical Society} \textbf{54} (1932), no.~3,
+1098--1106. DOI: \href{https://doi.org/10.1021/ja01342a036}{10.1021/ja01342a036}. [Pages 1098--1099 read by
+an AI from a scan; not read by a person.]
+
 \bibitem{BonaFlajolet}
 M. B\'ona and P. Flajolet, ``Isomorphism and symmetries in random phylogenetic trees'', \emph{Journal of
 Applied Probability} \textbf{46} (2009), 1005--1019. DOI:
 \href{https://doi.org/10.1239/jap/1261670685}{10.1239/jap/1261670685}. arXiv: 0901.0696. [Read by an AI in
 the arXiv version.]
+
+\bibitem{Collins}
+Michael J. Collins, ``The Combinatorics of Kummer's Theorem on Binomial Coefficients'', \emph{Missouri
+Journal of Mathematical Sciences} \textbf{36} (2024), no.~1, 32--41. DOI:
+\href{https://doi.org/10.35834/2024/3601032}{10.35834/2024/3601032}. [Bibliographic record and abstract
+only, from the Crossref record of the DOI on 15 November 2026; not read.]
 
 \bibitem{DeutschSagan}
 Emeric Deutsch and Bruce E. Sagan, ``Congruences for Catalan and Motzkin numbers and related sequences'',
