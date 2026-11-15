@@ -1,0 +1,8 @@
+slug:    W030_search_new_fields
+brief:   briefs/W030_search_new_fields.md
+model:   mistralai/mistral-large-4-0
+flags:   -AllowBash -Model mistralai/mistral-large-4-0
+started: 2026-11-14 18:32:58 PST
+attempt 1: exit 0 at 18:47:33
+ended:   2026-11-14 18:47:33 PST
+exit:    0
