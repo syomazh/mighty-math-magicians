@@ -1,0 +1,16 @@
+n= 0  m= 1  s=1  t=0  classes=     1  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 0
+n= 1  m= 3  s=1  t=0  classes=     1  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 0
+n= 2  m= 5  s=3  t=1  classes=     1  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 0
+n= 3  m= 7  s=3  t=1  classes=     2  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 0
+n= 4  m= 9  s=1  t=0  classes=     5  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 0
+n= 5  m=11  s=3  t=1  classes=    11  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 0
+n= 6  m=13  s=3  t=1  classes=    28  with o<s: 0  with d=t:     2 (o!=s: 0)  with o=s and d>t: 0
+n= 7  m=15  s=3  t=1  classes=    74  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 1
+n= 8  m=17  s=5  t=2  classes=   199  with o<s: 0  with d=t:    10 (o!=s: 0)  with o=s and d>t: 1
+n= 9  m=19  s=3  t=1  classes=   551  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 0
+n=10  m=21  s=3  t=1  classes=  1553  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 1
+n=11  m=23  s=5  t=2  classes=  4436  with o<s: 0  with d=t:    10 (o!=s: 0)  with o=s and d>t: 1
+n=12  m=25  s=5  t=2  classes= 12832  with o<s: 0  with d=t:    10 (o!=s: 0)  with o=s and d>t: 4
+n=13  m=27  s=1  t=0  classes= 37496  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 0
+n=14  m=29  s=3  t=1  classes=110500  with o<s: 0  with d=t:     1 (o!=s: 0)  with o=s and d>t: 0
+all checks passed

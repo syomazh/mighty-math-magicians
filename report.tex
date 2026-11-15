@@ -160,7 +160,7 @@ cyclic shifts of paths (Section~\ref{sec:lean}).}
 % ===== TITLE BLOCK (removed before the AI review) =====
 \author{TEAM MEMBERS: Misha Mazin, Josh Venick, Syoma Zharkov, Andrei Mazin\\[2pt]
 REPOSITORY: \url{https://github.com/syomazh/mighty-math-magicians}\\[2pt]
-COMMIT: \texttt{28ed7fcd26e98b4639552d109336e17fca0a3bb3}\\[2pt]
+COMMIT: \texttt{to be filled in the next commit}\\[2pt]
 {\footnotesize (the state that this report describes; the commit submitted is its successor,}\\
 {\footnotesize which adds only this line, the PDF built from it and the record of this step)}}
 % ===== END TITLE BLOCK =====
@@ -717,6 +717,17 @@ a program that is not kept in the repository. In the algebraic proof the corresp
 Remark~\ref{frob:rem:support}.)
 
 \subsection{Status of every claim}\label{sec:status}
+% Added 2026-11-15 by Claude Fable 5.2 (orchestrator), at the final check: the words of the team's results slide.
+\noindent\emph{The team's own summary, on its results slide.} The slide is headed ``four proofs of
+Problem~137''. It marks all four proofs as Lean verified, in the sense that the project builds on Lean v4.35.0
+and Mathlib with no \texttt{sorry} and the standard axioms only; for the accounting proof the formal proof
+differs from the text in two steps (Section~\ref{sec:lean}). For the human reading it says: main proof,
+``rigorously verified''; lattice paths, ``read, no gaps found''; algebraic, ``not verified''; accounting,
+``read, no gaps found''. These are the team's words on the day of submission. What was recorded when each
+reading was reported is in the third column of the table below (for the accounting proof: read, ``looks like
+it makes sense'', not signed), and Section~\ref{sec:event} says how each of the four proofs stands to the
+conditions of the problem: the main proof is the one from the symmetries of the trees themselves.
+
 The identifiers C1, C2, \dots{} are those of the project's ledger of claims (\file{materials/Other/CLAIMS.md} in the
 repository), whose latest entries are followed here. The second column uses the categories of the
 % (orchestrator, 2026-11-15: the parenthesis about "Lean" in the next sentence was adjusted after the move to v4.35.0.)
@@ -1866,7 +1877,10 @@ map such a tree to itself form a group of order $3^{n-d}$, which permutes the le
 hydrogens. It has at least $s_3(2n+1)$ orbits, and exactly $s_3(2n+1)$, of the sizes given by the base-$3$
 digits of $2n+1$, when $d=t$; in chemical words, the hydrogens fall into at least $s_3(2n+1)$ sets of
 interchangeable ones. Equality does not characterise $d=t$: the tree of 3-ethylpentan-3-ol ($n=7$, $d=3$,
-$t=1$) reaches it. Checked by the program of a guest session for $n\le8$ (claim C25). By Step~4 the
+$t=1$) reaches it. Checked by the program of a guest session for $n\le8$, by listing the groups (claim C25), and for $n\le14$ by a
+second program, which computes the number of orbits by recursion over the tree (at a symmetric node the
+orbits are those of one subtree, at an asymmetric node they add up; experiment E018, all $167{,}690$ classes).
+By Step~4 the
 number of rotation classes with $d=t$ is not divisible by $3$; in chemical words, the number of alcohols
 C$_n$H$_{2n+1}$OH with the smallest $d$, mirror forms counted separately, is never divisible by $3$ (a
 restatement of Theorem~\ref{main:thm:main} for $p=q=3$; the wording is ours). The
@@ -1969,7 +1983,7 @@ A398109; see \cite{OEISmobiles,OEISA000625}) by looking up computed values (clai
 \section{Computations}\label{sec:computations}
 A computation supports a statement in the range computed; it says nothing about a proof. The table lists
 what was computed, over what range, by which program, and with what result. The folders
-\file{materials/Other/experiments/E000_...} to \file{materials/Other/experiments/E017_...} of the repository
+\file{materials/Other/experiments/E000_...} to \file{materials/Other/experiments/E018_...} of the repository
 (where the report, the slides and the Lean project are in the root, the four proofs as separate documents in
 \file{materials/Proofs/}, and everything else in \file{materials/Other/}; a path that an appendix gives
 without this prefix, such as \texttt{notes/...} or \texttt{paper/reviews/...}, is relative to
@@ -2021,6 +2035,8 @@ E011 & the carry budget C19; the Dwork form C20 & C19: all $1{,}978$ classes wit
  C20: $565$ cases, $p\le13$, $k\le4$ & no violation\\\addlinespace[3pt]
 E012, E013 & the numbers shown in the pictures of the AI-written deck (C22) & small cases, as stated in
  Section~\ref{sec:connections} & all pass\\\addlinespace[3pt]
+E018 & the orbits of the leaves under the rotations that fix a ternary tree, computed by recursion
+ (Section~\ref{sec:connections}) & all $167{,}690$ classes with $n\le14$ nodes & all pass\\\addlinespace[3pt]
 E014 & Stickelberger's congruence, and C21 & $12$ fields with $q\le49$; $77$ cases,
  $q\in\{2,3,4,5,7,8,9\}$ & holds; altered statements fail\\\addlinespace[3pt]
 E015 & the statements behind the ranked connections (C23) & $18$ checks, ranges in the ledger & all pass; six
@@ -2634,12 +2650,15 @@ Lean~4 with Mathlib; Python; the OEIS; Crossref, OpenAlex, Semantic Scholar, arX
 The project's rule was that a claim moves through grades: \emph{conjecture}; \emph{computed} (a program
 passes); \emph{AI-proved} (a written proof exists); \emph{AI-reviewed} (a different model, or a session that
 has not seen the author's reasoning, tried to break it and failed); \emph{human-signed}. In words, the
-diagram of the workflow on the AI-written deck: the people set the direction; the orchestrating AI introduces one claim at a time;
+diagram of the workflow on the team's slides, which words the rule as ``3+ models check every claim'' and
+``Lean~4: machine-checked + 2 Claude auditors'': the people set the direction; the orchestrating AI introduces one claim at a time;
 the claim is first tested by heavy computation; a proof is written lemma by lemma; other models read it and
 mark every step correct, gap or wrong (for the main proof three models in the first round; the other proofs
 had one or two AI readers each, as listed below); the orchestrator checks who is right and repairs the proof, and
 a step marked gap or wrong goes back to the claim; then, in either order, the statement is formalized in Lean
-and audited, and a human reads and signs. Alongside, a search of the literature for existing proofs and for the
+and audited (by two separate sessions on 14 November, the two auditors of the slide, and a third on
+15 November; the files of the accounting proof have had no separate audit), and a human reads and signs.
+Delegated workers ran several at a time, and what they returned was checked again by the orchestrator. Alongside, a search of the literature for existing proofs and for the
 novelty of each idea was repeated during the event (Sections~\ref{sec:attribution} and~\ref{sec:event}).
 Concretely:
 \begin{itemize}[itemsep=1pt]
