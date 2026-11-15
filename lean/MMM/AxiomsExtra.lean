@@ -2,10 +2,14 @@
 Written by Claude Fable 5.2 (orchestrator), 2026-11-15. Not human-reviewed.
 Axiom audit for the statements added on 2026-11-15 around the main proof:
 the exact number of minimal classes for q = p (claim C8; `ExactCount.lean`, brief W048) and the
-carry budget (claim C19; `CarryBudget.lean`, brief W049).
+carry budget (claim C19; `CarryBudget.lean`, brief W049), the congruence for rotation-closed
+families (claim C11; `Closed.lean`) and the level profiles (claim C10; `Profile.lean`; brief W047).
 -/
 import MMM.ExactCount
 import MMM.CarryBudget
+import MMM.Closed
+import MMM.Profile
+import MMM.Frob.Deps
 
 #print axioms MMM.card_labelled_mul_factorial
 #print axioms MMM.card_minimal_mul_factorials
@@ -38,3 +42,23 @@ example : Nat.card (Quotient (MMM.PTree.rotSetoidOn (MMM.PTree.IsMinimal (p := 3
   have h3 : (3 * 1).factorial = 6 := by decide
   rw [h3] at h
   omega
+
+-- Closed families (C11) and level profiles (C10)
+#print axioms MMM.PTree.card_closed_modEq_classes
+#print axioms MMM.PTree.Rot.prof_eq
+#print axioms MMM.PTree.card_prof
+#print axioms MMM.PTree.pow_dvd_card_prof
+#print axioms MMM.pow_dvd_prod_choose_profile
+
+-- The divisibility of the profile products comes from the rotation classes: no declaration of
+-- Mathlib about valuations, factorials or the divisibility of binomial coefficients is referred to.
+#project_modules MMM.pow_dvd_prod_choose_profile
+#external_consts_matching MMM.pow_dvd_prod_choose_profile "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson" "factorial"
+
+-- An instance: p = 2, k = 1, the profile 1, 2, 1, 0 (four nodes, five leaves, 5 = 101 in base 2,
+-- t = 1): 2 divides binom(2, 2) * binom(4, 1) * binom(2, 0) = 4.
+example : 2 ^ 1 ∣ ∏ i ∈ Finset.range 3,
+    Nat.choose (2 ^ 1 * (fun i : ℕ => if i = 0 then 1 else if i = 1 then 2 else if i = 2 then 1 else 0) i)
+      ((fun i : ℕ => if i = 0 then 1 else if i = 1 then 2 else if i = 2 then 1 else 0) (i + 1)) := by
+  have : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
+  exact MMM.pow_dvd_prod_choose_profile 2 1 Nat.one_pos 3 _ (by decide) (by decide) 1 (by decide)

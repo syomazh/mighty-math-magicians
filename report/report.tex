@@ -554,18 +554,19 @@ Claim & How it is supported & Read and approved by a human?\\
 \midrule
 \textbf{C11. Closed families:} for a family $F$ of trees with $m$ leaves closed under rotation, $p^t$ divides
  $|F|$ and $|F|/p^t\equiv\#$(minimal classes in $F$) mod $p$.
- & Not written out as a proof in this report. \emph{Lean:} the divisibility, and the reduction modulo
- $p^{t+1}$ to the trees with $d=t$: \lean{PTree.pow_dvd_card_of_closed},
- \lean{PTree.card_modEq_minimal_of_closed}; the congruence with the number of minimal classes only for the
- family of all trees with $m$ leaves. \emph{Computation:} two families and five statistics, small $n$,
- $q\in\{2,3,4,5,8,9\}$ (E002, E007).
- & No.\\
+ & \emph{Proved in this report:} Section~\ref{sec:extensions} (a few lines from C1 and C2). \emph{Lean:}
+ \lean{PTree.pow_dvd_card_of_closed}, \lean{PTree.card_closed_modEq_classes}. \emph{Computation:} two families
+ and five statistics, small $n$, $q\in\{2,3,4,5,8,9\}$ (E002, E007).
+ & No (written on the last night; checked by Lean only).\\
 \midrule
 \textbf{C10. Level profiles:} $p^t$ divides $\prod_i\binom{qn_i}{n_{i+1}}$ for every profile
  $1=n_0,n_1,\dots$ with $\sum n_i=n$.
- & \emph{Computation} only: every profile with $n\le22$ ($q=2$), $\le15$ ($q=3$), $\le14$ ($q=4,5$),
- $\le12$ ($q=8,9$) (E002). No written proof; presented as a conjecture supported by computation.
- & No.\\
+ & \emph{Proved in this report:} Section~\ref{sec:extensions} (from C11 and the count of the trees with a
+ given profile). \emph{Lean}, with Mathlib's definitions only: \lean{MMM.pow_dvd_prod_choose_profile}; the
+ count: \lean{PTree.card_prof}. \emph{Computation:} every profile with $n\le22$ ($q=2$), $\le15$ ($q=3$),
+ $\le14$ ($q=4,5$), $\le12$ ($q=8,9$) (E002). Until the last night of the event this was a conjecture
+ supported by computation.
+ & No (checked by Lean only).\\
 \midrule
 \textbf{C9. Weighted numbers:} Konvalinka's Theorem~5 holds with the rotation group in place of the full
  symmetric group.
@@ -1253,18 +1254,36 @@ the symmetric group on their leaves.} This remark is the one place in this subse
 appears. (Checked by computation on explicit groups for small trees, claim C23(c); the proof of the group
 order is sketched in the note and is not reproduced here.)
 
-\subsection{Extensions supported by computation only}\label{sec:extensions}
-The problem statement suggests weighted numbers and other statistics. Nothing in this subsection is proved in
-this report; each item is a conjecture with the computations listed in Section~\ref{sec:computations}.
+\subsection{Extensions: other statistics}\label{sec:extensions}
+The problem statement suggests weighted numbers and other statistics. The first two items below are proved:
+the proofs are a few lines from Steps~1 and~2, and both statements are checked by Lean
+(Section~\ref{sec:lean}). They were written on the last night of the event, and no human has read them. The
+remaining items are conjectures, with the computations listed in Section~\ref{sec:computations}.
 \begin{itemize}[itemsep=1pt]
-\item \emph{Closed families} (C11). For a family $F$ of trees with $m$ leaves that is closed under rotation,
- $p^t$ divides $|F|$ and $|F|/p^t$ is congruent modulo $p$ to the number of minimal classes in $F$. The
- ledger records this as immediate from Steps~1 and~2; the divisibility is machine-checked in Lean, the
- congruence in general is not.
-\item \emph{Level profiles} (C10). Fix the number $n_i$ of nodes at each depth $i$, with $n_0=1$ and
- $\sum_in_i=n$. The number of $q$-ary trees with this profile is $\prod_i\binom{qn_i}{n_{i+1}}$, and in every
- case computed it is divisible by $p^t$. The expected reason is that rotations preserve the profile, so that
- this is a closed family; this has not been written out.
+\item \emph{Closed families} (C11). \textbf{Proposition.} \emph{Let $F$ be a set of $p$-ary trees with $m$
+ leaves that is closed under rotation. Then $p^t$ divides $|F|$, and
+ $|F|\equiv p^t\cdot\#\{\text{rotation classes in }F\text{ with }d=t\}\pmod{p^{t+1}}$.}
+ \emph{Proof.} $F$ is a union of rotation classes. A class has $p^{d}$ members
+ (Lemma~\ref{main:lem:class-size}) and $d\ge t$ (Proposition~\ref{main:prop:lower-bound}). The classes with
+ $d>t$ contribute multiples of $p^{t+1}$, and each class with $d=t$ contributes $p^t$. \qed\
+ So every statistic of trees that rotations do not change refines the divisibility of the theorem: the number
+ of trees with $m$ leaves and a prescribed value of the statistic is divisible by $p^t$. For $q=p^k$ the
+ trees are taken in their blocked form (Section~\ref{sec:mainproof}), where rotations keep the blocked trees.
+\item \emph{Level profiles} (C10). \textbf{Corollary.} \emph{Let $q=p^k$, let $n_0=1,n_1,\dots,n_{L-1}$ be
+ non-negative integers, $n_L=0$, $n=\sum_{i<L}n_i$ and $t=(s_p((q-1)n+1)-1)/(p-1)$. Then}
+ \[
+  p^t\ \Big|\ \prod_{i<L}\binom{q\,n_i}{n_{i+1}} .
+ \]
+ \emph{Proof.} The product is the number of $q$-ary trees that have $n_i$ internal nodes at depth $i$ for
+ every $i$: the $n_i$ nodes at depth $i$ have $q\,n_i$ children, and $n_{i+1}$ of these are chosen to be
+ internal nodes. In the blocked form a rotation does not change the depth of any node, so these trees form a
+ family closed under rotation, with $(q-1)n+1$ leaves, and the proposition applies. \qed\
+ The sum of these products over all profiles with $\sum_in_i=n$ is $C_n^{(q)}$, so the corollary refines the
+ divisibility half of the theorem; it is a statement about binomial coefficients, and its proof uses no
+ valuation of a factorial (the Lean proof refers to no declaration of Mathlib about factorials or
+ valuations at all, Section~\ref{sec:lean}). It was computed beforehand for every profile in the ranges of
+ Section~\ref{sec:computations}. We made no search of the literature for this statement and do not claim
+ that it is new.
 \item \emph{Weighted Fuss--Catalan numbers} (C9). Konvalinka's Theorem~5 \cite{Konvalinka} appears to need
  only that the group is transitive on the $q$ branches of a node; the rotation group is transitive, so the
  weighted theorem should also become free of factorial valuations. Supported numerically; not proved.
@@ -1272,8 +1291,8 @@ this report; each item is a conjecture with the computations listed in Section~\
  points with $t$ cycles of length $p$; it would give Corollary~\ref{main:cor:exact-count} without the
  Fuss--Catalan formula. Checked in small cases only.
 \item \emph{A product formula for minimal words over arbitrary lists of blocks} (C27), a generalisation of
- Proposition~\ref{path:prop:count} that was formulated as the statement for an induction in Lean. Checked by
- computation only.
+ Proposition~\ref{path:prop:count} that was formulated as the statement for an induction in Lean. It is
+ checked by Lean and by computation; there is no written proof in this report.
 \end{itemize}
 Not explored: $q$ that is not a prime power; residues modulo $p^2$.
 
@@ -1644,6 +1663,19 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  not with the number of carries. Fact~3 reads $(p-1)\,d(T)+1=s_p(m)+\text{slack}(T)$. The criterion for $d=t$
  is stated one node at a time, and ``the children have a power of $p$ leaves'' appears as ``digit sum $1$''.
  The remarks on other arities and on Sylow subgroups are not formalized.\\\addlinespace[3pt]
+\lean{PTree.pow_dvd_card_of_closed}, \lean{PTree.card_closed_modEq_classes} (\file{Reduction.lean},
+ \file{Closed.lean})
+ & the proposition on closed families of Section~\ref{sec:extensions} (C11)
+ & A family is a predicate on $p$-ary trees that is closed under rotation and has finitely many members; the
+ classes are a quotient type. The hypothesis is $t\le d(T)$ for the members, which holds for trees with $m$
+ leaves by the lower bound.\\\addlinespace[3pt]
+\lean{MMM.pow_dvd_prod_choose_profile}, \lean{PTree.card_prof}, \lean{PTree.pow_dvd_card_prof},
+ \lean{PTree.Rot.prof_eq} (\file{Profile.lean})
+ & the corollary on level profiles of Section~\ref{sec:extensions} (C10)
+ & The final statement uses Mathlib's definitions only: for a prime $p$, $k\ge1$, a function $n$ with $n(0)=1$,
+ $n(L)=0$ and $(p-1)t+1$ equal to the digit sum of $(p^k-1)\sum_{i<L}n(i)+1$, $p^t$ divides
+ $\prod_{i<L}\binom{p^kn(i)}{n(i+1)}$. The profile of a tree is fixed by prescribing it up to level $L$ with
+ $n(L)=0$. One instance is evaluated in \file{AxiomsExtra.lean}.\\\addlinespace[3pt]
 \midrule
 \multicolumn{3}{@{}l}{\emph{Accounting proof (Appendix~\ref{app:acc}, C13, C20): conclusions only}}\\
 \lean{MMM.dwork_form}, \lean{MMM.factorial_eq_pow_mul_prod_mul} (\file{Dwork.lean})
@@ -1705,8 +1737,8 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
 \item The argument of the accounting proof (only its conclusions, by another route).
 \item For the lattice-path proof: Lemmas~\ref{path:lem:atoms} and~\ref{path:lem:mixed} as stated (the count
  is proved by a different induction), Lemma~\ref{path:lem:shift} and Remark~\ref{path:rem:dyck}.
-\item The remarks of Section~\ref{sec:carrybudget} (other arities; Sylow subgroups); claims C9, C10, the general congruence
- of C11, C14 (sand), C17, C21 and the statements of Section~\ref{sec:connections}.
+\item The remarks of Section~\ref{sec:carrybudget} (other arities; Sylow subgroups); claims C9, C14 (sand),
+ C17, C21 and the statements of Section~\ref{sec:connections}.
 \end{itemize}
 
 \subsection{What one has to trust}
@@ -1764,7 +1796,11 @@ are Pacific time, as recorded in the journal and the ledger):
  Formalization of the divisibility half of Kummer's theorem by the path action, and of the algebraic proof
  layer by layer. Recorded late on Saturday: the faculty member had read and verified the lattice-path proof
  and had read the accounting proof.
-\item \emph{Night to Sunday.} The algebraic proof formalized in full. This report assembled.
+\item \emph{Night to Sunday.} The algebraic proof and the lattice-path proof formalized in full, so that the
+ theorem has three proofs checked by Lean. The Lean project moved to the versions that the rules require
+ (two lines changed). Formalized as well: the exact number of minimal classes for $q=p$, the carry budget,
+ the congruence for closed families and the divisibility for level profiles, which until then was a
+ conjecture supported by computation. This report assembled by an AI system from the existing write-ups.
 \end{itemize}
 
 \subsection{Limitations}
@@ -1786,9 +1822,10 @@ are Pacific time, as recorded in the journal and the ledger):
 \item \emph{Lean.} \LeanVersionStatus{} The formal proofs differ from the written ones in the places listed
  in Section~\ref{sec:lean}; in particular the formal main proof uses Wilson's theorem where the written one
  does not, and it does not formalize cyclic trees or the free action.
-\item \emph{Extensions.} The weighted theorem, the level profiles and the general congruence for closed
- families are supported by computation only (Section~\ref{sec:extensions}). The case where $q$ is not a prime
- power was not explored.
+\item \emph{Extensions.} The weighted theorem is supported by computation only. The statements on closed
+ families and on level profiles (Section~\ref{sec:extensions}) were proved and checked by Lean on the last
+ night; no human has read them, and no search of the literature was made for them. The case where $q$ is not
+ a prime power was not explored.
 \item \emph{Connections.} They are readings, not results; one earlier claim about tabulated symmetry numbers
  was wrong and was withdrawn; the remaining statements about other fields rest on sources opened by AI only.
 \end{itemize}
