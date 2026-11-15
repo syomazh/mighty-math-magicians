@@ -1,0 +1,41 @@
+PASS  K0  class size p^d, minimum d = t, total = Fuss-Catalan   [p=2 n<=9, p=3 n<=6, p=5 n<=4]
+PASS  K1a |Aut| = p^(n-d) <= p^nu(m) = p-part of m!, equality iff the tree is minimal   [same ranges]
+PASS  K1b automorphisms = a p-subgroup of S_m of order p^(n-d) (explicit leaf permutations)   [17 classes: p=2 n<=5, p=3 n<=3]
+PASS  K1c #Syl_p(S_m) = m!/(p^nu * prod m_j! * prod (p-1)^(j m_j)) is an integer = 1 mod p; digit forests = (-1)^nu mod p   [p in 2,3,5,7, m < 60 (formula level)]
+PASS  K2  ternary classes = A000625; conformers 3^d sum to binom(3n,n)/(2n+1); fewest conformers 3^t; largest symmetry number 3^nu   [n <= 7]
+      n, stereoisomers, conformers in all, t, number of most rigid radicals:
+      (0, 1, 1, 0, 1)
+      (1, 1, 1, 0, 1)
+      (2, 1, 3, 1, 1)
+      (3, 2, 12, 1, 1)
+      (4, 5, 55, 0, 1)
+      (5, 11, 273, 1, 1)
+      (6, 28, 1428, 1, 2)
+      (7, 74, 7752, 1, 1)
+PASS  K2b butyl: 55 = 1 + 9 + 9 + 9 + 27
+PASS  K3a binary: classes of labelled trees = (2m-3)!! (odd); swapping two labels fixes a tree iff they are a cherry; labellings of a shape = m!/2^(symmetric nodes)   [m <= 7]
+PASS  K3b p = 3, 5: classes of labelled trees = (pt)!/(t! p^t) = (-1)^t mod p; a p-cycle of labels fixes exactly (p-1) L(t-1) classes, all with the cherry   [p=3 t<=3, p=5 t<=2]
+PASS  K4  knockout formats: fewest unbalanced matches = (number of 1 bits of m) - 1   [m <= 12]
+      players, formats (Wedderburn-Etherington), fewest unbalanced matches, fairest formats:
+      [(1, 1, 0, 1), (2, 1, 0, 1), (3, 1, 1, 1), (4, 2, 0, 1), (5, 3, 1, 1), (6, 6, 1, 1), (7, 11, 2, 3), (8, 23, 0, 1), (9, 46, 1, 1), (10, 98, 1, 1), (11, 207, 2, 3), (12, 451, 1, 1)]
+PASS  K5  tiered merging in base b: levels = digits of m; merges = (m - s_b(m))/(b-1) (= exponent of b in m! for prime b)   [b in 2,3,4,5,10, m < 400]
+PASS  K5b binomial heap: trees = 1 bits of m; links = m - (number of 1 bits)   [m < 600]
+PASS  K6  RFC 6962 Merkle tree: asymmetric nodes = (1 bits of n) - 1 (the minimum); its perfect subtrees are the binary digits of n   [n < 200]
+PASS  K7  for m = (q-1)n+1, q = p^k: the digits of m folded onto k positions weigh 1 modulo p^k - 1 (end-around carry)   [(p,k) in (2,2),(2,3),(3,2),(5,2),(2,4), n < 40]
+PASS  K8  Domalski-Hearing: groups on a ring or double bond have N(int) = 3^(symmetric nodes) (times 2 for a ring); for alkanes R-R', 3^sym(R) * 3^sym(R') * (1, 2 or 4) = N(tot)   [3 groups, 8 alkanes; the quotient is not predicted by the model]
+      alkane: model product, paper's N(tot), quotient
+       methane = methyl-H                                       3     12 4
+       ethane = methyl-methyl                                   9     18 2
+       n-butane = ethyl-ethyl (paper: 18 for every n-alkane)     9     18 2
+       2-methylpropane = tert-butyl-H                          81     81 1
+       2,2-dimethylpropane = tert-butyl-methyl                243    972 4
+       2,2-dimethylbutane = tert-butyl-ethyl                  243    243 1
+       2,2,3,3-tetramethylbutane = tert-butyl-tert-butyl     6561  13122 2
+       2-methylbutane = isopropyl-ethyl                        27     27 1
+PASS  K8b butyl groups: (number of ordered trees) * (symmetry number) = 81 for each of the five
+      butyl groups: (class size, symmetry number): [(1, 81), (9, 9), (9, 9), (9, 9), (27, 3)]
+PASS  K9  binomial queues: UNION(n, n') costs ones(n)+ones(n')-ones(n+n') = carries of n+n'; any merge order of m singletons costs m - ones(m)   [n, n' < 200; all binary trees, m <= 9]
+PASS  K10 ordered ternary trees up to rotation at the root = A121179 (staggered conformers of alkyls)   [n <= 8]
+PASS  K11 quadtrees: the proof's group at a 4-ary node = the 8 symmetries of the square; families of 2^d pictures; 22 = 2 + 4 + 16; number of families = A398109   [n <= 5 cuts]
+
+ALL PASS
