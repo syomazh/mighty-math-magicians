@@ -190,8 +190,9 @@ $C_n^{(q)}/p^t\equiv(-1)^t/\prod_jm_j!\pmod p$ for every prime power; as stateme
 from classical theorems on binomial coefficients (Section~\ref{sec:attribution}). The report
 contains this proof in full; three further proofs found during the event (one on lattice paths, which proves
 Kummer's theorem with its residue by a known kind of group action; one by algebra alone; one by counting
-labelled trees); the computations; a formalization in Lean~4 of the main proof, of the lattice-path proof and of
-the algebraic proof; and, for every claim, how it is supported and whether a human has read it. A faculty
+labelled trees); the computations; a formalization in Lean~4 of the main proof, of the lattice-path proof, of
+the algebraic proof and, with two steps proved differently from the text, of the proof by counting labelled
+trees; and, for every claim, how it is supported and whether a human has read it. A faculty
 member of the team looked through the main proof and said it is good, and read and verified the lattice-path
 proof (both as reported; Section~\ref{sec:status} says what is on record); the algebraic proof has been checked
 only by AI systems and by Lean. For $p=2$ the statements are in the literature (Etherington, Deutsch and Sagan, Kersting
@@ -615,6 +616,17 @@ whose root has subtrees with $5$, $3$ and $9$ leaves, and $5+3+9=012_3+010_3+100
 carry; the node below the root adds $1+1+3=001_3+001_3+010_3=012_3$, again without a carry. Both nodes are
 asymmetric, and $d=t=2$.
 
+% Added 2026-11-15 by Claude Fable 5.2 (orchestrator): the example of the team members' slide "Step 5" in its
+% version with k = 2, worked out by hand; and one row of the table below (q = 9, n = 2).
+\emph{The same digits with a depth condition.} For $q=9$ ($p=3$, $k=2$), $n=2$: again $m=17=122_3$ and $t=2$,
+with the same atoms, of sizes $9,3,3,1,1$ (heights $2,1,1,0,0$), and $C_2^{(9)}=9=3^2$, so there is exactly
+one class, of size $9$, and it is minimal. Its skeleton is $(K_1,K_1',(K_2,K_0,K_0'))$: the root adds
+$3+3+11=010_3+010_3+102_3=122_3$ without a carry, and the node below it adds $9+1+1=100_3+001_3+001_3=102_3$
+without a carry. The depth condition of Step~3 holds: the atoms of height $1$ sit at depth $1$, which is odd,
+and the atoms of heights $0$ and $2$ at depth $2$, which is even. Without the condition ($k=1$, that is
+$q=3$, $n=8$) the same atoms give $10$ classes of skeletons (Corollary~\ref{main:cor:exact-count}:
+$N_{\min}\cdot2!\cdot3^2\cdot(1!\,2!\,2!)=6!$).
+
 \emph{Values of the theorem} (direct arithmetic, recomputed while assembling this report):
 \begin{center}\small
 \begin{tabular}{@{}rrllrcc@{}}
@@ -624,6 +636,7 @@ $q$ & $n$ & $C_n^{(q)}$ & $m$ in base $p$ & $t$ & $C_n^{(q)}/p^t \bmod p$ & $(-1
 2 & 6 & $132=2^2\cdot33$ & $111_2$ & 2 & 1 & 1\\
 3 & 8 & $43263=3^2\cdot4807$ & $122_3$ & 2 & 1 & 1\\
 4 & 4 & $140=2^2\cdot35$ & $1101_2$ & 2 & 1 & 1\\
+9 & 2 & $9=3^2\cdot1$ & $122_3$ & 2 & 1 & 1\\
 9 & 3 & $117=3^2\cdot13$ & $221_3$ & 2 & 1 & 1\\
 9 & 5 & $29799=3^2\cdot3311$ & $1112_3$ & 2 & 2 & 2\\
 \bottomrule
@@ -646,7 +659,13 @@ and the four fixed trees are
 the children of a node being taken up to cyclic rotation; collapsing the cherry to one leaf $z$ gives the two
 trees $(y_1,y_2,z)$ and $(y_1,z,y_2)$ counted by $T(3)=2$. For $p=3$, $k=2$: $T(3,2)=4$, $T(0,3)=2$, $T(1,0)=1$, and
 $4\equiv-2\equiv1\pmod3$, two carries (the four trees: a root carrying the two labels of class $1$ and a
-cherry of the three labels of class $0$, in $2\cdot2$ cyclic orders). In general, if $\mathbf a\ne0$ and
+cherry of the three labels of class $0$, in $2\cdot2$ cyclic orders; a $3$-cycle of the three labels of
+class $0$ fixes all four). One step earlier, for $\mathbf a=(6,1)$, six labels $x_1,x_2,x_3,y_1,y_2,y_3$ of
+class $0$ and one label $u$ of class $1$: $T(6,1)=80$ (the root carries $u$ and two cherries of labels of
+class $0$: $10$ ways to split the six labels, $2\cdot2$ cyclic orders in the cherries, $2$ at the root). The
+$3$-cycle $(x_1\,x_2\,x_3)$ moves $72$ of the $80$ trees, in $24$ orbits of size $3$, and fixes
+$8=(p-1)\cdot T(3,2)$: the trees in which $x_1,x_2,x_3$ form a cherry. Collapsing that cherry replaces three
+leaves of class $0$ at depth $2$ by one leaf of class $1$ at depth $1$, and $80\equiv-4\pmod3$. In general, if $\mathbf a\ne0$ and
 $\sum_ca_cp^c\equiv1\pmod{q-1}$ then $T(\mathbf a)\equiv\pm1\pmod p$, in particular $T(\mathbf a)\ne0$
 (Proposition~\ref{main:prop:carry-termination} for the vectors that come from digits, Lemma~\ref{acc:L0} in
 general). The converse also holds: \emph{if a tree counted by $T(\mathbf a)$ exists, then $\mathbf a\ne0$ and
