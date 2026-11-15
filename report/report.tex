@@ -126,7 +126,7 @@
 \newcommand{\LeanVersionStatus}{\textbf{The project builds on the versions that the rules require,
 \LeanVersions{}}: a fresh clone of the repository was built from scratch on 15 November 2026 at 03:41, to
 imitate the automated check ($3279$ jobs, no error). On the same morning the files of the accounting proof
-were added, and the full build was repeated at 08:25 ($3292$ jobs, no error). The build
+were added, and the full build was repeated, the last time at 09:13 ($3316$ jobs, no error). The build
 prints the
 axioms behind every final theorem named in this report: each depends only on \texttt{propext},
 \texttt{Classical.choice} and \texttt{Quot.sound}; there is no \texttt{sorry} and no
@@ -770,8 +770,9 @@ Claim & How it is supported & Read and approved by a human?\\
  \lean{MMM.Acc.residue_accounting}, \lean{MMM.Acc.problem137_fussCatalan_accounting}. As in the text:
  Lemma~\ref{acc:L1}, the recursion of Lemma~\ref{acc:L3}, the last step. \textbf{Not as in the text:} the two
  congruences in the proof of Lemma~\ref{acc:L4} are proved by an elementary computation and by Wilson's
- theorem, not by group actions; the digit forests are not formalized as objects, only their number; the
- statement on sand is not formalized (Section~\ref{sec:lean}).
+ theorem, not by group actions (the first is also proved by the group action of the text, as a statement of
+ its own outside the chain to the theorem); the digit forests are not formalized as objects, only their
+ number; the statement on sand is not formalized (Section~\ref{sec:lean}).
  \emph{Computation:} E004 ($24$ and $27$ cases); sand: $p\in\{2,3,5\}$, $k\le2$, $m\le200$.
  & \textbf{Read, not signed.} A faculty member of the team read it; the verdict as reported: ``looks like it
  makes sense''. One AI referee found the lemmas correct; its repairs were not re-reviewed.\\
@@ -2145,6 +2146,15 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  conjugation on the permutations. Lean proves the first by an elementary computation with factorials
  (\lean{choose_cast}) and the second from $K(a)\,a!\,p^a=(pa)!$ and Wilson's theorem
  (\lean{Kcount_modEq_wilson}).\\\addlinespace[3pt]
+\lean{choose_add_prime_modEq}, \lean{choose_mul_add_modEq_one_action} (\file{LegendreChoose.lean})
+ & The first of the two congruences, $\binom{p+n}{r}\equiv\binom{n}{r}$ and $\binom{pa+r}{r}\equiv1$ modulo
+ $p$ for $r<p$, by the argument of the text
+ & The argument of the text: a group of order $p$ translates $p$ of the $p+n$ points; an $r$-subset fixed by
+ it has fewer than $p$ elements and so contains none of them. \textbf{A statement of its own: the final
+ theorems above do not use it.} It rests on Mathlib's fixed-point congruence for $p$-groups, whose closure
+ contains Mathlib's definition of the $p$-adic valuation of a natural number and first lemmas about it (the
+ build lists them; none is about factorials or binomial coefficients); the final theorems are kept on the
+ route for which the list of the next subsection is empty.\\\addlinespace[3pt]
 \lean{residue_of_L1_of_legendre} (\file{AccountingDiv.lean}); \lean{Acc.residue_accounting},
  \lean{Acc.residue_fussCatalan_accounting}, \lean{Acc.problem137_fussCatalan_exact_accounting},
  \lean{Acc.problem137_fussCatalan_accounting} (\file{Accounting.lean})
@@ -2215,8 +2225,9 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
 \item The text's definitions and lemmas on skeletons as cyclic trees, and its worked examples (differences 2
  and 3 above).
 \item Of the accounting proof: the digit-forest structures as objects (Lean has their number, defined by the
- recursion), and the two group actions in the proof of Lemma~\ref{acc:L4} (the two congruences are proved
- differently).
+ recursion), and the conjugation action in the proof of Lemma~\ref{acc:L4} (the congruence for $K(a)$ is
+ proved by Wilson's theorem; the action on subsets is formalized, but outside the chain to the final
+ theorems).
 \item For the lattice-path proof: Lemmas~\ref{path:lem:atoms} and~\ref{path:lem:mixed} as stated (the count
  is proved by a different induction), Lemma~\ref{path:lem:shift} and Remark~\ref{path:rem:dyck}.
 % Consistency pass 2026-11-15 (brief W055): C29 added to the next item; the status table (Section 2.3) and the
@@ -2261,8 +2272,12 @@ one of the strings \texttt{multiplicity\_choose}, \texttt{multiplicity\_factoria
 the three proofs (closures of about $12{,}700$ to $13{,}500$ declarations for the tree proof, $20{,}100$ to
 $20{,}400$ for the algebraic proof, $12{,}200$ to $12{,}600$ for the lattice-path proof) and for the exact
 count, the carry budget, the closed families, the level profiles and the weights; in the build of
-15 November, 08:25, it is empty as well for the three final theorems of the accounting proof (closures of
-about $19{,}200$ to $19{,}500$ declarations, which contain Wilson's theorem, as the build also prints). This is a search by names:
+15 November, 09:13, it is empty as well for the three final theorems of the accounting proof (closures of
+about $19{,}200$ to $19{,}500$ declarations, which contain Wilson's theorem, as the build also prints). It is
+\emph{not} empty for one statement that no final theorem uses, the binomial congruence proved by a group
+action (\lean{choose_mul_add_modEq_one_action}): there it shows Mathlib's definition of the $p$-adic valuation
+of a natural number and twelve further declarations about it (thirteen entries), which lie behind the library's fixed-point congruence
+for $p$-groups. This is a search by names:
 it shows that no theorem of Mathlib on the power of $p$ in a factorial or in a binomial coefficient, and
 nothing named after Kummer, Legendre or Lucas, lies behind these proofs; it cannot show that no library proof
 reasons in such a way under another name. What the proofs do use from the library about factorials and
@@ -2409,8 +2424,9 @@ Kimi K3.1 Pro, through the Open Math OS service (a headless agent) & The first f
  first drafts of the accounting proof and of the algebraic proof, both superseded and not in this report; a
  first draft of slides; one search for connections; Lean files for the first half of the algebraic proof, for the
  first parts of the lattice-path proof and for the Dwork form, from statements and plans fixed by the
- orchestrator. On 15 November: three Lean files of the accounting proof (Lemma~\ref{acc:L1}, the recursion
- of Lemma~\ref{acc:L3}, the last step), from statements fixed by the orchestrator.\\\addlinespace[3pt]
+ orchestrator. On 15 November: four Lean files of the accounting proof (Lemma~\ref{acc:L1}, the recursion
+ of Lemma~\ref{acc:L3}, the last step, and the binomial congruence by a group action, whose last lemma the
+ orchestrator repaired), from statements fixed by the orchestrator.\\\addlinespace[3pt]
 Mistral Large 4.0, through the same service & One first-round review (it found the flaw in the proof that
  equal atoms can be permuted freely); the Lean file for the normal-form lemma; one search for connections.
  On 15 November: a comparison of the bibliography and the attributions of this report with the project's
@@ -2480,9 +2496,10 @@ and audited, and a human reads and signs. Concretely:
  read by a faculty member of the team.
 \item \emph{Lean files written by delegated models} were counted only after the orchestrator had recompiled
  them and read their statements; one delegated attempt (at the closed formula) failed, was reported as
- failed, and was redone by the orchestrator. The three files of the accounting proof written on the morning
- of 15 November by Kimi K3.1 Pro (Lemma~\ref{acc:L1}; the recursion of Lemma~\ref{acc:L3}; the last step) were
- handled in this way; the file that joins them and states the final theorems is the orchestrator's.
+ failed, and was redone by the orchestrator. The four files of the accounting proof written on the morning
+ of 15 November by Kimi K3.1 Pro (Lemma~\ref{acc:L1}; the recursion of Lemma~\ref{acc:L3}; the last step; the
+ binomial congruence by a group action) were handled in this way; a fifth task, the congruence for $K(a)$ by
+ conjugation, produced no file and was stopped; the file that joins them and states the final theorems is the orchestrator's.
 \item \emph{Statements about other fields} were checked against sources by AI sessions; an attempt by a
  separate session to break the first five connections found one wrong check and three overclaims, which were
  corrected and recorded.
@@ -4385,7 +4402,8 @@ remark and seven gaps of statement or citation, all repaired; the repairs were n
 is recorded as read, not as signed.} The lemmas were checked by computer (experiment E004). Since the morning
 of 15 November Lean checks the argument of this appendix down to the theorem, except that the two congruences
 in the proof of Lemma~\ref{acc:L4} are proved there by an elementary computation and by Wilson's theorem, not
-by the two group actions, and that the digit forests enter only through their number
+by the two group actions (the action on subsets is formalized too, as a separate statement), and that the
+digit forests enter only through their number
 (Section~\ref{sec:lean}). The text is reproduced unchanged, apart from labels,
 headings and cross-references.
 
