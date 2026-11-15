@@ -1,0 +1,9 @@
+slug:    W027_lean_frobenius_theta
+brief:   briefs/W027_lean_frobenius_theta.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 15:07:53 PST
+attempt 1: exit 1 at 16:03:10
+attempt 2: exit 124 at 17:34:41
+ended:   2026-11-14 17:34:41 PST
+exit:    124

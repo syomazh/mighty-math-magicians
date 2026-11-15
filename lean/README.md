@@ -53,7 +53,7 @@ Here `PTree q` is the type of plane trees in which every internal node has q ord
 
 The "divides, does not divide" statements are the convention-free form: Mathlib sets `multiplicity p 0 = 0` and `Nat.card` of an infinite type to 0, and the second half of those statements excludes both cases.
 
-## Status (last full build: 2026-11-14, `lake build` succeeded, no `sorry`)
+## Status (last full build: 2026-11-14 about 18:15, `lake build` succeeded, 4568 jobs, no `sorry`)
 
 | Step of the paper | Statement | Lean name | File |
 |---|---|---|---|
@@ -106,7 +106,8 @@ The strategy and the order of the steps are the paper's. Five things are organiz
 |---|---|
 | The corollary with the exact number of minimal classes for k = 1, (pt)!/(t!·p^t·∏ m_j!) | A consequence of the closed formula that has not been written out in Lean. |
 | The paper's definitions and lemmas on skeletons as cyclic trees; the worked examples of the paper | See difference 3. |
-| The accounting proof and the Frobenius proof | Nothing of either is formalized. |
+| The accounting proof | Its own argument is not formalized. (Its conclusion, the Dwork form C20, is checked by another route: see the status table.) |
+| The Frobenius proof, beyond its first layer | Checked (`MMM/Frob/`, see the layout table): the ring, the lift, θ and its rules, and the uniqueness of the family F_δ. **Not checked:** the existence of the family, that it gives the generating function of the trees at y = p, the weight, the lower bound and the residue. So Lean says nothing yet about the Frobenius proof's theorem. |
 
 ## What one has to trust
 
@@ -135,6 +136,7 @@ The strategy and the order of the steps are the paper's. Five things are organiz
 | `MMM/FussFormula.lean`, `Problem137.lean` | the closed formula; Problem 137 and the residue for the binomial expression |
 | `MMM/Catalan.lean` | the link to Mathlib's Catalan numbers for q = 2 |
 | `MMM/Axioms.lean` | prints the axioms; seven concrete instances |
+| `MMM/Frob/Basic.lean`, `Theta.lean`, `ThetaDiv.lean`, `ThetaIdents.lean`, `System.lean`, `Uniqueness.lean`, `Axioms.lean` | the first layer of the Frobenius proof (workers W025 and W027, Kimi K3.1 Pro; recompiled and read by the orchestrator): Λ = ℤ[y][[x]] and the lift φ: f(x, y) ↦ f(x^p, y^p) (`frobeniusLiftRingHom`); φ(f) ≡ f^p modulo p (`modSeries_frobeniusLift`); θ with p·θ(f) = f^p − φ(f) (`theta_spec`), its rules for sums and products (`theta_add`, `theta_mul`); a coefficient of f^p, φ(f), θ(f) of positive degree depends only on lower coefficients of f (`coeff_pow_lower`, `coeff_frobeniusLift_lower`, `coeff_theta_lower`); two families with zero constant terms that satisfy F_δ = [δ = 0]·x + φ(F_(δ+1)) + y·θ(F_(δ+1)) are equal (`cyclicSystem_unique`). `Frob/PLAN.md` is the workers' plan. |
 | `MMM/Smoke.lean` | a one-line test that the project compiles against Mathlib |
 | `MMM/ClassSizeDraft.md` | the plan that `RotEquiv.lean` and `ClassSize.lean` carried out (a working note) |
 | `AUDIT.md` | the independent audit of the statements for q = p |

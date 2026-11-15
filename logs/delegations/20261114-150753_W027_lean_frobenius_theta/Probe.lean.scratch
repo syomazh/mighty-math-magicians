@@ -1,0 +1,28 @@
+/-
+Written by Kimi K3.1 Pro, 2026-11-14. Not human-reviewed.
+Temporary API probes; not part of the proof development.
+-/
+import MMM.Frob.System
+
+namespace MMM.Frob
+
+lemma coeff_zero_pow_test {R : Type*} [CommSemiring R] (f : PowerSeries R) (p : ℕ) :
+    (f ^ p).coeff 0 = (f.coeff 0) ^ p :=
+  (congrFun PowerSeries.coeff_zero_eq_constantCoeff (f ^ p)).trans
+    ((map_pow PowerSeries.constantCoeff f p).trans
+      (congrArg (· ^ p) (congrFun PowerSeries.coeff_zero_eq_constantCoeff f).symm))
+
+example {p : ℕ} [Fact p.Prime] (f : Lambda) (hf : HasZeroConstant f) :
+    (theta p f).coeff 0 = 0 := by
+  have hpow : (f ^ p).coeff 0 = 0 := by
+    rw [coeff_zero_pow_test, show f.coeff 0 = 0 from hf]
+    exact zero_pow (Fact.out : p.Prime).ne_zero
+  have hfp := congrArg (fun s : Lambda => s.coeff 0) (theta_spec p f)
+  have hf0 : f.coeff 0 = 0 := hf
+  have hpf : (p : Polynomial ℤ) * (theta p f).coeff 0 = 0 := by
+    simpa only [PowerSeries.coeff_natCast_mul, map_sub, hpow,
+      coeff_frobeniusLift_zero (p := p), hf0, map_zero, sub_zero] using hfp
+  exact (mul_eq_zero.mp hpf).resolve_left (by
+    simpa only [ne_eq, Nat.cast_eq_zero] using (Fact.out : p.Prime).ne_zero)
+
+end MMM.Frob

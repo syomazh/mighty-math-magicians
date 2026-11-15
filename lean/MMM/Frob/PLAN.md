@@ -1,0 +1,116 @@
+# Frobenius proof — Lean plan (workers W025 and W027)
+
+Written by Kimi K3.1 Pro, 2026-11-14; not human-reviewed.
+The source note is `paper/frobenius_proof.tex`.
+
+## Representation and Mathlib survey
+
+Λ is represented in `Basic.lean` as `PowerSeries (Polynomial ℤ)`.  This directly
+codes `Z[y][[x]]`.  `Polynomial.expand ℤ p` is the map `P(y) ↦ P(y^p)`, and
+`PowerSeries.expand p hp` is substitution `x ↦ x^p`.  Their composition
+`frobeniusLiftRingHom` is an explicit `RingHom`.  The variable formulas are
+checked.  A mismatch between `MvPowerSeries.instAlgebra` and
+`PowerSeries.algebraPolynomial` in this checkout was avoided by defining the
+ring hom by its fields.
+
+Relevant APIs: `Mathlib.RingTheory.PowerSeries.Expand`,
+`Mathlib.Algebra.Polynomial.Expand`, `PowerSeries.map`,
+`PowerSeries.coeff_map`, and `Mathlib.FieldTheory.Finite.Basic`.  Witt vectors
+are in `Mathlib/RingTheory/WittVector/*`.  No δ-ring or power-series Hurwitz
+formalization was used.  Reduction modulo p is `PowerSeries.map
+(Polynomial.mapRingHom (Int.castRingHom (ZMod p)))`, coefficientwise.
+
+## Table of statements of the note
+
+| label in note | one-line statement | proposed Lean statement | Mathlib objects | depends on | difficulty | status |
+|---|---|---|---|---|---|---|
+| E1 | digit sums and carry-free sums | `Nat.digits`, `Nat.sum_digits`, carry predicates; finite sums | `Nat.digits`, Finset | — | medium | not done |
+| E2 | nonconstant p-tuples form p-cycles | cyclic permutation on `Fin p → α`; fixed tuples constant | `ZMod p`, group actions | — | medium | not done |
+| E3 | Fermat and Wilson | `Int.ModEq.pow_prime_eq_self`; Wilson factorial congruence | `ZMod`, Wilson | — | easy/medium | Fermat located; not done as files |
+| definition Λ, φ | `φ(x^m y^d)=x^(pm)y^(pd)` | `frobeniusLiftRingHom`; `frobeniusLift_X`, `frobeniusLift_coeff_X` | `PowerSeries`, `Polynomial.expand` | — | easy | done |
+| Lemma θ, congruence | `(f^p−φf)/p ∈ Λ` | `exists_frobenius_sub_eq_natCast_mul`, `theta_spec` | `PowerSeries.mk`, `ZMod` | congruence | medium | done |
+| Lemma system | unique cyclic family Fδ; F0(x,p)=G | `F : ZMod k → Lambda`; coefficient recursion on x-degree | `PowerSeries.coeff`, `Fin` induction | θ | hard | not done; partial coefficient lemmas in `System.lean` |
+| weight definition | `w(x^m y^d)=(p−1)d−s_p(m)` | integer-valued weight on monomials | `Nat.digits` | E1 | easy | not done |
+| (wprod) | weight of products; carry-free equality | weight product inequality | `Nat.digits` | E1 | medium | not done |
+| (wphi) | weight under φ | weight formula for φ | `PowerSeries.expand` | E1 | easy | not done |
+| Lemma lower | Fδ coefficients have weight ≥−1 | coefficientwise lower bound | recursion, weight | system, wprod, wphi | medium | not done |
+| Cor. div | y^t divides coefficient; p^t divides C | `Polynomial` divisibility and evaluation | `Polynomial` | lower | medium | not done |
+| carry-free algebra A | functions N→Q with carry-free convolution | `add_monoid`, `Semiring` on carry-aware convolutions | `Finset`, convolution | E1 | hard | not done |
+| Lemma lead (i) | Fδ(x,0)=sum x^(p^j) | evaluate y=0; unique recursion | `Polynomial.eval`, `PowerSeries` | system | medium | not done |
+| Lemma lead (ii) | ℓδ=αδ+(1/p)ℓδ+1^cf p | sequence convolution identity | carry algebra | lower, E1 | hard | not done |
+| Lemma H | unique labelled exponential system | `MvPowerSeries (ZMod k) ℚ` with zero constant term | `MvPowerSeries` | — | medium | not done |
+| Lemma subst | ℓ relates to T | substitution and base-p digits | `MvPowerSeries`, `Polynomial` | H, lead | hard | not done |
+| Hurwitz subring H | integral exponential coefficients and derivatives | `MvPowerSeries`, derivative maps | `MvPowerSeries` | E2/E3 | hard | not done |
+| Lemma hur (i)–(iv) | closure, p-power/derivative formulas | coefficientwise polynomial identities | `Finset`, multinomial | E2/E3 | hard | not done |
+| Prop carry | carry-congruence and integrality | `(Derivative)` identities mod p | `ZMod`, `MvPowerSeries` | H, hur | hard | not done |
+| Prop eval | induction on total digit weight | finite induction over `Fin k` | `ZMod`, Nat | carry | medium | not done |
+| Theorem thm | coefficient congruence modulo p^(t+1) | valuation coefficient theorem | all above | all | hard | not done |
+| tree dictionary | optional interpreting lemmas | none required for algebra | — | — | not pursued |
+
+## Status / blockers
+
+### W027, targets 1–4 (completed after resuming the interrupted run)
+
+`Theta.lean` proves
+
+```
+modSeries_frobeniusLift (p : ℕ) [Fact p.Prime] (f : Lambda) :
+  modSeries p (frobeniusLiftRingHom p (Fact.out : p.Prime).ne_zero f) =
+    (modSeries p f) ^ p
+```
+
+The proof combines `Polynomial.map_frobenius_expand` and
+`PowerSeries.map_frobenius_expand` with reduction commuting with expansion.
+An incorrect intermediate claim `modPoly_frobenius` was removed by the earlier
+worker.  `ThetaDiv.lean` proves
+
+```
+exists_frobenius_sub_eq_natCast_mul (p : ℕ) [Fact p.Prime] (f : Lambda) :
+  ∃ g : Lambda, f ^ p - frobeniusLiftRingHom p (Fact.out : p.Prime).ne_zero f =
+    (p : Lambda) * g
+
+mul_natCast_prime_cancel (p : ℕ) [Fact p.Prime] {g h : Lambda} :
+  (p : Lambda) * g = (p : Lambda) * h → g = h
+
+theta (p : ℕ) [Fact p.Prime] (f : Lambda) : Lambda
+
+theta_spec (p : ℕ) [Fact p.Prime] (f : Lambda) :
+  (p : Lambda) * theta p f =
+    f ^ p - frobeniusLiftRingHom p (Fact.out : p.Prime).ne_zero f
+```
+
+`ThetaIdents.lean` retains the zero, one, `x`, `y`, sum and product identities,
+and `theta_system_eq`.  `theta_add` uses
+
+```
+∑ i ∈ Finset.Ioo 0 p, ((p.choose i / p : ℕ) : Lambda) * f^i * g^(p-i)
+```
+
+and `theta_mul` gives `φ(f)θ(g) + φ(g)θ(f) + p θ(f)θ(g)`.  The `x` and `y`
+formulas show that θ vanishes on those two variables.  Optional attempts at
+negation/subtraction and separate `frobenius_natCast_theta` compatibility were
+not retained because their rewrites were not completed.
+
+### W027, target 5 (not done)
+
+`System.lean` proves lower-degree dependence of the `m`-th coefficient of `φ`
+for `0 < m`, a positive-summand bound for `Fin p` tuples, conversion of
+`Finset.finsuppAntidiag` membership to its sum over `Fin p`, and lower-degree
+coefficient dependence of both `f^p` and θ under zero-constant hypotheses.
+The unused `hm` argument in the latter makes the intended `0 < m` restriction
+clear; the proof also handles zero tuples via the zero-constant hypotheses.
+
+`Uniqueness.lean` defines `cyclicRHS` and `CyclicSystem` exactly over `ZMod k`
+and proves `cyclicSystem_unique` for all `k`, with zero-constant hypotheses.
+It also checks the zero coefficient of φ, theta, and RHS.  Existence of the
+family and the relation `F₀(x,p)=G` remain not done.  The next existence step
+is `Nat.strongRecursion` on the coefficient degree, with `PowerSeries.mk`
+assembling all coefficients.  The uniqueness of the tree generating series
+was not reached.  Targets 6 onward remain not started.
+
+### State inherited from W025
+
+`Basic.lean` proves Λ, φ as a ring hom, φ(X)=X^p and φ(C Y)=C(Y^p).
+`Theta.lean` proves the mod-p reduction lemmas and Frobenius congruence listed
+above.  No `sorry`, `admit`, `axiom`, `native_decide`, or `unsafe` is used in
+proof files.

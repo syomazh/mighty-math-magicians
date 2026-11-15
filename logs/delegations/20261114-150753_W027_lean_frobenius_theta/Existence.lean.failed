@@ -1,0 +1,102 @@
+/-
+Written by Kimi K3.1 Pro, 2026-11-14. Not human-reviewed.
+Existence and uniqueness of the zero-constant cyclic Frobenius system.
+-/
+import MMM.Frob.Uniqueness
+
+set_option maxHeartbeats 800000
+
+namespace MMM.Frob
+
+/-- At stage m, power series retain only coefficients below m. -/
+noncomputable def truncatedFamily {k : ℕ} (m : ℕ)
+    (c : ℕ → ZMod k → Polynomial ℤ) : ZMod k → Lambda :=
+  fun δ => PowerSeries.mk (fun j => if j < m then c j δ else 0)
+
+lemma coeff_truncatedFamily {k : ℕ} (m j : ℕ)
+    (c : ℕ → ZMod k → Polynomial ℤ) (δ : ZMod k) :
+    (truncatedFamily m c δ).coeff j = if j < m then c j δ else 0 := by
+  simp [truncatedFamily]
+
+/-- The coefficient step uses only lower coefficients. -/
+noncomputable def systemCoeffStep {k : ℕ} (p : ℕ) [Fact p.Prime]
+    (m : ℕ) (lower : (j : ℕ) → j < m → ZMod k → Polynomial ℤ) (δ : ZMod k) :
+    Polynomial ℤ :=
+  let F := truncatedFamily m (fun j ε => if h : j < m then lower j h ε else 0)
+  (if δ = 0 then PowerSeries.X else (0 : Lambda)).coeff m +
+    (frobeniusLiftRingHom p (Fact.out : p.Prime).ne_zero (F (δ + 1))).coeff m +
+    Polynomial.X * (theta p (F (δ + 1))).coeff m
+
+/-- Simultaneous recursion on coefficient degree for all cyclic labels. -/
+noncomputable def systemCoeff {k : ℕ} (p : ℕ) [Fact p.Prime] (m : ℕ) :
+    ZMod k → Polynomial ℤ :=
+  Nat.strongRec (systemCoeffStep p) m
+
+lemma systemCoeff_succ {k : ℕ} (p : ℕ) [Fact p.Prime] (m : ℕ) :
+    systemCoeff p m = systemCoeffStep (k := k) p m
+      (fun j _ => systemCoeff p j) := Nat.strongRec_eq (systemCoeffStep p) m
+
+/-- The power series assembled from the recursive coefficients. -/
+noncomputable def cyclicFamily {k : ℕ} (p : ℕ) [Fact p.Prime] : ZMod k → Lambda :=
+  fun δ => PowerSeries.mk (fun m => systemCoeff p m δ)
+
+lemma coeff_cyclicFamily {k : ℕ} (p : ℕ) [Fact p.Prime] (m : ℕ) (δ : ZMod k) :
+    (cyclicFamily p δ).coeff m = systemCoeff p m δ := by
+  simp [cyclicFamily]
+
+lemma zeroConstant_truncatedFamily {k : ℕ} (m : ℕ)
+    (c : ℕ → ZMod k → Polynomial ℤ) (hc : c 0 = 0) (δ : ZMod k) :
+    HasZeroConstant (truncatedFamily m c δ) := by
+  simp [HasZeroConstant, coeff_truncatedFamily, hc]
+
+lemma cyclicFamily_zero {k : ℕ} (p : ℕ) [Fact p.Prime] (δ : ZMod k) :
+    HasZeroConstant (cyclicFamily p δ) := by
+  rw [HasZeroConstant, coeff_cyclicFamily, systemCoeff_succ]
+  have hzero : HasZeroConstant (cyclicRHS p (fun _ : ZMod k => (0 : Lambda)) δ) :=
+    zeroConstant_cyclicRHS (fun _ : ZMod k => (0 : Lambda)) (fun _ => rfl) δ
+  have hstep : systemCoeffStep (k := k) p 0
+      (fun _ _ => systemCoeff p _) δ = (cyclicRHS p
+      (fun _ : ZMod k => (0 : Lambda)) δ).coeff 0 := by
+    split_ifs with hδ > congr_arg hstep
+    change _ = _
+    dsimp [systemCoeffStep, cyclicRHS]
+    apply PowerSeries.ext
+    intro m
+    simp [coeff_truncatedFamily]
+  rw [hstep, hzero]
+
+lemma cyclicFamily_system {k : ℕ} (p : ℕ) [Fact p.Prime] :
+    CyclicSystem p (cyclicFamily (k := k) p) := by
+  intro δ
+  apply PowerSeries.ext
+  intro m
+  have hzero : HasZeroConstant (cyclicFamily p δ) := by
+    apply cyclicFamily_zero
+  have hrhs : HasZeroConstant (cyclicRHS p (cyclicFamily p) δ) :=
+    zeroConstant_cyclicRHS (cyclicFamily p) (fun ε => cyclicFamily_zero p ε) δ
+  if hm : m = 0 then
+    rw [hm, hzero, hrhs]
+  have hmpos : 0 < m := Nat.pos_of_ne_zero hm
+  have hlow : ∀ j < m, (cyclicFamily p (δ + 1)).coeff j =
+      (truncatedFamily m (fun j ε => systemCoeff p j ε) (δ + 1)).coeff j := by
+    intro j hj
+    simp [coeff_cyclicFamily, coeff_truncatedFamily, hj]
+  have hzeroT : HasZeroConstant (truncatedFamily m
+      (fun j ε => systemCoeff (k := k) p j ε) (δ + 1)) :=
+    zeroConstant_truncatedFamily m _ (by
+      rw [HasZeroConstant, coeff_cyclicFamily, systemCoeff_succ] at hzero
+      exact hzero) _
+  rw [coeff_cyclicFamily, systemCoeff_succ]
+  simp only [cyclicRHS, systemCoeffStep, map_add, PowerSeries.coeff_C_mul]
+  congr 1
+  · exact (coeff_frobeniusLift_lower hmpos hlow).symm
+  · rw [coeff_theta_lower hmpos (cyclicFamily_zero p (δ + 1)) hzeroT hlow]
+
+theorem cyclicSystem_unique_exists {k : ℕ} (p : ℕ) [Fact p.Prime] :
+    ∃! F : ZMod k → Lambda, (∀ δ, HasZeroConstant (F δ)) ∧ CyclicSystem p F := by
+  refine ⟨cyclicFamily p, ⟨fun δ => cyclicFamily_zero p δ, cyclicFamily_system p⟩, ?_⟩
+  rintro G ⟨hGzero, hGsystem⟩
+  exact (cyclicSystem_unique (cyclicFamily_zero p) hGzero
+    (cyclicFamily_system p) hGsystem).symm
+
+end MMM.Frob
