@@ -42,3 +42,6 @@ import MMM.Frob.Deps
 #external_consts_matching MMM.Path.kummer_exact "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"
 #external_consts_matching MMM.Path.choose_residue "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"
 #external_consts_matching MMM.Path.problem137_fussCatalan_path "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"
+#print axioms MMM.Path.kummer_exact_digits
+#print axioms MMM.Path.multiplicity_choose_eq_carries
+#print axioms MMM.Path.choose_residue_digits

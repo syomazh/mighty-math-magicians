@@ -42,6 +42,37 @@ theorem choose_residue [Fact p.Prime] (N n c : ℕ) (hn : n ≤ N)
       (-(p : ℤ)) ^ c * (digFact p N : ℤ) [ZMOD (p : ℤ) ^ (c + 1)] :=
   choose_residue_of slotHyp N n c hn hc
 
+/-- **Kummer's theorem with Mathlib's definitions only.** The number of carries `c` is given
+through the digit sums: `(p - 1) c + s_p(N) = s_p(n) + s_p(N - n)`. -/
+theorem kummer_exact_digits (p : ℕ) [Fact p.Prime] (N n c : ℕ) (hn : n ≤ N)
+    (hc : (p - 1) * c + (Nat.digits p N).sum =
+      (Nat.digits p n).sum + (Nat.digits p (N - n)).sum) :
+    p ^ c ∣ N.choose n ∧ ¬ p ^ (c + 1) ∣ N.choose n :=
+  kummer_exact N n c hn hc
+
+/-- Kummer's theorem as a valuation: `v_p(binom(N, n)) = c`. -/
+theorem multiplicity_choose_eq_carries (p : ℕ) [Fact p.Prime] (N n c : ℕ) (hn : n ≤ N)
+    (hc : (p - 1) * c + (Nat.digits p N).sum =
+      (Nat.digits p n).sum + (Nat.digits p (N - n)).sum) :
+    multiplicity p (N.choose n) = c :=
+  multiplicity_eq_of_exact (kummer_exact N n c hn hc).1 (kummer_exact N n c hn hc).2
+
+/-- **The residue of a binomial coefficient with Mathlib's definitions only** (Anton,
+Stickelberger, Hensel): `binom(N, n) ∏ n_j! ∏ m_j! ≡ (-p)^c ∏ N_j!  (mod p^(c+1))`, the products
+over Mathlib's lists of base-`p` digits of `n`, `m = N - n` and `N`. -/
+theorem choose_residue_digits (p : ℕ) [hp : Fact p.Prime] (N n c : ℕ) (hn : n ≤ N)
+    (hc : (p - 1) * c + (Nat.digits p N).sum =
+      (Nat.digits p n).sum + (Nat.digits p (N - n)).sum) :
+    (N.choose n : ℤ) *
+        ((((Nat.digits p n).map Nat.factorial).prod *
+          ((Nat.digits p (N - n)).map Nat.factorial).prod : ℕ) : ℤ) ≡
+      (-(p : ℤ)) ^ c * ((((Nat.digits p N).map Nat.factorial).prod : ℕ) : ℤ)
+        [ZMOD (p : ℤ) ^ (c + 1)] := by
+  have h := choose_residue N n c hn hc
+  rw [digFact_eq_digits hp.out.two_le, digFact_eq_digits hp.out.two_le,
+    digFact_eq_digits hp.out.two_le] at h
+  exact h
+
 /-- **The residue of the Fuss–Catalan number, by the lattice-path proof.** -/
 theorem residue_fussCatalan_path (p : ℕ) [Fact p.Prime] (k n t : ℕ) (hk : 0 < k)
     (ht : (p - 1) * t + 1 = (Nat.digits p ((p ^ k - 1) * n + 1)).sum) :
