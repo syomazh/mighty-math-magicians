@@ -1,47 +1,93 @@
 % Written by Claude Fable 5.2 (claude-fable-5-2) in Claude Code, started by Andrei, 2026-11-15.
 % Not human-reviewed.
 %
-% One slide for the end of the talk: what comes next. Four directions, all taken from the
-% team's own record (talk/QA.md questions 37 to 40 and 46, FINDINGS.md, and the last
-% sentence of the problem statement); see outlook_notes.md. Same look as intro_slides.tex.
+% Two slides for the end of the talk, on Andrei's word: "for outlook slides I want just the
+% attached and weighted Fuss-Catalan; make the attached more concise and expand on Fuss-Catalan".
+%   16  From numbers to polynomials: a shorter version of a slide that Andrei supplied as a PDF
+%       (from_numbers_to_polynomials_slide.pdf; its formula, example, numbers and last sentence
+%       are taken from it, and I do not know who wrote it)
+%   17  Weighted Fuss--Catalan numbers: the definition, Konvalinka's theorem, the conjecture
+% They replace the four-row slide "What comes next" that this file held before.
+% Same look as intro_slides.tex. See outlook_notes.md.
 %
-% Build:  python3 check_outlook.py > check_outlook_output.txt   (checks rows 2 and 3)
+% Build:  python3 check_outlook.py > check_outlook_output.txt   (pictures and checks)
 %         latexmk -pdf outlook_slide.tex
 \documentclass[aspectratio=169,10pt,t]{beamer}
 
-% ---- the number of this slide in the whole deck (18 if the three intro slides replace
-%      slide 2 of the team's deck and this one stands before its last slide)
-\newcommand{\firstslide}{18}
+% ---- the number of the first of these two slides in the whole deck
+\newcommand{\firstslide}{16}
 % ---------------------------------------------------------------------------------
 
 \input{deck_style.tex}
-
-% one row of the list: number, heading, a grey line under it, and a formula on the right
-\newcommand{\dirrow}[5]{% y, number, heading, grey line, formula
-  \at{1.05,#1}{\serifbold\fs{13}\color{accent}#2}
-  \at{1.85,#1}{\serifbold\fs{12.5}\color{ink}#3}
-  \at{1.85,#1+0.44}{\fs{8.5}#4}
-  \at{9.3,#1+0.22}{\fs{10.5}#5}}
+\input{outlook_trees.tex}
+\newsavebox{\shapea}\newsavebox{\shapeb}\newsavebox{\weighttree}
+% a paragraph that wraps: top left corner, width, text
+\newcommand{\para}[3]{\node[anchor=north west,inner sep=0pt,outer sep=0pt,text width=#2,align=left] at (#1) {#3};}
 
 \begin{document}
 \setcounter{framenumber}{\numexpr\firstslide-1\relax}
 
-\begin{frame}{What comes next}{OUTLOOK}
+% 16 --------------------------------------------------------------------------------
+\begin{frame}{From numbers to polynomials}{WHAT COMES NEXT?}
+\sbox{\shapea}{\setlength{\tx}{0.23cm}\setlength{\ty}{0.42cm}\ShapeA}%
+\sbox{\shapeb}{\setlength{\tx}{0.23cm}\setlength{\ty}{0.42cm}\ShapeB}%
 \begin{canvas}
-  \dirrow{3.3}{1}{Weighted Fuss--Catalan numbers}
-    {Konvalinka's congruence, from rotations alone}
-    {$C_n^{(q)}(b)\;\equiv\;\Cq\pmod{p^{\,t+k}}$}
-  \dirrow{4.45}{2}{Other statistics}
-    {trees with $n_i$ internal nodes at depth $i$}
-    {$p^{\,t}\;\Big|\;\displaystyle\prod_{i}\binom{q\,n_i}{n_{i+1}}$}
-  \dirrow{5.6}{3}{The next digit}
-    {$N_d$\,: classes with $d$ asymmetric nodes}
-    {$\Cq/p^{\,t}\;\equiv\;N_t+p\,N_{t+1}\pmod{p^{2}}$}
-  \dirrow{6.75}{4}{$q$ not a prime power}
-    {what do the rotation classes say?}
-    {$q=6,\;10,\;12,\;\dots$}
+  \at{1.05,3.2}{\fs{12}$P_n(x,y)\;=\;\displaystyle\sum_{T}\,x^{\operatorname{height}(T)}\,y^{\,\ell(T)}$}
+  \at{8.2,3.02}{\fs{9}$\ell(T)$\,: the sum of the leaf depths}
+  \at{8.2,3.52}{\fs{9}$P_n(1,1)=\Cq$}
 
-  \at{1.85,7.82}{\quiet{1 and 2 are the further directions named in the problem statement.}}
+  \para{1.05,3.98}{13.9cm}{\fontsize{9.5}{13}\selectfont Rotations preserve both. So $p^{\,t}$ divides every
+    coefficient,\\ and modulo $p^{\,t+1}$ only the minimal trees remain.}
+
+  % the example q = 3, n = 3
+  \at[base]{2.35,4.95}{\usebox{\shapea}}
+  \at[base]{5.25,4.95}{\usebox{\shapeb}}
+  \at[base]{2.35,6.55}{\quiet{$3$ trees\,: $x^2y^{13}$}}
+  \at[base]{5.25,6.55}{\quiet{$9$ trees\,: $x^3y^{15}$}}
+  \at{7.4,5.05}{\quiet{$q=3$,\; $n=3$,\; $t=1$}}
+  \at{7.4,5.7}{\fs{11}$P_3\;=\;3\,x^2y^{13}+9\,x^3y^{15}\;\equiv\;3\,x^2y^{13}\pmod 9$}
+  \at{7.4,6.38}{\quiet{$n=6$\,: $1428$ trees, and $P_6\equiv 6\,x^3y^{34}\pmod 9$}}
+
+  \fill[callout,rounded corners=2.5pt] (1.05,6.88) rectangle (14.95,7.95);
+  \para{1.4,7.06}{13.2cm}{\fontsize{9.5}{12.5}\selectfont\color{ink}More interesting: statistics that rotations
+    change in a controlled way.\\ For Gaussian binomials, each carry then gives a cyclotomic factor.}
+\end{canvas}
+\end{frame}
+
+% 17 --------------------------------------------------------------------------------
+\begin{frame}{Weighted Fuss--Catalan numbers}{WHAT COMES NEXT?}
+% the example tree: internal nodes carry their index i_v
+\sbox{\weighttree}{%
+  \begin{tikzpicture}[x=0.36cm,y=0.56cm,baseline={(0,0)}]
+    \draw[tedge] (0,0)--(-3,-1) (0,0)--(0,-1) (0,0)--(3,-1);
+    \draw[tedge] (-3,-1)--(-4,-2) (-3,-1)--(-3,-2) (-3,-1)--(-2,-2);
+    \draw[tedge] (3,-1)--(2,-2) (3,-1)--(3,-2) (3,-1)--(4,-2);
+    \draw[tedge] (2,-2)--(1,-3) (2,-2)--(2,-3) (2,-2)--(3,-3);
+    \foreach \p in {(0,-1),(-4,-2),(-3,-2),(-2,-2),(3,-2),(4,-2),(1,-3),(2,-3),(3,-3)} \node[tlf] at \p {};
+    \foreach \p in {(0,0),(-3,-1),(3,-1),(2,-2)} \node[tin] at \p {};
+    \node[anchor=south,inner sep=2.6pt,font=\fontsize{8}{8}\selectfont\bfseries,text=accent] at (0,0) {0};
+    \node[anchor=east,inner sep=3.4pt,font=\fontsize{8}{8}\selectfont\bfseries,text=accent] at (-3,-1) {1};
+    \node[anchor=west,inner sep=3.4pt,font=\fontsize{8}{8}\selectfont\bfseries,text=accent] at (3,-1) {0};
+    \node[anchor=east,inner sep=3.4pt,font=\fontsize{8}{8}\selectfont\bfseries,text=accent] at (2,-2) {1};
+  \end{tikzpicture}}%
+\begin{canvas}
+  % the definition, with a picture
+  \at{1.05,3.2}{\fs{12}$\Cq(b)\;=\;\displaystyle\sum_{T}\;\prod_{v}\,b(i_v)$}
+  \at{1.05,4.1}{\fs{9}$i_v$\,: the number of non-right edges from the root to the node $v$}
+  \at[base]{12.0,2.8}{\usebox{\weighttree}}
+  \at[base]{12.0,4.85}{\quiet{the indices $i_v$; weight $b(0)^2\,b(1)^2$}}
+
+  % the theorem
+  \at{1.05,5.15}{\fs{9.5}{\bfseries\color{ink}Theorem} (Konvalinka 2007), for $q=p^k$.}
+  \at{1.05,5.8}{\fs{10.5}$b(0)\equiv 1\pmod q$ \;and\; $q^{\,j+1}\mid\Delta^{j}b$ for $j\ge 1$
+    $\quad\Longrightarrow\quad$ $\Cq(b)\;\equiv\;\Cq\pmod{p^{\,t+k}}$}
+
+  % the conjecture
+  \fill[callout,rounded corners=2.5pt] (1.05,6.3) rectangle (14.95,7.95);
+  \para{1.4,6.48}{13.2cm}{\fontsize{9.5}{12.5}\selectfont\color{ink}{\bfseries Conjecture.} His proof only needs a
+    group that moves every branch to every position. Rotations do, so the weighted theorem, too, would need
+    no factorial valuations.}
+  \at{1.4,7.68}{\quiet{Rotations change this weight. The conjecture holds in every case computed ($q=2,3,4,5,8,9$).}}
 \end{canvas}
 \end{frame}
 

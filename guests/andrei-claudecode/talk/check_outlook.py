@@ -1,28 +1,41 @@
 #!/usr/bin/env python3
 # Written by Claude Fable 5.2 (claude-fable-5-2) in Claude Code, started by Andrei, 2026-11-15.
 # Not human-reviewed.
-"""Checks of the two formulas on outlook_slide.tex (the slide "What comes next").
+"""Pictures and checks for outlook_slide.tex (two slides: "From numbers to polynomials"
+and "Weighted Fuss-Catalan numbers").
 
 Run from this folder:
 
     python3 check_outlook.py > check_outlook_output.txt
 
-Row 2 of the slide: the number of q-ary trees with n_i internal nodes at depth i is
-prod_i binom(q n_i, n_(i+1)), and p^t divides it (q a power of p, t as in the theorem).
-Row 3 of the slide: C/p^t = N_t + p N_(t+1) modulo p^2, where N_d is the number of
-rotation classes with d asymmetric nodes.
+It writes outlook_trees.tex (the two shapes of ternary trees with three internal nodes)
+and checks what the two slides say:
 
-Rows 1 and 4 are not checked here. Row 1 (weighted numbers) rests on the team's
-experiments/E002_extensions; row 4 is a question.
+  slide 1  P_n(x, y) = sum over the q-ary trees T with n internal nodes of
+           x^height(T) y^l(T), l(T) = sum of the leaf depths. Rotations preserve both
+           statistics; p^t divides every coefficient; modulo p^(t+1) only the minimal
+           trees remain; the two examples (q = 3, n = 3 and n = 6).
+  slide 2  The weighted number C(b) = sum over T of prod over internal nodes v of b(i_v),
+           i_v = number of non-right edges from the root to v; the example weight in the
+           picture; and Konvalinka's congruence C(b) = C modulo p^(t+k), tested for one
+           weight that meets his conditions and one that does not.
 
-The trees are listed by make_intro.py. Standard library only. About 20 seconds.
+Not checked here: the conjecture of slide 2 (that his proof goes through with rotations),
+which rests on the team's experiments/E002_extensions; and the sentence of slide 1 about
+Gaussian binomials, which is taken from the slide that Andrei supplied.
+
+An earlier version of this file checked a four-row slide that these two slides replace;
+it is in the history (commit e7278a7). The trees are listed by make_intro.py.
+Standard library only. About 15 seconds.
 """
 
 from collections import Counter
-from math import comb
+from functools import lru_cache
+from pathlib import Path
 
-from make_intro import LEAF, count_by_recursion, digits, trees, vp
+from make_intro import LEAF, compositions, count_by_recursion, digits, tikz, trees
 
+HERE = Path(__file__).resolve().parent
 RESULTS = []
 
 
@@ -37,78 +50,21 @@ def t_of(q, p, n):
     return (s - 1) // (p - 1)
 
 
-# ---------------------------------------------------------------- row 2: level profiles
+# ---------------------------------------------------------------- slide 1
 
 
-def profile(t):
-    """Number of internal nodes at depth 0, 1, 2, ..."""
-    prof = []
-
-    def walk(t, depth):
+def height_and_depths(t):
+    """(height, sum of the depths of the leaves); a single leaf has height 0."""
+    def walk(t, d):
         if t == LEAF:
-            return
-        if depth == len(prof):
-            prof.append(0)
-        prof[depth] += 1
-        for c in t:
-            walk(c, depth + 1)
-
-    walk(t, 0)
-    return tuple(prof)
-
-
-def profiles(q, n):
-    """All sequences 1 = n_0, n_1, ... of positive integers with sum n and n_(i+1) <= q n_i."""
-    def extend(prefix, left):
-        if left == 0:
-            yield tuple(prefix)
-            return
-        for nxt in range(1, min(left, q * prefix[-1]) + 1):
-            yield from extend(prefix + [nxt], left - nxt)
-
-    yield from extend([1], n - 1)
-
-
-def product(q, prof):
-    out = 1
-    for a, b in zip(prof, prof[1:]):
-        out *= comb(q * a, b)
-    return out
-
-
-def row2():
-    ok = True
-    for q, nmax in ((2, 8), (3, 5), (4, 4)):
-        for n in range(1, nmax + 1):
-            counted = Counter(profile(t) for t in trees(q, n))
-            ok &= set(counted) == set(profiles(q, n))
-            ok &= all(counted[pr] == product(q, pr) for pr in counted)
-    check("2a trees with n_i internal nodes at depth i: listing them gives prod binom(q n_i, n_(i+1))"
-          "  (q = 2, n <= 8; q = 3, n <= 5; q = 4, n <= 4)", ok)
-
-    ok, cases, tight = True, 0, 0
-    for q, p, nmax in ((2, 2, 18), (3, 3, 13), (4, 2, 12), (5, 5, 10), (8, 2, 9), (9, 3, 9)):
-        T = count_by_recursion(q, nmax)
-        for n in range(1, nmax + 1):
-            t = t_of(q, p, n)
-            total = 0
-            for pr in profiles(q, n):
-                x = product(q, pr)
-                total += x
-                cases += 1
-                ok &= x % p ** t == 0
-                tight += x % p ** (t + 1) != 0
-            ok &= total == T[n]
-    check("2b p^t divides prod binom(q n_i, n_(i+1)) for every profile, and the products add up "
-          "to the number of trees  (q = 2, n <= 18; 3, <= 13; 4, <= 12; 5, <= 10; 8 and 9, <= 9)",
-          ok, f"{cases} profiles, {tight} of them with the power of p exactly t")
-
-
-# ---------------------------------------------------------------- row 3: classes by d
+            return d, d
+        parts = [walk(c, d + 1) for c in t]
+        return max(h for h, _ in parts), sum(s for _, s in parts)
+    return walk(t, 0)
 
 
 def canon(t, memo={}):
-    """A normal form of the rotation class: rotate the children of every node to the least tuple."""
+    """A normal form of the rotation class (q prime): rotate every node to the least tuple."""
     if t == LEAF:
         return LEAF
     if t not in memo:
@@ -118,43 +74,138 @@ def canon(t, memo={}):
 
 
 def asymmetric_nodes(t):
-    """Number of internal nodes whose subtrees are not all equivalent."""
     if t == LEAF:
         return 0
     return (len({canon(c) for c in t}) > 1) + sum(asymmetric_nodes(c) for c in t)
 
 
-def row3():
-    ok_size, ok_bound, ok_mod = True, True, True
-    lines = []
+def polynomial(q, n):
+    return Counter(height_and_depths(t) for t in trees(q, n))
+
+
+def show(P, mod=None):
+    items = sorted((k, c % mod if mod else c) for k, c in P.items())
+    return " + ".join(f"{c} x^{h} y^{s}" for (h, s), c in items if c) or "0"
+
+
+def slide1():
+    # the two shapes drawn on the slide
+    L = LEAF
+    N = (L, L, L)
+    shape_a = (L, N, N)             # height 2, leaf depths 1 + 6*2 = 13
+    shape_b = (L, (L, N, L), L)     # height 3, leaf depths 2*1 + 2*2 + 3*3 = 15
+    (HERE / "outlook_trees.tex").write_text(
+        "% Generated by check_outlook.py (written by Claude Fable 5.2 in Claude Code, started by\n"
+        "% Andrei, 2026-11-15). Do not edit by hand. Not human-reviewed.\n"
+        f"\\newcommand{{\\ShapeA}}{{{tikz(shape_a)}}}\n"
+        f"\\newcommand{{\\ShapeB}}{{{tikz(shape_b)}}}\n")
+    fam = trees(3, 3)
+    in_a = [t for t in fam if canon(t) == canon(shape_a)]
+    in_b = [t for t in fam if canon(t) == canon(shape_b)]
+    check("1a q = 3, n = 3: 12 trees in two rotation classes of 3 and 9 trees, with "
+          "x^2 y^13 and x^3 y^15",
+          len(fam) == 12 and len(in_a) == 3 and len(in_b) == 9
+          and {height_and_depths(t) for t in in_a} == {(2, 13)}
+          and {height_and_depths(t) for t in in_b} == {(3, 15)})
+    P3 = polynomial(3, 3)
+    check("1b P_3 = 3 x^2 y^13 + 9 x^3 y^15, which is 3 x^2 y^13 modulo 9",
+          dict(P3) == {(2, 13): 3, (3, 15): 9}, "P_3 = " + show(P3))
+    P6 = polynomial(3, 6)
+    check("1c q = 3, n = 6: 1428 trees, 12 monomials, P_6 = 6 x^3 y^34 modulo 9",
+          sum(P6.values()) == 1428 and len(P6) == 12
+          and {k: c % 9 for k, c in P6.items() if c % 9} == {(3, 34): 6},
+          "P_6 mod 9 = " + show(P6, 9))
+
+    # rotations preserve both statistics; hence the two statements of the slide (q = p)
+    ok_inv, ok_div, ok_min = True, True, True
     for p, nmax in ((2, 11), (3, 7), (5, 4)):
         for n in range(1, nmax + 1):
             fam = trees(p, n)
-            size = Counter(canon(t) for t in fam)           # class -> number of trees in it
-            d_of = {}
-            for t in fam:
-                d_of.setdefault(canon(t), asymmetric_nodes(t))
-            ok_size &= all(size[c] == p ** d_of[c] for c in size)
-            N = Counter(d_of.values())                       # d -> number of classes
             t = t_of(p, p, n)
-            ok_bound &= min(N) == t and N[t] % p != 0
-            C = len(fam)
-            ok_mod &= C % p ** t == 0 and (C // p ** t - N[t] - p * N[t + 1]) % p ** 2 == 0
-            if (p, n) in ((2, 6), (3, 5), (3, 7)):
-                lines.append(f"   p = q = {p}, n = {n}: {C} trees, t = {t}, classes by d: "
-                             + ", ".join(f"N_{d} = {N[d]}" for d in sorted(N)))
-    check("3a a rotation class with d asymmetric nodes has exactly p^d trees"
-          "  (p = q = 2, n <= 11; 3, n <= 7; 5, n <= 4)", ok_size)
-    check("3b the least d is t, and the number of classes with d = t is not divisible by p", ok_bound)
-    check("3c C/p^t = N_t + p N_(t+1) modulo p^2", ok_mod)
-    print("\n".join(lines))
+            by_class = {}
+            for tr in fam:
+                by_class.setdefault(canon(tr), set()).add(height_and_depths(tr))
+            ok_inv &= all(len(v) == 1 for v in by_class.values())
+            P = Counter(height_and_depths(tr) for tr in fam)
+            ok_div &= all(c % p ** t == 0 for c in P.values())
+            minimal = Counter()   # p^t times the monomials of the classes with d = t
+            for c, v in by_class.items():
+                if asymmetric_nodes(c) == t:
+                    minimal[next(iter(v))] += p ** t
+            ok_min &= all((P[k] - minimal[k]) % p ** (t + 1) == 0 for k in set(P) | set(minimal))
+    check("1d height and sum of leaf depths are the same for all trees of a rotation class"
+          "  (p = q = 2, n <= 11; 3, n <= 7; 5, n <= 4)", ok_inv)
+    check("1e p^t divides every coefficient of P_n  (same range)", ok_div)
+    check("1f modulo p^(t+1) only the classes with d = t remain  (same range)", ok_min)
+
+    # prime powers: divisibility of every coefficient (no classes computed here)
+    ok = True
+    for q, p, nmax in ((4, 2, 6), (8, 2, 4), (9, 3, 4)):
+        for n in range(1, nmax + 1):
+            ok &= all(c % p ** t_of(q, p, n) == 0 for c in polynomial(q, n).values())
+    check("1g prime powers: p^t divides every coefficient of P_n  (q = 4, n <= 6; q = 8, 9, n <= 4)", ok)
+
+
+# ---------------------------------------------------------------- slide 2
+
+
+def weighted(q, n, b):
+    """Sum over the q-ary trees with n internal nodes of the product of b(i_v) over the
+    internal nodes v, where i_v is the number of non-right edges from the root to v."""
+    @lru_cache(None)
+    def W(n, i):                     # the root of the subtree has index i
+        if n == 0:
+            return 1
+        total = 0
+        for comp in compositions(n - 1, q):
+            prod = 1
+            for j, c in enumerate(comp):
+                prod *= W(c, i if j == q - 1 else i + 1)   # only the last branch is "right"
+            total += prod
+        return b(i) * total
+    return W(n, 0)
+
+
+def indices(t, i=0):
+    """The list of i_v over the internal nodes v of t."""
+    if t == LEAF:
+        return []
+    out = [i]
+    for j, c in enumerate(t):
+        out += indices(c, i if j == len(t) - 1 else i + 1)
+    return out
+
+
+def slide2():
+    L = LEAF
+    N = (L, L, L)
+    example = (N, L, (N, L, L))      # the tree drawn on the slide
+    check("2a the tree on the slide: indices 0, 1, 0, 1, so its weight is b(0)^2 b(1)^2",
+          sorted(indices(example)) == [0, 0, 1, 1])
+    ok = all(weighted(q, n, lambda i: 1) == count_by_recursion(q, 8)[n]
+             for q in (2, 3, 4) for n in range(1, 9))
+    check("2b with all weights 1 the weighted number is the number of trees  (q = 2, 3, 4; n <= 8)", ok)
+
+    ok, control, cases = True, 0, 0
+    for q, p, k, nmax in ((2, 2, 1, 14), (3, 3, 1, 10), (4, 2, 2, 8), (5, 5, 1, 6), (8, 2, 3, 5), (9, 3, 2, 5)):
+        T = count_by_recursion(q, nmax)
+        for n in range(1, nmax + 1):
+            modulus = p ** (t_of(q, p, n) + k)
+            cases += 1
+            # b(i) = 1 + q^2 i meets the conditions: b(0) = 1, q^2 divides the first
+            # difference, and the higher differences vanish
+            ok &= (weighted(q, n, lambda i: 1 + q * q * i) - T[n]) % modulus == 0
+            control += (weighted(q, n, lambda i: 1 + i) - T[n]) % modulus != 0
+    check("2c Konvalinka's congruence C(b) = C modulo p^(t+k) for b(i) = 1 + q^2 i"
+          "  (q = 2, 3, 4, 5, 8, 9; small n)", ok,
+          f"{cases} cases; with b(i) = 1 + i, which does not meet his conditions, it fails in {control}")
 
 
 def main():
     print("# Output of check_outlook.py, a script written by Claude Fable 5.2 in Claude Code, "
           "started by Andrei, 2026-11-15. Not human-reviewed.")
-    row2()
-    row3()
+    slide1()
+    slide2()
     print(f"\n{len(RESULTS)} checks, {sum(RESULTS)} passed")
     return 0 if all(RESULTS) else 1
 
