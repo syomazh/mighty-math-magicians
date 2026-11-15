@@ -736,7 +736,8 @@ Claim & How it is supported & Read and approved by a human?\\
  \cite[Remark~3]{Konvalinka} (\emph{cited}; compared with ours in the remark at the end of
  Section~\ref{sec:known}). \emph{Lean:} \lean{MMM.residue_fussCatalan},
  \lean{MMM.PTree.residue_primePower}, \lean{MMM.PTree.residue_paper_form};
- \lean{MMM.Frob.residue_fussCatalan_frobenius}; \lean{MMM.Path.residue_fussCatalan_path}.
+ \lean{MMM.Frob.residue_fussCatalan_frobenius}; \lean{MMM.Path.residue_fussCatalan_path};
+ \lean{MMM.Acc.residue_fussCatalan_accounting} (accounting proof, two steps proved differently from the text).
  \emph{Computation:} $885$ cases, $p\le11$, $k\le3$, $n<60$;
  and E003.
  & Yes, as part of the main proof.\\
@@ -1839,7 +1840,10 @@ map such a tree to itself form a group of order $3^{n-d}$, which permutes the le
 hydrogens. It has at least $s_3(2n+1)$ orbits, and exactly $s_3(2n+1)$, of the sizes given by the base-$3$
 digits of $2n+1$, when $d=t$; in chemical words, the hydrogens fall into at least $s_3(2n+1)$ sets of
 interchangeable ones. Equality does not characterise $d=t$: the tree of 3-ethylpentan-3-ol ($n=7$, $d=3$,
-$t=1$) reaches it. Checked by the program of a guest session for $n\le8$ (claim C25). The
+$t=1$) reaches it. Checked by the program of a guest session for $n\le8$ (claim C25). By Step~4 the
+number of rotation classes with $d=t$ is not divisible by $3$; in chemical words, the number of alcohols
+C$_n$H$_{2n+1}$OH with the smallest $d$, mirror forms counted separately, is never divisible by $3$ (a
+restatement of Theorem~\ref{main:thm:main} for $p=q=3$; the wording is ours). The
 ternary tree numbers are prime to $3$ exactly for $n=1,4,13,40,\dots$, the sizes at which a perfectly branched
 group exists (this case $t=0$, with residue $1$, is in the OEIS without proof \cite{OEISA201823}).
 \textbf{[computed; the reading is ours]} For a rooted ternary tree with $n$ nodes, (class size) $\times$
@@ -1939,7 +1943,11 @@ A398109; see \cite{OEISmobiles,OEISA000625}) by looking up computed values (clai
 \section{Computations}\label{sec:computations}
 A computation supports a statement in the range computed; it says nothing about a proof. The table lists
 what was computed, over what range, by which program, and with what result. The folders
-\file{materials/Other/experiments/E000_...} to \file{materials/Other/experiments/E017_...} of the repository contain the code, the output and a
+\file{materials/Other/experiments/E000_...} to \file{materials/Other/experiments/E017_...} of the repository
+(where the report, the slides and the Lean project are in the root, the four proofs as separate documents in
+\file{materials/Proofs/}, and everything else in \file{materials/Other/}; a path that an appendix gives
+without this prefix, such as \texttt{notes/...} or \texttt{paper/reviews/...}, is relative to
+\file{materials/Other/}) contain the code, the output and a
 description of each experiment (two folders begin with \file{E017}; the one meant below is
 \file{E017_path_slot_count}); the two guest sessions keep theirs in their own folders. The ranges below are
 those recorded in the project's ledger; the experiments were not rerun for this report, except for the five
@@ -2385,11 +2393,11 @@ not zero.) The independent audit reproduced these listings with its own program.
 constructors, for a recursor its rules), and lists the declarations outside the project whose names contain
 one of the strings \texttt{multiplicity\_choose}, \texttt{multiplicity\_factorial}, \texttt{padicval},
 \texttt{legendre}, \texttt{kummer}, \texttt{lucas}, \texttt{dvd\_choose\_pow}, \texttt{add\_pow\_char},
-\texttt{add\_pow\_expchar}. In the build of 15 November, 03:08, the list is empty for every final theorem of
-the three proofs (closures of about $12{,}700$ to $13{,}500$ declarations for the tree proof, $20{,}100$ to
+\texttt{add\_pow\_expchar}. In the build of the working copy of 15 November, 03:08 (the fresh clone was built at 03:41), the list is empty for every final theorem of
+the first three proofs (closures of about $12{,}700$ to $13{,}500$ declarations for the tree proof, $20{,}100$ to
 $20{,}400$ for the algebraic proof, $12{,}200$ to $12{,}600$ for the lattice-path proof) and for the exact
 count, the carry budget, the closed families, the level profiles and the weights; in the build of
-15 November, 09:13, it is empty as well for the three final theorems of the accounting proof (closures of
+15 November, 09:13 (working copy; the fresh clone at 09:31), it is empty as well for the three final theorems of the accounting proof (closures of
 about $19{,}200$ to $19{,}500$ declarations, which contain Wilson's theorem, as the build also prints). It is
 \emph{not} empty for one statement that no final theorem uses, the binomial congruence proved by a group
 action (\lean{choose_mul_add_modEq_one_action}): there it shows Mathlib's definition of the $p$-adic valuation
@@ -2415,7 +2423,7 @@ Everything in this report was done during the event: according to the project's 
 evening of Friday 13 November 2026 (first entry at about 20:15, reading the problem statement) and this
 report was assembled in the night before the deadline of Sunday 15 November, 12:00. What existed before the
 event is the literature of Sections~\ref{sec:known} and~\ref{sec:attribution}; the statement of the theorem
-and the divisibility by a group action are Konvalinka's, and the case $p=2$ is prior work. In order (times
+and the divisibility by a group action are Konvalinka's, and the case $p=2$ is prior work. In order, except that the item on Sunday morning stands before the one on the night to Sunday (times
 are Pacific time, as recorded in the journal and the ledger):
 \begin{itemize}[itemsep=1pt]
 \item \emph{Friday evening.} The idea of the main proof (rotations instead of permutations, class sizes $p^d$,
@@ -2450,9 +2458,13 @@ are Pacific time, as recorded in the journal and the ledger):
  another family read the proofs of Section~\ref{sec:extensions} and the converse of
  Section~\ref{sec:smallexamples} and found no error, and a third compared the bibliography and the
  attributions of this report with the project's reference list (no field differed; four places where the
- report said more than the list recorded were checked or marked).
+ report said more than the list recorded were checked or marked). Before the submission the repository was
+ put into the layout described in Section~\ref{sec:computations}, the report was brought in line with the
+ slides that team members had finished that morning, and an AI session with a fresh context read it once more
+ against those slides and the rules; its findings about the report were applied.
 \item \emph{Night to Sunday.} The algebraic proof and the lattice-path proof formalized in full, so that the
- theorem has three proofs checked by Lean. The Lean project moved to the versions that the rules require
+ theorem then had three proofs checked by Lean (the accounting proof followed on Sunday morning, with two steps
+ proved differently from its text; see the item above). The Lean project moved to the versions that the rules require
  (two kinds of small change in five files, Section~\ref{sec:lean}). Formalized as well: the exact number of minimal classes for $q=p$, the carry budget,
  the congruence for closed families, the divisibility for level profiles, which until then was a
  conjecture supported by computation, and the divisibility for weights that rotations do not change. This
@@ -2510,7 +2522,10 @@ and judged, and are answerable for what is submitted. This section says which to
 their output was checked, and what no human has checked. The full record is in the repository: a journal of
 every work block, a ledger with the origin of every claim, an automatic log of every run of a model
 delegated through the Open Math OS service, with its brief and its output, and the briefs of the later runs
-of delegated Claude sessions, whose results are recorded in the journal.
+of delegated Claude sessions, whose results are recorded in the journal. A state file with the current status
+and the queue of next actions, together with the journal, allowed an agent that had stopped to resume with the
+full context. By the project's rule every AI-written file names in its header the model that wrote it, and the
+ledger records for every claim which tool produced it and whether a human has approved it.
 
 \subsection{Tools}
 {\small
@@ -2598,7 +2613,9 @@ the claim is first tested by heavy computation; a proof is written lemma by lemm
 mark every step correct, gap or wrong (for the main proof three models in the first round; the other proofs
 had one or two AI readers each, as listed below); the orchestrator checks who is right and repairs the proof, and
 a step marked gap or wrong goes back to the claim; then, in either order, the statement is formalized in Lean
-and audited, and a human reads and signs. Concretely:
+and audited, and a human reads and signs. Alongside, a search of the literature for existing proofs and for the
+novelty of each idea was repeated during the event (Sections~\ref{sec:attribution} and~\ref{sec:event}).
+Concretely:
 \begin{itemize}[itemsep=1pt]
 \item \emph{Main proof.} Brute force on small trees; an independent program by another model (agreeing for
  $q=p$ and small $n$); a stress test on $1067$ leaf counts; three rounds of AI review ($14$ defects, then $4$
@@ -2612,7 +2629,8 @@ and audited, and a human reads and signs. Concretely:
  note and reimplemented every numbered statement; formalized in Lean in full, every file recompiled and its
  statements read by the orchestrator.
 \item \emph{Accounting proof.} Lemmas checked by a program independent of the first draft's; one AI referee;
- read by a faculty member of the team.
+ read by a faculty member of the team (not signed); formalized in Lean on the morning of 15 November with two
+ steps proved differently from the text (Section~\ref{sec:lean}), not audited by a separate session.
 \item \emph{Lean files written by delegated models} were counted only after the orchestrator had recompiled
  them and read their statements; one delegated attempt (at the closed formula) failed, was reported as
  failed, and was redone by the orchestrator. The four files of the accounting proof written on the morning
@@ -2644,7 +2662,7 @@ This report was assembled by an AI system and corrected after the reading of an 
 writing no human has read it.
 
 \subsection{What the people on the team did}
-They chose the problem, set the priorities, decided which tool was used for what and when, and decided that
+They chose the problem, set the priorities, set the budget for the delegated models, decided which tool was used for what and when, and decided that
 the repository is public. A faculty member of the team looked through the main proof and read the
 lattice-path proof and the accounting proof, with the verdicts recorded in Section~\ref{sec:status}. A team
 member began to read the algebraic proof and put it aside for the time being. A team
