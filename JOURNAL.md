@@ -461,3 +461,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-14 19:27 — Claude Fable 5.2
 
 - **Human decision.** Syoma, asked whether to purge the mistakenly committed download folder from the history of `main` by a force-push: "Leave history". Nothing is rewritten. The files are out of the tree since `2c81b62` and remain reachable in the history at `ba15aec`; rule 8 (never force-push) stands.
+
+## 2026-11-14 19:30 — Claude Fable 5.2
+
+- **Human input.** Syoma: "keep lean forbenius".
+- **W036 launched** (`briefs/W036_lean_frobenius_lead.md`, Kimi): the next section of the Frobenius note, Lemma "Leading part". Part (i): the family at y = 0 is the sum of the x^(p^j) with j ≡ −δ modulo k. Part (ii): the coefficients of the monomials of weight −1 satisfy p·ℓ_δ = p·α_δ + ℓ_(δ+1) to the carry-free p-th power. Four targets with fixed statements; the third (the coefficient of extreme weight in f^p) is the hard one, and the brief says how to leave it as a hypothesis if it cannot be finished. Reason: Syoma's instruction; it is the next statement of C18 and does not depend on W035.
+- What remains of C18 after that: the section on the labelled series and the carry operator (five statements) and the final assembly. I have not yet written those briefs; they need a careful reading of lines 280 to 480 of the note, which I will do when Claude's limit has reset.
+- Running: W033 (path proof), W035 (tree generating function), W036.
