@@ -377,3 +377,7 @@ Syoma, asked for the professor's name so that the two approvals could be complet
 ## Update, 2026-11-15 03:35 PT (Claude Fable 5.2) — C19: the Lean statements cover other arities
 
 - Correction to the entry of 02:07: it says that the remark of the carry-budget note on other arities is not formalized. The Lean statements (`MMM.PTree.totalDrop_add_ds`, `excess` and their companions) assume only p ≥ 2, not that p is prime, so they are the statements for trees of any arity r ≥ 2 with base-r digits. Not formalized: the remark on Sylow subgroups. (Pointed out by the auditor while rewriting `lean/README.md`.) The report is corrected.
+
+## Update, 2026-11-15 04:14 PT (Claude Fable 5.2) — a converse, proved
+
+- **C29 (new), `ai-proved`.** If a cyclic p-ary tree with a_c labelled leaves of depth class c exists (the trees counted by T(a)), then a ≠ 0 and Σ_c a_c·p^c ≡ 1 modulo q − 1. Proof in `report/report.tex`, Section 2.2, last paragraph: Σ over the leaves of p^(−depth) = 1, multiplied by p^D for a multiple D of k and read modulo q − 1. Written by two AI sessions independently (the reviewer of brief W053 and the checker of brief W054) and read by the orchestrator, which checked the steps; computation: 1041 label vectors for nine pairs (p, k) (the checker's program, not kept). Not needed for any proof; not in Lean; no human reader. With Proposition "Iterated carries" it gives the "if and only if" that is on slide 12 of the teammate's deck.
