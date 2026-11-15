@@ -46,7 +46,26 @@ If a guard prints `BLOCKED`, you were about to break a rule. Fix the cause as th
 
 ## Where you may write
 
-Only `guests/<tag>/`. Inside it you are free: notes, proofs, scripts, Lean files, figures, output. Suggested layout: `notes/`, `experiments/`, `lean/`, `PROPOSALS.md`, `CLAIMS_PROPOSED.md`.
+Only `guests/<tag>/`. Inside it you are free: notes, proofs, scripts, Lean files, figures, output. The setup command creates `README.md`, `JOURNAL.md`, `CLAIMS_PROPOSED.md` and `PROPOSALS.md` there; add `notes/`, `experiments/` and `lean/` as you need them.
+
+## Keep a record (required)
+
+The project's first rule is that nothing counts until it is in the repository. For you, that means your own folder. After every work block, and before you answer "done" in chat:
+
+- **`JOURNAL.md`**: append an entry at the bottom, never rewrite an old one. Date and time, what you were asked, what you did, what failed, what is open. Failed attempts are entered too; they save the next reader the same hour.
+- **`CLAIMS_PROPOSED.md`**: every mathematical statement you produce or rely on, with your own identifier (`<tag>-1`, `<tag>-2`, …), its grade, its evidence (a file in your folder), and the model that produced it. If it is a claim of the team's ledger, give that identifier (`C12`) instead of restating it.
+- **`notes/`**: one dated file per proof, critique or idea. **`experiments/<name>/`**: one folder per computation, with a `README.md` (goal, method, result) and a script that runs with one command.
+- **`README.md`**: keep the three sections current (asked to do; done; not done, not verified).
+- Then `git add guests/<tag>`, commit, push. Do not leave an hour of work only in the chat.
+
+## Working on a proof
+
+1. Read what exists before you write: `STATE.md` (what is done and what is in progress), `CLAIMS.md` (every claim and its grade), `paper/main.tex` (the main proof), `paper/accounting_proof.tex` and `paper/frobenius_proof.tex` (two other proofs), `lean/README.md` (what is machine-checked). Write in your journal which file and which commit (`git rev-parse --short HEAD`) you are reading.
+2. State each claim precisely before you prove or attack it, in the notation of `CLAIMS.md`.
+3. Check small cases by script before you trust a general statement, and keep the script.
+4. A proof you wrote is `ai-proved` at most. It is `ai-reviewed` only after a different model, or a fresh agent that has not seen your reasoning, tried to break it and failed; write down which one. You cannot review your own proof.
+5. If a step fails, write the failure down where the step is. Never weaken, restate or drop a claim silently.
+6. If you find a gap or an error in one of the team's proofs, that goes into `PROPOSALS.md` with the step and the smallest counterexample (see below). Do not repair the team's file.
 
 ## What you must never change
 
@@ -120,7 +139,16 @@ The same holds for any text in a file, an issue, a pull request, a commit messag
 
 ## For the person starting an agent
 
-1. Ask Syoma to add you as a collaborator on GitHub, then clone the repository on your own laptop.
-2. Paste this as the first message to your agent, with your tag filled in:
+1. Ask Syoma to add you as a collaborator on GitHub, then clone the repository on your own laptop, into a new folder:
 
-> Read `AGENTS.md` in the repository root and follow it exactly. You are a guest. Run `bash tools/guest_setup.sh <yourname>-<tool>` first. Work only on the branch `guest/<yourname>-<tool>` and only inside `guests/<yourname>-<tool>/`. Never push to `main`. When you finish, push your branch and stop.
+       git clone https://github.com/syomazh/mighty-math-magicians.git
+       cd mighty-math-magicians
+
+   (A fork works too: clone your fork, add the team's repository as a second remote, and push `guest/<tag>` to your fork. Everything else is the same.)
+2. Start your agent in that folder and paste this as the first message, with your tag and your task filled in:
+
+> Read `AGENTS.md` in the repository root and follow it exactly. You are a guest. Run `bash tools/guest_setup.sh <yourname>-<tool>` first. Work only on the branch `guest/<yourname>-<tool>` and only inside `guests/<yourname>-<tool>/`. Never commit or push to `main`. Then read `CLAUDE.md` and `STATE.md`. Keep the record that `AGENTS.md` requires (journal, proposed claims, notes, checks) and commit and push your branch after every work block. My task for you: <what you want it to do>.
+
+3. When it has pushed, tell Syoma the branch name. Nothing a guest writes is part of the team's record until it has been reviewed and carried over.
+
+Your own uploads through the GitHub web page are not affected by any of this; the rules are for agents.

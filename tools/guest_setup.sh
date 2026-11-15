@@ -59,11 +59,41 @@ Nothing here is human-reviewed or part of the team's record (see AGENTS.md).
 ## Not done, not verified
 EOF
 fi
+if [ ! -f "guests/$tag/JOURNAL.md" ]; then
+  cat > "guests/$tag/JOURNAL.md" << EOF
+# Journal of guests/$tag
+
+Append-only, newest at the bottom, one entry per work block (AGENTS.md, "Keep a record").
+First line of every entry: date, time, model and tool. Then: asked, done, failed, open.
+Not human-reviewed.
+EOF
+fi
+if [ ! -f "guests/$tag/CLAIMS_PROPOSED.md" ]; then
+  cat > "guests/$tag/CLAIMS_PROPOSED.md" << EOF
+# Claims proposed by guests/$tag
+
+Not part of the team's ledger (CLAIMS.md) until reviewed and carried over. Not human-reviewed.
+Grades as in CLAUDE.md, rule 2: conjecture, computed, ai-proved, ai-reviewed. A guest cannot give human-signed.
+
+| ID | Claim | Grade | Evidence (file in this folder) | Model | Date |
+|---|---|---|---|---|---|
+EOF
+fi
+if [ ! -f "guests/$tag/PROPOSALS.md" ]; then
+  cat > "guests/$tag/PROPOSALS.md" << EOF
+# Changes proposed by guests/$tag to files outside this folder
+
+One entry per change: the file and the place, what is wrong or missing, the exact replacement
+text (or a patch file in this folder), and the evidence (AGENTS.md, "How to propose a change").
+Not human-reviewed.
+EOF
+fi
 
 echo
 echo "Ready."
 echo "  branch : $branch"
 echo "  folder : guests/$tag/     (the only place you write)"
+echo "  record : guests/$tag/JOURNAL.md, CLAIMS_PROPOSED.md, PROPOSALS.md  (update after every work block)"
 echo "  save   : git add guests/$tag && git commit -m \"...\""
 echo "  send   : git push -u origin $branch"
 echo "  update : git fetch origin && git merge origin/main"
