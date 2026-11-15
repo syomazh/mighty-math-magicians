@@ -1,0 +1,73 @@
+% Written by Claude Fable 5.2 (claude-fable-5-2) in Claude Code, started by Andrei, 2026-11-15.
+% Not human-reviewed.
+%
+% The look shared by intro_slides.tex and outlook_slide.tex: fonts, colours, frame title,
+% footer, the hand-placed canvas and the tree styles. It imitates the 16-slide deck in talk/
+% ("Fuss–Catalan valuations from rotations of trees.pdf"). Load it right after \documentclass.
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{plex-sans}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,array,colortbl}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usefonttheme[onlymath]{serif}
+
+\definecolor{paper}{HTML}{F9F8F3}
+\definecolor{panel}{HTML}{F1EEE6}
+\definecolor{ink}{HTML}{161F26}
+\definecolor{body}{HTML}{4A5262}
+\definecolor{accent}{HTML}{BE4526}
+\definecolor{callout}{HTML}{FBE7DE}
+\definecolor{footgray}{HTML}{82878A}
+\definecolor{hair}{HTML}{D8D5CC}
+\arrayrulecolor{hair}
+
+\setbeamercolor{background canvas}{bg=paper}
+\setbeamercolor{normal text}{fg=body}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=1.05cm,text margin right=1.05cm}
+
+\newcommand{\serifbold}{\fontfamily{EBGaramond-LF}\fontseries{b}\selectfont}
+\newcommand{\kicker}[1]{{\fontsize{6.2}{7}\selectfont\bfseries\color{accent}\textls[150]{#1}}}
+\newcommand{\fs}[1]{\fontsize{#1}{#1}\selectfont}
+
+% frame title: small red kicker (the frame subtitle), then the title in bold Garamond
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.72cm}%
+  \kicker{\insertframesubtitle}\par\vspace{0.2cm}%
+  {\serifbold\fontsize{17.5}{20}\selectfont\color{ink}\insertframetitle}\par}
+
+\setbeamertemplate{footline}{%
+  \fontsize{6}{7}\selectfont\color{footgray}%
+  \hspace*{1.05cm}Mighty Math Magicians \textperiodcentered{} Caltech Mathathon 2026\hfill
+  \insertframenumber\hspace*{1.05cm}\vspace{0.62cm}}
+
+% formulas in the dark ink of the titles, text in grey, as in the team's deck
+\everymath\expandafter{\the\everymath\color{ink}}
+\everydisplay\expandafter{\the\everydisplay\color{ink}}
+
+\newcommand{\hl}[1]{{\bfseries\color{accent}#1}}
+\newcommand{\mhl}[1]{\textcolor{accent}{\mathbf{#1}}}  % the same inside a formula
+\newcommand{\head}[1]{{\serifbold\fs{13.5}\color{ink}#1}}   % heading of a panel
+\newcommand{\quiet}[1]{{\fs{8}\color{footgray}#1}}           % small grey line
+
+% Everything on a slide is placed by hand, in centimetres from the top left corner of
+% the page (the page is 16 cm by 9 cm; x to the right, y downwards).
+\newenvironment{canvas}
+  {\begin{tikzpicture}[remember picture,overlay,shift={(current page.north west)},x=1cm,y=-1cm]}
+  {\end{tikzpicture}}
+\newcommand{\at}[3][base west]{\node[anchor=#1,inner sep=0pt,outer sep=0pt] at (#2) {#3};}
+
+% trees: black dot = internal node, small square = leaf (as in the team's deck)
+\newlength{\tx}\newlength{\ty}\newlength{\tsep}\newlength{\trowsep}
+\tikzset{
+  tedge/.style={draw=ink,line width=0.55pt},
+  tin/.style={circle,fill=ink,inner sep=0pt,minimum size=4pt},
+  tlf/.style={rectangle,draw=body,fill=paper,line width=0.45pt,inner sep=0pt,minimum size=3.6pt},
+}
+
+\newcommand{\Cq}{C_n^{(q)}}
+\newcommand{\sd}{s_p}
+\newcommand{\vp}{v_p}
