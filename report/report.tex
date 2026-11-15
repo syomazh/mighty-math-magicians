@@ -1568,6 +1568,29 @@ Section~\ref{sec:computations}, and C27 is checked by Lean but has no written pr
  So every statistic of $p$-ary trees that rotations do not change refines the divisibility of the theorem: the
  number of trees with $m$ leaves and a prescribed value of the statistic is divisible by $p^t$.
 
+ \emph{Example: from numbers to polynomials.} For a $q$-ary tree $T$ let $\operatorname{height}(T)$ be the
+ largest depth of a leaf and $\ell(T)$ the sum of the depths of its leaves, and put
+ \[
+  P_n(x,y)=\sum_{T}x^{\operatorname{height}(T)}\,y^{\ell(T)},
+ \]
+ the sum over the $q$-ary trees with $n$ internal nodes, so that $P_n(1,1)=C_n^{(q)}$. In the blocked form the
+ depth of every leaf is multiplied by $k$, and rotation-equivalent trees have the same multiset of leaf depths
+ (Lemma~\ref{main:lem:depth-invariant}). So for every pair $(h,\ell)$ the trees with height $h$ and depth sum
+ $\ell$ form a set that is closed under rotation, and the proposition gives: \emph{$p^t$ divides every
+ coefficient of $P_n$, and modulo $p^{t+1}$ the coefficient of $x^hy^{\ell}$ is $p^t$ times the number of
+ classes with $d=t$ that have these two values}; modulo $p^{t+1}$ only the smallest classes remain. For $q=3$,
+ $n=3$ ($m=7$, $t=1$) the $12$ trees are: the $3$ trees in which the root has two internal children (height
+ $2$, one leaf at depth $1$ and six at depth $2$, depth sum $13$), one class; and the $9$ trees in which the
+ three internal nodes lie on one path (height $3$, depth sum $2\cdot1+2\cdot2+3\cdot3=15$), one class. So
+ $P_3=3x^2y^{13}+9x^3y^{15}\equiv3x^2y^{13}\pmod 9$. For $q=3$, $n=6$ ($m=13$, $t=1$) there are $1428$ trees
+ and $12$ monomials, and $P_6\equiv6x^3y^{34}\pmod 9$: the smallest classes are the two classes of the six
+ trees in which the children of the root are a leaf, a node with three leaves and a complete tree of height
+ $2$, in any order (height $3$, depth sum $1+3\cdot2+9\cdot3=34$). The polynomial and its two examples were
+ proposed in a guest session of a team member with an AI system; its program checks the examples and the two
+ statements in italics for $q=2$, $n\le11$; $q=3$, $n\le7$; $q=5$, $n\le4$, and the divisibility for $q=4$,
+ $n\le6$ and $q\in\{8,9\}$, $n\le4$ (rerun on 15 November, no failure). The two examples were also worked out
+ by hand as written here. No human has read this paragraph.
+
  For $q=p^k$ with $k\ge2$ this is a statement about the blocked form (Lemma~\ref{main:lem:blocked}): a set of
  $q$-ary trees is called closed under rotation if the set of the corresponding $k$-blocked $p$-ary trees is
  closed under rotation; rotations map $k$-blocked trees to $k$-blocked trees
@@ -1645,7 +1668,10 @@ Section~\ref{sec:computations}, and C27 is checked by Lean but has no written pr
  from the project's reading notes and says no more than they do. A vertex $v$ of a $q$-ary tree gets the
  weight $b(i_v)$, where $i_v$ is the number of non-right edges on the path from the root to $v$, and the
  weighted number is $C_n^{(q)}(b)=\sum_T\prod_vb(i_v)$ (the notes give this formula without saying more; we
- read $T$ as running over the $q$-ary trees with $n$ internal nodes). Theorem~5 of that paper: \emph{if $b(0)\equiv1\pmod q$ and $q^{j+1}$ divides $\Delta^jb(x)$ for all
+ read $T$ as running over the $q$-ary trees with $n$ internal nodes). For example, in the ternary tree whose
+ root has an internal left child and an internal right child, the right child having an internal left child
+ and all other children being leaves, the four internal nodes have the indices $0,1,0,1$ (root, left child,
+ right child, its left child), and the weight of the tree is $b(0)^2b(1)^2$. Theorem~5 of that paper: \emph{if $b(0)\equiv1\pmod q$ and $q^{j+1}$ divides $\Delta^jb(x)$ for all
  $j\ge1$ and all $x$, then $C_n^{(q)}(b)\equiv C_n^{(q)}\pmod{p^{t+k}}$.} (The notes do not define $\Delta$;
  the program of the experiment named below checks this hypothesis by finite differences.) This is a theorem of
  \cite{Konvalinka}, and its statement mentions no group. \emph{The conjecture C9}, in the words of the
@@ -1664,6 +1690,18 @@ Section~\ref{sec:computations}, and C27 is checked by Lean but has no written pr
 \item \emph{A product formula for minimal words over arbitrary lists of blocks} (C27), a generalisation of
  Proposition~\ref{path:prop:count} that was formulated as the statement for an induction in Lean. It is
  checked by Lean and by computation; there is no written proof in this report.
+\item \emph{Statistics that rotations change in a controlled way} (an outlook; nothing in this item is proved
+ by the methods of this report). The statistics of the items above are unchanged by rotations. The model for
+ the other case is the Gaussian binomial coefficient
+ $\binom{N}{n}_x=\prod_{i=1}^{n}\frac{x^{N-n+i}-1}{x^{i}-1}$. Since $x^{j}-1=\prod_{d\mid j}\Phi_d(x)$ with the
+ cyclotomic polynomials $\Phi_d$, it equals $\prod_{d\ge2}\Phi_d(x)^{e_d}$ with
+ $e_d=\lfloor N/d\rfloor-\lfloor n/d\rfloor-\lfloor (N-n)/d\rfloor\in\{0,1\}$, and for $d=p^{j}$ the exponent
+ is $1$ exactly when the addition of $n$ and $N-n$ in base $p$ has a carry into position $j$. So each carry
+ gives a cyclotomic factor $\Phi_{p^j}(x)$, whose value at $x=1$ is $p$: Kummer's theorem with a polynomial in
+ place of each factor $p$. This factorisation is classical and elementary; the derivation is the one just
+ given, and no source for it is in the project's reference list. Whether the rotations of the lattice-path
+ proof (Appendix~\ref{app:path}), applied to paths weighted by the area below them, produce these factors
+ orbit by orbit was not examined.
 \end{itemize}
 Not explored: $q$ that is not a prime power; residues modulo $p^2$.
 
