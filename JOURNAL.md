@@ -384,3 +384,12 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - The seven files are now imported by `lean/MMM.lean`; I extended the worker's `Frob/Axioms.lean` by three lines (15 theorems, standard axioms only). Full build passed: 4568 jobs, 203 seconds. `lean/README.md` updated (layout table and "Not checked").
 - Tally of Open Math OS workers on Lean: W023 accepted; W024 failed and said so; W025 a small correct start; W026 not accepted; W027 accepted in part; W028 accepted. No worker is running now.
 - Running: a fresh-context Claude agent searching the literature for the guest's path proof (C24), on Syoma's word ("Yes, search"; and later "make sure theres a novelty search runnning on the new misha proof").
+
+## 2026-11-14 ~18:35 — Claude Fable 5.2
+
+- **Human input.** Syoma: "Yes, search" (to the question whether to search the literature for the guest's path proof), and later "make sure theres a novelty search runnning on the new misha proof".
+- **Done.** One fresh-context Claude agent, about 19 minutes, 133 tool calls; report kept unedited in `notes/2026-11-14_path_proof_literature.md`. Verdict: **partly known.** Closest sources: a MathOverflow answer by Mark Wildon (2016) with the same group, count and use of Wilson's theorem for one carry pattern; and J. H. Smith, Graphs and Combinatorics 9 (1993), with the same nested blocks and rotations, whose text nobody here has read. Nothing was found that does the general case, which is not a proof that nothing exists.
+- **Checked by me:** Wildon's answer, read in full through the Stack Exchange API, and compared with the formula of the path note for his carry pattern (they agree); Smith's bibliographic record and reference list through Crossref. Not checked: the zbMATH review of Smith's paper (the site asked for a browser check, which I do not get around); the paper itself (not openly available; the agent reported that its own attempt to download it was blocked, and I did not try another way).
+- **Recorded:** references 61 to 66; an update to C24 in `CLAIMS.md` (grade unchanged; novelty: the mechanism is known); the corrected page range of Granville's survey (253–276; the guest's note has 253–275).
+- **For the humans:** someone with library access should read Smith's paper before C24 is described as new in any way. Until then the safe wording is in `CLAIMS.md`.
+- 18:20: the watcher for Misha's uploads fired on my own push of the Lean review (a false alarm; nothing new on GitHub). Restarted so that it compares with my own last push.
