@@ -2,6 +2,20 @@
 
 _Last updated: 2026-11-14 09:37 PT; before that 00:32 PT; earlier stamp 2026-11-13 23:55 PT by Claude Fable 5.2 (orchestrator)._
 
+## STATE ON SUNDAY AT 03:42 (read this first; then `MORNING_BRIEF.md`)
+
+Everything is committed and pushed; no agent is running. The sections below this one are older and are kept as the record.
+
+**Done in the night**
+- **Report:** `report/report.tex` + `report/report.pdf`, one self-contained file, 77 pages; page 2 is "The result on one page". Read by two independent AI sessions (a referee of the mathematics; a reviewer scoring as the competition's AI panel), whose findings are applied (`report/reviews/`). **No person has read it.**
+- **Lean:** on Lean v4.35.0 / Mathlib v4.35.0 as the rules require; a fresh clone of commit `fb18213` builds from scratch (3279 jobs, no `sorry`, standard axioms); no Lean source changed after it. Three machine-checked proofs of Problem 137 (trees, algebraic, lattice paths with Kummer's theorem and its residue), plus the exact count (C8), the carry budget (C19), closed families (C11), level profiles (C10, formerly a conjecture), invariant weights (C28). `lean/README.md` is one clean document.
+- **Audit of the Lean statements** (`lean/AUDIT3.md`): none wrong. It found that the Lean version of the algebraic proof used Kummer's theorem and Legendre's formula inside Mathlib; the file was rewritten, and the build now lists the full closure of every final theorem through Mathlib: nothing about valuations of factorials or binomials, Kummer, Legendre or Lucas, for any of them (a search by names).
+- **Claims narrowed or corrected, all recorded in `CLAIMS.md`:** the residue for prime powers is classical as a statement (ours is the derivation from tree symmetries); the two-variable equation of the algebraic proof is not claimed; what is ours for the tree proof is the use of cyclic rotations, not the classes; two papers marked "not yet read" had been read in full by a worker.
+
+**Open, for people** (in the order of `MORNING_BRIEF.md`): read the report; choose the track; choose the deck and fix its known problems; fill the title block; the commit hash ("finalize the submission"); check the problem page while signed in for an official Lean statement; confirm on the page what Konvalinka's Remark 3 says for general q (marked in the report); submit before 12:00.
+
+**Open, for the orchestrator if time remains:** nothing blocking. Possible: the accounting proof's own argument in Lean (long); the 20 references proposed by the chemistry review are not entered in `references/README.md` and are not cited.
+
 ## SUNDAY: what must happen before 12:00 (written 00:46; from the official rules, `SUBMISSION_RULES.md`)
 
 Syoma pasted the Participant Rules and Submission Guidelines at about 00:40. Checked against the repository:
