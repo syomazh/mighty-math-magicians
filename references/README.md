@@ -8,8 +8,8 @@ Bibliographic data below is copied from the Mathathon problem statement. Status:
 
 1. Matjaž Konvalinka, "Divisibility of generalized Catalan numbers", *Journal of Combinatorial Theory, Series A* 114 (2007), no. 6, 1089–1100. DOI: 10.1016/j.jcta.2006.11.003.
    Author's copy: https://users.fmf.uni-lj.si/konvalinka/wcatalan.pdf (local: `konvalinka_wcatalan.pdf`, text: `konvalinka_wcatalan.txt`). **Read in full, 2026-11-13.**
-2. Emeric Deutsch and Bruce E. Sagan, "Congruences for Catalan and Motzkin numbers and related sequences", *Journal of Number Theory* 117 (2006), no. 1, 191–215. DOI: 10.1016/j.jnt.2005.06.005. **Not yet read.**
-3. Alexander Postnikov and Bruce E. Sagan, "What power of two divides a weighted Catalan number?", *Journal of Combinatorial Theory, Series A* 114 (2007), no. 5, 970–977. DOI: 10.1016/j.jcta.2006.09.007. **Not yet read.**
+2. Emeric Deutsch and Bruce E. Sagan, "Congruences for Catalan and Motzkin numbers and related sequences", *Journal of Number Theory* 117 (2006), no. 1, 191–215. DOI: 10.1016/j.jnt.2005.06.005. **Read in full in its arXiv version by one AI worker (W009, Kimi K3.1 Pro) on 2026-11-13, for the overlap check: `references/overlap_fulltext.md` (local, not in git). Not read by a person and not by the orchestrator; the words "Not yet read" stood here until 2026-11-15 and were out of date.**
+3. Alexander Postnikov and Bruce E. Sagan, "What power of two divides a weighted Catalan number?", *Journal of Combinatorial Theory, Series A* 114 (2007), no. 5, 970–977. DOI: 10.1016/j.jcta.2006.09.007. **Read in full in its arXiv version by one AI worker (W009, Kimi K3.1 Pro) on 2026-11-13, for the overlap check: `references/overlap_fulltext.md` (local, not in git). Not read by a person and not by the orchestrator; the words "Not yet read" stood here until 2026-11-15 and were out of date.**
 
 ## What Konvalinka's paper contains (our reading; page numbers are of the author's copy)
 
