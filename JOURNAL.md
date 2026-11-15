@@ -688,3 +688,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - Correction from the auditor, applied: the Lean statements of the carry budget assume only p ≥ 2, so they do cover the note's remark on other arities; the report and `CLAIMS.md` had said that remark was not formalized.
 - `MORNING_BRIEF.md` updated with what the audit and the two reviews found.
 - **State at the end of this block:** everything is committed and pushed; no agent is running. The Lean sources are final unless something new is found. Open for the people in the morning: read the report (start with page 2), the track, the deck, the title block, the commit hash, the problem page while signed in, the submission.
+
+## 2026-11-15 03:44 — Claude Fable 5.2
+
+- `talk/QA.md`: six prepared answers added (55 to 60) for questions that the night's work makes likely: whether the computer proof uses Legendre or Kummer inside the library; what the AI got wrong; whether the residue is new; what was obtained for weights and other statistics; which group acts for q = p^k; which of the three formal proofs matches its text least closely. Not yet read by the presenters.
+- **One agent launched:** brief `W054_slides_vs_report.md`. Reason: the rules require everything on the slides to be in the report, the team chooses between two decks in the morning, and nobody has compared them with the report as it is now. The agent goes through both decks slide by slide and writes `talk/SLIDES_VS_REPORT.md` (what is on a slide and not in the report; what disagrees with the report or the record; ready sentences for true items that are missing). It changes nothing else.
