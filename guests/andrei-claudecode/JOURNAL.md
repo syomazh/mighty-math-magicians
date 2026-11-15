@@ -63,3 +63,17 @@ The first two entries were written on 2026-11-14 at about 18:15 PT, when the wor
 **Open.**
 - A reader for the two notes: a different model or a fresh agent, and a chemist.
 - The proposals in `PROPOSALS.md` are for the orchestrator and the humans.
+
+## 2026-11-14 19:00 PT — Claude Fable 5.2, Claude Code (local session), started by Andrei
+
+**Asked.** Before pushing: "look at the current status of the connections in the github, idk if the work we have locally is worthwhile whatsoever." Then, to my proposal to put a digest at the top of the README and push: "okay sure do that".
+
+**Read.** At 7609746 and then fdd8fd5: `notes/2026-11-14_connections_ranked.md`, sections 0, 1, 2 (all 43 rows), 3.3, 4.2, 5, 6 and 7; the brief W029 in full and the head of W030; the journal entries of 18:15 to 18:48; `notes/2026-11-14_motivation_and_connections.md`, line 58 and the start of section 12; `notes/2026-11-14_connections_sources.md`, lines 340 to 352. A keyword search of the team's files (outside `guests/`, `logs/`, `lean/`) for eighteen terms of my two notes. Not read: sections 3.1, 3.2, 3.4, 3.5 and 4.1 of the ranked note in full; the sources note in full; the report of W030.
+
+**Done.** An item-by-item comparison of this folder with the team's work. Result: the section "Read this first" of the README. Four items are new there; the rest is duplicate, colour, or of low value.
+
+**Corrected.** In chat I had called the polymers "better for motivation". The team's files already had the same idea, the class size as a probability, for p = 2 and with a published source (the Yule model, section 12 of the motivation note). I had read that note in the first work block and did not weigh it against the polymer note. The polymer note is unchanged; the README now marks it as low value and says why.
+
+**Failed.** Nothing.
+
+**Open.** W029 was still running. Its report may cover items 1 and 3 of the digest; whoever reviews it can compare with section 5 of the chemistry note and with checks F1 and F2 of EC01.
