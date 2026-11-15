@@ -1,0 +1,118 @@
+% AI workflow and results slides, restyled to match the Andrei / Josh / Misha slides
+% (cream background, red caps label, Palladio headings, Helvetica body).
+% Content copied unchanged from syoma_slides/ai_workflow_slide.tex.
+% Restyled by Claude Opus 5.5 (Claude Code), 2026-11-15.
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{pifont}
+\usepackage[scaled=0.92]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\definecolor{cream}{RGB}{240,237,229}
+\definecolor{accent}{RGB}{180,71,41}
+\definecolor{ink}{RGB}{30,41,57}
+\definecolor{muted}{RGB}{110,116,126}
+% palette of the rest of the deck: Claude = blue, other AI = warm orange, humans = green
+\definecolor{symblue}{RGB}{70,110,170}
+\definecolor{asymorange}{RGB}{214,120,60}
+\definecolor{atomgreen}{RGB}{90,150,110}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{background canvas}{bg=cream}
+\setbeamercolor{normal text}{fg=ink}
+\setbeamercolor{itemize item}{fg=accent}
+\setbeamertemplate{itemize item}{\small\raise0.15ex\hbox{\textbullet}}
+\newcommand{\slidelabel}{}
+\setbeamertemplate{frametitle}{%
+  \vspace*{6pt}{\fontfamily{phv}\selectfont\tiny\bfseries\color{accent}\slidelabel\par}\vspace{1pt}%
+  {\fontfamily{ppl}\selectfont\large\bfseries\color{ink}\insertframetitle\par}}
+\setbeamertemplate{footline}{\hspace*{0.45cm}{\fontfamily{phv}\selectfont\fontsize{4.5}{5}\selectfont\color{muted!70}Mighty Math Magicians \textperiodcentered\ Caltech Mathathon 2026}\par\vspace*{6pt}}
+
+\begin{document}
+
+% 16b ----------------------------------------------------------------
+% Infrastructure slide. Written by Claude Opus 5.5 (Claude Code), 2026-11-14.
+\renewcommand{\slidelabel}{HOW WE WORKED}\begin{frame}{How the AI team worked: every claim runs the gauntlet}
+  \vspace{-4pt}
+  \centering
+  \begin{tikzpicture}[scale=0.85,transform shape,
+      st/.style={draw,rounded corners=3pt,align=center,inner sep=2pt,
+                 text width=23mm,minimum height=9mm,font=\scriptsize,fill=white!60!cream,draw=ink!45},
+      ag/.style={st,fill=asymorange!15,draw=asymorange},
+      cl/.style={st,fill=symblue!15,draw=symblue,thick},
+      hu/.style={st,fill=atomgreen!18,draw=atomgreen,thick},
+      gr/.style={font=\tiny\itshape,text=gray},
+      fl/.style={-{Stealth[length=4pt]},thick,ink!60},
+      fb/.style={-{Stealth[length=4pt]},thick,dashed,accent}]
+    % top row, left to right
+    \node[hu] (H)  at (0,0)     {\textbf{Humans}\\ direction, budget};
+    \node[cl] (O)  at (2.75,0)  {\textbf{Claude}\\ orchestrator:\\ ideas, briefs};
+    \node[st] (C)  at (5.5,0)   {\textbf{A claim}\\ introduced one by one};
+    \node[st] (X)  at (8.25,0)  {\textbf{Heavy computer}\\ \textbf{checks}};
+    \node[st] (P)  at (11,0)    {\textbf{Written proof}\\ lemma by lemma};
+    % helpers above
+    \node[ag,text width=42mm] (L)  at (5.5,1.35)
+      {\textbf{Literature review, running throughout}\\ novelty of ideas, existing proofs};
+    \node[ag] (W)  at (11,1.35)   {\textbf{Open Math OS workers}\\ several in parallel};
+    % bottom row, right to left
+    \node[ag] (R)  at (11,-2.3)   {\textbf{3+ models} check\\ every claim, each says\\ \textsf{CORRECT / GAP / WRONG}};
+    \node[cl] (A)  at (8.25,-2.3) {\textbf{Claude checks again}\\ who is right,\\ fixes the proof};
+    \node[st,text width=33mm] (K)  at (4.9,-1.75) {\textbf{Lean 4}: machine-checked\\ + 2 Claude auditors};
+    \node[hu] (S)  at (4.9,-2.95) {\textbf{Human reads}\\ and signs};
+    \node[font=\scriptsize\bfseries,text=atomgreen!60!black] (T) at (1.9,-2.35) {= theorem};
+    % flow
+    \draw[fl] (H) -- (O); \draw[fl] (O) -- (C); \draw[fl] (C) -- (X); \draw[fl] (X) -- (P);
+    \draw[fl] (L) -- (C); \draw[fl] (L.east) -- (P.north west);
+    \draw[fl] (W) -- (P);
+    \draw[fl] (P) -- (R); \draw[fl] (R) -- (A);
+    \draw[fl] (A.west) -- (K.east); \draw[fl] (A.west) -- (S.east);
+    \draw[fl] (K.west) -- (T); \draw[fl] (S.west) -- (T);
+    \draw[fb] (A.north) -- ++(0,0.35) -| node[pos=0.6,right,font=\tiny,text=accent,align=left]{GAP or WRONG: back to the claim} ([xshift=9mm]C.south);
+    % grades of the claim ledger
+    \node[gr,below=0pt of C] {conjecture};
+    \node[gr,below=0pt of X] {computed};
+    \node[gr,below=0pt of P] {AI-proved};
+    \node[gr,below=0pt of A] {AI-reviewed};
+    \node[gr,below=0pt of S] {human-signed};
+    \node[gr,below=6pt of T] {in either order};
+  \end{tikzpicture}
+
+  \vspace{1pt}
+  {\scriptsize
+  \textcolor{atomgreen}{\rule{7pt}{7pt}} humans \quad
+  \textcolor{symblue}{\rule{7pt}{7pt}} Claude (orchestrator) \quad
+  \textcolor{asymorange}{\rule{7pt}{7pt}} other AI agents and models \quad
+  \textcolor{ink!30}{\rule{7pt}{7pt}} claims, checks and proofs \par}
+
+  \vspace{3pt}
+  \raggedright\scriptsize
+  \begin{itemize}\setlength{\itemsep}{0pt}
+    \item Open Math OS agents work for Claude, several running in parallel;
+      everything the sub-agents output is checked again by Claude.
+    \item Everything is recorded. That gives transparency, and the journal and state file
+      let an agent that stopped running for whatever reason pick up with full context.
+    \item Every worker run is logged automatically.
+    \item Every file and statement is marked: verified by a human or not, and if an AI made it,
+      which specific AI.
+  \end{itemize}
+\end{frame}
+
+% 16c ----------------------------------------------------------------
+% Results slide. Written by Claude Opus 5.5 (Claude Code), 2026-11-15.
+% Statuses as in CLAIMS.md and report/report.tex, Section "Limitations".
+\renewcommand{\slidelabel}{RESULTS}\begin{frame}{What we achieved: four proofs of Problem 137}
+  \centering
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{lcc}
+    & \textbf{Lean verified} & \textbf{Human checked} \\ \hline
+    Lattice paths             & \textcolor{atomgreen}{\ding{51}} & read, no gaps found \\
+    Algebraic (Frobenius)     & \textcolor{atomgreen}{\ding{51}} & not verified \\
+    Accounting                & \textcolor{atomgreen}{\ding{51}} & read, no gaps found \\
+    Main: symmetries of trees & \textcolor{atomgreen}{\ding{51}} & rigorously verified \\
+  \end{tabular}
+
+  \vspace{14pt}
+  {\small Lean verified: builds on Lean v4.35.0 / Mathlib, no \texttt{sorry}, standard axioms only.\par}
+\end{frame}
+
+\end{document}

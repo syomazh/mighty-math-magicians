@@ -1,15 +1,66 @@
-% Title slide for the final stitched deck. Written by Claude Opus 5.5 (Claude Code).
+% Title slide for the final stitched deck. Written by Claude Opus 5.5 (Claude Code), 2026-11-15.
+% Colours and fonts match the Andrei / Josh / Misha slides (cream background, red label, Palladio headings).
 \documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{mathpazo}
+\usepackage[scaled=0.92]{helvet}
 \setbeamertemplate{navigation symbols}{}
+\definecolor{cream}{RGB}{240,237,229}
+\definecolor{accent}{RGB}{180,71,41}
+\definecolor{ink}{RGB}{30,41,57}
+\definecolor{muted}{RGB}{110,116,126}
+\definecolor{tblue}{RGB}{70,110,170}
+\definecolor{tgreen}{RGB}{90,150,110}
+\definecolor{torange}{RGB}{214,120,60}
+\setbeamercolor{background canvas}{bg=cream}
 \begin{document}
 \begin{frame}[plain]
-  \centering
-  \vfill
-  {\Large\bfseries The power of $p$ in Fuss--Catalan numbers\ from symmetries of trees\par}
-  \vspace{1.2em}
-  {\large Mighty Math Magicians\par}
-  \vspace{0.6em}
-  {\small Caltech Mathathon 2026 -- Problem 137\par}
-  \vfill
+\begin{tikzpicture}[remember picture,overlay]
+  % ---------- text block ----------
+  \node[anchor=north west,text width=7.2cm,inner sep=0] at ([xshift=0.9cm,yshift=-2.0cm]current page.north west) {%
+    {\fontfamily{phv}\selectfont\scriptsize\bfseries\color{accent} CALTECH MATHATHON 2026 \textperiodcentered\ PROBLEM 137\par}
+    \vspace{0.35cm}
+    {\fontfamily{ppl}\selectfont\LARGE\bfseries\color{ink} The power of $p$ in\\ Fuss--Catalan numbers,\\ from rotations of trees\par}
+    \vspace{0.35cm}
+    {\fontfamily{phv}\selectfont\footnotesize\color{muted} $v_p\bigl(C^{(q)}_n\bigr)=\dfrac{s_p\bigl((q-1)n+1\bigr)-1}{p-1}$, \ $q=p^k$\par}
+    \vspace{0.6cm}
+    {\color{accent}\rule{1.2cm}{1.2pt}\par}
+    \vspace{0.25cm}
+    {\fontfamily{phv}\selectfont\normalsize\bfseries\color{ink} Mighty Math Magicians\par}
+  };
+  % ---------- picture: a ternary tree, children rotated cyclically ----------
+  \begin{scope}[shift={([xshift=-3.6cm,yshift=-2.05cm]current page.north east)},
+                every node/.style={circle,inner sep=0pt,minimum size=5pt},
+                edge/.style={draw=ink!70,line width=0.7pt},
+                rot/.style={-{Stealth[length=4pt]},draw=accent,line width=0.9pt}]
+    % root and level 1
+    \node[fill=ink,minimum size=7pt] (r) at (0,0) {};
+    \node[fill=ink] (a) at (-1.9,-1.35) {};
+    \node[fill=ink] (b) at (0,-1.35) {};
+    \node[fill=ink] (c) at (1.9,-1.35) {};
+    \foreach \x in {a,b,c} \draw[edge] (r) -- (\x);
+    % level 2
+    \foreach \p/\col in {a/tblue,b/tgreen,c/torange}{
+      \node[fill=ink] (\p1) at ([xshift=-0.62cm,yshift=-1.25cm]\p) {};
+      \node[fill=ink] (\p2) at ([yshift=-1.25cm]\p) {};
+      \node[fill=ink] (\p3) at ([xshift=0.62cm,yshift=-1.25cm]\p) {};
+      \foreach \i in {1,2,3} \draw[edge] (\p) -- (\p\i);
+      % leaves
+      \foreach \i in {1,2,3}{
+        \node[fill=\col] (\p\i a) at ([xshift=-0.19cm,yshift=-0.8cm]\p\i) {};
+        \node[fill=\col] (\p\i b) at ([yshift=-0.8cm]\p\i) {};
+        \node[fill=\col] (\p\i c) at ([xshift=0.19cm,yshift=-0.8cm]\p\i) {};
+        \foreach \l in {a,b,c} \draw[edge,line width=0.5pt] (\p\i) -- (\p\i\l);
+      }
+    }
+    % rotation arrows: big one under the root, small ones at level 1
+    \draw[rot,line width=1.1pt] (-1.05,-0.45) arc[start angle=200,end angle=340,x radius=1.12cm,y radius=0.42cm];
+    \foreach \p in {a,b,c}{
+      \draw[rot,line width=0.7pt] ([xshift=-0.42cm,yshift=-0.38cm]\p) arc[start angle=200,end angle=340,x radius=0.45cm,y radius=0.2cm];
+    }
+    \node[minimum size=0pt,font=\fontfamily{phv}\selectfont\tiny,text=muted,anchor=north] at (0,-3.15) {rotate the children at every node};
+  \end{scope}
+\end{tikzpicture}
 \end{frame}
 \end{document}
