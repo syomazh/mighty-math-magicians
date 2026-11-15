@@ -1866,6 +1866,10 @@ guest~2 & the lattice-path statements by a program of different design; chemistr
 (not kept) & C28, the sum of a depth weight over the $q$-ary trees with $n$ nodes & random integer weights,
  $q\in\{2,3,4,5,8,9\}$, $n\le14$ & no failure (a program of the AI session that wrote the Lean file; not in
  the repository)\\\addlinespace[3pt]
+(not kept) & C29, the converse of Section~\ref{sec:smallexamples}: a tree counted by $T(\mathbf a)$ exists
+ exactly when $\mathbf a\ne0$ and $\sum_ca_cp^c\equiv1\pmod{q-1}$ & nine pairs $(p,k)$ with $p\le5$, $k\le4$;
+ every label vector with at most $7$ to $10$ labels; $1041$ vectors & no failure (a program of the AI session
+ that compared the slides with the report; not in the repository)\\\addlinespace[3pt]
 (referee) & recomputation by the AI referee of this report, with programs of its own: the table of
  Section~\ref{sec:problem}, every number of Section~\ref{sec:smallexamples} and of the worked examples; C6,
  C7, C20; C10; C28; the carry congruence; Facts~1 to~3 of Section~\ref{sec:carrybudget}; the examples of
@@ -2259,7 +2263,11 @@ are Pacific time, as recorded in the journal and the ledger):
  conjecture supported by computation, and the divisibility for weights that rotations do not change. This
  report assembled by an AI system from the existing write-ups, then read by an AI referee with a fresh
  context, whose corrections were applied, and by a second AI reader with a fresh context, who scored it as the
- competition's panel would and then applied part of that review (Section~\ref{sec:ai}).
+ competition's panel would and then applied part of that review (Section~\ref{sec:ai}). A third audit of the
+ Lean statements by a separate AI session found that the formal version of the algebraic proof depended on
+ Kummer's theorem inside the library; that file was rewritten (Section~\ref{sec:lean}). A further AI session
+ compared the two slide decks with this report, and a last one read the report for contradictions between
+ its parts.
 \end{itemize}
 
 \subsection{Limitations}
@@ -2341,7 +2349,8 @@ Kimi K3.1 Pro, through the Open Math OS service (a headless agent) & The first f
  orchestrator.\\\addlinespace[3pt]
 Mistral Large 4.0, through the same service & One first-round review (it found the flaw in the proof that
  equal atoms can be permuted freely); the Lean file for the normal-form lemma; one search for connections.\\\addlinespace[3pt]
-Muse Spark Open, through the same service & One first-round review; a blind search for alternative proofs.\\\addlinespace[3pt]
+Muse Spark Open, through the same service & One first-round review; a blind search for alternative proofs;
+ a start on the accounting proof in Lean, which was not accepted.\\\addlinespace[3pt]
 Further sessions of Claude Fable 5.2 with a fresh context or forked from the orchestrator (no access to the
  orchestrator's reasoning unless forked) & Referees: review rounds 2 and 3 of the main proof; one round each
  for the accounting proof, the algebraic proof and the carry budget. Three audits of the Lean statements. Web

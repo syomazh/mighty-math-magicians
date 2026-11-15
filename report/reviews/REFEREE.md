@@ -261,7 +261,7 @@ No replacement is offered for 20 and 21 (renaming letters inside the approved pr
 ## What I checked numerically, and how
 
 Four programs of my own, written from the definitions in the report, sharing no code with the project (run with `uv run python`; kept outside the repository in
-`C:\Users\semyo\AppData\Local\Temp\claude\5f2d4d8d00e2c2d1\70dc9b11-3c1f-4588-b314-f2bd5410f768\scratchpad\ref\check1.py`, `…\ref\check2.py`, `…\ref\check3.py`, `…\ref\check4.py` in the same folder; the scratchpad may be cleared). Trees are nested tuples; a rotation class is found by a canonical form (the least rotation of the canonical forms of the children); d is counted from the definition.
+`check1.py`, `check2.py`, `check3.py`, `check4.py` in the referee's scratch folder, which is outside the repository and is not kept). Trees are nested tuples; a rotation class is found by a canonical form (the least rotation of the canonical forms of the children); d is counted from the definition.
 
 - **Section 1.1**: the table of Catalan numbers, binary expansions and valuations for n = 1,…,8. Correct.
 - **Section 2.2, every number**: classes and class sizes for binary trees with 4, 5, 6, 7, 8 leaves (5 = 1+4; 14 = 2+4+8; 132 = 3·4+3·8+4·16+32, 11 classes; 429 = 1+4+56+112+192+64 by d = 0,2,3,4,5,6); the d of each tree named in the text; ternary trees with 4 nodes (1, 9, 9, 9, 27); q = 4, n = 3 (22 = 2+4+16; **leaf depths {2,4} for 6 trees and {2,4,6} for 16**, finding 1); the five rows of the table of values; T(5) = 40 with 36 moved and 4 fixed by a 3-cycle, T(3) = 2; T(3,2) = 4, T(0,3) = 2, T(1,0) = 1 for p = 3, k = 2. All correct except finding 1.

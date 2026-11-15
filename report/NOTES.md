@@ -1,3 +1,5 @@
+> **Note added by the orchestrator, 2026-11-15 04:36:** this file is the assembler's note of about 01:18 and describes the report as it was then (66 pages). Its open points were dealt with afterwards; the present state is in `report/reviews/` (REFEREE, PANEL, CONSISTENCY), `talk/SLIDES_VS_REPORT.md` and `JOURNAL.md`.
+
 # Notes of the worker that assembled `report/report.tex` (brief W046)
 
 Written by Claude Fable 5.2 (AI; a fresh-context worker, brief `briefs/W046_report_single_file.md`), 2026-11-15, about 00:50 to 01:30 PT. For the orchestrator. Not human-reviewed. Nothing outside `report/` was changed.
