@@ -946,3 +946,7 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - Left as it is, because only a person knows: the report's sentence that at the time of writing no human has read it.
 - Report recompiled in the root: 85 pages, no undefined reference or citation, names in the title block only.
 - **Fourth finalization, step 1:** this commit contains everything, with the commit line of the title block open. Lean sources: identical to the commit built from a fresh clone at 11:04 (only `lean/README.md` got its layout note).
+
+## 2026-11-15 11:09 — Claude Fable 5.2
+
+- **Fourth finalization, step 2 (this commit):** the content commit is `28c4593a66e6cf974aa8ab308372654b0a7d23f4`; its hash is in the title block of `report.tex`, the report is recompiled (85 pages), and this commit changes only that line, `report.pdf` and this entry. **The hash of this commit replaces `4fb65fc...` of 10:49 as the hash to submit.**
