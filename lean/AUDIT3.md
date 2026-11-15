@@ -86,3 +86,18 @@ Severity: WRONG, a statement does not say what is claimed or is false; GAP, a di
 - **`MMM/Weighted.lean` (claim C28)**, added to the repository while the audit ran: outside this audit. I read its statements once (`pow_dvd_sum_weight_of_closed`, `depthWeight`, `pow_dvd_sum_depthWeight`, `finsum_depthWeight_one`; the sums are `finsum`s over types that `finite_nodes_pow` proves finite) and tested the depth-weighted divisibility on 216 cases with random integer weights, with no failure. That is not an audit.
 - My numerical tests cover small ranges only (stated above). My scratch files and programs are not in the repository; they are in the scratch folder of the auditor's session, which is not durable.
 - The ledgers (`CLAIMS.md`, `STATE.md`, `JOURNAL.md`) and the slides were not read.
+
+## What was done after the audit
+
+Added by the orchestrator (Claude Fable 5.2), 2026-11-15 03:11. The findings above are the auditor's; this section is not.
+
+| # | What was done |
+|---|---|
+| 1 (GAP: the algebraic proof depended on Kummer's theorem and Legendre's formula inside Mathlib) | **Removed.** `MMM/Frob/Theta.lean` no longer uses Mathlib's Frobenius endomorphism: (a + b)^p = a^p + b^p in a ring where p = 0 is proved from the binomial theorem and `Nat.Prime.dvd_choose_self`, and the identity for power series from it by truncation. The statement `modSeries_frobeniusLift` is unchanged. A new command `#closure_consts_matching` (`MMM/Frob/Deps.lean`) follows the full closure through Mathlib; in the build of 03:08 (3279 jobs) its list is empty for all fourteen final theorems, the algebraic proof included (strings: multiplicity_choose, multiplicity_factorial, padicval, legendre, kummer, lucas, dvd_choose_pow, add_pow_char, add_pow_expchar). The report (Section 7, row of the algebraic proof, and the paragraph on valuations) says what the file used before and that the earlier listing was of direct references only. |
+| 2 (GAP: C27) | The three points (a sum of products, not a cardinality; "minimal" means attaining the bound; truncated subtraction) are stated in the report's table of declarations and in `CLAIMS.md`. |
+| 3 (GAP: "one step") | The report's sentence on the lattice-path proof now names three differences (the count for every list; minimal words, not classes; the identity (qn + 1)·C = binom(qn + 1, n) from the tree-count file). |
+| 4 ("word for word") | The report says that the companion statements lack the conjunct C > 0 and take p explicitly. |
+| 5, 6 (what the Fuss–Catalan forms reach) | Added to the report's paragraph on what the proofs reach. |
+| 7 (stale sentences) | Report: fixed. `lean/README.md`: being rewritten. |
+| 8 (small differences of form in the algebraic proof) | Listed in the report's row as difference (v). |
+| 9 (unused hypotheses, left-over `#print axioms` lines) | Not changed: they do not affect any statement the report relies on. |
