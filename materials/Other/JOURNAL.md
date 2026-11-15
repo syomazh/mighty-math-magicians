@@ -950,3 +950,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-15 11:09 — Claude Fable 5.2
 
 - **Fourth finalization, step 2 (this commit):** the content commit is `28c4593a66e6cf974aa8ab308372654b0a7d23f4`; its hash is in the title block of `report.tex`, the report is recompiled (85 pages), and this commit changes only that line, `report.pdf` and this entry. **The hash of this commit replaces `4fb65fc...` of 10:49 as the hash to submit.**
+
+## 2026-11-15 11:10 — Claude Fable 5.2
+
+- **FINALIZED A FOURTH TIME, in the layout the team asked for. The commit to give to the platform is `9c2294e06dc9dae85b8156c006457e36a37d1c0a`** (pushed at 11:09). It replaces `4fb65fc2abc9f064d110c5b7c3f09fb03a5fac01` of 10:49. Checked: against the content commit `28c4593` it changes three files only (one line of `report.tex`, `report.pdf`, this journal); its Lean sources are identical to those of `f88ce37`; the title page of the PDF, read back as text, shows the four names, the repository link and the hash; the root of the commit holds `report.tex`, `report.pdf`, `slides.pdf`, `lean/`, `materials/`, `README.md`, `.gitignore`, `.gitattributes`.
+- This commit, after the submitted one, writes the new hash into `MORNING_BRIEF.md`, `STATE.md` and `SUBMISSION_RULES.md` (all under `materials/Other/`). It does not change the report or Lean.
+- **A fresh-clone build of the new submitted commit was started at 11:10**; its result is in the next entry.
+- **Open, for the people:** the points about the slides listed at 11:09; the human-assisted write-up of the main proof for `materials/Proofs/main_tree_rotations/` (not in the repository); the team's own list of main contributions, which had not reached me (the read at 11:02 lists what the report claims, for comparison); if `slides.pdf` is rebuilt, the copy in the root must be replaced and the two commits repeated; the entry on the platform before 12:00 with this hash.
