@@ -74,6 +74,8 @@ Open Math OS credit is the scarce resource: about 36% of the allowance was left 
 
 **Update 2026-11-14 about 14:40 (Syoma):** Open Math OS compute is effectively unlimited again. Workers may be launched for Lean formalization (everything that is not yet machine-checked, and a start on the Frobenius proof). The scarce resource is now this laptop: every worker compiles Lean locally, so keep to a few workers at a time (three or four), give each its own files, and never let a worker run `lake build`. Each run still gets its reason in `JOURNAL.md`, and a worker's Lean file counts only after the orchestrator has recompiled it and read its statements.
 
+**Update 2026-11-14 about 18:15 (Syoma):** Claude's five-hour limit is low until it resets at 22:00 ("use open math os slaves whenever u can"). Use Open Math OS workers wherever they can do the job: Lean formalization of everything that is not yet machine-checked, and the search for connections with other fields (`-AllowBash`, with `curl` against public interfaces; workers have no web-search tool). When no worker is running, start such workers without asking ("run lean proofs on everythings that not preoved if ur not running anything. also keep up the physical search"). Until the reset the orchestrator keeps its own turns short: launch, record, and review what has finished; no Claude subagents unless a human asks. The laptop limit stands for workers that compile Lean (three or four at a time); workers that only search do not count towards it.
+
 ## Launching a worker
 
 ```bash
