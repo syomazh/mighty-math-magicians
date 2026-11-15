@@ -39,3 +39,4 @@
 | 20261114-144331 | W023_lean_normal_form | mistralai/mistral-large-4-0 | 0 (attempts: 1) | logs/delegations/20261114-144331_W023_lean_normal_form |
 | 20261114-144331 | W024_lean_fuss_formula | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-144331_W024_lean_fuss_formula |
 | 20261114-145931 | W026_lean_accounting_start | meta/muse-spark-open | 0 (attempts: 1) | logs/delegations/20261114-145931_W026_lean_accounting_start |
+| 20261114-155001 | W028_lean_dwork_form | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-155001_W028_lean_dwork_form |

@@ -12,6 +12,7 @@ import MMM.ResidueForms
 import MMM.NormalForm
 import MMM.FussFormula
 import MMM.Problem137
+import MMM.Dwork
 
 -- digit sums
 #print axioms MMM.ds_add_le
@@ -171,3 +172,7 @@ example : multiplicity 3 (Nat.choose (3 ^ 2 * 2) 2 / ((3 ^ 2 - 1) * 2 + 1)) = 2 
 -- and the quotient really is 22 and 9
 example : Nat.choose (2 ^ 2 * 3) 3 / ((2 ^ 2 - 1) * 3 + 1) = 22 := by decide
 example : Nat.choose (3 ^ 2 * 2) 2 / ((3 ^ 2 - 1) * 2 + 1) = 9 := by decide
+
+-- Legendre's formula with its residue, and the Dwork form (claim C20; worker W028)
+#print axioms MMM.factorial_eq_pow_mul_prod_mul
+#print axioms MMM.dwork_form
