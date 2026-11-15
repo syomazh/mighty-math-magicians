@@ -2,6 +2,8 @@ PASS  K0  class size p^d, minimum d = t, total = Fuss-Catalan   [p=2 n<=9, p=3 n
 PASS  K1a |Aut| = p^(n-d) <= p^nu(m) = p-part of m!, equality iff the tree is minimal   [same ranges]
 PASS  K1b automorphisms = a p-subgroup of S_m of order p^(n-d) (explicit leaf permutations)   [17 classes: p=2 n<=5, p=3 n<=3]
 PASS  K1c #Syl_p(S_m) = m!/(p^nu * prod m_j! * prod (p-1)^(j m_j)) is an integer = 1 mod p; digit forests = (-1)^nu mod p   [p in 2,3,5,7, m < 60 (formula level)]
+PASS  K1d brute force: the rotations of nested blocks generate a group of order p^nu(m); its normaliser in S_m gives the number of Sylow p-subgroups of K1c   [(p, m) in (2,4),(2,5),(2,6),(2,7),(3,6),(3,7),(3,9)]
+      (p, m, |P|, |normaliser|, number of Sylow p-subgroups): [(2, 4, 8, 8, 3), (2, 5, 8, 8, 15), (2, 6, 16, 16, 45), (2, 7, 16, 16, 315), (3, 6, 9, 72, 10), (3, 7, 9, 72, 70), (3, 9, 81, 324, 1120)]
 PASS  K2  ternary classes = A000625; conformers 3^d sum to binom(3n,n)/(2n+1); fewest conformers 3^t; largest symmetry number 3^nu   [n <= 7]
       n, stereoisomers, conformers in all, t, number of most rigid radicals:
       (0, 1, 1, 0, 1)

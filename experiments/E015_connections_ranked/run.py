@@ -203,6 +203,76 @@ check("K1c #Syl_p(S_m) = m!/(p^nu * prod m_j! * prod (p-1)^(j m_j)) is an intege
       "digit forests = (-1)^nu mod p", ok_c, "p in 2,3,5,7, m < 60 (formula level)")
 
 
+# (d) the same number by brute force: build a Sylow p-subgroup of S_m from rotations of nested blocks
+# (blocks from the base-p digits of m), compute its normaliser by testing every permutation, and
+# compare m!/|N| with the formula of K1c. This also settles which index of the normaliser is right:
+# one factor (p - 1) for each LEVEL of each maximal block (K1c), not one for each proper block
+# (the formula in Section 4 of J. H. Smith's paper of 1993, as read by the orchestrator, gives 280
+# for 9 points and p = 3, where the count is 1120).
+def _compose(a, b):
+    return tuple(a[b[i]] for i in range(len(a)))
+
+def _inverse(a):
+    r = [0] * len(a)
+    for i, x in enumerate(a):
+        r[x] = i
+    return tuple(r)
+
+def _closure(gens, n):
+    idn = tuple(range(n))
+    seen, todo = {idn}, [idn]
+    while todo:
+        g = todo.pop()
+        for h in gens:
+            x = _compose(h, g)
+            if x not in seen:
+                seen.add(x)
+                todo.append(x)
+    return seen
+
+def sylow_generators(m, p):
+    """rotations of the p sub-blocks of every block; blocks from the base-p digits of m"""
+    gens = []
+    def rec(a, L):
+        if L == 1:
+            return
+        step = L // p
+        perm = list(range(m))
+        for i in range(L):
+            perm[a + i] = a + (i + step) % L
+        gens.append(tuple(perm))
+        for i in range(p):
+            rec(a + i * step, step)
+    pos = 0
+    dg = digits(m, p)
+    for j in reversed(range(len(dg))):
+        for _ in range(dg[j]):
+            rec(pos, p ** j)
+            pos += p ** j
+    return gens
+
+ok_d = True
+rows = []
+for p, m in ((2, 4), (2, 5), (2, 6), (2, 7), (3, 6), (3, 7), (3, 9)):
+    gens = sylow_generators(m, p)
+    P = _closure(gens, m)
+    ok_d &= len(P) == p ** nu(m, p)
+    norm = 0
+    for g in itertools.permutations(range(m)):
+        gi = _inverse(g)
+        if all(_compose(_compose(g, x), gi) in P for x in gens):
+            norm += 1
+    dg = digits(m, p)
+    formula = math.factorial(m) // (p ** nu(m, p) * math.prod(math.factorial(x) for x in dg)
+                                    * math.prod((p - 1) ** (j * x) for j, x in enumerate(dg)))
+    ok_d &= math.factorial(m) // norm == formula and math.factorial(m) % norm == 0
+    rows.append((p, m, len(P), norm, math.factorial(m) // norm))
+check("K1d brute force: the rotations of nested blocks generate a group of order p^nu(m); its "
+      "normaliser in S_m gives the number of Sylow p-subgroups of K1c", ok_d,
+      "(p, m) in (2,4),(2,5),(2,6),(2,7),(3,6),(3,7),(3,9)")
+print("      (p, m, |P|, |normaliser|, number of Sylow p-subgroups):", rows)
+
+
 # ================================================================ K2: alkyl radicals (p = 3)
 A000625 = [1, 1, 1, 2, 5, 11, 28, 74, 199]          # stereoisomeric alkyl radicals, n = 0..8
 ok = True

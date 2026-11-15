@@ -10,7 +10,7 @@ Written by Claude Fable 5.2 (AI, orchestrator), 2026-11-14. Not human-reviewed.
 
     uv run python experiments/E015_connections_ranked/run.py
 
-**Results (2026-11-14, 18 checks, all PASS, about 10 seconds).** An earlier version of this file said 17 checks when there were 16.
+**Results (2026-11-14, 19 checks, all PASS, about 15 seconds).** An earlier version of this file said 17 checks when there were 16.
 
 | Check | Statement | Range |
 |---|---|---|
@@ -18,6 +18,7 @@ Written by Claude Fable 5.2 (AI, orchestrator), 2026-11-14. Not human-reviewed.
 | K1a | a cyclic p-ary tree with n nodes, m leaves and d asymmetric nodes has p^(n−d) automorphisms; n − d ≤ ν(m) = (m − s_p(m))/(p − 1) = exponent of p in m!, with equality exactly for the minimal trees | same |
 | K1b | these automorphisms, as permutations of the m leaves, form a group of order p^(n−d) (computed explicitly from the orbit of the labelled tree under rotations) | 17 classes: p = 2, n ≤ 5; p = 3, n ≤ 3 |
 | K1c | m!/(p^ν·∏ m_j!) ≡ (−1)^ν (mod p), and m!/(p^ν·∏ m_j!·∏ (p − 1)^(j·m_j)) is an integer ≡ 1 (mod p) (the number of Sylow p-subgroups of S_m, if the normalizer has the order assumed in the note) | p in {2, 3, 5, 7}, m < 60; formula level, no group is constructed |
+| K1d | by brute force: the rotations of nested blocks (blocks from the base-p digits of m) generate a group of order p^ν(m); its normaliser, found by testing every permutation of the m points, has index (p − 1)^(Σ j·m_j)·∏ m_j! over it, so the number of Sylow p-subgroups of S_m is the number of K1c: 3, 15, 45, 315 for p = 2 and m = 4, 5, 6, 7; 10, 70, 1120 for p = 3 and m = 6, 7, 9 | seven pairs (p, m) |
 | K2 | rotation classes of ternary trees with n nodes are counted by OEIS A000625 (1, 1, 1, 2, 5, 11, 28, 74); the class sizes 3^d sum to binom(3n, n)/(2n + 1); the smallest class has 3^t trees; the largest value of 3^(n−d) is 3^ν(m) | n ≤ 7 |
 | K2b | n = 4 (butyl): 55 = 1 + 9 + 9 + 9 + 27 | |
 | K3a | binary trees with m distinctly labelled leaves, up to rotation: (2m − 3)!! of them, an odd number; exchanging two labels fixes a tree exactly when the two leaves form a cherry, and (2m − 5)!! trees are fixed; a shape with σ symmetric nodes has m!/2^σ labellings | m ≤ 7 |
