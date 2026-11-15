@@ -602,10 +602,18 @@ $4\equiv-2\equiv1\pmod3$, two carries (the four trees: a root carrying the two l
 cherry of the three labels of class $0$, in $2\cdot2$ cyclic orders). In general, if $\mathbf a\ne0$ and
 $\sum_ca_cp^c\equiv1\pmod{q-1}$ then $T(\mathbf a)\equiv\pm1\pmod p$, in particular $T(\mathbf a)\ne0$
 (Proposition~\ref{main:prop:carry-termination} for the vectors that come from digits, Lemma~\ref{acc:L0} in
-general). The converse, that no such tree exists unless the congruence holds, is on the team's slides; it is
-not needed for any proof and is not written out as a proof in this report (it is the remark that the depths
-$\ell$ of the leaves of a $p$-ary tree satisfy $\sum p^{-\ell}=1$, read modulo $q-1$; in the algebraic proof
-the corresponding statement is Remark~\ref{frob:rem:support}).
+general). The converse also holds: \emph{if a tree counted by $T(\mathbf a)$ exists, then $\mathbf a\ne0$ and
+$\sum_ca_cp^c\equiv1\pmod{q-1}$.} It is not needed for any proof. \emph{Proof.} In a $p$-ary tree the depths
+$\ell$ of the leaves satisfy $\sum_{\text{leaves}}p^{-\ell}=1$: this holds for a single leaf, and replacing a
+leaf at depth $\ell$ by a node with $p$ leaves at depth $\ell+1$ does not change the sum. Let $D$ be a multiple
+of $k$ that is at least the depth of every leaf; then $\sum_{\text{leaves}}p^{D-\ell}=p^{D}$, a sum of
+integers. Since $p^k=q\equiv1\pmod{q-1}$, we have $p^{D}\equiv1$, and $p^{D-\ell}\equiv p^{c}\pmod{q-1}$ for a
+leaf of depth class $c\in\{0,\dots,k-1\}$, because $D-\ell\ge0$ and $D-\ell\equiv c\pmod k$. Hence
+$\sum_ca_cp^c\equiv1\pmod{q-1}$, and $\mathbf a\ne0$ because a tree has a leaf. \qed\ (This proof was written by
+AI systems on 15 November and has been read by no human. The equivalence was also checked by computer for nine
+pairs $(p,k)$ with $p\le5$, $k\le4$ and every label vector with at most $7$ to $10$ labels, $1041$ vectors, by
+a program that is not kept in the repository. In the algebraic proof the corresponding statement is
+Remark~\ref{frob:rem:support}.)
 
 \subsection{Status of every claim}\label{sec:status}
 The identifiers C1, C2, \dots{} are those of the project's ledger of claims (\file{CLAIMS.md} in the
@@ -804,9 +812,9 @@ Claim & How it is supported & Read and approved by a human?\\
 % no number in the ledger.
 \textbf{A converse (on the slides; no number in the ledger):} no tree counted by $T(\mathbf a)$ exists unless
  $\sum_ca_cp^c\equiv1\pmod{q-1}$.
- & \emph{Not proved in this report.} Section~\ref{sec:smallexamples} names the remark it rests on;
- Remark~\ref{frob:rem:support} is the corresponding statement for the series of the algebraic proof, where it
- is marked as not used. Not needed for any proof; not in Lean.
+ & \emph{Proved in this report:} Section~\ref{sec:smallexamples}, last paragraph (a few lines, written on
+ 15 November). \emph{Computation:} $1041$ label vectors for nine pairs $(p,k)$. Not needed for any proof; not
+ in Lean.
  & No.\\
 \midrule
 \textbf{C21.} To leading order $C_n^{(q)}$ is $-1/\pi$ times a Gauss sum, $\pi=\zeta_p-1$.
@@ -1705,7 +1713,7 @@ permutations at a node the classes have sizes such as $6$ and $12$; with the $8$
 $1,2,4,8$ (``bits, not bytes'': rotate at each of the $k$ levels of $p$-ary nodes instead of permuting the
 $q$ branches). The picture is special to $q=4$: a cube has too few symmetries for $q=8$.
 
-\item \textbf{The answer in one picture.} \textbf{[restatement of Step~3]} The most symmetric tree with $13$
+\item \textbf{The answer in one picture.} \textbf{[restatement of Step~3]} A most symmetric tree with $13$
 leaves is made of complete trees with $8$, $4$ and $1$ leaves, because $13=1101_2$: the digits are the
 building blocks. \textbf{[computed]} The Merkle tree that the Certificate Transparency standard prescribes
 for $n$ entries \cite{RFC6962} is such a minimal tree. Letting $13$ single leaves fuse in equal pairs until
@@ -1742,7 +1750,7 @@ $12=3+9$.
 
 \item \textbf{Light ($p=2$).} \textbf{[computed, with a caveat]} A nonlinear crystal fuses two photons into
 one. In the history of a photon of the $m$-th harmonic, read as a binary tree with $m$ leaves, at least
-$s_2(m)-1$ fusions are mixings of two different photons (all shapes up to $m=20$; it is Step~2). A real
+$s_2(m)-1$ fusions are mixings of two different photons (all shapes up to $m=20$; it follows by the induction of Step~2, which uses only the numbers of leaves). A real
 apparatus can reuse a beam; then the count can drop, first at $m=15$.
 
 \item \textbf{Sand.} \textbf{[proved in Appendix~\ref{app:acc}]} With the rule ``$p$ grains on a site topple
@@ -1860,11 +1868,14 @@ claims; \texttt{native\_decide} does not count; a claim with a \texttt{sorry} be
 All Lean files were written by AI systems (Section~\ref{sec:ai}). \textbf{No human has read any Lean file.}
 The project is the folder \file{lean/} of the repository; its README lists every statement, and the file
 \file{lean/MMM/Axioms.lean} prints the axioms behind the theorems of the main proof (each line shows only the
-three standard axioms). Two separate AI sessions with no access to the authoring session audited whether the
-statements of the main proof say what is claimed, and found no error; the files added after those audits
-(among them the closed formula, the statements in Mathlib's terms, and everything for the algebraic and
-lattice-path proofs) are covered only by the Lean kernel and by the reading of the AI system that coordinated
-the work. The trust base as it is on the machine used: Mathlib's compiled files come from its prebuilt cache
+three standard axioms). Two separate AI sessions with no access to the authoring session audited on
+14 November whether the statements of the main proof say what is claimed, and found no error. A third
+separate AI session audited on 15 November the statements added after that (the algebraic proof, the
+lattice-path proof, the exact count, the carry budget, the closed families, the level profiles, and more
+lightly five further files): no statement wrong, three gaps of disclosure, which are repaired in the table
+below, and the hidden dependency described there. The file on weights was added during that audit and was
+read by it only in its statements. Beyond these audits the files are covered by the Lean kernel and by the
+reading of the AI system that coordinated the work. The trust base as it is on the machine used: Mathlib's compiled files come from its prebuilt cache
 and were not rebuilt; no external replay of the proofs was run.
 
 \subsection{The final statement}
@@ -2244,8 +2255,9 @@ that only AI systems have opened.
 The proofs in this report were found and written by AI systems; the people on the team gave direction, read
 and judged, and are answerable for what is submitted. This section says which tools were used, for what, how
 their output was checked, and what no human has checked. The full record is in the repository: a journal of
-every work block, a ledger with the origin of every claim, and an automatic log of every run of a delegated
-model with its brief and its output.
+every work block, a ledger with the origin of every claim, an automatic log of every run of a model
+delegated through the Open Math OS service, with its brief and its output, and the briefs of the later runs
+of delegated Claude sessions, whose results are recorded in the journal.
 
 \subsection{Tools}
 {\small
@@ -2282,7 +2294,7 @@ Mistral Large 4.0, through the same service & One first-round review (it found t
 Muse Spark Open, through the same service & One first-round review; a blind search for alternative proofs.\\\addlinespace[3pt]
 Further sessions of Claude Fable 5.2 with a fresh context or forked from the orchestrator (no access to the
  orchestrator's reasoning unless forked) & Referees: review rounds 2 and 3 of the main proof; one round each
- for the accounting proof, the algebraic proof and the carry budget. Two audits of the Lean statements. Web
+ for the accounting proof, the algebraic proof and the carry budget. Three audits of the Lean statements. Web
  checks of references. An independent search for connections and an attempt to break the ranked list. The
  literature search for the lattice-path proof. Lean files for the second half of the algebraic proof, for
  the second half of the lattice-path proof, and for the exact count, the carry budget, the closed families,
@@ -2320,8 +2332,9 @@ The project's rule was that a claim moves through grades: \emph{conjecture}; \em
 passes); \emph{AI-proved} (a written proof exists); \emph{AI-reviewed} (a different model, or a session that
 has not seen the author's reasoning, tried to break it and failed); \emph{human-signed}. In words, the
 diagram on the slides: the people set the direction; the orchestrating AI introduces one claim at a time;
-the claim is first tested by heavy computation; a proof is written lemma by lemma; three or more models read
-it and mark every step correct, gap or wrong; the orchestrator checks who is right and repairs the proof, and
+the claim is first tested by heavy computation; a proof is written lemma by lemma; other models read it and
+mark every step correct, gap or wrong (for the main proof three models in the first round; the other proofs
+had one or two AI readers each, as listed below); the orchestrator checks who is right and repairs the proof, and
 a step marked gap or wrong goes back to the claim; then, in either order, the statement is formalized in Lean
 and audited, and a human reads and signs. Concretely:
 \begin{itemize}[itemsep=1pt]
