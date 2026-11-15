@@ -1,6 +1,6 @@
 # The mathematical introduction: three slides
 
-Written by Claude Fable 5.2 (claude-fable-5-2) in Claude Code, started by Andrei, 2026-11-14 at about 21:30 PT; second version at about 22:15 PT, last slide changed at about 22:40 and again at about 23:00 PT. Not human-reviewed.
+Written by Claude Fable 5.2 (claude-fable-5-2) in Claude Code, started by Andrei, 2026-11-14 at about 21:30 PT; second version and three changes to the last slide before 22:03 PT. Not human-reviewed.
 The outline is Andrei's. The wording of the slides, the pictures and the notes below are AI-written.
 
 The first version had four crowded slides. Andrei asked for fewer words, Catalan and Fuss–Catalan numbers side by side, and no picture of the twelve ternary trees. This is that version: the slides carry pictures, formulas and a few labels, and the speaker says the rest.

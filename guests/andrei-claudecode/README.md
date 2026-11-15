@@ -29,6 +29,7 @@ In chat, on 2026-11-14:
 2. "Dive deeper on the polymers and decide which one seems better for motivation."
 3. "Look at updates, I think mmazin added something interesting", and then: move the two notes into a guest folder and bring the clone up to date.
 4. (2026-11-14, evening) Slides for the mathematical introduction of the talk, on Andrei's outline: Catalan numbers, Fuss–Catalan numbers without the formula, the problem, then the formula and the known proof.
+5. (2026-11-14, late evening) "A slide for what we plan to do in the future."
 
 ## Done
 
@@ -44,7 +45,8 @@ In chat, on 2026-11-14:
   - The gel point of Flory's theory is the radius of convergence of the Fuss–Catalan series.
 - **A second reading of the path proof (C24).** I read `guests/andrei-claude/notes/2026-11-14_path_proof/path_proof.tex` line by line and re-derived every lemma; I found no failing step. `experiments/EC03_path_proof_check/` tests its statements by a different method (328 + 26 cases, all pass).
 - **Three slides for the mathematical introduction.** `talk/intro_slides.pdf` (source `talk/intro_slides.tex`), in the look of the team's 16-slide deck, with few words: the speaker says the rest. Every number on them is checked by `talk/make_intro.py` (9 checks). Where they go, what to say and four cautions: `talk/intro_notes.md`. (A first version with four crowded slides was replaced on Andrei's word.) They overlap slide 2 of the team's deck; see `PROPOSALS.md`, entry 7.
-- Proposed claims in `CLAIMS_PROPOSED.md`, seven proposals in `PROPOSALS.md`, the work blocks in `JOURNAL.md`.
+- **One slide on what comes next.** `talk/outlook_slide.pdf`: weighted numbers, other statistics, the residue modulo p², q not a prime power. All four from the team's record; sources and status in `talk/outlook_notes.md`; two formulas checked by `talk/check_outlook.py` (5 checks). See `PROPOSALS.md`, entries 8 and 9.
+- Proposed claims in `CLAIMS_PROPOSED.md`, nine proposals in `PROPOSALS.md`, the work blocks in `JOURNAL.md`.
 
 ## Not done, not verified
 

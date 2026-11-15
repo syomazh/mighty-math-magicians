@@ -137,3 +137,26 @@ The first two entries were written on 2026-11-14 at about 18:15 PT, when the wor
 
 **Done.** Title changed to "A closed formula for the number of trees", with "THE KNOWN PROOF" as the small line above it. Nothing else on the slide changed.
 
+## 2026-11-14 22:10 PT — Claude Fable 5.2, Claude Code (local session), started by Andrei
+
+**Asked.** (1) "Commit and push the slides." (2) "Now make a slide for what we plan to do in the future."
+
+**Read.** At `origin/main` 240176c: `talk/QA.md`, questions 34 to 40 and 46 to 46b; `FINDINGS.md`, rows 7 and 8 and the list of open items; `experiments/E007_refinements/README.md`; the rows C7, C9, C10, C11 of `CLAIMS.md`; the head of `lean/README.md`; `references/README.md`, the summary of Konvalinka's paper; the problem statement in full; slides 14 to 16 of the team's deck (it has no slide on future work).
+
+**Done.**
+- (1) Two commits, 7c7cf97 (the slides) and 6b9015c (the record), pushed to `origin/guest/andrei-claudecode` on Andrei's word.
+- (2) `talk/outlook_slide.tex` and `.pdf`, one slide, "What comes next", four rows: weighted Fuss–Catalan numbers; other statistics; the next digit (modulo p²); q not a prime power. All four are from the team's record; rows 1 and 2 are the further directions that the problem statement names. `talk/outlook_notes.md`: what to say, the source and the status of each row, what was left off.
+- `talk/check_outlook.py` (5 checks, all pass): the product formula for trees with a given number of nodes at each depth and its divisibility by p^t (26697 profiles), and the class sum modulo p² (classes found by a normal form under rotations).
+- The look of the slides moved into `talk/deck_style.tex`, loaded by both files. The three intro pages are unchanged: the rendered pages have the same checksums before and after.
+- `PROPOSALS.md`, entries 8 and 9.
+
+**Correction to the four entries above this one.** Their headings carry the times 22:15, 22:40, 23:00 and 23:10 PT. Those were estimates: I did not look at the clock, and they are wrong. All four blocks were finished before 22:03 PT, the time of the commit that contains them (6b9015c). Their order is right. The headings are left as they are because this file is append-only. The time of this entry was read from the clock.
+
+**Found on the way.** `talk/QA.md`, question 46, lists "extend the formal check in Lean to the residue" as future work; `lean/README.md` says the residue is checked. Proposed as entry 9.
+
+**Failed or corrected on the way.** First layout: the formula of row 3 ran into the grey line beside it. The formulas now start at one fixed place and the grey line is shorter.
+
+**Not checked.** Row 1 (the weighted congruence): E002 was not rerun and Konvalinka's paper was not read in this session. The slide leaves out his two conditions on the weights.
+
+**Open.** A person reads the slide. The team decides whether it goes into the deck and which number it gets.
+
