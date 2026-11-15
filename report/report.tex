@@ -497,7 +497,8 @@ Claim & How it is supported & Read and approved by a human?\\
 \textbf{C8. Exact number of minimal classes for $k=1$:} $(pt)!/(t!\,p^t\prod_jm_j!)$.
  & \emph{Proved in this report:} Corollary~\ref{main:cor:exact-count} (it uses the closed formula for
  Fuss--Catalan numbers; it is not used for the main theorem). For $p=2$ \emph{cited}:
- \cite{DeutschSagan,KerstingFischer}. \emph{Not in Lean.} \emph{Computation:} E000, E003.
+ \cite{DeutschSagan,KerstingFischer}. \emph{Lean:} \lean{MMM.card_minimal_classes_mul}, in the form
+ $N_{\min}\cdot t!\cdot p^t\cdot\prod_jm_j!=(pt)!$. \emph{Computation:} E000, E003.
  & It is part of the approved text; whether the approval was meant to include every remark is not recorded.\\
 \midrule
 \textbf{C1--C8 as a whole} (the main proof, Section~\ref{sec:mainproof}).
@@ -544,7 +545,9 @@ Claim & How it is supported & Read and approved by a human?\\
 \midrule
 \textbf{C19. Carry budget:} $d(T)-t$ is a sum of non-negative terms; a second proof of C2 and of the local
  form of C3.
- & \emph{Proved in this report:} Section~\ref{sec:carrybudget}. \emph{Not in Lean} in this form.
+ & \emph{Proved in this report:} Section~\ref{sec:carrybudget}. \emph{Lean:} \lean{PTree.totalDrop_add_ds},
+ \lean{PTree.drop_of_symmetric}, \lean{PTree.excess}, \lean{PTree.d_eq_iff_slack} (Facts~1 to~3 and the
+ criterion, each multiplied by $p-1$).
  \emph{Computation:} all $1{,}978$ classes of small trees for $p\le7$ (E011); an AI referee's own check on
  about $1.36$ million classes.
  & \textbf{No.} Checked only by AI (one referee, the same model as the author; repairs not re-reviewed).\\
@@ -1196,7 +1199,8 @@ This subsection is transcribed from a note of the project (claim C19). It proves
 Proposition~\ref{main:prop:lower-bound} and the criterion of Proposition~\ref{main:prop:minimal-local}, from
 one identity and without induction on the tree. \emph{Status:} checked only by AI (one AI referee found the
 mathematics correct; one wrong sentence in an analogy and some gaps of statement were repaired and not
-re-reviewed) and by computation; no human has read it.
+re-reviewed), by computation, and since 15 November by Lean (Facts~1 to~3 and the criterion for
+$d=t$; Section~\ref{sec:lean}); no human has read it.
 
 Let $T$ be a $p$-ary tree with $m$ leaves. For a vertex $v$ let $m_v$ be the number of leaves below it
 ($m_v=1$ for a leaf), and let $N=(m-1)/(p-1)$ be the number of internal nodes. A \emph{carry} is one trade of
@@ -1623,6 +1627,24 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  multi-indices with the binomial convolution. Also: $\theta$ is not expanded into monomials in the lower
  bound; the carry-free product is written as a sum over $p$-tuples whose digit sums add up.\\\addlinespace[3pt]
 \midrule
+\multicolumn{3}{@{}l}{\emph{Around the main proof: the exact count (C8) and the carry budget (C19)}}\\
+\lean{MMM.card_minimal_classes_mul}, \lean{MMM.card_minimal_mul_factorials},
+ \lean{MMM.card_labelled_mul_factorial} (\file{ExactCount.lean})
+ & Corollary~\ref{main:cor:exact-count}
+ & Stated without division: $N_{\min}\cdot t!\cdot p^t\cdot\prod_jm_j!=(pt)!$, where $N_{\min}$ is the number
+ of rotation classes of trees with $m$ leaves and $d=t$ (a quotient type). The route is that of the residue
+ in Lean (equal atoms renamed one at a time), with an exact count in place of the congruence: a tree with
+ pairwise different labels is a shape and the list of its labels, and the number of shapes is given by the
+ closed formula. Two instances are evaluated in \file{AxiomsExtra.lean} ($N_{\min}=1$ for $p=2$, $m=3$ and for
+ $p=3$, $m=5$).\\\addlinespace[3pt]
+\lean{PTree.totalDrop_add_ds}, \lean{PTree.drop_of_symmetric}, \lean{PTree.excess},
+ \lean{PTree.d_eq_iff_slack}, \lean{PTree.slack_node_eq_zero_iff} (\file{CarryBudget.lean})
+ & Facts~1 to~3 and the two consequences of Section~\ref{sec:carrybudget}
+ & Each statement is the text's multiplied by $p-1$: Lean works with the drop $(p-1)c(v)$ of the digit sum,
+ not with the number of carries. Fact~3 reads $(p-1)\,d(T)+1=s_p(m)+\text{slack}(T)$. The criterion for $d=t$
+ is stated one node at a time, and ``the children have a power of $p$ leaves'' appears as ``digit sum $1$''.
+ The remarks on other arities and on Sylow subgroups are not formalized.\\\addlinespace[3pt]
+\midrule
 \multicolumn{3}{@{}l}{\emph{Accounting proof (Appendix~\ref{app:acc}, C13, C20): conclusions only}}\\
 \lean{MMM.dwork_form}, \lean{MMM.factorial_eq_pow_mul_prod_mul} (\file{Dwork.lean})
  & Lemma~\ref{acc:L1} (C20), and Legendre's formula with its residue (the corollary of
@@ -1678,13 +1700,12 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
 
 \subsection{Not checked by Lean}
 \begin{itemize}[itemsep=1pt]
-\item Corollary~\ref{main:cor:exact-count} (the exact number of minimal classes for $k=1$, claim C8).
 \item The text's definitions and lemmas on skeletons as cyclic trees, and its worked examples (differences 2
  and 3 above).
 \item The argument of the accounting proof (only its conclusions, by another route).
 \item For the lattice-path proof: Lemmas~\ref{path:lem:atoms} and~\ref{path:lem:mixed} as stated (the count
  is proved by a different induction), Lemma~\ref{path:lem:shift} and Remark~\ref{path:rem:dyck}.
-\item The carry budget (Section~\ref{sec:carrybudget}) in its own form; claims C9, C10, the general congruence
+\item The remarks of Section~\ref{sec:carrybudget} (other arities; Sylow subgroups); claims C9, C10, the general congruence
  of C11, C14 (sand), C17, C21 and the statements of Section~\ref{sec:connections}.
 \end{itemize}
 
