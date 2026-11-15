@@ -296,3 +296,105 @@ Targets 3 (the partial derivations) and 4 (prime powers and `divPow`) are not
 yet in the file. The retained file compiles with the direct `lake env lean`
 command; it has no `sorry`, `admit`, `axiom`, `native_decide`, or `unsafe`.
 
+
+## W042 — the family H, its recursion, the carry congruence (2026-11-14)
+
+Section written by Claude Fable 5.2 (a subagent of the orchestrator), not
+human-reviewed. Brief: `briefs/W042_lean_frobenius_carry.md`.
+
+**Ring file used: `HurwitzC.lean` (new), not `Hurwitz.lean`.** When W042
+started (23:05), `Hurwitz.lean` compiled but contained only targets 1 and 2 of
+brief W037 (no `der`, no `divPow`), so the ring was written again in
+`MMM/Frob/HurwitzC.lean`, with the namespace, names and statements of brief
+W037. Its section `Construction` (the map `toQ` into `MvPowerSeries ι ℚ` and
+the transfer of the ring structure) is adapted from `Hurwitz.lean` (Kimi K3.1
+Pro); the operations are local instances there, so that afterwards every
+operation on `Hur ι` comes from the `CommRing` instance. Targets 3 and 4 are
+new; `der_mul` goes through `toQ` and Mathlib's `MvPowerSeries.pderiv`.
+`HurwitzC.lean` and `Hurwitz.lean` both define `MMM.Frob.Hur` and cannot be
+imported together.
+
+| File | Statement | Status |
+|---|---|---|
+| `HurwitzC.lean` | `Hur`, `mchoose`, `Hur.instCommRing`, `coeff_zero'`, `coeff_one'`, `coeff_add'`, `coeff_neg'`, `coeff_nsmul'`, `coeff_mul'` (all by `rfl`), also `coeff_sub'` | done |
+| `HurwitzC.lean` | `constCoeff`, `var`, `coeff_pow_zero` | done |
+| `HurwitzC.lean` | `der`, `der_add`, `der_mul`, `der_one`, `der_nsmul`, `der_comm`, `der_var`, `der_pow_succ`, `coeff_eq_der` | done |
+| `HurwitzC.lean` | `dvd_coeff_pow_prime`, `coeff_pow_prime_modEq`, `divPow`, `divPow_spec`, `divPow_coeff_zero`, `der_divPow`, `nsmul_left_cancel_hur` | done |
+| `HFamily.lean` | `exists_unique_Hfam`, `Hfam`, `Hfam_coeff_zero`, `Hfam_eq`, `T`, `T_zero`, `T_single` | done |
+| `Carry.lean` | `coeff_prod_fin`, `T_rec` (right-hand sides literally as in the brief) | done |
+| `Carry.lean` | `isDer_der`, `iterate_der_divPow` (Lemma "hur" (iv), second formula) | done |
+| `Carry.lean` | `carry`: `(p : ℤ) ∣ T p k δ (b + p • Pi.single c 1) + T p k δ (b + Pi.single (c + 1) 1)` | done |
+
+Method. `Hur.VanishBelow N f` (all coefficients of total degree `< N` vanish)
+is multiplicative in `N` (`Hur.VanishBelow.mul`). With
+`f ^ p - g ^ p = (f - g) * ∑ i < p, f ^ i * g ^ (p - 1 - i)` this gives the key
+lemma `Hur.divPow_sub_divPow`: two series without constant term that agree
+below degree `N` have `divPow p` agreeing below degree `N + 1`. Existence is
+the coefficientwise limit of the iterates `Hiter` (starting from 0), uniqueness
+is the same lemma and induction on the degree. `coeff_prod_fin` is an induction
+on the number of factors (`Hur.sum_tupleBox_succ`, and `multinomial_cons_fin`
+of `PowDeriv.lean`). For `carry`, `Hur.DvdAll p f` says that all coefficients
+of `f` are divisible by `p`; `carry_step` is the congruence
+`E H_δ ≡ H_(δ+1)^(p-1) · E H_(δ+1)` of the note (Wilson, Fermat in the form
+`coeff_pow_prime_modEq`, `iterate_der_divPow`). Difference from the note: the
+congruence is not applied `k` times to return to `δ`; `carry_aux` applies it
+`n` times along `δ, δ+1, …, δ+n` and concludes that `E H_δ` is congruent
+modulo `p` to a series without terms of degree `< n`, for every `n`.
+
+Remark on `exists_unique_Hfam`: the uniqueness is among families of Hurwitz
+series (integer coefficients `f_a`), as the statement of the brief says; the
+note's Lemma "H" states uniqueness in `ℚ[[z]]`. Existence in `Hur` is the
+integrality part of Proposition "carry".
+
+Compile, in this order (each with no output, exit code 0):
+
+```bash
+lake env lean MMM/Frob/HurwitzC.lean -o .lake/build/lib/lean/MMM/Frob/HurwitzC.olean
+lake env lean MMM/Frob/HFamily.lean -o .lake/build/lib/lean/MMM/Frob/HFamily.olean
+lake env lean MMM/Frob/Carry.lean -o .lake/build/lib/lean/MMM/Frob/Carry.olean
+```
+
+No `sorry`, `admit`, `axiom`, `native_decide` or `unsafe`. `#print axioms` for
+`carry`, `T_rec`, `exists_unique_Hfam`, `coeff_prod_fin`, `iterate_der_divPow`,
+`T_single`, `der_divPow` gives `[propext, Classical.choice, Quot.sound]`.
+
+Not done here (outside the brief): the three files are not imported by
+`MMM.lean`; `Eval.lean` and `Subst.lean` do not yet use `T`, `T_rec`, `carry`.
+A scratch check against the `Subst.olean` of 23:01 accepted
+`⟨fun δ => T_zero δ, fun δ a => T_rec p k δ a⟩ : LabelledRec p k (T p k)`;
+`Subst.lean` has changed since, so this has to be repeated.
+
+## W039 — `Eval.lean`: Proposition "Evaluation" from the carry congruence (2026-11-14)
+
+Started by Kimi K3.1 Pro (Open Math OS worker W039, cut off), finished by
+Claude Fable 5.2 (a subagent of the orchestrator). Not human-reviewed. The file
+is self-contained (`import Mathlib.Tactic` only) and is about an arbitrary
+function `T0 : (ZMod k → ℕ) → ℤ`.
+
+| Lean | Statement | Status |
+|---|---|---|
+| `wt` | `wt p k a = ∑ c, a c * p ^ c.val` | done |
+| `sum_modEq_one_of_wt` | `wt p k a ≡ 1 [MOD p ^ k - 1] → (∑ c, a c) ≡ 1 [MOD p - 1]` | done |
+| `eval_of_carry` | from `T0 (Pi.single 0 1) = 1` and `∀ b c, (p : ℤ) ∣ T0 (b + p • Pi.single c 1) + T0 (b + Pi.single (c + 1) 1)`: for `a ≠ 0` with `wt p k a ≡ 1 [MOD p ^ k - 1]`, `T0 a ≡ (-1) ^ (((∑ c, a c) - 1) / (p - 1)) [ZMOD p]` | done |
+
+Method: as in the note. Strong induction on `∑ c, a c`. Carry case:
+`carry_weight_modEq` (the weight of `b + e_(c+1)` and of `b + p e_c` agree
+modulo `p ^ k - 1`), from `val_add_one : (c + 1).val = (c.val + 1) % k` and
+`pow_mod_modEq : p ^ (m % k) ≡ p ^ m [MOD p ^ k - 1]`; this covers `k = 1`
+without a separate case. Bounded case: `wt_le_of_lt` (all entries `< p` give
+`wt ≤ p ^ k - 1`, by `sum_zmod_val` and `pred_mul_geom_sum`), `eq_one_of_modEq`
+and `eq_single_of_wt_eq_one` (`wt p k a = 1` forces `a = Pi.single 0 1`).
+
+Compile (no output, exit code 0):
+
+```bash
+lake env lean MMM/Frob/Eval.lean -o .lake/build/lib/lean/MMM/Frob/Eval.olean
+```
+
+No `sorry`, `admit`, `axiom`, `native_decide` or `unsafe`. `#print axioms` for
+`eval_of_carry` and `sum_modEq_one_of_wt` gives
+`[propext, Classical.choice, Quot.sound]`.
+
+Not done here (outside the brief): `Eval.lean` is not imported by `MMM.lean`,
+and `eval_of_carry` is not yet applied to `T0 := T p k 0` of `Carry.lean`
+(that needs `carry` at `δ = 0` and the value of `T p k 0` at `Pi.single 0 1`).
