@@ -988,3 +988,9 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-15 11:22 — Claude Fable 5.2
 
 - **Sixth finalization, step 2 (this commit):** the content commit is `28ed7fcd26e98b4639552d109336e17fca0a3bb3`; its hash is in the title block of `report.tex`, the report is recompiled (85 pages), and this commit changes only that line, `report.pdf` and this entry. **The hash of this commit replaces `584464b...` of 11:17 as the hash to submit.**
+
+## 2026-11-15 11:23 — Claude Fable 5.2
+
+- **FINALIZED A SIXTH TIME. The commit to give to the platform is `445915fe152d73ff17b3306a2d3422dd3847c23e`** (pushed at 11:22). It replaces `584464bda881df1e59af489762a40072dce835d6` of 11:17. Against the content commit `28ed7fc` it changes three files only (one line of `report.tex`, `report.pdf`, this journal); its `lean/` folder is identical to that of `9c2294e`, built from a fresh clone from 11:10 to 11:19. The title page of the PDF, read back as text, shows the four names, the repository link and the hash.
+- This commit, after the submitted one, writes the new hash into `MORNING_BRIEF.md`, `STATE.md` and `SUBMISSION_RULES.md`. It does not change the report, the slides or Lean.
+- **Still open, for the people:** the wording of slides 2, 3, 23 and 24 of the deck against the report (entries of 10:40 and 11:09; with the report now saying that the main proof is verified by a human on the team's statement, what remains on slide 3 is the word "rigorously", the accounting row and the title); `slides.pdf` in the root is the deck as committed at 10:59, and a rebuilt deck must be copied there and the report finalized again; the sentence of the report that no human has read it; the entry on the platform before 12:00 with this hash.
