@@ -984,3 +984,7 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
   - "The result on one page" was one sentence too long after this; its last paragraph was shortened without loss of content. Checked in the PDF text: abstract on page 1, the one-page section on page 2, contents on page 3; 85 pages.
 - The guidelines and the alignment with the slides were the subject of the independent read of 11:02 to 11:08 (entry of 11:09); nothing further was found since. Not done in this pass: a new full read of the 85 pages by me or by an agent (no time before 12:00).
 - **Sixth finalization, step 1:** this commit contains everything, with the commit line of the title block open.
+
+## 2026-11-15 11:22 — Claude Fable 5.2
+
+- **Sixth finalization, step 2 (this commit):** the content commit is `28ed7fcd26e98b4639552d109336e17fca0a3bb3`; its hash is in the title block of `report.tex`, the report is recompiled (85 pages), and this commit changes only that line, `report.pdf` and this entry. **The hash of this commit replaces `584464b...` of 11:17 as the hash to submit.**
