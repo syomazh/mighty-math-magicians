@@ -914,3 +914,7 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **FINALIZED A THIRD TIME. The commit to give to the platform is `4fb65fc2abc9f064d110c5b7c3f09fb03a5fac01`** (pushed at 10:49). It replaces `4945e9a0e6413308d3080fd680e0f57ec290f257` of 10:00. Checked: against the content commit `bcaf988` it changes three files only (one line of `report/report.tex`, `report/report.pdf`, `JOURNAL.md`); its Lean sources are identical to those of `f88ce37`; the title page of the PDF, read back as text, shows the four names, the repository link and the hash.
 - This commit, after the submitted one, writes the new hash into `MORNING_BRIEF.md`, `STATE.md` and `SUBMISSION_RULES.md`, with the three points of the final deck that people must settle. It does not change the report or Lean.
 - **A fresh-clone build of the new submitted commit was started at 10:49**; its result is in the next entry.
+
+## 2026-11-15 11:00 — Claude Opus 5.5
+
+- **Closing slide added to the final deck (`talk/final/final_slides.pdf`, now 27 pages).** `talk/final/thanks_slide.tex`: "Thank you!", the team name and "Questions?" over a screenshot of the team's video call (`talk/final/video_call.jpg`, supplied by Syoma in chat, window controls cropped off). `build_final.py` appends it after Andrei's outlook slides; the page numbers now run to 27.

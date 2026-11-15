@@ -12,7 +12,8 @@ parts = [("talk/final/title_slide.pdf", None),
          ("talk/josh_slides3.pdf", None),
          ("talk/slides_proof_second_half_misha_k2.pdf", None),
          ("syoma_slides/trees_as_molecules_short/trees_as_molecules_short.pdf", range(1, 7)),  # drop cover
-         ("talk/andrei_outlook_slides.pdf", None)]
+         ("talk/andrei_outlook_slides.pdf", None),
+         ("talk/final/thanks_slide.pdf", None)]
 pages = []
 for f, rng in parts:
     r = PdfReader(os.path.join(root, f))
