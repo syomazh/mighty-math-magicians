@@ -9,10 +9,10 @@ Written by Claude Fable 5.2 (orchestrator), 2026-11-15, from the Participant Rul
 | Item | Requirement | Our status (Sunday 00:45) |
 |---|---|---|
 | Track | choose one of: Algebra/Number Theory, Analysis, Combinatorics, Computation/Applied Math, Geometry | **not chosen (humans).** The problem page lists Combinatorics and Algebra/Number Theory. |
-| Report | **one self-contained `.tex` file and its PDF**; appendix and bibliography inside the file; no `\input`, no `.bib` | **missing.** `paper/main.tex` is self-contained but covers only the main proof; the other proofs, the Lean list, the AI statement and the status of the claims are in separate files. A single report is being assembled in `report/`. |
+| Report | **one self-contained `.tex` file and its PDF**; appendix and bibliography inside the file; no `\input`, no `.bib` | **draft exists (01:29):** `report/report.tex`, 66 pages, compiles (assembled by a Claude agent, brief W046; Lean parts updated by the orchestrator). **Not yet read by a human.** Title block still has placeholders for the names and the commit hash. |
 | Slides | PDF; **everything on the slides must also be in the report** | two decks exist in `talk/`; the humans choose. The report must cover the chosen deck. |
 | Supplementary materials | optional; inside the submission | this repository (experiments, notes, ledgers) |
-| Lean project | optional; a repository; **Lean v4.35.0 and Mathlib v4.35.0**; an automated check builds it at the deadline and its result overrides the report | **not compliant yet:** `lean/` is on Lean v4.36.0-rc2 and Mathlib `master`. Port to v4.35.0 in progress (`lean435/`, temporary). |
+| Lean project | optional; a repository; **Lean v4.35.0 and Mathlib v4.35.0**; an automated check builds it at the deadline and its result overrides the report | **compliant since 01:29:** `lean/` is on Lean v4.35.0 and Mathlib v4.35.0 (`lean-toolchain`, `lakefile.toml`, `lake-manifest.json`); full build from scratch passes: 3272 jobs, no `sorry`, standard axioms only. Two source lines had to change. |
 | Submission form | one ZIP **or** one GitHub link with the **full commit hash**; any team member can submit, replace or withdraw before the deadline | repository is public; the hash is fixed at the end |
 
 ## Requirements on the report (each is checked by a panel of five AI models)

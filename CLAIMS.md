@@ -335,3 +335,8 @@ Syoma, asked for the professor's name so that the two approvals could be complet
   - The polymer ratio 27 : 9 : 9 : 9 : 1 is exact in an ideal model of ours and has no printed source: not for a slide.
   - Worker W029's report has two wrong statements (the orbit sizes of n-butyl; one source attribution) and three wrong author names: take no name, link or bibliographic field from it. Nothing from it had entered `references/README.md` unchecked; its content statements that we use are those the review confirmed.
   - The review lists 20 references to add (N1 to N20); they are **not** in `references/README.md` and may not be cited until they are checked and entered.
+
+## Update, 2026-11-15 01:29 PT (Claude Fable 5.2) — Lean: the project builds on the required versions
+
+- **All Lean statements named in this ledger now build on Lean v4.35.0 with Mathlib v4.35.0** (full build from scratch, 3272 jobs, no `sorry`, standard axioms only), the versions the competition's rules require. This removes the caveat in the two entries above. Two source lines changed (a renamed Mathlib lemma in `ExactCond.lean`; a case name in four inductions); no statement changed.
+- In the competition's sense these declarations are "Lean-verified" as far as we can check ourselves; the competition's automated build decides. The differences between each formal statement and the claim of the written proof are listed in `lean/README.md` and in Section 7 of `report/report.tex`. Grades on our own scale are unchanged: a Lean proof is recorded as evidence, and only a human's sign-off makes a claim `human-signed`.
