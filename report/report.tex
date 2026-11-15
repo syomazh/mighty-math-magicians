@@ -17,6 +17,13 @@
 % named in a comment line near it). In the reproduced proof texts only marked additions were made (macro \revnote, each preceded by a
 % comment line): the pictured words in four captions of Appendix A, one note in Appendix A.9 and one in
 % Appendix B.8. No statement and no step of a proof was changed. Not human-reviewed.
+% Consistency pass by Claude Fable 5.2 (AI; a fresh-context agent, brief W055), 2026-11-15: counts, status
+% words, names of declarations and references that disagreed with another place of this report or with the
+% project's record (CLAIMS.md, lean/README.md, lean/AUDIT3.md) were corrected, and comments that asked for
+% work now done were brought up to date. Each change is preceded by a comment line that begins
+% "Consistency pass 2026-11-15 (brief W055)". No mathematical statement, no proof, nothing in the title block
+% and no bracketed note was changed. The findings, with those left for a decision, are in
+% report/reviews/CONSISTENCY.md. Not human-reviewed.
 %
 % Compile:  latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build report.tex
 \documentclass[11pt]{article}
@@ -105,13 +112,16 @@
 \newcommand{\revnote}[1]{[\emph{Added on 15 November after an AI review of the report:} #1]}
 
 % =====================================================================================================
-% Sentences that change tonight. Each is used in several places; change it here only.
+% Sentences that are used in several places. Each is defined here; change it here only.
 % =====================================================================================================
-% Updated by the orchestrator (Claude Fable 5.2), 2026-11-15, after the move. Original note: the project is being moved to Lean v4.35.0 and Mathlib v4.35.0, as the rules
-% require. When lean/ has been switched and the full build passes there, replace the two macros below
-% (for example: \LeanVersions = "Lean \texttt{v4.35.0} with Mathlib \texttt{v4.35.0}", and \LeanVersionStatus =
-% "The project builds on the required versions, Lean v4.35.0 and Mathlib v4.35.0 (full build, date, number of
-% jobs); in the sense of the rules the declarations listed as checked below are Lean-verified.").
+% Consistency pass 2026-11-15 (brief W055): the two comments of this block still carried the instructions
+% written before the work was done ("the project is being moved to Lean v4.35.0 ...; when the full build
+% passes there, replace the two macros below", and "when the count, the residue and exactness of the
+% lattice-path proof are in the build, replace this macro and update ..."). Both were carried out by the
+% orchestrator on 2026-11-15; the comments now say so.
+% Updated by the orchestrator (Claude Fable 5.2), 2026-11-15, after the project was moved to Lean v4.35.0 and
+% Mathlib v4.35.0, as the rules require, and the full build passed there: the two macros below state the
+% position after the move.
 \newcommand{\LeanVersions}{Lean \texttt{v4.35.0} with Mathlib \texttt{v4.35.0}}
 \newcommand{\LeanVersionStatus}{\textbf{The project builds on the versions that the rules require,
 \LeanVersions{}}: a fresh clone of the repository was built from scratch on 15 November 2026 at 03:41, to
@@ -126,10 +136,10 @@ own automated check is what counts: if its result differs from this paragraph, i
 project was developed during the event on Lean \texttt{v4.36.0-rc2}; moving it to the required versions
 needed two kinds of change in five files: the name of one lemma of Mathlib about \texttt{multiplicity}, and
 the name of a case in four inductions.)}
-% Updated by the orchestrator (Claude Fable 5.2), 2026-11-15: the path proof is in the build. Original note: when the count, the residue and exactness of the lattice-path proof
-% are in the build, replace this macro (for example by: "The lattice-path proof is machine-checked in full:
-% ... declarations ...") and update the row of C24 in the status table (Section 2.3), the row of the
-% lattice-path proof in the table of Section 7.3 and the fourth item of Section 7.4 ("Not checked by Lean").
+% Updated by the orchestrator (Claude Fable 5.2), 2026-11-15, when the count, the residue and the exactness of
+% the lattice-path proof were in the build: this macro, the row of C24 in the status table (Section 2.3), the
+% rows of the lattice-path proof in the table of Section 7.3 and the item on it in Section 7.4 ("Not checked
+% by Lean") state the position since then.
 \newcommand{\PathLeanStatus}{The lattice-path proof is machine-checked in full (since 15 November 2026,
 00:59): Kummer's theorem with the exact power of $p$ (\lean{MMM.Path.kummer_exact}), the residue of a binomial
 coefficient (\lean{MMM.Path.choose_residue}), and from them the valuation and the residue of the
@@ -665,7 +675,10 @@ Claim & How it is supported & Read and approved by a human?\\
 \midrule
 \textbf{C1. Class size:} the rotation class of $T$ has $p^{d(T)}$ trees.
  & \emph{Proved in this report:} Lemmas~\ref{main:lem:normal-form}, \ref{main:lem:class-size}. For $p=2$
- \emph{cited}: \cite{Etherington}. \emph{Lean:} \lean{PTree.card_class}, \lean{PTree.rot_iff_eqvGen}.
+% Consistency pass 2026-11-15 (brief W055): the namespace prefix MMM. was added to the declaration names in the
+% rows C1, C2, C3, C4, C5, C19, C11, C10 and C28 of this table, so that every name in it is the full name, as in
+% the other rows (the declarations are MMM.PTree.x and MMM.LTree.x in the Lean files).
+ \emph{cited}: \cite{Etherington}. \emph{Lean:} \lean{MMM.PTree.card_class}, \lean{MMM.PTree.rot_iff_eqvGen}.
  \emph{Computation:} E000, E003.
  & Yes (main proof).\\
 \midrule
@@ -673,7 +686,8 @@ Claim & How it is supported & Read and approved by a human?\\
  & \emph{Proved in this report:} Proposition~\ref{main:prop:lower-bound}; a second proof in
  Section~\ref{sec:carrybudget}. The divisibility is \emph{cited} \cite[Prop.~7]{Konvalinka} (by a different
  group); for $p=2$ the bound is in \cite{KerstingFischer} and follows from \cite{Etherington}. \emph{Lean:}
- \lean{PTree.lower_bound}, \lean{PTree.pow_dvd_card_trees}, \lean{PTree.pow_dvd_card_blocked_trees}; by the
+% Consistency pass 2026-11-15 (brief W055): prefix MMM. added to the three names of the next line.
+ \lean{MMM.PTree.lower_bound}, \lean{MMM.PTree.pow_dvd_card_trees}, \lean{MMM.PTree.pow_dvd_card_blocked_trees}; by the
  algebraic route \lean{MMM.Frob.pow_dvd_card_blocked_frobenius}. \emph{Computation:} E000, E003.
  & Yes (main proof).\\
 \midrule
@@ -682,22 +696,25 @@ Claim & How it is supported & Read and approved by a human?\\
  & \emph{Proved in this report:} Propositions~\ref{main:prop:minimal-local}, \ref{main:prop:skeleton}.
  For $p=2$ \emph{cited}: \cite{DeutschSagan,KerstingFischer}; the analogous shape for the full group in base
  $q$: \cite[Lemmas~8--10]{Konvalinka}. \emph{Lean}, in a different form (a bijection of trees, not of
- classes): \lean{LTree.minimalEquiv}, \lean{LTree.cnt_eq_dig}, \lean{LTree.blockedAt_realize},
- \lean{LTree.card_minimal_blocked}. \emph{Computation:} E000.
+% Consistency pass 2026-11-15 (brief W055): prefix MMM. added to the four names of the next two lines.
+ classes): \lean{MMM.LTree.minimalEquiv}, \lean{MMM.LTree.cnt_eq_dig}, \lean{MMM.LTree.blockedAt_realize},
+ \lean{MMM.LTree.card_minimal_blocked}. \emph{Computation:} E000.
  & Yes (main proof).\\
 \midrule
 \textbf{C4. Equal atoms:} permuting equal atoms is a free action; $N_{\min}=T(\mathbf a)/\prod_jm_j!$.
  & \emph{Proved in this report:} Proposition~\ref{main:prop:free}. \emph{Lean}, as a count only, by renaming one
- atom at a time; the free action is not formalized: \lean{LTree.exists_distinct_fact},
- \lean{LTree.exists_distinct_fact_blocked}. \emph{Computation:} E000.
+% Consistency pass 2026-11-15 (brief W055): prefix MMM. added to the two names of the next two lines.
+ atom at a time; the free action is not formalized: \lean{MMM.LTree.exists_distinct_fact},
+ \lean{MMM.LTree.exists_distinct_fact_blocked}. \emph{Computation:} E000.
  & Yes (main proof).\\
 \midrule
 \textbf{C5. A carry is a cherry:} $T(\mathbf a)\equiv-T(\mathbf a-pe_c+e_{c+1})$ mod $p$; hence
  $T(\mathbf a)\equiv(-1)^t$.
  & \emph{Proved in this report:} Propositions~\ref{main:prop:carry}, \ref{main:prop:carry-termination}.
  \emph{Lean}, in a different form (the number of labelled trees is $\equiv(-p)^t$ mod $p^{t+1}$, the sign
- from Wilson's theorem): \lean{LTree.cherry_of_fixed}, \lean{LTree.labelled_congruence},
- \lean{LTree.labelled_congruence_blocked}. \emph{Computation:} E000 ($307$ cases).
+% Consistency pass 2026-11-15 (brief W055): prefix MMM. added to the three names of the next two lines.
+ from Wilson's theorem): \lean{MMM.LTree.cherry_of_fixed}, \lean{MMM.LTree.labelled_congruence},
+ \lean{MMM.LTree.labelled_congruence_blocked}. \emph{Computation:} E000 ($307$ cases).
  & Yes (main proof).\\
 \midrule
 \textbf{C8. Exact number of minimal classes for $k=1$:} $(pt)!/(t!\,p^t\prod_jm_j!)$.
@@ -757,8 +774,9 @@ Claim & How it is supported & Read and approved by a human?\\
 \midrule
 \textbf{C19. Carry budget:} $d(T)-t$ is a sum of non-negative terms; a second proof of C2 and of the local
  form of C3.
- & \emph{Proved in this report:} Section~\ref{sec:carrybudget}. \emph{Lean:} \lean{PTree.totalDrop_add_ds},
- \lean{PTree.drop_of_symmetric}, \lean{PTree.excess}, \lean{PTree.d_eq_iff_slack} (Facts~1 to~3 and the
+% Consistency pass 2026-11-15 (brief W055): prefix MMM. added to the four names of the next two lines.
+ & \emph{Proved in this report:} Section~\ref{sec:carrybudget}. \emph{Lean:} \lean{MMM.PTree.totalDrop_add_ds},
+ \lean{MMM.PTree.drop_of_symmetric}, \lean{MMM.PTree.excess}, \lean{MMM.PTree.d_eq_iff_slack} (Facts~1 to~3 and the
  criterion, each multiplied by $p-1$).
  \emph{Computation:} all $1{,}978$ classes of small trees for $p\le7$ (E011); an AI referee's own check on
  about $1.36$ million classes.
@@ -767,7 +785,8 @@ Claim & How it is supported & Read and approved by a human?\\
 \textbf{C11. Closed families:} for a set $F$ of $p$-ary trees with $m$ leaves closed under rotation, $p^t$
  divides $|F|$ and $|F|/p^t\equiv\#$(minimal classes in $F$) mod $p$.
  & \emph{Proved in this report:} Section~\ref{sec:extensions} (a few lines from C1 and C2). \emph{Lean:}
- \lean{PTree.pow_dvd_card_of_closed}, \lean{PTree.card_closed_modEq_classes}. \emph{Computation:} two families
+% Consistency pass 2026-11-15 (brief W055): prefix MMM. added to the two names of the next line.
+ \lean{MMM.PTree.pow_dvd_card_of_closed}, \lean{MMM.PTree.card_closed_modEq_classes}. \emph{Computation:} two families
  and five statistics, small $n$, $q\in\{2,3,4,5,8,9\}$ (E002, E007).
  & No (written on the last night; read by one AI referee; checked by Lean).\\
 \midrule
@@ -775,7 +794,8 @@ Claim & How it is supported & Read and approved by a human?\\
  $1=n_0,n_1,\dots$ with $\sum n_i=n$.
  & \emph{Proved in this report:} Section~\ref{sec:extensions} (from C11 and the count of the trees with a
  given profile). \emph{Lean}, with Mathlib's definitions only: \lean{MMM.pow_dvd_prod_choose_profile}; the
- count: \lean{PTree.card_prof}. \emph{Computation:} every profile with $n\le22$ ($q=2$), $\le15$ ($q=3$),
+% Consistency pass 2026-11-15 (brief W055): prefix MMM. added to the name in the next line.
+ count: \lean{MMM.PTree.card_prof}. \emph{Computation:} every profile with $n\le22$ ($q=2$), $\le15$ ($q=3$),
  $\le14$ ($q=4,5$), $\le12$ ($q=8,9$) (E002); the AI referee's own check on about $2.35$ million profiles.
  Until the last night of the event this was a conjecture supported by computation.
  & No (the written proof was completed by the AI referee who read it; that wording has had no other reader;
@@ -790,7 +810,10 @@ Claim & How it is supported & Read and approved by a human?\\
 \midrule
 \textbf{C17.} Cyclic $p$-ary trees with $(p-1)t+1$ labelled leaves correspond to permutations of $pt$ points
  with $t$ cycles of length $p$.
- & \emph{Computation} only: $p=2$ ($t\le5$), $p=3$ ($t\le3$), $p=5$ ($t\le2$) (E009).
+% Consistency pass 2026-11-15 (brief W055): the status word "Conjecture" added, as in Section 4.5 ("C9 and C17
+% are conjectures supported by the computations") and in the ledger (entry of 2026-11-15 02:12); before, the
+% cell began "Computation only".
+ & \emph{Conjecture}; \emph{computation} only: $p=2$ ($t\le5$), $p=3$ ($t\le3$), $p=5$ ($t\le2$) (E009).
  & No.\\
 \midrule
 \textbf{C27.} A product formula for the number of minimal words for an arbitrary list of block heights
@@ -803,14 +826,17 @@ Claim & How it is supported & Read and approved by a human?\\
 \textbf{C28.} A rotation-invariant integer weight summed over a rotation-closed family is divisible by $p^t$;
  depth-weighted Fuss--Catalan numbers.
  & \emph{Proved in this report:} Section~\ref{sec:extensions}. \emph{Lean:}
- \lean{PTree.pow_dvd_sum_weight_of_closed}, \lean{PTree.pow_dvd_sum_depthWeight}. \emph{Computation:} random
+% Consistency pass 2026-11-15 (brief W055): prefix MMM. added to the two names of the next line.
+ \lean{MMM.PTree.pow_dvd_sum_weight_of_closed}, \lean{MMM.PTree.pow_dvd_sum_depthWeight}. \emph{Computation:} random
  integer weights, $q\in\{2,3,4,5,8,9\}$, $n\le14$ (a program of the AI session that wrote the Lean file; not
  kept in the repository).
  & No (written on the last night; the proof was completed by the AI referee who read it; checked by Lean).\\
 \midrule
-% Row added 2026-11-15 by the reviewer of brief W053, from the last paragraph of Section 2.2; the statement has
-% no number in the ledger.
-\textbf{A converse (on the slides; no number in the ledger):} no tree counted by $T(\mathbf a)$ exists unless
+% Row added 2026-11-15 by the reviewer of brief W053, from the last paragraph of Section 2.2; the statement had
+% no number in the ledger then.
+% Consistency pass 2026-11-15 (brief W055): the ledger has this statement as claim C29 since its entry of
+% 2026-11-15 04:14; the label of the row was "A converse (on the slides; no number in the ledger):".
+\textbf{C29. A converse (on the slides):} no tree counted by $T(\mathbf a)$ exists unless
  $\sum_ca_cp^c\equiv1\pmod{q-1}$.
  & \emph{Proved in this report:} Section~\ref{sec:smallexamples}, last paragraph (a few lines, written on
  15 November). \emph{Computation:} $1041$ label vectors for nine pairs $(p,k)$. Not needed for any proof; not
@@ -1689,7 +1715,11 @@ wording of the project that said otherwise was withdrawn). The ordered ternary t
 to rotation at the root only, are counted by the sequence \cite{OEISA121179} ($n\le8$), which a comment in that
 entry describes as the number of staggered conformers of alkyls. With chemists in the room, a node of ours whose three
 branches are not all alike should be called ``lopsided'', not ``asymmetric carbon'', which means something
-narrower. \textbf{[computed]} A second agent session run by a team member compared the model with printed
+narrower.
+% Consistency pass 2026-11-15 (brief W055): "A second agent session" changed to "Another agent session": in
+% Section 8.1 "a second agent session" is the one that wrote the lattice-path proof, and the session meant here
+% (guest 2 in the table of Section 6) is called the third there.
+\textbf{[computed]} Another agent session run by a team member compared the model with printed
 tables up to $14$ carbons (stereoisomers, structural isomers, achiral ones) and found agreement; under all
 permutations the five classes for $n=4$ become four, of sizes $1,9,18,27$.
 
@@ -1848,7 +1878,9 @@ guest~2 & the lattice-path statements by a program of different design; chemistr
 \end{longtable}}
 
 
-% ---- Section 8: written by Claude Fable 5.2 (worker W046), 2026-11-15, from lean/README.md and CLAIMS.md
+% Consistency pass 2026-11-15 (brief W055): the next comment said "Section 8"; the section on Lean is Section 7
+% in the numbering of the PDF, as in the other comments of this kind.
+% ---- Section 7 (in the numbering of the PDF): written by Claude Fable 5.2 (worker W046), 2026-11-15, from lean/README.md and CLAIMS.md
 % ---- (entries of 2026-11-14 13:35 to 2026-11-15 00:24). The names of the declarations were checked to exist
 % ---- in the Lean sources by a text search; nothing was compiled for this report. Not human-reviewed.
 \section{Lean}\label{sec:lean}
@@ -1872,8 +1904,11 @@ three standard axioms). Two separate AI sessions with no access to the authoring
 14 November whether the statements of the main proof say what is claimed, and found no error. A third
 separate AI session audited on 15 November the statements added after that (the algebraic proof, the
 lattice-path proof, the exact count, the carry budget, the closed families, the level profiles, and more
+% Consistency pass 2026-11-15 (brief W055): the next sentence read "three gaps of disclosure, which are repaired
+% in the table below, and the hidden dependency described there"; in the audit (lean/AUDIT3.md, Verdict) the
+% hidden dependency is the first of the three gaps, not a fourth finding.
 lightly five further files): no statement wrong, three gaps of disclosure, which are repaired in the table
-below, and the hidden dependency described there. The file on weights was added during that audit and was
+below, the first of them the hidden dependency described there. The file on weights was added during that audit and was
 read by it only in its statements. Beyond these audits the files are covered by the Lean kernel and by the
 reading of the AI system that coordinated the work. The trust base as it is on the machine used: Mathlib's compiled files come from its prebuilt cache
 and were not rebuilt; no external replay of the proofs was run.
@@ -1992,7 +2027,11 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  \lean{eval_of_carry} (in the namespace \lean{MMM.Frob}; files under \file{Frob/})
  & Lemmas~\ref{frob:lem:system}, \ref{frob:lem:lower} with Corollary~\ref{frob:cor:div},
  \ref{frob:lem:lead}, \ref{frob:lem:subst}, Propositions~\ref{frob:prop:carry}, \ref{frob:prop:eval}
- & Four differences of method, and one correction made after an audit. (iv, the correction) The congruence
+% Consistency pass 2026-11-15 (brief W055): the cell began "Four differences of method, and one correction made
+% after an audit."; its own items are three differences of method (i) to (iii), the correction (iv) and
+% differences of form (v), and the head of Appendix B says "three differences of method listed there".
+ & Three differences of method, one correction made after an audit, and differences of form. (iv, the
+ correction) The congruence
  $\varphi(f)\equiv f^p\pmod p$ behind $\theta$ is proved in \file{Frob/Theta.lean} from the binomial theorem
  and $p\mid\binom pk$ for $0<k<p$, as in the text. \textbf{Until 03:00 on 15 November the Lean file used
  Mathlib's Frobenius endomorphism instead, and in the pinned Mathlib the additivity of that map is derived
@@ -2008,7 +2047,9 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  multi-indices with the binomial convolution. Also: $\theta$ is not expanded into monomials in the lower
  bound; the carry-free product is written as a sum over $p$-tuples whose digit sums add up.\\\addlinespace[3pt]
 \midrule
-\multicolumn{3}{@{}l}{\emph{Around the main proof: the exact count (C8) and the carry budget (C19)}}\\
+% Consistency pass 2026-11-15 (brief W055): the heading of this group named only C8 and C19; the group also
+% has the rows of C11, C10 and C28, which were added later.
+\multicolumn{3}{@{}l}{\emph{Around the main proof (C8, C19) and its extensions (C11, C10, C28)}}\\
 \lean{MMM.card_minimal_classes_mul}, \lean{MMM.card_minimal_mul_factorials},
  \lean{MMM.card_labelled_mul_factorial} (\file{ExactCount.lean})
  & Corollary~\ref{main:cor:exact-count}
@@ -2121,8 +2162,10 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
 \item The argument of the accounting proof (only its conclusions, by another route).
 \item For the lattice-path proof: Lemmas~\ref{path:lem:atoms} and~\ref{path:lem:mixed} as stated (the count
  is proved by a different induction), Lemma~\ref{path:lem:shift} and Remark~\ref{path:rem:dyck}.
+% Consistency pass 2026-11-15 (brief W055): C29 added to the next item; the status table (Section 2.3) and the
+% ledger say of it "not in Lean", and it got its number after this list was written.
 \item The remark on Sylow subgroups in Section~\ref{sec:carrybudget}; claims C9, C14 (sand),
- C17, C21 and the statements of Section~\ref{sec:connections}.
+ C17, C21, C29 and the statements of Section~\ref{sec:connections}.
 \end{itemize}
 
 \subsection{What one has to trust}
@@ -2143,8 +2186,13 @@ and the digit files, only the definition of the trees and of the number of leave
 depths, and three elementary facts about the number of leaves; the form for the Fuss--Catalan number reaches
 in addition the tree-count formula, the blocked form of a $q$-ary tree, the lemma that a tree with $n$ nodes
 has $(q-1)n+1$ leaves, and three arithmetic lemmas. Neither reaches a rotation, a class of trees or a cherry.
-(The lattice-path proof reaches, from the files of the tree proof, one counting lemma on classes of an
-equivalence relation, the tree-count formula, two arithmetic lemmas, and one instance saying that a prime is
+% Consistency pass 2026-11-15 (brief W055): the parenthesis said "one counting lemma on classes of an equivalence
+% relation" and did not name the definitions of the trees. lean/README.md (Section 7) and lean/AUDIT3.md
+% (finding 6) list three declarations of Counting.lean (dvd_card_of_classes, and card_eq_sum_classes and
+% classEquivRel, which it uses) and, with the tree-count formula, PTree and PTree.nodes.
+(The lattice-path proof reaches, from the files of the tree proof, three declarations on counting by classes
+of an equivalence relation, the tree-count formula with the definition of the trees, two arithmetic lemmas,
+and one instance saying that a prime is
 not zero.) The independent audit reproduced these listings with its own program.
 
 \emph{``Without valuations of factorials'', as far as Lean can list it.} A second command follows the
@@ -2197,7 +2245,9 @@ are Pacific time, as recorded in the journal and the ledger):
  instead of from the source, and three overclaims, were found and corrected.
 \item \emph{Saturday evening.} The lattice-path proof arrived from a second agent session run by a team
  member; its checks were rerun, it was read line by line, and a literature search was made, after which the
- papers of Smith and the answer of Wildon were read and the proof was reclassified from ``new method'' to ``a
+% Consistency pass 2026-11-15 (brief W055): "the papers of Smith" changed to "the paper of Smith" (one paper,
+% \cite{Smith}, as in Sections 1.4 and 9.4).
+ paper of Smith and the answer of Wildon were read and the proof was reclassified from ``new method'' to ``a
  known method carried through in general''. Chemistry and polymer checks from a third agent session.
  Formalization of the divisibility half of Kummer's theorem by the path action, and of the algebraic proof
  layer by layer. Recorded late on Saturday: the faculty member had read and verified the lattice-path proof
