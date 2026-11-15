@@ -1,49 +1,48 @@
-# The slide "What comes next"
+# The outlook: two slides
 
-Written by Claude Fable 5.2 (claude-fable-5-2) in Claude Code, started by Andrei, 2026-11-14 at about 22:10 PT. Not human-reviewed.
-Asked by Andrei: "make a slide for what we plan to do in the future". The choice of the four rows and their wording are AI-written; every row comes from the team's own record, named below.
+Written by Claude Fable 5.2 (claude-fable-5-2) in Claude Code, started by Andrei, 2026-11-15 at 07:35 PT. Not human-reviewed.
+This replaces the notes on the four-row slide "What comes next" of 14 November, which these two slides replace.
 
-Files: `outlook_slide.tex` and `outlook_slide.pdf` (one page, 16:9), `check_outlook.py` with `check_outlook_output.txt` (5 checks, all pass), `deck_style.tex` (the look, shared with `intro_slides.tex`).
+**Asked by Andrei:** "for outlook slides I want just the attached and weighted Fuss–Catalan. Make the info on the attached slide more concise and expand on Fuss–Catalan." The attached file was `from_numbers_to_polynomials_slide.pdf`, one slide in the look of the teammate's deck, numbered 16.
 
-## Where the slide goes
+**Who wrote what.** Slide 16 here is a shorter version of that slide: its formula, its example, its numbers and its last sentence are taken from it. I do not know who or which tool wrote the original. Slide 17 is AI-written, from the team's record. The layout of both is AI-written.
 
-Before the last slide of the team's deck ("In one sentence … Questions?"), after "What is known, and what is new". It carries the number 18, which is right if the three intro slides replace slide 2 of that deck. The number is one line at the top of `outlook_slide.tex`.
+Files: `outlook_slide.tex` and `outlook_slide.pdf` (two pages, numbered 16 and 17; the first number is one line at the top of the source), `check_outlook.py` with `check_outlook_output.txt` (10 checks, all pass), `outlook_trees.tex` (written by the script), `deck_style.tex`.
 
-## The four rows: what to say, and where each comes from
+## Slide 16, "From numbers to polynomials"
 
-**1. Weighted Fuss–Catalan numbers.** "Konvalinka gives every node a weight that depends on its position in the tree and proves that the weighted count agrees with the plain one modulo a higher power of p. His proof moves branches with all permutations. It seems to need only what our rotations can do."
-- Source: `references/README.md`, "Theorem 5": if b(0) ≡ 1 (mod q) and q^(n+1) divides the n-th difference of b, then C(b) ≡ C (mod p^(ξ+k)). His ξ is our t. **The slide leaves out the two conditions on the weight b.**
-- Status in the ledger: claim C9, grade "computed". `experiments/E002_extensions`: six values of q, four weight functions each, no failure. No written proof. `talk/QA.md`, question 38: "this is not signed".
-- This session did not rerun E002 and did not read Konvalinka's paper; the formula is the team's reading of it.
+**What was cut from the original.** The sentence "T runs over the q-ary trees with n internal nodes" (say it); "by hand" and "by computer"; "12 monomials". Kept: the definition of P_n, the consequence, the example with its two pictures, the value for n = 6 in small type, and the box at the bottom, with its two sentences unchanged apart from a comma.
 
-**2. Other statistics.** "A rotation does not change the depth of any node. So fix how many nodes sit at each depth: the number of such trees is this product of binomial coefficients, and it is still divisible by p^t. The same holds for the height and for anything else that rotations preserve."
-- Source: claim C10; `FINDINGS.md`, row 7; `experiments/E007_refinements` (height, level profile and three more statistics).
-- It is a two-line consequence of "every class has p^d trees, and d ≥ t". It is not in the paper yet.
-- Checked here: `check_outlook.py`, 2a (the product counts the trees, by listing them) and 2b (26697 profiles for q = 2, 3, 4, 5, 8, 9; p^t divides every product; for 111 of them the power is exactly t).
+**What to say.** "Instead of counting the trees, record two things about each: its height, and the sum of the depths of its leaves. A rotation changes neither. So the whole proof applies to every coefficient of this polynomial: each is divisible by p^t, and modulo p^(t+1) only the smallest classes are left. For ternary trees with three internal nodes there are two shapes, three trees and nine trees, and modulo 9 only the first survives."
 
-**3. The next digit.** "The number of trees is the sum of p^d over the classes. So after dividing by p^t, the remainder modulo p² needs the number of classes with d = t and with d = t + 1. We know the first only modulo p."
-- Source: `talk/QA.md`, question 40 ("we have data but no formula"); `FINDINGS.md`: "Residues modulo p²: data only".
-- The formula on the slide is the class sum read modulo p², nothing more. To evaluate it one needs N_t modulo p² and N_(t+1) modulo p. The theorem gives N_t modulo p only.
-- Checked here: 3a to 3c, for p = q = 2 (n ≤ 11), 3 (n ≤ 7), 5 (n ≤ 4). Example to have ready: 132 binary trees with n = 6, t = 2, classes N_2 = 3, N_3 = 3, N_4 = 4, N_5 = 1; indeed 132 = 3·4 + 3·8 + 4·16 + 1·32, and 132/4 = 33 ≡ 3 + 2·3 (mod 4).
+**Checked** (`check_outlook.py`, 1a to 1g): the two classes of 3 and 9 trees with x²y¹³ and x³y¹⁵; P_3; for n = 6 the 1428 trees and P_6 ≡ 6x³y³⁴ (mod 9), and also the "12 monomials" of the original; that both statistics are constant on rotation classes, that p^t divides every coefficient and that modulo p^(t+1) only the classes with d = t remain, for p = q = 2 (n ≤ 11), 3 (n ≤ 7), 5 (n ≤ 4); divisibility for q = 4, 8, 9 in small cases.
 
-**4. q not a prime power.** "Our first step turns a q-ary node into k levels of p-ary nodes. That needs q to be a power of p. For q = 6 we have not looked."
-- Source: `talk/QA.md`, question 37; `FINDINGS.md`: "q not a prime power: not explored". By the team's reading of Konvalinka's paper (section 4), the conclusion of his weighted theorem fails for q = 6.
-- The slide lists 6, 10, 12 only as the first numbers that are not prime powers.
+**Against the report** (the rules: everything on the slides must be in the report). The general statement is there: Section 4.5, "Closed families" (C11) and "Weights that rotations do not change" (C28), both proved and checked by Lean in the night. **Not there:** the polynomial P_n itself, the example P_3, the value of P_6, and **the sentence about Gaussian binomials and cyclotomic factors** (the words "Gaussian" and "cyclotomic" do not occur in the report at bdc310c). Either the report gets these, or the slide loses them. I did not check the Gaussian sentence against any source; it is the original slide's.
 
-**The grey line at the bottom.** The last sentence of the problem statement names "weighted Fuss–Catalan numbers" and "a multidimensional generalisation (or ones related to other statistics)" as a further direction. Rows 1 and 2 are those.
+**Is it future work?** Not quite: divisibility of the coefficients follows from statements proved in the night. What is open is the last box.
 
-## Left off the slide on purpose
+## Slide 17, "Weighted Fuss–Catalan numbers"
 
-- **Lean.** `talk/QA.md`, question 46, still says that the next step is to extend the formal check to the residue. `lean/README.md` at 240176c says that Lean has checked the valuation and the residue. So this is no longer future work; it was left off, and question 46 needs an update (`PROPOSALS.md`, entry 9).
-- **The human check.** The honest first item is not mathematics: the proofs are still under line-by-line human review (slide 15 of the team's deck says so). Say it aloud if asked what comes first.
-- **A bijection** between labelled cyclic p-ary trees and permutations made of p-cycles, which would turn the count of the smallest classes for q = p into a bijective statement: holds in every tested case (`talk/QA.md`, question 34; `FINDINGS.md`). A good fifth row if there is room; left off to keep four.
-- **The literature question** (is the rotation argument new for odd primes?) is for experts, not for a slide of plans.
+**What to say.**
+- "Konvalinka gives every node a weight. Walk from the root to the node and count the steps that do not go to the rightmost child: that is the index of the node, and its weight is b of that index. In the picture the indices are 0, 1, 0, 1. The weighted number is the sum over all trees of the product of the weights."
+- "His theorem: if the weights satisfy two congruence conditions, the weighted number agrees with the plain one modulo a higher power of p."
+- "A rotation moves the rightmost branch, so it changes these weights. This is exactly a statistic that rotations change. Still, his proof seems to need only that the group can move every branch to every position, and our rotations can. If so, his theorem also needs no factorial valuations. That is a conjecture; it holds in every case we computed."
+
+**Where each part is in the record.**
+- Definition and theorem: `report/report.tex`, Section 4.5, item "Weighted Fuss–Catalan numbers (C9), a conjecture", which takes them from the project's reading notes of his paper (`references/README.md`, "Weighted numbers", "Theorem 5") "and says no more than they do". Δ is the difference operator; the report notes that the reading notes do not define it.
+- The conjecture: the same item, in the words of the ledger: his proof works unchanged with the rotation group in place of the full symmetric group, because it only needs the group to be transitive on the q branches of a node. "It has not been written out as a proof." Also in the report's "Next steps".
+- "Every case computed": the team's `experiments/E002_extensions` (q = 2, 3, 4, 5, 8, 9, four weight functions each, with the orbits of the rotation group). I did not rerun it.
+- "Rotations change this weight": the report says so in the same item.
+
+**Checked here** (2a to 2c): the indices of the tree in the picture; that all weights 1 give the number of trees; and **the theorem itself**, not the conjecture, for the weight b(i) = 1 + q²·i, which meets his conditions (48 cases, q = 2, 3, 4, 5, 8, 9), with a control weight b(i) = 1 + i that does not meet them and fails in 36 of the 48. This confirms that the definition on the slide is read the way his theorem needs. It says nothing about his proof.
+
+**Do not mix up** with what was proved in the night: a weight that rotations do not change, summed over the trees, is divisible by p^t (C28). The report says in so many words that this is not Konvalinka's weighted theorem. Slide 16 is a case of C28; slide 17 is not.
 
 ## Not checked
 
-- Row 1, as said above.
-- Nothing here is a claim that any of the four will work. Rows 1 and 2 hold in every case computed; row 3 is an identity with an unknown in it; row 4 is a question.
-- No person has read this slide.
+- Konvalinka's paper was not read in this session.
+- The sentence about Gaussian binomials.
+- No person has read these two slides.
 
 ## Build
 
