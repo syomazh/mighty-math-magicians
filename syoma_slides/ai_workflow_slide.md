@@ -43,9 +43,9 @@
 
 | Proof | Lean verified | Human checked |
 |---|---|---|
-| Lattice paths | ✓ | checked |
-| Algebraic (Frobenius) | ✓ | not checked |
-| Accounting | ✓ | checked |
-| Main: symmetries of trees | ✓ | checked |
+| Lattice paths | ✓ | read, no gaps found |
+| Algebraic (Frobenius) | ✓ | not verified |
+| Accounting | ✓ | read, no gaps found |
+| Main: symmetries of trees | ✓ | rigorously verified |
 
 Lean verified: builds on Lean v4.35.0 / Mathlib, no `sorry`, standard axioms only.
