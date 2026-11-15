@@ -49,6 +49,30 @@ formalization was used.  Reduction modulo p is `PowerSeries.map
 
 ## Status / blockers
 
+### W034: lower weight bound and the divisibility corollary
+
+`Weight.lean` is a new compiling file (all 15 requested statements are done). It defines
+
+```lean
+def WB (p c : ℕ) (f : Lambda) : Prop :=
+  ∀ m d, (f.coeff m).coeff d ≠ 0 → ds p m ≤ (p - 1) * d + c
+```
+
+and proves the closure lemmas `WB_zero`, `WB_one`, `WB_X`, `WB_mono`, `WB_add`, `WB_sub`,
+`WB_mul`, `WB_pow`, `WB_frobeniusLift`, `WB_theta`, `WB_C_X_mul`, `WB_cyclicRHS`; the lower
+bound `weight_solution : WB p 1 (solution p k δ)` by induction on the iterates; and the two
+divisibility conclusions, `X_pow_dvd_coeff_solution` (via `Polynomial.X_pow_dvd_iff`) and
+`pow_dvd_coeff_evalY_solution`. The key hypothesis `ds p m = (p - 1) * t + 1` is exactly that
+of the brief (not weakened to a general bound). Product bounds use nested `antidiagonal` sums;
+Frobenius uses `PowerSeries.coeff_expand` and `Polynomial.coeff_expand` together with
+`ds_base_mul`. No `sorry`, `admit`, `axiom`, `native_decide`, or `unsafe` is used.
+
+Axiom check:
+
+```text
+'MMM.Frob.pow_dvd_coeff_evalY_solution' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
 ### W031: existence, value at y=p, and reduction at y=0
 
 `Existence.lean` is a new compiling file. It defines `iter p k n δ`, starting at

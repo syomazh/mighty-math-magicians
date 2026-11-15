@@ -53,7 +53,7 @@ Here `PTree q` is the type of plane trees in which every internal node has q ord
 
 The "divides, does not divide" statements are the convention-free form: Mathlib sets `multiplicity p 0 = 0` and `Nat.card` of an infinite type to 0, and the second half of those statements excludes both cases.
 
-## Status (last full build: 2026-11-14 19:00, `lake build` succeeded, 4580 jobs, no `sorry`)
+## Status (last full build: 2026-11-14 19:25, `lake build` succeeded, 4582 jobs, no `sorry`)
 
 | Step of the paper | Statement | Lean name | File |
 |---|---|---|---|
@@ -107,7 +107,7 @@ The strategy and the order of the steps are the paper's. Five things are organiz
 | The corollary with the exact number of minimal classes for k = 1, (pt)!/(t!·p^t·∏ m_j!) | A consequence of the closed formula that has not been written out in Lean. |
 | The paper's definitions and lemmas on skeletons as cyclic trees; the worked examples of the paper | See difference 3. |
 | The accounting proof | Its own argument is not formalized. (Its conclusion, the Dwork form C20, is checked by another route: see the status table.) |
-| The Frobenius proof, beyond its first layer | Checked (`MMM/Frob/`, see the layout table): the ring, the lift, θ and its rules, and the uniqueness of the family F_δ. Since 19:00 also the existence of the family (`exists_unique_cyclicSystem`, worker W031) and its equation at y = p, G_δ = [δ = 0]·x + G_(δ+1)^p (`evalY_solution`). **Not checked:** that G_0 is the generating function of the trees, the weight and the lower bound, the residue. So Lean says nothing yet about the Frobenius proof's theorem. |
+| The Frobenius proof, beyond its first layer | Checked (`MMM/Frob/`, see the layout table): the ring, the lift, θ and its rules, and the uniqueness of the family F_δ. Since 19:00 also the existence of the family (`exists_unique_cyclicSystem`, worker W031) and its equation at y = p, G_δ = [δ = 0]·x + G_(δ+1)^p (`evalY_solution`). Since 19:25 also the note's lower bound and its corollary (`Weight.lean`, worker W034): every monomial x^m y^d of F_δ has s_p(m) ≤ (p − 1)d + 1 (`weight_solution`), so y^t divides the coefficient of x^m and p^t divides its value at y = p (`pow_dvd_coeff_evalY_solution`). **Not checked:** that the family at y = p is the generating function of the trees (the one link still missing for "p^t divides the number of trees" by this route), and the residue. |
 
 ## What one has to trust
 

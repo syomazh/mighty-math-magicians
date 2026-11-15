@@ -1,0 +1,8 @@
+slug:    W034_lean_frobenius_weights
+brief:   briefs/W034_lean_frobenius_weights.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 19:00:18 PST
+attempt 1: exit 0 at 19:21:53
+ended:   2026-11-14 19:21:53 PST
+exit:    0
