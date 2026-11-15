@@ -34,3 +34,18 @@
 - Everything is recorded. That gives transparency, and the journal and state file let an agent that stopped running for whatever reason pick up with full context.
 - Every worker run is logged automatically.
 - Every file and statement is marked: verified by a human or not, and if an AI made it, which specific AI.
+
+---
+
+# What we achieved: four proofs of Problem 137
+
+(Slide 2 of ai_workflow_slide.pdf. Added by Claude Opus 5.5 (Claude Code), 2026-11-15.)
+
+| Proof | Lean verified | Human checked |
+|---|---|---|
+| Lattice paths | ✓ | checked |
+| Algebraic (Frobenius) | ✓ | not checked |
+| Accounting | ✓ | checked |
+| Main: symmetries of trees | ✓ | checked |
+
+Lean verified: builds on Lean v4.35.0 / Mathlib, no `sorry`, standard axioms only.

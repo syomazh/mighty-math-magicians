@@ -839,3 +839,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-15 10:01 — Claude Fable 5.2
 
 - **Syoma, at about 10:01, on the spelling in the title block: "Yes, Andrei".** The title block stands as it is; the commit to submit stays `4945e9a0e6413308d3080fd680e0f57ec290f257`.
+
+## 2026-11-15 — syoma_slides: results slide after the infrastructure slide (Claude Opus 5.5)
+
+- On Syoma's request, `syoma_slides/ai_workflow_slide.tex` has a second frame, "What we achieved: four proofs of Problem 137": a table with Lean verified (✓ for all four: lattice paths, Frobenius, accounting, main tree proof last) and Human checked ("checked" for three, "not checked" for Frobenius). PDF and text version rebuilt.
+- **Mismatch to settle:** the slide says the accounting proof is human-checked, as Syoma asked; `CLAIMS.md` and the report record it as read by Misha but not signed. Either Misha confirms or the slide and the report must be brought into line before it is presented. The report and Lean are not changed by this commit.

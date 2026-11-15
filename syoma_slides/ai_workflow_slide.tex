@@ -9,6 +9,7 @@
 \setbeamercolor{title}{fg=blue!50!black}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz}
+\usepackage{pifont}
 \usetikzlibrary{arrows.meta,positioning}
 % colours shared with talk/figures/make_figures.py (symmetric = blue circle, asymmetric = orange square)
 \definecolor{symblue}{HTML}{2A78D6}
@@ -103,6 +104,24 @@
     \item Every file and statement is marked: verified by a human or not, and if an AI made it,
       which specific AI.
   \end{itemize}
+\end{frame}
+
+% 16c ----------------------------------------------------------------
+% Results slide. Written by Claude Opus 5.5 (Claude Code), 2026-11-15.
+% Statuses as in CLAIMS.md and report/report.tex, Section "Limitations".
+\begin{frame}{What we achieved: four proofs of Problem 137}
+  \centering
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{lcc}
+    & \textbf{Lean verified} & \textbf{Human checked} \\ \hline
+    Lattice paths             & \textcolor{atomgreen}{\ding{51}} & checked \\
+    Algebraic (Frobenius)     & \textcolor{atomgreen}{\ding{51}} & not checked \\
+    Accounting                & \textcolor{atomgreen}{\ding{51}} & checked \\
+    Main: symmetries of trees & \textcolor{atomgreen}{\ding{51}} & checked \\
+  \end{tabular}
+
+  \vspace{14pt}
+  {\small Lean verified: builds on Lean v4.35.0 / Mathlib, no \texttt{sorry}, standard axioms only.\par}
 \end{frame}
 
 \end{document}
