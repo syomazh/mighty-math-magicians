@@ -1,4 +1,4 @@
-% Report for the Caltech Mathathon 2026, Problem 137. One self-contained file: nothing is read from other
+% Report on Problem 137. One self-contained file: nothing is read from other
 % files (the bibliography is in this file; the pictures are drawn in this file; no image files).
 % Assembled by Claude Fable 5.2 (AI; worker W046 of the project), 2026-11-15, from material already in the
 % project's repository: four proof write-ups, the ledger of claims, the Lean README, the AI-usage statement,
@@ -9,6 +9,14 @@
 % In the reproduced proof texts (Section 3, Section 4.4, Appendices A and B) only six notes were added (five on
 % notation, one on the range of a computer check); each is preceded by a comment line "Clarification added
 % 2026-11-15 after the referee report" and is printed in brackets (macro \refnote). Not human-reviewed.
+% Revised by Claude Fable 5.2 (AI; a fresh-context reviewer, brief W053), 2026-11-15: changes of its own review
+% (report/reviews/PANEL.md) applied to the report text: the section "The result on one page" and the shorter
+% table of contents; the wording of who drafted, reviewed and read what; Sections 1.2 to 1.4 (what is classical
+% about the residue, Remark 3 of Konvalinka's paper, what is claimed); one new row of the status table; two
+% bibliography entries and two reading notes; small rewordings in Sections 4.2, 4.5, 5, 8 and 9 (each place is
+% named in a comment line near it). In the reproduced proof texts only marked additions were made (macro \revnote, each preceded by a
+% comment line): the pictured words in four captions of Appendix A, one note in Appendix A.9 and one in
+% Appendix B.8. No statement and no step of a proof was changed. Not human-reviewed.
 %
 % Compile:  latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build report.tex
 \documentclass[11pt]{article}
@@ -24,7 +32,7 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 
-% ---- theorem environments: one counter, numbered within sections (4.1, A.1, ...)
+% ---- theorem environments: one counter, numbered within sections (3.1, A.1, ...)
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -91,6 +99,10 @@
 % a note added to a reproduced proof text after the referee report of 15 November (report/reviews/REFEREE.md);
 % such notes were not part of the texts that were approved or reviewed earlier
 \newcommand{\refnote}[1]{[\emph{Note added on 15 November after an AI referee's report:} #1]}
+% a note, or words added to a caption, in a reproduced proof text after a second AI review of the report on
+% 15 November (report/reviews/PANEL.md, brief W053); such additions were not part of the texts that were
+% approved or reviewed earlier
+\newcommand{\revnote}[1]{[\emph{Added on 15 November after an AI review of the report:} #1]}
 
 % =====================================================================================================
 % Sentences that change tonight. Each is used in several places; change it here only.
@@ -143,8 +155,14 @@ COMMIT: to be filled at submission}
 \begin{document}
 \maketitle
 
-% ---- Abstract and Sections 1 to 3: written by Claude Fable 5.2 (worker W046), 2026-11-15, from CLAIMS.md,
-% ---- FINDINGS.md, references/README.md, the notes on prior work and the two slide decks. Not human-reviewed.
+% ---- Abstract and Sections 1 and 2 (in the numbering of the PDF): written by Claude Fable 5.2 (worker W046),
+% ---- 2026-11-15, from CLAIMS.md, FINDINGS.md, references/README.md, the notes on prior work and the two slide
+% ---- decks. Not human-reviewed.
+% ---- Revised 2026-11-15 by Claude Fable 5.2 (reviewer, brief W053): two sentences of the abstract; the section
+% ---- "The result on one page"; in Section 1.2 the sentence on Remark 3 and the remark after it; the table at
+% ---- the end of Section 1.3; the first and fourth items "Claimed" and three items "Not claimed" of Section 1.4;
+% ---- the rows C7, "C1--C8 as a whole", C24 and C18 of the status table, and a new row on the converse
+% ---- statement of Section 2.2. Not human-reviewed.
 \begin{abstract}
 Let $p$ be a prime and $q=p^k$. The number $C_n^{(q)}$ of plane $q$-ary trees with $n$ internal nodes is
 divisible by $p^t$ and not by $p^{t+1}$, where $t=(s_p((q-1)n+1)-1)/(p-1)$ and $s_p$ is the sum of the base-$p$
@@ -155,17 +173,92 @@ one. Read a $q$-ary node as $k$ levels of $p$-ary nodes and allow only cyclic ro
 a node. Then every class of trees has $p^d$ members, where $d$ is the number of nodes whose $p$ subtrees are
 not all equivalent; digit sums give $d\ge t$; the classes with $d=t$ are skeletons carrying complete trees,
 one for each unit of each base-$p$ digit of the number of leaves; and their number is computed modulo $p$ by a
-fixed-point argument in which a carry in base $p$ is the collapse of $p$ sibling leaves. The result is the
-valuation and the residue $C_n^{(q)}/p^t\equiv(-1)^t/\prod_jm_j!\pmod p$ for every prime power. The report
+fixed-point argument in which a carry in base $p$ is the collapse of $p$ sibling leaves. The result is a
+proof, from the symmetries of the trees, of the valuation and of the residue
+$C_n^{(q)}/p^t\equiv(-1)^t/\prod_jm_j!\pmod p$ for every prime power; as statements about numbers both follow
+from classical theorems on binomial coefficients (Section~\ref{sec:attribution}). The report
 contains this proof in full; three further proofs found during the event (one on lattice paths, which proves
 Kummer's theorem with its residue by a known kind of group action; one by algebra alone; one by counting
 labelled trees); the computations; a formalization in Lean~4 of the main proof, of the lattice-path proof and of
-the algebraic proof; and, for every claim, how it is supported and whether a human has read it. The main proof and the lattice-path
-proof were read and approved by a faculty member of the team; the algebraic proof has been checked only by AI
-systems and by Lean. For $p=2$ the statements are in the literature (Etherington, Deutsch and Sagan, Kersting
+the algebraic proof; and, for every claim, how it is supported and whether a human has read it. A faculty
+member of the team looked through the main proof and said it is good, and read and verified the lattice-path
+proof (both as reported; Section~\ref{sec:status} says what is on record); the algebraic proof has been checked
+only by AI systems and by Lean. For $p=2$ the statements are in the literature (Etherington, Deutsch and Sagan, Kersting
 and Fischer). The proofs were found and written by AI systems under the direction of the team; Section~\ref{sec:ai} says which.
 \end{abstract}
 
+% ---- "The result on one page": added by Claude Fable 5.2 (AI; a fresh-context reviewer, brief W053),
+% ---- 2026-11-15, from Sections 1.3, 1.4, 2.1, 2.3, 4.5 and 7.1 of this report as they stand after the
+% ---- referee's revision. It is meant to contain no statement that is not in those sections. Not
+% ---- human-reviewed. The \clearpage before and after keep it on a page of its own (page 2 of the PDF).
+\clearpage
+\section*{The result on one page}\label{sec:onepage}
+\addcontentsline{toc}{section}{The result on one page}
+
+\noindent\textbf{Statement.} Let $p$ be a prime, $k\ge1$, $q=p^k$, $n\ge1$, and let $C_n^{(q)}$ be the number
+of plane $q$-ary trees with $n$ internal nodes; such a tree has $m=(q-1)n+1$ leaves. Write $m=\sum_jm_jp^j$
+in base $p$, $s=\sum_jm_j$ and $t=(s-1)/(p-1)$. Then (Theorem~\ref{main:thm:main})
+\[
+ v_p\bigl(C_n^{(q)}\bigr)=t\qquad\text{and}\qquad\frac{C_n^{(q)}}{p^t}\equiv\frac{(-1)^t}{\prod_jm_j!}\pmod p .
+\]
+Both are known as statements (Section~\ref{sec:attribution}); Problem~137 asks for a proof from tree symmetries.
+
+\noindent\textbf{What was missing} (Section~\ref{sec:unsatisfying}). The known group-action argument
+\cite{Konvalinka} allows all permutations of the $q$ branches of a node. That is not a $p$-group: orbit sizes
+are products of multinomial coefficients, whose power of $p$ again needs factorials, and the smallest orbits
+are not counted modulo $p$. It gives ``$p^t$ divides'', not ``exactly''.
+
+\noindent\textbf{The idea.} Shrink the group until it is a $p$-group. Read a $q$-ary node as $k$ levels of
+$p$-ary nodes: $q$-ary trees with $n$ internal nodes become $p$-ary trees with $m$ leaves, all at depths
+divisible by $k$ (Lemma~\ref{main:lem:blocked}). Allow only cyclic rotations of the $p$ children of a node; a
+node is \emph{asymmetric} if its $p$ subtrees are not all equivalent, and $d(T)$ counts the asymmetric nodes
+of $T$.
+\begin{description}[leftmargin=1.2em,itemsep=0pt,topsep=2pt,parsep=0pt]
+\item[Step 1] (Lemma~\ref{main:lem:class-size}). \emph{A class has $p^{d}$ members:} the trees obtained from
+ $T$ by rotations are exactly $p^{d(T)}$ in number. Hence $C_n^{(q)}=\sum_{\text{classes}}p^{d}$.
+\item[Step 2] (Proposition~\ref{main:prop:lower-bound}). \emph{$d\ge t$}, because $s_p(pa)=s_p(a)$ and
+ $s_p(a+b)\le s_p(a)+s_p(b)$, with equality exactly when no carry occurs. Hence $p^t$ divides $C_n^{(q)}$, and
+ $C_n^{(q)}/p^t$ is congruent modulo $p$ to the number $N_{\min}$ of classes with $d=t$.
+\item[Step 3] (Propositions~\ref{main:prop:minimal-local}, \ref{main:prop:skeleton}). \emph{The smallest
+ classes are built from the digits of $m$:} they come from the skeletons, $p$-ary trees with $t$ nodes, up to
+ rotation, whose leaves carry complete trees (``atoms''), $m_j$ of height $j$, each at a depth
+ $\equiv-j\pmod k$.
+\item[Step 4] (Propositions~\ref{main:prop:free}, \ref{main:prop:carry}, \ref{main:prop:carry-termination}).
+ \emph{A carry is a cherry.} Give the atoms distinct labels; this multiplies the number of skeletons by
+ $\prod_jm_j!$, which is prime to $p$. Let a cyclic permutation of $p$ labels of one depth class act: modulo
+ $p$ only the fixed trees count, and in a fixed tree the $p$ labels are the children of one node (a
+ \emph{cherry}), in one of $p-1$ cyclic orders. Collapsing the cherry to one leaf of the next class is a carry
+ in base $p$ and multiplies the count by $p-1\equiv-1$. The $t$ carries end at a single leaf, so
+ $N_{\min}\equiv(-1)^t/\prod_jm_j!\pmod p$, which is not zero.
+\end{description}
+
+{\small % the last three paragraphs are set one size smaller, so that the section fits its page
+\noindent\textbf{What Steps~1 and~2 give besides} (Section~\ref{sec:extensions}). $p^t$ divides $|F|$ for every
+set $F$ of $p$-ary trees with $m$ leaves that is closed under rotation; for instance $p^t$ divides
+$\prod_{i<L}\binom{q\,n_i}{n_{i+1}}$, the number of $q$-ary trees with $n_i$ internal nodes at depth $i$
+($n_0=1$, $n_L=0$, $\sum_{i<L}n_i=n$).
+
+\noindent\textbf{What is new, and what is not} (Section~\ref{sec:attribution}; no certificate of novelty). New,
+as far as we know: the use of cyclic rotations, a $p$-group, for this theorem, for every prime power; the
+smallest classes in base $p$ with the depth condition; their count modulo $p$ by collapsing cherries, and
+with it the exactness and the residue from tree symmetries. Not new: the two formulas as statements; the
+divisibility by a group action and the shape of the smallest orbits \cite{Konvalinka}; everything for $p=2$
+\cite{Etherington,DeutschSagan,KerstingFischer}; the classes under rotation as objects; the fixed-point
+principle \cite{Gessel}.
+
+\noindent\textbf{What supports it} (Section~\ref{sec:status}). The written proof (Section~\ref{sec:mainproof})
+went through three rounds of review by AI systems; a faculty member of the team looked through it and said it
+is good (as reported; no more is on record about that reading). Three proofs are formalized in Lean (the main
+proof, the lattice-path proof, the algebraic proof), with the theorem stated in Mathlib's terms; the project
+builds on \LeanVersions{} with no \texttt{sorry} (Section~\ref{sec:lean}, with the differences from the
+written proofs). No failure in $1067$ values of $m$. The lattice-path proof (Appendix~\ref{app:path})
+was read and verified by the faculty member (as reported); the accounting proof (Appendix~\ref{app:acc}) was
+read, not signed; the algebraic proof (Appendix~\ref{app:frob}) and Section~\ref{sec:extensions} have been
+checked only by AI systems and by Lean. The proofs were found and written by AI systems under the direction
+of the team (Section~\ref{sec:ai}).\par}
+
+\clearpage
+\setcounter{tocdepth}{1}
 \tableofcontents
 
 \section{The problem, what was known, and what is unsatisfying about it}\label{sec:problem}
@@ -205,8 +298,12 @@ in Section~\ref{sec:ai}.
 
 \emph{Konvalinka} \cite{Konvalinka}. Proposition~2 of that paper is the formula above, proved with the
 formula for the power of $p$ in a factorial (Legendre's formula). Remark~3 gives, for $q=p$, the residue of
-$C_n^{(q)}/p^{t}$ modulo $p$ in terms of the base-$p$ digits, and says that the formula for general $q$ is much
-more complicated. Proposition~7 states that every orbit of the full symmetry group of the complete $q$-ary tree,
+$C_n^{(q)}/p^{t}$ in terms of the base-$p$ digits, and says that the formula for general $q$ is much
+more complicated. (According to an AI reading of the text of the paper on 15 November, to be confirmed by a
+person, Remark~3 speaks of the residue modulo $q$. For $q=p$ that is the residue modulo $p$. For $q=p^k$ with
+$k\ge2$ it is a finer residue than the residue modulo $p$ that this report computes, so the sentence of
+Remark~3 about general $q$ and the residue formula of this report are about different residues. The remark
+at the end of this subsection compares the two for $q=p$.) Proposition~7 states that every orbit of the full symmetry group of the complete $q$-ary tree,
 acting on $q$-ary trees, has size divisible by $p^t$; the paper notes that this is a combinatorial proof of the
 divisibility only, not of the exactness. In its proof the vertices are ``black'' (all branches equivalent) or
 ``white'', the size of an orbit is a product of multinomial coefficients over the white vertices, Lemmas~8
@@ -236,9 +333,38 @@ $\binom Nn$ is the number $c$ of carries when $n$ and $N-n$ are added in base $p
 $\binom Nn/p^c\equiv(-1)^c\prod_iN_i!/(n_i!\,r_i!)\pmod p$ for the quotient, where $N_i$, $n_i$ and $r_i$ are
 the base-$p$ digits of $N$, $n$ and $r=N-n$, which according to the introduction
 of Granville's survey \cite{Granville} was discovered by Anton (1869), Stickelberger (1890) and Hensel (1902);
-the original papers were not opened by anyone in the project. Wilson's theorem, $(p-1)!\equiv-1\pmod p$, and
+the original papers were not opened by anyone in the project. Applied to
+$\binom{qn+1}{n}=(qn+1)\,C_n^{(q)}$, these two theorems give the valuation of $C_n^{(q)}$ and its residue
+$(-1)^t/\prod_jm_j!$ for every prime power $q$: the computation, which uses only the digits of $qn+1$ and
+$qn+1\equiv1\pmod p$, is the one of Section~\ref{path:sec:proof} in Appendix~\ref{app:path}. So the residue
+formula of this report is, as a statement, a consequence of a classical congruence; what the report adds is
+its derivation from the symmetries of the trees. Wilson's theorem, $(p-1)!\equiv-1\pmod p$, and
 Fermat's congruence $c^p\equiv c\pmod p$. Legendre's formula $v_p(m!)=(m-s_p(m))/(p-1)$, which the main proof
 avoids and the accounting proof (Appendix~\ref{app:acc}) reproves.
+
+% ---- Remark added by Claude Fable 5.2 (reviewer, brief W053), 2026-11-15. The description of Remark 3 as a
+% ---- signed product is that of notes/2026-11-14_path_proof_literature.md (item 2(c)); the sign is from an AI
+% ---- reading of the local text of the paper (lines 103 to 110 of the extraction), which no person has checked.
+% ---- The numerical comparison was made with a program of the reviewing session that is not in the repository.
+\medskip\noindent\textbf{Remark} (added on 15 November after an AI review of this report; read by no human).
+\emph{The residue of this report and Remark~3 of \cite{Konvalinka}, for $q=p$.} The project's notes on the
+literature record the residue of Remark~3 as ``a signed product of $(p-a_i-1)!$, where $a_i$ are the base-$p$
+digits of $(p-1)n+1$''; they do not record the sign. The residue of this report has that shape. For
+$0\le a\le p-1$,
+\[
+ (p-1)!=(p-1)(p-2)\cdots(p-a)\cdot(p-1-a)!\equiv(-1)^a\,a!\,(p-1-a)!\pmod p ,
+\]
+so by Wilson's theorem $a!\,(p-1-a)!\equiv(-1)^{a+1}$, that is, $1/a!\equiv(-1)^{a+1}(p-1-a)!\pmod p$. Taking
+the product over the digits $m_j$ of $m=(p-1)n+1$,
+\[
+ \frac{(-1)^t}{\prod_jm_j!}\equiv(-1)^{\,t+\sum_j(m_j+1)}\prod_j(p-1-m_j)!\pmod p .
+\]
+According to the AI reading of the text of the paper mentioned above (to be confirmed by a person), the sign
+printed in Remark~3 is $(-1)^{(\sum_ia_i-1)/(p-1)+\sum_i(a_i-1)}$, which is the sign of the last display, since
+$t=(\sum_jm_j-1)/(p-1)$ and $m_j+1$ and $m_j-1$ have the same parity. The reviewing AI session compared, for $p\in\{2,3,5,7,11,13\}$ and $1\le n<80$ ($474$
+cases), the residue of $C_n^{(p)}/p^t$ computed from the binomial formula, the formula of this report, and the
+signed product with the sign as read: the three agree in every case. The program is not kept in the
+repository.
 
 \subsection{What is unsatisfying about the known proofs}\label{sec:unsatisfying}
 The formula says that the power of $p$ in a number of trees is governed by the digits of the number of leaves.
@@ -255,33 +381,68 @@ the half of the theorem that says ``exactly'', and the residue for prime powers,
 trees except for $p=2$, where a rotation and a reflection of two branches are the same thing and the smallest
 orbits can be counted directly.
 
+% ---- Table added by Claude Fable 5.2 (reviewer, brief W053), 2026-11-15. Its entries repeat statements of
+% ---- Sections 1.2, 1.3 and 2.1; the entry "a power of 2" is from the reading notes on Deutsch and Sagan
+% ---- (references/README.md, change to entry 2; references/overlap_fulltext.md, section 3).
+In a table (the first two columns are what the reading notes record about \cite{Konvalinka} and
+\cite{DeutschSagan}):
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.26\textwidth}@{}}
+\toprule
+ & \cite{Konvalinka}, every $q=p^k$ & \cite{DeutschSagan}, $p=q=2$ & this report, every $q=p^k$\\
+\midrule
+group at a node & all permutations of the $q$ branches & exchange of the two branches
+ & cyclic rotations at $k$ levels of $p$-ary nodes: a $p$-group\\
+size of an orbit & a product of multinomial coefficients & a power of $2$
+ & $p^{d}$, $d$ the number of asymmetric nodes\\
+smallest orbits & described, by the base-$q$ digits of $m$ & described and counted: $(2t-1)(2t-3)\cdots1$
+ & described, by the base-$p$ digits of $m$ with a depth condition; counted modulo $p$\\
+``exactly'' comes from & the arithmetic formula & the count being odd
+ & the count being $\equiv(-1)^t/\prod_jm_j!\not\equiv0$ modulo $p$: a carry is a cherry\\
+\bottomrule
+\end{tabular}
+\end{center}
+For $p=2$ the number of smallest orbits is an explicit odd number. For general $p$ and $k$ the main proof
+does not use a closed formula for it; it computes it modulo $p$ by the fixed-point count of Step~4
+(Section~\ref{sec:results}).
+
 Problem~137 asks whether tree symmetries can give a fully combinatorial proof of the exact formula: ideally a
 proof that explains how the structure and symmetries of $q$-ary trees give rise to the base-$p$ digit sum,
 without relying on factorial valuations; possible intermediate outcomes are a characterization of the relevant
 orbits, special cases, and extensions to weighted numbers and other statistics.
 
 \subsection{What is claimed as the team's contribution, and what is not}\label{sec:attribution}
-\textbf{Claimed}, in the words of the project's ledger and with its caveat (``as far as we know''; this is
+\textbf{Claimed}, with the caveat of the project's ledger (``as far as we know''; this is
 the outcome of searches by AI systems and of the reading of a handful of papers, and is \emph{not} a
 certificate of novelty):
 \begin{itemize}[itemsep=1pt]
-\item the action by cyclic rotations (a $p$-group) for every prime $p$, and for prime powers $q=p^k$ through
- the reading of a $q$-ary node as $k$ levels of $p$-ary nodes, with the depth condition this brings;
+\item the \emph{use}, for this theorem, of the action by cyclic rotations (a $p$-group), for every prime $p$,
+ and for prime powers $q=p^k$ through the reading of a $q$-ary node as $k$ levels of $p$-ary nodes, with the
+ depth condition this brings. The action and its classes are not new as objects: trees up to rotation at each
+ node are called mobiles in the OEIS \cite{OEISmobiles}, for $p=3$ they are the alkyl groups with mirror
+ images counted separately \cite{OEISA000625}, and the group at a carbon is cyclic of order $3$ \cite{RHB}
+ (Section~\ref{sec:connections}, items~3 and~4; sources opened by AI systems only);
 \item the description of the smallest classes by the base-$p$ digits of the number of leaves, with the depth
  condition modulo $k$ (the \emph{shape} of this description is not new: it is the analogue, for cyclic
  rotations and in base $p$, of Konvalinka's Lemmas~8 to~10 for the full symmetry group in base $q$, and for
  $p=2$ it is in \cite{DeutschSagan,KerstingFischer});
 \item the count of the smallest classes modulo $p$ by collapsing cherries (``a carry is a cherry''), and with
  it a proof of exactness and of the residue for every prime power from the symmetries of the trees;
-\item in the algebraic proof (Appendix~\ref{app:frob}): the extra variable, the weight, the carry-free product
- and the carry operator.
+\item in the algebraic proof (Appendix~\ref{app:frob}): the weight, the carry-free product and the carry
+ operator, and with them the use of the extra variable to isolate the lowest power of $p$ for all $m$ at once.
+ The two-variable equation itself is not claimed (see below). The same caveat applies; the appendix says of
+ itself that it does not claim the argument to be new.
 \end{itemize}
 \textbf{Not claimed:}
 \begin{itemize}[itemsep=1pt]
 \item The valuation formula itself \cite[Proposition~2]{Konvalinka}; the divisibility by a group action and
  the description of minimal orbits of the full symmetry group \cite[Proposition~7, Lemmas~8--10]{Konvalinka};
- the residue for $q=p$ \cite[Remark~3]{Konvalinka} (according to the project's ledger our residue agrees with
- it for $q=p$, via Wilson's theorem; that comparison is not written out in this report).
+ and the residue formula as a statement. For every prime power it follows from the classical congruence of
+ Anton, Stickelberger and Hensel applied to $\binom{qn+1}{n}$, by the computation that
+ Appendix~\ref{app:path} contains (Section~\ref{path:sec:proof}; see Section~\ref{sec:known}); for $q=p$ a
+ residue is given in \cite[Remark~3]{Konvalinka} (it is compared with ours in the remark at the end of
+ Section~\ref{sec:known}). What this report adds is the derivation of the valuation and of the residue from
+ the symmetries of the trees.
 \item Anything for $p=2$: class sizes $2^\mu$, the ingredient of the lower bound, and the two-variable
  generating function with its equation are Etherington's \cite{Etherington}; the exact valuation by orbits
  with the odd count of minimal orbits is Deutsch and Sagan's \cite{DeutschSagan}; the minimal trees and their
@@ -292,7 +453,12 @@ certificate of novelty):
  J.~H.~Smith \cite{Smith}, who uses them for congruences of Lucas' type; the count of the smallest orbits
  with Wilson's theorem is sketched, for one carry pattern, in an answer by M.~Wildon on MathOverflow
  \cite{Wildon}. The theorem that the proof establishes is classical (Kummer; Anton, Stickelberger, Hensel).
- What was not found in those two sources is the general statement: the bound by the number of carries for
+ Congruences for binomial coefficients had been derived from group actions before: the reference list records,
+ from the reading of an AI system, Rota and Sagan \cite{RotaSagan} (a cyclic group of order $p^m$; the
+ divisibility half for $N=p^m$ only) and Sagan \cite{SaganAbelian} (congruences for binomial coefficients
+ modulo $p$, $p^2$ and $p^r$ from groups generated by disjoint $p$-cycles, not nested; Kummer's theorem is
+ cited there, not proved).
+ What was not found in the paper of Smith and in the answer of Wildon is the general statement: the bound by the number of carries for
  every $N$, the structure and the exact count of the smallest orbits, and with them Kummer's theorem and its
  residue obtained in this way. As far as one search and these two readings show, it is a new proof of a
  classical theorem by a known method; that is a statement about what was found, not a proof that nothing else
@@ -300,8 +466,21 @@ certificate of novelty):
 \item The starting point of the algebraic proof modulo $p$: the series $\Phi=\sum_nz^{p^n}$, the relation
  $\Phi^p-\Phi+z\equiv0\pmod p$ and its use for Fuss--Catalan generating functions are in Kauers,
  Krattenthaler and M\"uller \cite{KKM} (for $p=2$) and in Krattenthaler and M\"uller \cite{KM}; for $p=2$,
- $k=1$ the deformed equation itself is Etherington's equation~(33) \cite{Etherington}. The remark that names
+ $k=1$ the deformed equation itself is Etherington's equation~(33) \cite{Etherington}. The reference list
+ records two further two-variable equations of this kind, both from readings by AI systems that no person
+ has checked. Lemma~1 of B\'ona and Flajolet \cite{BonaFlajolet}, a paper on the symmetries of phylogenetic
+ trees, is recorded as a functional equation for a bivariate generating function,
+ $F(z,u)=z+\tfrac12F(z,u)^2+(u-\tfrac12)F(z^2,u^2)$; it has the shape of Etherington's equation. Equation~(24)
+ of P\'olya \cite{Polya} is recorded as a two-variable equation of the same shape as the deformed equation of
+ Appendix~\ref{app:frob}, for the full symmetric group and another statistic; it was read by an AI system
+ from a scan, and the reference list asks that a person read page~436 of that paper before the equation is
+ relied on. For $p=3$, $k=1$ the deformed equation, indexed by the number of nodes, becomes at $y=1$ the
+ equation that the OEIS entry \cite{OEISA000625} refers to P\'olya (his equation~(25)); this was checked by
+ computer for $n\le14$ (Section~\ref{sec:connections}, item~3). The remark that names
  the structure of a $\delta$-ring uses the definition of Bhatt and Scholze \cite{BhattScholze}.
+\item The statement of Legendre's formula with a residue (the corollary of Lemmas~\ref{acc:L3}
+ and~\ref{acc:L4} in Appendix~\ref{app:acc}): the appendix offers a proof of it by a symmetry argument, not
+ the statement.
 \item The fixed-point principle of the last step of the main proof: when a group of order $p$ acts on a
  finite set, the number of points is congruent modulo $p$ to the number of fixed points. As recorded in the
  reference list from slides of Gessel \cite{Gessel}, J.~Petersen proved Fermat's and Wilson's theorems in
@@ -466,8 +645,11 @@ Claim & How it is supported & Read and approved by a human?\\
 \textbf{C7, C12. Residue:} $C_n^{(q)}/p^t\equiv(-1)^t/\prod_jm_j!$ mod $p$; compact form
  $C_n^{(q)}\prod_jm_j!\equiv(-p)^t$ mod $p^{t+1}$.
  & \emph{Proved in this report:} Theorem~\ref{main:thm:main}; also Theorems~\ref{path:thm:main},
- \ref{frob:thm}, \ref{acc:thm}. Known for $q=p$ \cite[Remark~3]{Konvalinka} (\emph{cited}; the comparison
- with our form is not written out here). \emph{Lean:} \lean{MMM.residue_fussCatalan},
+ \ref{frob:thm}, \ref{acc:thm}. As a statement it follows, for every prime power, from the classical
+ congruence of Anton, Stickelberger and Hensel (\emph{cited} through \cite{Granville}) applied to
+ $\binom{qn+1}{n}$, by the computation of Section~\ref{path:sec:proof}; for $q=p$ a residue is in
+ \cite[Remark~3]{Konvalinka} (\emph{cited}; compared with ours in the remark at the end of
+ Section~\ref{sec:known}). \emph{Lean:} \lean{MMM.residue_fussCatalan},
  \lean{MMM.PTree.residue_primePower}, \lean{MMM.PTree.residue_paper_form};
  \lean{MMM.Frob.residue_fussCatalan_frobenius}; \lean{MMM.Path.residue_fussCatalan_path}.
  \emph{Computation:} $885$ cases, $p\le11$, $k\le3$, $n<60$;
@@ -519,8 +701,10 @@ Claim & How it is supported & Read and approved by a human?\\
  & It is part of the approved text; whether the approval was meant to include every remark is not recorded.\\
 \midrule
 \textbf{C1--C8 as a whole} (the main proof, Section~\ref{sec:mainproof}).
- & Three rounds of review by AI systems (three models other than the author, then two further readers with
- no access to the project's notes): no counterexample and no step needing a new idea; every defect found was
+ & Three rounds of review by AI systems (first three models, Mistral Large 4.0, Muse Spark Open and Kimi
+ K3.1 Pro, of which the last had drafted the write-up, in a separate run, from a sketch by the AI system that
+ had the idea; then two further readers with no access to the project's notes, sessions of the same model as
+ that system): no counterexample and no step needing a new idea; every defect found was
  repaired; the last repairs were not re-reviewed by a machine.
  & \textbf{Yes.} A faculty member of the team looked through the proof and said it is good (reported
  14 November 2026). What is known about the extent of that reading is this sentence. The approval predates one
@@ -537,17 +721,18 @@ Claim & How it is supported & Read and approved by a human?\\
  \lean{MMM.Path.residue_fussCatalan_path}; the count of the minimal words is proved there in a more general
  form than in the text (C27, Section~\ref{sec:lean}). \emph{Computation:} $456$ triples $(N,n,p)$ with
  $1\le N\le16$, $0\le n\le N$, $p\in\{2,3,5\}$, and $34$ pairs $(q,n)$; a second program of different design, $328+26$ cases.
- & \textbf{Yes.} Read and verified by a faculty member of the team, 14 November 2026. This covers the written
- proof, not the Lean files, not the statement about novelty, and not the three bracketed notes added to
- Appendix~\ref{app:path} on 15 November.\\
+ & \textbf{Yes.} Read and verified by a faculty member of the team, 14 November 2026 (as reported by a team
+ member). This covers the written proof, not the Lean files, not the statement about novelty, and not the
+ bracketed notes and the words added to four captions in Appendix~\ref{app:path} on 15 November.\\
 \midrule
 \textbf{C18. Algebraic (``Frobenius'') proof:} C6 and C7 from $G=x+G^q$ alone.
  & \emph{Proved in this report:} Appendix~\ref{app:frob}, Theorem~\ref{frob:thm}. \emph{Lean}, the whole chain:
  \lean{MMM.Frob.residue_frobenius}, \lean{MMM.Frob.exact_valuation_blocked_frobenius},
  \lean{MMM.Frob.problem137_fussCatalan_frobenius}, \lean{MMM.Frob.residue_fussCatalan_frobenius}.
  \emph{Computation:} every lemma separately, $p\le11$, $k\le4$, up to $100$ leaves (E010).
- & \textbf{No.} No human has read the proof or the Lean files. Checked only by AI: one AI referee (the same
- model as the author) found no error; its repairs were not re-reviewed.\\
+ & \textbf{No.} A team member began to read the proof and stopped for the time being; no human has checked it
+ or read the Lean files. Checked only by AI: one AI referee (the same model as the author) found no error;
+ its repairs were not re-reviewed.\\
 \midrule
 \textbf{C13, C14. Accounting proof:} $m!\,C_n^{(q)}=p^{N(m)}L(m)$ with $N(m)=(m-1)/(p-1)$ and
  $L(m)\equiv(-1)^{N(m)}$ mod $p$; Legendre's formula with its residue; the statement on sand.
@@ -616,6 +801,15 @@ Claim & How it is supported & Read and approved by a human?\\
  kept in the repository).
  & No (written on the last night; the proof was completed by the AI referee who read it; checked by Lean).\\
 \midrule
+% Row added 2026-11-15 by the reviewer of brief W053, from the last paragraph of Section 2.2; the statement has
+% no number in the ledger.
+\textbf{A converse (on the slides; no number in the ledger):} no tree counted by $T(\mathbf a)$ exists unless
+ $\sum_ca_cp^c\equiv1\pmod{q-1}$.
+ & \emph{Not proved in this report.} Section~\ref{sec:smallexamples} names the remark it rests on;
+ Remark~\ref{frob:rem:support} is the corresponding statement for the series of the algebraic proof, where it
+ is marked as not used. Not needed for any proof; not in Lean.
+ & No.\\
+\midrule
 \textbf{C21.} To leading order $C_n^{(q)}$ is $-1/\pi$ times a Gauss sum, $\pi=\zeta_p-1$.
  & \emph{Computation}: $77$ cases, $q\in\{2,3,4,5,7,8,9\}$ (E014). It would follow from Stickelberger's
  congruence (classical; quoted from \cite{Blache}, not from a primary source) and C6, C7; the deduction is
@@ -644,6 +838,8 @@ Sections~\ref{sec:problem} and~\ref{sec:results}.
 
 
 % ---- Source: paper/main.tex. Provenance lines of the source file:
+% (Comment added 2026-11-15 by the reviewer of brief W053: the words "Not yet human-verified" in the next line
+% are those of the source file at the time it was written; the present status is in the paragraph above.)
 % Drafted by moonshotai/kimi-k3.1-pro (Open Math OS worker), 2026-11-13, from a sketch by Claude Fable 5.2. Not yet human-verified.
 % Repaired 2026-11-13 by moonshotai/kimi-k3.1-pro (W021) per paper/reviews/ADJUDICATION_round1.md items A1-A14; see paper/CHANGES_round1.md.
 % Revised 2026-11-13/14 by Claude Fable 5.2 (orchestrator): four corrections (paper/reviews/round2_orchestrator.md) and the round-2 repairs (paper/reviews/ADJUDICATION_round2.md).
@@ -1156,9 +1352,11 @@ Modulo $2$, the carry congruence reads $T(\mathbf a)\equiv-T(\mathbf a')\equiv T
 The actual values are all $1$, and $N_{\min}=1$.  Indeed $C_4^{(4)}=140$ and $140/2^2=35\equiv1\pmod2$.
 \end{example}
 
-% ---- Section 5: written by Claude Fable 5.2 (worker W046), 2026-11-15, from CLAIMS.md, FINDINGS.md and
+% ---- Section 4 (in the numbering of the PDF): written by Claude Fable 5.2 (worker W046), 2026-11-15, from CLAIMS.md, FINDINGS.md and
 % ---- notes/2026-11-14_carry_budget.md (the carry budget is transcribed from that note, written by Claude
 % ---- Fable 5.2 as orchestrator). Not human-reviewed.
+% ---- Revised 2026-11-15 by Claude Fable 5.2 (reviewer, brief W053): the first sentence of "Support" in
+% ---- Section 4.2, and in Section 4.5 the parenthesis on the paper of Postnikov and Sagan (item on weights).
 \section{Three further proofs, the carry budget, and extensions}\label{sec:further}
 Three more proofs of the main theorem were produced during the event. Their full texts are
 Appendices~\ref{app:path}, \ref{app:frob} and~\ref{app:acc}. This section says what each adds and how it is
@@ -1206,8 +1404,8 @@ and that of $x^6$ is $y+2y^2+2y^3+y^4$, which at $y=2$ give $14$ and $42$; these
 in Etherington's paper \cite{Etherington}, whose equation~(33) is the case $p=2$, $k=1$ of the deformed
 equation. It is algebra, not ``symmetries of trees'', so it is not offered as the answer to the problem.
 
-\emph{Support.} No human has read this proof. One AI referee and computer checks of every lemma found no
-error. It is formalized in Lean in full (Section~\ref{sec:lean}); a dependency listing produced by Lean shows
+\emph{Support.} A team member began to read this proof and stopped for the time being; no human has checked
+it. One AI referee and computer checks of every lemma found no error. It is formalized in Lean in full (Section~\ref{sec:lean}); a dependency listing produced by Lean shows
 that the formal proof reaches no rotation, no class of trees and no cherry of the first formal proof.
 
 \subsection{An accounting proof: every node is worth $-p$ (Appendix~\ref{app:acc})}
@@ -1384,8 +1582,10 @@ Section~\ref{sec:computations}, and C27 is checked by Lean but has no written pr
  With all $b_i=1$ this is the divisibility half of the theorem. It is \emph{not} the weighted theorem of
  \cite[Theorem~5]{Konvalinka}, which is quoted in the next item:
  there the weight of a vertex depends on the number of non-right edges on the path from the root, which
- rotations change, and the conclusion is a congruence, not only a divisibility. (The paper
- \cite{PostnikovSagan} on weighted Catalan numbers was not read in the project.) The corollary says nothing
+ rotations change, and the conclusion is a congruence, not only a divisibility. (Of the paper
+ \cite{PostnikovSagan} on weighted Catalan numbers the project has one reading: an AI system read the full
+ text of its arXiv version on the first day of the event, to look for overlap with the main proof; no person
+ has read it, and the corollary is not compared with that paper here.) The corollary says nothing
  about exactness; it records what the rotation argument gives for weights with no further idea. Tested
  beforehand on random integer weights ($q\in\{2,3,4,5,8,9\}$, $n\le14$; the program is not kept in the
  repository). No search of the literature was made for it.
@@ -1416,9 +1616,11 @@ Section~\ref{sec:computations}, and C27 is checked by Lean but has no written pr
 Not explored: $q$ that is not a prime power; residues modulo $p^2$.
 
 
-% ---- Section 6: written by Claude Fable 5.2 (worker W046), 2026-11-15, from
+% ---- Section 5 (in the numbering of the PDF): written by Claude Fable 5.2 (worker W046), 2026-11-15, from
 % ---- notes/2026-11-14_connections_ranked.md, notes/2026-11-14_motivation_and_connections.md, CLAIMS.md
 % ---- (C15, C21, C22, C23, C25, C26) and the two slide decks. Not human-reviewed.
+% ---- Revised 2026-11-15 by Claude Fable 5.2 (reviewer, brief W053): in item 1 the sentence on the four
+% ---- pictures of one tree (reworded, content unchanged); in item 5 the reading status of the cited survey.
 \section{Connections with other fields}\label{sec:connections}
 The trees of the theorem occur in several sciences, and in none of them does the left-to-right order of the
 branches mean anything: what matters is the shape, and the question ``how many ordered trees stand over one
@@ -1443,8 +1645,9 @@ cherry in that field. \textbf{[computed; the formula is in the literature]} In t
 uniform splitting, the probability of a shape is $2^{d}/\prod_v(m_v-1)$, $m_v$ the number of leaves below the
 node $v$, with our $d$ (\cite{Steel2025} states the Yule--Harding probability as $2^{n-1-s}/\prod n(v)$, in
 its notation). \textbf{[computed]} Exchanging two labels fixes a labelled tree exactly when the two leaves form a cherry
-($m\le7$). On the slides: the same tree with $6$ leaves drawn as an evolutionary tree, a knockout
-tournament, a prefix code and a bar of music; $6=110_2$, so one node has to be lopsided, and one is enough.
+($m\le7$). One tree with $6$ leaves can be drawn as an evolutionary tree, a knockout tournament, a prefix
+code and a bar of music (four pictures of one slide of the talk); $6=110_2$, so one node has to be lopsided,
+and one is enough.
 
 \item \textbf{Sylow subgroups of symmetric groups (every $p$ and $q$).} \textbf{[known]} The group that the
 proof puts at a $q$-ary node, rotations at $k$ levels of $p$-ary nodes, is an iterated wreath product of
@@ -1492,7 +1695,8 @@ by $p$: the plan of the proof. Trees up to rotation at each node are called mobi
 proof's group at a $4$-ary node has $8$ elements.
 
 \item \textbf{Quadtrees ($q=4$).} \textbf{[known]} Cutting a square into four quarters, and some of the
-quarters again, is how quadtrees store images \cite{Samet}; the pictures with $n$ cuts are the $4$-ary trees
+quarters again, is how quadtrees store images (\cite{Samet}, cited from its bibliographic record only; its
+text was not opened); the pictures with $n$ cuts are the $4$-ary trees
 with $n$ nodes. \textbf{[computed]} The eight symmetries of a square permute its four quarters and keep the
 two diagonals together; as permutations of the quarters they are exactly the group the proof puts at a
 $4$-ary node (two levels of binary nodes), of order $8$ among the $24$ permutations. Turning or mirroring any
@@ -1557,7 +1761,7 @@ $7$-ary trees and of $4$-ary trees with $n$ nodes were found in the OEIS (A00119
 A398109) by looking up computed values (claim C15); these are lookups, not proofs.
 
 
-% ---- Section 7: written by Claude Fable 5.2 (worker W046), 2026-11-15, from CLAIMS.md (ranges as recorded
+% ---- Section 6 (in the numbering of the PDF): written by Claude Fable 5.2 (worker W046), 2026-11-15, from CLAIMS.md (ranges as recorded
 % ---- there) and AI_USAGE.md. The assembler did not rerun the experiments. Not human-reviewed.
 \section{Computations}\label{sec:computations}
 A computation supports a statement in the range computed; it says nothing about a proof. The table lists
@@ -1948,8 +2152,12 @@ binomial coefficients: that a prime $p$ divides $n!$ only if $n\ge p$, that $p$ 
 $0<k<p$, the formula $\binom nk\,k!\,(n-k)!=n!$, and Wilson's theorem for the residues.
 
 
-% ---- Sections 9 and 10: written by Claude Fable 5.2 (worker W046), 2026-11-15, from JOURNAL.md, STATE.md,
-% ---- CLAIMS.md and AI_USAGE.md. Not human-reviewed.
+% ---- Sections 8 and 9 (in the numbering of the PDF): written by Claude Fable 5.2 (worker W046), 2026-11-15,
+% ---- from JOURNAL.md, STATE.md, CLAIMS.md and AI_USAGE.md. Not human-reviewed.
+% ---- Revised 2026-11-15 by Claude Fable 5.2 (reviewer, brief W053): the sentences on who read what in
+% ---- Sections 8.1, 8.2 and 9.4; the Lean item of Section 8.2 (a pointer in place of the repeated paragraph);
+% ---- in Section 9.1 the rows of Kimi K3.1 Pro and of the further sessions; in Section 9.2 the item on this
+% ---- report. Not human-reviewed.
 \section{Work done during the event; limitations; next steps}\label{sec:event}
 \subsection{What was done during the event}
 Everything in this report was done during the event: according to the project's journal, work began on the
@@ -1985,18 +2193,20 @@ are Pacific time, as recorded in the journal and the ledger):
  and had read the accounting proof.
 \item \emph{Night to Sunday.} The algebraic proof and the lattice-path proof formalized in full, so that the
  theorem has three proofs checked by Lean. The Lean project moved to the versions that the rules require
- (two lines changed). Formalized as well: the exact number of minimal classes for $q=p$, the carry budget,
+ (two kinds of small change in five files, Section~\ref{sec:lean}). Formalized as well: the exact number of minimal classes for $q=p$, the carry budget,
  the congruence for closed families, the divisibility for level profiles, which until then was a
  conjecture supported by computation, and the divisibility for weights that rotations do not change. This
  report assembled by an AI system from the existing write-ups, then read by an AI referee with a fresh
- context, whose corrections were applied (Section~\ref{sec:ai}).
+ context, whose corrections were applied, and by a second AI reader with a fresh context, who scored it as the
+ competition's panel would and then applied part of that review (Section~\ref{sec:ai}).
 \end{itemize}
 
 \subsection{Limitations}
 \begin{itemize}[itemsep=1pt]
-\item \emph{Human reading.} Two of the four proofs were read and approved by a human (the main proof and the
- lattice-path proof), one was read without a verdict that every step was checked (the accounting proof), and
- one has no human reader (the algebraic proof). What is recorded about the extent of the reading of the main
+\item \emph{Human reading.} Of the four proofs, a human looked through one and approved it (the main proof)
+ and read and verified one (the lattice-path proof); one was read without a verdict that every step was
+ checked (the accounting proof); and one was begun by a team member and put aside, so that no human has
+ checked it (the algebraic proof). What is recorded about the extent of the reading of the main
  proof is one sentence (Section~\ref{sec:status}). No human has read the Lean files, the carry-budget note,
  the notes on connections, or the sources cited for other fields.
 \item \emph{Novelty is not established.} What is called ``ours'' in Section~\ref{sec:attribution} is the
@@ -2008,14 +2218,16 @@ are Pacific time, as recorded in the journal and the ledger):
 \item \emph{What the proofs are.} The main proof answers the problem as posed. The lattice-path proof acts
  on paths, not on trees. The algebraic proof is algebra. The accounting proof depends on the main proof and
  computes $v_p(m!)$.
-\item \emph{Lean.} \LeanVersionStatus{} The formal proofs differ from the written ones in the places listed
- in Section~\ref{sec:lean}; in particular the formal main proof uses Wilson's theorem where the written one
+\item \emph{Lean.} What is built, on which versions and with which axioms is said in Section~\ref{sec:lean};
+ the competition's own automated check is what counts. The formal proofs differ from the written ones in the
+ places listed in Section~\ref{sec:lean}; in particular the formal main proof uses Wilson's theorem where the written one
  does not, and it does not formalize cyclic trees or the free action.
 \item \emph{Extensions.} The conjecture on weighted numbers (C9) is supported by computation only. The
  statements on closed families, level profiles and invariant weights (Section~\ref{sec:extensions}) were
  proved and checked by Lean on the last night, and their written proofs were completed on 15 November after
- an AI referee's report; no human has read them, and no search of the literature was made for them. The case where $q$ is not
- a prime power was not explored.
+ an AI referee's report; no human has read them, and no search of the literature was made for them (the
+ statement on level profiles was looked for only in the four papers that an AI system read in full on the
+ first day). The case where $q$ is not a prime power was not explored.
 \item \emph{Connections.} They are readings, not results; one earlier claim about tabulated symmetry numbers
  was wrong and was withdrawn; the remaining statements about other fields rest on sources opened by AI only.
 \end{itemize}
@@ -2058,8 +2270,11 @@ Claude Fable 5.2 in Claude Code, on a team member's machine (the ``orchestrator'
  Lean project to the required versions; the updates of this report after it was assembled.\\\addlinespace[3pt]
 Kimi K3.1 Pro, through the Open Math OS service (a headless agent) & The first full \LaTeX{} write-up of the
  main proof and its repair after the first review round; an independent replication of the brute-force check;
- numerical experiments on the extensions; a literature scan through public interfaces; one of the three
- first-round reviews; a first draft of slides; Lean files for the first half of the algebraic proof, for the
+ numerical experiments on the extensions and on the first algebraic facts; a literature scan through public
+ interfaces, and a reading of the full arXiv texts of four papers to look for overlap with the main proof;
+ one of the three first-round reviews (of the write-up that the same model had drafted, in a separate run);
+ first drafts of the accounting proof and of the algebraic proof, both superseded and not in this report; a
+ first draft of slides; one search for connections; Lean files for the first half of the algebraic proof, for the
  first parts of the lattice-path proof and for the Dwork form, from statements and plans fixed by the
  orchestrator.\\\addlinespace[3pt]
 Mistral Large 4.0, through the same service & One first-round review (it found the flaw in the proof that
@@ -2077,7 +2292,15 @@ Further sessions of Claude Fable 5.2 with a fresh context or forked from the orc
  and~7, the appendices; the examples recomputed): it found one false sentence in an example, three passages
  that were out of date, a skipped step in two proofs of Section~\ref{sec:extensions}, and notation used in
  several senses; the same session then applied its findings to the text, which includes the present wording
- of Section~\ref{sec:extensions} and the bracketed notes in the reproduced proofs.\\\addlinespace[3pt]
+ of Section~\ref{sec:extensions} and the bracketed notes in the reproduced proofs. A second reading of this
+ report, by a session that scored it as the competition's panel would and attacked its statements on
+ attribution and novelty against the project's reading notes; the same session then applied part of that
+ review: the section ``The result on one page''; the wording of who drafted, reviewed and read what, and one
+ row of the status table; in
+ Section~\ref{sec:problem} what is classical about the residue, the remark on Remark~3 of \cite{Konvalinka},
+ the table and the rewording of what is claimed; two bibliography entries; and, in the appendices, the
+ pictured words added to four captions and two bracketed notes. Both reviews are in the
+ repository.\\\addlinespace[3pt]
 Claude Fable 5.2 in the Claude app (a chat session started by a team member) & The lattice-path proof: the
  question was the team member's; the proof, the note, its figures and its check scripts are the AI's.\\\addlinespace[3pt]
 Claude Fable 5.2 in Claude Code on another team member's machine & Chemistry and polymer checks against
@@ -2124,7 +2347,10 @@ and audited, and a human reads and signs. Concretely:
 \item \emph{This report} was read by an AI referee with a fresh context, which recomputed the examples and
  tested the statements of Section~\ref{sec:extensions} with programs of its own
  (Section~\ref{sec:computations}); its findings were applied to the text by the same session. The referee's
- report is in the repository.
+ report is in the repository. A second AI reader with a fresh context then scored the report on the six
+ dimensions of the competition's panel, checked it against the rules for the report, and compared what it
+ claims and credits with the project's reading notes; part of its review was applied to the text by the same
+ session (Section~\ref{sec:ai}, table of tools). Neither reading is a human reading.
 \end{itemize}
 
 \subsection{What no human has checked}
@@ -2141,8 +2367,9 @@ writing no human has read it.
 
 \subsection{What the people on the team did}
 They chose the problem, set the priorities, decided which tool was used for what and when, and decided that
-the repository is public. A faculty member of the team read the main proof, the
+the repository is public. A faculty member of the team looked through the main proof and read the
 lattice-path proof and the accounting proof, with the verdicts recorded in Section~\ref{sec:status}. A team
+member began to read the algebraic proof and put it aside for the time being. A team
 member asked whether the theorem can be proved by symmetries of lattice paths, which led to
 Appendix~\ref{app:path}; a team member directed the comparison with chemistry and polymers. A team member obtained
 through a library two papers that the AI systems could not reach (Etherington's and Smith's), which changed
@@ -2169,6 +2396,9 @@ were provided by the organisers of the competition.
 % ---- data given there; the bracketed note after an entry says, from the same list, how far the source was
 % ---- read and by whom. "AI" means an AI system of the project; no entry was read by a human on the team for
 % ---- this purpose unless the note says so.
+% ---- (Reviewer of brief W053, 2026-11-15: the entries RotaSagan and SaganAbelian were added from entry 64 of
+% ---- that list; the notes of DeutschSagan and PostnikovSagan now also say what references/overlap_fulltext.md
+% ---- records, a reading of the full arXiv texts by the worker W009 on 2026-11-13.)
 \begin{thebibliography}{99}\small
 \bibitem{AlbenqueMarckert}
 M. Albenque and J.-F. Marckert, ``Some families of increasing planar maps'', \emph{Electronic Journal of
@@ -2202,7 +2432,8 @@ the arXiv version.]
 Emeric Deutsch and Bruce E. Sagan, ``Congruences for Catalan and Motzkin numbers and related sequences'',
 \emph{Journal of Number Theory} \textbf{117} (2006), no.~1, 191--215. DOI:
 \href{https://doi.org/10.1016/j.jnt.2005.06.005}{10.1016/j.jnt.2005.06.005}. [Given in the problem statement.
-Pages 1--5 of the arXiv version, math/0407326, read by AI.]
+The arXiv version, math/0407326, was read in full by one AI system on 13 November 2026, to look for overlap;
+its pages 1--5 were read again by three others. Not read by a person.]
 
 \bibitem{DomalskiHearing}
 Eugene S. Domalski and Elizabeth D. Hearing, ``Estimation of the thermodynamic properties of hydrocarbons at
@@ -2299,7 +2530,8 @@ read by an AI from a scan; not read by a person.]
 Alexander Postnikov and Bruce E. Sagan, ``What power of two divides a weighted Catalan number?'',
 \emph{Journal of Combinatorial Theory, Series A} \textbf{114} (2007), no.~5, 970--977. DOI:
 \href{https://doi.org/10.1016/j.jcta.2006.09.007}{10.1016/j.jcta.2006.09.007}. [Given in the problem
-statement. Abstract read by AI.]
+statement. The arXiv version, math/0601339, was read in full by one AI system on 13 November 2026, to look
+for overlap; the abstract was read by two others. Not read by a person.]
 
 \bibitem{RFC6962}
 B. Laurie, A. Langley and E. Kasper, ``Certificate Transparency'', RFC~6962, June 2013. [Section~2.1 read by
@@ -2310,6 +2542,15 @@ R. W. Robinson, F. Harary and A. T. Balaban, ``The numbers of chiral and achiral
 alkanes'', \emph{Tetrahedron} \textbf{32} (3) (1976), 355--361. DOI:
 \href{https://doi.org/10.1016/0040-4020(76)80049-X}{10.1016/0040-4020(76)80049-X}. [Pages 355--359 read by an
 AI from a scan.]
+
+\bibitem{RotaSagan}
+Gian-Carlo Rota and Bruce Sagan, ``Congruences derived from group action'', \emph{European Journal of
+Combinatorics} \textbf{1} (1980), 67--76. [Read by an AI; not read by a person.]
+
+\bibitem{SaganAbelian}
+Bruce E. Sagan, ``Congruences via Abelian groups'', \emph{Journal of Number Theory} \textbf{20} (1985),
+210--237. [Read by an AI from the author's copy,
+\url{https://users.math.msu.edu/users/sagan/Papers/Old/cag-pub.pdf}; not read by a person.]
 
 \bibitem{Samet}
 Hanan Samet, ``The quadtree and related hierarchical data structures'', \emph{ACM Computing Surveys}
@@ -2362,7 +2603,11 @@ question of that team member: can the theorem be proved by symmetries of lattice
 text is reproduced unchanged, apart from labels, headings, the inlined pictures, two marked additions made
 in assembling the report, and three marked notes added on 15 November after an AI referee's reading of this
 report (two on notation, one on the range of a computer check); these three notes were not part of the text
-that the faculty member read, and no statement or step of a proof was changed.
+that the faculty member read, and no statement or step of a proof was changed. After a second AI review of
+the report on the same day, the words pictured in Figures~\ref{path:fig:models}, \ref{path:fig:moves},
+\ref{path:fig:exA} and~\ref{path:fig:exB} were added to their captions, and one note was added to item~3 of
+Section~\ref{path:sec:remarks}. These additions are marked; the words were read off the source of the
+pictures by an AI system; none of them was part of the text that the faculty member read.
 Since it was written: its three check scripts were rerun and the proof was read line by line by two further
 AI sessions that had not seen the author's reasoning, with no failing step found; \textbf{a faculty member of
 the team read and verified the written proof (14 November 2026)}; and a search of the literature was made
@@ -2376,6 +2621,9 @@ valuations, not a proof ``from symmetries of the trees'' in the sense of the pro
 % ---- Source: the note path_proof.tex and its six figure files, in the folder notes/2026-11-14_path_proof/
 % ---- of the first guest session (under guests/ in the repository).
 % ---- Provenance lines of the source file (a name replaced by 'a team member'):
+% (Comment added 2026-11-15 by the reviewer of brief W053: the words "Not human-reviewed", "Not reviewed by
+% another model" and "Not human-signed" in the next two lines are those of the source file at the time it was
+% written; the present status is in the paragraph "Provenance and status" above.)
 % Written by Claude Fable 5.2 (claude-fable-5-2) in the Claude app (cloud session), started by a team member, 2026-11-14. Not human-reviewed.
 % Status in the project's grades: computed + ai-proved. Not reviewed by another model. Not human-signed.
 % Build: python3 gen_figs.py && latexmk -pdf path_proof.tex
@@ -2383,6 +2631,9 @@ valuations, not a proof ``from symmetries of the trees'' in the sense of the pro
 % ---- sections demoted one level, title, provenance box and bibliography removed, figures inlined,
 % ---- one sentence of words added to a caption and one editorial note added (both marked).
 % ---- The mathematical text is unchanged.
+% ---- Claude Fable 5.2 (reviewer, brief W053), 2026-11-15: the pictured words added to the captions of four
+% ---- figures (models, moves, exA, exB) and one note added to item 3 of the remarks, all through the macro
+% ---- \revnote and each preceded by a comment line. Nothing else in this appendix was changed.
 % ---- Claude Fable 5.2 (referee, brief W052), 2026-11-15: three notes added (macro \refnote, each preceded by
 % ---- a comment line): after Lemma "carries", in the comparison table of the Remarks, and in the last remark.
 \subsection{Statement}\label{path:sec:statement}
@@ -2522,7 +2773,10 @@ such a path (Figure~\ref{path:fig:models}). We do not use this; we checked it by
 \end{tikzpicture}
 \caption{$p=q=3$, $n=3$, so $m=7$, $N=10$, $C=12$. Steps $\E$ are drawn in coral, steps $\Ss$ in grey.
 (a) A path from $(0,6)$ to $(3,0)$ under the dashed line. (b) The same path with one step $\Ss$ (teal) put in
-front: a path in $\W$. (c) One of the other nine cyclic shifts of (b); none of them is of the form (b).}
+front: a path in $\W$. (c) One of the other nine cyclic shifts of (b); none of them is of the form (b).
+% Words added 2026-11-15 after the AI review of brief W053, read off the source of the picture; not in the text that was approved.
+\revnote{in words: (a) is the path $\Ss\Ss\Ss\E\Ss\E\Ss\Ss\E$; (b) is $\Ss\Ss\Ss\Ss\E\Ss\E\Ss\Ss\E$; (c) is
+$\E\Ss\E\Ss\Ss\E\Ss\Ss\Ss\Ss$, the cyclic shift of (b) by four steps.}}
 \label{path:fig:models}
 \end{figure}
 
@@ -2720,7 +2974,13 @@ compare the pieces of a path on two different segments of the same length.
 \caption{$p=3$, $N=10$: one top segment of length $9$ and one single step. Top row: the path (b) of
 Figure~\ref{path:fig:models} as a word, with its segments drawn as a tree, and two moves. A box drawn around several steps
 is a monochromatic segment; purple discs are asymmetric segments (Definition~\ref{path:def:sym}). All three paths have
-$d=3$. Bottom row: the same three paths in the plane; the dots cut the $9$-segment into thirds.}
+$d=3$. Bottom row: the same three paths in the plane; the dots cut the $9$-segment into thirds.
+% Words added 2026-11-15 after the AI review of brief W053, read off the source of the picture; not in the text that was approved.
+\revnote{in words, the three paths are, from left to right: $\Ss\Ss\Ss\,\Ss\E\Ss\,\E\Ss\Ss\,\E$; then, after
+the move at the $9$-segment, which turns its thirds $\Ss\Ss\Ss$, $\Ss\E\Ss$, $\E\Ss\Ss$ into $\Ss\E\Ss$,
+$\E\Ss\Ss$, $\Ss\Ss\Ss$, the path $\Ss\E\Ss\,\E\Ss\Ss\,\Ss\Ss\Ss\,\E$; then, after the move at the first
+third, which turns $\Ss\E\Ss$ into $\E\Ss\Ss$, the path $\E\Ss\Ss\,\E\Ss\Ss\,\Ss\Ss\Ss\,\E$. In each the last
+letter is the single step.}}
 \label{path:fig:moves}
 \end{figure}
 
@@ -3250,7 +3510,12 @@ $10\cdot C=120=3\cdot1+9\cdot13$, hence $C=12=3\cdot 4$ and $4\equiv1\equiv-1/(2
 \end{tikzpicture}
 \caption{Example~\ref{path:ex:A}. Top: the minimal class, as words and as paths from $(0,7)$ to $(3,0)$. The
 $9$-segment is the only mixed segment; its three thirds are atoms. Bottom: paths in two of the larger classes. They are not
-minimal because their steps $\E$ are split into three atoms of length $1$, while $n=3=(10)_3$ has digit sum $1$.}
+minimal because their steps $\E$ are split into three atoms of length $1$, while $n=3=(10)_3$ has digit sum $1$.
+% Words added 2026-11-15 after the AI review of brief W053, read off the source of the picture; not in the text that was approved.
+\revnote{in words, the minimal class consists of $\E\E\E\,\Ss\Ss\Ss\,\Ss\Ss\Ss\,\Ss$,
+$\Ss\Ss\Ss\,\E\E\E\,\Ss\Ss\Ss\,\Ss$ and $\Ss\Ss\Ss\,\Ss\Ss\Ss\,\E\E\E\,\Ss$; the two paths of the bottom row are
+$\E\E\Ss\,\Ss\Ss\Ss\,\Ss\Ss\Ss\,\E$, marked $d=2$, in a class of $9$ paths, and
+$\E\E\Ss\,\E\Ss\Ss\,\Ss\Ss\Ss\,\Ss$, marked $d=3$, in a class of $27$ paths.}}
 \label{path:fig:exA}
 \end{figure}
 
@@ -3333,7 +3598,12 @@ $C/9=1\equiv4\equiv(-1)^2/(2!\,2!\,1!)\pmod3$.
 \end{tikzpicture}
 \caption{Example~\ref{path:ex:B}: a minimal path with its two mixed segments, one for each carry of the addition on
 the right. Its atoms are two $\E$-atoms of length $1$ and $\Ss$-atoms of lengths $9,3,3,1,1$: the digits of $n=(2)_3$ and
-$m=(122)_3$.}
+$m=(122)_3$.
+% Words added 2026-11-15 after the AI review of brief W053, read off the source of the picture; not in the text that was approved.
+\revnote{in words, the pictured path is $\Ss\Ss\Ss\,\E\E\Ss\,\Ss\Ss\Ss$ on the first top segment of length
+$9$, nine steps $\Ss$ on the second, and $\Ss$ on the single step; the mixed segment of length $3$ is the
+middle third $\E\E\Ss$ of the first top segment. The addition drawn on the right is $2+17=19$ in base $3$,
+that is $(002)_3+(122)_3=(201)_3$, with a carry into digit $1$ and a carry into digit $2$.}}
 \label{path:fig:exB}
 \end{figure}
 
@@ -3361,6 +3631,9 @@ complete $p$-ary trees, a Sylow $p$-subgroup of the symmetric group of the steps
 appears as the symmetry group of a minimal tree (the team's note \texttt{notes/2026-11-14\_connections\_ranked.md},
 section 3.2); here it acts from the start. But these are the trees of segments, not the $q$-ary trees that $C$ counts
 and on which the group of \cite{Konvalinka} acts. Whether this answers Problem~137 is for the team to judge.
+% Note added 2026-11-15 after the AI review of brief W053; not in the text that was approved.
+\revnote{the answer of this report is in Section~\ref{sec:further}: the lattice-path proof is offered as a
+companion to the main proof, not as a proof from the symmetries of the trees.}
 
 \item \textbf{Comparison with the tree proof.}\nopagebreak[4]
 
@@ -3399,13 +3672,15 @@ Remark~\ref{path:rem:dyck} for small $(q,n)$. Scripts and their output: \texttt{
 \noindent\emph{Provenance and status} (this paragraph replaces the box at the head of the stand-alone note; its
 second half is the content of that box, its first half was written in assembling the report from the
 project's ledger, claim C18). The note below was written on 14 November 2026 by an AI system (Claude
-Fable~5.2). \textbf{No human has read it.} A second AI reader (the same model as the author), who saw only
+Fable~5.2). \textbf{No human has checked it} (a team member began to read it and stopped for the time being).
+A second AI reader (the same model as the author), who saw only
 the note, refereed it and found no false statement and no invalid step; the omitted justifications it listed
 are filled in this version, and those repairs were not re-reviewed. Every lemma was checked by computer
 (experiment E010). The whole chain of lemmas is formalized in Lean (Section~\ref{sec:lean}), with three
 differences of method listed there. The text is reproduced unchanged, apart from labels, headings and
-cross-references, and one marked note on notation added on 15 November after an AI referee's reading of this
-report.
+cross-references, one marked note on notation added on 15 November after an AI referee's reading of this
+report, and one marked note in the remark on earlier algebraic work, added the same day after a second AI
+review.
 
 \smallskip\noindent
 This appendix proves the theorem of Section~\ref{sec:mainproof} a second time, by algebra only. It is
@@ -3429,6 +3704,8 @@ trees''; it is offered as a check on the main proof and an explanation of it.
 % ---- sections repaired. The mathematical text is unchanged.
 % ---- Claude Fable 5.2 (referee, brief W052), 2026-11-15: one note added in the remark on delta-rings
 % ---- (macro \refnote, preceded by a comment line).
+% ---- Claude Fable 5.2 (reviewer, brief W053), 2026-11-15: one note added at the end of the remark "Earlier
+% ---- algebraic work" (macro \revnote, preceded by a comment line). Nothing else in this appendix was changed.
 \subsection{Statement}\label{frob:sec:statement}
 
 Let $p$ be a prime, $k\ge1$ and $q=p^k$. Let $G(x)\in\Z[[x]]$ be the unique power series
@@ -3938,6 +4215,11 @@ its residue for every prime power $q$. A keyword search of OpenAlex and arXiv on
 vectors; such a search cannot establish novelty. (The queries are listed in the repository,
 in the notes file \nolinkurl{2026-11-14_crossfield_literature.md}.) We do not claim that this argument is new; that is for the
 experts on the team to judge.
+% Note added 2026-11-15 after the AI review of brief W053; not in the text that was reviewed.
+\revnote{Section~\ref{sec:attribution} lists, with its caveat, what in this argument the project's searches
+did not find elsewhere: the weight, the carry-free product and the carry operator, and with them the use of the
+extra variable. That list is not a claim that the argument is new either. The same section names two further
+two-variable equations that the project's reference list records, in \cite{BonaFlajolet} and in \cite{Polya}.}
 \end{remark}
 
 \begin{remark}[What was checked by computer]
