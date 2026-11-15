@@ -4,16 +4,17 @@ Written by the orchestrator (Claude Fable 5.2) during the night; last updated Su
 
 **Deadline: 12:00 PT today. After it nothing can be changed. The rules are summarised in `SUBMISSION_RULES.md`.**
 
-## FINALIZED at 09:40 (Syoma: "Finalize now")
+## FINALIZED AGAIN at 10:00, with the names (first finalization 09:40)
 
-**The commit to give to the platform: `6b1d7e039dc7e257065c6b877febff712394f541`** (repository https://github.com/syomazh/mighty-math-magicians).
+**The commit to give to the platform: `4945e9a0e6413308d3080fd680e0f57ec290f257`** (repository https://github.com/syomazh/mighty-math-magicians). It replaces the hash of 09:40 (`6b1d7e039dc7e257065c6b877febff712394f541`), which had no names in the title block; if that one was already entered on the platform, replace it.
 
-- It contains the report with the commit line of the title block filled (the title block names `0a1b89dac67c2e89f25860cfea12d6a0ff89ef50`, the commit with all the content; the submitted commit is its successor and adds only that line, the rebuilt PDF and the journal entry of the step; a commit cannot contain its own hash).
-- Its Lean sources are those of the commit whose fresh clone was built from scratch at 09:31 (3316 jobs, no `sorry`). **A fresh clone of the submitted commit itself was built from scratch from 09:40 to 09:49: 3316 jobs, no `sorry`.**
-- **Still open in it: the names and affiliations in the title block read "to be filled by the team".** Tell the orchestrator the names and affiliations (or edit the line under `TITLE BLOCK` in `report/report.tex`); then the two commits are repeated and **the hash to submit changes**.
+- It contains the report with the commit line of the title block filled (the title block names `0002feb8451e206cbf94a9990419335fddff9899`, the commit with all the content; the submitted commit is its successor and adds only that line, the rebuilt PDF and the journal entry of the step; a commit cannot contain its own hash).
+- Its Lean sources are those of the commit whose fresh clone was built from scratch at 09:31 (3316 jobs, no `sorry`). A fresh clone of the commit of 09:40 was built from scratch from 09:40 to 09:49 (3316 jobs, no `sorry`); the new commit has the same Lean sources, and a fresh-clone build of it was started at 10:00 (result at the end of `JOURNAL.md`).
+- **The title block has the four names** as Syoma gave them at 09:56 (Misha Mazin, Josh Venick, Syoma Zharkov, Andrei Mazin), and no affiliations, because none were given. **Check the spelling "Andrei":** the message had "Andrie"; the report has the spelling of his own commits. A correction, or affiliations, means repeating the two commits; **the hash to submit then changes**.
 - The same holds for any later change to the report or to `lean/`: say "finalize again". Commits that only add slides or logs after it do not matter for the submission; the platform takes the hash it is given.
 - On the platform: choose the track, paste the repository link and this hash, and upload the slides the team presents.
 - `talk/josh_slides3.pdf` (uploaded 09:45) adds to the slide "Step 3" the two properties of t; they are the inequality of the report's proof of the lower bound, so the report did not change. **The sign there must be "at most": t(u_1 + ... + u_p) ≤ 1 + Σ t(u_i).**
+- Andrei's slides are now also in `talk/` (`talk/andrei_intro_slides.pdf`, three slides; `talk/andrei_outlook_slides.pdf`, two), copied from his guest folder; the intro slides were compared with the report and one sentence was added to Section 1.1.
 - Slides uploaded this morning (`talk/josh_slides.pdf`, `talk/josh_slides2.pdf`, `talk/slides_proof_second_half_misha_k2.pdf`, and the two outlook slides of pull request 1) were compared with the report; what was missing is in the report now (Sections 2.1, 2.2 and 4.5). Not seen: new versions of slides 1, 2, 14 and 15 of that deck, and the formulas of the slide "The engine".
 
 ## What a person must do, in this order

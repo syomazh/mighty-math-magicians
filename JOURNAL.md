@@ -828,3 +828,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-15 09:59 — Claude Fable 5.2
 
 - **Finalization repeated, step 2 (this commit):** the content commit is `0002feb8451e206cbf94a9990419335fddff9899`; its hash is now in the title block, the report is recompiled (84 pages), and this commit changes only that line of `report/report.tex`, `report/report.pdf` and this entry. **The hash of this commit replaces the one of 09:40 (`6b1d7e0...`) as the hash to submit;** it is written in the next entry and at the top of `MORNING_BRIEF.md`.
+
+## 2026-11-15 10:00 — Claude Fable 5.2
+
+- **FINALIZED AGAIN, with the names. The commit to give to the platform is `4945e9a0e6413308d3080fd680e0f57ec290f257`** (pushed at 10:00). It replaces `6b1d7e039dc7e257065c6b877febff712394f541` of 09:40. Checked: against the content commit `0002feb` it changes three files only (one line of `report/report.tex`, `report/report.pdf`, `JOURNAL.md`); its Lean sources are identical to those of `f88ce37` and of `6b1d7e0`, both built from fresh clones (09:31, 09:49); the title page of the PDF, read back as text, shows the four names, the repository link and the hash; a search of the report's source finds the names in the title block only.
+- This commit, after the submitted one, writes the new hash into `MORNING_BRIEF.md`, `STATE.md` and `SUBMISSION_RULES.md`. It does not change the report or Lean.
+- **A fresh-clone build of the new submitted commit was started at 10:00**; its result is in the next entry.
+- **Open, for the people:** the spelling "Andrei" (the message had "Andrie"); affiliations, if the team wants them in the title block; the track; the entry on the platform before 12:00, with this hash and not the one of 09:40.
