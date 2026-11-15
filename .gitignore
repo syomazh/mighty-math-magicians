@@ -34,3 +34,6 @@ lean/.lake/
 # download folders of search workers (may hold copyrighted text; never committed)
 experiments/*/tmp/
 guests/*/experiments/*/tmp/
+
+# temporary copy for the port to Lean v4.35.0 (orchestrator, 2026-11-15)
+/lean435/

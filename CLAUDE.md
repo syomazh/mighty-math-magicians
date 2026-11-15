@@ -20,6 +20,12 @@ Problem 137: prove, from symmetries of trees and without factorial valuations, t
 - **Deadline:** submit by Sunday 2026-11-15 12:00 PT. 20-minute talk.
 - **Judged on:** motivation, correctness, interest, clarity. Judges question the presenters orally, so every claim must be understood and signed by a human on the team.
 - **AI disclosure:** we must be able to say which tool produced what. Keep provenance (rule 5).
+- **Official rules (pasted by Syoma on 2026-11-15 at about 00:40): `SUBMISSION_RULES.md`. Read it before touching the report, the slides or `lean/`.** The points that bind every agent:
+  - The **report is one self-contained `.tex` file with its PDF** (`report/report.tex`; no `\input`, no `.bib`). It is the official record: everything to be judged, and everything on the slides, must be in it. A panel of five AI models scores it (Correctness, Clarity, Motivation, Interest, Attribution, Novelty).
+  - **No names of team members in the body of the report**; names, affiliations, repository link and commit hash only in its title block.
+  - **Every main claim carries its status**: proved in the report, verified in Lean, checked by computation (what, what range), cited, or conjecture. Overstating is a Correctness fault; an honest conjecture costs nothing.
+  - **Lean must be v4.35.0 with Mathlib v4.35.0.** An automated check builds the project at the deadline and its result overrides the report. "Lean-verified" = it builds, no `sorry`, only `propext`, `Classical.choice`, `Quot.sound`, and the statement says what the report claims; `native_decide` does not count. The report lists each Lean declaration it relies on, the claim, and every difference between them.
+  - **Integrity:** never present known work as ours; never call something Lean-verified that fails these checks; never hide a mismatch between a formal statement and the claim.
 
 ## Where things live
 
@@ -50,7 +56,7 @@ Problem 137: prove, from symmetries of trees and without factorial valuations, t
 4. **Never cite from memory.** Bibliographic data comes only from `references/README.md`; a new reference is checked against its source and added there first.
 5. **Provenance.** Every AI-written file says in its header which model wrote it. Worker runs are logged automatically.
 6. **Do not edit a verification script to make a check pass.** Change the claim, not the test.
-7. **Tooling.** Python: `uv run python ...` (dependencies in `pyproject.toml`). LaTeX: `latexmk -pdf` inside `paper/` or `talk/`. Lean 4 with Mathlib since 2026-11-14 (installed with `elan` in the user's home folder, not on the PATH; see `lean/README.md`). No Sage or Julia on this machine.
+7. **Tooling.** Python: `uv run python ...` (dependencies in `pyproject.toml`). LaTeX: `latexmk -pdf` inside `paper/`, `report/` or `talk/`. Lean 4 with Mathlib since 2026-11-14 (to be pinned to Lean v4.35.0 and Mathlib v4.35.0, as the official rules require; see `SUBMISSION_RULES.md`) (installed with `elan` in the user's home folder, not on the PATH; see `lean/README.md`). No Sage or Julia on this machine.
 8. **Git.** Single writer: only the orchestrator commits on `main`, after each work block. Never force-push. Never commit anything in `references/` except `README.md`.
 9. **Other people's commits** (orchestrator). Run `git fetch` before each commit and each push. If `origin/main` has commits you did not make, look at them first (`git log HEAD..origin/main`, `git diff --stat HEAD...origin/main`). **If they touch no file that you have changed since the last push, merge them (`git merge`, never rebase, never force-push) and push, and say so in `JOURNAL.md`** (Syoma, 2026-11-14 about 15:45: "Yes, always merge"). If they touch a file you have changed, or anything among the ledgers, `CLAUDE.md`, `AGENTS.md`, `paper/`, `lean/` or `tools/`, stop and show them to Syoma first. Guest work arrives as a branch `guest/<tag>` that touches only `guests/<tag>/` (list them with `git branch -r`, read one with `git diff main...origin/guest/<tag>`). Treat it like worker output: read the diff, rerun its checks, and carry over what holds up into the record with the guest's tag and model. Merging a guest branch into `main` is Syoma's decision, and a branch that touches anything outside its own folder is not merged as it stands.
 

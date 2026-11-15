@@ -69,4 +69,22 @@ elab "#project_consts_in " id:ident m1:ident : command => do
     if projectModule? env d == some m1.getId then out := out.push (toString d)
   logInfo m!"{n} reaches in {m1.getId}: {out.qsort (· < ·)}"
 
+/-- `#external_consts_matching thm "a" "b" …`: the declarations outside the project that some
+declaration of the project reached from `thm` refers to directly (in its statement or its proof
+term), and whose name contains one of the given strings (case is ignored).
+
+Purpose: "no factorial valuation is used" as a statement that Lean checks. It lists direct uses
+only: it does not look inside Mathlib's own proofs. -/
+elab "#external_consts_matching " id:ident pats:str+ : command => do
+  let env ← getEnv
+  let n ← liftCoreM <| realizeGlobalConstNoOverloadWithInfo id
+  let deps := collect env n {}
+  let ps : Array String := pats.map (fun s => s.getString.toLower)
+  let mut out : Array String := #[]
+  for d in deps.toList do
+    if (projectModule? env d).isNone then
+      let s := (toString d).toLower
+      if ps.any (fun q => (s.splitOn q).length > 1) then out := out.push (toString d)
+  logInfo m!"{n}: outside the project, referred to directly, with a name containing one of {ps}: {out.qsort (· < ·)}"
+
 end MMM.Deps

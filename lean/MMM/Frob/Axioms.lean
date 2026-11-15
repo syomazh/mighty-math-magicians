@@ -57,3 +57,13 @@ import MMM.Frob.Deps
 #project_consts_in MMM.Frob.residue_frobenius MMM.Trees
 #project_modules MMM.Frob.problem137_fussCatalan_frobenius
 #project_modules MMM.problem137_fussCatalan
+
+-- "No factorial valuation", as far as Lean can list it: the declarations outside the project that
+-- the proofs refer to directly and whose names contain one of these strings. Expected: no
+-- `padicValNat`, no `factorization`, nothing of Legendre, Kummer or Lucas, no `dvd_choose`;
+-- `multiplicity` only for the form of the final statement; `Nat.Prime.dvd_factorial`
+-- (p ∣ n! ↔ p ≤ n) to say that p does not divide j! for j < p; Wilson's theorem for the residue.
+#external_consts_matching MMM.problem137_fussCatalan "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"
+#external_consts_matching MMM.residue_fussCatalan "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"
+#external_consts_matching MMM.Frob.problem137_fussCatalan_frobenius "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"
+#external_consts_matching MMM.Frob.residue_fussCatalan_frobenius "padicval" "multiplicity" "factorization" "legendre" "kummer" "lucas" "dvd_choose" "dvd_factorial" "wilson"

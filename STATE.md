@@ -2,6 +2,16 @@
 
 _Last updated: 2026-11-14 09:37 PT; before that 00:32 PT; earlier stamp 2026-11-13 23:55 PT by Claude Fable 5.2 (orchestrator)._
 
+## SUNDAY: what must happen before 12:00 (written 00:46; from the official rules, `SUBMISSION_RULES.md`)
+
+Syoma pasted the Participant Rules and Submission Guidelines at about 00:40. Checked against the repository:
+
+1. **Report as one `.tex` file + PDF: MISSING, being assembled.** A Claude agent (brief `W046_report_single_file.md`) is building `report/report.tex` from `paper/main.tex`, the three other proofs, `CLAIMS.md`, `lean/README.md`, `AI_USAGE.md`. When it returns: the orchestrator reads it against the hard requirements (no names in the body, statuses as in `CLAIMS.md`, attribution, Lean list), fills the `% TODO(orchestrator)` places, recompiles. **Then a human must read it.**
+2. **Lean version: NOT COMPLIANT, port in progress.** The rules require Lean v4.35.0 and Mathlib v4.35.0 and an automated check builds the project at the deadline; `lean/` is on v4.36.0-rc2 and Mathlib `master`. A temporary copy `lean435/` (ignored by git) is being set up on v4.35.0; fix what breaks there, then switch `lean/` (toolchain, `lakefile.toml`, `lake-manifest.json`), full build, and only then call anything "Lean-verified" in the report.
+3. **Path proof in Lean:** the agent of W044 is done (`Path/KummerExact.lean`, `Path/Problem137.lean`: residue, exact Kummer and Problem 137, all conditional on the count); the agent of W043 is still proving the count (`Path/Slots*.lean`). Then one line joins them.
+4. **Humans decide:** the track (Combinatorics or Algebra/Number Theory); which deck is presented (the report must contain everything on it); names and affiliations for the title block; who submits on the platform and with which commit hash.
+5. **Before submitting:** `git status` clean, pushed, the commit hash copied into the title block of the report and into the platform form; the Lean build of that commit passes on v4.35.0.
+
 ## Status in one paragraph
 
 We have a candidate proof of the full problem (exact valuation for every q = p^k from tree symmetries, no factorial valuations). Evidence: brute force (E000), a no-assumption stress test on 1067 values of m up to 400 leaves, p up to 13, k up to 4 (E003, all checks pass), and three adversarial AI reviews that found no counterexample but 14 write-up defects (`paper/reviews/ADJUDICATION_round1.md`). The paper `paper/main.pdf` (13 pages) has been through three review rounds with repairs after each (`paper/reviews/ADJUDICATION_round1.md`, `_round2.md`, `_round3.md`). **No human has signed anything.** The ranked digest for humans is `FINDINGS.md`.
