@@ -49,6 +49,26 @@ formalization was used.  Reduction modulo p is `PowerSeries.map
 
 ## Status / blockers
 
+### W035: the tree generating function and the value at `y = p`
+
+`TreeGF.lean` is a new compiling file. It proves all seven requested declarations:
+`treeGF`, `treeGF_coeff_zero`, `treeGF_eq`, `blockedAt_add_period`,
+`treeGF_add_period`, `treeSystem_unique`, and `evalY_solution_eq_treeGF`.
+The coefficient recursion is proved by decomposing a tree into a leaf or an ordered
+forest, splitting the forest according to its leaf composition, and converting
+`PowerSeries.coeff_pow` to a sum over finite tuples. The uniqueness proof uses
+strong induction on the coefficient degree; zero constant terms make every
+composition occurring in positive degree have a zero or a strictly smaller summand.
+Thus the specialised Frobenius solution is the blocked-tree generating function at
+every natural offset.
+
+The file compiled with the prescribed direct `lake env lean` command. No `sorry`,
+`admit`, `axiom`, `native_decide`, or `unsafe` is used. Axiom check:
+
+```text
+'MMM.Frob.evalY_solution_eq_treeGF' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
 ### W034: lower weight bound and the divisibility corollary
 
 `Weight.lean` is a new compiling file (all 15 requested statements are done). It defines

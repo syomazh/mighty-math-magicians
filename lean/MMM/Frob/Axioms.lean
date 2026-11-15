@@ -4,7 +4,7 @@ Axiom audit for the currently checked Frobenius-start results.
 Extended by the orchestrator (Claude Fable 5.2) on review: the import now reaches
 Uniqueness.lean and the last three lines were added.
 -/
-import MMM.Frob.Weight
+import MMM.Frob.Divisibility
 
 #print axioms MMM.Frob.modSeries_frobeniusLift
 #print axioms MMM.Frob.exists_frobenius_sub_eq_natCast_mul
@@ -27,3 +27,6 @@ import MMM.Frob.Weight
 #print axioms MMM.Frob.weight_solution
 #print axioms MMM.Frob.X_pow_dvd_coeff_solution
 #print axioms MMM.Frob.pow_dvd_coeff_evalY_solution
+#print axioms MMM.Frob.treeGF_eq
+#print axioms MMM.Frob.evalY_solution_eq_treeGF
+#print axioms MMM.Frob.pow_dvd_card_blocked_frobenius

@@ -1,0 +1,8 @@
+slug:    W035_lean_frobenius_tree_gf
+brief:   briefs/W035_lean_frobenius_tree_gf.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 19:00:18 PST
+attempt 1: exit 0 at 19:36:58
+ended:   2026-11-14 19:36:58 PST
+exit:    0
