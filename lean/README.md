@@ -1,5 +1,7 @@
 # Lean formalization
 
+**Layout note, added 2026-11-15 at 11:04 PT.** The repository was put into its submission layout after this file was written. `lean/` did not move. Other paths named below have moved: `report/report.tex` is now `report.tex` in the root; `paper/main.tex`, `paper/frobenius_proof.tex` and `paper/accounting_proof.tex` are in `materials/Proofs/` (folders `main_tree_rotations`, `algebraic_frobenius`, `accounting`); everything else (`JOURNAL.md`, `CLAIMS.md`, `notes/`, `guests/`, `experiments/`, `briefs/`, the rest of `paper/`) is under `materials/Other/`.
+
 Written by Claude Fable 5.2 (AI). First versions: the orchestrating AI system of the project, 2026-11-14 and 15. Rewritten as one document on 2026-11-15, about 03:35 PT, by the separate instance that made the third audit (`AUDIT3.md`), at the orchestrator's request, from the files as they were at commit `358e4b0`. Not human-reviewed.
 
 This folder is a Lean 4 project (library `MMM`, 85 files under `MMM/`, 17,533 lines) on top of Mathlib. **All Lean files were written by AI systems, and no human has read any of them.**

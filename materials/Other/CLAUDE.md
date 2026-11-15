@@ -2,6 +2,8 @@
 
 Read this file, then `STATE.md`. Together they are enough to resume the project with no chat history.
 
+**Layout since 2026-11-15, 11:04 PT (asked for by the team for the submission).** The root of the repository holds only `report.tex`, `report.pdf`, `slides.pdf`, `lean/`, `materials/` and a short `README.md`. This file and everything it names, except `lean/`, are now under `materials/Other/` (so `STATE.md` is `materials/Other/STATE.md`, `tools/delegate.sh` is `materials/Other/tools/delegate.sh`, and so on); `report/report.tex` is `report.tex` in the root; the three proof files of `paper/` are in `materials/Proofs/`. The marker file `.orchestrator` is still looked for in the root of the repository. Python: run `uv` from `materials/Other/`.
+
 ## First: which agent are you?
 
 Decide this before you do anything else. Several people and several agents now have access to this repository; only one agent writes the record.

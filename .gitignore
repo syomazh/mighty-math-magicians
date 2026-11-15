@@ -1,8 +1,10 @@
 # Copyrighted reference material stays local (the repo is public)
+materials/Other/references/*
+!materials/Other/references/README.md
+!materials/Other/references/literature_scan.md
+!materials/Other/references/overlap_fulltext.md
+# the same rules for the old place of that folder, in case a copy is left there
 references/*
-!references/README.md
-!references/literature_scan.md
-!references/overlap_fulltext.md
 
 # Python
 .venv/
@@ -10,8 +12,8 @@ __pycache__/
 *.pyc
 
 # LaTeX build products
-paper/build/
-talk/build/
+**/paper/build/
+**/talk/build/
 *.aux
 *.log
 *.fls
@@ -23,7 +25,7 @@ talk/build/
 *.snm
 *.bbl
 *.blg
-!references/cross_field_refs.md
+!materials/Other/references/cross_field_refs.md
 
 # Lean build products and downloaded packages (several GB)
 lean/.lake/
@@ -32,12 +34,11 @@ lean/.lake/
 .orchestrator
 
 # download folders of search workers (may hold copyrighted text; never committed)
-experiments/*/tmp/
-guests/*/experiments/*/tmp/
+**/experiments/*/tmp/
 
 # temporary copy for the port to Lean v4.35.0 (orchestrator, 2026-11-15)
 /lean435/
 
 # LaTeX build files of the report (logs contain local paths)
-/report/build/
-/report/build_stdout.txt
+/.report_build/
+/report/
