@@ -1010,3 +1010,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-15 11:32 — Claude Fable 5.2
 
 - **Seventh finalization, step 2 (this commit):** the content commit is `965ddd77a5245a5d02a9e0995bf186d54b529af8`; its hash is in the title block of `report.tex`, the report is recompiled (85 pages), and this commit changes only that line, `report.pdf` and this entry. **The hash of this commit replaces `445915f...` of 11:22 as the hash to submit.**
+
+## 2026-11-15 11:32 — Claude Fable 5.2
+
+- **FINALIZED A SEVENTH TIME, after the final check. The commit to give to the platform is `1e159a80a2b1867aa407f0a6c5c7ceb838810a9a`** (pushed at 11:32). It replaces `445915fe152d73ff17b3306a2d3422dd3847c23e` of 11:22. Against the content commit `965ddd7` it changes three files only (one line of `report.tex`, `report.pdf`, this journal); its `lean/` folder is identical to that of `9c2294e`, built from a fresh clone from 11:10 to 11:19; `slides.pdf` is byte-identical to the final deck; the root of the commit holds `report.tex`, `report.pdf`, `slides.pdf`, `lean/`, `materials/`, `README.md` and the two git files.
+- This commit, after the submitted one, writes the new hash into `MORNING_BRIEF.md`, `STATE.md` and `SUBMISSION_RULES.md`. It does not change the report, the slides or Lean.
