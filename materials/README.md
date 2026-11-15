@@ -10,14 +10,14 @@ The four proofs as separate documents, each as the AI systems produced it. All f
 
 | Folder | Proof | In the report | Files |
 |---|---|---|---|
-| `Proofs/main_tree_rotations/` | The main proof: rotations of p-ary trees | Section 3 | `main.tex`, `main.pdf` |
+| `Proofs/main_tree_rotations/` | The main proof: rotations of p-ary trees | Section 3 | `main.tex`, `main.pdf` (the AI-produced write-up); `human_assisted_write_up.pdf` (the human-assisted write-up, see below) |
 | `Proofs/lattice_paths/` | The proof on lattice paths (Kummer's theorem with its residue, by rotations of blocks of a path) | Appendix A | `path_proof.tex`, `path_proof.pdf`, the figure files it inputs, `gen_figs.py` |
 | `Proofs/algebraic_frobenius/` | The algebraic proof (a lift of the Frobenius map on power series) | Appendix B | `frobenius_proof.tex`, `frobenius_proof.pdf` |
 | `Proofs/accounting/` | The accounting proof (every node is worth −p) | Appendix C | `accounting_proof.tex`, `accounting_proof.pdf` |
 
 - Which model wrote and revised each file is in the first lines of each `.tex` file.
 - The lattice-path files are a copy of the note in `Other/guests/andrei-claude/notes/2026-11-14_path_proof/`, where it was written in a guest session of a team member with Claude.
-- **The human-assisted write-up of the main proof**, which the team wants in `Proofs/main_tree_rotations/`, was not in the repository when this layout was made (2026-11-15, 11:04 PT); it is to be added there by the team.
+- **`Proofs/main_tree_rotations/human_assisted_write_up.pdf`** is the human-assisted write-up of the main proof: "Scheme of a tree-symmetry proof that p^t(m) divides C_n^(q) with quotient not divisible by p", dated 14 November 2026, seven pages, in seven steps with five lemmas; the slides follow its steps and its notation. A team member supplied it on 2026-11-15 at about 11:15 PT under the name `proof_scheme.pdf`; it was renamed on the team's word. The file itself names no author and no tool; who wrote which part of it is not on record in this repository. It was put here as it is and was not compared line by line with Section 3 of the report.
 - Reviews of these texts, earlier drafts and the lists of gaps: `Other/paper/`.
 
 ## Other
