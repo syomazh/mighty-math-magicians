@@ -6,14 +6,14 @@ A q-ary tree is read as a p-ary tree whose leaves all sit at depth ≡ 0 (mod k)
 
 | ID | Claim | Grade | Evidence | Origin | Human sign-off |
 |---|---|---|---|---|---|
-| C1 | The `~`-class of T has exactly p^d(T) trees. | computed | E000 (47 cases) | Claude Fable 5.2, 2026-11-13 | — |
-| C2 | d(T) ≥ t for every T with m leaves (so p^t divides C_n^(q)). | computed | E000 | Claude Fable 5.2 | — |
-| C3 | d(T) = t iff T is a carry-free skeleton of asymmetric nodes whose leaves are complete trees ("atoms"), m_j atoms of size p^j, an atom p^j at depth ≡ −j (mod k). | computed | E000 (count of minimal classes equals skeleton count) | Claude Fable 5.2 | — |
-| C4 | Permuting equal atoms acts freely on distinctly labelled skeleton trees, so N_min = T(a)/∏ m_j!. | computed | E000 | Claude Fable 5.2 | — |
-| C5 | Carry = cherry: T(a) ≡ −T(a − p·e_c + e_{c+1}) (mod p), indices mod k; hence T(a) ≡ (−1)^t. | computed | E000 (307 cases) | Claude Fable 5.2 | — |
-| C6 | **Main theorem.** v_p(C_n^(q)) = t, proved from C1–C5 with no factorial valuations. | conjecture (sketch in `notes/2026-11-13_candidate_proof_sketch.md`) | follows from C1–C5 | Claude Fable 5.2 | — |
-| C7 | C_n^(q)/p^t ≡ (−1)^t / ∏ m_j! (mod p) for every prime power q. | computed | E000; agrees with Konvalinka's Remark 3 when q = p (via Wilson) | Claude Fable 5.2 | — |
-| C8 | For q = p the number of minimal classes is exactly (pt)! / (t!·p^t·∏ m_j!). | computed (6 values checked by hand against E000 output) | E000 output | Claude Fable 5.2 | — |
+| C1 | The `~`-class of T has exactly p^d(T) trees. | computed | E000 (47 cases) | Claude Fable 5.2, 2026-11-13 | Misha, 2026-11-14 (see the update of 23:18) |
+| C2 | d(T) ≥ t for every T with m leaves (so p^t divides C_n^(q)). | computed | E000 | Claude Fable 5.2 | Misha, 2026-11-14 (see the update of 23:18) |
+| C3 | d(T) = t iff T is a carry-free skeleton of asymmetric nodes whose leaves are complete trees ("atoms"), m_j atoms of size p^j, an atom p^j at depth ≡ −j (mod k). | computed | E000 (count of minimal classes equals skeleton count) | Claude Fable 5.2 | Misha, 2026-11-14 (see the update of 23:18) |
+| C4 | Permuting equal atoms acts freely on distinctly labelled skeleton trees, so N_min = T(a)/∏ m_j!. | computed | E000 | Claude Fable 5.2 | Misha, 2026-11-14 (see the update of 23:18) |
+| C5 | Carry = cherry: T(a) ≡ −T(a − p·e_c + e_{c+1}) (mod p), indices mod k; hence T(a) ≡ (−1)^t. | computed | E000 (307 cases) | Claude Fable 5.2 | Misha, 2026-11-14 (see the update of 23:18) |
+| C6 | **Main theorem.** v_p(C_n^(q)) = t, proved from C1–C5 with no factorial valuations. | conjecture (sketch in `notes/2026-11-13_candidate_proof_sketch.md`) | follows from C1–C5 | Claude Fable 5.2 | Misha, 2026-11-14 (see the update of 23:18) |
+| C7 | C_n^(q)/p^t ≡ (−1)^t / ∏ m_j! (mod p) for every prime power q. | computed | E000; agrees with Konvalinka's Remark 3 when q = p (via Wilson) | Claude Fable 5.2 | Misha, 2026-11-14 (see the update of 23:18) |
+| C8 | For q = p the number of minimal classes is exactly (pt)! / (t!·p^t·∏ m_j!). | computed (6 values checked by hand against E000 output) | E000 output | Claude Fable 5.2 | Misha, 2026-11-14 (see the update of 23:18) |
 | C9 | Konvalinka's proof of his Theorem 5 (weighted numbers) works unchanged with our p-group in place of the full symmetric group, because the proof only needs the group to be transitive on the q branches. So the weighted theorem also becomes free of factorial valuations. | conjecture | argument in JOURNAL 2026-11-13 ~21:00; not yet computed | Claude Fable 5.2 | — |
 | C10 | Level-profile refinement: for any 1 = n_0, n_1, n_2, … with Σ n_i = n, p^t divides ∏_i binom(q·n_i, n_{i+1}) (the number of q-ary trees with n_i nodes at depth i), because `~` preserves the profile. | conjecture | — | Claude Fable 5.2 | — |
 | C11 | Master statement: for any `~`-closed family F of trees with m leaves, p^t divides \|F\| and \|F\|/p^t ≡ #(minimal classes in F) (mod p). | conjecture | immediate from C1–C2 | Claude Fable 5.2 | — |
@@ -301,3 +301,13 @@ Recorded from a note that Syoma pasted into the orchestrator's session at 23:13 
 - **C1 to C8 (the main proof, `paper/main.pdf`): approved by the professor earlier** (the entry of 10:37 above), **still waiting for his name.** Grade unchanged.
 - **No human verdict:** C18 (the Frobenius proof), every Lean file, the notes on connections, and the sources.
 - For the talk: until the name is on these lines, nothing is `human-signed`, and rule 2 says only `human-signed` claims are presented as theorems. The name is the one thing missing for C24 and for the main proof.
+
+## Update, 2026-11-14 23:18 PT (Claude Fable 5.2) — sign-off: the name
+
+Syoma, asked for the professor's name so that the two approvals could be completed, answered at 23:18: "misha". The orchestrator records the name as given (first name only; a surname was not given and is not added from anywhere else) and has not spoken with him.
+
+- **C24 (the proof on lattice paths): `human-signed`. Misha, the team's professor, 2026-11-14: read and verified** (as reported by Syoma in the note recorded at 23:12). This is the proof in `guests/andrei-claude/notes/2026-11-14_path_proof/path_proof.pdf`. The sign-off covers the written proof; it does not cover the Lean files in `lean/MMM/Path/` (which contain only its divisibility half so far) or the statement about novelty.
+- **C1 to C8 (the main proof, `paper/main.pdf`, with the main theorem C6 and the residue C7): `human-signed`. Misha, 2026-11-14: approved** (reported by Syoma at about 10:37: he looked through the main proof and said it is good). What is known about the extent of that reading is only this sentence; if he read a particular version or made comments, they should be added here. The first table above now carries the name in its last column for C1 to C8. C8 as an exact count is part of the paper's text; whether his approval was meant to include every remark of the paper is not known.
+- **C12 and C13 (the accounting proof): unchanged: read by Misha, "looks like it makes sense"; not signed.**
+- **Everything else: no human sign-off.** In particular C18 (Frobenius proof), C9 to C11, C14 to C23, C25, C26, and all Lean files.
+- By rule 2, C1 to C8 and C24 may now be presented as theorems. The wording of the slides ("Claim" or "Theorem") is still the humans' decision.

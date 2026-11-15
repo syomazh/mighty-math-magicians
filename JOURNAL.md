@@ -515,3 +515,8 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 
 - **Human input.** Syoma pasted a note (its beginning cut off) with what to record, dated 2026-11-14: the lattice-path proof (C24) was read and verified by the professor and can become `human-signed` once his name is added; the accounting proof (C12, C13) was read by the professor, "looks like it makes sense", to be recorded as human-read, not signed, unless he says he checked every step; the main proof (C1 to C8) was approved by him earlier and still waits for his name.
 - **Recorded as given** in `CLAIMS.md` (update of 23:13) and `STATE.md`. No grade was changed: rule 2 asks for a name and a date for `human-signed`, and the name is not in the note. I know of these verdicts only through the note.
+
+## 2026-11-14 23:18 — Claude Fable 5.2
+
+- **Human input.** Syoma, to the question what the professor's name is: "misha".
+- **Recorded.** `CLAIMS.md`: C24 (lattice-path proof) and C1 to C8 (main proof) are now `human-signed` by Misha, 2026-11-14, on Syoma's report of his verdicts (verified; approved). The accounting proof stays "read, not signed". I recorded the first name as given and added no surname. These are the first `human-signed` claims of the project.
