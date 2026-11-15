@@ -1,0 +1,559 @@
+            DETERMINATION OF THE NUCLEAR SPIN
+                           STATISTICAL WEIGHTS
+
+                    FOR THE ROTATION-INTERNAL
+     ROTATION-INVERSION LEVELS OF METHYLAMINE
+
+                                        L. SZTRAKA
+
+                                      Department of Physical Chemistry,
+                                   Technical University, H-1521 Budapest
+
+                                             Received April 15, 1986
+                                     Presented by Prof. Dr. Gy. Vars{myi
+
+                                            Abstract
+
+         A complete derivation of the nuclear statistical weights for the rotation-internal rotation-
+inversion levels of methylamine is given using the permutation-inversion transformation
+properties of the nuclear spin wavefunctions and the rotation-internal rotation-inversion
+eigenfunctions.
+
+                                         Introduction
+
+       From the theory of vibrotors it is well known that the absorption
+coefficient of a rotation-vibration transition is proportional to the nuclear spin
+statistical weight 'of the levels between which the transition takes place. To
+determine the nuclear spin statistical weights for levels of flexible molecules
+having hindered large amplitude internal motions is generally impossible with
+the method used for rigid molecules.
+
+       The aim of the present paper is to derive the nuclear spin statistical
+weights for levels of methylamine. These data have been determined by
+Kryglewski [lJ exploiting the analogy with methyl boron difluoride [2J,
+however, no complete derivation has been given. The derivation described in
+the present paper is general, it can be used for all flexible molecules. The
+method is based on the symmetry properties of the eigenfunctions. In contrast
+to rigid molecules where point groups and the rotational group can be used to
+describe the symmetry properties of eigensystems, for flexible molecules,--like
+methylamine which has two different types of hindered large amplitude
+internal motions (see e.g. [3J}-, the permutation-inversion (PI) group theory
+has to be applied.
+
+7 Periodica Po1ytechnica Ch. 31/1-2.
+94  L. SZTRAKA
+
+    The permutation-inversion (PI) group of methylamine
+
+      The permutation-inversion (PI) group theory was elaborated by
+Longuet-Higgins [2J and Hougen [4, 5J for classifying the eigensystems of
+flexible molecules which tunnel among' different configurations varying
+continuously the point group symmetry. This theory is a very efficient tool in
+the molecular spectroscopy of flexible molecules. Beside the symmetry
+classification of molecular eigensystems it can be successfully used to obtain
+selection rules for transitions, to simplify considerably the theory of molecular
+motions, to increase the speed of numerical calculations and last but not least
+to derive nuclear spin statistical weights of energy levels.
+
+       The permutation-inversion group as all molecular symmetry groups is
+formed by a set of operations which leaves the molecular Hamiltonian
+unchanged. The PI group elements are [2]:
+
+        i. the identity E,
+        ii. the permutation P of positions and spins of identical nuclei or the
+
+           products of such permutations,
+      iii. the permutation-inversion P = PE* = E* P where E* is the inversion of
+
+           the positions of all particles in the center of mass.
+       The number of elements of a complete PI group is given by
+
+                              TIm
+
+                                           2 l1k!
+
+                                                                             k=l
+
+where l1k denotes the number of nuclei in the k-th identical atom set [6]. E.g. the
+methylamine molecule contains two atom sets with two and three identical
+atoms, respectively. Thus there are 24 elements in the complete PI group of
+methylamine:
+
+    E: (567), (576); (67)*. (57)*, (56)*; (12);
+
+    (12) (567), (12) (576): (12) (67)*, (12) (57)*, (12) (56)*:  (1 a)
+
+    , (567)*, (576)*; (67). (57), (56); (12)*;
+
+    (12) (567)*, (12) (576)*; (12) (67), (12) (57), (12) (56);   (1 b)
+
+where the numbers in the brackets denote the permuted atoms. For example
+the permutation (567) is a cyclic permutation of the hydrogen nuclei in the
+methyl group, which is equivalent to the product of two simple permutations,
+i.e. (567)=(67) (56). The numbering of nuclei is shown in Fig. 1, the effects of
+operations upon the molecule are depicted in Fig. 2a, b.
+
+       For the symmetry problems of flexible molecules it is not the complete PI
+group but the so called PI group (a subgroup of the complete PI one) that has to
+be applied. The complete PI group consists of feasible and infeasible
+DETERMINATION OF THE NUCLEAR SPIN STATISTICAL WEIGHTS  95
+
+·z  1,2            A
+                     X
+
+------~r--------~
+
+Fig, 1, Numbering of the atoms of methylamine, The angles rx. and T denote the coordinates of
+                                internal rotation and inversion, respectively
+
+operations. According to Longuet-Higgins' concept an operation is feasible if
+it can be achieved during the time of the experiment [2J. The PI group of a
+molecule is obtained by deleting all infeasible elements from the complete PI
+one,
+
+       In order to clarify the deeper meaning of feasibility, we consider each
+operation as sum of an "equivalent rotation" and hindered large amplitude
+motions (see for methylamine in Ref. [3J), An "equivalent rotation" describes
+the effect of a PI element on the Euler angles, Since the "equivalent rotations"
+are always unhindered, a PI operation consisting of only an "equivalent
+rotation" is feasible, Thus the feasibility of an operation is determined by the
+barrier heights of the large amplitude motions, E.g, if one ofthe barriers is low,
+all elements requiring the tunnelling of only this low barrier are feasible, There
+is, of course, no absolute criterion for the feasibility of a given element. For
+instance if the energy of an excited level is comparable to the barrier, the
+probability of penetrating and therefore the associated speed of the tunnelling
+the barrier will be greater than for lower energy levels, Elements that are not
+feasible for lower energies can be therefore feasible for higher energies, From
+this it may be seen that the PI group theory is a very flexible and efficient one,
+
+       Comparing the elements of the complete PI group of methylamine it can
+be shown that all elements in Fig, 2a are feasible, and all the ones in Fig, 2b are
+infeasible. The operations in Fig. 2a require the tunnelling of only the barriers
+of internal rotation and inversion beside the "equivalent rotations" (see Table
+I). The probabilities of penetrating these barriers are relatively high, The
+operations in Fig. 2b require also interchanges of protons (see Table II), e.g. the
+element E* consists of an "equivalent rotation" Ci and the change of proton 6
+for 7. The speed of these interchanges is practically zero.
+
+7*
+                                                                                                                               e-r0-
+
+                                                                                                 l"--       ...
+
+              I                                                                                      I
+              I                                                                                     I
+            I                                                                                       I
+
+        6..1                                                                                     54
+
+        (12 )(567)                                                                               (12)(576)
+
+                  6
+
+                                                                                              6                             6  ,.
+
+                                                        6                                                                      ";'";
+        (57)" 2                                                                                                                '-
+                                                                                                                 (12)(56)"
+                                                                                                                               '":...
+
+  ,                                                     c)
+,,II
+        Fi!l. 2. a) The ellccts of the feasible elements or the complete PI group upon methylamine
+~
+
+7 (12)
+6
+
+                                                                         6                          ~"'"
+
+                   a                            (12)(567)'                                          '~"
+
+                                                                                                    ::<.:.-:.
+
+                                                                                                    ~
+                                                                                                    ~
+
+   =..!k   I>                                                                                       .C..,l
+
+   (567)"                      6                     I        ,                          ,,I        :i!
+               (576)"                                I
+                                                    I            I                      711         '"c>:.:
+
+                                                6d          5. I                          (12)(56)  ~
+                                                                I                                   !;?
+                                                  (12)(67)
+                                                               (12)(57)                             ~'"
+
+                                                                                                    <:
+
+   ,.-- "X"'"                                                                                       ';;";J
+                                                                                                    ~
+                I                       I                                                           ~
+                                       I
+               : I (57)                                                                             r-
+                                      : I (56)
+
+               56                     7/;                                                           ~
+
+                                                                                                    !:;;
+
+                                                                                                    Cl
+                                                                                                    ::z:
+                                                                                                    ~
+
+                                  b)
+
+   wt
+
+   b) The efTects of the infeasible elements of the complete PI group upon methylamine              '-0
+
+                                                                                                    -..J
+98                                                  L. SZTRAKA
+
+     Eq. rot.                                       Table I
+
+          iR~  The feasible elements of the complete PI group of methylamine"
+          I~'
+                                                    (56)*                                            (12) (56)*
+
+               E                   (567)            (67)*            (12)           (12) (567)       (12)(67)*
+
+                                   (576)            (57)*                           (12)(576)        (12) (57)*
+
+               E                   E                q                Cl             Cl               Cl
+
+                                             27!                 7!                           7!                  27!
+                                                                                    \(-+\(+          \(-+-\(+ -
+                                   C(-+(X--         :C-+-(X- -
+                                                                                             3                    3
+                                             3                  3
+
+               .:X-+:X                              \(-+-\(-7!       \( .... \(+7!                   (x-+-:l
+
+                                            2IT                  7!                           7!                  27!
+                                   \( .... \(+      \( .... -\(+                                     \(-+-\(-
+                                                                                    (X-+ct- -
+                                             3                  3                                                3
+                                                                                             3
+
+               T-+T                r .... r         T-+ -r           T-+-T          !-+ -T           T-+t
+
+      a Superscript (1: in the operator iR and superscript '[' in the operator I indicate the new
+
+values of the coordinates after tunnelling the barriers [3].
+
+                                                    Table II
+
+               The infeasible elements of the complete PI group of methylamineb
+
+Eq. rot.           E*                 (567)*        (56)               (12)*        (12)(567)*       (12)(56)
+                                      (576)*        (67)                            (12)(576)*       (12)(67)
+   iR~            q                                 (57)               Cl                            (12)(57)
+                                       q                                                Cl
+                               IT                     E              \( .... :x+7!                     Cl
+                                                7!                                               7!
+               o:.-+:t:+ -         :x .... :x -     0:-+ (X                                          :X-+:X+7!
+                         2                                                          :l-+-:;(--
+                                               3
+                                                                                                 3
+
+                                                7!                                               7!
+                                   :x-+-:x+ -                                       \(-+-\(+ -
+
+                                               3                                                3
+
+       I~      !-+ -r              !-+ -!           r-+r             r .... r       !-+!             r-+ -t
+                6.-.7                               6.-.7            6.-.7                            6.-.7
+Interchange                         6.-.7           5.-.7                           6.-.7             5.-.7
+      of                                            5.-.6                                             5.-.6
+
+  protons
+
+b Each operation contains only one interchange of protons.
+
+      It is necessary to note that in Bunker's terminology the term "complete
+nuclear PI group" (CNPI) is used for the complete PI group whereas PI is
+called molecular symmetry group [7].
+                   DETERMINATION OF THE NUCLEAR SP/S STATISTICAL WEIGHTS                     99
+
+                   The derivation of the nuclear spin statistical weights
+
+       The nuclear spin statistical weight of a rotation-internal rotation-
+inversion level of methylamine,-like the rotation levels of nonflexible
+molecules-, is defined by the number of the different nuclear spin quantum
+states corresponding to the given level. These spin states take their origin from
+the presence of atomic nuclei with nonzero spin momenta and correspond to
+the different projections of the spins along a chosen direction. In the absence of
+external fields the energy of all projections is the same. However, for a given
+level different spin states can be realized depending on its symmetry, i.e. the
+levels have in general different nuclear spin statistical weights. The number of
+allowed states can be derived by group theoretical considerations.
+
+       The total wavefunction of methylamine can be written as a product of the
+electron, the vibration, the rotation-internal rotation-inversion, the nuclear
+spin and the electron spin eigenfunctions:
+
+                                                                                     (2)
+
+It is assumed here that all electrons and all vibrations of the molecule are in
+ground state, i.e. 'Pe' 'P" and 'Pes are totally symmetric. The forms and the
+symmetry properties ofeigenfunctions 'P riri of methylamine have been given in
+our previous paper [3].
+
+       According to the generalized Pauli Exclusion Principle 'Pt is changed in
+sign by any permutation P that involves odd number permutations of nuclei
+having half integer spin (ferrnions):
+
+                                                                                             (3)
+
+However, if the inversion operation E* is applied to 'Pt the sign can be either
++or-, i.e.:
+
+                                                                                             (4)
+
+From the results it can be seen that the total wavefunction 'Pt has to
+
+belong to such species in which the characters of operations P involving odd
+
+number permutations of ferrnions are always -1. In the case of methylamine
+
+these species are A'; and A;, respectively (see Table Ill). Here the allowed
+
+species doubles according to the double-valued eigenstate of operation E*. It is
+
+necessary to note that in the theory of PI groups the species are labelled by the
+
+irreducible representations of the point group isomorphic with the given PI
+
+group. Thus in the case of methylamine this is the point group D3h .
+
+Since the product 'Pe 'P ,. 'Pes in ground state belongs to the total symmetric
+
+species  Af     ,  insteaq.  of  'Pt  it  is  enough  to  disscuss  only  the  symmetry  of  the
+             l
+
+product 'Priri 'Pns . The representations of this product can be derived as direct
+100                               L. SZTRAKA
+
+                                  Table III
+
+Character table of the permutation-inversion group of methylamine isomorphic with the point
+                                                    group D3b
+
+                                  (56)*                               (12)(56)*
+                                  (67)*
+     Species  E  (567)            (57)*             (12)  (12) (567)  (12)(67)*
+                 (576)
+                                                          (12) (576)  (12)(57)*
+
+     A'I         1                                                    1
+
+     A~          I                -I                      I           -I
+
+     A';         I                1                 -1    -I          -1
+
+     ,4",        1                1                 -I    -I          1
+
+     E'       2  -1               0                 2     -1          0
+
+     E"       2  -1               0                 2                 0
+
+products from the species of the two constituents. It is obvious that for a given
+level only such nuclear spin states are allowed for which it holds [7]:
+
+                 T(Priri)®T(PnsY°(~T(Pr)=(A'{, A~),                              (5)
+
+where r(Pr) denotes the species to which Pr has to belong, i.e. A'{ and A~ ,
+l( If'rirJ is the species of the given rotation-internal rotation-inversion level and
+
+r (PnsrO! denotes the full representation of the nuclear spin functions. The
+
+number of species A'{ and A~ in the direct product is the nuclear spin statistical
+
+weight.
+
+      In the following the nuclear spin eigenfunctions will be built up. All
+
+nuclear spin functions can be written as a product of the functions of identical
+
+atom sets, i.e. in our case:
+
+                              If' = p(12)p(567)                                  (6)
+                              ns  ns          ns .
+
+     From this follows that:
+
+                 r(If'ns)=l(p~;2)®l(p~;67) .                                     (7)
+
+       The nuclear spin functions of identical atom sets can be represented by
+
+the usual products of atomic spin functions Cl:(k) and f3(k) where Cl:(k) is the
+
+symmetric spin function of the k-th hydrogen atom and f3(k) is the antisym-
+
+metric one.
+
+     If S denotes the operator of the atomic spin angular momentum and Sz
+denotes the z component of S, the eigenvalues for a single proton in Ii units are:
+
+                              = "2 ~   1                                  (8a)
+
+                              S zCl:(k)    iX(k) ,
+
+or
+
+                                                                          (8b)
+DETERMINATION OF THE NUCLEAR SPIN STATISTICAL WEIGHTS     101
+
+and
+                                                                                              (8c)
+
+or
+                                                                                              (8d)
+
+where the quantum number Ins of the atomic spin angular momentum is 1/2.
+
+Both the values 1/2 and -1/2 in Eq. (8a, b) are the quantum numbers mns of S=.
+
+       If an identical atom set contains m protons the total number of nuclear
+
+lr. spin states in this set is given by the expression (2Ins+ The nuclear spin
+
+functions of the two atom sets of methylamine and their resultant quantum
+numbers ms are collected in Table IV. Table V gives the characters of the
+reducible (or irreducible) representations to which these functions belong. The
+
+full representations of the two sets obtained as a direct sum of the derived
+representations are given also in Table V. In the transformation of the products
+a{3 it has been taken into account that:
+
+        i. Only the operations P act on the functions which are invariant under
+           E*, so the nuclear spin wavefunctions are transformed by P* and Pin
+
+           the same way.
+
+                             Table IV
+    The nuclear spin functions tp~1321 of the group NH2
+
+                                  Resultant quantum
+                                 number of the group
+
+l.  :>:(1):>:(2)                 m,=+1
+
+2   :>:( I )(3(2), (i( 1):>:(2)  m,= 0
+
+3.  (3(1 )fJ(2)                  m,=-I
+
+    The nuclear spin functions tp~;671 of the group CH 3
+
+                                  Resultant quantum
+                                 number of the group
+
+    :>:(5):>:(6):>:(7)                     1
+
+                                 m,= +12
+
+2.  :>:(5):>:(6)fJ(7) }                    1
+
+3.  :>:(5)fJ(6):>:(7)            m'=+2
+
+4.  fJ(5):>:(6):>:(7)                      1
+
+5.  fJ(5)fJ(6):>:(7)             m'=-2
+
+6.  fJ(5j:>:(6)fJ(7)                       1
+
+7.  :>:(5)fJ(6)fJ(7)             m,=-I-
+
+8.  fJ(5)fJ(6)fJ(7)
+102                            L. SZTRAKA
+
+                               Table V
+
+     Effects of the PI operations on the nuclear spin functions of identical atom sets
+
+                               (56)*                                     (12) (56)*
+
+                     £  (567)  (67)*       (12)               (12)(567)  (12) (67)*
+
+     x(1)x(2)                                                            Species
+                                                                           A'!
+
+     x(l){J(2)                                             0  0          0 A'I+A';
+
+     fJ(l){J(2)                                                          A'l
+
+     fJ(l){Jf2)                                                          A',
+
+     Direct sum      4  4      4                           2  2          2 3A', +A';
+
+     1.                 1      1                              1          1 A',
+
+     2.                 0      0                              0          nA', +£'
+                                                              0
+     3.                 0      0                              0
+
+     4.                 0      1
+
+     5.                 0      0                              0          ~} A', +£'
+                                                              0
+     6.                 0      0
+
+     7.                 0      1                              0          1 A',
+
+     8.                 1      1                              1
+
+     Direct sum      8  2      4                           8  2          4 4A', +2£'
+
+     ii. The operations P change the sequences a{3 in the nuclear spin
+
+         functions. The numbering of atoms in these sequences are unimpor-
+
+         tant, i.e. Cf.(1){3(2) and Cf.(2){3(1) are equivalent and indistinguishable.
+
+     iii. If the sequence a{3 does not change, X= 1, if it changes, X= O.
+
+     The full representation of the nuclear spin functions Pns can be derived as
+
+a direct product offull representations of the two identical atom sets. The result
+
+IS:              (3A'l +A,{)®(4A'l +2E')= 12A'l +4A'{ +6E' +2E".                                (9)
+
+      The direct products of the above irreducible representation and the
+species T(PrirJ can be seen in Table VI with the obtained nuclear spin statistical
+weights. The results correspond to the ones published by Kryglewski [1].
+
+                               Table VI
+
+     The representation of the products If'riri If'ns and the nuclear spin statistical weights
+
+         [('I'riri)                  f('I' riri)0f('I'n,)     f('I',)    Statistical
+                                                                          weights
+          A',                   12A', + 4A'; + 6£' + 2£"      A';, A:;
+          ,A~                   12A~ +4A:; +6£' +2£"          A';, A:;         4
+                                12A'; + 4A', + 6£" + 2£'      A';, A~          4
+           A"                   12A:; +4A~ +6£" +2£'                          12
+                        2A'; + 18£' +6£" +6A', +6A~ +2A';     A';, A2         12
+           A2           2A~ + 18£" +6£' +6,1'; +6A:l +2A"                      4
+                                                              AI;, A'l        12
+            E'
+            £"                                                AI;, A2
+DETERMINATION OF THE NUCLEAR SPIN STATISTICAL WEIGHTS  103
+
+References
+
+1. KR~GLEWSKI, M.: J. Mol. Spectr. 72, 1(1978)
+
+2. LONGUET-HIGGINS, H. c.: Mol. Phys. 6, 445 (1963)
+
+3. SZTRAKA, L.: Acta Phys. Hung. 55, 135 (1984)
+4. HOUGEN, 1. T.: J. Chem. Phys. 37, 1433 (1962)
+5. HOUGEN, 1. T.: ibid 39, 358 (1963)
+6. PAPOUSEK, D.-ALlEV, M. R.: Molecular Vibrational-Rotational Spectra, Academia, Prague
+
+        1982.
+7. BUNKER, P. R.: Molecular Symmetry and Spectroscopy, Academic Press 1979.
+
+Dr. Lajos SZTRAKA H-1521 Budapest
+

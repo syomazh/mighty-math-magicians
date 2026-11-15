@@ -1,0 +1,1075 @@
+Theor Chem Account (2007) 118:813­826
+DOI 10.1007/s00214-007-0328-0
+
+ REGULAR ARTICLE
+
+Symmetry numbers and chemical reaction rates
+
+Antonio Fernández-Ramos · Benjamin A. Ellingson ·
+Rubén Meana-Pañeda · Jorge M. C. Marques ·
+Donald G. Truhlar
+
+Received: 14 February 2007 / Accepted: 25 April 2007 / Published online: 11 July 2007
+© Springer-Verlag 2007
+
+Abstract This article shows how to evaluate rotational               1 Introduction
+symmetry numbers for different molecular configurations
+and how to apply them to transition state theory. In general,        Transition state theory (TST) [1­6] is the most widely used
+the symmetry number is given by the ratio of the reactant and        method for calculating rate constants of chemical reactions.
+transition state rotational symmetry numbers. However, spe-          The conventional TST rate expression may be written
+cial care is advised in the evaluation of symmetry numbers
+in the following situations: (i) if the reaction is symmetric,       kTST(T )  =        kBT   QTS(T )  exp  -V /kBT                 (1)
+(ii) if reactants and/or transition states are chiral, (iii) if the                        h    R(T )
+reaction has multiple conformers for reactants and/or tran-
+sition states and, (iv) if there is an internal rotation of part     where kB is Boltzmann's constant; h is Planck's constant;
+of the molecular system. All these four situations are treated       V  is the classical barrier height; T is the temperature and 
+systematically and analyzed in detail in the present article.
+We also include a large number of examples to clarify some           is the reaction-path symmetry number; QTS(T ) and R(T )
+complicated situations, and in the last section we discuss an
+example involving an achiral diasteroisomer.                         are the quantum mechanical transition state quasi-partition
+
+Keywords Symmetry numbers · Chemical reactions ·                     function and reactant partition function, respectively, without
+Transition state theory · Chiral molecules · Multiple
+conformers · Internal rotation                                       rotational symmetry numbers, and with the zeroes of energy
+
+A. Fernández-Ramos (B) · R. Meana-Pañeda                             at the zero-point-exclusive energies of the saddle point and
+
+Departamento de Química Física, Facultade de Química,                equilibrium reactants, respectively. QTS(T ) is referred to as
+Universidade de Santiago de Compostela,
+15782 Santiago de Compostela, Spain                                  a quasi-partition function because it is missing the vibra-
+e-mail: qftramos@usc.es
+                                                                     tional degree of freedom corresponding to the reaction coor-
+B. A. Ellingson · D. G. Truhlar (B)
+                                                                     dinate. R(T ) is the unitless reactant partition function for
+Department of Chemistry and Supercomputing Institute,
+University of Minnesota, 207 Pleasant Street S. E.,                  unimolecular reactions and the reactants partition function
+Minneapolis, MN 55455-0431, USA
+e-mail: truhlar@umn.edu                                              per unit volume for bimolecular reactions. Specifically for
+
+J. M. C. Marques                                                     bimolecular reactions (A + B  P), the reactants partition
+Departamento de Química, Universidade de Coimbra,                    function can be factorized as R(T ) = rAe,lB(T )QR(T ) =
+3004-535 Coimbra, Portugal                                           Are,lB(T )QA(T )QB(T ), where          A,B
+                                                                                                            rel  is  the  relative  transla-
+
+                                                                     tional motion per unit volume and QR(T ) = QA(T )QB(T )
+
+                                                                     is the unitless reactants partition function for the internal
+
+                                                                     motions. The present article is mainly concerned with  .
+
+                                                                     Equation (1) can be generalized by variationally optimiz-
+
+                                                                     ing the transition state (so it is no longer located at the saddle
+
+                                                                     point) and by adding a transmission coefficient to account
+
+                                                                     for recrossing and quantum effects (including tunnelling)
+
+                                                                     [3­6]. These generalizations do not change the considera-
+
+                                                                     tions involved in giving a value to  .
+
+                                                                     In a classic article, Pollak and Pechukas [7] sorted out con-
+
+                                                                     ceptual difficulties involving  and proved that it is always
+
+                                                                                                                          123
+814                                                                                                      Theor Chem Account (2007) 118:813­826
+
+equal to the ratio of the total symmetry number of the reac-                            Table 1 Ratios of approximate rotational partition functions for 16O2
+tant divided by the total symmetry of the transition state.                             to the accurate one with only odd J
+Despite the simplicity and clarity of this result, it can some-
+times be confusing to apply it to complex reactions, because it                         Temperature (K)  Classical with    Quantal without
+may require considering more than the usual rotational sym-                                              symmetry factora  symmetryb
+metry numbers, and it is discouraging to find that in some
+recent applications that the symmetry numbers are ignored,                              1,000            0.9993             2.0000
+ill-defined, or wrong. In addition, the increased complexity                            600              0.9988             2.0000
+of new applications also raises interesting new questions. For                          300              0.9977             2.0000
+these reasons it is useful to review some of the arguments of                           200              0.9965             2.0000
+Pollak and Pechukas and to add some new comments on the                                 100              0.9931             2.0000
+subject. It should be noted that symmetry number arguments                              50               0.9862             2.0000
+similar to those of Pollak and Pechukas were also given by                              25               0.9726             2.0000
+Coulson [8].                                                                            10               0.9326             2.0002
+                                                                                        5                0.8883             2.0452
+   In conventional TST, the forward thermal rate constant                               1                5.1368            22.3732
+can be calculated with information about only two config-
+urations, i.e., reactants and the transition state. Leaving the                         For this illustration we use the rigid rotor approximation with a
+symmetry numbers out of the rotational partition function                               moment of inertia of 75,894 me bohr2, where me is the mass of an
+in Eq. (1) means that we are treating the identical particles                           electron
+as distinguishable, and in this case the rotational partition                           a Ratio of Eq. (3a) with rot = 2 to accurate result
+functions would be given by                                                             b Ratio of partition function with all J to partition function with only
+
+                                                                                        odd J
+
+Q       (T  )  =  2I                                                           (2a)     is the product of the two rot numbers. In some cases, it will
+   rot            h¯ 2                                                                  not be sufficient to consider just rotational symmetry num-
+                                                                                        bers, rot. We will need to consider rotational translational
+for a lineal molecule, where I is the moment of inertia, h¯ is                          symmetry numbers r­t .
+
+Planck's constant divided by 2  , and  is defined as 1/kBT .                               It is useful to review the fundamental origin of the sym-
+                                                                                        metry factors. Consider 16O2 as an example. Because the 16O
+For nonlinear molecules, the expression for the rotational                              nucleus is a boson, the nuclear spin wave function is sym-
+                                                                                        metric under interchange of the nuclei. By Bose­Einstein sta-
+partition      function    of   distinguishable      particles  Q       (T  )  is       tistics, the overall wave function must be symmetric under
+                                                                   rot                  such interchange. Since the nuclear spin wave function is
+                                                                                        symmetric, and the ground electronic state (3 g-) is odd,
+                      2         3               1/2                                     the rotational wave function must be antisymmetric (odd).
+                     h¯ 2                                                               Therefore, half of the rotational quantum numbers J (the
+Q       (T  )  =                     IA IB IC                                  (2b)     even ones) are missing [9]. In the classical limit where sums
+   rot                                                                                  over rotational levels are replaced by an integral [10], half
+                                                                                        of the levels being missing decreases the rotational partition
+where IA, IB and IC are the principal moments of inertia.                               function by a factor of two. At low temperature where only
+The symmetry number in Eq. (1) arises from the indistin-                                a few rotational levels are populated, the factor of two is
+guishability of identical particles, i.e., the rotational partition                     only approximately correct. In practice, the inclusion of the
+is given by                                                                             inaccessible J = 0 state would cause a very large error at
+                                                                                        very low temperature. This is illustrated in Table 1, which
+Qrot(T )       =   1    Q       (T  )                                          (3a)     first shows the ratio of the partition function calculated using
+                  rot      rot                                                          Eq. (3a) to the accurate one, and then shows the ratio of the
+                                                                                        hypothetical partition function for all J to the accurate one.
+where rot is the rotational symmetry number. Therefore the                              The table shows that the symmetry factor is very close to 2 at
+ratio between the rotational partition functions of the transi-                         most temperatures of interest. The classical approximation is
+                                                                                        so good that one almost always uses it--the main exception
+tion state, Qrot,TS(T ), and reactants, Qrot,R(T ), leads to:                           being H2 below room temperature.
+
+Qrot,TS(T )       =    rot,R       Qrot,TS(T )  =      Qrot,TS(T )             (3b)        When the identical nuclei are fermions, the situation is
+Qrot,R(T )             rot,TS      Qrot,R(T )          Qrot,R(T )                       more complicated. H2 provide the classic example. Since it
+                                                                                        is treated in most statistical mechanics texts [10], we just
+   Therefore, in simple cases, the rotational symmetry num-                             summarize the result. It turns out that one fourth of the
+bers in the above partition functions account for all the effects
+of nuclear indistinguishablility on reaction rates, and the
+symmetry number in Eq. (1) is given by
+
+ = rot,R/rot,TS,                                                                   (4)
+
+with rot,R and rot,TS being the rotational symmetry numbers
+of the reactants and the transition state, respectively. For a
+bimolecular reaction, where the reactants are different, rot,R
+
+123
+Theor Chem Account (2007) 118:813­826                                                                                     815
+
+nuclear spin states are forbidden for odd J and three fourths                  complications such as chiral isomers, symmetric reactions,
+are forbidden for even J . Averaging over many states again                    low-energy conformers, and internal rotation.
+decreases the partition function by a factor of two.
+                                                                               2 Symmetry numbers and rotation
+   Polyatomic molecules are more complicated, because
+there can be more than two identical nuclei, because the                       Consider the molecules depicted in Structure 1 in their equi-
+vibrational wave functions are not all symmetric, and because                  librium configurations: water, ammonia, and the methyl rad-
+the rotational wave functions are more complicated. Con-                       ical. If all of the indistinguishable atoms are labelled and
+sider methane (CH4) as an example. The total wave function                     treated as distinguishable and the molecule is fixed in space,
+must be antisymmetric with respect to the exchange of both                     the configurations shown in Structure 1 are obtained.
+coordinates and spins of the hydrogen nuclei because they
+are fermions. As discussed in detail elsewhere [11­13], in                        That is, there are two possible configurations for water and
+order to find the correct nuclear degeneracy associated with                   six each for nonplanar ammonia and planar methyl radical.
+each rovibrational state, one has to evaluate a direct product                 In general, the total number of possible configurations equals
+between the permutation group symmetries of the rovibra-                       the m! permutations of the m equivalent atoms. Of those, we
+tional states and the nuclear spin wave functions. The net                     would like to know which of them cannot be transformed into
+result is that, on average, the molecule has only 1/12 as many                 each other by rotation or translation of the whole molecule.
+states as it would have if the nuclear permutation antisym-
+metry were not enforced.                                                          The water molecule, labelled as a2 in Structure 1, can
+                                                                               be transformed into a1 by a rotation of 180 and, therefore,
+   In the rest of this article, except briefly in the discussion               there is only one unique configuration. In the case of ammo-
+of the H + H2 reaction, we shall simply use the classical                      nia b5 and b4 are transformed into b1 by clockwise rota-
+symmetry factors without considering nuclear spin states or                    tions of 120 and 240, respectively, whereas b3 and b6 can
+very low temperatures where the classical limit breaks down.                   be transformed into b2. However, it is not possible to find
+                                                                               any combination of rotation and translation of the ammonia
+   Equation (4) and the product rule given right below it usu-                 molecule that transforms b1 into b2 and, therefore, these two
+ally suffice, but exceptions arise when reactants in a bimole-                 structures are each unique configurations. For the methyl rad-
+cular reaction are indistinguishable, when species are chiral,                 ical c2, c3 and c6 can be transformed into c1 by rotations of
+when a reaction is symmetric (sometimes called a degenerate                    180 degrees around the C­Ha, C­Hc and C­Hb axes, respec-
+rearrangement), or when TST is used to account for multiple                    tively; additionally c4 and c5 are identical to c1 by rotations
+elementary reactions. Continuing along the line of the article                 of 120 and 240 about an axis that is perpendicular to the
+of Pollak and Pechukas, it is the objective of this paper to                   molecule and that passes through the central atom. Therefore,
+show by examples how to calculate the reaction-path sym-                       there is only one unique configuration of the methyl radical.
+metry number of Eq. (1) for any unimolecular or bimolecular                    The rotational symmetry number is given by the number of
+reaction.                                                                      permutations of m atoms of the same type divided by the
+                                                                               number of unique configurations, nd, that remain different
+   To evaluate the symmetry number of Eq. (1) the first step                   under rotation of the molecule, i.e.,
+is to calculate the rotational symmetry number of the reac-
+tants and the transition state. This is explained in Sect. 2.                  rot  =   m!                                (5)
+Section 3 illustrates by means of examples how to calculate                             nd
+the symmetry numbers for chemical reactions with additional
+
+                                                   O                           O
+
+                                           Ha             Hb               Hb        Ha
+
+                                                   a1                          a2
+
+                                                              water
+
+                     N              N              N                         N                      N              N
+
+             Ha             Ha             Hb                        Hb                     Hc             Hc
+
+                            Hc         Hb      Ha         Hc                        Ha      Ha         Hb  Hb         Ha
+
+             Hb         Hc                                                 Hc
+
+                 b1             b2                    b3                       b4               b5             b6
+
+                                                          ammonia
+
+              Hb             Hc            Ha                                               Ha              Hb
+                                                                       Hc
+                     C Ha           C Ha                                                                           C Hc
+                                                   C Hb                        C Hb                 C Hc
+             Hc             Hb                                                                             Ha
+                                           Hc                 Ha                            Hb
+                     c1              c2                                                                             c6
+                                                    c3                c4                             c5
+
+                                                          methyl radical
+
+Structure 1
+
+                                                                                                                          123
+816                                                                                    Theor Chem Account (2007) 118:813­826
+
+   From these examples we find that for water, ammonia, and                                   H
+
+the methyl radical the symmetry number is two, three and six,                          H
+
+respectively. The symmetry number is uniquely determined                                  H       H
+
+by the point group symmetry of the molecule. A molecule           Structure 3
+without any symmetry (denoted as C1) has a rotational sym-
+metry number of one. The water molecule with C2v point            really distinguishable, because w1 = w9, w2 = w7, w3 = w8,
+group symmetry in the equilibrium configuration has a rota-       w4 = w11, w5 = w12, and w6= w10 by simply translating the
+                                                                  first water molecule to the place of the second and vice versa.
+tional symmetry number of two because of the C2 and E sym-        Therefore, symmetry number is 48/6 = 8. In this particular
+metry operations. The methyl radical with D3h point group         case we talk about a symmetry number of rotation-translation
+symmetry has a rotational symmetry number of 6 because of         r-t,R which is given by r-t,R = 2r2ot,A , which in this case
+                                                                  is r-t,R = 2(2)2 = 8.
+the identity operation, E, three C2 rotation axes along any of
+the C­H bonds, and C3 (rotation of 120) and C32 (rotation            In some cases the symmetry number of the molecule has
+of 240) operations. This makes a total of six rotational sym-     a counterintuitive value. For example, consider the molecule
+                                                                  of methane, which is depicted in Structure 3. There are four
+metry operations. In the same way ammonia, which has C3v          equivalent hydrogen atoms; however, the rotational symme-
+symmetry, has a symmetry number of three. Therefore, as           try number is not four. For methane the number of possible
+                                                                  configurations is 4! = 24 of which only two cannot be super-
+a general rule, the symmetry number of rotation for a given       imposed by rotation as indicated below in Structure 4. Thus,
+                                                                  the symmetry number is 24/2 = 12. Again this agrees with
+molecule equals the number of rotational symmetry opera-          what is inferred from the point group symmetry of the mole-
+                                                                  cule, which is Td, because Td has 12 rotational symmetry
+tions. As a final example let us consider ferrocene, a molecule   operations (E + 8C3 + 3C2).
+
+with D5h point group symmetry. For this molecule the sym-                          Ha                Hb
+metry number of rotation is ten (E + 2C5 + 2C52 + 5C2).
+                                                                               Hc             Hc
+   As stated above, the symmetry number of reactants for a
+bimolecular reaction (A + B  Products) is usually given                        Hd         Hb     Hd      Ha
+by the product rot,R = rot,Arot,B, with rot,A and rot,B
+being the rotation symmetry numbers of A and B, respec-                            d1                d2
+tively. However, a bimolecular reaction of the type A + A 
+Products constitutes a special case. In this case the symme-      Structure 4
+try number of reactants is given by r-t,R = 2A2 . The fac-
+tor of two appears because of the ability of the reactants
+
+to exchange positions between molecules by translation. For
+
+instance, let's consider the reaction of a water molecule react-
+
+ing with another water molecule. The number of possible
+
+configurations with labelled hydrogen and oxygen is 2!4!
+
+= 48. Of those, only the 12 depicted in Structure 2 cannot
+
+be superimposed by rotation, but only six configurations are
+
+     Oa             Ob          Oa         Ob                        In other cases the symmetry number corresponds to the
+                                                                  number of equivalent atoms, such as the symmetry number
+Ha       Hb Hc          Hd  Hb      Hd Ha      Hc                 for ethane (D3d symmetry), which has six equivalent hydro-
+                                                                  gen atoms and also have a rotational symmetry number of
+             w1                     w4                            six. Table 2 lists the rotation symmetry number for the most
+                                                                  common point groups.
+     Oa             Ob          Oa         Ob
+
+Hc       Hd Ha          Hb  Ha      Hd Hb      Hc
+
+             w2                     w5
+
+     Oa             Ob          Oa         Ob
+
+Ha       Hc Hb          Hd  Hb      Hc Ha      Hd                 3 The symmetry number in chemical reactions
+
+             w3                     w6                            Below we illustrate how to calculate the symmetry numbers
+                                                                  for a given chemical reaction. This section involves the rota-
+     Ob             Oa          Ob         Oa                     tional symmetry numbers of Sect. 2.
+
+Ha       Hb Hc          Hd  Hb      Hd Ha      Hc                 3.1 Some easy examples
+
+             w7                     w8                            Structure 5 illustrates the bimolecular abstraction of hydro-
+                                                                  gen from methane by a hydrogen atom.
+     Ob             Oa          Ob         Oa
+                                                                     The symmetry number for the forward reaction, f , mak-
+Hc           Hd Ha      Hb  Ha      Hd Hb      Hc                 ing use of Table 2 and Eq. (4), is given by
+
+             w9                     w10
+
+     Ob             Oa          Ob         Oa
+
+Ha           Hc Hb      Hd  Hb      Hc Ha      Hd
+
+             w11                    w12
+
+Structure 2
+
+123
+Theor Chem Account (2007) 118:813­826                                                        817
+
+                                                        H
+
+                                                                         HH
+                                                        H
+
+                                      H                 H        TS                    H
+
+                 H+H                                                         H H+
+
+                                  H            H                                   H      H
+
+                 Reactants                                                   Products
+
+Structure 5
+
+Table 2 Rotational symmetry       Point group                 rot    ment around the CF3 as one may be tempted to think. The
+number, rot, of the most com-                                        relation between internal rotation and symmetry numbers is
+                                                                     discussed in Sect. 3.5.
+mon point groups of symmetry      C1                          1
+                                                                     3.2 Symmetric reactions
+                                  Cs                          1
+                                                                     An example of a symmetric reaction is H + H2  H2 + H.
+                                  C2                          2      The rotational symmetry numbers for H, H2, and the linear
+                                                                     transition state are one, two, and two, respectively. Therefore,
+                                  C2v                         2      the symmetry number for the reaction is naively expected to
+                                                                     be one. However, it is important to be more precise, and ask
+                                  C3v                         3      precisely what observable one is calculating. In fact, the reac-
+                                                                     tion of H with H2 is not observable as a macroscopic reaction
+                                  Cv                          1      rate. It could, however, be observed by measuring the rate of
+                                                                     interconversion of ortho and para hydrogen, and this topic is
+                                  D2h                         4      discussed elsewhere [14]. Similar reactions interconverting
+                                                                     the two modifications [9,15] of other molecules, e.g., N2,
+                                  D3h                         6      may also be imagined, although these are not as well known.
+
+                                  D5h                         10        The H + H2 reaction provides one of the rare examples of
+                                                                     a case where calculations of the effect of nuclear identical-
+                                  Dh                          2      particle symmetry have gone beyond the symmetry-number
+                                                                     approximation. In particular, Schatz and Kuppermann [16]
+                                  D3d                         6      used the technique of postantisymmetrization [17] to calcu-
+                                                                     late nuclear-motion wave functions with the correct permuta-
+                                  Td                          12     tion symmetry for H + H2 with zero total angular momentum.
+                                                                     Para-to-ortho rate constants calculated from distinguishable-
+                                  Oh                          24     atom rate constants with appropriate classical symmetry
+                                                                     numbers differ from those calculated with a proper treat-
+f  =  rot,R   =  H rot,CH4 (Td )  =  1 × 12       =4          (6)    ment of permutation symmetry by 0.8, 1.6, 3, 5, and 26% at
+      rot,TS      rot,TS(C3v )          3                            400, 300, 250, 200, and 100 K, respectively. Just as nonclas-
+                                                                     sical symmetry effects on rotational partition functions are
+which matches the intuitive answer because there are four            much smaller for all other molecules than for H2, nonclas-
+equivalent hydrogen atoms to abstract. However, sometimes            sical symmetry effects on reaction rates are expected to be
+the symmetry number for a reaction is not intuitive. If the          much smaller for other reactions than for H + H2.
+hydrogen is abstracted by the CF3 radical (which has C3v
+symmetry in its equilibrium configuration), then the symme-             In general, any symmetric reaction with just one transition
+try number is 12 because                                             state between reactants and products is unobservable as a
+                                                                     macroscopic rate phenomenon, unless one resolves quantum
+f  =  rot,R   =  rot,CF3 (C3v ) rot,CH4 (Td )  =  3×12  = 12         states as in the ortho­para conversion of hydrogen.
+      rot,TS            rot,TS(C3v )                3
+                                                                     3.3 Chiral species
+                                                              (7)
+                                                                     In the previous examples none of the species are chiral, so the
+This can be difficult to comprehend if the symmetry numbers          symmetry number for any nonsymmetric reaction is given
+are visualized in terms of the number of equivalent reactions,
+because in classical mechanics there are four different hydro-
+gen atoms to abstract. However, when it is recognized that
+there is only one transition state that is quantum mechan-
+ically distinguishable, it becomes clear that the symmetry
+number of 12 arises entirely from the effect that symme-
+try has on the rotational partition functions of reactants and
+the transition state. The reader should keep in mind that the
+symmetry number results from certain rotational states (that
+would be present for distinguishable particles) being miss-
+ing in quantum mechanics. It should be noticed that the dif-
+ference of a factor of three when comparing Eq. (6) with
+Eq. (7) is unrelated to the internal rotation of the CH3 frag-
+
+                                                                                             123
+818                                                                                              Theor Chem Account (2007) 118:813­826
+
+                H               H                         H                            O
+                                                     H                                                        H
+
+                                                                     H                           +
+
+                H                                         O                                                      NO
+                                        O                          N
+
+                                                         e1
+
+                                                                         O
+                                                            TS
+
+                                                                            H                 H
+
+                                  ON                                                             Products
+                             Reactant
+
+Structure 6
+
+by Eq. (4). In this section we consider chiral species. We                  noticed that there is no possibility of having chirality when
+note that some of the species in this section are not consid-               the molecule has one or more planes of symmetry.) There
+ered optically active in the traditional sense because they are             are two separate elementary reactions leading to products
+short-lived or have low barriers of conversion between the                  from a common reactant, and therefore the total forward rate
+two mirror images. Because of this, we will avoid the words                 constant kf is
+optically active and enantiomer, and instead use the word chi-
+ral, which describes any three-dimensional object that cannot               kf = ke1 + ke1                                (8)
+be rotated to coincide with its mirror image. An illustrative
+example of chiral transition states is the elimination reac-                where ke1 and ke1 are the rate constants for the passage
+tion of HNO in the cis-methylnitrite molecule (showed in                    to products from the e1 and e1 transition state structures,
+Structure 6). This elimination reaction has a reactant with Cs
+symmetry in the equilibrium configuration and a four-center                 respectively. Both rate constants are equal, so the previous
+transition state with C1 symmetry as indicated in Structure 6.
+                                                                            equation can be written as
+   In the transition state of Structure 6 the oxygen atom is
+not coplanar with the C, O, H, and N atoms. There is another                kf = 2ke1                                     (9)
+transition state e1*, with the same energy as e1, for which
+the oxygen is on the opposite side the plane as indicated in                   Another example of a chiral transition state is the hydro-
+Structure 7.                                                                gen abstraction reaction from methanol by a hydrogen atom.
+                                                                            The rotational symmetry number for reactants is one. The
+        H                       H                                           transition state has C1 symmetry and therefore the symmetry
+                                                                            number for the elementary reaction is one. However, Chuang
+     H                       H                                              et al. [20] have calculated two possible transition states, f1
+                                                                            and f1*, which are chiral (see Structure 8). As in the pre-
+             H                               H                              vious example, there are two elementary reactions with rate
+                                                                            constants that are equal, so the total forward rate constant is
+                                O                                           given by
+                                          N
+        O                                                                   kf = 2kf1                                     (10)
+                  N             e1*
+                                                  O                            An example in which the reactants are chiral is the hydro-
+        e1                                                                  gen abstraction by a hydrogen atom from the C(I)(Br)(Cl)H
+                          O                                                 molecule. This molecule would be present as a racemic
+                                                                            mixture of the two possible chiral isomers, as shown in
+Structure 7                                                                 Structure 9.
+
+   The structures e1 and e1* are chiral, i.e., they are mirror
+images that cannot be superimposed by rotation. (It should be
+
+                                                     H H2                   H2 H
+
+                                   H            H          HH                     H                                    H
+                                          H                                 f1*                                O
+                H+                                   f1
+                                                                TS                         H     H+
+
+                             H         H                                                             Products
+
+                Reactants
+
+Structure 8
+
+123
+Theor Chem Account (2007) 118:813­826                                                                                                819
+
+                           Cl                          H                                                   Ha         Ha
+
+                                                                                                  Hb                            Hb
+
+            Br                          + Br
+
+                   I              H              I               Cl                               Hc                         Hc
+                       g1                                                                            Hc                   Hc
+
+Structure 9                                            g1*
+
+                                                                              Structure 11
+
+   The hydrogen abstraction reaction from g1 and g1* would                       There are eight transition state configurations for the for-
+lead to the two chiral transition states shown in Structure 10.               mation of H2, which are depicted in Structure 12. The h1 and
+                                                                              h2 transition state configurations correspond to the abstrac-
+      Cl                                     Br                               tion of a central hydrogen atom. These configurations are
+                                                                              superimposable, with the symmetry number for this single
+                           H         H                        H      H        transition state equal to one because the symmetry is Cs. The
+                                                                              same reasoning can be applied to h3 and h4. For the last
+Br                                           Cl                               four transition state configurations there is no point group
+                                                                              symmetry, but h5 and h8 are superimposable, and so are h6
+             I                                   I                            and h7. However, h5 and h6 cannot be superimposed and
+                      TS1                               TS1*                  therefore are chiral. The thermal rate constant for hydrogen
+                                                                              abstraction is the sum of the contributions of all the transition
+Structure 10                                                                  states depicted in Structure 13:
+
+   TS1 is only accessible from g1, and TS1 is only acces-                     kf  =  rot,R n TS (h1)  kh1  +  rot,R n TS (h3)   kh3
+sible from g1. There are two distinct reactions with unique                          rot,TS(h1)nR             rot,TS(h3)nR
+
+reactants and transition states that lead to the same products.
+The rate constant for passage through TS1, kTS1(T ) would
+be
+
+kTS1(T  )  =  k  BT            1             QTS1(T )  exp    -V /kBT                +  rot,R n TS (h5)  kh5
+                 h                           Qg1(T )                                    rot,TS(h5)nR
+                           H,CHClBrI  (T  )
+                           rel                                                       2  ×  1         2×  1         2  ×  2
+                                                                                  =  1  ×  1 kh1  +  1×  1 kh3  +  1  ×  1 kh5
+                                                                        (11)
+
+where rHe,lCHClBrI(T ) is the relative translational energy per                   = 2kh1 + 2kh3 + 4kh5                               (13)
+unit of volume and Qg1(T ) is the partition function of g1
+excluding translation. In the same way, the rate constant for                 where nR is two for chiral reactants and the unity otherwise,
+                                                                              nTS(h5) is the number of distinct transition state configura-
+passage through TS1*, which can be reached only from g1*,                     tions that can be represented by h5, which is two
+                                                                              because h5 and h6 have identical thermodynamic proper-
+would be                                                                      ties, and both nTS(h1) and nTS(h3) are equal to one because
+                                                                              they do not correspond to a chiral transition state. It should be
+kTS1  (T  )  =  k  BT           1            QTS1 (T ) exp       -V /kBT      noted that because the transitions states h5 and h6 are non-
+                   h       Hre,lCHClBrI(T )  Qg1 (T )                         superimposable, they are part of different elementary reac-
+                                                                              tions. Doubling the rate constant from two to four for the
+                                                                        (12)  reaction corresponding to h5 is simply a shortcut that is
+                                                                              utilized by recognizing that mirror images have properties
+   When using the rate constant to calculate a reaction rate,                 that are equivalent. Calculating each of the four elementary
+it is important to recognize what the rate constant refers to.                reactions separately would yield the same result achieved in
+In this example, the overall reaction rate for the formation                  Eq. (13).
+of products is given by kTS1(T )[g1][H] + kTS1 (T )[g1][H],
+where [g1], [g1] and [H] are the concentrations of g1, g1*                       The hydrogen abstraction reaction of OH with propane
+and H, respectively. Therefore, after one recognizes the                      [18] is calculated in the same manner. For this reaction, the
+unique elementary reactions, the symmetry number is cal-                      non-degenerate transition states are in Structure 14, and as
+culated normally using Eq. (4).                                               a first approximation the rate constant is calculated using
+                                                                              Eq. (13) Structure 14. However, abstracting with an OH group
+   Another example involving a chiral transition state is the                 rather than an H atom presents a new difficulty because of the
+hydrogen abstraction reaction from propane by a hydrogen                      ability of the OH group to rotate. To appropriately model this
+atom. Propane in the equilibrium configuration has C2v sym-                   reaction, each of the transition states needs to be modelled by
+metry and has no optical isomers, so the rotational symmetry
+is two. In Structure 11, the non-equivalent hydrogen atoms
+have been labelled as Ha, Hb and Hc.
+
+                                                                                                                                     123
+820                                                                                                                     Theor Chem Account (2007) 118:813­826
+
+                                 H H2                             H2 H                     HH                                HH
+
+                           H                        H  H                        H H2                        H     H                     H2
+                                                                                                                                        H
+                           H                        H  H                        H  H                        H     H                   H
+                                                                                                                      H
+                              H               H               H       h2 H            H                  H                              H
+                                                                                                                              h4
+                                     h1                                                       h3
+                                                                                                                            HH
+                                 HH                               HH                       HH
+                                                                                                                  H
+                           H                        H  H                        HH                          H
+
+                           H2                       HH                          HH                          H2 H                      H
+                                H
+                                              H               H2             H        H                  H           H                H2
+                                      h5
+                                                                      h6                   h7                            h8
+
+Structure 12
+
+        H H2                     HH                               HH               The expression for the forward rate constant would be sim-
+                                                                                   ilar to Eq. (13), with the difference that there are multiple
+H                    H H2                     HH                             H     reactants instead of multiple transition states, and they are
+                                                                                   not necessarily chiral species with the same energy, i.e.
+H                    HH    H                     H     H2                    H
+   H                                          H            H              H
+                  H
+
+        h1                       h3                               h5                              kBT                        QTS(T )/rot,TS
+                                                                                                   h           j1(T )e- E1,2/kBT /rot,j1 + j2(T )/rot,j2
+Structure 13                                                                       kf(T )     =
+
+                                                                                                  × exp -V /kBT                                                (14)
+
+treating the OH group as a hindered rotor. This is discussed                       where rot,j1, rot,j2 and rot,TS are the rotation symmetry
+in Sect. 3.5.                                                                      numbers of j1, j2, and the transition state, respectively, E1,2
+                                                                                   is the energy difference between j1 and j2, i.e., E1,2 =
+3.4 Reactions with many conformers                                                 E (j1) ­ E (j2) and V  is the barrier height. For the specific
+
+This section demonstrates how to calculate rate constants                          case that j1 and j2 are nonsuperimposable mirror images of
+for reactions in which the reactants have several conforma-
+tions. An example is considered where the reactants may be                         each other, rot,j1 = rot,j2, E1,2 = 0, j1(T ) = j2(T )
+present in two energetically different conformations j1 and                        and therefore
+j2 of which only j2 can lead to products. A model potential
+for this type of reaction is depicted in Fig. 1, in which all                      kf  (T  )  =      k  BT     QTS(T )   exp          -V /kBT                  (15)
+energies are relative to the most stable conformer of reac-                                             h        j1(T )
+tants. The reactant conformations are all stable structures
+that cannot be superimposed by rotation and therefore can-                         where  is given by Eq. (4), but including the factor of two
+not be taken into account in the rotation symmetry number.
+                                                                                   in the denominator due to the chirality of reactants, i.e.,
+
+                                                                                    = rot,j1                                                                   (16)
+                                                                                           2rot,TS
+
+                                                                      TS              For a general reaction with a set of {R1. . .Ri . . .RN} con-
+                                                                                   formers of reactants that can lead to a set of {T1. . .Tj. . .TM}
+                                                                                   transition states, which lead to products, the forward rate
+
+                                                                                   constant is given by
+
+                                                                                                               M                   -  ET j /kB T
+
+                                                                                                                     QT j (T )e
+
+                                                                                   kf  (T  )  =   k  BT        j =1           rot,T j             exp -V /kBT  (17)
+                                                                                                     h         N        Ri (T )e- ERi /kB T
+Energy
+                                                                                                               i =1      rot,Ri
+
+                                                                          V        where rot,Ri , rot,T j , Ri (T ) and QT j (T ) are the rotational
+                                                                                   symmetry numbers and partition functions of conformations
+
+              j1                                                                   Ri and T j , respectively. The value of ERi is a positive
+                                                                                   energy calculated as the difference between the energy of
+
+              E1,2                        j2                                       conformation Ri and the energy of the most stable confor-
+                                                                                   mation of reactants. In the same manner, ETj is the energy
+Fig. 1 Schematic illustration showing a model potential for a reaction             difference between the energy of transition state T j and the
+with a reactant with two different conformations j1 and j2, of which               energy of the most stable transition state that leads to prod-
+only j2 can lead to products through the transition state TS (see text)            ucts. The value of V  is calculated as the difference between
+
+123
+Theor Chem Account (2007) 118:813­826                                                                                             821
+
+                          H H-OH                         HH                                   HH
+
+                       H                      HH                      H-OH H                           H
+
+                       H                      HH                      H            H                 H-OH
+                          H                                                                       H
+                                           H       H               H                   H
+                                   i1
+                                                         i3                                   i5
+
+Structure 14                                                          The symmetry numbers are correct in both cases. The
+                                                                   reaction through TS1 has C3v symmetry and the reaction
+the energy of the most stable transition state conformation        through TS2 has Cs symmetry, which causes the symmetry
+and the energy of the most stable reactant conformation. It        number for the reaction through TS2 to be three times larger.
+should be noticed that the sum also runs over the different        However, when the internal rotation for TS2 is treated cor-
+chiral isomers and that all the barriers for interconversions of   rectly, the difference in the partition functions at the transition
+reactants should be smaller than V . The above expression          state will largely reconcile the symmetry number difference.
+is valid when the potentials in the vicinity of the stationary
+points are well described by the harmonic oscillator approx-          There are three indistinguishable transition state configu-
+imation. Complications may arise from low barriers of con-         rations of the type TS2 for each reactive hydrogen, as shown
+version between conformations, which may lead to nearly            in Structure 16. The three transition state configurations can
+free internal rotations and the breakdown of the harmonic          be obtained from one another through a torsional motion
+oscillator approximation, which are discussed in Sect. 3.5.        about the C­H bond. This internal rotation leads to a poten-
+                                                                   tial with three equivalent minima, which coincide with the
+3.5 Symmetry numbers and internal rotation                         above configurations, and to three equivalent maxima, which
+                                                                   correspond to the eclipsed configurations. The crucial aspects
+In this section the implications of internal rotation are consid-  of the potential of internal rotation are the magnitude of both
+                                                                   the vibrational frequency of the torsion, tor, and the barrier
+ered. It should be noticed that rotational symmetry numbers        height between the minima, Wtor.
+
+are based on the rotational symmetry of the molecule, i.e.,           In the regime of a high torsional frequency and low tem-
+                                                                   perature, i.e., when kB T << h¯ tor, the potential is well
+they are based on the rotation of the molecule as a whole,         represented by an inverted parabola and the harmonic oscil-
+                                                                   lator (HO) partition function is a good approximation for this
+whereas internal rotation involves the rotation of a given part    torsional mode. Assuming separable HO partition functions
+                                                                   for all the normal modes, the total partition function for TS2
+of the molecule relative to the rest of the molecule, and that     is given by:
+
+it is actually a vibrational mode.
+
+Torsion approximations can properly account for indis-
+
+tinguishable minima corresponding to a nearly free internal
+
+rotation. This is demonstrated with the example of the hydro-
+
+gen abstraction reaction from methane by the fluorine atom.
+
+For this reaction, some electronic structure calculations pre-
+
+dict a transition state with C3v symmetry (TS1), such as the                                      3N -8
+one shown in Structure 15.
+                                                                   Qvib,TS2(T ) = qtHorO,TS2(T )         qmH,Ovib,TS2(T )
+   Therefore, the symmetry number for this reaction f1 is:
+                                                                                                  m=1
+
+f1  =   rot,R   =      F × rot,CH4(Td)  =  1 × 12  =4                                     3N -7
+       rot,TS1           rot,TS1(C3v )        3
+                                                                                   =             qmH,Ovib,TS2(T )                 (20)
+
+                                                         (18)                             m=1
+
+   Other electronic structure calculations predict a bent tran-    where qtHorO,TS2(T ) and qm,3N-7,TS2(T ) are two names for the
+sition state with Cs symmetry (TS2) as depicted below              HO vibrational partition function of the torsional mode with
+                                                                   frequency tor, and qmH,Ovib,TS2(T ) for m = 1, . . . , 3N - 8
+       H                                                           are the HO vibrational partition functions of the other modes.
+
+H               H      F                                           In this case the thermal rate constant evaluated by the TST
+
+                                                                   expression is given by:
+
+       H
+                  TS2
+
+In this case the symmetry number f2 is given by                    kTST  (T  )  =  12  k  BT  Q  rot,TS2(T )Qvib,TS2  (T  )  exp  -V /kBT
+                                                                                          h                R(T )
+f2  =   rot,R   = F × rot,CH4(Td)      =  1 × 12  = 12.
+       rot,TS2        rot,TS2(Cs)            1           (19)                                                                     (21)
+
+                                                                                                                                  123
+822                                                                                                                  Theor Chem Account (2007) 118:813­826
+
+                                                                  H
+
+                                                               H               HF
+
+                                                     H            H             TS1                                            H
+
+                               F+ H                                                                       F H+
+
+                                           H            H                                                            H            H
+
+                                                  Reactants                                                      Products
+
+Structure 15
+
+        F                                                                            to that for which the transition state is of type TS1, since in
+
+Ha             Hb Ha                                 Hb Ha                     Hb    that case:
+
+                                                                                     kTST (T  )  =  4  k  BT
+                                                                                                          h
+                                                   F           F
+           Hc                              Hc                           Hc                          ×  Qrot,TS1  (T  )qmH,O3N  -7,TS1(T   )  3mN=-18qmH,Ovib,TS1(T )
+Structure 16                                                                                                                         R(T  )
+
+                                                                                                    × exp -V /kBT .                          (24)
+
+where Qrot,TS2(T ) is the TS2 rotational partition function for                         The internal rotation for TS2 is very nearly a free rotation,
+distinguishable particles given by Eq. (2b) and Qvib,TS2(T )
+is given by Eq. (20).                                                                therefore the factor of three that was lost from the rotational
+
+   However, when kB T >> Wtor, the rotation around the                               partition function when the C3v symmetry of TS1was broken
+C­H bond would be nearly free, therefore the classical free                          reappears in the vibrational partition function from the inter-
+rotor (FR) partition function is a good approximation. The
+FR partition function is given by:                                                   nal rotation. However, the rate constants for TS1 and TS2
+
+qFR(T ) =     (2 I kBT )1/2    =            1     q  FR(T   )                  (22)  will still be different, as they should be because they are dif-
+                   h¯ int                  int                                       ferent structures. Most importantly, qtFoRr,TS2(T ) may not be
+                                                                                     similar to qmH,O3N-7,TS1(T ); additionally the other vibrational
+where I is the effective moment of inertia for internal rota-                        and rotational partition functions will likely be slightly differ-
+tion, qFR(T ) is the FR partition function without the sym-
+metry number for internal rotation, and int is the symmetry                          ent. While the factor of three has been recovered, it depends
+number for internal rotation. For the above reaction, int is
+three because the three minima depicted in Structure 16 are                          on how the change in geometry has influenced the partition
+
+quantum mechanically indistinguishable. In this case the tor-                        functions as to whether or not the rate constant for TS1 will
+
+sional mode is treated as a free rotation instead of a harmonic                      be similar to the rate constant for TS2.
+
+vibration, and therefore the TST rate constant is given by:                             It should be noticed that Eq. (21) and Eq. (23) are extreme
+                                                                                     cases. An important intermediate regime is when h¯ tor <<
+                                                                                     kB T << Wtor. The partition function for this intermediate
+                                                                                     (I) case is given by:
+
+                                                                                     QI(T )   =     kBT                                      (25)
+                                                                                                    h¯ tor
+
+kTST(T )                                                                             For a reaction in which internal rotations may play a role,
+
+                               qtFoRr,TS2  (T  )     3N -8                           it would be desirable to have an expression for the partition
+               rot,TS2               3               m=1
+= 12 kB T  Q            (T  )                               qmH,Ovib,TS2(T  )        function that is accurate for the two extreme cases of FR and
+
+        h                                  R(T )                                     HO and displays smooth behaviour for intermediate cases.
+
+× exp -V /kBT                                                                        A function with these characteristics has been given else-
+
+                                                                                     where [19] and has the form:
+
+=  4kBT    Q           (T  )qtFoRr,TS2(T       )     3N -8  qmH,Ovib,TS2(T  )        Q = QHO tanh(QFR/QI)                                    (26)
+              rot,TS2                                m=1
+
+     h                                     R(T )                                     where QHO, QFR and QI are the partition function for the
+                                                                                     HO, FR and intermediate case of Eq. (25), respectively. The
+× exp -V kBT                                                                   (23)  example of this section deals with internal rotations in the
+                                                                                     transition state but the same reasoning can be applied to
+where the symmetry number of rotation is partially cancelled                         internal rotations in the reactants or in both reactants and
+out by the internal rotation symmetry number. This result                            the transition state.
+indicates that a free rotation for the torsional mode is similar
+
+123
+Theor Chem Account (2007) 118:813­826                                                                                                                      823
+
+   The H + CH3OH  H2 + CH2OH abstraction reaction                          where         H,HCD2 OH       is  the   relative    translational  partition  func-
+[20] is a case where an internal rotation approximation is                               rel
+able to account for multiple configurations. If two of the
+three hydrogens of the methyl group were deuterated, the rate              tion per unit of volume as mentioned in the Introduction.
+constant for hydrogen abstraction is expected to be approxi-
+mately three times smaller than that involving the undeuter-               Noticed that this rate constant is about one third the rate con-
+ated methanol because there are one third as many reactive
+atoms. The rate constant of interest is for the H+HCD2OH                   stant obtained for the undeuterated reaction as it should be.
+H2 + CD2OH process. The molecule HCD2OH has the three
+conformers depicted in Structure 17, where k1 and k1* are                  For distinguishable conformers, as is the case here, it may
+chiral.
+                                                                           be desirable to use a torsional method that accounts for the
+
+                                                                           multiple wells of the reactant and/or transition state regions
+
+                                                                           instead of using a simple HO approximation. Specifically,
+
+                                                                           the HO approximation for the torsional mode is replaced by
+
+                                                                           the multiconformer HO (MC­HO) treatment: [21,22]
+
+          H                H                         H                     Q  MC      -  HO  =   P    e-(U j +h¯ tor, j /2)                                (28)
+                                                                              tor               j =1   1 - e-h¯ tor, j
+
+D             H         D           D        H               D
+
+          D                H                         D                     where P is the number of distinguishable minima, tor, j is
+                                                                           the harmonic frequency at minimum j of the torsional mode,
+          k1               k2                    k1*                       and U j is the energy of well j of this mode relative to the
+                                                                           lowest well of this mode. In this example we have labeled
+Structure 17                                                               the torsional mode as 3N - 7 in the transition state and 3N -
+                                                                           8 in reactants In the case of the deuterated methanol, all
+   Structure 18 depicts the two lowest-energy transition states            of the wells have the same energy so U j = 0 in all cases,
+starting from the above reactants                                          but k2 does have a frequency for the torsional mode that is
+                                                                           different than k1 and k1*. In the same manner, the MC­HO
+                   H H2                H2 H                                method is used as part of the torsional method to calculate the
+                                                                           partition function for the transition state. However, because
+              D            DD                D                             the multiple transition state configurations are now accounted
+                    Tk1                                                    for using the torsional method, the symmetry number for the
+                                       Tk1*                                transition state is no longer equal to two, rather it is equal to
+                                                                           one. This MC­HO partition function for the torsion is then
+Structure 18                                                               used in the equations given above and the TST rate constant
+                                                                           is given by Eq. (29),
+For this case Eq. (17) leads to the following expression:
+
+kTST(T )  =   kBT     1                -V /kBT                      Qrot,Tk1(T     ) Q vib,Tk1 (T     )  +   Q             (T  ) Q vib,Tk1   (T  )
+               h   H,HCD2OH exp                                                                                 rot,Tk1
+
+                   rel                               Qrot,k1(T      ) Q vib,k1 (T  )  +  Q           (T  ) Q vib,k2 (T  )  +   Q          (T  )Qvib,k1 (T  )
+                                                                                             rot,k2                               rot,k1
+
+          = kBT       1       2 Q rot,k1 (T  2 Q rot,Tk1 (T  )Qvib,Tk1(T )                      )  exp   -V /kBT                                       (27)
+               h                             )Qvib,k1(T )    + Qrot,k2(T )Qvib,k2(T
+                   H,HCD2 OH
+                   rel
+
+kTST(T )  =   kBT       1      QM3NC--7H,TOS(T )Qrot,Tk1(T )        3N -8  qm,vib,Tk1(T         )  exp   -V /kBT
+               h                                                    m=1
+
+                   H,HCD2 OH   Q    MC-HO    (T  )Q          (T  )  3N -7  qm,vib,k1(T       )
+                   rel              3N -6,R          rot,k1         m=1
+
+          = kBT       1        2       e-h¯ 3N -7, j /2      × Qrot,Tk1(T )              3N -8  qm,vib,Tk1   (T    )
+               h                                                                         m=1
+                   H,HCD2 OH   j =1 1-e-h¯ 3N -7, j                                                                   exp  -V /kBT
+                   rel
+                                    3  e-h¯ 3N -6, j /2          × Qrot,k1(T )           3N -7  qm,vib,k1(T     )
+                                                                                         m=1
+                                    j =1 1-e-h¯ 3N -6, j
+
+          = kBT       1                -V /kBT                      2 e-h¯ 3N-7,Tk1/2    Qrot,Tk1(T )           3N -8  qm,vib,Tk1(T       )
+               h                                                                                                m=1
+                   H,HCD2 OH   exp                                    1-e-h¯ 3N-7,Tk1                                                                      (29)
+
+                   rel                               2 + e-h¯ 3N -6,k1/2      e-h¯ 3N -6,k2/2            × Qrot,k1(T )         3N -7  qm,vib,k1(T   )
+                                                                              1-e-h¯ 3N -6,k2                                  m=1
+                                                       1-e-h¯ 3N -6,k1
+
+                                                                                                                                                    123
+824                                                                                     Theor Chem Account (2007) 118:813­826
+
+              HO  COOH HO          COOH HO                            COOH HO                  COOH
+
+              HO  COOH HO          COOH HO                            COOH HO                  COOH
+
+                  L-tartaric acid  D-tartaric acid                mesotartaric acid     mesotartaric acid
+
+Structure 19
+
+   Because the summation accounts for three degenerate            states (this time explicitly drawing the carboxyl group on the
+wells, the torsional treatment causes the reactant partition      reacting carbon).
+function to be approximately three times as large as the par-
+tition function for undeuterated methanol, which causes the                          O
+rate constant for the deuterated methanol to be about 1/3 as
+large, just as expected.                                          HO                 CO-H-OH- HO                  COOH
+
+   While the rate constant for undeuterated methanol was          HO                 COOH      HO                 CO-H-OH-
+calculated in an earlier example by accounting for the two
+nonsuperimposable transition states that were low in energy,                                                      O
+a better way to account for the entire range of motion is
+to use a torsional method for the transition state as well.           L-TS1                                L-TS2
+Note that the strategy used for this example is very similar
+to the strategy discussed in Sect. 3.4. The difference is that                       O
+in Sect. 3.4, the vibrations were only calculated using the
+HO approximation, whereas this example uses the MC-HO             HO                 CO-H-OH-  HO                 COOH
+partition function in conjunction with Eq. (26). Therefore,
+as the motion becomes more like a free internal rotation, the     HO                 COOH      HO                 CO-H-OH-
+rotational partition function calculated by Eq. (26) remains
+qualitatively correct. If the multiple conformations of the           D-TS1                                           O
+torsion were calculated using the strategy in Sect. 3.4, there
+would be substantial error in regions where the HO approx-                                                 D-TS2
+imation was not valid. The drawback of Eq. (29) is that the
+rotational and vibrational partition functions, with exception                       O
+of the torsional mode, are considered to be equal for all con-
+formers.                                                          HO                 CO-H-OH-  HO                 COOH
+
+   For further details on the treatment of internal rotation, we  HO                 COOH      HO                 CO-H-OH-
+refer to references [19­22].
+                                                                      m-TS1                                           O
+3.6 An example involving an achiral diasteromer
+                                                                                                           m-TS2
+
+                                                                  Structure 20
+
+Tartaric acid is an organic acid that is naturally occurring         The transition states have been labelled according to which
+in the l-(-)-tartaric acid form [23,24]. Tartaric acid has two    reactant they originated from, where l-indicates that it origi-
+carbon stereocenters and which allows it to be synthesized in     nated from l-tartaric acid, d-indicates that it originated from
+three distinguishable configurations. There is a set of enan-     d-tartaric acid, and m- indicated that is originated from meso-
+tiomers, and there is also a meso complex. These configura-       tartaric acid. The transition states that originate from the meso
+tions are shown in Structure 19.                                  reactant are labelled with m-instead of meso- because they
+                                                                  are not superimposable. l-TS1 and l-TS2 are superimpos-
+   While l-tartaric acid and d-tartaric acid are distinguish-     able by a rotation, so there is only a single indistinguishable
+able, the two drawings of mesotartaric acid are superimpos-       transition state for this reaction. This is also true for d-TS1
+able, so there is only a single distinguishable configuration     and d-TS2. For the l- and d-enantiomers, there is a single
+for mesotartaric acid. That is, there are three stereoisomers     elementary reaction leading to a single product for each enan-
+of tartaric acid; two of them are enantiomers, and the third is   tiomer, as shown in Structure 21.
+an achiral diastereomer.
+                                                                     The two transition states for mesotartaric acid are not
+   For a reaction where the acidic proton is abstracted by        superimposable. There are two elementary reactions with
+OH- to create the conjugate base, we illustrate the transition
+
+123
+Theor Chem Account (2007) 118:813­826                                                                                            825
+
+                                                                    O                            O
+
+                      HO       COOH                     HO          CO-H-OH                  HO  CO
+
+                                         + OH                                                                + H2O
+
+                      HO       COOH                     HO          COOH                     HO  COOH
+
+                      L-tartaric acid                        L-TS                                L-Product
+
+                                                                    O                            O
+
+                      HO       COOH                     HO          CO-H-OH                  HO  CO
+
+                                         + OH                                                                + H2O
+
+                      HO       COOH                     HO          COOH                     HO  COOH
+
+                      D-tartaric acid                        D-TS                                D-Product
+
+Structure 21
+
+                                                                    O                            O
+
+                      HO       COOH                     HO          CO-H-OH                  HO  CO
+
+                                         + OH                                                                + H2O
+
+                      HO       COOH                     HO          COOH                     HO  COOH
+
+                      mesotartaric acid                      m-TS1                               m-Product1
+
+                      HO       COOH                     HO          COOH                     HO  COOH
+
+                                         + OH                                                                + H2O
+
+                      HO       COOH                     HO          CO-H-OH                  HO  CO
+
+                      mesotartaric acid                                  O                       O
+
+                                                             m-TS2                               m-Product2
+
+Structure 22
+
+distinct transition states that lead to distinct products. These   where QD-R(T ) is the reactant partition function for
+are shown in Structure 22.                                         d-tartaric acid. At this point, we are able to take advantage
+                                                                   of mirror images, and we find that QL-TS(T ) = QD-TS(T ),
+   Now that the elementary reactions have all been deter-          QL-R(T ) = QD-R(T ), and the barrier heights are the same,
+mined, the symmetry numbers for the rate constants can be          therefore kL(T ) = kD(T ).
+calculated. For l-tartaric acid, the reactant has C2 symme-
+try and the transition state has C1 symmetry, which yields a          For mesotartaric acid, the reactant has Cs symmetry, and
+symmetry number of 2. Therefore, the forward rate constant         both of the transition states have C1 symmetry, which yield a
+for the formation of l-product is                                  rotational symmetry number of 1. However, the chiral transi-
+                                                                   tion states present an additional difficulty, because the single
+kL(T  )  =  2  k  BT    1         QL - TS(T )  exp  -V /kBT        reactant can follow two different elementary reactions, so
+                  h            QL-R(T )QOH -                       the symmetry number for the formation of the two products
+                      L-R,OH-                                      is two. Therefore, each elementary reaction has a symmetry
+                      rel                                          number of one due to the chirality of the transition states [7].
+                                                                   The rate constants for meso-product1 and meso-product2 are
+                                                            (30)
+
+where QL-R(T ) is the reactant partition function for
+                                               L-R,OH-
+l-tartaric acid excluding translation and      rel      is  the                           k  BT     1         Qm - TS1(T )
+                                                                                             h              Qm-R(T )QOH -
+relative translational partition function per unit volume as       km       -  1(T  )  =         m-R,OH-                    exp  -V /kBT
+                                                                                                 rel
+stated in Sect. 1. Similarly, the forward rate constant for the
+
+formation of d-product is                                                                                                        (32)
+
+kD(T  )  =  2  k  BT     1        QD - TS(T )  exp  -V /kBT        km          2(T  )  =  k  BT     1         Qm - TS2(T )  exp  -V /kBT
+                  h            QD-R(T )QOH -                                                 h              Qm-R(T )QOH -
+                      D-R,OH-                                               -                    m-R,OH-
+                      rel                                                                        rel
+
+                                                            (31)                                                                 (33)
+
+                                                                                                                                 123
+826                                                                 Theor Chem Account (2007) 118:813­826
+
+where Qm-R(T ) is the reactant partition function for meso-         Acknowledgments A.F.-R. thanks the Ministerio de Educación y
+tartaric acid. Once again, we may take advantage of the mirror      Ciencia (MEC) and Xunta de Galicia (through the Dirección Xeral de
+images to find that Qm-TS1(T ) = Qm-TS2(T ), and therefore          Promoción Científica e tenolóxica do SUG) for financial support under
+km-1(T ) = km-2(T ).                                                projects #BQU2003-01639 and #2006/XA088, respectively. R. M.-P.
+                                                                    thanks the MEC for a research contract under project #BQU2003-
+   For tartaric acid, there are three possible reactants that can   01639. B.A.E. and D.G.T. thank the US Department of Energy for
+form four possible products. Each product is only accessible        research support, through grant no. DOE-FG02-86ER13579.
+from a single reactant. The properties of mirror images can
+be used to decrease the number of quantities that must be cal-      References
+culated. It is advisable not to employ any additional shortcuts
+when dealing with a complicated system like this one. We             1. Eyring H (1935) J Chem Phys 3: 107­115
+recommend for the rate constants to be used exclusively with         2. Evans MG, Polanyi M (1935) Trans Faraday Soc 31: 875­894
+their corresponding reactants and products and not to use for-       3. Truhlar GG, Isaacson AD, Garrett BC (1985) Theory of chemical
+mulas like Eq. (17) in any case where it may be conceptually
+difficult.                                                               reaction dynamics. In: Baer M (ed) CRC Press, Boca Raton, vol 4,
+                                                                         pp 65­137
+4 Summary                                                            4. Truhlar DG, Garrett BC, Klippenstein SJ (1996) J Phys Chem 100:
+                                                                         12771­12800
+The present article shows how to calculate the rotational sym-       5. Fernández-Ramos A, Ellingson BA, Garrett BC, Truhlar DG
+metry numbers for various molecular configurations and how               (2007) Rev Comp Chem 23: 125­232
+to apply these symmetry numbers to transition state theory.          6. Garrett BC, Truhlar DG (1998) Encyclopedia of computational
+For most reactions, the overall symmetry number is given by              chemistry. In: Schleyer PvR, Allinger NL, Clark T, Gasteiger J,
+the ratio of the reactant and transition state rotational symme-         Kollman PA, Schaefer III HF (eds) Wiley, Chichester, vol. 5, pp.
+try numbers, as given by Eq. (4). For bimolecular reactions              3094­3104
+where the two reactants are equivalent, the symmetry number          7. Pollak E, Pechukas PJ (1978) J Am Chem Soc 100: 2984­2991
+is a rotational-translational symmetry number, which gives           8. Coulson DR (1978) J Am Chem Soc 100: 2992­2996
+rise to an additional factor of two.                                 9. Herzberg G (1950) Molecular spectra and molecular structure:
+                                                                         spectra of diatomic molecules, 2nd edn, Van Nostrand D (ed)
+   Section 3 contains several examples for calculating the               Princeton, NJ, pp. 132­139
+symmetry number for reaction rate constants. Section 3.1            10. McQuarrie DA (2000) Statistical mechanics. University Science
+gives examples for symmetry numbers that are both intuitive              Books, Sausalito
+and nonintuitive. Section 3.2 illustrates that Eq. (4) is techni-   11. Wilson EB Jr (1935) J Chem Phys 3: 276­85
+cally valid for symmetric reactions, but the number of interest     12. Bunker P, Jensen P (1998) Molecular symmetry and spectroscopy.
+is typically twice as large as predicted by Eq. (4) because both         Edited by NRC Research press, 2nd edn
+the forward and reverse flux contribute equally. Section 3.3        13. Chakraborty A, Truhlar DG, Bowman JM, Carter S (2004) J Chem
+illustrates how to account for chiral isomers using the symme-           Phys 121: 2071­2084
+try number. Multiple conformers for reactants and/or transi-        14. Truhlar DG (1976) J Chem Phys 65: 1008­1010
+tion states are illustrated in Sect. 3.4, and Sect. 3.5 deals with  15. Dennison DM (1927) Proc Roy Soc Lond Ser A 115: 483­486
+internal rotation, where the treatment used in some previous        16. Schatz GC, Kuppermann A (1976) J Chem Phys 65: 4668­4692
+examples is improved upon. Section 3.6 gives an example             17. Truhlar DG, Abdallah J Jr (1974) Phys Rev A 9: 297­300
+involving an achiral diasteromer.                                   18. Hu W-P, Rossi I, Corchado JC, Truhlar DG (1997) J Phys Chem A
+                                                                         101: 6911­6921
+   Many of the typical problems that arise when using               19. Truhlar DG (1991) J Comput Chem 12: 266­270
+symmetry numbers have been highlighted. Even complicated            20. Chuang YY, Radhakrishnan ML, Fast PL, Cramer CJ, Truhlar
+scenarios are treated systematically by properly calculating             DG (1999) J Phys Chem A 103: 4893­4909
+rotational symmetry numbers and differentiating between             21. Chuang YY, Truhlar DG (2000) J Chem Phys 112: 1221­1228;
+distinguishable and indistinguishable reaction paths.                    (2004) 121: 7036(E); (2006) 124: 179903(E)
+                                                                    22. Ellingson BA, Lynch VA, Mielke SL, Truhlar DG (2006) J Chem
+                                                                         Phys 125: 84305­84317
+                                                                    23. http://www.en.wikipedia.org/wiki/Tartaric_acid
+                                                                    24. http://www.en.wikipedia.org/wiki/Diastereomer
+
+123
+

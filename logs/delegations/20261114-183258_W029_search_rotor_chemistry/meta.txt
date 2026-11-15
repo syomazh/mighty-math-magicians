@@ -1,0 +1,8 @@
+slug:    W029_search_rotor_chemistry
+brief:   briefs/W029_search_rotor_chemistry.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 18:32:58 PST
+attempt 1: exit 0 at 19:00:01
+ended:   2026-11-14 19:00:01 PST
+exit:    0
