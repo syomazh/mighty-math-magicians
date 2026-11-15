@@ -1,0 +1,47 @@
+/-
+Written by an Open Math OS worker (model recorded in logs/delegations/INDEX.md, brief W057c), 2026-11-15. Not human-reviewed.
+
+Cycle-type invariance and lemmas for the conjugation proof of the recurrence for K(a).
+-/
+import MMM.LegendreDefs
+import Mathlib.GroupTheory.PGroup
+import Mathlib.Data.ZMod.Basic
+
+noncomputable section
+namespace MMM
+
+theorem cycleType_permCongr {α β : Type*} [Fintype α] [DecidableEq α]
+    [Fintype β] [DecidableEq β] (e : α ≃ β) (π : Equiv.Perm α) :
+    (Equiv.permCongr e π).cycleType = π.cycleType := by
+  let p : β → Prop := fun _ => True
+  let f : α ≃ Subtype p := {
+    toFun := fun a => ⟨e a, trivial⟩
+    invFun := fun b => e.symm b.1
+    left_inv := fun a => by simp
+    right_inv := fun b => Subtype.ext (e.apply_symm_apply b.1)
+  }
+  have h1 : Equiv.permCongr e π = π.extendDomain f := by
+    apply Equiv.ext
+    intro x
+    have hx : x ∈ Set.range (fun a : α => (f a : β)) := by
+      use e.symm x
+      simp [f]
+    obtain ⟨a, rfl⟩ := hx
+    change (Equiv.permCongr e π) (f a) = (π.extendDomain f) (f a)
+    rw [Equiv.Perm.extendDomain_apply_image]
+    simp [Equiv.permCongr_apply, f]
+  rw [h1, Equiv.Perm.cycleType_extendDomain]
+
+/-- The count does not depend on the set of points. -/
+theorem card_cycleType_replicate_eq (p a : ℕ) (X : Type) [Fintype X] [DecidableEq X]
+    (hX : Fintype.card X = p * a) :
+    Nat.card {π : Equiv.Perm X // π.cycleType = Multiset.replicate a p} = Kcount p a := by
+  let e : X ≃ Fin (p * a) := Fintype.equivFinOfCardEq hX
+  exact Nat.card_congr {
+    toFun := fun π => ⟨Equiv.permCongr e π.1, (cycleType_permCongr e π.1).trans π.2⟩
+    invFun := fun π => ⟨Equiv.permCongr e.symm π.1, (cycleType_permCongr e.symm π.1).trans π.2⟩
+    left_inv := fun π => Subtype.ext (Equiv.ext (fun x => by simp [Equiv.permCongr_apply]))
+    right_inv := fun π => Subtype.ext (Equiv.ext (fun x => by simp [Equiv.permCongr_apply]))
+  }
+
+end MMM

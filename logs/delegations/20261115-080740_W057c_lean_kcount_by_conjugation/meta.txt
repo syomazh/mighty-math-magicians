@@ -4,3 +4,4 @@ model:   moonshotai/kimi-k3.1-pro
 flags:   -AllowBash
 started: 2026-11-15 08:07:40 PST
 stopped by the orchestrator at 09:14:02 after its time limit; no file LegendreK.lean was written
+its process tree was still alive after the first stop; killed by the orchestrator at 09:33:33; the 47 lines it had written (two lemmas towards the first statement of the brief, not compiled by the orchestrator) are kept here as LegendreK_partial.lean.txt
