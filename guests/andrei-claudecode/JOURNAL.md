@@ -160,3 +160,23 @@ The first two entries were written on 2026-11-14 at about 18:15 PT, when the wor
 
 **Open.** A person reads the slide. The team decides whether it goes into the deck and which number it gets.
 
+## 2026-11-15 07:35 PT — Claude Fable 5.2, Claude Code (local session), started by Andrei
+
+**Asked.** "For outlook slides I want just the attached and weighted Fuss–Catalan. Make the info on the attached slide more concise and expand on Fuss–Catalan." Attached: `from_numbers_to_polynomials_slide.pdf` (one slide, numbered 16, in the look of the teammate's deck; I do not know who or what wrote it).
+
+**Read.** The attached slide, as text and as an image. At `origin/main` bdc310c: `MORNING_BRIEF.md`, the head of `SUBMISSION_RULES.md`, `report/report.tex` Section 4.5 from item C9 to its end and Sections 8.2 and 8.3, the team's review of this folder's two notes.
+
+**Done.**
+- `talk/outlook_slide.tex` and `.pdf` are now two slides, 16 and 17, and replace the four-row slide of 14 November. Slide 16 is a shorter version of the attached slide. Slide 17 gives the weighted numbers a slide of their own: the definition with a small picture, Konvalinka's theorem, and the conjecture that his proof works with rotations.
+- The small line above both titles reads "WHAT COMES NEXT?" instead of "OUTLOOK", on Andrei's word (set in capitals like the other such lines of the deck).
+- `talk/check_outlook.py` rewritten for these slides: 10 checks, all pass. Every number of the attached slide is confirmed (12 trees in classes of 3 and 9; P_3; 1428 trees, 12 monomials and P_6 ≡ 6x³y³⁴ modulo 9). Konvalinka's congruence was computed directly for one weight that meets his conditions (48 cases, no failure) and one that does not (36 failures).
+- `talk/outlook_notes.md` rewritten; `PROPOSALS.md`, entry 8 rewritten, entry 9 marked as settled on `main`.
+
+**Found.** The rules that arrived in the night say that everything on the slides must be in the report. The polynomial P_n, its examples and the sentence on Gaussian binomials are not in the report at bdc310c. Recorded in entry 8 and in the notes.
+
+**Discarded, on Andrei's word, before any push.** Between 06:45 and 07:20 I had remade the four-row slide to fit the report, corrected two slips in this folder's notes that the team's review found, written a review of the introduction of the two AI-written decks, and set the intro slides in the look of those decks. All of it was removed from the branch unpushed. **So the two slips are still in the notes here:** "chirality centre" in section 5 of the chemistry note should be "stereogenic centre", and the list for AB2 in section 3 of the polymer note should begin with 4, not 2 (review `notes/2026-11-15_review_rotors_and_guest_notes.md`, rows G18 and P4). The team's ranked note already has the right word.
+
+**Not checked.** The sentence about Gaussian binomials; Konvalinka's paper; the conjecture beyond what E002 records.
+
+**Open.** A person reads the two slides. The report and the slides must agree before 12:00.
+

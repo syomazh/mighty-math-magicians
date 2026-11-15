@@ -70,16 +70,18 @@ Added 2026-11-14 at about 21:30 PT; changed before 22:03 PT, when the slides wer
 - **Evidence.** `guests/andrei-claudecode/talk/make_intro.py` (9 checks, all pass; the tree counts come from listing trees or from the recursion, not from the formula). The line "Our proof does not use the formula" is the statement of `paper/main.tex`, lines 54 and 72 at 9a4ff85.
 - **Limits.** The proof by Legendre's formula behind the arrow of slide 4 was written out by us (in `intro_notes.md`) and not compared with Konvalinka's text. Two cautions for the speaker are in `intro_notes.md`: his tree argument (divisibility) and the exact tree proof for p = 2 by Deutsch and Sagan are earlier work on trees.
 
-## 8. The deck in `talk/`: one slide "What comes next", for the humans
+## 8. The deck in `talk/`: two outlook slides, for the humans
 
-Added 2026-11-14 at about 22:10 PT.
+Added 2026-11-14 at about 22:10 PT; rewritten 2026-11-15 at 07:35 PT, when Andrei replaced the four-row slide by two.
 
-- **What is offered.** `guests/andrei-claudecode/talk/outlook_slide.pdf`, one page in the look of the deck, to stand before its last slide. Four rows: (1) weighted Fuss–Catalan numbers, Konvalinka's congruence from rotations alone; (2) other statistics, with p^t dividing ∏ binom(q·n_i, n_(i+1)); (3) the next digit, C/p^t ≡ N_t + p·N_(t+1) (mod p²); (4) q not a prime power.
-- **Why these.** The deck has no slide on future work. Rows 1 and 2 are the further directions named in the problem statement and are claims C9 and C10 of the ledger (grade "computed"); rows 3 and 4 are the open items of `FINDINGS.md` and questions 40 and 37 of `talk/QA.md`.
-- **Evidence.** `guests/andrei-claudecode/talk/check_outlook.py` (5 checks, all pass) for rows 2 and 3. Row 1 rests on `experiments/E002_extensions`, not rerun here.
-- **Limits.** The formula of row 1 leaves out Konvalinka's two conditions on the weights. Nothing on the slide is a result; `outlook_notes.md` gives the status of each row.
+- **What is offered.** `guests/andrei-claudecode/talk/outlook_slide.pdf`, two pages in the look of the deck, numbered 16 and 17. (16) "From numbers to polynomials": a shorter version of a slide that Andrei supplied, P_n(x, y) = Σ x^height y^(sum of leaf depths), with the example for ternary trees with three internal nodes. (17) "Weighted Fuss–Catalan numbers": the definition with a picture, Konvalinka's theorem, and the conjecture C9.
+- **If the four-row slide of 14 November was copied anywhere, drop it.** Its row "Other statistics" was proved in the night and is no longer future work.
+- **Against the report.** Slide 17 is Section 4.5, item C9. Of slide 16 the general statement is in Section 4.5 (C11, C28), but **the polynomial P_n, its two examples and the sentence about Gaussian binomials and cyclotomic factors are not in the report**. If the slide is shown, the report needs them (two or three sentences in Section 4.5), or the slide loses them.
+- **Evidence.** `guests/andrei-claudecode/talk/check_outlook.py` (10 checks, all pass): every number of slide 16; the picture of slide 17; Konvalinka's congruence for one weight that meets his conditions and one that does not. The conjecture itself rests on `experiments/E002_extensions`, not rerun.
 
-## 9. `talk/QA.md`, question 46 ("What would you do with two more months?"): out of date on Lean
+## 9. `talk/QA.md`, question 46 ("What would you do with two more months?"): out of date on Lean — settled on `main`
+
+**Nothing left to do.** The answer was rewritten on `main` on 2026-11-15 at 00:24 (commit 47e4185), before this entry reached it; my clone was behind when I wrote it.
 
 Added 2026-11-14 at about 22:10 PT.
 

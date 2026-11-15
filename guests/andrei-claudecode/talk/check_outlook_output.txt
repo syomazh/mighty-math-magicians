@@ -1,11 +1,13 @@
 # Output of check_outlook.py, a script written by Claude Fable 5.2 in Claude Code, started by Andrei, 2026-11-15. Not human-reviewed.
-PASS  2a trees with n_i internal nodes at depth i: listing them gives prod binom(q n_i, n_(i+1))  (q = 2, n <= 8; q = 3, n <= 5; q = 4, n <= 4)
-PASS  2b p^t divides prod binom(q n_i, n_(i+1)) for every profile, and the products add up to the number of trees  (q = 2, n <= 18; 3, <= 13; 4, <= 12; 5, <= 10; 8 and 9, <= 9)   26697 profiles, 111 of them with the power of p exactly t
-PASS  3a a rotation class with d asymmetric nodes has exactly p^d trees  (p = q = 2, n <= 11; 3, n <= 7; 5, n <= 4)
-PASS  3b the least d is t, and the number of classes with d = t is not divisible by p
-PASS  3c C/p^t = N_t + p N_(t+1) modulo p^2
-   p = q = 2, n = 6: 132 trees, t = 2, classes by d: N_2 = 3, N_3 = 3, N_4 = 4, N_5 = 1
-   p = q = 3, n = 5: 273 trees, t = 1, classes by d: N_1 = 1, N_2 = 3, N_3 = 6, N_4 = 1
-   p = q = 3, n = 7: 7752 trees, t = 1, classes by d: N_1 = 1, N_2 = 6, N_3 = 15, N_4 = 36, N_5 = 15, N_6 = 1
+PASS  1a q = 3, n = 3: 12 trees in two rotation classes of 3 and 9 trees, with x^2 y^13 and x^3 y^15
+PASS  1b P_3 = 3 x^2 y^13 + 9 x^3 y^15, which is 3 x^2 y^13 modulo 9   P_3 = 3 x^2 y^13 + 9 x^3 y^15
+PASS  1c q = 3, n = 6: 1428 trees, 12 monomials, P_6 = 6 x^3 y^34 modulo 9   P_6 mod 9 = 6 x^3 y^34
+PASS  1d height and sum of leaf depths are the same for all trees of a rotation class  (p = q = 2, n <= 11; 3, n <= 7; 5, n <= 4)
+PASS  1e p^t divides every coefficient of P_n  (same range)
+PASS  1f modulo p^(t+1) only the classes with d = t remain  (same range)
+PASS  1g prime powers: p^t divides every coefficient of P_n  (q = 4, n <= 6; q = 8, 9, n <= 4)
+PASS  2a the tree on the slide: indices 0, 1, 0, 1, so its weight is b(0)^2 b(1)^2
+PASS  2b with all weights 1 the weighted number is the number of trees  (q = 2, 3, 4; n <= 8)
+PASS  2c Konvalinka's congruence C(b) = C modulo p^(t+k) for b(i) = 1 + q^2 i  (q = 2, 3, 4, 5, 8, 9; small n)   48 cases; with b(i) = 1 + i, which does not meet his conditions, it fails in 36
 
-5 checks, 5 passed
+10 checks, 10 passed
