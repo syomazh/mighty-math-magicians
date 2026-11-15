@@ -1,0 +1,271 @@
+<!doctype html>
+<!-- Trees as molecules, two-minute version (7 slides): a chemistry reading of Problem 137, case q = p = 3.
+     Deck drafted by Claude Opus 5.5, revised and shortened by Claude Fable 5.2 (Claude Code), 2026-11-15.
+     This single file is generated from source/ (deck.json, deck.css, slides/*.html).
+     Speaker notes are kept as hidden <aside> elements inside each slide. -->
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trees as molecules (short)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+* { margin: 0; }
+html { background: #3D4657; }
+@page { size: 1920px 1080px; margin: 0; }
+section { width: 1920px; height: 1080px; overflow: hidden; position: relative; margin: 0 auto 24px; break-after: page; break-inside: avoid; }
+@media print { html { background: none; } section { margin: 0; } }
+aside { display: none; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #C9C4B8; padding: 0.35em 0.6em; text-align: left; }
+th { background: #E4DFD3; font-weight: 600; }
+body { font-family: 'Inter', Arial, sans-serif; color: #1B2333; }
+section { background: #F6F4EE; color: #1B2333; padding: 128px; display: flex; flex-direction: column; gap: 40px; box-sizing: border-box; }
+section.dark { background: #1B2333; color: #F6F4EE; }
+h1 { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 120px; font-weight: 700; line-height: 1.05; }
+h2 { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 64px; font-weight: 600; line-height: 1.1; }
+.sub { font-size: 44px; color: #BFC8D6; line-height: 1.3; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; flex: 1; }
+.card { padding: 40px; display: flex; flex-direction: column; gap: 24px; border-radius: 0; }
+.proof { background: #E9E5DA; border-left: 8px solid #2F5F8F; }
+.chem { background: #FBEFE6; border-left: 8px solid #C25A20; }
+.tag { font-size: 24px; font-weight: 600; letter-spacing: 2px; }
+.proof .tag { color: #2F5F8F; }
+.chem .tag { color: #A84A17; }
+.quote { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; line-height: 1.45; color: #1B2333; }
+.plain { font-size: 30px; line-height: 1.45; color: #3D4657; }
+.cap { font-size: 26px; line-height: 1.4; color: #4A5568; }
+.big { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 44px; font-weight: 600; color: #A84A17; }
+.legend { display: flex; gap: 32px; font-size: 24px; color: #4A5568; }
+.status td, .status th { padding: 0.5em 0.6em; }
+.status { font-size: 28px; color: #1B2333; }
+
+</style></head><body>
+<section id="cover" class="dark" style="justify-content:center">
+<svg aria-label="A ternary tree whose nodes are carbon balls and leaves hydrogen balls" width="560" height="300" viewBox="0 0 560 300" style="position:absolute;left:1240px;top:360px">
+<g stroke="#BFC8D6" stroke-width="4"><line x1="280" y1="20" x2="280" y2="90"/><line x1="280" y1="90" x2="130" y2="180"/><line x1="280" y1="90" x2="280" y2="180"/><line x1="280" y1="90" x2="430" y2="180"/><line x1="130" y1="180" x2="70" y2="270"/><line x1="130" y1="180" x2="130" y2="270"/><line x1="130" y1="180" x2="190" y2="270"/></g>
+<rect x="250" y="4" width="60" height="32" rx="6" fill="#D9682B"/>
+<circle cx="280" cy="90" r="30" fill="#8A93A3"/><circle cx="130" cy="180" r="30" fill="#E3A33B"/>
+<circle cx="280" cy="180" r="20" fill="#8DB5E0"/><circle cx="430" cy="180" r="20" fill="#8DB5E0"/><circle cx="70" cy="270" r="20" fill="#8DB5E0"/><circle cx="130" cy="270" r="20" fill="#8DB5E0"/><circle cx="190" cy="270" r="20" fill="#8DB5E0"/>
+</svg>
+<p class="tag" style="color:#E3A33B">PROBLEM 137 · A CHEMISTRY READING</p>
+<h1 style="width:1050px">Trees as molecules</h1>
+<p class="sub" style="width:1000px">Each slide puts a statement from our proof (for q = p = 3) next to what it means for an alcohol.</p>
+<aside>Left column on every slide: quoted from paper/main.tex. Right column: the chemistry translation. Everything is the case q = p = 3, k = 1.</aside>
+</section>
+
+<section id="atoms">
+<h2>A ternary tree is a drawing of an alcohol</h2>
+<div class="cols">
+<div class="card proof">
+<p class="tag">IN THE PROOF · DEFINITION</p>
+<p class="quote">“A p-ary tree is either a leaf or an ordered p-tuple (T₁,…,T_p) of p-ary trees, attached from left to right to a new root.”</p>
+<svg aria-label="A plane ternary tree with two nodes and five leaves" width="633" height="290" style="align-self:center" viewBox="0 0 720 330">
+<g stroke="#3D4657" stroke-width="4"><line x1="360" y1="20" x2="360" y2="90"/><line x1="360" y1="90" x2="220" y2="190"/><line x1="360" y1="90" x2="360" y2="190"/><line x1="360" y1="90" x2="500" y2="190"/><line x1="360" y1="190" x2="270" y2="300"/><line x1="360" y1="190" x2="360" y2="300"/><line x1="360" y1="190" x2="450" y2="300"/></g>
+<rect x="335" y="4" width="50" height="26" rx="5" fill="#D9682B"/>
+<circle cx="360" cy="90" r="16" fill="#8A93A3"/><circle cx="360" cy="190" r="16" fill="#8A93A3"/>
+<rect x="206" y="176" width="28" height="28" fill="#8DB5E0"/><rect x="486" y="176" width="28" height="28" fill="#8DB5E0"/><rect x="256" y="286" width="28" height="28" fill="#8DB5E0"/><rect x="346" y="286" width="28" height="28" fill="#8DB5E0"/><rect x="436" y="286" width="28" height="28" fill="#8DB5E0"/>
+</svg>
+<p class="cap">Root, 2 nodes, 5 leaves. In general n nodes carry 2n + 1 leaves.</p>
+</div>
+<div class="card chem">
+<p class="tag">IN CHEMISTRY · ETHANOL</p>
+<p class="plain">Carbon has 4 bonds: one up, <b>3 down</b>, each to a carbon (node) or a hydrogen (leaf). So CₙH₂ₙ₊₁OH has 2n + 1 leaves.</p>
+<svg aria-label="Ethanol twice: the standard structural formula H3C-CH2-OH with bonds at right angles, and the same molecule hung from its OH as a tree of balls" width="720" height="330" viewBox="0 0 720 330">
+<g stroke="#3D4657" stroke-width="4"><line x1="55" y1="150" x2="85" y2="150"/><line x1="125" y1="150" x2="155" y2="150"/><line x1="195" y1="150" x2="225" y2="150"/><line x1="265" y1="150" x2="295" y2="150"/><line x1="105" y1="95" x2="105" y2="128"/><line x1="105" y1="172" x2="105" y2="205"/><line x1="175" y1="95" x2="175" y2="128"/><line x1="175" y1="172" x2="175" y2="205"/></g>
+<g font-family="Inter, Arial, sans-serif" font-size="40" font-weight="600" text-anchor="middle">
+<g fill="#2F5F8F"><text x="35" y="164">H</text><text x="105" y="88">H</text><text x="105" y="240">H</text><text x="175" y="88">H</text><text x="175" y="240">H</text></g>
+<g fill="#5E6675"><text x="105" y="164">C</text><text x="175" y="164">C</text></g>
+<g fill="#C25A20"><text x="245" y="164">O</text><text x="315" y="164">H</text></g>
+<text x="385" y="164" fill="#3D4657">=</text>
+</g>
+<g font-family="Inter, Arial, sans-serif" font-size="24" fill="#4A5568" text-anchor="middle"><text x="175" y="310">structural formula</text><text x="570" y="310">hung from its OH</text></g>
+<g transform="translate(300 20) scale(0.75)">
+<g stroke="#3D4657" stroke-width="5"><line x1="360" y1="36" x2="360" y2="90"/><line x1="360" y1="90" x2="220" y2="190"/><line x1="360" y1="90" x2="360" y2="190"/><line x1="360" y1="90" x2="500" y2="190"/><line x1="360" y1="190" x2="270" y2="295"/><line x1="360" y1="190" x2="360" y2="295"/><line x1="360" y1="190" x2="450" y2="295"/></g>
+<rect x="325" y="2" width="70" height="36" rx="8" fill="#D9682B"/>
+<circle cx="360" cy="90" r="34" fill="#8A93A3"/><circle cx="360" cy="190" r="34" fill="#8A93A3"/>
+<circle cx="220" cy="190" r="22" fill="#8DB5E0"/><circle cx="500" cy="190" r="22" fill="#8DB5E0"/><circle cx="270" cy="298" r="22" fill="#8DB5E0"/><circle cx="360" cy="298" r="22" fill="#8DB5E0"/><circle cx="450" cy="298" r="22" fill="#8DB5E0"/>
+</g>
+</svg>
+<div class="legend"><p>orange = OH (root)</p><p>gray = carbon (node)</p><p>blue = hydrogen (leaf)</p></div>
+</div>
+</div>
+<aside>Quote: paper/main.tex, the definition of a p-ary tree. With p = 3, alcohols C_nH_(2n+1)OH and plane ternary trees with n nodes are the same shapes, once the order of the three down-bonds is fixed. The leaves are the hydrogens on carbon; the H of OH is not counted. So s₃(2n + 1) in the theorem is the base-3 digit sum of that number.</aside>
+</section>
+
+<section id="classes">
+<h2>A rotation class is one molecule</h2>
+<div class="cols">
+<div class="card proof">
+<p class="tag">IN THE PROOF · ROTATION CLASSES</p>
+<p class="quote">“Two trees in one class are called rotation equivalent; [T] denotes the class of T.”</p>
+<p class="plain">A rotation turns the three children of one node cyclically, anywhere in the tree.</p>
+<svg aria-label="The three plane trees with two nodes: the second node on the left, in the middle, or on the right" width="720" height="260" viewBox="0 0 720 260">
+<g stroke="#3D4657" stroke-width="3">
+<line x1="120" y1="30" x2="120" y2="80"/><line x1="120" y1="80" x2="70" y2="150"/><line x1="120" y1="80" x2="120" y2="150"/><line x1="120" y1="80" x2="170" y2="150"/><line x1="70" y1="150" x2="40" y2="220"/><line x1="70" y1="150" x2="70" y2="220"/><line x1="70" y1="150" x2="100" y2="220"/>
+<line x1="360" y1="30" x2="360" y2="80"/><line x1="360" y1="80" x2="310" y2="150"/><line x1="360" y1="80" x2="360" y2="150"/><line x1="360" y1="80" x2="410" y2="150"/><line x1="360" y1="150" x2="330" y2="220"/><line x1="360" y1="150" x2="360" y2="220"/><line x1="360" y1="150" x2="390" y2="220"/>
+<line x1="600" y1="30" x2="600" y2="80"/><line x1="600" y1="80" x2="550" y2="150"/><line x1="600" y1="80" x2="600" y2="150"/><line x1="600" y1="80" x2="650" y2="150"/><line x1="650" y1="150" x2="620" y2="220"/><line x1="650" y1="150" x2="650" y2="220"/><line x1="650" y1="150" x2="680" y2="220"/></g>
+<g fill="#D9682B"><rect x="102" y="16" width="36" height="18" rx="4"/><rect x="342" y="16" width="36" height="18" rx="4"/><rect x="582" y="16" width="36" height="18" rx="4"/></g>
+<g fill="#8A93A3"><circle cx="120" cy="80" r="12"/><circle cx="360" cy="80" r="12"/><circle cx="600" cy="80" r="12"/></g>
+<g fill="#E3A33B"><circle cx="70" cy="150" r="12"/><circle cx="360" cy="150" r="12"/><circle cx="650" cy="150" r="12"/></g>
+<g fill="#8DB5E0"><rect x="110" y="140" width="20" height="20"/><rect x="160" y="140" width="20" height="20"/><rect x="30" y="210" width="20" height="20"/><rect x="60" y="210" width="20" height="20"/><rect x="90" y="210" width="20" height="20"/><rect x="300" y="140" width="20" height="20"/><rect x="400" y="140" width="20" height="20"/><rect x="320" y="210" width="20" height="20"/><rect x="350" y="210" width="20" height="20"/><rect x="380" y="210" width="20" height="20"/><rect x="540" y="140" width="20" height="20"/><rect x="590" y="140" width="20" height="20"/><rect x="610" y="210" width="20" height="20"/><rect x="640" y="210" width="20" height="20"/><rect x="670" y="210" width="20" height="20"/></g>
+</svg>
+<p class="cap">C₂⁽³⁾ = 3 plane trees, and they form one class [T].</p>
+</div>
+<div class="card chem">
+<p class="tag">IN CHEMISTRY · FREE ROTATION</p>
+<p class="plain">A carbon’s three groups spin freely about the bond toward the root: <b>the same molecule</b>.</p>
+<svg aria-label="Top view of a carbon with three coloured groups, shown at 0, 120 and 240 degrees of spin" width="576" height="200" style="align-self:center" viewBox="0 0 720 250">
+<g stroke="#3D4657" stroke-width="4">
+<line x1="120" y1="125" x2="120" y2="55"/><line x1="120" y1="125" x2="181" y2="160"/><line x1="120" y1="125" x2="59" y2="160"/>
+<line x1="360" y1="125" x2="360" y2="55"/><line x1="360" y1="125" x2="421" y2="160"/><line x1="360" y1="125" x2="299" y2="160"/>
+<line x1="600" y1="125" x2="600" y2="55"/><line x1="600" y1="125" x2="661" y2="160"/><line x1="600" y1="125" x2="539" y2="160"/></g>
+<circle cx="120" cy="125" r="16" fill="#8A93A3"/><circle cx="360" cy="125" r="16" fill="#8A93A3"/><circle cx="600" cy="125" r="16" fill="#8A93A3"/>
+<circle cx="120" cy="55" r="26" fill="#D9682B"/><circle cx="181" cy="160" r="26" fill="#2E8C7A"/><circle cx="59" cy="160" r="26" fill="#6E5BB8"/>
+<circle cx="421" cy="160" r="26" fill="#D9682B"/><circle cx="299" cy="160" r="26" fill="#2E8C7A"/><circle cx="360" cy="55" r="26" fill="#6E5BB8"/>
+<circle cx="299" cy="160" r="0"/><circle cx="539" cy="160" r="26" fill="#D9682B"/><circle cx="600" cy="55" r="26" fill="#2E8C7A"/><circle cx="661" cy="160" r="26" fill="#6E5BB8"/>
+<path d="M205 70 Q240 40 275 70" fill="none" stroke="#A84A17" stroke-width="5"/><path d="M268 60 L277 72 L262 74" fill="none" stroke="#A84A17" stroke-width="5"/>
+<path d="M445 70 Q480 40 515 70" fill="none" stroke="#A84A17" stroke-width="5"/><path d="M508 60 L517 72 L502 74" fill="none" stroke="#A84A17" stroke-width="5"/>
+</svg>
+<p class="plain"><b>Plane trees</b> are drawings; <b>rotation classes</b> are the molecules (mirror forms apart).</p>
+<p class="cap">Class counts 1, 1, 2, 5, 11, 28, … are the stereoisomer counts of alcohols (OEIS A000625; Blair–Henze 1932), checked to 14 carbons.</p>
+</div>
+</div>
+<aside>The three trees on the left are all ethanol, CH₃–CH₂–OH. Quote: the definition of rotation equivalence in the report; (R1) rotate the children of one node, (R2) do it anywhere inside the tree. The chemists’ model with free rotation about every C–C bond is Robinson, Harary and Balaban (1976), read by AI. Class counts: guest experiment EC01, checks A1 to A2, compared with OEIS A000625.</aside>
+</section>
+
+<section id="classsize">
+<h2>Each lopsided carbon triples the drawings</h2>
+<div class="cols">
+<div class="card proof">
+<p class="tag">IN THE PROOF · DEFINITION AND LEMMA (CLASS SIZE)</p>
+<p class="quote">“A node is asymmetric if its immediate subtrees (T₁,…,T_p) do not all have the same rotation class.”</p>
+<svg aria-label="Top views of three carbons: three hydrogens; a carbon group and two hydrogens; three different groups" width="540" height="180" style="align-self:center" viewBox="0 0 720 240">
+<g stroke="#3D4657" stroke-width="4">
+<line x1="120" y1="120" x2="120" y2="55"/><line x1="120" y1="120" x2="176" y2="152"/><line x1="120" y1="120" x2="64" y2="152"/>
+<line x1="360" y1="120" x2="360" y2="55"/><line x1="360" y1="120" x2="416" y2="152"/><line x1="360" y1="120" x2="304" y2="152"/>
+<line x1="600" y1="120" x2="600" y2="55"/><line x1="600" y1="120" x2="656" y2="152"/><line x1="600" y1="120" x2="544" y2="152"/></g>
+<circle cx="120" cy="120" r="16" fill="#8A93A3"/><circle cx="360" cy="120" r="16" fill="#E3A33B"/><circle cx="600" cy="120" r="16" fill="#E3A33B"/>
+<g fill="#8DB5E0"><circle cx="120" cy="55" r="22"/><circle cx="176" cy="152" r="22"/><circle cx="64" cy="152" r="22"/><circle cx="416" cy="152" r="22"/><circle cx="304" cy="152" r="22"/><circle cx="544" cy="152" r="22"/></g>
+<circle cx="360" cy="55" r="28" fill="#8A93A3"/><circle cx="600" cy="55" r="28" fill="#8A93A3"/><circle cx="656" cy="152" r="34" fill="#5E6675"/>
+</svg>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+<p class="cap"><b>H, H, H</b><br>symmetric</p>
+<p class="cap"><b>C, H, H</b><br>asymmetric</p>
+<p class="cap"><b>three different</b><br>asymmetric</p>
+</div>
+<p class="quote">“For every p-ary tree T, |[T]| = p^d(T).”</p>
+</div>
+<div class="card chem">
+<p class="tag">IN CHEMISTRY · DRAWINGS PER MOLECULE</p>
+<svg aria-label="tert-butanol with no amber carbons, and butan-1-ol with three amber carbons in a chain" width="480" height="220" viewBox="0 0 720 330" style="align-self:center">
+<g stroke="#3D4657" stroke-width="4">
+<line x1="170" y1="30" x2="170" y2="90"/><line x1="170" y1="90" x2="80" y2="170"/><line x1="170" y1="90" x2="170" y2="170"/><line x1="170" y1="90" x2="260" y2="170"/>
+<line x1="80" y1="170" x2="55" y2="240"/><line x1="80" y1="170" x2="80" y2="240"/><line x1="80" y1="170" x2="105" y2="240"/><line x1="170" y1="170" x2="145" y2="240"/><line x1="170" y1="170" x2="170" y2="240"/><line x1="170" y1="170" x2="195" y2="240"/><line x1="260" y1="170" x2="235" y2="240"/><line x1="260" y1="170" x2="260" y2="240"/><line x1="260" y1="170" x2="285" y2="240"/>
+<line x1="520" y1="20" x2="520" y2="70"/><line x1="520" y1="70" x2="470" y2="110"/><line x1="520" y1="70" x2="570" y2="110"/><line x1="520" y1="70" x2="520" y2="140"/><line x1="520" y1="140" x2="470" y2="180"/><line x1="520" y1="140" x2="570" y2="180"/><line x1="520" y1="140" x2="520" y2="210"/><line x1="520" y1="210" x2="470" y2="250"/><line x1="520" y1="210" x2="570" y2="250"/><line x1="520" y1="210" x2="520" y2="280"/><line x1="520" y1="280" x2="475" y2="310"/><line x1="520" y1="280" x2="565" y2="310"/><line x1="520" y1="280" x2="520" y2="318"/></g>
+<rect x="148" y="12" width="44" height="22" rx="4" fill="#D9682B"/><rect x="498" y="4" width="44" height="22" rx="4" fill="#D9682B"/>
+<g fill="#8A93A3"><circle cx="170" cy="90" r="20"/><circle cx="80" cy="170" r="18"/><circle cx="170" cy="170" r="18"/><circle cx="260" cy="170" r="18"/><circle cx="520" cy="280" r="16"/></g>
+<g fill="#E3A33B"><circle cx="520" cy="70" r="16"/><circle cx="520" cy="140" r="16"/><circle cx="520" cy="210" r="16"/></g>
+<g fill="#8DB5E0"><circle cx="55" cy="244" r="11"/><circle cx="80" cy="244" r="11"/><circle cx="105" cy="244" r="11"/><circle cx="145" cy="244" r="11"/><circle cx="170" cy="244" r="11"/><circle cx="195" cy="244" r="11"/><circle cx="235" cy="244" r="11"/><circle cx="260" cy="244" r="11"/><circle cx="285" cy="244" r="11"/><circle cx="470" cy="110" r="10"/><circle cx="570" cy="110" r="10"/><circle cx="470" cy="180" r="10"/><circle cx="570" cy="180" r="10"/><circle cx="470" cy="250" r="10"/><circle cx="570" cy="250" r="10"/><circle cx="475" cy="312" r="10"/><circle cx="565" cy="312" r="10"/><circle cx="520" cy="318" r="10"/></g>
+</svg>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<svg aria-label="Structural formula of tert-butanol: a carbon bonded at right angles to three CH3 groups and OH" width="352" height="130" viewBox="0 0 352 130"><g stroke="#3D4657" stroke-width="3"><line x1="117" y1="65" x2="162" y2="65"/><line x1="189" y1="65" x2="243" y2="65"/><line x1="176" y1="38" x2="176" y2="49"/><line x1="176" y1="81" x2="176" y2="92"/></g><g font-family="Inter, Arial, sans-serif" font-size="26" font-weight="600" text-anchor="middle"><text x="86" y="74" fill="#3D4657">H₃C</text><text x="176" y="31" fill="#3D4657">CH₃</text><text x="176" y="74" fill="#3D4657">C</text><text x="176" y="117" fill="#3D4657">CH₃</text><text x="266" y="74" fill="#C25A20">OH</text></g></svg>
+<svg aria-label="Structural formula of butan-1-ol: a straight chain of four carbons ending in OH, hydrogens above and below" width="352" height="130" viewBox="0 0 352 130"><g stroke="#3D4657" stroke-width="3"><line x1="51" y1="65" x2="70" y2="65"/><line x1="84" y1="38" x2="84" y2="49"/><line x1="84" y1="81" x2="84" y2="92"/><line x1="97" y1="65" x2="116" y2="65"/><line x1="130" y1="38" x2="130" y2="49"/><line x1="130" y1="81" x2="130" y2="92"/><line x1="143" y1="65" x2="162" y2="65"/><line x1="176" y1="38" x2="176" y2="49"/><line x1="176" y1="81" x2="176" y2="92"/><line x1="189" y1="65" x2="208" y2="65"/><line x1="222" y1="38" x2="222" y2="49"/><line x1="222" y1="81" x2="222" y2="92"/><line x1="235" y1="65" x2="254" y2="65"/><line x1="281" y1="65" x2="300" y2="65"/></g><g font-family="Inter, Arial, sans-serif" font-size="26" font-weight="600" text-anchor="middle"><text x="38" y="74" fill="#2F5F8F">H</text><text x="84" y="74" fill="#3D4657">C</text><text x="84" y="31" fill="#2F5F8F">H</text><text x="84" y="117" fill="#2F5F8F">H</text><text x="130" y="74" fill="#3D4657">C</text><text x="130" y="31" fill="#2F5F8F">H</text><text x="130" y="117" fill="#2F5F8F">H</text><text x="176" y="74" fill="#3D4657">C</text><text x="176" y="31" fill="#2F5F8F">H</text><text x="176" y="117" fill="#2F5F8F">H</text><text x="222" y="74" fill="#3D4657">C</text><text x="222" y="31" fill="#2F5F8F">H</text><text x="222" y="117" fill="#2F5F8F">H</text><text x="268" y="74" fill="#C25A20">O</text><text x="314" y="74" fill="#C25A20">H</text></g></svg>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<p class="cap"><b>tert-butanol</b>: no amber carbon, d = 0, <b>1 drawing</b></p>
+<p class="cap"><b>butan-1-ol</b>: 3 amber CH₂’s, d = 3, <b>27 drawings</b></p>
+</div>
+<p class="cap">Lopsided (amber) = asymmetric node. A chemist’s “asymmetric carbon” is narrower: three different groups only.</p>
+</div>
+</div>
+<aside>d(T) = number of asymmetric nodes; it is the same for every tree in a class, so d belongs to the molecule. At a symmetric node a rotation changes nothing (factor 1); at an asymmetric node it gives 3 different trees (factor 3). tert-butanol is the complete tree K_2. Vocabulary: three different groups = a stereocentre; C, H, H = a prochirality centre (IUPAC glossary read through a summarising tool; not checked by a chemist). Do not say “asymmetric carbon” for the CH₂ kind.</aside>
+</section>
+
+<section id="fiftyfive" style="background:#EDE9DF">
+<h2>Why 55 is not divisible by 3</h2>
+<div class="cols">
+<div class="card proof">
+<p class="tag">IN THE PROOF · THEOREM 1 AND ITS PROOF</p>
+<p class="quote">“If p is prime, k ≥ 1, q = p^k, n ≥ 1, and m = (q − 1)n + 1, then v_p(C_n^(q)) = (s_p(m) − 1)/(p − 1) =: t.”</p>
+<p class="plain">Every class has size 3ᵈ with d ≥ t, and the number of classes with d = t is prime to 3. So v₃ = t: <b>the fewest lopsided carbons set the power of 3</b>.</p>
+<p class="plain">n = 4, q = 3: m = 9 = 100₃, so t = 0 and 3 ∤ C₄⁽³⁾ = 55.</p>
+</div>
+<div class="card chem">
+<p class="tag">IN CHEMISTRY · THE BUTANOLS, MIRROR FORMS APART</p>
+<div style="display:flex;height:96px">
+<div style="width:13px;background:#C25A20"></div>
+<div style="width:117px;background:#2F5F8F;border-left:3px solid #FBEFE6;display:flex;align-items:center;justify-content:center"><p style="font-size:32px;font-weight:600;color:#F6F4EE">9</p></div>
+<div style="width:117px;background:#2F5F8F;border-left:3px solid #FBEFE6;display:flex;align-items:center;justify-content:center"><p style="font-size:32px;font-weight:600;color:#F6F4EE">9</p></div>
+<div style="width:117px;background:#2F5F8F;border-left:3px solid #FBEFE6;display:flex;align-items:center;justify-content:center"><p style="font-size:32px;font-weight:600;color:#F6F4EE">9</p></div>
+<div style="width:351px;background:#2F5F8F;border-left:3px solid #FBEFE6;display:flex;align-items:center;justify-content:center"><p style="font-size:32px;font-weight:600;color:#F6F4EE">27</p></div>
+</div>
+<table style="font-size:26px;color:#1B2333">
+<tr><th style="width:52%">alcohol</th><th style="width:16%">d</th><th style="width:32%">drawings (ours)</th></tr>
+<tr><td>tert-butanol (orange sliver)</td><td>0</td><td>1</td></tr>
+<tr><td>isobutanol</td><td>2</td><td>9</td></tr>
+<tr><td>butan-2-ol, left-handed</td><td>2</td><td>9</td></tr>
+<tr><td>butan-2-ol, right-handed</td><td>2</td><td>9</td></tr>
+<tr><td>butan-1-ol</td><td>3</td><td>27</td></tr>
+</table>
+<p class="big">55 = 1 + (multiple of 3)</p>
+</div>
+</div>
+<aside>Breakdown 1, 9, 9, 9, 27: guest check G1. The single class of size 1 is the complete tree, so 55 ≡ 1 mod 3, as the theorem predicts. Lower bound: Proposition Lower bound of the report, d(T) ≥ t(ℓ(T)), with d = 0 exactly for the complete tree (here tert-butanol). Next example if asked: neopentyl alcohol, n = 5, 11 H = 102₃, t = 1, d = 1. Five butanols counts the two mirror forms of butan-2-ol apart; the 55 drawings are our count, not a chemist’s.</aside>
+</section>
+
+<section id="deeper">
+<h2>Further connections, not covered today</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div class="card chem" style="padding:32px;gap:16px">
+<p class="tag">INTERCHANGEABLE HYDROGENS</p>
+<p class="plain"><b>The spins that fix a molecule sort its hydrogens into at least s₃(2n + 1) groups</b>, and exactly that many when d = t.</p>
+<p class="cap">Checked by script up to 14 carbons.</p>
+</div>
+<div class="card proof" style="padding:32px;gap:16px">
+<p class="tag">AS MUCH SYMMETRY AS POSSIBLE</p>
+<p class="plain"><b>d = t exactly when the fixing spins form a Sylow 3-subgroup</b> of all permutations of the hydrogens.</p>
+<p class="cap">Checked by script for n ≤ 6. A restatement of our lemmas.</p>
+</div>
+<div class="card chem" style="padding:32px;gap:16px">
+<p class="tag">PÓLYA’S COUNTING SERIES</p>
+<p class="plain"><b>Our generating function counts stereoisomers by d.</b> Setting y = 1 gives Pólya’s equation (25).</p>
+<p class="cap">Checked by script up to 14 carbons. Pólya’s paper was read by an AI only.</p>
+</div>
+<div class="card proof" style="padding:32px;gap:16px">
+<p class="tag">COUNTING THE EXTREMES</p>
+<p class="plain"><b>The number of alcohols with the smallest d is never divisible by 3.</b></p>
+<p class="cap">This is the last step of the proof (report and Lean); the chemical wording is ours.</p>
+</div>
+</div>
+<p class="cap">All four are our readings or computations. None is a result in chemistry, and no chemist has read them.</p>
+<aside>Mention only; do not go into these. Sources in CLAIMS.md: hydrogens C25 (e) (equality does not characterise d = t; first failure at n = 7); Sylow C23 (c) (p = 3, n ≤ 6); Pólya C25 (c) (equation of C18 at p = 3, k = 1); the count of minimal classes prime to 3 is Step 3–4 of the main proof, C6–C8. Not confirmed that all four are in report/report.tex.</aside>
+</section>
+
+<section id="status">
+<h2>What is proved, what is cited, what is our reading</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div class="card proof" style="padding:32px;gap:16px">
+<p class="tag">PROVED</p>
+<p class="plain"><b>Class size 3ᵈ, minimum d = t, so v₃ = t exactly.</b></p>
+<p class="cap">Proved in the report and signed by a human. Also checked in Lean (v4.35.0, no sorry).</p>
+</div>
+<div class="card chem" style="padding:32px;gap:16px">
+<p class="tag">CITED · KNOWN CHEMISTRY</p>
+<p class="plain"><b>Alcohols are rooted trees with a 3-fold rotation at each carbon.</b></p>
+<p class="cap">Pólya 1936; Robinson–Harary–Balaban 1976. Stereoisomer counts: Blair–Henze 1932. All read by AI only.</p>
+</div>
+<div class="card proof" style="padding:32px;gap:16px">
+<p class="tag">CHECKED BY COMPUTATION</p>
+<p class="plain"><b>Rotation classes = stereoisomers</b> (1, 1, 2, 5, 11, …), up to 14 carbons.</p>
+<p class="cap">The butanols split the 55 trees as 1 + 9 + 9 + 9 + 27.</p>
+</div>
+<div class="card chem" style="padding:32px;gap:16px">
+<p class="tag">OUR READING · NOT A RESULT</p>
+<p class="plain"><b>“Drawings”, “lopsided carbons” and the 55 are our words and our count.</b></p>
+<p class="cap">They restate the proof in chemical terms; no chemist has read them.</p>
+</div>
+</div>
+<p class="cap">The chemistry is a reading of the proof, not a new result in chemistry. It was drafted by AI and reviewed by a second AI against the sources.</p>
+<aside>Statuses from CLAIMS.md: C1–C8 human-signed, Lean build on v4.35.0; C25 (a), (f) computed, scripts rerun; references 11, 71, 72, 73 of references/README.md. A person should read Pólya p. 436 before equation (24) is cited. Be careful in Q&A: avoid “asymmetric carbon” with chemists in the room.</aside>
+</section>
+
+</body></html>
