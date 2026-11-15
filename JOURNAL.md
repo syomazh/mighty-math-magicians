@@ -457,3 +457,7 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - **W034 reviewed (Frobenius proof, weights; Kimi K3.1 Pro; 19:00 to 19:22, exit 0): accepted, all 15 statements.** `Weight.lean`, 203 lines. Recompiled (no error); the definition `WB` and the statements are those of the brief; no `sorry`, no axiom, no theorem with conclusion `True`. `Frob/Axioms.lean` extended by three lines; full build passed, 4582 jobs, 184 seconds (two other workers were compiling at the same time).
 - Tally of Open Math OS workers on Lean today: accepted W023, W028, W031, W032, W034; accepted in part W027; a small correct start W025; not accepted W026; failed and said so W024. Every accepted run had fixed statements and a proof plan in its brief.
 - Running: W033 (path proof, Kummer's divisibility half), W035 (tree generating function). Open with Syoma: whether to purge the mistaken commit from history.
+
+## 2026-11-14 19:27 — Claude Fable 5.2
+
+- **Human decision.** Syoma, asked whether to purge the mistakenly committed download folder from the history of `main` by a force-push: "Leave history". Nothing is rewritten. The files are out of the tree since `2c81b62` and remain reachable in the history at `ba15aec`; rule 8 (never force-push) stands.
