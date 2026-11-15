@@ -12,6 +12,14 @@ Syoma pasted the Participant Rules and Submission Guidelines at about 00:40. Che
 4. **Humans decide:** the track (Combinatorics or Algebra/Number Theory); which deck is presented (the report must contain everything on it); names and affiliations for the title block; who submits on the platform and with which commit hash.
 5. **Before submitting:** `git status` clean, pushed, the commit hash copied into the title block of the report and into the platform form; the Lean build of that commit passes on v4.35.0.
 
+### Lean additions in the night (02:12; all in the build on v4.35.0, 3277 jobs)
+
+- Kummer's theorem and its residue with Mathlib's definitions only (`MMM.Path.kummer_exact_digits`, `choose_residue_digits`).
+- The exact number of minimal classes for q = p (C8, `MMM.card_minimal_classes_mul`); the carry budget (C19, `MMM.PTree.excess`).
+- **Level profiles (C10): no longer a conjecture.** For q = p^k and any numbers n_i of nodes per depth, p^t divides ∏ binom(q·n_i, n_(i+1)) (`MMM.pow_dvd_prod_choose_profile`, Mathlib's terms; written proof in the report, Section 4.5). With it the congruence for rotation-closed families (C11). Not searched in the literature; not claimed as new; no human reader. **Humans: one sentence in the talk would cover it** (it answers the problem's "other statistics").
+- A fresh clone of the repository builds from scratch on v4.35.0 (tested 01:52).
+- Not formalized: the accounting proof's own argument; C9, C17 (conjectures).
+
 ## Status in one paragraph
 
 We have a candidate proof of the full problem (exact valuation for every q = p^k from tree symmetries, no factorial valuations). Evidence: brute force (E000), a no-assumption stress test on 1067 values of m up to 400 leaves, p up to 13, k up to 4 (E003, all checks pass), and three adversarial AI reviews that found no counterexample but 14 write-up defects (`paper/reviews/ADJUDICATION_round1.md`). The paper `paper/main.pdf` (13 pages) has been through three review rounds with repairs after each (`paper/reviews/ADJUDICATION_round1.md`, `_round2.md`, `_round3.md`). **No human has signed anything.** The ranked digest for humans is `FINDINGS.md`.
