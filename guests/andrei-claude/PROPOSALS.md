@@ -18,3 +18,13 @@ Not human-reviewed.
 - **What speaks against using it as an answer to Problem 137:** the symmetry acts on paths (binom(qn+1, n) of them), not on q-ary trees, and the result is the special case binom(qn+1, n) of a classical congruence for binomial coefficients. It may be better as a remark ("the same carries appear as mixed segments of a path") than as a headline.
 - **Evidence:** `experiments/path_segments/output.txt`; run `uv run python check_paths.py` there.
 - **Needed first:** an independent review of the note.
+
+## 3. `references/README.md` (and the paper, where the cherry collapse is introduced): Petersen's proof of Wilson's theorem
+
+- **Place:** a new entry in `references/README.md`; one sentence where `paper/main.tex` introduces the cherry collapse (C5). `grep -i "petersen\|wilson" references/README.md` finds nothing at commit 487bdaf.
+- **What is missing:** the smallest case of the cherry collapse is a known proof of Wilson's theorem. With k = 1 and a = (p), the trees are single cherries with p labelled leaves, (p − 1)! of them up to rotation; the relabelling σ fixes p − 1 of them; the collapse gives T((1)), one tree; so (p − 1)! ≡ −1 (mod p). In the literature: the cyclic group of order p acts on the (p − 1)! cyclic permutations of p points by conjugation and fixes p − 1 of them.
+- **Sources found (web search, 2026-11-14; excerpts only, the original paper of 1872 was not located):**
+  - I. M. Gessel, slides "Combinatorial Proofs of Congruences", Joint Mathematics Meeting, January 2010 (seen on a slide-hosting site, https://www.sambuz.com/doc/combinatorial-proofs-of-congruences-ppt-presentation-983881): "Petersen also gave a similar proof of Wilson's theorem"; (p − 1)! cyclic permutations of p points, C_p acts by conjugation, p − 1 fixed cycles.
+  - B. E. Sagan, "Congruences via Abelian Groups" (1985), introduction (https://users.math.msu.edu/users/sagan/Papers/Old/cag-pub.pdf): proving congruences by group actions goes back to a paper of Petersen with the cyclic group of order p.
+  - The online textbook at https://math.gordon.edu/ntic/ntic2021/section-congruence-counting-proofs.html gives the same proof with p-gons on p points of a circle, from Carmichael's textbook.
+- **To do before use:** get the bibliographic data of Petersen's paper from a source that prints it, and check it. I did not write it down from memory.

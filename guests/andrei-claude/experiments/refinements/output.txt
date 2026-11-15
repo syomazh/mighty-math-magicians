@@ -1,0 +1,77 @@
+$ python depth_refinement.py
+p=2 k=1 n=1: C=1 t=0 profiles=1 with nonzero residue=1 mismatches=0
+p=2 k=1 n=2: C=2 t=1 profiles=1 with nonzero residue=1 mismatches=0
+p=2 k=1 n=3: C=5 t=0 profiles=2 with nonzero residue=1 mismatches=0
+p=2 k=1 n=4: C=14 t=1 profiles=3 with nonzero residue=1 mismatches=0
+p=2 k=1 n=5: C=42 t=1 profiles=5 with nonzero residue=1 mismatches=0
+p=2 k=1 n=6: C=132 t=2 profiles=9 with nonzero residue=3 mismatches=0
+p=2 k=1 n=7: C=429 t=0 profiles=16 with nonzero residue=1 mismatches=0
+p=2 k=1 n=8: C=1430 t=1 profiles=28 with nonzero residue=1 mismatches=0
+p=3 k=1 n=1: C=1 t=0 profiles=1 with nonzero residue=1 mismatches=0
+p=3 k=1 n=2: C=3 t=1 profiles=1 with nonzero residue=1 mismatches=0
+p=3 k=1 n=3: C=12 t=1 profiles=2 with nonzero residue=1 mismatches=0
+p=3 k=1 n=4: C=55 t=0 profiles=4 with nonzero residue=1 mismatches=0
+p=3 k=1 n=5: C=273 t=1 profiles=7 with nonzero residue=1 mismatches=0
+p=3 k=1 n=6: C=1428 t=1 profiles=13 with nonzero residue=1 mismatches=0
+p=2 k=2 n=1: C=1 t=0 profiles=1 with nonzero residue=1 mismatches=0
+p=2 k=2 n=2: C=4 t=2 profiles=1 with nonzero residue=1 mismatches=0
+p=2 k=2 n=3: C=22 t=1 profiles=2 with nonzero residue=1 mismatches=0
+p=2 k=2 n=4: C=140 t=2 profiles=4 with nonzero residue=1 mismatches=0
+p=2 k=2 n=5: C=969 t=0 profiles=8 with nonzero residue=1 mismatches=0
+p=5 k=1 n=1: C=1 t=0 profiles=1 with nonzero residue=1 mismatches=0
+p=5 k=1 n=2: C=5 t=1 profiles=1 with nonzero residue=1 mismatches=0
+p=5 k=1 n=3: C=35 t=1 profiles=2 with nonzero residue=1 mismatches=0
+p=5 k=1 n=4: C=285 t=1 profiles=4 with nonzero residue=1 mismatches=0
+p=3 k=2 n=1: C=1 t=0 profiles=1 with nonzero residue=1 mismatches=0
+p=3 k=2 n=2: C=9 t=2 profiles=1 with nonzero residue=1 mismatches=0
+p=3 k=2 n=3: C=117 t=2 profiles=2 with nonzero residue=1 mismatches=0
+p=2 k=3 n=1: C=1 t=0 profiles=1 with nonzero residue=1 mismatches=0
+p=2 k=3 n=2: C=8 t=3 profiles=1 with nonzero residue=1 mismatches=0
+p=2 k=3 n=3: C=92 t=2 profiles=2 with nonzero residue=1 mismatches=0
+all cases agree
+
+$ python cyclotomic.py   (needs sympy)
+x-binomials: multiplicity of Phi_{p^i} = carry c_i, and x-Lucas mod Phi_{p^i}: 567 cases
+p=2 q=2 n=3: C(x) has degree 6, C(1)=5, t=0, C(x) =  * Q(x), Q(1) mod p = 1
+p=2 q=2 n=6: C(x) has degree 30, C(1)=132, t=2, C(x) = Phi_4 Phi_8 * Q(x), Q(1) mod p = 1
+p=2 q=2 n=10: C(x) has degree 90, C(1)=16796, t=2, C(x) = Phi_4 Phi_16 * Q(x), Q(1) mod p = 1
+p=3 q=3 n=3: C(x) has degree 12, C(1)=12, t=1, C(x) = Phi_9 * Q(x), Q(1) mod p = 1
+p=3 q=3 n=6: C(x) has degree 60, C(1)=1428, t=1, C(x) = Phi_9 * Q(x), Q(1) mod p = 2
+p=3 q=3 n=8: C(x) has degree 112, C(1)=43263, t=2, C(x) = Phi_3 Phi_9 * Q(x), Q(1) mod p = 1
+p=2 q=4 n=4: C(x) has degree 36, C(1)=140, t=2, C(x) = Phi_8 Phi_16 * Q(x), Q(1) mod p = 1
+p=3 q=9 n=2: C(x) has degree 16, C(1)=9, t=2, C(x) = Phi_3 Phi_9 * Q(x), Q(1) mod p = 1
+p=3 q=9 n=3: C(x) has degree 48, C(1)=117, t=2, C(x) = Phi_9 Phi_27 * Q(x), Q(1) mod p = 1
+p=5 q=5 n=4: C(x) has degree 48, C(1)=285, t=1, C(x) = Phi_5 * Q(x), Q(1) mod p = 2
+p=2 q=8 n=3: C(x) has degree 42, C(1)=92, t=2, C(x) = Phi_4 Phi_8 * Q(x), Q(1) mod p = 1
+
+$ python bivariate.py   (needs sympy)
+(1) height and leaf path length, q-ary trees, modulo p^(t+1)
+   p=3 q=3 n=3: C=12, t=1, 2 monomials;  P = 3 x^2 y^13   (mod 9)
+   p=3 q=3 n=6: C=1428, t=1, 12 monomials;  P = 6 x^3 y^34   (mod 9)
+   p=2 q=2 n=6: C=132, t=2, 9 monomials;  P = 4 x^3 y^20 + 4 x^4 y^22 + 4 x^4 y^23   (mod 8)
+   p=2 q=2 n=10: C=16796, t=2, 54 monomials;  P = 4 x^4 y^40 + 4 x^5 y^46 + 4 x^5 y^47   (mod 8)
+   p=2 q=4 n=4: C=140, t=2, 4 monomials;  P = 4 x^2 y^25   (mod 8)
+   p=3 q=9 n=3: C=117, t=2, 2 monomials;  P = 9 x^2 y^43   (mod 27)
+   p=5 q=5 n=4: C=285, t=1, 4 monomials;  P = 10 x^2 y^32   (mod 25)
+   p=3 q=3 n=8: C=43263, t=2, 32 monomials;  P = 18 x^3 y^46 + 18 x^3 y^48 + 9 x^4 y^52 + 9 x^4 y^54 + 9 x^4 y^56   (mod 27)
+(2) F_N(x,y) = prod (1 + y x^i)
+   product over sub-segments and reduction modulo Phi_{p^h}(x): ok for p^h in 2,4,8,3,9,5
+(3) coefficients of statistics that rotations do not preserve
+   n=2: C_n=2, q,t-symmetric=True, coefficients range 1..1, gcd of coefficients=1
+   n=3: C_n=5, q,t-symmetric=True, coefficients range 1..1, gcd of coefficients=1
+   n=4: C_n=14, q,t-symmetric=True, coefficients range 1..1, gcd of coefficients=1
+   n=5: C_n=42, q,t-symmetric=True, coefficients range 1..2, gcd of coefficients=1
+   n=6: C_n=132, q,t-symmetric=True, coefficients range 1..4, gcd of coefficients=1
+   Fuss-Narayana q=2 n=4: [1, 6, 6, 1], gcd=1
+   Fuss-Narayana q=2 n=6: [1, 15, 50, 50, 15, 1], gcd=1
+   Fuss-Narayana q=3 n=3: [1, 6, 5], gcd=1
+   Fuss-Narayana q=3 n=6: [1, 30, 220, 550, 495, 132], gcd=1
+   Fuss-Narayana q=4 n=4: [1, 18, 66, 55], gcd=1
+
+===== sunday_checks.py (2026-11-15) =====
+(a) P_n(x, y) in full
+   q=3 n=3: 3 x^2 y^13 + 9 x^3 y^15   total 12
+   q=3 n=6: 12 monomials, total 1428 ; modulo 9: 6 x^3 y^34
+(b) Gaussian binomial = sum of x^(boxes under the path) = sum of x^(boxes above): 45 pairs (N, n), N <= 8; sum of positions of E-steps = boxes above + n(n-1)/2 in every path
+(c) rotating a block of d steps by one step changes the boxes under the path by -a mod d: 2000 random cases
+all assertions passed

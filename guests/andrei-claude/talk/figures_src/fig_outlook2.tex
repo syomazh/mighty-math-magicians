@@ -1,0 +1,33 @@
+% Written by Claude Fable 5.2, 2026-11-15. The two shapes of ternary trees with 3 internal nodes (q = 3, n = 3).
+% shape A: root with a leaf and two cherries (3 trees, one rotation class, minimal)
+\draw[cbox, fill=coralfill!45] (0.10,-1.25) rectangle (0.70,-0.65);
+\draw[cbox, fill=coralfill!45] (1.05,-2.20) rectangle (2.35,-0.65);
+\draw[cbox, fill=coralfill!45] (2.65,-2.20) rectangle (3.95,-0.65);
+\draw[edge] (1.85,0) -- (0.40,-0.95);
+\draw[edge] (1.85,0) -- (1.70,-0.95);
+\draw[edge] (1.85,0) -- (3.30,-0.95);
+\foreach \x in {1.30,1.70,2.10} \draw[edge] (1.70,-0.95) -- (\x,-1.90);
+\foreach \x in {2.90,3.30,3.70} \draw[edge] (3.30,-0.95) -- (\x,-1.90);
+\node[anode] at (1.85,0) {};
+\node[gnode] at (1.70,-0.95) {};
+\node[gnode] at (3.30,-0.95) {};
+\node[leafsq] at (0.40,-0.95) {};
+\foreach \x in {1.30,1.70,2.10,2.90,3.30,3.70} \node[leafsq] at (\x,-1.90) {};
+\node[font=\large] at (2.0,-3.50) {$3$ trees:\ \ $x^{2}y^{13}$};
+% shape B: a chain (9 trees, one rotation class)
+\draw[edge] (7.20,0) -- (6.20,-0.95);
+\draw[edge] (7.20,0) -- (7.20,-0.95);
+\draw[edge] (7.20,0) -- (8.20,-0.95);
+\draw[edge] (7.20,-0.95) -- (6.60,-1.90);
+\draw[edge] (7.20,-0.95) -- (7.20,-1.90);
+\draw[edge] (7.20,-0.95) -- (7.80,-1.90);
+\foreach \x in {6.80,7.20,7.60} \draw[edge] (7.20,-1.90) -- (\x,-2.85);
+\node[anode] at (7.20,0) {};
+\node[anode] at (7.20,-0.95) {};
+\node[gnode] at (7.20,-1.90) {};
+\node[leafsq] at (6.20,-0.95) {};
+\node[leafsq] at (8.20,-0.95) {};
+\node[leafsq] at (6.60,-1.90) {};
+\node[leafsq] at (7.80,-1.90) {};
+\foreach \x in {6.80,7.20,7.60} \node[leafsq] at (\x,-2.85) {};
+\node[font=\large] at (7.2,-3.50) {$9$ trees:\ \ $x^{3}y^{15}$};

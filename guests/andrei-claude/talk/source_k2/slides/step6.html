@@ -1,0 +1,11 @@
+<section id="step6" class="std alt" data-transition="fade">
+<p class="eyebrow">STEP 6</p>
+<h2 class="title">Make the labels distinct</h2>
+<p class="body">Give the atoms distinct names; a label’s class is its height mod k. T(a) is the set of trees with these labels, children taken up to cyclic rotation at every node, a label of class i at depth ≡ −i (mod k).</p>
+<img class="eq" src="/_blob/5605dbd242486148ad1f6432447dd1d8" alt="The size of T(a) equals the product of m_j factorial times the size of S(m,k), where a_i is the sum of the m_j with j congruent to i mod k" style="width:1017px; height:141px">
+<p class="callout">Permuting equal-height labels is a free action: its order is prime to p, while symmetries of a cyclic tree have p-power order. Every digit is below p, so ∏ m<i>ⱼ</i>! is prime to p. It remains to show <b>p ∤ |T(a)|</b>.</p>
+<p class="caption">q = 9, n = 2: heights 0, 0, 2 have class 0 and heights 1, 1 have class 1, so a = (3, 2), and |T(3, 2)| = 4 = 2!·2!·1!·1.</p>
+<p class="foot-l">Mighty Math Magicians · Caltech Mathathon 2026</p>
+<p class="foot-r"></p>
+<aside>Here is the lift. Repeated labels make S(m,k) awkward to count mod p, so we make them distinct. That multiplies the count by the product of the digit factorials, which is harmless because each digit is less than p. The lifted set only remembers each label’s class, its height mod k, and that leaves room for a p-cycle.</aside>
+</section>

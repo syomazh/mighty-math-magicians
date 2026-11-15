@@ -62,3 +62,18 @@ N=10 sizes: [(3, 1), (9, 1), (27, 4)]
 size-9 class sample: ['EESSSSSSSE', 'ESESSSSSSE', 'SEESSSSSSE']
 example B word d = 2 carries ([2, 0, 0, 0], [2, 2, 1, 0], [1, 0, 2, 0], [0, 1, 1, 0, 0])
 N=19 n=2: words by d: [(2, 36), (3, 54), (4, 81)] classes by d: {2: 4, 3: 2, 4: 1} binom 171
+
+$ python wilson_fixed_points.py
+p=2 N=0: classes, fixed = (1, 1)
+p=2 N=1: classes, fixed = (3, 1)
+p=2 N=2: classes, fixed = (12, 2)
+p=2 N=3: classes, fixed = (60, 6)
+p=2 N=4: classes, fixed = (360, 24)
+p=3 N=0: classes, fixed = (2, 2)
+p=3 N=1: classes, fixed = (8, 2)
+p=3 N=2: classes, fixed = (40, 4)
+p=3 N=3: classes, fixed = (240, 12)
+p=5 N=0: classes, fixed = (24, 4)
+p=5 N=1: classes, fixed = (144, 4)
+p=5 N=2: classes, fixed = (1008, 8)
+p=7 N=0: classes, fixed = (720, 6)

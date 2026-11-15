@@ -1,0 +1,15 @@
+<section id="step5" class="std" data-transition="fade">
+<p class="eyebrow">STEP 5</p>
+<h2 class="title">Collapse the complete subtrees</h2>
+<div class="row">
+<div class="col">
+<p class="body">A minimal tree is a skeleton of t asymmetric nodes carrying complete subtrees, the atoms. Since leaf counts add without carries, there are exactly m<i>ⱼ</i> atoms of height j, where m<i>ⱼ</i> is the j-th base-p digit of m: s<i>ₚ</i>(m) atoms in all.</p>
+<p class="callout">N<i>min</i> = |S(m, k)|: skeletons with m<i>ⱼ</i> leaves labelled j, children taken up to cyclic rotation at every node; a leaf labelled j sits at depth ≡ −j (mod k).</p>
+</div>
+<img class="fig" src="/_blob/00880ed966efcfb347346a7a8d4fec40" alt="A minimal ternary tree with 17 leaves whose atoms are outlined, collapsed to a skeleton with two internal nodes and five leaves labelled by atom heights 1, 2, 0, 0, 1" style="width:900px; height:330px">
+</div>
+<p class="caption">q = 3, n = 8, m = 17 = 122₃: atoms of sizes 9, 3, 3, 1, 1; root adds 3 + 9 + 5 = 010₃ + 100₃ + 012₃ with no carry.</p>
+<p class="foot-l">Mighty Math Magicians · Caltech Mathathon 2026</p>
+<p class="foot-r"></p>
+<aside>Unwinding the characterization: maximal complete subtrees are atoms, the remaining nodes form a skeleton of t asymmetric nodes. Carry-free addition means digit vectors just add, so the atoms are exactly the digits of m. Conversely any skeleton on the digit atoms is minimal. Atoms are rotation invariant, so minimal classes are cyclic skeletons; in this example there are 10 of them.</aside>
+</section>

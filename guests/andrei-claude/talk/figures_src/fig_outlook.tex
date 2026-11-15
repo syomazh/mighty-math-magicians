@@ -1,0 +1,23 @@
+% Written by Claude Fable 5.2, 2026-11-15. Minimal tree for q = 3, n = 6: complete subtrees with 1, 3, 9 leaves under the root.
+\draw[black!22, line width=0.5pt, dash pattern=on 2pt off 2pt] (0.3,-1.1) -- (9.25,-1.1);
+\draw[black!22, line width=0.5pt, dash pattern=on 2pt off 2pt] (2.0,-2.2) -- (9.25,-2.2);
+\draw[black!22, line width=0.5pt, dash pattern=on 2pt off 2pt] (4.3,-3.3) -- (9.25,-3.3);
+\draw[cbox, fill=coralfill!45] (0.55,-1.45) rectangle (1.25,-0.75);
+\draw[cbox, fill=coralfill!45] (2.05,-2.55) rectangle (3.75,-0.75);
+\draw[cbox, fill=coralfill!45] (4.35,-3.65) rectangle (8.85,-0.75);
+\draw[edge] (4.20,0.00) -- (0.90,-1.10);
+\draw[edge] (4.20,0.00) -- (2.90,-1.10);
+\draw[edge] (4.20,0.00) -- (6.60,-1.10);
+\foreach \x in {2.40,2.90,3.40} \draw[edge] (2.90,-1.10) -- (\x,-2.20);
+\foreach \x in {5.10,6.60,8.10} { \draw[edge] (6.60,-1.10) -- (\x,-2.20);
+  \foreach \d in {-0.40,0,0.40} \draw[edge] (\x,-2.20) -- (\x+\d,-3.30); }
+\node[gnode] at (2.90,-1.10) {};
+\node[gnode] at (6.60,-1.10) {};
+\foreach \x in {5.10,6.60,8.10} \node[gnode] at (\x,-2.20) {};
+\node[anode] at (4.20,0.00) {};
+\node[leafsq] at (0.90,-1.10) {};
+\foreach \x in {2.40,2.90,3.40} \node[leafsq] at (\x,-2.20) {};
+\foreach \x in {5.10,6.60,8.10} \foreach \d in {-0.40,0,0.40} \node[leafsq] at (\x+\d,-3.30) {};
+\node[anchor=west, font=\large] at (9.4,-1.10) {depth 1:\ \ 1 leaf};
+\node[anchor=west, font=\large] at (9.4,-2.20) {depth 2:\ \ 3 leaves};
+\node[anchor=west, font=\large] at (9.4,-3.30) {depth 3:\ \ 9 leaves};

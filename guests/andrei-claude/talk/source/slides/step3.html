@@ -1,0 +1,13 @@
+<section id="step3" class="std" data-transition="fade" style="gap:24px">
+<p class="eyebrow">STEP 3</p>
+<h2 class="title">A lower bound from base-p digit sums</h2>
+<img class="eq" src="/_blob/9a7f418d927721d43cf14d6a988ff717" alt="s_p(pa) = s_p(a), and s_p of a sum is at most the sum of the s_p, with equality exactly when there are no carries" style="width:1531px; height:78px">
+<p class="body">Claim: d(T) ≥ t(m) = (s<i>ₚ</i>(m) − 1)/(p − 1) for every tree T with m leaves. Induction on m, splitting at the root.</p>
+<p class="body"><span style="color:#1F2A3A; font-weight:600">Symmetric root.</span> Its p subtrees are equivalent, so m = p·m₁ and d(T) = p·d(T₁) ≥ p·t(m₁) ≥ t(m₁) = t(m), with equality exactly when d(T) = 0, i.e. T is a complete p-ary tree.</p>
+<p class="body"><span style="color:#1F2A3A; font-weight:600">Asymmetric root.</span> If the subtrees have m₁, …, m<i>ₚ</i> leaves, then d(T) = 1 + Σ d(Tᵢ) ≥ 1 + Σ t(mᵢ) ≥ t(m), with equality exactly when d(Tᵢ) = t(mᵢ) for each i and the mᵢ add without carries.</p>
+<img class="eq" src="/_blob/9ef294b9bf01719e7fa3f0c2b3cc511b" alt="C_n^(q) is the sum over rotation classes of p to the d(T); since d(T) is at least t for every T, p to the t divides C_n^(q)" style="width:1270px; height:120px">
+<p class="callout">This is the divisibility Konvalinka obtains from a larger group action.</p>
+<p class="foot-l">Mighty Math Magicians · Caltech Mathathon 2026</p>
+<p class="foot-r"></p>
+<aside>Two facts about base-p addition, no factorials: multiplying by p keeps the digit sum, and the digit sum is subadditive, with the defect equal to p − 1 times the number of carries. The induction has two cases. A symmetric root multiplies the count by p, which can only help. An asymmetric root costs exactly one, and the digit sums pay for it unless there are carries. Summing class sizes p to the d(T), every term is divisible by p to the t.</aside>
+</section>

@@ -1,0 +1,35 @@
+% Written by Claude Fable 5.2 (claude-fable-5-2), 2026-11-14/15. Not human-reviewed.
+\documentclass[border=6pt]{standalone}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\definecolor{coralfill}{RGB}{250,226,216}\definecolor{coralline}{RGB}{216,90,48}
+\definecolor{grayfill}{RGB}{241,239,232}\definecolor{grayline}{RGB}{136,135,128}
+\definecolor{purpfill}{RGB}{206,203,246}\definecolor{purpline}{RGB}{83,74,183}
+\definecolor{tealfill}{RGB}{159,225,203}\definecolor{tealline}{RGB}{15,110,86}
+\tikzset{
+  edge/.style={line width=0.6pt, black!75},
+  act/.style={-{Stealth[length=2.4mm]}, line width=0.7pt},
+  brace/.style={line width=0.5pt, black!55},
+  lab/.style={rounded corners=2pt, inner sep=2pt, minimum width=0.75cm, minimum height=0.44cm, font=\small},
+  cyc/.style={lab, draw=coralline, fill=coralfill},
+  oth/.style={lab, draw=grayline, fill=grayfill},
+  czero/.style={lab, draw=tealline, fill=tealfill},
+  cone/.style={lab, draw=purpline, fill=purpfill},
+  clab/.style={draw=coralline, fill=coralfill, rounded corners=2pt, inner sep=1.5pt, minimum width=0.5cm, minimum height=0.45cm, font=\small},
+  leafsq/.style={draw=grayline, fill=grayfill, minimum size=5pt, inner sep=0pt},
+  pnode/.style={circle, draw=purpline, fill=purpfill, minimum size=8pt, inner sep=0pt},
+  tnode/.style={circle, draw=tealline, fill=tealfill, minimum size=8pt, inner sep=0pt},
+  gnode/.style={circle, draw=grayline, fill=grayfill, minimum size=5.5pt, inner sep=0pt},
+  snode/.style={circle, draw=grayline, fill=grayfill, minimum size=10pt, inner sep=0pt},
+  anode/.style={circle, draw=purpline, fill=purpfill, minimum size=10pt, inner sep=0pt},
+  badring/.style={draw=coralline, line width=1.3pt},
+  pbox/.style={draw=purpline, dashed, rounded corners=6pt, line width=0.6pt},
+  tbox/.style={draw=tealline, dashed, rounded corners=6pt, line width=0.6pt},
+  cbox/.style={draw=coralline, dashed, rounded corners=5pt, line width=0.6pt}
+}
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\input{fig_k2_orbit.tex}
+\end{tikzpicture}
+\end{document}

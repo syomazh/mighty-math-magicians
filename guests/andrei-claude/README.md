@@ -22,3 +22,29 @@ Andrei asked, in chat: the Fuss–Catalan numbers also count lattice paths (path
 - **Sources.** Granville's survey: only the introduction of the online version was read; its bibliographic data was taken from a Wikipedia page. Kaloujnine and Giannelli–Law are quoted from `references/README.md` (entries 43, 44) and were not opened by me.
 - **Not read at this commit (487bdaf):** `paper/main.tex`, `paper/accounting_proof.tex`, `paper/frobenius_proof.tex`, `lean/README.md`. The comparison table in the note rests on the talk slides and on `main.pdf` and `accounting_proof.pdf` as Andrei attached them earlier in the chat. I did not check whether the path proof overlaps with the accounting or the Frobenius proof.
 - The cycle lemma (paths under the line) is quoted without proof and without a source; it is not used in the proof, and was checked by script for 8 pairs (q, n).
+
+## Second hand-over, 2026-11-15 (zip, by hand)
+
+Added by Claude Fable 5.2 on 2026-11-15 at about 12:25 CT. Not human-reviewed. The sections above describe the first hand-over (Saturday 19:15 CT), which the team's record took in as claim C24; they are left as written.
+
+**Asked since then** (in chat; the log is in `chat/`): whether the binomial theorem of the note is in the literature; whether Wilson's theorem makes the path proof less combinatorial, and whether a cherry-collapse proof of Wilson's theorem is known; whether the argument reaches polynomials with a statistic or Gaussian binomials; an outlook slide; the slides of the second half of the proof as a separate file, and a version with k = 2 examples; a zip of all of it with the chat.
+
+**New in this folder**
+
+| Path | What |
+|---|---|
+| `JOURNAL.md` | seven more entries (Saturday 20:00 to Sunday 12:25 CT) |
+| `CLAIMS_PROPOSED.md` | andrei-claude-7 to -13 |
+| `PROPOSALS.md` | entry 3: Petersen's proof of Wilson's theorem as a reference |
+| `experiments/path_segments/wilson_fixed_points.py` | a fixed-point count in place of Wilson's theorem (andrei-claude-7) |
+| `experiments/refinements/` | leaf-depth refinement (29 cases), cyclotomic factors of Gaussian binomials (567 + 11 cases), two-variable probes, and the checks behind the outlook slide |
+| `talk/` | the deck (17 slides) as a PDF and as source, the second half of the proof with k = 1 and with k = 2 examples, the outlook slide; see `talk/README.md` |
+| `chat/2026-11-14_15_chat_log.md` | the chat session, reconstructed by the assistant: Part 1 is the user's messages and a summary, Part 2 has both sides |
+
+**Not done, not verified (added to the list above)**
+
+- Nothing new here has been reviewed by another model or signed by a person. The residue formula for the leaf-depth refinement (andrei-claude-8, -9) is a conjecture with a proof sketch and 29 computed cases.
+- Literature statements of Saturday evening and Sunday (Anton 1869, Collins 2024, Petersen 1872, Sagan 1992, Fray 1967, Knuth–Wilf 1989) come from search excerpts and secondary sources. None of the papers was opened in full, and none is in `references/README.md`.
+- The path-proof note is unchanged since the first hand-over. It still quotes Wilson's theorem.
+- The chat log is not a transcript (see its header).
+- Still no push from the assistant's session (no GitHub access for the Claude app).

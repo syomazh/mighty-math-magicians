@@ -1,0 +1,15 @@
+<section id="step5" class="std" data-transition="fade">
+<p class="eyebrow">STEP 5</p>
+<h2 class="title">Collapse the complete subtrees</h2>
+<div class="row">
+<div class="col">
+<p class="body">A minimal tree is a skeleton of t asymmetric nodes carrying complete subtrees, the atoms. Since leaf counts add without carries, there are exactly m<i>ⱼ</i> atoms of height j, where m<i>ⱼ</i> is the j-th base-p digit of m: s<i>ₚ</i>(m) atoms in all.</p>
+<p class="callout">N<i>min</i> = |S(m, k)|: skeletons with m<i>ⱼ</i> leaves labelled j, children taken up to cyclic rotation at every node; a leaf labelled j sits at depth ≡ −j (mod k).</p>
+</div>
+<img class="fig" src="/_blob/2d4e9c24a9c85c2511e394fb9f648ac6" alt="A minimal ternary tree with 17 leaves for q = 9, n = 2, drawn with depths 0 to 4 and its atoms outlined: two cherries with leaves at depth 2, two single leaves at depth 2, and a complete subtree with 9 leaves at depth 4. It is collapsed to a skeleton with two internal nodes: leaves labelled 1 and 1 at depth 1, and leaves labelled 0, 0 and 2 at depth 2" style="width:900px; height:315px">
+</div>
+<p class="caption">q = 9 (p = 3, k = 2), n = 2, m = 17 = 122₃: atoms of sizes 9, 3, 3, 1, 1; root adds 3 + 3 + 11 = 010₃ + 010₃ + 102₃ with no carry. Depth condition: labels 1 sit at odd depth, labels 0 and 2 at even depth. This is the only skeleton; without the condition (k = 1) the same atoms give 10.</p>
+<p class="foot-l">Mighty Math Magicians · Caltech Mathathon 2026</p>
+<p class="foot-r"></p>
+<aside>Unwinding the characterization: maximal complete subtrees are atoms, the remaining nodes form a skeleton of t asymmetric nodes. Carry-free addition means digit vectors just add, so the atoms are exactly the digits of m. Conversely any skeleton on the digit atoms is minimal. Atoms are rotation invariant, so minimal classes are cyclic skeletons. Here q = 9, so k = 2: a 9-ary node is two levels of the ternary tree, and every leaf of the big tree is at even depth. An atom of height j must therefore have its root at depth congruent to −j mod 2: the two cherries (height 1) at depth 1, the two single leaves (height 0) and the 9-leaf atom (height 2) at depth 2. That forces the skeleton: there is exactly one. With k = 1, for q = 3 and n = 8, which has the same m = 17, there are 10.</aside>
+</section>
