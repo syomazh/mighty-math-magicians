@@ -30,3 +30,7 @@ lean/.lake/
 
 # Marks the orchestrator's working folder on the owner's machine; never committed (see AGENTS.md)
 .orchestrator
+
+# download folders of search workers (may hold copyrighted text; never committed)
+experiments/*/tmp/
+guests/*/experiments/*/tmp/
