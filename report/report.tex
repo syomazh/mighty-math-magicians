@@ -94,7 +94,8 @@
 % jobs); in the sense of the rules the declarations listed as checked below are Lean-verified.").
 \newcommand{\LeanVersions}{Lean \texttt{v4.35.0} with Mathlib \texttt{v4.35.0}}
 \newcommand{\LeanVersionStatus}{\textbf{The project builds on the versions that the rules require,
-\LeanVersions{}} (a full build from scratch on 15 November 2026: 3272 jobs, no error). The build prints the
+\LeanVersions{}} (a full build from scratch on 15 November 2026: 3272 jobs, no error; a fresh clone of the
+repository was built from scratch in the same way, to imitate the automated check). The build prints the
 axioms behind every final theorem named in this report: each depends only on \texttt{propext},
 \texttt{Classical.choice} and \texttt{Quot.sound}; there is no \texttt{sorry} and no
 \texttt{native\_decide} in the project. In this report ``machine-checked'' and ``Lean'' therefore mean
@@ -1662,7 +1663,10 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
 \lean{MMM.Path.kummer_exact}, \lean{MMM.Path.choose_residue} (\file{Path/Final.lean})
  & Theorem~\ref{path:thm:binom}
  & The number of carries enters through the hypothesis $(p-1)c+s_p(N)=s_p(n)+s_p(N-n)$. The residue is stated
- in the integers: $\binom Nn\prod_jn_j!\,m_j!\equiv(-p)^c\prod_jN_j!\pmod{p^{c+1}}$.\\\addlinespace[3pt]
+ in the integers: $\binom Nn\prod_jn_j!\,m_j!\equiv(-p)^c\prod_jN_j!\pmod{p^{c+1}}$. The same two statements with
+ Mathlib's definitions only (digit sums and products of factorials over \lean{Nat.digits}) are
+ \lean{MMM.Path.kummer_exact_digits} and \lean{MMM.Path.choose_residue_digits}; as a valuation,
+ \lean{MMM.Path.multiplicity_choose_eq_carries}.\\\addlinespace[3pt]
 \lean{MMM.Path.problem137_fussCatalan_path}, \lean{MMM.Path.problem137_fussCatalan_exact_path},
  \lean{MMM.Path.residue_fussCatalan_path} (\file{Path/Final.lean})
  & Theorem~\ref{path:thm:main}
