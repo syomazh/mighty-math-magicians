@@ -244,3 +244,55 @@ lake env lean MMM/Frob/Lead.lean -o .lake/build/lib/lean/MMM/Frob/Lead.olean
 `evalY0_solution`, `lead_add`, `lead_X` and `lead_frobeniusLift` all give only
 `[propext, Classical.choice, Quot.sound]`.
 
+## W038 — `PowDeriv.lean`: the p-th derivative of a p-th power (2026-11-14)
+
+Section written by Claude Fable 5.2 (a subagent of the orchestrator), not
+human-reviewed. Brief: `briefs/W038_lean_frobenius_powderiv.md`.
+
+`MMM/Frob/PowDeriv.lean` is self-contained (it imports only Mathlib:
+`Data.Nat.Choose.Multinomial`, `Data.Nat.Prime.Factorial`,
+`Data.Fin.Tuple.NatAntidiagonal`, `GroupTheory.Perm.Cycle.Type`). It is for
+Lemma `lem:hur` (iv) of the note. All four statements of the brief are proved,
+with the statements exactly as in the brief:
+
+| Statement | Status |
+|---|---|
+| `IsDer` (structure: additive, product rule) and helpers `IsDer.map_zero`, `map_one`, `map_nsmul`, `map_sum`, `iterate_map_zero`, `iterate_succ_map_one`, `iterate_map_add`, `iterate_map_nsmul`, `iterate_map_sum` | done |
+| `IsDer.iterate_mul` (Leibniz, two factors) | done |
+| `IsDer.iterate_prod` (Leibniz, m factors, over `Finset.Nat.antidiagonalTuple m n` with `Nat.multinomial`) | done |
+| `sum_cyclic_invariant` (fact E2 as a statement about sums) | done |
+| `IsDer.iterate_pow_prime`: `∃ r, D^[p] (u ^ p) = p • (u ^ (p - 1) * D^[p] u) + p.factorial • (D u) ^ p + (p ^ 2) • r` | done |
+
+Helper lemmas that may be useful elsewhere: `sum_antidiagonalTuple_succ` (a sum
+over `antidiagonalTuple (m + 1) n` sorted by the first entry; Mathlib has this
+only for lists), `multinomial_cons_fin`, `card_dvd_of_shift_invariant` (a
+shift-closed finite set of `p`-tuples without constant tuples has `p ∣ card`,
+through `Equiv.Perm.card_fixedPoints_modEq`), `dvd_multinomial_of_ne`,
+`multinomial_shift`.
+
+Compile (no output, exit code 0):
+
+```bash
+lake env lean MMM/Frob/PowDeriv.lean -o .lake/build/lib/lean/MMM/Frob/PowDeriv.olean
+```
+
+No `sorry`, `admit`, `axiom`, `native_decide` or `unsafe`. `#print axioms` for
+`IsDer.iterate_mul`, `IsDer.iterate_prod`, `sum_cyclic_invariant` and
+`IsDer.iterate_pow_prime` gives `[propext, Classical.choice, Quot.sound]`.
+
+Not done here (outside the brief): the step from `iterate_pow_prime` to the
+congruence of Lemma `lem:hur` (iv) for `h = f^p / p` in the Hurwitz ring
+(divide by `p`, then Wilson's theorem `(p - 1)! ≡ -1`); `PowDeriv.lean` is not
+yet imported by `Hurwitz.lean` or by `MMM.lean`.
+
+## W037 — the ring of Hurwitz series
+
+Written by Kimi K3.1 Pro, 2026-11-14. Not human-reviewed.
+
+`Hurwitz.lean` has completed the first two targets. `instCommRing` transports
+the commutative ring along `toQ : Hur ι → MvPowerSeries ι ℚ`; all requested
+coefficient formulas, `constCoeff`, `var`, and `coeff_pow_zero` are proved.
+Targets 3 (the partial derivations) and 4 (prime powers and `divPow`) are not
+yet in the file. The retained file compiles with the direct `lake env lean`
+command; it has no `sorry`, `admit`, `axiom`, `native_decide`, or `unsafe`.
+
