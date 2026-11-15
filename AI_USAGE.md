@@ -2,6 +2,16 @@
 
 Maintained by the orchestrator (Claude Fable 5.2). Last updated 2026-11-14, Saturday 14:30 PT. This is the summary required for disclosure; the full record is `JOURNAL.md` (chronological), `CLAIMS.md` (origin of every claim) and `logs/delegations/` (every worker run with its brief and output).
 
+## Added on Sunday 2026-11-15, 08:32: what AI did between 08:00 and 08:30
+
+Syoma asked whether all four proofs were in Lean and said that the Open Math OS allowance was available again. From then on:
+
+- **Open Math OS workers, Kimi K3.1 Pro** (briefs W056a, W056b, W057a in `briefs/`, runs in `logs/delegations/`): three Lean files of the accounting proof (`lean/MMM/AccountingL1.lean`, `AccountingDiv.lean`, `LegendreSym.lean`), each from a brief in which the orchestrator had fixed the statements and a proof plan. Checked: the orchestrator read each file, recompiled it, compared the statements with the brief (unchanged), and ran the full build (3292 jobs, no `sorry`) and the dependency audit. Two more workers of the same model were started on the two group-action arguments of Lemma L4 (W057b, W057c); nothing of theirs is in the repository's build at the time of writing.
+- **The orchestrator (Claude Fable 5.2):** the briefs; `lean/MMM/LegendreDefs.lean`, `Accounting.lean` (the file that joins the pieces and states the final theorems) and `AxiomsAccounting.lean`; the changes to the report, to `lean/README.md` and to the ledgers.
+- **Open Math OS worker, Muse Spark Open** (W058, read-only): a reading of the three proofs of Section 4.5 of the report and of the converse in Section 2.2, with the instruction to break them. No error; three clarifications, applied by the orchestrator. This is the first reading of these proofs by a model other than Claude.
+- **Open Math OS worker, Mistral Large 4.0** (W059, read-only): the report's bibliography and attributions compared with `references/README.md`. No field differs; the places where the report said more than the list recorded were checked by the orchestrator against the local texts (two entered in `references/README.md`, one citation added).
+- **What no one has checked:** no person has read any of this; no separate session has audited the new Lean files (the three audits were earlier). In Lean, two congruences of the accounting proof are proved by other arguments than in the text, and the report says so wherever it mentions the formalization.
+
 ## State on Sunday 2026-11-15, 04:36 (read this first; it corrects what is out of date below)
 
 The fullest and most current statement of AI use is **Section 9 of the report** (`report/report.tex`); this file is the project's own summary and its older parts were written on Friday and Saturday. Where the text below disagrees with this section, this section holds.
