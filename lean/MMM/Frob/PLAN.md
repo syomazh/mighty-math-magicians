@@ -29,14 +29,14 @@ formalization was used.  Reduction modulo p is `PowerSeries.map
 | E3 | Fermat and Wilson | `Int.ModEq.pow_prime_eq_self`; Wilson factorial congruence | `ZMod`, Wilson | — | easy/medium | Fermat located; not done as files |
 | definition Λ, φ | `φ(x^m y^d)=x^(pm)y^(pd)` | `frobeniusLiftRingHom`; `frobeniusLift_X`, `frobeniusLift_coeff_X` | `PowerSeries`, `Polynomial.expand` | — | easy | done |
 | Lemma θ, congruence | `(f^p−φf)/p ∈ Λ` | `exists_frobenius_sub_eq_natCast_mul`, `theta_spec` | `PowerSeries.mk`, `ZMod` | congruence | medium | done |
-| Lemma system | unique cyclic family Fδ; F0(x,p)=G | `F : ZMod k → Lambda`; coefficient recursion on x-degree | `PowerSeries.coeff`, `Fin` induction | θ | hard | not done; partial coefficient lemmas in `System.lean` |
+| Lemma system | unique cyclic family Fδ; F0(x,p)=G | `F : ZMod k → Lambda`; coefficient recursion on x-degree | `PowerSeries.coeff`, `Fin` induction | θ | hard | existence and uniqueness done in `Existence.lean`; value at y=p in `Special.lean` |
 | weight definition | `w(x^m y^d)=(p−1)d−s_p(m)` | integer-valued weight on monomials | `Nat.digits` | E1 | easy | not done |
 | (wprod) | weight of products; carry-free equality | weight product inequality | `Nat.digits` | E1 | medium | not done |
 | (wphi) | weight under φ | weight formula for φ | `PowerSeries.expand` | E1 | easy | not done |
 | Lemma lower | Fδ coefficients have weight ≥−1 | coefficientwise lower bound | recursion, weight | system, wprod, wphi | medium | not done |
 | Cor. div | y^t divides coefficient; p^t divides C | `Polynomial` divisibility and evaluation | `Polynomial` | lower | medium | not done |
 | carry-free algebra A | functions N→Q with carry-free convolution | `add_monoid`, `Semiring` on carry-aware convolutions | `Finset`, convolution | E1 | hard | not done |
-| Lemma lead (i) | Fδ(x,0)=sum x^(p^j) | evaluate y=0; unique recursion | `Polynomial.eval`, `PowerSeries` | system | medium | not done |
+| Lemma lead (i) | Fδ(x,0)=sum x^(p^j) | evaluate y=0; unique recursion | `Polynomial.eval`, `PowerSeries` | system | medium | y=0 cyclic recursion and Frobenius-as-expansion done in `Special.lean`; explicit closed form not done |
 | Lemma lead (ii) | ℓδ=αδ+(1/p)ℓδ+1^cf p | sequence convolution identity | carry algebra | lower, E1 | hard | not done |
 | Lemma H | unique labelled exponential system | `MvPowerSeries (ZMod k) ℚ` with zero constant term | `MvPowerSeries` | — | medium | not done |
 | Lemma subst | ℓ relates to T | substitution and base-p digits | `MvPowerSeries`, `Polynomial` | H, lead | hard | not done |
@@ -48,6 +48,47 @@ formalization was used.  Reduction modulo p is `PowerSeries.map
 | tree dictionary | optional interpreting lemmas | none required for algebra | — | — | not pursued |
 
 ## Status / blockers
+
+### W031: existence, value at y=p, and reduction at y=0
+
+`Existence.lean` is a new compiling file. It defines `iter p k n δ`, starting at
+zero and applying `cyclicRHS`; proves zero constant terms by induction; proves
+`iter_stable_eq` by strong induction on coefficient degree; and derives the
+brief's two-sided statement `iter_stable`. The limit is literally
+
+```lean
+noncomputable def solution (p : ℕ) [Fact p.Prime] (k : ℕ) (δ : ZMod k) : Lambda :=
+  PowerSeries.mk fun m => (iter p k (m + 1) δ).coeff m
+```
+
+The new theorems are `solution_zeroConstant`, `solution_cyclic`, and
+
+```lean
+theorem exists_unique_cyclicSystem (p : ℕ) [Fact p.Prime] (k : ℕ) :
+    ∃! F : ZMod k → Lambda, (∀ δ, HasZeroConstant (F δ)) ∧ CyclicSystem p F
+```
+
+The key coefficient proof follows `cyclicSystem_unique`: the two lower-degree
+lemmas for φ and θ are applied between the limit and its `(m+1)`-st iterate.
+
+`Special.lean` is also compiling. It defines `evalY p := PowerSeries.map
+(Polynomial.evalRingHom (p : ℤ))` and proves `evalY_cyclicRHS` and
+`evalY_solution`. The proof transports `theta_system_eq` through the ring
+homomorphism; the coefficient-variable term becomes `p * θ`, which cancels.
+At `y=0`, it additionally defines `evalY0 := PowerSeries.map
+(Polynomial.evalRingHom 0)`, proves
+`evalY0 (frobeniusLiftRingHom p _ f) = PowerSeries.expand p _ (evalY0 f)`, and
+reduces both cyclic-RHS equations to `if δ=0 then x else 0` plus the image of the
+Frobenius lift (or equivalently the expanded series). No closed form for the
+tree generating series is claimed, and the identification of `F 0` with a
+particular catalytic generating function remains outside these files.
+
+Axiom checks via `lake env lean --stdin`:
+
+```text
+'MMM.Frob.exists_unique_cyclicSystem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MMM.Frob.evalY_solution' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
 
 ### W027, targets 1–4 (completed after resuming the interrupted run)
 
@@ -102,11 +143,11 @@ clear; the proof also handles zero tuples via the zero-constant hypotheses.
 
 `Uniqueness.lean` defines `cyclicRHS` and `CyclicSystem` exactly over `ZMod k`
 and proves `cyclicSystem_unique` for all `k`, with zero-constant hypotheses.
-It also checks the zero coefficient of φ, theta, and RHS.  Existence of the
-family and the relation `F₀(x,p)=G` remain not done.  The next existence step
-is `Nat.strongRecursion` on the coefficient degree, with `PowerSeries.mk`
-assembling all coefficients.  The uniqueness of the tree generating series
-was not reached.  Targets 6 onward remain not started.
+It also checks the zero coefficient of φ, theta, and RHS.  Existence and the
+relation at `y=p` are now supplied by W031's `Existence.lean` and `Special.lean`.
+The uniqueness of the tree generating series was not part of W031 and remains
+not done here; likewise, an explicit generating-series equation beyond
+`evalY_solution` remains not done. Targets 6 onward remain not started.
 
 ### State inherited from W025
 

@@ -257,3 +257,7 @@ Source: `guests/andrei-claude/` (written by Claude Fable 5.2 in a chat session o
 ## Update, 2026-11-14 18:46 PT (Claude Fable 5.2) — Lean: first part of the path proof (C24)
 
 - **C24 (a) and (b), for one block of length p^h: machine-checked** (`lean/MMM/Path/`, worker W032, Kimi K3.1 Pro, from definitions and statements fixed by the orchestrator; recompiled and read by the orchestrator; standard axioms; in the project's build, 4576 jobs). `card_class`: the class of a word under rotations of sub-blocks has p^d elements. `lower_bound`: s_p(a) + s_p(p^h − a) ≤ (p − 1)·d + 1. `pow_dvd_card`: p^c divides the number of words with n letters E, c the number of carries of n + (p^h − n). Not yet in Lean: the identification of that number with binom(p^h, n), words of arbitrary length N, and parts (c) to (f) of C24. Grade of C24 unchanged.
+
+## Update, 2026-11-14 19:00 PT (Claude Fable 5.2) — Lean: the system lemma of the Frobenius proof, except its last sentence
+
+- **C18, Lemma "system": existence and uniqueness of the family F_δ are machine-checked** (`exists_unique_cyclicSystem`, `lean/MMM/Frob/Existence.lean`), and so are the equations it satisfies at y = p and at y = 0 (`Special.lean`). Worker W031 (Kimi K3.1 Pro) from statements and a plan fixed by the orchestrator; recompiled and read by the orchestrator; standard axioms; in the build (4580 jobs). Not yet: "F_0(x, p) is the generating function of the trees" (worker W035 launched), the weight and the lower bound (worker W034 launched), the leading part and the residue. Grade of C18 unchanged.

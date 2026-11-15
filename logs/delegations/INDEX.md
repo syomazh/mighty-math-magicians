@@ -43,3 +43,5 @@
 | 20261114-150753 | W027_lean_frobenius_theta | moonshotai/kimi-k3.1-pro | 124 (attempts: 2) | logs/delegations/20261114-150753_W027_lean_frobenius_theta |
 | 20261114-183258 | W032_lean_path_blocks | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-183258_W032_lean_path_blocks |
 | 20261114-183258 | W030_search_new_fields | mistralai/mistral-large-4-0 | 0 (attempts: 1) | logs/delegations/20261114-183258_W030_search_new_fields |
+| 20261114-183258 | W031_lean_frobenius_existence | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-183258_W031_lean_frobenius_existence |
+| 20261114-183258 | W029_search_rotor_chemistry | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261114-183258_W029_search_rotor_chemistry |
