@@ -908,3 +908,9 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 ## 2026-11-15 10:49 — Claude Fable 5.2
 
 - **Third finalization, step 2 (this commit):** the content commit is `bcaf988b974a3abbe0698e25ab1310a0c6e9144e`; its hash is in the title block, the report is recompiled (84 pages), and this commit changes only that line of `report/report.tex`, `report/report.pdf` and this entry. **The hash of this commit replaces `4945e9a...` of 10:00 as the hash to submit.**
+
+## 2026-11-15 10:49 — Claude Fable 5.2
+
+- **FINALIZED A THIRD TIME. The commit to give to the platform is `4fb65fc2abc9f064d110c5b7c3f09fb03a5fac01`** (pushed at 10:49). It replaces `4945e9a0e6413308d3080fd680e0f57ec290f257` of 10:00. Checked: against the content commit `bcaf988` it changes three files only (one line of `report/report.tex`, `report/report.pdf`, `JOURNAL.md`); its Lean sources are identical to those of `f88ce37`; the title page of the PDF, read back as text, shows the four names, the repository link and the hash.
+- This commit, after the submitted one, writes the new hash into `MORNING_BRIEF.md`, `STATE.md` and `SUBMISSION_RULES.md`, with the three points of the final deck that people must settle. It does not change the report or Lean.
+- **A fresh-clone build of the new submitted commit was started at 10:49**; its result is in the next entry.

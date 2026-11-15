@@ -4,11 +4,15 @@ Written by the orchestrator (Claude Fable 5.2) during the night; last updated Su
 
 **Deadline: 12:00 PT today. After it nothing can be changed. The rules are summarised in `SUBMISSION_RULES.md`.**
 
-## FINALIZED AGAIN at 10:00, with the names (first finalization 09:40)
+## FINALIZED A THIRD TIME at 10:49 (after 09:40 and 10:00)
 
-**The commit to give to the platform: `4945e9a0e6413308d3080fd680e0f57ec290f257`** (repository https://github.com/syomazh/mighty-math-magicians). It replaces the hash of 09:40 (`6b1d7e039dc7e257065c6b877febff712394f541`), which had no names in the title block; if that one was already entered on the platform, replace it.
+**The commit to give to the platform: `4fb65fc2abc9f064d110c5b7c3f09fb03a5fac01`**. It replaces `4945e9a0e6413308d3080fd680e0f57ec290f257` of 10:00: the report now also has what the final deck's chemistry slides say (the alcohols by name, Blair and Henze, the interchangeable hydrogens) and one more reference for the lattice-path proof (Collins 2024, not read). If the hash of 10:00 was already entered on the platform, replace it.
 
-- It contains the report with the commit line of the title block filled (the title block names `0002feb8451e206cbf94a9990419335fddff9899`, the commit with all the content; the submitted commit is its successor and adds only that line, the rebuilt PDF and the journal entry of the step; a commit cannot contain its own hash).
+**Two slides of the final deck (`talk/final/final_slides.pdf`) still do not agree with the report, and only people can settle them:** slide 3 calls the main proof "rigorously verified" (the report: a faculty member looked through it and said it is good); slide 2 says "3+ models check every claim" (the report: three models for the main proof in the first round, one or two for the other proofs). And on the slide "Further connections" the box on interchangeable hydrogens says "up to 14 carbons"; the check on record is for up to 8.
+
+Earlier text of this section, kept: the commit of 10:00 was `4945e9a0e6413308d3080fd680e0f57ec290f257` (repository https://github.com/syomazh/mighty-math-magicians). It replaces the hash of 09:40 (`6b1d7e039dc7e257065c6b877febff712394f541`), which had no names in the title block; if that one was already entered on the platform, replace it.
+
+- It contains the report with the commit line of the title block filled (the title block names `bcaf988b974a3abbe0698e25ab1310a0c6e9144e`, the commit with all the content; the submitted commit is its successor and adds only that line, the rebuilt PDF and the journal entry of the step; a commit cannot contain its own hash).
 - Its Lean sources are those of the commit whose fresh clone was built from scratch at 09:31 (3316 jobs, no `sorry`). A fresh clone of the commit of 09:40 was built from scratch from 09:40 to 09:49 (3316 jobs, no `sorry`); **a fresh clone of the new commit was built from scratch from 10:00 to 10:11: 3316 jobs, no `sorry`.**
 - **The title block has the four names** as Syoma gave them at 09:56 (Misha Mazin, Josh Venick, Syoma Zharkov, Andrei Mazin), and no affiliations, because none were given. **Check the spelling "Andrei":** the message had "Andrie"; the report has the spelling of his own commits. A correction, or affiliations, means repeating the two commits; **the hash to submit then changes**.
 - The same holds for any later change to the report or to `lean/`: say "finalize again". Commits that only add slides or logs after it do not matter for the submission; the platform takes the hash it is given.
