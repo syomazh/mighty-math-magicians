@@ -58,3 +58,4 @@
 | 20261115-080512 | W057a_lean_legendre_assembly | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261115-080512_W057a_lean_legendre_assembly |
 | 20261115-080605 | W059_bibliography_check | mistralai/mistral-large-4-0 | 0 (attempts: 1) | logs/delegations/20261115-080605_W059_bibliography_check |
 | 20261115-080510 | W056b_lean_accounting_division | moonshotai/kimi-k3.1-pro | 0 (attempts: 1) | logs/delegations/20261115-080510_W056b_lean_accounting_division |
+| 20261115-080514 | W057b_lean_choose_by_action | moonshotai/kimi-k3.1-pro | 0 (attempts: 2) | logs/delegations/20261115-080514_W057b_lean_choose_by_action |

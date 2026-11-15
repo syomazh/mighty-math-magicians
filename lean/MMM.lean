@@ -35,6 +35,7 @@ import MMM.Problem137
 import MMM.Dwork
 import MMM.LegendreDefs
 import MMM.LegendreSym
+import MMM.LegendreChoose
 import MMM.AccountingL1
 import MMM.AccountingDiv
 import MMM.Accounting

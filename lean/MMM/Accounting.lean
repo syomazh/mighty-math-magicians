@@ -54,8 +54,8 @@ As in the text: `u` is the number `forestCount p m` defined by the recursion of 
 of the permutations of a given cycle type); Lemma L3 is `factorial_eq_forestCount` and Lemma L4 is
 `forestCount_modEq_of`, from the two congruences `binom(p a + r, r) ≡ 1` and `K(a) ≡ (-1) ^ a`.
 
-The two congruences are supplied below; the docstrings of `choose_congruence` and
-`Kcount_congruence` say by which argument. -/
+The two congruences are supplied below, neither by the argument of the text in the chain to the
+final theorems; the docstrings of `choose_congruence` and `Kcount_congruence` say how. -/
 theorem legendre_accounting_of (p : ℕ) [Fact p.Prime]
     (hK : ∀ a, (Kcount p a : ZMod p) = (-1) ^ a)
     (hC : ∀ a r, r < p → ((Nat.choose (p * a + r) r : ℕ) : ZMod p) = 1) (m : ℕ) :
@@ -63,8 +63,17 @@ theorem legendre_accounting_of (p : ℕ) [Fact p.Prime]
       (u : ZMod p) = (-1) ^ nu p m :=
   factorial_eq_pow_mul_prod_mul_sym_of p hK hC m
 
-/-- `binom(p a + r, r) ≡ 1 (mod p)` for `r < p`: by the elementary computation `choose_cast` of `MMM/Dwork.lean`
-(NOT the argument of the text, which lets a group of order `p` act on the `r`-subsets). -/
+/-- `binom(p a + r, r) ≡ 1 (mod p)` for `r < p`: here by the elementary computation `choose_cast` of
+`MMM/Dwork.lean`, which is NOT the argument of the text.
+
+The argument of the text (a group of order `p` acts on the `r`-subsets; a fixed subset has fewer
+than `p` elements and avoids the `p` points that are moved) is formalized as well, as a statement
+of its own: `MMM.choose_mul_add_modEq_one_action` in `MMM/LegendreChoose.lean`. It is not used in
+the chain to the final theorems, because it rests on Mathlib's fixed-point congruence for
+`p`-groups (`IsPGroup.card_modEq_card_fixedPoints`), whose dependency closure contains Mathlib's
+definition of the `p`-adic valuation of a natural number and first lemmas about it (listed by
+`MMM/AxiomsAccounting.lean`); the final theorems of this file are kept free of every declaration
+with such a name, like those of the other proofs. -/
 theorem choose_congruence (p : ℕ) [Fact p.Prime] (a r : ℕ) (hr : r < p) :
     ((Nat.choose (p * a + r) r : ℕ) : ZMod p) = 1 :=
   choose_cast hr a

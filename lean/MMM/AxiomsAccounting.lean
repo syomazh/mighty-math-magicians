@@ -7,6 +7,7 @@ the final theorem reaches, and the declarations outside the project, in its full
 Mathlib and the core library, whose names contain one of the listed strings.
 -/
 import MMM.Accounting
+import MMM.LegendreChoose
 import MMM.Frob.Deps
 
 #print axioms MMM.LTree.blockedL_zero_iff_shape
@@ -19,6 +20,8 @@ import MMM.Frob.Deps
 #print axioms MMM.factorial_eq_forestCount
 #print axioms MMM.forestCount_modEq_of
 #print axioms MMM.Kcount_eq_W
+#print axioms MMM.choose_add_prime_modEq
+#print axioms MMM.choose_mul_add_modEq_one_action
 #print axioms MMM.Acc.choose_congruence
 #print axioms MMM.Acc.Kcount_congruence
 #print axioms MMM.Acc.legendre_accounting
@@ -38,3 +41,8 @@ import MMM.Frob.Deps
 #closure_consts_matching MMM.Acc.residue_fussCatalan_accounting "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
 #closure_consts_matching MMM.Acc.problem137_fussCatalan_accounting "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
 #closure_consts_matching MMM.Acc.problem137_fussCatalan_accounting "wilson"
+
+-- The binomial congruence by the group action of the text (`MMM/LegendreChoose.lean`) is not used by
+-- the theorems above. Its own closure is listed here: it contains Mathlib's definition of the p-adic
+-- valuation of a natural number and first lemmas about it, through the library's theory of p-groups.
+#closure_consts_matching MMM.choose_mul_add_modEq_one_action "multiplicity_choose" "multiplicity_factorial" "padicval" "legendre" "kummer" "lucas" "dvd_choose_pow" "add_pow_char" "add_pow_expchar"
