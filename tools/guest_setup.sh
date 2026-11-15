@@ -10,7 +10,8 @@ set -euo pipefail
 
 tag="${1:-}"
 if ! [[ "$tag" =~ ^[a-z0-9]+-[a-z0-9]+$ ]]; then
-  echo "usage: bash tools/guest_setup.sh <name>-<tool>"
+  echo "usage: bash tools/guest_setup.sh <name>-<tool> [--keep-branch]"
+  echo "       --keep-branch: only in a cloud session that already put you on its own branch"
   echo "       lower-case letters and digits, one hyphen, for example: alex-chatgpt"
   exit 1
 fi
@@ -36,12 +37,27 @@ git config mmm.guesttag "$tag"
 chmod +x tools/githooks/pre-commit tools/githooks/pre-push 2>/dev/null || true
 
 branch="guest/$tag"
-if git show-ref --verify --quiet "refs/heads/$branch"; then
-  git switch "$branch"
-elif git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
-  git switch -c "$branch" --track "origin/$branch"
+if [ "${2:-}" = "--keep-branch" ]; then
+  # Cloud sessions (Claude Code on the web, the Code tab with Cloud selected) start on a branch
+  # of their own, and their "Create PR" button belongs to that branch. Keep it instead of
+  # switching, and tell the guards that this is the guest's branch.
+  cur="$(git symbolic-ref --short -q HEAD || true)"
+  if [ -z "$cur" ] || [ "$cur" = "main" ] || [ "$cur" = "master" ]; then
+    echo "--keep-branch: you are on '${cur:-no branch}'. A guest never works on the main branch."
+    echo "Run again without --keep-branch; that puts you on guest/$tag."
+    exit 1
+  fi
+  branch="$cur"
+  git config mmm.guestbranch "$branch"
 else
-  git switch -c "$branch" --no-track origin/main
+  git config --unset mmm.guestbranch 2>/dev/null || true
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    git switch "$branch"
+  elif git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+    git switch -c "$branch" --track "origin/$branch"
+  else
+    git switch -c "$branch" --no-track origin/main
+  fi
 fi
 
 mkdir -p "guests/$tag"

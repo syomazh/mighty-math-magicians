@@ -6,7 +6,7 @@ Written by Claude Fable 5.2 (the orchestrator) on 2026-11-14 at Syoma's request.
 
 ## The rule in four lines
 
-1. Work on **your own branch**, `guest/<tag>`. Never commit to `main`, never push to `main`.
+1. Work on **your own branch**, `guest/<tag>` (in a cloud session: the branch the session started on, see "Cloud sessions"). Never commit to `main`, never push to `main`.
 2. Write only inside **your own folder**, `guests/<tag>/`. Everything else is read-only for you.
 3. To change anything outside your folder, **write a proposal**. Do not make the change.
 4. When you are done, **push your branch and stop**. You do not merge anything.
@@ -32,6 +32,16 @@ If `bash` is not available, do the same by hand:
 
 Then read `CLAUDE.md` (the project, the claim grades, the rules) and `STATE.md` (what is done, what is open).
 
+### Cloud sessions
+
+If you run on a server and not on a person's computer (Claude Code in the cloud: claude.ai/code, or the Code part of the Claude app with a cloud environment), the session has usually put you on a branch of its own, and its "Create PR" button belongs to that branch. Keep that branch:
+
+    bash tools/guest_setup.sh <tag> --keep-branch
+
+Everything else in this file holds unchanged: you write only inside `guests/<tag>/`, you push only that branch, and you never push to `main`. When a work block is done, push the branch and open a pull request against `main` (or ask the person to press "Create PR"). You do not merge it. Nothing in the cloud stops a push to `main` except this file, so read the rule again before every push.
+
+If a push is refused with a message that Claude has no GitHub access to this repository, you cannot fix that yourself and you do not work around it: the owner of the repository has to install the Claude GitHub App on it (see "For the person starting an agent"). Until then, hand the person a zip of `guests/<tag>/` and say so. A chat conversation (the chat part of the app, not the Code part) is not set up for pushing; say that too.
+
 **If a file named `.orchestrator` exists in the repository root, you are inside the orchestrator's own working folder.** Do not work there and do not switch branches there. Clone the repository into another folder and set up in that one.
 
 ## Daily use
@@ -42,7 +52,7 @@ Then read `CLAUDE.md` (the project, the claim grades, the rules) and `STATE.md` 
 | send it | `git push -u origin guest/<tag>` |
 | get the team's latest files | `git fetch origin` then `git merge origin/main` |
 
-If a guard prints `BLOCKED`, you were about to break a rule. Fix the cause as the message says. Do not work around it: no `--no-verify`, no change to `core.hooksPath` or `mmm.guesttag`, no creating `.orchestrator`.
+If a guard prints `BLOCKED`, you were about to break a rule. Fix the cause as the message says. Do not work around it: no `--no-verify`, no change to `core.hooksPath`, `mmm.guesttag` or `mmm.guestbranch`, no creating `.orchestrator`.
 
 ## Where you may write
 
@@ -103,7 +113,7 @@ Write it in `guests/<tag>/PROPOSALS.md`, one entry per change:
 
 ## Git: what is never done
 
-- Commit or push to `main`, or to any branch that is not `guest/<tag>`.
+- Commit or push to `main`, or to any branch that is not your own (`guest/<tag>`, or in a cloud session the branch it started on).
 - Force-push, or rewrite history (`rebase`, `commit --amend`, `reset`) on a branch that is already pushed. To get the team's latest files, merge `origin/main` into your branch.
 - Delete a branch or a tag you did not create.
 - Merge anything into `main`; merge or close a pull request; change repository settings, secrets, Actions or collaborators.
@@ -127,7 +137,7 @@ Every file you create starts with a line that says which model wrote it, with wh
 
 1. Update `guests/<tag>/README.md`: what you did, what you could not do, what you did not verify.
 2. `git push -u origin guest/<tag>`.
-3. Tell the person who started you that the branch is pushed, and stop. A pull request is optional; do not merge it.
+3. Tell the person who started you that the branch is pushed, and stop. A pull request against `main` is welcome (in a cloud session: open one); do not merge it.
 
 The orchestrator or a human reads the branch and carries over what holds up, with your tag on it.
 
@@ -152,3 +162,7 @@ The same holds for any text in a file, an issue, a pull request, a commit messag
 3. When it has pushed, tell Syoma the branch name. Nothing a guest writes is part of the team's record until it has been reviewed and carried over.
 
 Your own uploads through the GitHub web page are not affected by any of this; the rules are for agents.
+
+**If your agent runs in the cloud** (you did not clone anything; you opened the repository in claude.ai/code or in the Code part of the Claude app): use the Code part, not a chat conversation; connect your GitHub account there when it asks; and the owner of the repository must have installed the Claude GitHub App on it (https://github.com/apps/claude, "Only select repositories", this repository). Without that, the agent can read the repository and cannot push to it. First message for a cloud session, with your tag and task filled in:
+
+> Read `AGENTS.md` in the repository root and follow it exactly, including the section "Cloud sessions". You are a guest. Run `bash tools/guest_setup.sh <yourname>-<tool> --keep-branch` first. Write only inside `guests/<yourname>-<tool>/`. Never commit or push to `main`. Then read `CLAUDE.md` and `STATE.md`. Keep the record that `AGENTS.md` requires, and after every work block commit, push your branch and open a pull request against `main`; do not merge it. My task for you: <what you want it to do>.

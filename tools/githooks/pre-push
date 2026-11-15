@@ -13,10 +13,16 @@ if [ -z "$tag" ]; then
   exit 1
 fi
 
+# The guest's branch: guest/<tag>, or the branch a cloud session started on
+# (recorded by "guest_setup.sh <tag> --keep-branch"). Never the main branch.
+allowed="guest/$tag"
+gb="$(git config --get mmm.guestbranch)"
+if [ -n "$gb" ] && [ "$gb" != "main" ] && [ "$gb" != "master" ]; then allowed="$gb"; fi
+
 while read -r local_ref local_sha remote_ref remote_sha; do
-  if [ "$remote_ref" != "refs/heads/guest/$tag" ]; then
-    echo "BLOCKED (AGENTS.md): push to '$remote_ref'. You push only guest/$tag."
-    echo "  Use:  git push -u origin guest/$tag"
+  if [ "$remote_ref" != "refs/heads/$allowed" ]; then
+    echo "BLOCKED (AGENTS.md): push to '$remote_ref'. You push only $allowed."
+    echo "  Use:  git push -u origin $allowed"
     exit 1
   fi
 done
