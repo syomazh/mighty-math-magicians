@@ -904,3 +904,7 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
 - Not changed, because only a person can decide them: the report's sentence that a faculty member looked through the main proof and said it is good (the results slide says "rigorously verified"), and the sentence on how many models read each proof (the workflow slide says "3+ models check every claim").
 - Report recompiled: 84 pages, no undefined reference or citation; the names are in the title block only.
 - **Third finalization, step 1:** this commit contains everything, with the commit line of the title block open. No Lean source has changed since the commit built from a fresh clone at 10:11.
+
+## 2026-11-15 10:49 — Claude Fable 5.2
+
+- **Third finalization, step 2 (this commit):** the content commit is `bcaf988b974a3abbe0698e25ab1310a0c6e9144e`; its hash is in the title block, the report is recompiled (84 pages), and this commit changes only that line of `report/report.tex`, `report/report.pdf` and this entry. **The hash of this commit replaces `4945e9a...` of 10:00 as the hash to submit.**
