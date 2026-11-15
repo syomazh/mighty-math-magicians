@@ -1,0 +1,20 @@
+# Output of guests/andrei-claudecode/experiments/EC03_path_proof_check/run.py, a script written by Claude Fable 5.2 in Claude Code, started by Andrei, 2026-11-14. Not human-reviewed.
+# Everything below this line is the script's output, unchanged.
+EC03 - independent check of the path proof (C24)
+
+Part A - all binomial coefficients binom(N, n), classes by graph search from the moves
+  p = 2, 1 <= N <= 14, 0 <= n <= N: 119 cases, 32766 words, statements (1)-(3) hold: PASS
+  p = 3, 1 <= N <= 14, 0 <= n <= N: 119 cases, 32766 words, statements (1)-(3) hold: PASS
+  p = 5, 1 <= N <= 12, 0 <= n <= N: 90 cases, 8190 words, statements (1)-(3) hold: PASS
+  binomial cases in all: 328
+
+Part B - the Fuss-Catalan case N = qn + 1
+  q = 2 (p = 2): n=1: C=1=2^0*1, 1 smallest classes; n=2: C=2=2^1*1, 1 smallest classes; n=3: C=5=2^0*5, 1 smallest classes; n=4: C=14=2^1*7, 1 smallest classes; n=5: C=42=2^1*21, 1 smallest classes; n=6: C=132=2^2*33, 3 smallest classes; n=7: C=429=2^0*429, 1 smallest classes; n=8: C=1430=2^1*715, 1 smallest classes; n=9: C=4862=2^1*2431, 1 smallest classes
+  q = 3 (p = 3): n=1: C=1=3^0*1, 1 smallest classes; n=2: C=3=3^1*1, 4 smallest classes; n=3: C=12=3^1*4, 1 smallest classes; n=4: C=55=3^0*55, 1 smallest classes; n=5: C=273=3^1*91, 4 smallest classes; n=6: C=1428=3^1*476, 2 smallest classes
+  q = 4 (p = 2): n=1: C=1=2^0*1, 1 smallest classes; n=2: C=4=2^2*1, 1 smallest classes; n=3: C=22=2^1*11, 1 smallest classes; n=4: C=140=2^2*35, 1 smallest classes
+  q = 5 (p = 5): n=1: C=1=5^0*1, 1 smallest classes; n=2: C=5=5^1*1, 6 smallest classes; n=3: C=35=5^1*7, 12 smallest classes
+  q = 8 (p = 2): n=1: C=1=2^0*1, 1 smallest classes; n=2: C=8=2^3*1, 1 smallest classes
+  q = 9 (p = 3): n=1: C=1=3^0*1, 1 smallest classes; n=2: C=9=3^2*1, 4 smallest classes
+  Fuss-Catalan cases in all: 26, statement (4) holds: PASS
+
+2 checks, all pass (328 + 26 cases)
