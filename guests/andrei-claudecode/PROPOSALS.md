@@ -63,9 +63,27 @@ No proposal here says that a proof is wrong. Entry 1 is a wording that a chemist
 
 ## 7. The deck in `talk/` ("Fuss–Catalan valuations from rotations of trees"): three slides of introduction, for the humans
 
-Added 2026-11-14 at about 21:30 PT; changed at about 22:15 PT, when the slides were made again with fewer words, and at about 22:40 and 23:00 PT (last slide).
+Added 2026-11-14 at about 21:30 PT; changed before 22:03 PT, when the slides were made again with fewer words and the last slide was changed three times. (Times first written here, 22:15 to 23:00, were estimates and were wrong.)
 
 - **What is offered.** `guests/andrei-claudecode/talk/intro_slides.pdf`, three pages in the look of that deck, numbered 2 to 4: Catalan numbers and binary trees next to Fuss–Catalan numbers and q-ary trees (the formula only on the Catalan side); the problem as one formula with three examples; the formula with one arrow to the statement (marked "Legendre's formula", "Konvalinka 2007"), and under it the problem and "Our proof does not use the formula". The outline is Andrei's.
 - **What it touches.** Slide 2 of the deck states the problem with the formula on it. Either the three slides replace it and the residue moves to the slide where it is proved, or slide 2 follows them as the precise statement. The deck is a PDF of images and its source is not in the repository, so nothing was changed in it.
 - **Evidence.** `guests/andrei-claudecode/talk/make_intro.py` (9 checks, all pass; the tree counts come from listing trees or from the recursion, not from the formula). The line "Our proof does not use the formula" is the statement of `paper/main.tex`, lines 54 and 72 at 9a4ff85.
 - **Limits.** The proof by Legendre's formula behind the arrow of slide 4 was written out by us (in `intro_notes.md`) and not compared with Konvalinka's text. Two cautions for the speaker are in `intro_notes.md`: his tree argument (divisibility) and the exact tree proof for p = 2 by Deutsch and Sagan are earlier work on trees.
+
+## 8. The deck in `talk/`: one slide "What comes next", for the humans
+
+Added 2026-11-14 at about 22:10 PT.
+
+- **What is offered.** `guests/andrei-claudecode/talk/outlook_slide.pdf`, one page in the look of the deck, to stand before its last slide. Four rows: (1) weighted Fuss–Catalan numbers, Konvalinka's congruence from rotations alone; (2) other statistics, with p^t dividing ∏ binom(q·n_i, n_(i+1)); (3) the next digit, C/p^t ≡ N_t + p·N_(t+1) (mod p²); (4) q not a prime power.
+- **Why these.** The deck has no slide on future work. Rows 1 and 2 are the further directions named in the problem statement and are claims C9 and C10 of the ledger (grade "computed"); rows 3 and 4 are the open items of `FINDINGS.md` and questions 40 and 37 of `talk/QA.md`.
+- **Evidence.** `guests/andrei-claudecode/talk/check_outlook.py` (5 checks, all pass) for rows 2 and 3. Row 1 rests on `experiments/E002_extensions`, not rerun here.
+- **Limits.** The formula of row 1 leaves out Konvalinka's two conditions on the weights. Nothing on the slide is a result; `outlook_notes.md` gives the status of each row.
+
+## 9. `talk/QA.md`, question 46 ("What would you do with two more months?"): out of date on Lean
+
+Added 2026-11-14 at about 22:10 PT.
+
+- **What is wrong.** The answer begins: "Extend the formal check in Lean to the residue, to the closed formula and to the second and third proofs". `lean/README.md` at 240176c says that Lean has checked the residue (`residue_fussCatalan`) and the tree-counting formula (`fuss_catalan_formula`), and the log has later commits on the Frobenius and path routes. A speaker who gives the old answer undersells what is done.
+- **Proposed.** Whoever knows the current state of `lean/` rewrites the first clause. I did not read the Lean files and propose no wording for what is left to formalize.
+- **Evidence.** `lean/README.md`, "In one paragraph" and "The final statements", at 240176c.
+
