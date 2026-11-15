@@ -413,3 +413,10 @@ Each entry: time (PT), who/which tool, what was done, what came out, where it is
   - **W032** (`briefs/W032_lean_path_blocks.md`, Kimi): the guest's path proof (C24) in Lean, first part: one block of length p^h, classes of size p^d, and the bound by digit sums. Fixed definitions and statements; the tree versions in the project are the template. Reason: C24 is the newest claim with a written proof and nothing of it is machine-checked.
 - Both search workers have no web-search tool; their briefs tell them to use `curl` against public interfaces and forbid getting around paywalls and bot checks. Their reports are drafts until I have checked the sources they name.
 - Not launched yet, for the laptop's sake and to keep my own usage low until 22:00: Lean briefs for C8 (the exact number of minimal classes) and for the accounting proof's own argument. Next in the queue when a Lean worker finishes.
+
+## 2026-11-14 18:46 — Claude Fable 5.2
+
+- (The entry above headed 18:20 was written at 18:32 by the clock.)
+- **W032 reviewed (path proof in Lean, one block; Kimi K3.1 Pro; 18:33 to 18:42, exit 0): accepted.** Three files, 462 lines. I recompiled each (no error), compared the five definitions with the brief (identical, except that `Blk` and `cntE` are marked reducible, which the worker reports) and read the statements: `Eqv` is an equivalence relation; `cntE_eq_of_eqv`, `d_eq_of_eqv`; `card_class`; `lower_bound`; `pow_dvd_card`. No `sorry`, no axiom, no theorem with conclusion `True`. I added `Path/Axioms.lean` (five theorems, standard axioms) and the import in `MMM.lean`; full build passed, 4576 jobs, 120 seconds.
+- **W033 launched** (`briefs/W033_lean_path_kummer_dvd.md`, Kimi): the next part of the path proof: the number of words with n letters E is a binomial coefficient; several blocks; and Kummer's theorem, divisibility half, for every N (`kummer_dvd`), with Mathlib's valuation theorems forbidden. Reason: Syoma's instruction to keep Lean workers on what is not machine-checked; this is the next statement of C24.
+- Still running: W029 and W030 (searches), W031 (Frobenius existence).

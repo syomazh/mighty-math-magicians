@@ -53,7 +53,7 @@ Here `PTree q` is the type of plane trees in which every internal node has q ord
 
 The "divides, does not divide" statements are the convention-free form: Mathlib sets `multiplicity p 0 = 0` and `Nat.card` of an infinite type to 0, and the second half of those statements excludes both cases.
 
-## Status (last full build: 2026-11-14 about 18:15, `lake build` succeeded, 4568 jobs, no `sorry`)
+## Status (last full build: 2026-11-14 18:46, `lake build` succeeded, 4576 jobs, no `sorry`)
 
 | Step of the paper | Statement | Lean name | File |
 |---|---|---|---|
@@ -137,6 +137,7 @@ The strategy and the order of the steps are the paper's. Five things are organiz
 | `MMM/Catalan.lean` | the link to Mathlib's Catalan numbers for q = 2 |
 | `MMM/Axioms.lean` | prints the axioms; seven concrete instances |
 | `MMM/Frob/Basic.lean`, `Theta.lean`, `ThetaDiv.lean`, `ThetaIdents.lean`, `System.lean`, `Uniqueness.lean`, `Axioms.lean` | the first layer of the Frobenius proof (workers W025 and W027, Kimi K3.1 Pro; recompiled and read by the orchestrator): Λ = ℤ[y][[x]] and the lift φ: f(x, y) ↦ f(x^p, y^p) (`frobeniusLiftRingHom`); φ(f) ≡ f^p modulo p (`modSeries_frobeniusLift`); θ with p·θ(f) = f^p − φ(f) (`theta_spec`), its rules for sums and products (`theta_add`, `theta_mul`); a coefficient of f^p, φ(f), θ(f) of positive degree depends only on lower coefficients of f (`coeff_pow_lower`, `coeff_frobeniusLift_lower`, `coeff_theta_lower`); two families with zero constant terms that satisfy F_δ = [δ = 0]·x + φ(F_(δ+1)) + y·θ(F_(δ+1)) are equal (`cyclicSystem_unique`). `Frob/PLAN.md` is the workers' plan. |
+| `MMM/Path/Block.lean`, `ClassSize.lean`, `Bound.lean`, `Axioms.lean` | the path proof (claim C24), first part, for one block of length p^h (worker W032, Kimi K3.1 Pro; recompiled and read by the orchestrator): words as complete p-ary trees of letters (`Blk`), equivalence under rotations of sub-blocks (`Eqv`), the class of a word has p^d elements (`card_class`), s_p(a) + s_p(p^h − a) ≤ (p − 1)·d + 1 for a word with a letters E (`lower_bound`), and p^c divides the number of words with n letters E when c is the number of carries (`pow_dvd_card`). **Not yet:** that this number is binom(p^h, n); several blocks; the smallest classes and the residue. |
 | `MMM/Smoke.lean` | a one-line test that the project compiles against Mathlib |
 | `MMM/ClassSizeDraft.md` | the plan that `RotEquiv.lean` and `ClassSize.lean` carried out (a working note) |
 | `AUDIT.md` | the independent audit of the statements for q = p |

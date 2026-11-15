@@ -1,0 +1,8 @@
+slug:    W032_lean_path_blocks
+brief:   briefs/W032_lean_path_blocks.md
+model:   moonshotai/kimi-k3.1-pro
+flags:   -AllowBash
+started: 2026-11-14 18:32:58 PST
+attempt 1: exit 0 at 18:42:18
+ended:   2026-11-14 18:42:18 PST
+exit:    0
