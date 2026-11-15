@@ -1,0 +1,140 @@
+# Output of guests/andrei-claudecode/experiments/EC01_chemistry_tower/run.py, a script written by Claude Fable 5.2 in Claude Code, started by Andrei, 2026-11-14. Not human-reviewed.
+# Everything below this line is the script's output, unchanged.
+====================================================================================================
+PART A - the three counts against the chemical literature (n = 0..14 carbons)
+====================================================================================================
+n            : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+plane trees  : [1, 1, 3, 12, 55, 273, 1428, 7752, 43263, 246675, 1430715, 8414640, 50067108, 300830572, 1822766520]
+stereoisomers: [1, 1, 1, 2, 5, 11, 28, 74, 199, 551, 1553, 4436, 12832, 37496, 110500]
+structural   : [1, 1, 1, 2, 4, 8, 17, 39, 89, 211, 507, 1238, 3057, 7639, 19241]
+achiral      : [1, 1, 1, 2, 3, 5, 8, 14, 23, 41, 69, 122, 208, 370, 636]
+no stereogenic centre: [1, 1, 1, 2, 3, 5, 8, 14, 23, 39, 65, 110, 184, 310, 520]
+PASS  A1 number of rotation classes = stereoisomers of C_nH_(2n+1)X (RHB Table 2, OEIS A000625)
+PASS  A2 classes up to all permutations = structural isomers (RHB Table 2, OEIS A000598)
+PASS  A3 classes equal to their mirror image = achiral (RHB Table 2)
+PASS  A4 chiral = stereo - achiral (OEIS A005628)
+PASS  A5 classes with no stereogenic centre = Polya's q (OEIS A000621)
+PASS  A6 stereo - q = Blair-Henze 'stereoisomeric' column (OEIS A000620)
+PASS  A7 'achiral' and 'no stereogenic centre' first differ at n = 9, by two meso-type alcohols   n=9: ['OC(C(C)CC)C(C)CC', 'OC(C(C)CC)C(C)CC']
+
+====================================================================================================
+PART B - the 3^d law: plane trees over one stereoisomer
+====================================================================================================
+PASS  B1 sum over stereoisomers of 3^d = binom(3n,n)/(2n+1), n = 0..14
+PASS  B2 brute force, n = 0..8: every stereoisomer carries exactly 3^d plane trees
+PASS  B3 orbit of the full group (structural isomer) = sum of 3^d over its stereoisomers
+   n = 4:  structural isomers carry [1, 9, 18, 27]  stereoisomers carry [1, 9, 9, 9, 27]
+   n = 4: 1 of 4 structural isomers carry a number of plane trees that is NOT a power of 3
+   n = 5: 3 of 8 structural isomers carry a number of plane trees that is NOT a power of 3
+   n = 6: 9 of 17 structural isomers carry a number of plane trees that is NOT a power of 3
+   n = 7: 25 of 39 structural isomers carry a number of plane trees that is NOT a power of 3
+   n = 8: 66 of 89 structural isomers carry a number of plane trees that is NOT a power of 3
+
+====================================================================================================
+PART C - stereogenic centres: the 2026 table of Eriksen and Merkle (arXiv 2609.02932)
+====================================================================================================
+PASS  C1 stereoisomers by number of stereogenic centres = their Table 3.2.2 (n = 1..11)
+PASS  C2 structural isomers by number of asymmetric carbons = their Table 3.2.1 (n = 1..11)
+   joint distribution for stereoisomers: rows d (branches not all alike), columns stereogenic centres
+   n = 4
+      d = 0: 1 with 0 stg
+      d = 2: 1 with 0 stg  2 with 1 stg
+      d = 3: 1 with 0 stg
+   n = 5
+      d = 1: 1 with 0 stg
+      d = 2: 1 with 0 stg  2 with 1 stg
+      d = 3: 2 with 0 stg  4 with 1 stg
+      d = 4: 1 with 0 stg
+   n = 6
+      d = 1: 2 with 1 stg
+      d = 2: 2 with 0 stg
+      d = 3: 3 with 0 stg  6 with 1 stg  4 with 2 stg
+      d = 4: 2 with 0 stg  8 with 1 stg
+      d = 5: 1 with 0 stg
+   n = 7
+      d = 1: 1 with 0 stg
+      d = 2: 6 with 1 stg
+      d = 3: 5 with 0 stg  6 with 1 stg  4 with 2 stg
+      d = 4: 4 with 0 stg  16 with 1 stg  16 with 2 stg
+      d = 5: 3 with 0 stg  12 with 1 stg
+      d = 6: 1 with 0 stg
+
+====================================================================================================
+PART D - Polya 1936, equations (23)-(25), and the van 't Hoff rule 2^alpha
+====================================================================================================
+PASS  D1 Polya's equation (24) for Q(x,y) reproduces 'structural isomers by asymmetric carbons', n = 0..14
+PASS  D2 Polya: alpha asymmetric carbons first occur at n = 2 alpha + 2, in a single structure (alpha = 1..6)
+PASS  D3 Polya: 'stereoisomers = 2^alpha' first fails at C13H27OH, for a single structure   structure OC(C(C)CC)(C(C)CC)C(C)CC: alpha = 3, 2^alpha = 8, actual stereoisomers = 4
+   so the 2^alpha rule is a rule with exceptions (always <=), while the 3^d law of Part B has none.
+PASS  D4 where it fails the true number is smaller than 2^alpha
+PASS  D5 the team's deformed equation (p = 3) reproduces 'stereoisomers by d', n = 0..14
+PASS  D6 at y = 3 it gives the Fuss-Catalan numbers, at y = 1 the stereoisomer numbers (Polya's (25))
+   n : Polya Q_n(y) [structural isomers, y marks asymmetric carbons]   |   team A_n(y) [stereoisomers, y marks d]
+   1 : 1                                             |   1
+   2 : 1                                             |   1y^1
+   3 : 2                                             |   1y^1 + 1y^2
+   4 : 3 + 1y^1                                      |   1 + 3y^2 + 1y^3
+   5 : 5 + 3y^1                                      |   1y^1 + 3y^2 + 6y^3 + 1y^4
+   6 : 8 + 8y^1 + 1y^2                               |   2y^1 + 2y^2 + 13y^3 + 10y^4 + 1y^5
+   7 : 14 + 20y^1 + 5y^2                             |   1y^1 + 6y^2 + 15y^3 + 36y^4 + 15y^5 + 1y^6
+   8 : 23 + 46y^1 + 19y^2 + 1y^3                     |   10y^2 + 18y^3 + 68y^4 + 81y^5 + 21y^6 + 1y^7
+
+====================================================================================================
+PART E - the most symmetric alcohols (minimal classes) and the symmetry number
+====================================================================================================
+   n   H=2n+1  base 3   t   stereoisomers  min d  #minimal (chiral+achiral)  formula  3-part of H!   most symmetric alcohols
+   1   3      10       0   1             0      1    (0+1)                  1            3   OC
+   2   5      12       1   1             1      1    (0+1)                  1            3   OCC
+   3   7      21       1   2             1      1    (0+1)                  1            9   OC(C)C
+   4   9      100      0   5             0      1    (0+1)                  1           81   OC(C)(C)C
+   5   11     102      1   11            1      1    (0+1)                  1           81   OCC(C)(C)C
+   6   13     111      1   28            1      2    (2+0)                  2          243   OC(C)C(C)(C)C
+   7   15     120      1   74            1      1    (0+1)                  1          729   OC(C)(C)C(C)(C)C
+   8   17     122      2   199           2      10   (8+2)                 10          729   OC(C(C)C)C(C)(C)C, OC(C)(C)CC(C)(C)C, OC(C)(CC)C(C)(C)C ...
+   9   19     201      1   551           1      1    (0+1)                  1         6561   OC(C(C)(C)C)C(C)(C)C
+   10  21     210      1   1553          1      1    (0+1)                  1        19683   OC(C)(C(C)(C)C)C(C)(C)C
+   11  23     212      2   4436          2      10   (8+2)                 10        19683   OC(C(C)(C)C)C(C)C(C)(C)C, OC(C)(C(C)(C)C)CC(C)(C)C, OC(C)C(C(C)(C)C)C(C)(C)C ...
+   12  25     221      2   12832         2      10   (8+2)                 10        59049   OC(C(C)(C)C)C(C)(C)C(C)(C)C, OC(C(C)C)(C(C)(C)C)C(C)(C)C, OC(C)(C(C)(C)C)C(C)C(C)(C)C ...
+   13  27     1000     0   37496         0      1    (0+1)                  1      1594323   OC(C(C)(C)C)(C(C)(C)C)C(C)(C)C
+   14  29     1002     1   110500        1      1    (0+1)                  1      1594323   OCC(C(C)(C)C)(C(C)(C)C)C(C)(C)C
+PASS  E1 fewest 'not all alike' carbons = t = (digit sum of 2n+1 in base 3 - 1)/2, n = 1..14
+PASS  E2 number of most symmetric stereoisomers = (3t)!/(t! 3^t prod m_j!)  (claim C8, p = 3)
+PASS  E3 that number times prod m_j! is congruent to (-1)^t mod 3 (so it is never divisible by 3)
+PASS  E4 largest symmetry number 3^(n - t) = largest power of 3 dividing (2n+1)!
+
+====================================================================================================
+PART F - symmetry groups as permutations of the hydrogens (n <= 8)
+====================================================================================================
+PASS  F1 the rotations that keep a stereoisomer form a group of order 3^(carbons with three like branches)
+PASS  F2 it splits the hydrogens into at least (digit sum of 2n+1) classes; the most symmetric reach it, with class sizes = the digits   2 others reach it without being most symmetric, first: OC(CC)(CC)CC (n = 7, d = 3, t = 1)
+PASS  F3 Gilson-Irikura's generators for tert-butyl give groups of order 81 (rotations) and 162 (with inversion)
+PASS  F4 the tree symmetry group of tert-butyl is the same group of 81 permutations of the 9 hydrogens   81 = 3^4 = largest power of 3 dividing 9! = 81
+
+====================================================================================================
+PART G - the alcohols with up to 5 carbons
+====================================================================================================
+   n  SMILES        name                                         mirror forms  d  like-branched C  stereogenic  plane trees  symmetry number
+   1  OC            methanol                                     1             0  1                0            1            3
+      total plane trees for n = 1: 1 = binom(3,1)/3
+   2  OCC           ethanol                                      1             1  1                0            3            3
+      total plane trees for n = 2: 3 = binom(6,2)/5
+   3  OC(C)C        propan-2-ol                                  1             1  2                0            3            9
+   3  OCCC          propan-1-ol                                  1             2  1                0            9            3
+      total plane trees for n = 3: 12 = binom(9,3)/7
+   4  OC(C)(C)C     2-methylpropan-2-ol (tert-butanol)           1             0  4                0            1            81
+   4  OC(C)CC       butan-2-ol                                   2             2  2                1            9 each       9
+   4  OCC(C)C       2-methylpropan-1-ol                          1             2  2                0            9            9
+   4  OCCCC         butan-1-ol                                   1             3  1                0            27           3
+      total plane trees for n = 4: 55 = binom(12,4)/9
+   5  OCC(C)(C)C    2,2-dimethylpropan-1-ol (neopentyl alcohol)  1             1  4                0            3            81
+   5  OC(C)(C)CC    2-methylbutan-2-ol                           1             2  3                0            9            27
+   5  OC(C)C(C)C    3-methylbutan-2-ol                           2             2  3                1            9 each       27
+   5  OC(C)CCC      pentan-2-ol                                  2             3  2                1            27 each      9
+   5  OC(CC)CC      pentan-3-ol                                  1             3  2                0            27           9
+   5  OCC(C)CC      2-methylbutan-1-ol                           2             3  2                1            27 each      9
+   5  OCCC(C)C      3-methylbutan-1-ol                           1             3  2                0            27           9
+   5  OCCCCC        pentan-1-ol                                  1             4  1                0            81           3
+      total plane trees for n = 5: 273 = binom(15,5)/11
+PASS  G1 every alcohol with up to 5 carbons is named, and the plane trees add up
+
+27 checks, 27 passed

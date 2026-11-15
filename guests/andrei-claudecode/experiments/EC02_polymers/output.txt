@@ -1,0 +1,79 @@
+# Output of guests/andrei-claudecode/experiments/EC02_polymers/run.py, a script written by Claude Fable 5.2 in Claude Code, started by Andrei, 2026-11-14. Not human-reviewed.
+# Everything below this line is the script's output, unchanged.
+====================================================================================================
+PART A - counting molecules from the chemical model (monomers and bonds; no trees assumed)
+====================================================================================================
+PASS  A1 ring-free molecules of n labelled AB_(f-1) monomers number n! x FussCatalan(f-1, n); each has one free A and (f-2)n+1 free B   f=3 n=3: 30 = 3! x 5; f=3 n=4: 336 = 4! x 14; f=3 n=5: 5040 = 5! x 42; f=3 n=6: 95040 = 6! x 132 ...
+
+====================================================================================================
+PART B - the one-pot reaction, exactly, for a few monomers
+====================================================================================================
+PASS  B1 f=3, n=5: the number of possible next bonds depends only on how many bonds exist   after j bonds: (n-j-1) x ((f-1)n - j)
+PASS  B2 f=3, n=5: hence at every stage all bond patterns are equally likely   states per stage: [40, 540, 2880, 5040]
+PASS  B3 f=3: among the final 5-mers an isomer (tree up to rotation) has probability 2^d / 42   isomer probabilities: 8/21, 4/21, 4/21, 2/21, 2/21, 1/21
+PASS  B1 f=4, n=4: the number of possible next bonds depends only on how many bonds exist   after j bonds: (n-j-1) x ((f-1)n - j)
+PASS  B2 f=4, n=4: hence at every stage all bond patterns are equally likely   states per stage: [36, 396, 1320]
+PASS  B3 f=4: among the final 4-mers an isomer (tree up to rotation) has probability 3^d / 55   isomer probabilities: 27/55, 9/55, 9/55, 9/55, 1/55
+
+====================================================================================================
+PART C - a large one-pot AB2 reaction, simulated (10^6 monomers)
+====================================================================================================
+   monomers 1000000, bonds 800000 (conversion of A: 0.80; of B: alpha = 0.40), molecules 200000, largest molecule 164 units
+   size n   observed   Flory: molecules x Catalan(n) x alpha^(n-1) x (1-alpha)^(n+1)
+   1        72477      72000.0
+   2        34368      34560.0
+   3        20678      20736.0
+   4        13774      13934.6
+   5        9793       10032.9
+   6        7653       7567.7
+   7        5835       5902.8
+   8        4723       4722.2
+   9        3805       3853.3
+   10       3246       3194.8
+   11       2698       2683.6
+   12       2318       2279.0
+   >12      18632      18533.1
+PASS  C1 the size distribution follows Flory's formula with the Catalan numbers (chi-square, 12 degrees of freedom)   chi-square = 16.4
+   isomers among the n-mers: observed against 2^d / Catalan(n)
+   n = 3: 20678 molecules, 2 isomers seen, chi-square = 0.1 on 1 d.f.; perfect dendrons: 4157 observed, 4135.6 expected (1 in 5)
+   n = 4: 13774 molecules, 3 isomers seen, chi-square = 0.1 on 2 d.f.
+   n = 5: 9793 molecules, 6 isomers seen, chi-square = 9.5 on 5 d.f.
+   n = 6: 7653 molecules, 11 isomers seen, chi-square = 9.7 on 10 d.f.
+   n = 7: 5835 molecules, 23 isomers seen, chi-square = 14.1 on 22 d.f.; perfect dendrons: 8 observed, 13.6 expected (1 in 429)
+PASS  C2 among n-mers (n = 3..7) each isomer occurs in proportion to 2^d
+PASS  C3 degree of branching 2D/(2D+L) equals alpha = (conversion of A)/2, the chemists' linear law   dendritic 160317, linear 479366, terminal 360317 units; DB = 0.4008, alpha = 0.4000
+
+====================================================================================================
+PART D - Flory's distribution, the gel point and the radius of convergence
+====================================================================================================
+PASS  D1 sum over n of FussCatalan(q, n) alpha^(n-1) (1-alpha)^((q-1)n+1) = 1 below alpha = 1/q
+PASS  D2 Flory's gel point alpha = 1/(f-1) is where alpha(1-alpha)^(f-2) reaches the radius of convergence of the Fuss-Catalan series   f = 3: 1/4;  f = 4: 4/27;  f = 5: 27/256
+PASS  D3 Stockmayer's factor (fn-n)!/(n!(fn-2n+2)!) = FussCatalan(f-1, n) / (number of free groups)
+
+====================================================================================================
+PART E - degree of branching of a random n-mer (all plane binary trees equally likely)
+====================================================================================================
+PASS  E1 DB over all n-mers tends to 1/2 (the value chemists quote for random AB2 polymers)   n=7: 0.3846, n=15: 0.4483, n=31: 0.4754, n=100: 0.4925, n=1000: 0.4992, n=2000: 0.4996
+PASS  E2 AB3 at full conversion: DB = (2D + sD) / ((2/3)(3D + 2sD + L)) = 4/9 = 0.44, the published value   the formula is the Hoelter-Burgath-Frey definition as remembered, not read today; the value 0.44 is quoted in a review
+
+====================================================================================================
+PART F - the theorem in polymer words (AB2, p = 2)
+====================================================================================================
+   n units  free B = n+1 (binary)   lightest isomer weight 2^t   Catalan(n)            chance that a random n-mer is the perfect dendron
+   1        2 = 10                 1                           1                     1 in 1
+   2        3 = 11                 2                           2                     none exists
+   3        4 = 100                1                           5                     1 in 5
+   4        5 = 101                2                           14                    none exists
+   5        6 = 110                2                           42                    none exists
+   6        7 = 111                4                           132                   none exists
+   7        8 = 1000               1                           429                   1 in 429
+   15       16 = 10000             1                           9694845               1 in 9694845
+   31       32 = 100000            1                           14544636039226909     1 in 14544636039226909
+   63       64 = 1000000           1                           94295850558771979787935384946380125 1 in 94295850558771979787935384946380125
+PASS  F1 the power of 2 in Catalan(n) = log2 of the weight of the lightest isomer = (ones in n+1) - 1
+   n = 3: 2 isomers; perfect dendron weight 1 of 5; mean number of lopsided units per molecule 1.60 of 3
+   n = 7: 23 isomers; perfect dendron weight 1 of 429; mean number of lopsided units per molecule 4.59 of 7
+   n = 15: 10905 isomers; perfect dendron weight 1 of 9694845; mean number of lopsided units per molecule 10.47 of 15
+PASS  F2 for n = 3, 7, 15 the weights 2^d of all isomers add up to Catalan(n), and exactly one isomer has weight 1
+
+17 checks, 17 passed
