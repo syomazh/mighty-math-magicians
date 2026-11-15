@@ -125,7 +125,8 @@
 \newcommand{\LeanVersions}{Lean \texttt{v4.35.0} with Mathlib \texttt{v4.35.0}}
 \newcommand{\LeanVersionStatus}{\textbf{The project builds on the versions that the rules require,
 \LeanVersions{}}: a fresh clone of the repository was built from scratch on 15 November 2026 at 03:41, to
-imitate the automated check ($3279$ jobs, no error; no Lean source has changed since that state). The build
+imitate the automated check ($3279$ jobs, no error). On the same morning the files of the accounting proof
+were added, and the full build was repeated at 08:25 ($3292$ jobs, no error). The build
 prints the
 axioms behind every final theorem named in this report: each depends only on \texttt{propext},
 \texttt{Classical.choice} and \texttt{Quot.sound}; there is no \texttt{sorry} and no
@@ -258,7 +259,8 @@ principle \cite{Gessel}.
 \noindent\textbf{What supports it} (Section~\ref{sec:status}). The written proof (Section~\ref{sec:mainproof})
 went through three rounds of review by AI systems; a faculty member of the team looked through it and said it
 is good (as reported; no more is on record about that reading). Three proofs are formalized in Lean (the main
-proof, the lattice-path proof, the algebraic proof), with the theorem stated in Mathlib's terms; the project
+proof, the lattice-path proof, the algebraic proof), and the accounting proof with two steps proved
+differently from the text, each with the theorem stated in Mathlib's terms; the project
 builds on \LeanVersions{} with no \texttt{sorry} (Section~\ref{sec:lean}, with the differences from the
 written proofs). No failure in $1067$ values of $m$. The lattice-path proof (Appendix~\ref{app:path})
 was read and verified by the faculty member (as reported); the accounting proof (Appendix~\ref{app:acc}) was
@@ -656,7 +658,9 @@ Claim & How it is supported & Read and approved by a human?\\
  Theorem~\ref{path:thm:main} (lattice paths), Theorem~\ref{frob:thm} (algebra), Theorem~\ref{acc:thm}
  (accounting). \emph{Lean:} \lean{MMM.problem137_fussCatalan}, \lean{MMM.problem137_fussCatalan_exact} (main
  proof); \lean{MMM.Frob.problem137_fussCatalan_frobenius} (algebraic proof);
- \lean{MMM.Path.problem137_fussCatalan_path} (lattice-path proof). \emph{Computation:} no failure
+ \lean{MMM.Path.problem137_fussCatalan_path} (lattice-path proof);
+ \lean{MMM.Acc.problem137_fussCatalan_accounting} (accounting proof, with two steps proved differently from
+ the text, Section~\ref{sec:lean}). \emph{Computation:} no failure
  for $1067$ values of $m$ up to about $400$ leaves, $p\le13$, $k\le4$ (E003).
  & Yes for the main proof: approved by a faculty member of the team, 14 November 2026 (see C1--C8 below).\\
 \midrule
@@ -762,14 +766,20 @@ Claim & How it is supported & Read and approved by a human?\\
 \textbf{C13, C14. Accounting proof:} $m!\,C_n^{(q)}=p^{N(m)}L(m)$ with $N(m)=(m-1)/(p-1)$ and
  $L(m)\equiv(-1)^{N(m)}$ mod $p$; Legendre's formula with its residue; the statement on sand.
  & \emph{Proved in this report:} Appendix~\ref{app:acc} (it relies on the carry proposition of the main proof
- and it does compute $v_p(m!)$, by a symmetry argument). \emph{Lean:} only the conclusions, by a classical
- route and not by the accounting argument: \lean{MMM.dwork_form}, \lean{MMM.factorial_eq_pow_mul_prod_mul}.
+ and it does compute $v_p(m!)$, by a symmetry argument). \emph{Lean} (since the morning of 15 November):
+ \lean{MMM.Acc.residue_accounting}, \lean{MMM.Acc.problem137_fussCatalan_accounting}. As in the text:
+ Lemma~\ref{acc:L1}, the recursion of Lemma~\ref{acc:L3}, the last step. \textbf{Not as in the text:} the two
+ congruences in the proof of Lemma~\ref{acc:L4} are proved by an elementary computation and by Wilson's
+ theorem, not by group actions; the digit forests are not formalized as objects, only their number; the
+ statement on sand is not formalized (Section~\ref{sec:lean}).
  \emph{Computation:} E004 ($24$ and $27$ cases); sand: $p\in\{2,3,5\}$, $k\le2$, $m\le200$.
  & \textbf{Read, not signed.} A faculty member of the team read it; the verdict as reported: ``looks like it
  makes sense''. One AI referee found the lemmas correct; its repairs were not re-reviewed.\\
 \midrule
 \textbf{C20. ``Dwork form'':} $C_n^{(q)}\,m!\equiv(-p)^{N(m)}$ mod $p^{N(m)+1}$, $N(m)=(m-1)/(p-1)$.
- & \emph{Proved in this report:} it is Lemma~\ref{acc:L1}. \emph{Lean:} \lean{MMM.dwork_form}.
+ & \emph{Proved in this report:} it is Lemma~\ref{acc:L1}. \emph{Lean:}
+ \lean{MMM.factorial_mul_card_blocked_modEq} (by the argument of Lemma~\ref{acc:L1}, for the blocked $p$-ary
+ trees) and \lean{MMM.dwork_form} (for $q$-ary trees; derived from the residue theorem of the main proof).
  \emph{Computation:} $565$ cases, $p\le13$, $k\le4$ (E011).
  & As the accounting proof.\\
 \midrule
@@ -1464,8 +1474,9 @@ and it computes $v_p(m!)$ (by symmetry, not by quoting Legendre); whether that m
 valuations'' is left to the reader.
 
 \emph{Support.} Read by a faculty member of the team (``looks like it makes sense''; not signed); one AI
-referee; computer checks of the lemmas. Lean checks the two conclusions by a classical route, not this
-argument.
+referee; computer checks of the lemmas. Since the morning of 15 November Lean checks the proof down to the
+theorem in Mathlib's terms, with two steps proved differently from the text (the two congruences in the proof
+of Lemma~\ref{acc:L4}; Section~\ref{sec:lean}). No human has read these Lean files.
 
 \subsection{The carry budget: a second proof of the lower bound}\label{sec:carrybudget}
 This subsection is transcribed from a note of the project (claim C19), with one marked note on notation
@@ -1802,7 +1813,7 @@ is a known remark has not been established; no human has looked at it.
 
 \noindent Identifications of sequences: the numbers of rotation classes of binary, ternary, $5$-ary and
 $7$-ary trees and of $4$-ary trees with $n$ nodes were found in the OEIS (A001190, A000625, A036727, A036728,
-A398109) by looking up computed values (claim C15); these are lookups, not proofs.
+A398109; see \cite{OEISmobiles,OEISA000625}) by looking up computed values (claim C15); these are lookups, not proofs.
 
 
 % ---- Section 6 (in the numbering of the PDF): written by Claude Fable 5.2 (worker W046), 2026-11-15, from CLAIMS.md (ranges as recorded
@@ -1920,7 +1931,9 @@ lattice-path proof, the exact count, the carry budget, the closed families, the 
 % hidden dependency is the first of the three gaps, not a fourth finding.
 lightly five further files): no statement wrong, three gaps of disclosure, which are repaired in the table
 below, the first of them the hidden dependency described there. The file on weights was added during that audit and was
-read by it only in its statements. Beyond these audits the files are covered by the Lean kernel and by the
+read by it only in its statements. The files of the accounting proof were added on the morning of
+15 November, after the three audits: no separate session has audited them; the coordinating system fixed
+their statements beforehand, recompiled them and read them. Beyond these audits the files are covered by the Lean kernel and by the
 reading of the AI system that coordinated the work. The trust base as it is on the machine used: Mathlib's compiled files come from its prebuilt cache
 and were not rebuilt; no external replay of the proofs was run.
 
@@ -1942,7 +1955,8 @@ $(q-1)n+1$.
 \subsection{Declarations the report relies on, the claims they support, and the differences}
 In the table, ``the text'' is the written proof in this report. A difference is listed whenever the formal
 statement is not literally the written one. All declarations are in the namespace \lean{MMM} (those of the
-algebraic proof in \lean{MMM.Frob}, those of the lattice-path proof in \lean{MMM.Path}); the prefix is
+algebraic proof in \lean{MMM.Frob}, those of the lattice-path proof in \lean{MMM.Path}, the final ones of the
+accounting proof in \lean{MMM.Acc}); the prefix is
 omitted in some rows.
 
 {\small
@@ -2106,13 +2120,43 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  $e\le d(T)$ for the members of the family, for any $e$; the text takes the trees with $m$ leaves and $e=t$.
  The second formal statement allows $n=0$.\\\addlinespace[3pt]
 \midrule
-\multicolumn{3}{@{}l}{\emph{Accounting proof (Appendix~\ref{app:acc}, C13, C20): conclusions only}}\\
+\multicolumn{3}{@{}l}{\emph{Accounting proof (Appendix~\ref{app:acc}, C13, C20); added on the morning of 15 November}}\\
+\lean{factorial_mul_card_blocked_modEq}, \lean{LTree.card_good_lab_blocked_eq} (\file{AccountingL1.lean})
+ & Lemma~\ref{acc:L1} (C20)
+ & The argument of the text: the leaves get $m$ distinct labels, the labelled trees are $m!$ times the trees,
+ and the labelled trees are counted by the cherry collapse (the formal version of Lemma~\ref{acc:L0} is
+ \lean{LTree.labelled_congruence_blocked} of the main proof's files). \textbf{Differences:} the statement
+ is the congruence $m!\,C\equiv(-p)^{N}$ modulo $p^{N+1}$ for the number $C$ of $k$-blocked $p$-ary trees
+ with $m$ leaves, $(p-1)N+1=m$; the cyclic trees and their number $L(m)$ are not formalized (as for the main
+ proof, difference~2).\\\addlinespace[3pt]
+\lean{Kcount}, \lean{Kcount_mul}, \lean{forestCount}, \lean{factorial_eq_forestCount},
+ \lean{forestCount_modEq_of} (\file{LegendreDefs.lean}, \file{LegendreSym.lean})
+ & Lemmas~\ref{acc:L3} and~\ref{acc:L4}
+ & \textbf{The digit forests are not formalized as objects, only their number.} \lean{forestCount} is
+ defined by the recursion in the proof of Lemma~\ref{acc:L3},
+ $|\F(m)|=\binom{m}{m_0}\,K(a)\,|\F(a)|$ with $a=\lfloor m/p\rfloor$. $K(a)$ is defined as in the text, as the
+ number of permutations of $pa$ points all of whose cycles have length $p$, and $K(a)\,a!\,p^a=(pa)!$ is
+ taken from Mathlib's count of the permutations of a given cycle type. Lemma~\ref{acc:L3} follows as in the
+ text. Lemma~\ref{acc:L4} is proved from its two congruences, given as hypotheses.\\\addlinespace[3pt]
+\lean{Acc.choose_congruence}, \lean{Acc.Kcount_congruence} (\file{Accounting.lean})
+ & The two congruences in the proof of Lemma~\ref{acc:L4}: $\binom{pa+r}{r}\equiv1$ and
+ $K(a)\equiv(-1)^a$ modulo $p$
+ & \textbf{Not the argument of the text.} The text lets a group of order $p$ act: on the $r$-subsets, and by
+ conjugation on the permutations. Lean proves the first by an elementary computation with factorials
+ (\lean{choose_cast}) and the second from $K(a)\,a!\,p^a=(pa)!$ and Wilson's theorem
+ (\lean{Kcount_modEq_wilson}).\\\addlinespace[3pt]
+\lean{residue_of_L1_of_legendre} (\file{AccountingDiv.lean}); \lean{Acc.residue_accounting},
+ \lean{Acc.residue_fussCatalan_accounting}, \lean{Acc.problem137_fussCatalan_exact_accounting},
+ \lean{Acc.problem137_fussCatalan_accounting} (\file{Accounting.lean})
+ & Theorem~\ref{acc:thm}; the statements of the first block of this table, proved a fourth time
+ & The last step as in the text (divide, with $N=\nu+t$). The three final statements are word for word those
+ of the main proof. Borrowed from other files of the project: that the Fuss--Catalan number counts the
+ blocked trees, and that the congruence gives the exact power of $p$.\\\addlinespace[3pt]
 \lean{MMM.dwork_form}, \lean{MMM.factorial_eq_pow_mul_prod_mul} (\file{Dwork.lean})
- & Lemma~\ref{acc:L1} (C20), and Legendre's formula with its residue (the corollary of
- Lemmas~\ref{acc:L3}, \ref{acc:L4})
- & \textbf{Not the argument of the text.} The factorial statement is proved classically (blocks of $p-1$
- consecutive factors and Wilson's theorem), not by digit-forest structures; \lean{dwork_form} is derived
- from the residue theorem of the main proof and this lemma. The accounting argument itself is not formalized.\\\addlinespace[3pt]
+ & Lemma~\ref{acc:L1} for $q$-ary trees, and Legendre's formula with its residue
+ & The earlier formalization by a classical route (blocks of $p-1$ consecutive factors and Wilson's theorem;
+ \lean{dwork_form} is derived from the residue theorem of the main proof). The declarations above use from
+ this file the definition of $\nu$, lemmas on digits, and the two lemmas named in the previous row.\\\addlinespace[3pt]
 \midrule
 \multicolumn{3}{@{}l}{\emph{Lattice-path proof (Appendix~\ref{app:path}, C24, C27)}}\\
 \lean{MMM.Path.kummer_dvd} (\file{Path/Kummer.lean})
@@ -2170,7 +2214,9 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
 \begin{itemize}[itemsep=1pt]
 \item The text's definitions and lemmas on skeletons as cyclic trees, and its worked examples (differences 2
  and 3 above).
-\item The argument of the accounting proof (only its conclusions, by another route).
+\item Of the accounting proof: the digit-forest structures as objects (Lean has their number, defined by the
+ recursion), and the two group actions in the proof of Lemma~\ref{acc:L4} (the two congruences are proved
+ differently).
 \item For the lattice-path proof: Lemmas~\ref{path:lem:atoms} and~\ref{path:lem:mixed} as stated (the count
  is proved by a different induction), Lemma~\ref{path:lem:shift} and Remark~\ref{path:rem:dyck}.
 % Consistency pass 2026-11-15 (brief W055): C29 added to the next item; the status table (Section 2.3) and the
@@ -2214,12 +2260,15 @@ one of the strings \texttt{multiplicity\_choose}, \texttt{multiplicity\_factoria
 \texttt{add\_pow\_expchar}. In the build of 15 November, 03:08, the list is empty for every final theorem of
 the three proofs (closures of about $12{,}700$ to $13{,}500$ declarations for the tree proof, $20{,}100$ to
 $20{,}400$ for the algebraic proof, $12{,}200$ to $12{,}600$ for the lattice-path proof) and for the exact
-count, the carry budget, the closed families, the level profiles and the weights. This is a search by names:
+count, the carry budget, the closed families, the level profiles and the weights; in the build of
+15 November, 08:25, it is empty as well for the three final theorems of the accounting proof (closures of
+about $19{,}200$ to $19{,}500$ declarations, which contain Wilson's theorem, as the build also prints). This is a search by names:
 it shows that no theorem of Mathlib on the power of $p$ in a factorial or in a binomial coefficient, and
 nothing named after Kummer, Legendre or Lucas, lies behind these proofs; it cannot show that no library proof
 reasons in such a way under another name. What the proofs do use from the library about factorials and
 binomial coefficients: that a prime $p$ divides $n!$ only if $n\ge p$, that $p$ divides $\binom pk$ for
-$0<k<p$, the formula $\binom nk\,k!\,(n-k)!=n!$, and Wilson's theorem for the residues.
+$0<k<p$, the formula $\binom nk\,k!\,(n-k)!=n!$, Wilson's theorem for the residues, and, in the accounting
+proof only, the number of permutations of a given cycle type.
 
 
 % ---- Sections 8 and 9 (in the numbering of the PDF): written by Claude Fable 5.2 (worker W046), 2026-11-15,
@@ -2263,6 +2312,13 @@ are Pacific time, as recorded in the journal and the ledger):
  Formalization of the divisibility half of Kummer's theorem by the path action, and of the algebraic proof
  layer by layer. Recorded late on Saturday: the faculty member had read and verified the lattice-path proof
  and had read the accounting proof.
+\item \emph{Sunday morning} (written at 08:28). The accounting proof formalized, with two of its steps
+ proved differently from the text (Section~\ref{sec:lean}); the files were written by AI workers of another
+ model family from statements fixed by the coordinating system, which recompiled and read them. A model of
+ another family read the proofs of Section~\ref{sec:extensions} and the converse of
+ Section~\ref{sec:smallexamples} and found no error, and a third compared the bibliography and the
+ attributions of this report with the project's reference list (no field differed; four places where the
+ report said more than the list recorded were checked or marked).
 \item \emph{Night to Sunday.} The algebraic proof and the lattice-path proof formalized in full, so that the
  theorem has three proofs checked by Lean. The Lean project moved to the versions that the rules require
  (two kinds of small change in five files, Section~\ref{sec:lean}). Formalized as well: the exact number of minimal classes for $q=p$, the carry budget,
@@ -2353,11 +2409,16 @@ Kimi K3.1 Pro, through the Open Math OS service (a headless agent) & The first f
  first drafts of the accounting proof and of the algebraic proof, both superseded and not in this report; a
  first draft of slides; one search for connections; Lean files for the first half of the algebraic proof, for the
  first parts of the lattice-path proof and for the Dwork form, from statements and plans fixed by the
- orchestrator.\\\addlinespace[3pt]
+ orchestrator. On 15 November: three Lean files of the accounting proof (Lemma~\ref{acc:L1}, the recursion
+ of Lemma~\ref{acc:L3}, the last step), from statements fixed by the orchestrator.\\\addlinespace[3pt]
 Mistral Large 4.0, through the same service & One first-round review (it found the flaw in the proof that
- equal atoms can be permuted freely); the Lean file for the normal-form lemma; one search for connections.\\\addlinespace[3pt]
+ equal atoms can be permuted freely); the Lean file for the normal-form lemma; one search for connections.
+ On 15 November: a comparison of the bibliography and the attributions of this report with the project's
+ reference list.\\\addlinespace[3pt]
 Muse Spark Open, through the same service & One first-round review; a blind search for alternative proofs;
- a start on the accounting proof in Lean, which was not accepted.\\\addlinespace[3pt]
+ a start on the accounting proof in Lean, which was not accepted. On 15 November: a reading of the proofs
+ of Section~\ref{sec:extensions} and of the converse in Section~\ref{sec:smallexamples}, with the instruction
+ to break them (no error found; three clarifications, now in the text).\\\addlinespace[3pt]
 Further sessions of Claude Fable 5.2 with a fresh context or forked from the orchestrator (no access to the
  orchestrator's reasoning unless forked) & Referees: review rounds 2 and 3 of the main proof; one round each
  for the accounting proof, the algebraic proof and the carry budget. Three audits of the Lean statements. Web
@@ -2419,7 +2480,9 @@ and audited, and a human reads and signs. Concretely:
  read by a faculty member of the team.
 \item \emph{Lean files written by delegated models} were counted only after the orchestrator had recompiled
  them and read their statements; one delegated attempt (at the closed formula) failed, was reported as
- failed, and was redone by the orchestrator.
+ failed, and was redone by the orchestrator. The three files of the accounting proof written on the morning
+ of 15 November by Kimi K3.1 Pro (Lemma~\ref{acc:L1}; the recursion of Lemma~\ref{acc:L3}; the last step) were
+ handled in this way; the file that joins them and states the final theorems is the orchestrator's.
 \item \emph{Statements about other fields} were checked against sources by AI sessions; an attempt by a
  separate session to break the first five connections found one wrong check and three overclaims, which were
  corrected and recorded.
@@ -4319,9 +4382,11 @@ project's ledger, claims C12 to C14). The note below was written on 14 November 
 Fable~5.2). An AI referee (the same model) found the theorem and all lemmas correct, with one wrong closing
 remark and seven gaps of statement or citation, all repaired; the repairs were not re-reviewed.
 \textbf{A faculty member of the team read it; the verdict as reported was ``looks like it makes sense''. This
-is recorded as read, not as signed.} The lemmas were checked by computer (experiment E004). Lean checks the
-conclusions (the ``Dwork form'' and Legendre's formula with its residue) by a classical route, not the
-argument of this appendix (Section~\ref{sec:lean}). The text is reproduced unchanged, apart from labels,
+is recorded as read, not as signed.} The lemmas were checked by computer (experiment E004). Since the morning
+of 15 November Lean checks the argument of this appendix down to the theorem, except that the two congruences
+in the proof of Lemma~\ref{acc:L4} are proved there by an elementary computation and by Wilson's theorem, not
+by the two group actions, and that the digit forests enter only through their number
+(Section~\ref{sec:lean}). The text is reproduced unchanged, apart from labels,
 headings and cross-references.
 
 \smallskip\noindent
