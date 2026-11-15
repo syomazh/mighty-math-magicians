@@ -2014,7 +2014,8 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
  & Each statement is the text's multiplied by $p-1$: Lean works with the drop $(p-1)c(v)$ of the digit sum,
  not with the number of carries. Fact~3 reads $(p-1)\,d(T)+1=s_p(m)+\text{slack}(T)$. The criterion for $d=t$
  is stated one node at a time, and ``the children have a power of $p$ leaves'' appears as ``digit sum $1$''.
- The remarks on other arities and on Sylow subgroups are not formalized.\\\addlinespace[3pt]
+ The Lean statements assume only $p\ge2$, not that $p$ is prime, so they cover the remark on other
+ arities; the remark on Sylow subgroups is not formalized.\\\addlinespace[3pt]
 \lean{PTree.pow_dvd_card_of_closed}, \lean{PTree.card_closed_modEq_classes} (\file{Reduction.lean},
  \file{Closed.lean})
  & the proposition on closed families of Section~\ref{sec:extensions} (C11)
@@ -2110,7 +2111,7 @@ Declaration (file under \file{lean/MMM/}) & Claim it supports & Differences from
 \item The argument of the accounting proof (only its conclusions, by another route).
 \item For the lattice-path proof: Lemmas~\ref{path:lem:atoms} and~\ref{path:lem:mixed} as stated (the count
  is proved by a different induction), Lemma~\ref{path:lem:shift} and Remark~\ref{path:rem:dyck}.
-\item The remarks of Section~\ref{sec:carrybudget} (other arities; Sylow subgroups); claims C9, C14 (sand),
+\item The remark on Sylow subgroups in Section~\ref{sec:carrybudget}; claims C9, C14 (sand),
  C17, C21 and the statements of Section~\ref{sec:connections}.
 \end{itemize}
 
